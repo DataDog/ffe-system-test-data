@@ -51,6 +51,42 @@ After making changes, ensure that:
 2. Test cases reference flags that exist in the config
 3. Expected results match the flag configuration logic
 
+## Updating Downstream Repositories
+
+After your changes are merged to this repository, you need to update the submodule references in downstream repos:
+
+### system-tests
+
+```bash
+cd system-tests
+git checkout -b update-ffe-test-data
+cd tests/parametric/test_ffe/ffe-data
+git fetch origin && git checkout main && git pull
+cd ../../../..
+git add tests/parametric/test_ffe/ffe-data
+git commit -m "Update ffe-system-test-data submodule"
+git push origin update-ffe-test-data
+# Create PR
+```
+
+### dd-trace-py
+
+```bash
+cd dd-trace-py
+git checkout -b update-ffe-test-data
+cd tests/openfeature/ffe-data
+git fetch origin && git checkout main && git pull
+cd ../../..
+git add tests/openfeature/ffe-data
+git commit -m "Update ffe-system-test-data submodule"
+git push origin update-ffe-test-data
+# Create PR
+```
+
+### Other Tracers
+
+Follow the same pattern for other tracer repositories (dd-trace-java, dd-trace-dotnet, etc.) that consume this submodule.
+
 ## Questions?
 
 If you have questions about contributing, please open an issue or reach out to the FFE SDK team.
