@@ -1,0 +1,4 @@
+# FFE (Feature Flags & Experimentation) System Test Data
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @DataDog/feature-flagging-and-experimentation-sdk
