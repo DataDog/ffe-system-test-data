@@ -1,40 +1,43 @@
 [
   {
-    "flag": "empty_flag",
-    "variationType": "STRING",
+    "attributes": {
+      "country": "US",
+      "email": "alice@mycompany.com"
+    },
     "defaultValue": "default_value",
+    "flag": "empty_flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "default_value"
+    },
     "targetingKey": "alice",
-    "attributes": {
-      "email": "alice@mycompany.com",
-      "country": "US"
-    },
-    "result": {
-      "value": "default_value"
-    }
+    "variationType": "STRING"
   },
   {
-    "flag": "empty_flag",
-    "variationType": "STRING",
+    "attributes": {
+      "country": "Canada",
+      "email": "bob@example.com"
+    },
     "defaultValue": "default_value",
+    "flag": "empty_flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "default_value"
+    },
     "targetingKey": "bob",
-    "attributes": {
-      "email": "bob@example.com",
-      "country": "Canada"
-    },
-    "result": {
-      "value": "default_value"
-    }
+    "variationType": "STRING"
   },
   {
-    "flag": "empty_flag",
-    "variationType": "STRING",
-    "defaultValue": "default_value",
-    "targetingKey": "charlie",
     "attributes": {
       "age": 50
     },
+    "defaultValue": "default_value",
+    "flag": "empty_flag",
     "result": {
+      "reason": "DEFAULT",
       "value": "default_value"
-    }
+    },
+    "targetingKey": "charlie",
+    "variationType": "STRING"
   }
 ]

@@ -1,38 +1,41 @@
 [
   {
-    "flag": "empty-string-variation",
-    "variationType": "STRING",
-    "defaultValue": "default_value",
-    "targetingKey": "empty_user",
     "attributes": {
       "content_type": "minimal"
     },
+    "defaultValue": "default_value",
+    "flag": "empty-string-variation",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": ""
-    }
+    },
+    "targetingKey": "empty_user",
+    "variationType": "STRING"
   },
   {
-    "flag": "empty-string-variation",
-    "variationType": "STRING",
-    "defaultValue": "default_value",
-    "targetingKey": "full_user",
     "attributes": {
       "content_type": "full"
     },
+    "defaultValue": "default_value",
+    "flag": "empty-string-variation",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": "detailed_content"
-    }
+    },
+    "targetingKey": "full_user",
+    "variationType": "STRING"
   },
   {
-    "flag": "empty-string-variation",
-    "variationType": "STRING",
-    "defaultValue": "default_value",
-    "targetingKey": "default_user",
     "attributes": {
       "content_type": "unknown"
     },
+    "defaultValue": "default_value",
+    "flag": "empty-string-variation",
     "result": {
+      "reason": "DEFAULT",
       "value": "default_value"
-    }
+    },
+    "targetingKey": "default_user",
+    "variationType": "STRING"
   }
 ]

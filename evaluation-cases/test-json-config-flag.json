@@ -1,72 +1,76 @@
 [
   {
-    "flag": "json-config-flag",
-    "variationType": "JSON",
+    "attributes": {
+      "country": "US",
+      "email": "alice@mycompany.com"
+    },
     "defaultValue": {
       "foo": "bar"
+    },
+    "flag": "json-config-flag",
+    "result": {
+      "reason": "SPLIT",
+      "value": {
+        "float": 1,
+        "integer": 1,
+        "string": "one"
+      }
     },
     "targetingKey": "alice",
-    "attributes": {
-      "email": "alice@mycompany.com",
-      "country": "US"
-    },
-    "result": {
-      "value": {
-        "integer": 1,
-        "string": "one",
-        "float": 1.0
-      }
-    }
+    "variationType": "JSON"
   },
   {
-    "flag": "json-config-flag",
-    "variationType": "JSON",
+    "attributes": {
+      "country": "Canada",
+      "email": "bob@example.com"
+    },
     "defaultValue": {
       "foo": "bar"
+    },
+    "flag": "json-config-flag",
+    "result": {
+      "reason": "SPLIT",
+      "value": {
+        "float": 2,
+        "integer": 2,
+        "string": "two"
+      }
     },
     "targetingKey": "bob",
-    "attributes": {
-      "email": "bob@example.com",
-      "country": "Canada"
-    },
-    "result": {
-      "value": {
-        "integer": 2,
-        "string": "two",
-        "float": 2.0
-      }
-    }
+    "variationType": "JSON"
   },
   {
-    "flag": "json-config-flag",
-    "variationType": "JSON",
-    "defaultValue": {
-      "foo": "bar"
-    },
-    "targetingKey": "charlie",
     "attributes": {
       "age": 50
     },
-    "result": {
-      "value": {
-        "integer": 2,
-        "string": "two",
-        "float": 2.0
-      }
-    }
-  },
-  {
-    "flag": "json-config-flag",
-    "variationType": "JSON",
     "defaultValue": {
       "foo": "bar"
     },
-    "targetingKey": "diana",
+    "flag": "json-config-flag",
+    "result": {
+      "reason": "SPLIT",
+      "value": {
+        "float": 2,
+        "integer": 2,
+        "string": "two"
+      }
+    },
+    "targetingKey": "charlie",
+    "variationType": "JSON"
+  },
+  {
     "attributes": {
       "Force Empty": true
     },
+    "defaultValue": {
+      "foo": "bar"
+    },
+    "flag": "json-config-flag",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": {}
-    }
+    },
+    "targetingKey": "diana",
+    "variationType": "JSON"
   }
 ]

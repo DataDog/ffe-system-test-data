@@ -1,54 +1,58 @@
 [
   {
-    "flag": "special-characters",
-    "variationType": "JSON",
-    "defaultValue": {},
-    "targetingKey": "ash",
     "attributes": {},
+    "defaultValue": {},
+    "flag": "special-characters",
     "result": {
+      "reason": "SPLIT",
       "value": {
         "a": "kümmert",
         "b": "schön"
       }
-    }
+    },
+    "targetingKey": "ash",
+    "variationType": "JSON"
   },
   {
-    "flag": "special-characters",
-    "variationType": "JSON",
-    "defaultValue": {},
-    "targetingKey": "ben",
     "attributes": {},
+    "defaultValue": {},
+    "flag": "special-characters",
     "result": {
+      "reason": "SPLIT",
       "value": {
         "a": "піклуватися",
         "b": "любов"
       }
-    }
+    },
+    "targetingKey": "ben",
+    "variationType": "JSON"
   },
   {
-    "flag": "special-characters",
-    "variationType": "JSON",
-    "defaultValue": {},
-    "targetingKey": "cameron",
     "attributes": {},
+    "defaultValue": {},
+    "flag": "special-characters",
     "result": {
+      "reason": "SPLIT",
       "value": {
         "a": "照顾",
         "b": "漂亮"
       }
-    }
+    },
+    "targetingKey": "cameron",
+    "variationType": "JSON"
   },
   {
-    "flag": "special-characters",
-    "variationType": "JSON",
-    "defaultValue": {},
-    "targetingKey": "darryl",
     "attributes": {},
+    "defaultValue": {},
+    "flag": "special-characters",
     "result": {
+      "reason": "SPLIT",
       "value": {
         "a": "🤗",
         "b": "🌸"
       }
-    }
+    },
+    "targetingKey": "darryl",
+    "variationType": "JSON"
   }
 ]

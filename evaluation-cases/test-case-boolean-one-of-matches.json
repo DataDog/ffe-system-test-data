@@ -1,192 +1,208 @@
 [
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "alice",
     "attributes": {
       "one_of_flag": true
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 1
-    }
+    },
+    "targetingKey": "alice",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "bob",
     "attributes": {
       "one_of_flag": false
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "bob",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "charlie",
     "attributes": {
       "one_of_flag": "True"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "charlie",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "derek",
     "attributes": {
       "matches_flag": true
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 2
-    }
+    },
+    "targetingKey": "derek",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "erica",
     "attributes": {
       "matches_flag": false
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "erica",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "frank",
     "attributes": {
       "not_matches_flag": false
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "frank",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "george",
     "attributes": {
       "not_matches_flag": true
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 4
-    }
+    },
+    "targetingKey": "george",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "haley",
     "attributes": {
       "not_matches_flag": "False"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 4
-    }
+    },
+    "targetingKey": "haley",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "ivy",
     "attributes": {
       "not_one_of_flag": true
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 3
-    }
+    },
+    "targetingKey": "ivy",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "julia",
     "attributes": {
       "not_one_of_flag": false
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "julia",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "kim",
     "attributes": {
       "not_one_of_flag": "False"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 3
-    }
+    },
+    "targetingKey": "kim",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "lucas",
     "attributes": {
       "not_one_of_flag": "true"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 3
-    }
+    },
+    "targetingKey": "lucas",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "mike",
     "attributes": {
       "not_one_of_flag": "false"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "mike",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "nicole",
     "attributes": {
       "null_flag": "null"
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 5
-    }
+    },
+    "targetingKey": "nicole",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "owen",
     "attributes": {
       "null_flag": null
     },
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "owen",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "boolean-one-of-matches",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "pete",
     "attributes": {},
+    "defaultValue": 0,
+    "flag": "boolean-one-of-matches",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "pete",
+    "variationType": "INTEGER"
   }
 ]

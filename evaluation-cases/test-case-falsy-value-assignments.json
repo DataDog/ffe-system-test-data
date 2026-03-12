@@ -1,38 +1,41 @@
 [
   {
-    "flag": "falsy-value-assignments",
-    "variationType": "INTEGER",
-    "defaultValue": 999,
-    "targetingKey": "zero_user",
     "attributes": {
       "plan_tier": "free"
     },
+    "defaultValue": 999,
+    "flag": "falsy-value-assignments",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 0
-    }
+    },
+    "targetingKey": "zero_user",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "falsy-value-assignments",
-    "variationType": "INTEGER",
-    "defaultValue": 999,
-    "targetingKey": "premium_user",
     "attributes": {
       "plan_tier": "premium"
     },
+    "defaultValue": 999,
+    "flag": "falsy-value-assignments",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 100
-    }
+    },
+    "targetingKey": "premium_user",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "falsy-value-assignments",
-    "variationType": "INTEGER",
-    "defaultValue": 999,
-    "targetingKey": "unknown_user",
     "attributes": {
       "plan_tier": "trial"
     },
+    "defaultValue": 999,
+    "flag": "falsy-value-assignments",
     "result": {
+      "reason": "DEFAULT",
       "value": 999
-    }
+    },
+    "targetingKey": "unknown_user",
+    "variationType": "INTEGER"
   }
 ]

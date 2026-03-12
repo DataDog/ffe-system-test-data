@@ -1,24 +1,26 @@
 [
   {
-    "flag": "empty_string_flag",
-    "variationType": "STRING",
-    "defaultValue": "default",
-    "targetingKey": "alice",
     "attributes": {
       "country": "US"
     },
+    "defaultValue": "default",
+    "flag": "empty_string_flag",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": ""
-    }
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
   },
   {
-    "flag": "empty_string_flag",
-    "variationType": "STRING",
-    "defaultValue": "default",
-    "targetingKey": "bob",
     "attributes": {},
+    "defaultValue": "default",
+    "flag": "empty_string_flag",
     "result": {
+      "reason": "SPLIT",
       "value": "non_empty"
-    }
+    },
+    "targetingKey": "bob",
+    "variationType": "STRING"
   }
 ]

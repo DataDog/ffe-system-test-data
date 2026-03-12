@@ -1,86 +1,93 @@
 [
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "alice",
     "attributes": {
       "number": 1
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 1
-    }
+    },
+    "targetingKey": "alice",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "bob",
     "attributes": {
       "number": 2
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "DEFAULT",
       "value": 0
-    }
+    },
+    "targetingKey": "bob",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "charlie",
     "attributes": {
       "number": 3
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 3
-    }
+    },
+    "targetingKey": "charlie",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "derek",
     "attributes": {
       "number": 4
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 3
-    }
+    },
+    "targetingKey": "derek",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "erica",
     "attributes": {
       "number": "1"
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 1
-    }
+    },
+    "targetingKey": "erica",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "frank",
     "attributes": {
       "number": 1
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 1
-    }
+    },
+    "targetingKey": "frank",
+    "variationType": "INTEGER"
   },
   {
-    "flag": "numeric-one-of",
-    "variationType": "INTEGER",
-    "defaultValue": 0,
-    "targetingKey": "george",
     "attributes": {
       "number": 123456789
     },
+    "defaultValue": 0,
+    "flag": "numeric-one-of",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": 2
-    }
+    },
+    "targetingKey": "george",
+    "variationType": "INTEGER"
   }
 ]

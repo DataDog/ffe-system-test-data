@@ -1,53 +1,57 @@
 [
   {
-    "flag": "regex-flag",
-    "variationType": "STRING",
-    "defaultValue": "none",
-    "targetingKey": "alice",
     "attributes": {
-      "version": "1.15.0",
-      "email": "alice@example.com"
+      "email": "alice@example.com",
+      "version": "1.15.0"
     },
+    "defaultValue": "none",
+    "flag": "regex-flag",
     "result": {
+      "reason": "TARGETING_MATCH",
       "value": "partial-example"
-    }
-  },
-  {
-    "flag": "regex-flag",
-    "variationType": "STRING",
-    "defaultValue": "none",
-    "targetingKey": "bob",
-    "attributes": {
-      "version": "0.20.1",
-      "email": "bob@test.com"
     },
-    "result": {
-      "value": "test"
-    }
+    "targetingKey": "alice",
+    "variationType": "STRING"
   },
   {
-    "flag": "regex-flag",
-    "variationType": "STRING",
+    "attributes": {
+      "email": "bob@test.com",
+      "version": "0.20.1"
+    },
     "defaultValue": "none",
-    "targetingKey": "charlie",
+    "flag": "regex-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "test"
+    },
+    "targetingKey": "bob",
+    "variationType": "STRING"
+  },
+  {
     "attributes": {
       "version": "2.1.13"
     },
+    "defaultValue": "none",
+    "flag": "regex-flag",
     "result": {
+      "reason": "DEFAULT",
       "value": "none"
-    }
+    },
+    "targetingKey": "charlie",
+    "variationType": "STRING"
   },
   {
-    "flag": "regex-flag",
-    "variationType": "STRING",
-    "defaultValue": "none",
-    "targetingKey": "derek",
     "attributes": {
-      "version": "2.1.13",
-      "email": "derek@gmail.com"
+      "email": "derek@gmail.com",
+      "version": "2.1.13"
     },
+    "defaultValue": "none",
+    "flag": "regex-flag",
     "result": {
+      "reason": "DEFAULT",
       "value": "none"
-    }
+    },
+    "targetingKey": "derek",
+    "variationType": "STRING"
   }
 ]

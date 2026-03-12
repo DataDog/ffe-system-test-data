@@ -1,36 +1,39 @@
 [
   {
-    "flag": "microsecond-date-test",
-    "variationType": "STRING",
-    "defaultValue": "unknown",
-    "targetingKey": "alice",
     "attributes": {},
+    "defaultValue": "unknown",
+    "flag": "microsecond-date-test",
     "result": {
+      "reason": "STATIC",
       "value": "active"
-    }
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
   },
   {
-    "flag": "microsecond-date-test",
-    "variationType": "STRING",
-    "defaultValue": "unknown",
-    "targetingKey": "bob",
     "attributes": {
       "country": "US"
     },
+    "defaultValue": "unknown",
+    "flag": "microsecond-date-test",
     "result": {
+      "reason": "STATIC",
       "value": "active"
-    }
+    },
+    "targetingKey": "bob",
+    "variationType": "STRING"
   },
   {
-    "flag": "microsecond-date-test",
-    "variationType": "STRING",
-    "defaultValue": "unknown",
-    "targetingKey": "charlie",
     "attributes": {
       "version": "1.0.0"
     },
+    "defaultValue": "unknown",
+    "flag": "microsecond-date-test",
     "result": {
+      "reason": "STATIC",
       "value": "active"
-    }
+    },
+    "targetingKey": "charlie",
+    "variationType": "STRING"
   }
 ]
