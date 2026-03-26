@@ -11,7 +11,7 @@
     "result": {
       "reason": "SPLIT",
       "value": {
-        "float": 1,
+        "float": 1.0,
         "integer": 1,
         "string": "one"
       }
@@ -31,7 +31,7 @@
     "result": {
       "reason": "SPLIT",
       "value": {
-        "float": 2,
+        "float": 2.0,
         "integer": 2,
         "string": "two"
       }
@@ -50,7 +50,7 @@
     "result": {
       "reason": "SPLIT",
       "value": {
-        "float": 2,
+        "float": 2.0,
         "integer": 2,
         "string": "two"
       }
