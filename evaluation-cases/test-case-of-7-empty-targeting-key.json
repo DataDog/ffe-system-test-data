@@ -1,13 +1,15 @@
-[
-  {
-    "attributes": {},
-    "defaultValue": "default",
-    "flag": "empty-targeting-key-flag",
-    "result": {
-      "reason": "STATIC",
-      "value": "on-value"
-    },
-    "targetingKey": "",
-    "variationType": "STRING"
-  }
-]
+{
+  "cases": [
+    {
+      "attributes": {},
+      "defaultValue": "default",
+      "flag": "empty-targeting-key-flag",
+      "result": {
+        "reason": "STATIC",
+        "value": "on-value"
+      },
+      "targetingKey": "",
+      "variationType": "STRING"
+    }
+  ]
+}

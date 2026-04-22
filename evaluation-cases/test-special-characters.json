@@ -1,58 +1,60 @@
-[
-  {
-    "attributes": {},
-    "defaultValue": {},
-    "flag": "special-characters",
-    "result": {
-      "reason": "SPLIT",
-      "value": {
-        "a": "kümmert",
-        "b": "schön"
-      }
+{
+  "cases": [
+    {
+      "attributes": {},
+      "defaultValue": {},
+      "flag": "special-characters",
+      "result": {
+        "reason": "SPLIT",
+        "value": {
+          "a": "kümmert",
+          "b": "schön"
+        }
+      },
+      "targetingKey": "ash",
+      "variationType": "JSON"
     },
-    "targetingKey": "ash",
-    "variationType": "JSON"
-  },
-  {
-    "attributes": {},
-    "defaultValue": {},
-    "flag": "special-characters",
-    "result": {
-      "reason": "SPLIT",
-      "value": {
-        "a": "піклуватися",
-        "b": "любов"
-      }
+    {
+      "attributes": {},
+      "defaultValue": {},
+      "flag": "special-characters",
+      "result": {
+        "reason": "SPLIT",
+        "value": {
+          "a": "піклуватися",
+          "b": "любов"
+        }
+      },
+      "targetingKey": "ben",
+      "variationType": "JSON"
     },
-    "targetingKey": "ben",
-    "variationType": "JSON"
-  },
-  {
-    "attributes": {},
-    "defaultValue": {},
-    "flag": "special-characters",
-    "result": {
-      "reason": "SPLIT",
-      "value": {
-        "a": "照顾",
-        "b": "漂亮"
-      }
+    {
+      "attributes": {},
+      "defaultValue": {},
+      "flag": "special-characters",
+      "result": {
+        "reason": "SPLIT",
+        "value": {
+          "a": "照顾",
+          "b": "漂亮"
+        }
+      },
+      "targetingKey": "cameron",
+      "variationType": "JSON"
     },
-    "targetingKey": "cameron",
-    "variationType": "JSON"
-  },
-  {
-    "attributes": {},
-    "defaultValue": {},
-    "flag": "special-characters",
-    "result": {
-      "reason": "SPLIT",
-      "value": {
-        "a": "🤗",
-        "b": "🌸"
-      }
-    },
-    "targetingKey": "darryl",
-    "variationType": "JSON"
-  }
-]
+    {
+      "attributes": {},
+      "defaultValue": {},
+      "flag": "special-characters",
+      "result": {
+        "reason": "SPLIT",
+        "value": {
+          "a": "🤗",
+          "b": "🌸"
+        }
+      },
+      "targetingKey": "darryl",
+      "variationType": "JSON"
+    }
+  ]
+}
