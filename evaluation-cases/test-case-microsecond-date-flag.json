@@ -1,39 +1,41 @@
-[
-  {
-    "attributes": {},
-    "defaultValue": "unknown",
-    "flag": "microsecond-date-test",
-    "result": {
-      "reason": "STATIC",
-      "value": "active"
+{
+  "cases": [
+    {
+      "attributes": {},
+      "defaultValue": "unknown",
+      "flag": "microsecond-date-test",
+      "result": {
+        "reason": "STATIC",
+        "value": "active"
+      },
+      "targetingKey": "alice",
+      "variationType": "STRING"
     },
-    "targetingKey": "alice",
-    "variationType": "STRING"
-  },
-  {
-    "attributes": {
-      "country": "US"
+    {
+      "attributes": {
+        "country": "US"
+      },
+      "defaultValue": "unknown",
+      "flag": "microsecond-date-test",
+      "result": {
+        "reason": "STATIC",
+        "value": "active"
+      },
+      "targetingKey": "bob",
+      "variationType": "STRING"
     },
-    "defaultValue": "unknown",
-    "flag": "microsecond-date-test",
-    "result": {
-      "reason": "STATIC",
-      "value": "active"
-    },
-    "targetingKey": "bob",
-    "variationType": "STRING"
-  },
-  {
-    "attributes": {
-      "version": "1.0.0"
-    },
-    "defaultValue": "unknown",
-    "flag": "microsecond-date-test",
-    "result": {
-      "reason": "STATIC",
-      "value": "active"
-    },
-    "targetingKey": "charlie",
-    "variationType": "STRING"
-  }
-]
+    {
+      "attributes": {
+        "version": "1.0.0"
+      },
+      "defaultValue": "unknown",
+      "flag": "microsecond-date-test",
+      "result": {
+        "reason": "STATIC",
+        "value": "active"
+      },
+      "targetingKey": "charlie",
+      "variationType": "STRING"
+    }
+  ]
+}
