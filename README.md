@@ -1,40 +1,42 @@
 # ffe-system-test-data
 
-Canonical test fixtures for Datadog's Feature Flag Evaluation (FFE) system, shared across all SDK repositories via git submodule.
+Canonical test data for Datadog's Feature Flags & Experimentation (FFE) SDK implementations.
 
-## Contents
+## Overview
 
-- `ufc-config.json` -- UFC (Unified Feature Configuration) server payload used by all evaluation test cases
-- `evaluation-cases/` -- 24 JSON fixture files, each containing an array of evaluation test cases
+This repository contains the canonical set of flag configurations and evaluation test cases used to validate FFE SDK implementations across multiple languages. It serves as a single source of truth consumed via git submodules by:
 
-## Fixture Schema
+- [system-tests](https://github.com/DataDog/system-tests) - Parametric tests
+- [dd-trace-py](https://github.com/DataDog/dd-trace-py) - Python tracer
+- [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
+- [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
+- [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
 
-Each evaluation case uses a universal schema with the following fields:
+## Directory Structure
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `flag` | string | The flag key to evaluate |
-| `variationType` | string | Expected type: `BOOLEAN`, `STRING`, `INTEGER`, `DOUBLE`, `JSON` |
-| `defaultValue` | any | The default value passed to the evaluation call |
-| `targetingKey` | string | The subject/user identifier for evaluation |
-| `attributes` | object | Additional context attributes for targeting rules |
-| `result.value` | any | The expected evaluation result value |
-| `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
-
-### SDK-Specific Fields
-
-The shared fixtures intentionally exclude SDK-specific fields such as `variant` and `flagMetadata`. SDKs that need these fields should compute them at test load time from the universal fields. For example:
-
-- **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
-- **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+```
+ffe-system-test-data/
+├── ufc-config.json          # Master flag configuration (UFC format)
+└── evaluation-cases/
+    └── test-*.json          # Evaluation test case files
+```
 
 ## Usage
 
-### Adding as a Git Submodule
+### As a Git Submodule
+
+Add this repository as a submodule to your project:
 
 ```bash
-git submodule add https://github.com/DataDog/ffe-system-test-data.git path/to/testdata
-git submodule update --init
+git submodule add https://github.com/DataDog/ffe-system-test-data path/to/ffe-data
+```
+
+Initialize and update submodules when cloning:
+
+```bash
+git clone --recurse-submodules <your-repo>
+# or after cloning:
+git submodule update --init --recursive
 ```
 
 ### In Tests
@@ -43,6 +45,60 @@ git submodule update --init
 2. For each file in `evaluation-cases/`, parse the JSON array
 3. For each test case, call your evaluator with `flag`, `defaultValue`, `targetingKey`, and `attributes`
 4. Assert the result matches `result.value` and `result.reason`
+
+## File Formats
+
+### UFC Config (`ufc-config.json`)
+
+The UFC (Unified Flag Configuration) file contains flag definitions in the format used by Datadog's Remote Configuration:
+
+```json
+{
+  "flag-key": {
+    "key": "flag-key",
+    "enabled": true,
+    "variationType": "STRING|BOOLEAN|INTEGER|NUMERIC|JSON",
+    "variations": { ... },
+    "allocations": [ ... ]
+  }
+}
+```
+
+### Evaluation Test Cases (`evaluation-cases/test-*.json`)
+
+Each evaluation case uses a universal schema with the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `flag` | string | The flag key to evaluate |
+| `variationType` | string | Expected type: `BOOLEAN`, `STRING`, `INTEGER`, `NUMERIC`, `JSON` |
+| `defaultValue` | any | The default value passed to the evaluation call |
+| `targetingKey` | string | The subject/user identifier for evaluation |
+| `attributes` | object | Additional context attributes for targeting rules |
+| `result.value` | any | The expected evaluation result value |
+| `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
+
+Example:
+
+```json
+[
+  {
+    "flag": "flag-key",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "user-123",
+    "attributes": { "country": "US" },
+    "result": { "value": "expected-value", "reason": "TARGETING_MATCH" }
+  }
+]
+```
+
+### SDK-Specific Fields
+
+The shared fixtures intentionally exclude SDK-specific fields such as `variant` and `flagMetadata`. SDKs that need these fields should compute them at test load time from the universal fields. For example:
+
+- **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
+- **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
 
 ## Evaluation Cases
 
@@ -62,7 +118,7 @@ git submodule update --init
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
-| `test-case-numeric-flag.json` | Numeric (double) flag evaluation |
+| `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
@@ -76,3 +132,15 @@ git submodule update --init
 ## Origin
 
 These fixtures are derived from the Go SDK (`dd-trace-go`) reference implementation, which was the first to implement and validate the OpenFeature `reason` field. The Go fixtures serve as the canonical source of truth for expected evaluation behavior across all Datadog SDKs.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or modifying test cases.
+
+## License
+
+Unless explicitly stated otherwise, all files in this repository are licensed under the Apache 2.0 License.
+
+This product includes software developed at Datadog (https://www.datadoghq.com/). Copyright 2026 Datadog, Inc.
+
+See [LICENSE](LICENSE) for the full license text.
