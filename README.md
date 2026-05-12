@@ -128,7 +128,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
-| `test-case-race-conditions.json` | Default path used by concurrent evaluator regression coverage |
+| `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-flag-that-does-not-exist.json` | Non-existent flag (error/default case) |
