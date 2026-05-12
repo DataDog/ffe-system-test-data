@@ -11,6 +11,12 @@ This repository contains the canonical set of flag configurations and evaluation
 - [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
 - [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
 - [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
+- [dd-trace-js](https://github.com/DataDog/dd-trace-js) - JavaScript tracer
+- [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) - Ruby tracer
+- [libdatadog](https://github.com/DataDog/libdatadog) - Shared Rust FFE evaluator
+- [openfeature-js-client](https://github.com/DataDog/openfeature-js-client) - Datadog OpenFeature JavaScript clients
+
+`dd-trace-php` is intentionally excluded until its OpenFeature client has landed.
 
 ## Directory Structure
 
@@ -73,7 +79,7 @@ Each evaluation case uses a universal schema with the following fields:
 | `flag` | string | The flag key to evaluate |
 | `variationType` | string | Expected type: `BOOLEAN`, `STRING`, `INTEGER`, `NUMERIC`, `JSON` |
 | `defaultValue` | any | The default value passed to the evaluation call |
-| `targetingKey` | string | The subject/user identifier for evaluation |
+| `targetingKey` | string or null | The subject/user identifier for evaluation. Use `null` only for explicit missing-targeting-key coverage |
 | `attributes` | object | Additional context attributes for targeting rules |
 | `result.value` | any | The expected evaluation result value |
 | `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
@@ -118,9 +124,11 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
+| `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
+| `test-case-race-conditions.json` | Default path used by concurrent evaluator regression coverage |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-flag-that-does-not-exist.json` | Non-existent flag (error/default case) |
@@ -132,6 +140,10 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 ## Origin
 
 These fixtures are derived from the Go SDK (`dd-trace-go`) reference implementation, which was the first to implement and validate the OpenFeature `reason` field. The Go fixtures serve as the canonical source of truth for expected evaluation behavior across all Datadog SDKs.
+
+## Downstream Updates
+
+Downstream repositories should consume this repository as a git submodule and run their fixture coverage by loading every JSON file in `evaluation-cases/`. Shared evaluator behavior should be added here first, then downstream repositories should update their submodule SHA. Do not add copied JSON fixture directories or language-only programmatic cases for behavior that belongs in this shared fixture set.
 
 ## Contributing
 
