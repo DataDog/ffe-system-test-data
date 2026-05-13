@@ -24,16 +24,17 @@ Thank you for your interest in contributing to the FFE system test data reposito
     "defaultValue": "<default value>",
     "targetingKey": "<user identifier>",
     "attributes": { "<key>": "<value>" },
-    "result": { "value": "<expected value>" }
+    "result": { "value": "<expected value>", "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED" }
   }
 ]
 ```
 
-3. If your test case requires a new flag, add the flag definition to `config/ufc-config.json`
+3. If your test case requires a new flag, add the flag definition to `ufc-config.json`
+4. Keep the fixture SDK-neutral. Do not include SDK-specific fields such as `variant` or `flagMetadata`; downstream SDKs should derive those from `ufc-config.json` when they need them.
 
 ### Modifying Flag Configuration
 
-When adding or modifying flags in `config/ufc-config.json`:
+When adding or modifying flags in `ufc-config.json`:
 
 1. Ensure the flag key is unique and descriptive
 2. Include all required fields: `key`, `enabled`, `variationType`, `variations`, `allocations`
@@ -53,39 +54,14 @@ After making changes, ensure that:
 
 ## Updating Downstream Repositories
 
-After your changes are merged to this repository, you need to update the submodule references in downstream repos:
+After your changes are merged to this repository, update the submodule references in downstream repos. Each downstream repository should:
 
-### system-tests
+1. Keep `ffe-system-test-data` as a git submodule adjacent to the OpenFeature/FFE tests
+2. Configure Dependabot with `package-ecosystem: "gitsubmodule"` so fixture updates are proposed automatically
+3. Load `ufc-config.json` and loop over every `evaluation-cases/*.json` file in unit tests
+4. Avoid copied fixture directories and programmatic-only shared evaluator cases
 
-```bash
-cd system-tests
-git checkout -b update-ffe-test-data
-cd tests/parametric/test_ffe/ffe-data
-git fetch origin && git checkout main && git pull
-cd ../../../..
-git add tests/parametric/test_ffe/ffe-data
-git commit -m "Update ffe-system-test-data submodule"
-git push origin update-ffe-test-data
-# Create PR
-```
-
-### dd-trace-py
-
-```bash
-cd dd-trace-py
-git checkout -b update-ffe-test-data
-cd tests/openfeature/ffe-data
-git fetch origin && git checkout main && git pull
-cd ../../..
-git add tests/openfeature/ffe-data
-git commit -m "Update ffe-system-test-data submodule"
-git push origin update-ffe-test-data
-# Create PR
-```
-
-### Other Tracers
-
-Follow the same pattern for other tracer repositories (dd-trace-java, dd-trace-dotnet, etc.) that consume this submodule.
+Current downstream consumers are `system-tests`, `dd-trace-go`, `dd-trace-java`, `dd-trace-js`, `dd-trace-py`, `dd-trace-rb`, `dd-trace-dotnet`, `libdatadog`, and `openfeature-js-client`. `dd-trace-php` is excluded until its OpenFeature client lands.
 
 ## Questions?
 
