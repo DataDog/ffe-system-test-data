@@ -131,7 +131,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
-| `test-flag-that-does-not-exist.json` | Non-existent flag (error/default case) |
+| `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
 | `test-json-config-flag.json` | JSON-typed flag returning object value |
 | `test-no-allocations-flag.json` | Another no-allocations variant |
 | `test-special-characters.json` | Flag keys/values with special characters |
