@@ -7,7 +7,8 @@
     "defaultValue": 0,
     "flag": "flag-that-does-not-exist",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": 0
     },
     "targetingKey": "alice",
@@ -21,7 +22,8 @@
     "defaultValue": 0,
     "flag": "flag-that-does-not-exist",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": 0
     },
     "targetingKey": "bob",
@@ -34,7 +36,8 @@
     "defaultValue": 0,
     "flag": "flag-that-does-not-exist",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": 0
     },
     "targetingKey": "charlie",
