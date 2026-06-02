@@ -3356,6 +3356,7 @@
       "key": "unknown-fields-tolerance-flag",
       "enabled": true,
       "variationType": "STRING",
+      "comment": "This flag deliberately contains unknown fields at every fixed-schema UFC level. SDKs must ignore those fields and evaluate the flag normally.",
       "unknownFlagField": "ignored",
       "variations": {
         "on": {
@@ -3411,6 +3412,7 @@
       "key": "operator-grease-flag",
       "enabled": true,
       "variationType": "STRING",
+      "comment": "This flag deliberately uses an unknown condition operator. SDKs must ignore this flag rather than falling through to the catch-all allocation or rejecting the whole config.",
       "variations": {
         "trap": {
           "key": "trap",
@@ -3460,6 +3462,7 @@
       "key": "malformed-allocations-flag",
       "enabled": true,
       "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: allocations must be an array, but this fixture uses a string to verify per-flag parse error isolation.",
       "variations": {
         "on": {
           "key": "on",
@@ -3472,6 +3475,7 @@
       "key": "valid-flag-after-invalid-config",
       "enabled": true,
       "variationType": "STRING",
+      "comment": "This valid neighbor proves malformed or unsupported flags do not poison the rest of the remote config.",
       "variations": {
         "expected": {
           "key": "expected",

@@ -1,5 +1,6 @@
 [
   {
+    "description": "The first allocation uses an unknown operator and the second is a catch-all trap; SDKs should ignore the whole flag and return the caller default.",
     "attributes": {
       "country": "US"
     },
@@ -13,6 +14,7 @@
     "variationType": "STRING"
   },
   {
+    "description": "A valid flag in the same config must still evaluate after the unknown-operator flag is skipped.",
     "attributes": {
       "country": "US"
     },

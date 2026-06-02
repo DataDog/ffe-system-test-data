@@ -1,5 +1,6 @@
 [
   {
+    "description": "The malformed flag has allocations encoded as a string instead of an array, so SDKs should ignore that flag and return the caller default.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "malformed-allocations-flag",
@@ -11,6 +12,7 @@
     "variationType": "STRING"
   },
   {
+    "description": "A valid flag in the same config must still evaluate after the malformed flag is skipped.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "valid-flag-after-invalid-config",
