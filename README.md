@@ -23,8 +23,11 @@ This repository contains the canonical set of flag configurations and evaluation
 ```
 ffe-system-test-data/
 ├── ufc-config.json          # Master flag configuration (UFC format)
-└── evaluation-cases/
-    └── test-*.json          # Evaluation test case files
+├── evaluation-cases/
+│   └── test-*.json          # Evaluation test case files
+└── precomputed/
+    ├── README.md            # Precomputed assignment fixture format
+    └── cases/*.json         # Client-side precompute response fixtures
 ```
 
 ## Usage
@@ -105,6 +108,15 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
 - **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+
+### Precomputed Assignment Fixtures (`precomputed/cases/*.json`)
+
+Precomputed fixtures cover SDKs that consume Datadog's
+`/precompute-assignments` API instead of evaluating UFC locally. Each case
+contains the context, mocked precompute response, typed evaluations to run, and
+expected exposure/flagevaluation emission counts.
+
+See [precomputed/README.md](precomputed/README.md) for the schema.
 
 ## Evaluation Cases
 
