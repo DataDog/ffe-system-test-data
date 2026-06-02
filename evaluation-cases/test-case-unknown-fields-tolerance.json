@@ -1,0 +1,15 @@
+[
+  {
+    "attributes": {
+      "country": "US"
+    },
+    "defaultValue": "default",
+    "flag": "unknown-fields-tolerance-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "on"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  }
+]

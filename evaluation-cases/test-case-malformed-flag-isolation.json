@@ -1,0 +1,24 @@
+[
+  {
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "malformed-allocations-flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "default"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "valid-flag-after-invalid-config",
+    "result": {
+      "reason": "STATIC",
+      "value": "expected"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  }
+]

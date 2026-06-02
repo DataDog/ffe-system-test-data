@@ -2,8 +2,11 @@
   "createdAt": "2024-04-17T19:40:53.716Z",
   "format": "SERVER",
   "environment": {
-    "name": "Test"
+    "name": "Test",
+    "unknownEnvironmentField": "ignored"
   },
+  "unknownTopLevelField": "ignored",
+  "unknownTopLevelNull": null,
   "flags": {
     "empty_flag": {
       "key": "empty_flag",
@@ -3345,6 +3348,146 @@
           ],
           "startAt": "2022-10-31T09:00:00.235982Z",
           "endAt": "2050-10-31T09:00:00.987654Z",
+          "doLog": true
+        }
+      ]
+    },
+    "unknown-fields-tolerance-flag": {
+      "key": "unknown-fields-tolerance-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "unknownFlagField": "ignored",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on",
+          "unknownVariationField": "ignored"
+        }
+      },
+      "allocations": [
+        {
+          "key": "unknown-fields-allocation",
+          "unknownAllocationField": "ignored",
+          "rules": [
+            {
+              "unknownRuleField": "ignored",
+              "conditions": [
+                {
+                  "attribute": "country",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "US"
+                  ],
+                  "unknownConditionField": "ignored"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "on",
+              "unknownSplitField": "ignored",
+              "shards": [
+                {
+                  "salt": "unknown-fields-tolerance-flag",
+                  "totalShards": 10000,
+                  "unknownShardField": "ignored",
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 10000,
+                      "unknownRangeField": "ignored"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "operator-grease-flag": {
+      "key": "operator-grease-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "on": {
+          "key": "on",
+          "value": "on"
+        }
+      },
+      "allocations": [
+        {
+          "key": "grease-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "country",
+                  "operator": "NOT_A_REAL_OPERATOR",
+                  "value": "anything"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "default-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "malformed-allocations-flag": {
+      "key": "malformed-allocations-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on"
+        }
+      },
+      "allocations": "this-is-not-a-list"
+    },
+    "valid-flag-after-invalid-config": {
+      "key": "valid-flag-after-invalid-config",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "expected": {
+          "key": "expected",
+          "value": "expected"
+        }
+      },
+      "allocations": [
+        {
+          "key": "default-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "expected",
+              "shards": []
+            }
+          ],
           "doLog": true
         }
       ]

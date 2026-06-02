@@ -120,6 +120,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-flag-with-empty-string.json` | Flag with empty string in configuration |
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
+| `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
@@ -131,6 +132,8 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
+| `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
+| `test-case-unknown-operator-isolation.json` | Flag with unknown operator is ignored without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
 | `test-json-config-flag.json` | JSON-typed flag returning object value |
 | `test-no-allocations-flag.json` | Another no-allocations variant |

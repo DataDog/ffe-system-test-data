@@ -1,0 +1,28 @@
+[
+  {
+    "attributes": {
+      "country": "US"
+    },
+    "defaultValue": "default",
+    "flag": "operator-grease-flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "default"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
+      "country": "US"
+    },
+    "defaultValue": "default",
+    "flag": "valid-flag-after-invalid-config",
+    "result": {
+      "reason": "STATIC",
+      "value": "expected"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  }
+]
