@@ -1,0 +1,987 @@
+[
+  {
+    "description": "Subject that matches several targeted allocations across boolean, numeric, comparator, regex, and string flags.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "boolean-false-assignment": {
+              "allocationKey": "disable-feature",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "false-variation",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "boolean-one-of-matches": {
+              "allocationKey": "1-for-one-of",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "1",
+              "variationType": "number",
+              "variationValue": 1
+            },
+            "comparator-operator-test": {
+              "allocationKey": "small-size",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "small",
+              "variationType": "string",
+              "variationValue": "small"
+            },
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "targeted allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "three",
+              "variationType": "number",
+              "variationValue": 3
+            },
+            "json-config-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "one",
+              "variationType": "object",
+              "variationValue": {
+                "float": 1.0,
+                "integer": 1,
+                "string": "one"
+              }
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "new-user-onboarding": {
+              "allocationKey": "experiment",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "control",
+              "variationType": "string",
+              "variationValue": "control"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric-one-of": {
+              "allocationKey": "1-for-1",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "1",
+              "variationType": "number",
+              "variationValue": 1
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "regex-flag": {
+              "allocationKey": "partial-example",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "partial-example",
+              "variationType": "string",
+              "variationValue": "partial-example"
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "ua",
+              "variationType": "object",
+              "variationValue": {
+                "a": "піклуватися",
+                "b": "любов"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "alice",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "rich-targeting-alice",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {
+              "country": "France",
+              "email": "alice@example.com",
+              "number": 1,
+              "one_of_flag": true,
+              "should_disable_feature": true,
+              "size": 5,
+              "version": "1.15.0"
+            },
+            "targeting_key": "alice"
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  },
+  {
+    "description": "Subject with no attributes, exercising default and static precompute behavior.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "number",
+              "variationValue": 2
+            },
+            "json-config-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "one",
+              "variationType": "object",
+              "variationValue": {
+                "float": 1.0,
+                "integer": 1,
+                "string": "one"
+              }
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "de",
+              "variationType": "object",
+              "variationValue": {
+                "a": "kümmert",
+                "b": "schön"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "race-default",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "default-empty-attributes",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {},
+            "targeting_key": "race-default"
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  },
+  {
+    "description": "Precompute request with an empty but present targeting key.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "one",
+              "variationType": "number",
+              "variationValue": 1
+            },
+            "json-config-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "object",
+              "variationValue": {
+                "float": 2.0,
+                "integer": 2,
+                "string": "two"
+              }
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "emoji",
+              "variationType": "object",
+              "variationValue": {
+                "a": "🤗",
+                "b": "🌸"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "empty-targeting-key",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {},
+            "targeting_key": ""
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  },
+  {
+    "description": "JSON variation case whose selected assignment value is an empty object.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "number",
+              "variationValue": 2
+            },
+            "json-config-flag": {
+              "allocationKey": "Optionally Force Empty",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "empty",
+              "variationType": "object",
+              "variationValue": {}
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "de",
+              "variationType": "object",
+              "variationValue": {
+                "a": "kümmert",
+                "b": "schön"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "diana",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "json-empty-object",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {
+              "Force Empty": true
+            },
+            "targeting_key": "diana"
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  },
+  {
+    "description": "JSON variation case containing emoji and non-ASCII characters in the assignment value.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "one",
+              "variationType": "number",
+              "variationValue": 1
+            },
+            "json-config-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "object",
+              "variationValue": {
+                "float": 2.0,
+                "integer": 2,
+                "string": "two"
+              }
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "emoji",
+              "variationType": "object",
+              "variationValue": {
+                "a": "🤗",
+                "b": "🌸"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "darryl",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "unicode-special-characters",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {},
+            "targeting_key": "darryl"
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  },
+  {
+    "description": "Subject that matches a regex allocation and returns a targeted string assignment.",
+    "expectedResponse": {
+      "data": {
+        "attributes": {
+          "createdAt": "2026-01-01T00:00:00Z",
+          "environment": {
+            "name": "Test"
+          },
+          "flags": {
+            "empty-targeting-key-flag": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "on",
+              "variationType": "string",
+              "variationValue": "on-value"
+            },
+            "empty_string_flag": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "non_empty",
+              "variationType": "string",
+              "variationValue": "non_empty"
+            },
+            "integer-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "number",
+              "variationValue": 2
+            },
+            "json-config-flag": {
+              "allocationKey": "50/50 split",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "two",
+              "variationType": "object",
+              "variationValue": {
+                "float": 2.0,
+                "integer": 2,
+                "string": "two"
+              }
+            },
+            "kill-switch": {
+              "allocationKey": "off-for-all",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "off",
+              "variationType": "boolean",
+              "variationValue": false
+            },
+            "microsecond-date-test": {
+              "allocationKey": "active-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "active",
+              "variationType": "string",
+              "variationValue": "active"
+            },
+            "null-operator-test": {
+              "allocationKey": "null-operator",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "old",
+              "variationType": "string",
+              "variationValue": "old"
+            },
+            "numeric_flag": {
+              "allocationKey": "rollout",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "pi",
+              "variationType": "number",
+              "variationValue": 3.1415926
+            },
+            "regex-flag": {
+              "allocationKey": "test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "TARGETING_MATCH",
+              "serialId": null,
+              "variationKey": "test",
+              "variationType": "string",
+              "variationValue": "test"
+            },
+            "special-characters": {
+              "allocationKey": "allocation-test",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "SPLIT",
+              "serialId": null,
+              "variationKey": "zh",
+              "variationType": "object",
+              "variationValue": {
+                "a": "照顾",
+                "b": "漂亮"
+              }
+            },
+            "start-and-end-date-test": {
+              "allocationKey": "current-versions",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "current",
+              "variationType": "string",
+              "variationValue": "current"
+            },
+            "valid-flag-after-invalid-config": {
+              "allocationKey": "default-allocation",
+              "doLog": true,
+              "extraLogging": {},
+              "reason": "STATIC",
+              "serialId": null,
+              "variationKey": "expected",
+              "variationType": "string",
+              "variationValue": "expected"
+            }
+          },
+          "format": "PRECOMPUTED",
+          "obfuscated": false
+        },
+        "id": "bob",
+        "type": "precomputed-assignments"
+      }
+    },
+    "name": "regex-targeting-bob",
+    "request": {
+      "data": {
+        "attributes": {
+          "env": {
+            "dd_env": "Test"
+          },
+          "subject": {
+            "targeting_attributes": {
+              "email": "bob@test.com",
+              "version": "0.20.1"
+            },
+            "targeting_key": "bob"
+          }
+        },
+        "type": "precompute-assignments"
+      }
+    }
+  }
+]
