@@ -81,9 +81,59 @@
         "test": {
           "key": "test",
           "value": "test"
+        },
+        "capturing-groups": {
+          "key": "capturing-groups",
+          "value": "capturing-groups"
+        },
+        "unicode-word-boundary": {
+          "key": "unicode-word-boundary",
+          "value": "unicode-word-boundary"
         }
       },
       "allocations": [
+        {
+          "key": "capturing-groups",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "email",
+                  "operator": "MATCHES",
+                  "value": "^([[:alnum:]._%+-]+)@capture\\.example$"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "capturing-groups",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "unicode-word-boundary",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "email",
+                  "operator": "MATCHES",
+                  "value": "(?u)\\bmañana\\b"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "unicode-word-boundary",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
         {
           "key": "partial-example",
           "rules": [
