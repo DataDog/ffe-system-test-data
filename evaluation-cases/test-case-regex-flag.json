@@ -1,6 +1,32 @@
 [
   {
     "attributes": {
+      "email": "user.name+tag@capture.example"
+    },
+    "defaultValue": "none",
+    "flag": "regex-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "capturing-groups"
+    },
+    "targetingKey": "capture",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
+      "email": "llega mañana temprano"
+    },
+    "defaultValue": "none",
+    "flag": "regex-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "unicode-word-boundary"
+    },
+    "targetingKey": "unicode",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
       "email": "alice@example.com",
       "version": "1.15.0"
     },
