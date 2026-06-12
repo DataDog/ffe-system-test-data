@@ -4,7 +4,7 @@
     "defaultValue": "unknown",
     "flag": "microsecond-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "active"
     },
     "targetingKey": "alice",
@@ -17,7 +17,7 @@
     "defaultValue": "unknown",
     "flag": "microsecond-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "active"
     },
     "targetingKey": "bob",
@@ -30,7 +30,7 @@
     "defaultValue": "unknown",
     "flag": "microsecond-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "active"
     },
     "targetingKey": "charlie",
