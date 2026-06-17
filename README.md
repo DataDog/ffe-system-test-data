@@ -122,6 +122,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
+| `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |

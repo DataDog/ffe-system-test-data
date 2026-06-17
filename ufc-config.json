@@ -3521,6 +3521,30 @@
       },
       "allocations": "this-is-not-a-list"
     },
+    "missing-split-shards-flag": {
+      "key": "missing-split-shards-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards is required even when the intended split is unsharded. SDKs must treat omitted shards differently from an explicit empty shards array.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        }
+      },
+      "allocations": [
+        {
+          "key": "malformed-split-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "trap"
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "valid-flag-after-invalid-config": {
       "key": "valid-flag-after-invalid-config",
       "enabled": true,
