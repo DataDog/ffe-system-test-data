@@ -27,6 +27,32 @@
   },
   {
     "attributes": {
+      "email": "ALICE"
+    },
+    "defaultValue": "none",
+    "flag": "regex-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "unicode-combined-inline-flags"
+    },
+    "targetingKey": "unicode-combined",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
+      "email": "mañana"
+    },
+    "defaultValue": "none",
+    "flag": "regex-flag",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "unicode-scoped-inline-flags"
+    },
+    "targetingKey": "unicode-scoped",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
       "email": "alice@example.com",
       "version": "1.15.0"
     },
