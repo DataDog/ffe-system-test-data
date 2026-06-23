@@ -120,6 +120,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-flag-with-empty-string.json` | Flag with empty string in configuration |
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
+| `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
@@ -131,7 +132,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
 | `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
-| `test-case-regex-flag.json` | Flag using regex matching operator |
+| `test-case-regex-flag.json` | Flag using regex matching operator, including Unicode inline flags |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | Flag with unknown operator is ignored without poisoning valid flags |
