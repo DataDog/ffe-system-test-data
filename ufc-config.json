@@ -89,14 +89,6 @@
         "unicode-word-boundary": {
           "key": "unicode-word-boundary",
           "value": "unicode-word-boundary"
-        },
-        "unicode-combined-inline-flags": {
-          "key": "unicode-combined-inline-flags",
-          "value": "unicode-combined-inline-flags"
-        },
-        "unicode-scoped-inline-flags": {
-          "key": "unicode-scoped-inline-flags",
-          "value": "unicode-scoped-inline-flags"
         }
       },
       "allocations": [
@@ -137,48 +129,6 @@
           "splits": [
             {
               "variationKey": "unicode-word-boundary",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
-        {
-          "key": "unicode-combined-inline-flags",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "email",
-                  "operator": "MATCHES",
-                  "value": "(?iu)^alice$"
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "unicode-combined-inline-flags",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
-        {
-          "key": "unicode-scoped-inline-flags",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "email",
-                  "operator": "MATCHES",
-                  "value": "(?u:^mañana$)"
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "unicode-scoped-inline-flags",
               "shards": []
             }
           ],
@@ -3589,78 +3539,6 @@
           "splits": [
             {
               "variationKey": "trap"
-            }
-          ],
-          "doLog": true
-        }
-      ]
-    },
-    "overflow-total-shards-flag": {
-      "key": "overflow-total-shards-flag",
-      "enabled": true,
-      "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].totalShards must fit in an unsigned 32-bit integer. SDKs must ignore this flag rather than overflowing or poisoning the whole config.",
-      "variations": {
-        "trap": {
-          "key": "trap",
-          "value": "trap"
-        }
-      },
-      "allocations": [
-        {
-          "key": "malformed-shard-allocation",
-          "rules": [],
-          "splits": [
-            {
-              "variationKey": "trap",
-              "shards": [
-                {
-                  "salt": "overflow-total-shards-flag",
-                  "totalShards": 4294967296,
-                  "ranges": [
-                    {
-                      "start": 0,
-                      "end": 1
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "doLog": true
-        }
-      ]
-    },
-    "negative-shard-range-start-flag": {
-      "key": "negative-shard-range-start-flag",
-      "enabled": true,
-      "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[].start must be an unsigned integer. SDKs must ignore this flag rather than treating a negative range as matching traffic.",
-      "variations": {
-        "trap": {
-          "key": "trap",
-          "value": "trap"
-        }
-      },
-      "allocations": [
-        {
-          "key": "malformed-shard-allocation",
-          "rules": [],
-          "splits": [
-            {
-              "variationKey": "trap",
-              "shards": [
-                {
-                  "salt": "negative-shard-range-start-flag",
-                  "totalShards": 100,
-                  "ranges": [
-                    {
-                      "start": -1,
-                      "end": 1
-                    }
-                  ]
-                }
-              ]
             }
           ],
           "doLog": true
