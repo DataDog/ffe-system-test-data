@@ -1,0 +1,118 @@
+{
+  "name": "type-mismatch-all-types",
+  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error.",
+  "context": {
+    "targetingKey": "mismatch-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "fixture.mismatch.bool-as-string": {
+            "allocationKey": "alloc-mm",
+            "variationKey": "var-bool",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.mismatch.string-as-int": {
+            "allocationKey": "alloc-mm",
+            "variationKey": "var-str",
+            "variationType": "string",
+            "variationValue": "hello",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.mismatch.int-as-float": {
+            "allocationKey": "alloc-mm",
+            "variationKey": "var-int",
+            "variationType": "integer",
+            "variationValue": 7,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.mismatch.float-as-bool": {
+            "allocationKey": "alloc-mm",
+            "variationKey": "var-float",
+            "variationType": "float",
+            "variationValue": 3.14,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.mismatch.object-as-string": {
+            "allocationKey": "alloc-mm",
+            "variationKey": "var-obj",
+            "variationType": "object",
+            "variationValue": {"key": "value"},
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.mismatch.bool-as-string",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "result": {
+        "value": "fallback",
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.mismatch.string-as-int",
+      "variationType": "integer",
+      "defaultValue": -1,
+      "result": {
+        "value": -1,
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.mismatch.int-as-float",
+      "variationType": "float",
+      "defaultValue": 0.0,
+      "result": {
+        "value": 0.0,
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.mismatch.float-as-bool",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": false,
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.mismatch.object-as-string",
+      "variationType": "string",
+      "defaultValue": "none",
+      "result": {
+        "value": "none",
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 0,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 5
+  }
+}

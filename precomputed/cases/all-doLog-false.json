@@ -1,0 +1,82 @@
+{
+  "name": "all-doLog-false",
+  "description": "All flags have doLog=false. Evaluations succeed but zero exposure events should be emitted.",
+  "context": {
+    "targetingKey": "silent-user",
+    "attributes": {
+      "plan": "internal"
+    }
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "fixture.silent.bool": {
+            "allocationKey": "alloc-silent",
+            "variationKey": "on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          },
+          "fixture.silent.string": {
+            "allocationKey": "alloc-silent",
+            "variationKey": "greeting",
+            "variationType": "string",
+            "variationValue": "hello",
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          },
+          "fixture.silent.int": {
+            "allocationKey": "alloc-silent",
+            "variationKey": "limit-ten",
+            "variationType": "integer",
+            "variationValue": 10,
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.silent.bool",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": true,
+        "variant": "on",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "fixture.silent.string",
+      "variationType": "string",
+      "defaultValue": "default",
+      "result": {
+        "value": "hello",
+        "variant": "greeting",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "fixture.silent.int",
+      "variationType": "integer",
+      "defaultValue": 0,
+      "result": {
+        "value": 10,
+        "variant": "limit-ten",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 0,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 3
+  }
+}

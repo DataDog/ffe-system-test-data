@@ -1,0 +1,118 @@
+{
+  "name": "large-flag-set",
+  "description": "Response contains 20 flags but only 3 are evaluated. Emission counts must match evaluations performed, not total flags in the config.",
+  "context": {
+    "targetingKey": "large-set-user",
+    "attributes": {
+      "plan": "enterprise"
+    }
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "fixture.large.flag-01": {
+            "allocationKey": "alloc-l", "variationKey": "v1", "variationType": "boolean", "variationValue": true, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-02": {
+            "allocationKey": "alloc-l", "variationKey": "v2", "variationType": "string", "variationValue": "two", "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-03": {
+            "allocationKey": "alloc-l", "variationKey": "v3", "variationType": "integer", "variationValue": 3, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-04": {
+            "allocationKey": "alloc-l", "variationKey": "v4", "variationType": "boolean", "variationValue": false, "reason": "DEFAULT", "doLog": true
+          },
+          "fixture.large.flag-05": {
+            "allocationKey": "alloc-l", "variationKey": "v5", "variationType": "string", "variationValue": "five", "reason": "SPLIT", "doLog": true
+          },
+          "fixture.large.flag-06": {
+            "allocationKey": "alloc-l", "variationKey": "v6", "variationType": "float", "variationValue": 6.6, "reason": "TARGETING_MATCH", "doLog": false
+          },
+          "fixture.large.flag-07": {
+            "allocationKey": "alloc-l", "variationKey": "v7", "variationType": "boolean", "variationValue": true, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-08": {
+            "allocationKey": "alloc-l", "variationKey": "v8", "variationType": "string", "variationValue": "eight", "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-09": {
+            "allocationKey": "alloc-l", "variationKey": "v9", "variationType": "integer", "variationValue": 9, "reason": "DEFAULT", "doLog": true
+          },
+          "fixture.large.flag-10": {
+            "allocationKey": "alloc-l", "variationKey": "v10", "variationType": "boolean", "variationValue": true, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-11": {
+            "allocationKey": "alloc-l", "variationKey": "v11", "variationType": "string", "variationValue": "eleven", "reason": "SPLIT", "doLog": true
+          },
+          "fixture.large.flag-12": {
+            "allocationKey": "alloc-l", "variationKey": "v12", "variationType": "float", "variationValue": 1.2, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-13": {
+            "allocationKey": "alloc-l", "variationKey": "v13", "variationType": "boolean", "variationValue": false, "reason": "DEFAULT", "doLog": false
+          },
+          "fixture.large.flag-14": {
+            "allocationKey": "alloc-l", "variationKey": "v14", "variationType": "string", "variationValue": "fourteen", "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-15": {
+            "allocationKey": "alloc-l", "variationKey": "v15", "variationType": "integer", "variationValue": 15, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-16": {
+            "allocationKey": "alloc-l", "variationKey": "v16", "variationType": "boolean", "variationValue": true, "reason": "SPLIT", "doLog": true
+          },
+          "fixture.large.flag-17": {
+            "allocationKey": "alloc-l", "variationKey": "v17", "variationType": "string", "variationValue": "seventeen", "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-18": {
+            "allocationKey": "alloc-l", "variationKey": "v18", "variationType": "float", "variationValue": 18.0, "reason": "DEFAULT", "doLog": true
+          },
+          "fixture.large.flag-19": {
+            "allocationKey": "alloc-l", "variationKey": "v19", "variationType": "boolean", "variationValue": false, "reason": "TARGETING_MATCH", "doLog": true
+          },
+          "fixture.large.flag-20": {
+            "allocationKey": "alloc-l", "variationKey": "v20", "variationType": "object", "variationValue": {"count": 20}, "reason": "TARGETING_MATCH", "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.large.flag-01",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": true,
+        "variant": "v1",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "fixture.large.flag-10",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": true,
+        "variant": "v10",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "fixture.large.flag-20",
+      "variationType": "object",
+      "defaultValue": {},
+      "result": {
+        "value": {"count": 20},
+        "variant": "v20",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 3,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 3
+  }
+}
