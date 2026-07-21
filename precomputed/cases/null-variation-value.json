@@ -1,0 +1,80 @@
+{
+  "name": "null-variation-value",
+  "description": "Flag exists in the response but variationValue is null. SDK must return the default value with an appropriate error.",
+  "context": {
+    "targetingKey": "null-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "fixture.null.bool": {
+            "allocationKey": "alloc-null",
+            "variationKey": "null-var",
+            "variationType": "boolean",
+            "variationValue": null,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.null.string": {
+            "allocationKey": "alloc-null",
+            "variationKey": "null-var",
+            "variationType": "string",
+            "variationValue": null,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.null.object": {
+            "allocationKey": "alloc-null",
+            "variationKey": "null-var",
+            "variationType": "object",
+            "variationValue": null,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.null.bool",
+      "variationType": "boolean",
+      "defaultValue": true,
+      "result": {
+        "value": true,
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.null.string",
+      "variationType": "string",
+      "defaultValue": "safe",
+      "result": {
+        "value": "safe",
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    },
+    {
+      "flag": "fixture.null.object",
+      "variationType": "object",
+      "defaultValue": {"fallback": true},
+      "result": {
+        "value": {"fallback": true},
+        "variant": null,
+        "reason": null,
+        "error": "typeMismatch"
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 0,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 3
+  }
+}

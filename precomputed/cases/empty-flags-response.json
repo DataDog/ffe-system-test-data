@@ -1,0 +1,55 @@
+{
+  "name": "empty-flags-response",
+  "description": "Server returns an empty flags object. All evaluations must return their default values with a flagNotFound error.",
+  "context": {
+    "targetingKey": "empty-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {}
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.bool.missing",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": false,
+        "variant": null,
+        "reason": null,
+        "error": "flagNotFound"
+      }
+    },
+    {
+      "flag": "fixture.string.missing",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "result": {
+        "value": "fallback",
+        "variant": null,
+        "reason": null,
+        "error": "flagNotFound"
+      }
+    },
+    {
+      "flag": "fixture.int.missing",
+      "variationType": "integer",
+      "defaultValue": 0,
+      "result": {
+        "value": 0,
+        "variant": null,
+        "reason": null,
+        "error": "flagNotFound"
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 0,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 3
+  }
+}

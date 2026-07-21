@@ -1,0 +1,53 @@
+{
+  "name": "duplicate-evaluation",
+  "description": "The same flag is evaluated twice. Validates that the SDK returns consistent values and that exposure dedup produces only one exposure event.",
+  "context": {
+    "targetingKey": "dedup-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "fixture.dedup.flag": {
+            "allocationKey": "alloc-dedup",
+            "variationKey": "variant-a",
+            "variationType": "string",
+            "variationValue": "alpha",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.dedup.flag",
+      "variationType": "string",
+      "defaultValue": "default",
+      "result": {
+        "value": "alpha",
+        "variant": "variant-a",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "fixture.dedup.flag",
+      "variationType": "string",
+      "defaultValue": "default",
+      "result": {
+        "value": "alpha",
+        "variant": "variant-a",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 1,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 2
+  }
+}
