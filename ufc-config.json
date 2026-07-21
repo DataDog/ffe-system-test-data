@@ -89,14 +89,6 @@
         "unicode-word-boundary": {
           "key": "unicode-word-boundary",
           "value": "unicode-word-boundary"
-        },
-        "unicode-combined-inline-flags": {
-          "key": "unicode-combined-inline-flags",
-          "value": "unicode-combined-inline-flags"
-        },
-        "unicode-scoped-inline-flags": {
-          "key": "unicode-scoped-inline-flags",
-          "value": "unicode-scoped-inline-flags"
         }
       },
       "allocations": [
@@ -137,48 +129,6 @@
           "splits": [
             {
               "variationKey": "unicode-word-boundary",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
-        {
-          "key": "unicode-combined-inline-flags",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "email",
-                  "operator": "MATCHES",
-                  "value": "(?iu)^alice$"
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "unicode-combined-inline-flags",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
-        {
-          "key": "unicode-scoped-inline-flags",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "email",
-                  "operator": "MATCHES",
-                  "value": "(?u:^mañana$)"
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "unicode-scoped-inline-flags",
               "shards": []
             }
           ],
