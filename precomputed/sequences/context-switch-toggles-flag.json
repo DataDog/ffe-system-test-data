@@ -1,0 +1,254 @@
+{
+  "name": "context-switch-toggles-flag",
+  "description": "Verify that changing evaluation context triggers a re-fetch and the SDK evaluates updated flag assignments. Step 1 uses the 'all-types-success' fixture (plan=pro), step 2 switches to 'defaults-and-emission-gates' (plan=free) to exercise doLog:false, type mismatches, and missing flags.",
+  "initialContext": {
+    "targetingKey": "precomputed-user",
+    "attributes": {
+      "plan": "pro",
+      "platform": "flutter"
+    }
+  },
+  "steps": [
+    {
+      "name": "all-types-success",
+      "description": "SDK initializes with plan=pro context. All five variation types resolve successfully.",
+      "setContext": null,
+      "response": {
+        "data": {
+          "type": "precomputed-assignments",
+          "id": "precomputed-user",
+          "attributes": {
+            "createdAt": "2026-01-01T00:00:00Z",
+            "format": "PRECOMPUTED",
+            "obfuscated": false,
+            "flags": {
+              "flutter.fixture.enabled": {
+                "allocationKey": "allocation-success",
+                "variationKey": "enabled",
+                "variationType": "boolean",
+                "variationValue": true,
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.title": {
+                "allocationKey": "allocation-success",
+                "variationKey": "copy-a",
+                "variationType": "string",
+                "variationValue": "Datadog Flags",
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.limit": {
+                "allocationKey": "allocation-success",
+                "variationKey": "limit-five",
+                "variationType": "integer",
+                "variationValue": 5,
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.ratio": {
+                "allocationKey": "allocation-success",
+                "variationKey": "half",
+                "variationType": "float",
+                "variationValue": 0.5,
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.config": {
+                "allocationKey": "allocation-success",
+                "variationKey": "object-a",
+                "variationType": "object",
+                "variationValue": {
+                  "showBanner": true,
+                  "colors": ["blue", "green"]
+                },
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              }
+            }
+          }
+        }
+      },
+      "evaluations": [
+        {
+          "flag": "flutter.fixture.enabled",
+          "variationType": "boolean",
+          "defaultValue": false,
+          "result": {
+            "value": true,
+            "variant": "enabled",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        },
+        {
+          "flag": "flutter.fixture.title",
+          "variationType": "string",
+          "defaultValue": "Fallback title",
+          "result": {
+            "value": "Datadog Flags",
+            "variant": "copy-a",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        },
+        {
+          "flag": "flutter.fixture.limit",
+          "variationType": "integer",
+          "defaultValue": 0,
+          "result": {
+            "value": 5,
+            "variant": "limit-five",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        },
+        {
+          "flag": "flutter.fixture.ratio",
+          "variationType": "float",
+          "defaultValue": 0.0,
+          "result": {
+            "value": 0.5,
+            "variant": "half",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        },
+        {
+          "flag": "flutter.fixture.config",
+          "variationType": "object",
+          "defaultValue": {},
+          "result": {
+            "value": {
+              "showBanner": true,
+              "colors": ["blue", "green"]
+            },
+            "variant": "object-a",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        }
+      ],
+      "expectedEmissions": {
+        "exposures": 5,
+        "flagevaluationRequests": 1,
+        "flagevaluationEvents": 5
+      }
+    },
+    {
+      "name": "switch-to-free-plan",
+      "description": "Context changes to plan=free. Server returns config with doLog:false, type mismatches, and unknown variation types. Validates emission gating and error handling.",
+      "setContext": {
+        "targetingKey": "precomputed-user",
+        "attributes": {
+          "plan": "free",
+          "platform": "flutter"
+        }
+      },
+      "response": {
+        "data": {
+          "type": "precomputed-assignments",
+          "id": "precomputed-user",
+          "attributes": {
+            "createdAt": "2026-01-01T00:01:00Z",
+            "format": "PRECOMPUTED",
+            "obfuscated": false,
+            "flags": {
+              "flutter.fixture.silent": {
+                "allocationKey": "allocation-silent",
+                "variationKey": "silent-on",
+                "variationType": "boolean",
+                "variationValue": true,
+                "reason": "TARGETING_MATCH",
+                "doLog": false,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.string": {
+                "allocationKey": "allocation-string",
+                "variationKey": "copy-b",
+                "variationType": "string",
+                "variationValue": "Actual string",
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              },
+              "flutter.fixture.unknown": {
+                "allocationKey": "allocation-unknown",
+                "variationKey": "unknown-a",
+                "variationType": "unsupported",
+                "variationValue": "Ignored",
+                "reason": "TARGETING_MATCH",
+                "doLog": true,
+                "extraLogging": {},
+                "serialId": null
+              }
+            }
+          }
+        }
+      },
+      "evaluations": [
+        {
+          "flag": "flutter.fixture.silent",
+          "variationType": "boolean",
+          "defaultValue": false,
+          "result": {
+            "value": true,
+            "variant": "silent-on",
+            "reason": "TARGETING_MATCH",
+            "error": null
+          }
+        },
+        {
+          "flag": "flutter.fixture.string",
+          "variationType": "boolean",
+          "defaultValue": false,
+          "result": {
+            "value": false,
+            "variant": null,
+            "reason": null,
+            "error": "typeMismatch"
+          }
+        },
+        {
+          "flag": "flutter.fixture.unknown",
+          "variationType": "boolean",
+          "defaultValue": false,
+          "result": {
+            "value": false,
+            "variant": null,
+            "reason": null,
+            "error": "flagNotFound"
+          }
+        },
+        {
+          "flag": "flutter.fixture.missing",
+          "variationType": "string",
+          "defaultValue": "fallback",
+          "result": {
+            "value": "fallback",
+            "variant": null,
+            "reason": null,
+            "error": "flagNotFound"
+          }
+        }
+      ],
+      "expectedEmissions": {
+        "exposures": 0,
+        "flagevaluationRequests": 1,
+        "flagevaluationEvents": 4
+      }
+    }
+  ]
+}
