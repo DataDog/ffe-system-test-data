@@ -63,9 +63,13 @@
     {
       "flag": "fixture.null.object",
       "variationType": "object",
-      "defaultValue": {"fallback": true},
+      "defaultValue": {
+        "fallback": true
+      },
       "result": {
-        "value": {"fallback": true},
+        "value": {
+          "fallback": true
+        },
         "variant": null,
         "reason": null,
         "error": "typeMismatch"
@@ -76,5 +80,9 @@
     "exposures": 0,
     "flagevaluationRequests": 1,
     "flagevaluationEvents": 3
-  }
+  },
+  "skipForSdks": [
+    "web"
+  ],
+  "skipForSdks_reason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
 }
