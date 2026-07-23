@@ -45,7 +45,9 @@
             "allocationKey": "alloc-mm",
             "variationKey": "var-obj",
             "variationType": "object",
-            "variationValue": {"key": "value"},
+            "variationValue": {
+              "key": "value"
+            },
             "reason": "TARGETING_MATCH",
             "doLog": true
           }
@@ -114,5 +116,9 @@
     "exposures": 0,
     "flagevaluationRequests": 1,
     "flagevaluationEvents": 5
-  }
+  },
+  "skipForSdks": [
+    "web"
+  ],
+  "skipForSdks_reason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
 }
