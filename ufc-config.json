@@ -3676,6 +3676,10 @@
         "trap": {
           "key": "trap",
           "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
         }
       },
       "allocations": [
@@ -3694,6 +3698,17 @@
                   ]
                 }
               ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "null-shard-range-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
             }
           ],
           "doLog": true

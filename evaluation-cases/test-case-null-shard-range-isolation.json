@@ -1,6 +1,6 @@
 [
   {
-    "description": "The malformed flag has a null shard range, so SDKs must ignore the flag and return the caller default.",
+    "description": "The malformed flag has a null shard range before a catch-all allocation. SDKs must ignore the whole flag and return the caller default.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "null-shard-range-flag",
