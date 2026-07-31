@@ -3667,6 +3667,39 @@
         }
       ]
     },
+    "null-shard-range-flag": {
+      "key": "null-shard-range-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[] contains null. SDKs must ignore this flag rather than panicking or poisoning the whole config.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        }
+      },
+      "allocations": [
+        {
+          "key": "null-shard-range-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": [
+                {
+                  "salt": "null-shard-range-flag",
+                  "totalShards": 8192,
+                  "ranges": [
+                    null
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "valid-flag-after-invalid-config": {
       "key": "valid-flag-after-invalid-config",
       "enabled": true,

@@ -128,6 +128,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
+| `test-case-null-shard-range-isolation.json` | Flag with a null shard range is ignored without poisoning valid flags |
 | `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
