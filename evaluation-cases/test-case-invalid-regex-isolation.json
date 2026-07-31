@@ -1,0 +1,28 @@
+[
+  {
+    "description": "The malformed flag uses the invalid regex *@datadoghq.com before a catch-all allocation. SDKs must ignore the whole flag and return the caller default.",
+    "attributes": {
+      "email": "harish@datadoghq.com"
+    },
+    "defaultValue": "default",
+    "flag": "invalid-regex-flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "default"
+    },
+    "targetingKey": "harish",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A valid flag in the same config must still evaluate after the invalid-regex flag is skipped.",
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "valid-flag-after-invalid-config",
+    "result": {
+      "reason": "STATIC",
+      "value": "expected"
+    },
+    "targetingKey": "harish",
+    "variationType": "STRING"
+  }
+]

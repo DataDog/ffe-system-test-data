@@ -3508,6 +3508,56 @@
         }
       ]
     },
+    "invalid-regex-flag": {
+      "key": "invalid-regex-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must ignore this flag rather than falling through to a later allocation or rejecting the whole config.",
+      "variations": {
+        "invalid-regex-match": {
+          "key": "invalid-regex-match",
+          "value": "invalid-regex-match"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-regex-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "email",
+                  "operator": "MATCHES",
+                  "value": "*@datadoghq.com"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "invalid-regex-match",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-regex-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "malformed-allocations-flag": {
       "key": "malformed-allocations-flag",
       "enabled": true,

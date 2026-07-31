@@ -121,6 +121,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
 | `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
+| `test-case-invalid-regex-isolation.json` | Flag with an invalid regular expression is ignored without poisoning valid flags |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
