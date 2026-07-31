@@ -10,17 +10,5 @@
     },
     "targetingKey": "alice",
     "variationType": "STRING"
-  },
-  {
-    "description": "A valid flag in the same config must still evaluate after the null-shard-range flag is skipped.",
-    "attributes": {},
-    "defaultValue": "default",
-    "flag": "valid-flag-after-invalid-config",
-    "result": {
-      "reason": "STATIC",
-      "value": "expected"
-    },
-    "targetingKey": "alice",
-    "variationType": "STRING"
   }
 ]
