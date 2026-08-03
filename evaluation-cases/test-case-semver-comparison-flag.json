@@ -1,7 +1,7 @@
 [
   {
     "attributes": {
-      "app_version": "1.9.9"
+      "app_version": "1.2.3-alpha.4"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -14,7 +14,7 @@
   },
   {
     "attributes": {
-      "app_version": "1.0.0-alpha"
+      "app_version": "1.2.3-alpha.5"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -27,7 +27,7 @@
   },
   {
     "attributes": {
-      "app_version": "2.0.0"
+      "app_version": "2.3.4"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -40,7 +40,7 @@
   },
   {
     "attributes": {
-      "app_version": "2.5.1"
+      "app_version": "2.9.1"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -53,7 +53,7 @@
   },
   {
     "attributes": {
-      "app_version": "3.0.0"
+      "app_version": "3.4.5-beta.1"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -66,7 +66,7 @@
   },
   {
     "attributes": {
-      "app_version": "3.5.0"
+      "app_version": "3.4.5-beta.2"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -79,7 +79,7 @@
   },
   {
     "attributes": {
-      "app_version": "4.0.0-rc.1"
+      "app_version": "4.5.6-rc.0"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -92,7 +92,7 @@
   },
   {
     "attributes": {
-      "app_version": "4.0.0"
+      "app_version": "4.5.6-rc.1"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -105,20 +105,20 @@
   },
   {
     "attributes": {
-      "app_version": "4.0.0+build.42"
+      "app_version": "4.5.6-rc.1+build.42"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
     "result": {
       "reason": "TARGETING_MATCH",
-      "value": "launch"
+      "value": "future"
     },
     "targetingKey": "mia",
     "variationType": "STRING"
   },
   {
     "attributes": {
-      "app_version": "4.5.0"
+      "app_version": "4.5.6"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
@@ -131,7 +131,7 @@
   },
   {
     "attributes": {
-      "app_version": "5.0.0"
+      "app_version": "5.6.7"
     },
     "defaultValue": "unknown",
     "flag": "semver-comparison-test",
