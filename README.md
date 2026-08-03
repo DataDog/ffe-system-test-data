@@ -23,8 +23,12 @@ This repository contains the canonical set of flag configurations and evaluation
 ```
 ffe-system-test-data/
 ├── ufc-config.json          # Master flag configuration (UFC format)
-└── evaluation-cases/
-    └── test-*.json          # Evaluation test case files
+├── evaluation-cases/
+│   └── test-*.json          # Evaluation test case files
+└── regex-conformance/
+    ├── targeting-regex-conformance.json   # Portable authoring and matching contract
+    ├── targeting-regex-conformance.sha256 # SHA-256 of the JSON bytes
+    └── validate-targeting-regex-conformance.jq # Canonical schema validator
 ```
 
 ## Usage
@@ -105,6 +109,20 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
 - **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+
+### Targeting Regex Conformance
+
+`regex-conformance/targeting-regex-conformance.json` is a standalone, versioned
+contract for targeting regular expressions. It is intentionally outside
+`evaluation-cases/`; consumers of that directory parse every JSON file as a
+complete UFC evaluation case.
+
+Each regex case has a stable ID, a portable authoring `contract`, raw and
+normalized patterns, native compile observations, an input, and an unanchored
+match observation when the engines agree. Go and browser consumers compile
+`normalizedPattern`; Rust consumers compile `rawPattern`. Cases with native
+engine differences include per-engine expectations. The adjacent SHA-256 file
+lets downstream tests detect fixture drift.
 
 ## Evaluation Cases
 
