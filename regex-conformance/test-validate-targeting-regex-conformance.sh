@@ -5,20 +5,27 @@ set -eu
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 fixture="$script_dir/targeting-regex-conformance.json"
 validator="$script_dir/validate-targeting-regex-conformance.jq"
-temporary_files=""
+temporary_file=$(mktemp)
 
 cleanup() {
-  for file in $temporary_files; do
-    rm -f "$file"
-  done
+  rm -f "$temporary_file"
 }
-trap cleanup EXIT INT TERM
+
+handle_signal() {
+  signal=$1
+  trap - "$signal"
+  cleanup
+  kill -s "$signal" "$$"
+}
+
+trap cleanup 0
+trap 'handle_signal HUP' HUP
+trap 'handle_signal INT' INT
+trap 'handle_signal TERM' TERM
 
 expect_invalid() {
   description=$1
   mutation=$2
-  temporary_file=$(mktemp)
-  temporary_files="$temporary_files $temporary_file"
 
   jq "$mutation" "$fixture" >"$temporary_file"
   if jq -e -f "$validator" "$temporary_file" >/dev/null; then
