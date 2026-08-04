@@ -41,6 +41,7 @@
       "unsupported byte escapes",
       "Rust-only character class set operators and nested non-POSIX character classes",
       "inline Unicode flag forms whose raw Rust meaning differs from normalized Go and browser syntax",
+      "named capture groups with digit-prefixed or duplicate names",
       "atomic groups",
       "possessive quantifiers"
     ]
@@ -947,6 +948,64 @@
       "expectedCompile": false,
       "input": "aa",
       "expectedMatch": false
+    },
+    {
+      "id": "rejected-digit-prefixed-named-group",
+      "description": "Go and RE2JS accept a digit-prefixed capture name, but both Rust evaluators reject it.",
+      "category": "named-group-dialect",
+      "contract": "rejected",
+      "rawPattern": "^(?P<1>a)$",
+      "normalizedPattern": "^(?P<1>a)$",
+      "expectedCompile": null,
+      "input": "a",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": {
+          "compile": true,
+          "match": true
+        },
+        "re2js": {
+          "compile": true,
+          "match": true
+        },
+        "rustRulesBased": {
+          "compile": false,
+          "match": null
+        },
+        "rustRkyv": {
+          "compile": false,
+          "match": null
+        }
+      }
+    },
+    {
+      "id": "rejected-duplicate-named-group",
+      "description": "Go accepts a duplicate capture name, but RE2JS and both Rust evaluators reject it.",
+      "category": "named-group-dialect",
+      "contract": "rejected",
+      "rawPattern": "^(?P<word>a)(?<word>b)$",
+      "normalizedPattern": "^(?P<word>a)(?<word>b)$",
+      "expectedCompile": null,
+      "input": "ab",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": {
+          "compile": true,
+          "match": true
+        },
+        "re2js": {
+          "compile": false,
+          "match": null
+        },
+        "rustRulesBased": {
+          "compile": false,
+          "match": null
+        },
+        "rustRkyv": {
+          "compile": false,
+          "match": null
+        }
+      }
     },
     {
       "id": "rejected-named-backreference",
