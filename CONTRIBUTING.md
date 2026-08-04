@@ -60,6 +60,7 @@ Validate JSON syntax, unique case IDs, required field types, and the hash:
 ```bash
 jq empty ufc-config.json evaluation-cases/*.json regex-conformance/targeting-regex-conformance.json
 jq -e -f regex-conformance/validate-targeting-regex-conformance.jq regex-conformance/targeting-regex-conformance.json
+regex-conformance/test-validate-targeting-regex-conformance.sh
 (cd regex-conformance && shasum -a 256 -c targeting-regex-conformance.sha256)
 ```
 

@@ -28,7 +28,8 @@ ffe-system-test-data/
 └── regex-conformance/
     ├── targeting-regex-conformance.json   # Portable authoring and matching contract
     ├── targeting-regex-conformance.sha256 # SHA-256 of the JSON bytes
-    └── validate-targeting-regex-conformance.jq # Canonical schema validator
+    ├── validate-targeting-regex-conformance.jq # Canonical schema validator
+    └── test-validate-targeting-regex-conformance.sh # Validator regression tests
 ```
 
 ## Usage

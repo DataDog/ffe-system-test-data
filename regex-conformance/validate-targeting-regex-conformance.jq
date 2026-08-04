@@ -4,6 +4,31 @@ def nonempty_string:
 def nullable_boolean:
   type == "boolean" or . == null;
 
+def nonempty_string_array:
+  type == "array" and
+  length > 0 and
+  all(.[]; nonempty_string) and
+  length == (unique | length);
+
+def valid_semantics:
+  type == "object" and
+  (.acceptedSyntax | nonempty_string) and
+  (.engines | nonempty_string_array) and
+  (.matchMode | nonempty_string) and
+  .nativeCompileFailureEvaluationResult == false and
+  (.normalization | nonempty_string) and
+  (.contract | nonempty_string) and
+  (.expectedCompile | nonempty_string) and
+  (.expectedMatch | nonempty_string) and
+  (.engineExpectations | nonempty_string);
+
+def valid_portable_syntax:
+  type == "object" and
+  (.accepted | nonempty_string_array) and
+  (.rejected | nonempty_string_array) and
+  ([.accepted[], .rejected[]] | length) ==
+    ([.accepted[], .rejected[]] | unique | length);
+
 def expected_engine_keys:
   ["go", "re2js", "rustRkyv", "rustRulesBased"];
 
@@ -57,15 +82,16 @@ def valid_case:
    end) and
   (if has("engineExpectations")
    then valid_engine_expectations
-   else .expectedCompile != null and .expectedMatch != null
+   else .expectedCompile != null and
+        .expectedMatch != null and
+        (if .expectedCompile == false then .expectedMatch == false else true end)
    end);
 
 .schema == "datadog.ffe.targeting-regex-conformance/v1" and
 .schemaVersion == 1 and
 (.contractVersion | nonempty_string) and
-(.semantics | type) == "object" and
-(.portableSyntax.accepted | type) == "array" and
-(.portableSyntax.rejected | type) == "array" and
+(.semantics | valid_semantics) and
+(.portableSyntax | valid_portable_syntax) and
 (.cases | type) == "array" and
 (.cases | length) > 0 and
 ([.cases[].id] | length) == ([.cases[].id] | unique | length) and
