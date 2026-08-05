@@ -1,0 +1,184 @@
+[
+  {
+    "description": "The maximum Rust u64 value is valid in every core version component.",
+    "attributes": {
+      "app_version": "18446744073709551615.18446744073709551615.18446744073709551615"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "maximum"
+    },
+    "targetingKey": "max-core",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A numeric prerelease identifier is not limited to u64.",
+    "attributes": {
+      "app_version": "4.5.6-rc.18446744073709551616"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "future"
+    },
+    "targetingKey": "large-prerelease",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A major version larger than u64 is invalid.",
+    "attributes": {
+      "app_version": "18446744073709551616.0.0"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "major-overflow",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A minor version larger than u64 is invalid.",
+    "attributes": {
+      "app_version": "0.18446744073709551616.0"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "minor-overflow",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A patch version larger than u64 is invalid.",
+    "attributes": {
+      "app_version": "0.0.18446744073709551616"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "patch-overflow",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Rust SemVer requires all three core components.",
+    "attributes": {
+      "app_version": "1.2"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "short-version",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Rust SemVer does not accept a v prefix.",
+    "attributes": {
+      "app_version": "v1.2.3"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "v-prefix",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Core numeric components cannot have leading zeros.",
+    "attributes": {
+      "app_version": "01.2.3"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "core-leading-zero",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Numeric prerelease identifiers cannot have leading zeros.",
+    "attributes": {
+      "app_version": "1.2.3-01"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "prerelease-leading-zero",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Prerelease identifiers cannot be empty.",
+    "attributes": {
+      "app_version": "1.2.3-alpha..1"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "empty-prerelease-identifier",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Build metadata identifiers cannot be empty.",
+    "attributes": {
+      "app_version": "1.2.3+build..1"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "empty-build-identifier",
+    "variationType": "STRING"
+  },
+  {
+    "description": "Prerelease and build identifiers are ASCII-only.",
+    "attributes": {
+      "app_version": "1.2.3-α"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-comparison-test",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "unknown"
+    },
+    "targetingKey": "non-ascii-prerelease",
+    "variationType": "STRING"
+  },
+  {
+    "description": "An invalid configured SemVer comparand aborts flag evaluation with an error.",
+    "attributes": {
+      "app_version": "1.2.3"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-invalid-comparand-test",
+    "result": {
+      "reason": "ERROR",
+      "value": "unknown"
+    },
+    "targetingKey": "invalid-comparand",
+    "variationType": "STRING"
+  }
+]
