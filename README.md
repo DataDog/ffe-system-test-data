@@ -134,6 +134,7 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 | `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-semver-comparison-flag.json` | Flag using semver comparison operators (SEMVER_EQ, SEMVER_NEQ, SEMVER_LT, SEMVER_LTE, SEMVER_GT, SEMVER_GTE), including prerelease ordering and invalid/missing attribute handling |
+| `test-case-semver-validation-flag.json` | Rust-compatible SemVer parsing boundaries, invalid syntax, and invalid configured comparands |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | Flag with unknown operator is ignored without poisoning valid flags |

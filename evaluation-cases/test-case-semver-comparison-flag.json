@@ -111,7 +111,7 @@
     "flag": "semver-comparison-test",
     "result": {
       "reason": "TARGETING_MATCH",
-      "value": "future"
+      "value": "launch"
     },
     "targetingKey": "mia",
     "variationType": "STRING"

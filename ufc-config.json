@@ -689,9 +689,34 @@
         "future": {
           "key": "future",
           "value": "future"
+        },
+        "maximum": {
+          "key": "maximum",
+          "value": "maximum"
         }
       },
       "allocations": [
+        {
+          "key": "maximum-version",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "9007199254740991.9007199254740991.9007199254740991"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "maximum",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
         {
           "key": "legacy-versions",
           "rules": [
@@ -821,6 +846,40 @@
           "splits": [
             {
               "variationKey": "future",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-test": {
+      "key": "semver-invalid-comparand-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18446744073709551616.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
               "shards": []
             }
           ],
