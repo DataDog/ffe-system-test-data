@@ -23,8 +23,10 @@ This repository contains the canonical set of flag configurations and evaluation
 ```
 ffe-system-test-data/
 ├── ufc-config.json          # Master flag configuration (UFC format)
-└── evaluation-cases/
-    └── test-*.json          # Evaluation test case files
+├── evaluation-cases/
+│   └── test-*.json          # Evaluation test case files
+└── precompute-cases/
+    └── *.json               # Precompute API request/response contract files
 ```
 
 ## Usage
@@ -51,6 +53,13 @@ git submodule update --init --recursive
 2. For each file in `evaluation-cases/`, parse the JSON array
 3. For each test case, call your evaluator with `flag`, `defaultValue`, `targetingKey`, and `attributes`
 4. Assert the result matches `result.value` and `result.reason`
+
+For precompute API tests:
+
+1. Load `ufc-config.json` to initialize your UFC evaluator
+2. For each file in `precompute-cases/`, parse the JSON array
+3. For each test case, call your precompute API with `request`
+4. Assert the full response matches `expectedResponse`
 
 ## File Formats
 
@@ -105,6 +114,21 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
 - **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+
+### Precompute Test Cases (`precompute-cases/*.json`)
+
+Each precompute case validates the SDK-facing precompute API response shape. These fixtures use JSON:API request and response bodies so edge services and SDK implementations can share the same contract tests.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Stable test case identifier |
+| `description` | string | Human-readable coverage note |
+| `request` | object | JSON:API precompute request body |
+| `expectedResponse` | object | Expected JSON:API precompute response body |
+
+`expectedResponse.data.attributes.createdAt` is intentionally fixed to `2026-01-01T00:00:00Z` so implementations can run the suite deterministically by injecting that evaluation timestamp.
+
+Precompute responses include `extraLogging` because the current API schema contains the field, but the canonical cases keep it empty (`{}`) so SDKs do not need to preserve deprecated split logging details.
 
 ## Evaluation Cases
 
