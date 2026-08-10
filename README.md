@@ -171,6 +171,23 @@ These fixtures are derived from the Go SDK (`dd-trace-go`) reference implementat
 
 Downstream repositories should consume this repository as a git submodule and run their fixture coverage by loading every JSON file in `evaluation-cases/`. Shared evaluator behavior should be added here first, then downstream repositories should update their submodule SHA. Do not add copied JSON fixture directories or language-only programmatic cases for behavior that belongs in this shared fixture set.
 
+### Compatibility Preview
+
+Pull requests that change `ufc-config.json` or `evaluation-cases/` run an
+advisory compatibility preview against the focused canonical-fixture tests on
+the current `dd-trace-go` and `dd-trace-java` default branches. Each downstream
+test runs twice: once with the candidate's merge-base against this repository's
+default branch and once with its proposed head revision. This makes stacked
+fixture changes test their cumulative effect while preserving the usual base
+versus head comparison for pull requests opened directly against the default
+branch.
+
+The preview distinguishes a newly introduced regression (base passes and head
+fails) from existing downstream drift (both revisions fail). It reports the
+classification in the job summary and uploads both test logs. The preview does
+not update downstream submodule pins, open issues, or replace the downstream
+repositories' own required CI.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or modifying test cases.
