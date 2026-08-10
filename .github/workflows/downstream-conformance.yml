@@ -61,7 +61,7 @@ jobs:
             # ddtest runs as uid 1000 in Docker while the Actions checkout is uid 1001.
             setup: chmod -R a+rwX .
             contract: >-
-              scripts/ddtest riot -v run --pass-env -s 14fc413 -- -vv
+              scripts/run-tests --venv 14fc413 -- -- -vv
               -k targeting_regex_conformance
             enforce_contract: true
           - slug: dd-trace-rb
@@ -90,7 +90,7 @@ jobs:
             repository: DataDog/dd-trace-php
             runtime: php
             submodule: tests/FeatureFlags/ffe-system-test-data
-            setup: ":"
+            setup: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev
             contract: >-
               make test_c TESTS=tests/ext/ffe/regex_conformance.phpt
               MAX_TEST_PARALLELISM=1
