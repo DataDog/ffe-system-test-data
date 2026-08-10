@@ -93,7 +93,7 @@ After your changes are merged to this repository, update the submodule reference
 3. Load `ufc-config.json` and loop over every `evaluation-cases/*.json` file in unit tests
 4. Avoid copied fixture directories and programmatic-only shared evaluator cases
 
-Current downstream consumers are `system-tests`, `dd-trace-go`, `dd-trace-java`, `dd-trace-js`, `dd-trace-py`, `dd-trace-rb`, `dd-trace-dotnet`, `libdatadog`, and `openfeature-js-client`. `dd-trace-php` is excluded until its OpenFeature client lands.
+Current downstream consumers are `system-tests`, `dd-trace-go`, `dd-trace-java`, `dd-trace-js`, `dd-trace-py`, `dd-trace-rb`, `dd-trace-dotnet`, `dd-trace-php`, `libdatadog`, and `openfeature-js-client`.
 
 ## Questions?
 

@@ -10,13 +10,12 @@ This repository contains the canonical set of flag configurations and evaluation
 - [dd-trace-py](https://github.com/DataDog/dd-trace-py) - Python tracer
 - [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
 - [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
+- [dd-trace-php](https://github.com/DataDog/dd-trace-php) - PHP tracer
 - [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
 - [dd-trace-js](https://github.com/DataDog/dd-trace-js) - JavaScript tracer
 - [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) - Ruby tracer
 - [libdatadog](https://github.com/DataDog/libdatadog) - Shared Rust FFE evaluator
 - [openfeature-js-client](https://github.com/DataDog/openfeature-js-client) - Datadog OpenFeature JavaScript clients
-
-`dd-trace-php` is intentionally excluded until its OpenFeature client has landed.
 
 ## Directory Structure
 
@@ -173,20 +172,24 @@ Downstream repositories should consume this repository as a git submodule and ru
 
 ### Compatibility Preview
 
-Pull requests that change `ufc-config.json` or `evaluation-cases/` run an
-advisory compatibility preview against the focused canonical-fixture tests on
-the current `dd-trace-go` and `dd-trace-java` default branches. Each downstream
-test runs twice: once with the candidate's merge-base against this repository's
-default branch and once with its proposed head revision. This makes stacked
-fixture changes test their cumulative effect while preserving the usual base
-versus head comparison for pull requests opened directly against the default
-branch.
+Pull requests that change `ufc-config.json`, `evaluation-cases/`, or
+`regex-conformance/` run focused tests from conformance branches in the seven
+tracer repositories with an FFE evaluator and in `libdatadog`. Those branches
+keep the executable consumer tests next to the production implementations;
+this repository only orchestrates them.
 
-The preview distinguishes a newly introduced regression (base passes and head
-fails) from existing downstream drift (both revisions fail). It reports the
-classification in the job summary and uploads both test logs. The preview does
-not update downstream submodule pins, open issues, or replace the downstream
-repositories' own required CI.
+The preview reports two independent signals. The standalone regex contract
+runs against the proposed fixture revision. Until the contract first lands on
+the default branch, its pull-request base has no standalone file to execute.
+The canonical UFC evaluation test still runs twice, once with the candidate's
+merge-base and once with the proposed head, and distinguishes a new regression
+from existing downstream drift.
+
+Engine observations explicitly represented by the fixture (Go, RE2JS, and
+Rust rules-based consumers) are enforced. Java and .NET remain advisory until
+the contract defines their engine-specific pattern and normalization behavior.
+All jobs publish logs and summaries. The preview does not update downstream
+submodule pins, open issues, or replace the downstream repositories' own CI.
 
 ## Contributing
 
