@@ -3830,6 +3830,56 @@
         }
       ]
     },
+    "invalid-regex-flag": {
+      "key": "invalid-regex-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must ignore this flag rather than falling through to a later allocation or rejecting the whole config.",
+      "variations": {
+        "invalid-regex-match": {
+          "key": "invalid-regex-match",
+          "value": "invalid-regex-match"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-regex-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "email",
+                  "operator": "MATCHES",
+                  "value": "*@datadoghq.com"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "invalid-regex-match",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-regex-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "malformed-allocations-flag": {
       "key": "malformed-allocations-flag",
       "enabled": true,
@@ -3933,6 +3983,54 @@
                   ]
                 }
               ]
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "null-shard-range-flag": {
+      "key": "null-shard-range-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[] contains null. SDKs must ignore this flag rather than panicking or poisoning the whole config.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "null-shard-range-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": [
+                {
+                  "salt": "null-shard-range-flag",
+                  "totalShards": 8192,
+                  "ranges": [
+                    null
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "null-shard-range-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
             }
           ],
           "doLog": true

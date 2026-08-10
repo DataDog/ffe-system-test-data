@@ -1,0 +1,31 @@
+name: Fixture validation
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/validate-fixtures.yml
+      - ci/validate-fixtures.py
+      - evaluation-cases/**
+      - ufc-config.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fixture-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate fixture JSON and references
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out fixtures
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Validate fixtures
+        run: python3 ci/validate-fixtures.py

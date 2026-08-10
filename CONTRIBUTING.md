@@ -80,9 +80,14 @@ All changes require review from the @DataDog/feature-flagging-and-experimentatio
 
 After making changes, ensure that:
 
-1. All JSON files are valid (no syntax errors)
-2. Test cases reference flags that exist in the config
-3. Expected results match the flag configuration logic
+1. `python3 ci/validate-fixtures.py` passes
+2. Expected results match the flag configuration logic
+3. Informational downstream results are reviewed for new regressions
+
+Static fixture validation is a merge gate. Downstream compatibility results are
+advisory: they provide evidence for review, but a mismatch may be caused by
+either a consumer implementation or the proposed fixture and does not block
+merge by itself.
 
 ## Updating Downstream Repositories
 

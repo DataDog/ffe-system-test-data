@@ -10,10 +10,10 @@ This repository contains the canonical set of flag configurations and evaluation
 - [dd-trace-py](https://github.com/DataDog/dd-trace-py) - Python tracer
 - [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
 - [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
-- [dd-trace-php](https://github.com/DataDog/dd-trace-php) - PHP tracer
 - [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
 - [dd-trace-js](https://github.com/DataDog/dd-trace-js) - JavaScript tracer
 - [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) - Ruby tracer
+- [dd-trace-php](https://github.com/DataDog/dd-trace-php) - PHP tracer
 - [libdatadog](https://github.com/DataDog/libdatadog) - Shared Rust FFE evaluator
 - [openfeature-js-client](https://github.com/DataDog/openfeature-js-client) - Datadog OpenFeature JavaScript clients
 
@@ -124,6 +124,22 @@ match observation when the engines agree. Go and browser consumers compile
 engine differences include per-engine expectations. The adjacent SHA-256 file
 lets downstream tests detect fixture drift.
 
+## Automated Validation
+
+Pull requests run a blocking static validation check over `ufc-config.json`
+and every file in `evaluation-cases/`. It rejects invalid JSON, duplicate
+object keys, malformed evaluation-case envelopes, mismatched flag or variation
+map keys, and references to unknown flags without a `FLAG_NOT_FOUND`
+expectation.
+
+The validator deliberately does not fully schema-check allocation internals.
+Some fixtures contain malformed flag fields on purpose to verify that consumers
+reject only the affected flag. Run the same check locally with:
+
+```bash
+python3 ci/validate-fixtures.py
+```
+
 ## Evaluation Cases
 
 | File | Description |
@@ -139,12 +155,14 @@ lets downstream tests detect fixture drift.
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
 | `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
+| `test-case-invalid-regex-isolation.json` | Flag with an invalid regular expression is ignored without poisoning valid flags |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
+| `test-case-null-shard-range-isolation.json` | Flag with a null shard range is ignored without poisoning valid flags |
 | `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
@@ -170,26 +188,24 @@ These fixtures are derived from the Go SDK (`dd-trace-go`) reference implementat
 
 Downstream repositories should consume this repository as a git submodule and run their fixture coverage by loading every JSON file in `evaluation-cases/`. Shared evaluator behavior should be added here first, then downstream repositories should update their submodule SHA. Do not add copied JSON fixture directories or language-only programmatic cases for behavior that belongs in this shared fixture set.
 
-### Compatibility Preview
+### Informational Compatibility Preview
 
-Pull requests that change `ufc-config.json`, `evaluation-cases/`, or
-`regex-conformance/` run focused tests from conformance branches in the seven
-tracer repositories with an FFE evaluator and in `libdatadog`. Those branches
-keep the executable consumer tests next to the production implementations;
-this repository only orchestrates them.
+Fixture pull requests also run the canonical evaluation suite from Go, Java,
+JavaScript, Python, Ruby, .NET, PHP, and `libdatadog` against both the
+pull-request merge base and proposed head. Each job classifies the result as
+compatible, a new regression, an improvement, or existing downstream drift and
+uploads the two logs.
 
-The preview reports two independent signals. The standalone regex contract
-runs against the proposed fixture revision. Until the contract first lands on
-the default branch, its pull-request base has no standalone file to execute.
-The canonical UFC evaluation test still runs twice, once with the candidate's
-merge-base and once with the proposed head, and distinguishes a new regression
-from existing downstream drift.
+These compatibility jobs are intentionally advisory and are allowed to fail.
+They must not be configured as required merge checks. Their purpose is to show
+contributors where to start investigating; a mismatch can indicate either a
+downstream implementation gap or an incorrect expectation in this repository.
+The preview does not automatically update submodule pins, open issues, or
+decide which side is wrong.
 
-Engine observations explicitly represented by the fixture (Go, RE2JS, and
-Rust rules-based consumers) are enforced. Java and .NET remain advisory until
-the contract defines their engine-specific pattern and normalization behavior.
-All jobs publish logs and summaries. The preview does not update downstream
-submodule pins, open issues, or replace the downstream repositories' own CI.
+The executable entrypoints currently live on purpose-built consumer branches
+based on each repository's default branch. This repository only orchestrates
+those consumer-owned tests.
 
 ## Contributing
 

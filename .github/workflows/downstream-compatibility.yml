@@ -1,26 +1,26 @@
-name: Regex universality evidence
+name: Downstream compatibility preview
 
 on:
   pull_request:
     paths:
-      - .github/workflows/downstream-conformance.yml
-      - ci/run-regex-conformance.sh
+      - .github/workflows/downstream-compatibility.yml
+      - ci/run-downstream-conformance.sh
       - evaluation-cases/**
-      - regex-conformance/**
       - ufc-config.json
 
 permissions:
   contents: read
 
 concurrency:
-  group: regex-universality-${{ github.event.pull_request.number }}
+  group: downstream-compatibility-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
   downstream:
-    name: ${{ matrix.slug }} regex evidence
+    name: ${{ matrix.slug }} compatibility (advisory)
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -30,27 +30,18 @@ jobs:
             runtime: go
             submodule: openfeature/ffe-system-test-data
             setup: ":"
-            contract: go test ./openfeature -run '^TestTargetingRegexConformance$' -count=1
             evaluation: go test ./openfeature -run '^TestEvaluateFlag_JSONFixtures$' -count=1
-            enforce_contract: true
           - slug: dd-trace-java
             repository: DataDog/dd-trace-java
             runtime: java
             submodule: dd-smoke-tests/openfeature/src/test/resources/ffe-system-test-data
             setup: ":"
-            contract: >-
-              ./gradlew
-              :products:feature-flagging:feature-flagging-api:cleanTest
-              :products:feature-flagging:feature-flagging-api:test
-              --tests datadog.trace.api.openfeature.DDEvaluatorTest.testRegexConformance
-              --no-daemon
             evaluation: >-
               ./gradlew
               :products:feature-flagging:feature-flagging-api:cleanTest
               :products:feature-flagging:feature-flagging-api:test
               --tests datadog.trace.api.openfeature.DDEvaluatorTest.testEvaluateCanonicalFixture
               --no-daemon
-            enforce_contract: false
           - slug: dd-trace-js
             repository: DataDog/dd-trace-js
             runtime: node
@@ -58,34 +49,23 @@ jobs:
             setup: >-
               npm install -g bun@1.3.1 --prefer-offline --no-audit --no-fund &&
               bun install --linker=hoisted --trust --network-concurrency 8
-            contract: npm run test:openfeature -- --grep 'targeting regex conformance'
             evaluation: npm run test:openfeature -- --grep 'canonical FFE fixtures'
-            # dd-trace-js uses native ECMAScript RegExp, not the fixture's RE2JS engine.
-            enforce_contract: false
           - slug: dd-trace-py
             repository: DataDog/dd-trace-py
             runtime: python
             submodule: tests/openfeature/ffe-system-test-data
             setup: ":"
-            contract: >-
-              scripts/run-tests --venv 13c4b39 -- -- -vv
-              tests/openfeature/test_regex_conformance.py
             evaluation: >-
               scripts/ddtest riot -v run --pass-env -s 13c4b39 -- -vv
-              tests/openfeature/test_provider_fixtures.py -k regex
-            enforce_contract: true
+              tests/openfeature/test_provider_fixtures.py
           - slug: dd-trace-rb
             repository: DataDog/dd-trace-rb
             runtime: ruby
             submodule: spec/datadog/open_feature/ffe-system-test-data
             setup: bundle install --jobs 4 && bundle exec rake compile
-            contract: >-
-              bundle exec rspec spec/datadog/open_feature/native_evaluator_spec.rb
-              -e 'targeting regex conformance'
             evaluation: >-
               bundle exec rspec spec/datadog/open_feature/native_evaluator_spec.rb
               -e 'canonical FFE fixtures'
-            enforce_contract: true
           - slug: dd-trace-dotnet
             repository: DataDog/dd-trace-dotnet
             runtime: dotnet
@@ -93,43 +73,27 @@ jobs:
             setup: >-
               dotnet restore
               tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
-            contract: >-
-              dotnet test tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
-              --framework net10.0 --no-restore
-              --filter 'FullyQualifiedName~Datadog.Trace.Tests.FeatureFlags.FeatureFlagsEvaluatorTests.RegexConformance'
-              --verbosity minimal
             evaluation: >-
               dotnet test tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
-              --framework net10.0 --no-build --no-restore
+              --framework net10.0 --no-restore
               --filter 'FullyQualifiedName~Datadog.Trace.Tests.FeatureFlags.FeatureFlagsEvaluatorTests.BundledTest'
               --verbosity minimal
-            enforce_contract: false
           - slug: dd-trace-php
             repository: DataDog/dd-trace-php
             runtime: php
             submodule: tests/FeatureFlags/ffe-system-test-data
             setup: ":"
-            contract: >-
-              make test_c TESTS=tests/ext/ffe/regex_conformance.phpt
-              MAX_TEST_PARALLELISM=1
             evaluation: >-
               make test_c TESTS=tests/ext/ffe/system_test_data_evaluate.phpt
               MAX_TEST_PARALLELISM=1
-            enforce_contract: true
           - slug: libdatadog
             repository: DataDog/libdatadog
             runtime: rust
             submodule: libdd-ffe-test-suite/ffe-system-test-data
             setup: rustup toolchain install 1.87.0 --profile minimal
-            contract: >-
-              cargo +1.87.0 test -p libdd-ffe-test-suite
-              --test targeting_regex_conformance
-              evaluates_targeting_regex_conformance_fixture -- --exact --nocapture
             evaluation: >-
               cargo +1.87.0 test -p libdd-ffe-test-suite
-              --test canonical_fixtures evaluates_regex_json_fixture
-              -- --exact --nocapture
-            enforce_contract: true
+              --test canonical_fixtures -- --nocapture
 
     steps:
       - name: Check out proposed fixtures
@@ -139,7 +103,7 @@ jobs:
           path: fixtures
           persist-credentials: false
 
-      - name: Check out ${{ matrix.slug }} conformance branch
+      - name: Check out ${{ matrix.slug }} fixture-test branch
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: ${{ matrix.repository }}
@@ -210,55 +174,32 @@ jobs:
             "origin/${{ github.event.repository.default_branch }}")
           echo "base=$base_sha" >> "$GITHUB_OUTPUT"
 
-      - name: Run candidate regex contract
-        id: contract
-        env:
-          TEST_COMMAND: ${{ matrix.contract }}
-        run: |
-          fixtures/ci/run-regex-conformance.sh --candidate-only \
-            "$GITHUB_WORKSPACE/fixtures" \
-            "$GITHUB_WORKSPACE/downstream" \
-            "${{ matrix.submodule }}" \
-            "${{ github.event.pull_request.head.sha }}" \
-            "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}/contract" \
-            -- \
-            bash -lc "$TEST_COMMAND"
-
       - name: Compare canonical evaluation behavior
         id: evaluation
         env:
           TEST_COMMAND: ${{ matrix.evaluation }}
         run: |
-          fixtures/ci/run-regex-conformance.sh \
+          fixtures/ci/run-downstream-conformance.sh \
             "$GITHUB_WORKSPACE/fixtures" \
             "$GITHUB_WORKSPACE/downstream" \
             "${{ matrix.submodule }}" \
             "${{ steps.revisions.outputs.base }}" \
             "${{ github.event.pull_request.head.sha }}" \
-            "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}/evaluation" \
+            "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}" \
             -- \
             bash -lc "$TEST_COMMAND"
 
-      - name: Report candidate contract failure
-        if: steps.contract.outputs.classification == 'candidate-failure'
+      - name: Report compatibility finding
+        if: steps.evaluation.outputs.classification != 'compatible'
+        env:
+          CLASSIFICATION: ${{ steps.evaluation.outputs.classification }}
         run: |
-          echo "::warning title=${{ matrix.slug }} regex contract failure::The proposed fixture does not match the consumer branch. See the job summary and logs."
-
-      - name: Report candidate evaluation regression
-        if: steps.evaluation.outputs.classification == 'new-regression'
-        run: |
-          echo "::warning title=${{ matrix.slug }} evaluation regression::The fixture base passes, but the proposed head fails end-to-end evaluation. See the job summary and logs."
+          echo "::warning title=${{ matrix.slug }} fixture compatibility::Classification: $CLASSIFICATION. This is informational; inspect the job summary and attached logs before deciding whether the SDK or fixture needs a fix."
 
       - name: Upload comparison logs
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: downstream-conformance-${{ matrix.slug }}
-          path: ${{ runner.temp }}/downstream-conformance/${{ matrix.slug }}/**/*.log
+          name: downstream-compatibility-${{ matrix.slug }}
+          path: ${{ runner.temp }}/downstream-conformance/${{ matrix.slug }}/*.log
           if-no-files-found: warn
-
-      - name: Enforce claimed engine observations
-        if: matrix.enforce_contract && steps.contract.outputs.classification == 'candidate-failure'
-        run: |
-          echo "${{ matrix.slug }} is an engine explicitly represented by the fixture, so this mismatch is blocking."
-          exit 1

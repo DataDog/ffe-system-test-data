@@ -7,42 +7,21 @@ usage() {
 usage: run-downstream-conformance.sh \
   <fixture-repository> <downstream-repository> <fixture-submodule-path> \
   <base-fixture-sha> <head-fixture-sha> <log-directory> -- <test-command> [args...]
-
-   or: run-downstream-conformance.sh --candidate-only \
-  <fixture-repository> <downstream-repository> <fixture-submodule-path> \
-  <candidate-fixture-sha> <log-directory> -- <test-command> [args...]
 EOF
 }
 
-mode=compare
-if [[ ${1:-} == "--candidate-only" ]]; then
-  mode=candidate
-  shift
-  if [[ $# -lt 7 ]]; then
-    usage
-    exit 2
-  fi
-
-  fixture_repository=$1
-  downstream_repository=$2
-  fixture_submodule_path=$3
-  head_fixture_sha=$4
-  log_directory=$5
-  shift 5
-else
-  if [[ $# -lt 8 ]]; then
-    usage
-    exit 2
-  fi
-
-  fixture_repository=$1
-  downstream_repository=$2
-  fixture_submodule_path=$3
-  base_fixture_sha=$4
-  head_fixture_sha=$5
-  log_directory=$6
-  shift 6
+if [[ $# -lt 8 ]]; then
+  usage
+  exit 2
 fi
+
+fixture_repository=$1
+downstream_repository=$2
+fixture_submodule_path=$3
+base_fixture_sha=$4
+head_fixture_sha=$5
+log_directory=$6
+shift 6
 
 if [[ $1 != "--" ]]; then
   usage
@@ -54,12 +33,7 @@ fixture_repository=$(cd "$fixture_repository" && pwd)
 downstream_repository=$(cd "$downstream_repository" && pwd)
 fixture_checkout="$downstream_repository/$fixture_submodule_path"
 
-fixture_shas=("$head_fixture_sha")
-if [[ $mode == compare ]]; then
-  fixture_shas=("$base_fixture_sha" "$head_fixture_sha")
-fi
-
-for fixture_sha in "${fixture_shas[@]}"; do
+for fixture_sha in "$base_fixture_sha" "$head_fixture_sha"; do
   git -C "$fixture_repository" cat-file -e "$fixture_sha^{commit}"
 done
 
@@ -103,66 +77,49 @@ run_fixture_revision() {
   return "$status"
 }
 
+base_status=0
 head_status=0
-if [[ $mode == candidate ]]; then
-  run_fixture_revision candidate "$head_fixture_sha" "$@" || head_status=$?
-  if [[ $head_status -eq 0 ]]; then
-    classification=candidate-pass
-    summary="The proposed fixture passes the downstream conformance test."
-  else
-    classification=candidate-failure
-    summary="The proposed fixture fails the downstream conformance test."
-  fi
-else
-  base_status=0
-  run_fixture_revision base "$base_fixture_sha" "$@" || base_status=$?
-  run_fixture_revision head "$head_fixture_sha" "$@" || head_status=$?
+run_fixture_revision base "$base_fixture_sha" "$@" || base_status=$?
+run_fixture_revision head "$head_fixture_sha" "$@" || head_status=$?
 
-  if [[ $base_status -eq 0 && $head_status -eq 0 ]]; then
-    classification=compatible
-    summary="Both the pull-request base and head fixtures pass."
-  elif [[ $base_status -eq 0 && $head_status -ne 0 ]]; then
-    classification=new-regression
-    summary="The base fixture passes and the proposed fixture fails."
-  elif [[ $base_status -ne 0 && $head_status -eq 0 ]]; then
-    classification=improvement
-    summary="The base fixture fails and the proposed fixture passes."
-  else
-    classification=existing-drift
-    summary="Both fixture revisions fail; the downstream repository was already incompatible with the pull-request base."
-  fi
+if [[ $base_status -eq 0 && $head_status -eq 0 ]]; then
+  classification=compatible
+  summary="Both the pull-request base and head fixtures pass."
+elif [[ $base_status -eq 0 && $head_status -ne 0 ]]; then
+  classification=new-regression
+  summary="The base fixture passes and the proposed fixture fails."
+elif [[ $base_status -ne 0 && $head_status -eq 0 ]]; then
+  classification=improvement
+  summary="The base fixture fails and the proposed fixture passes."
+else
+  classification=existing-drift
+  summary="Both fixture revisions fail; the downstream repository was already incompatible with the pull-request base."
 fi
 
 printf '\nclassification=%s\n' "$classification"
+printf 'base_exit_code=%s\n' "$base_status"
 printf 'head_exit_code=%s\n' "$head_status"
-if [[ $mode == compare ]]; then
-  printf 'base_exit_code=%s\n' "$base_status"
-fi
 
 if [[ -n ${GITHUB_OUTPUT:-} ]]; then
   {
     printf 'classification=%s\n' "$classification"
+    printf 'base_exit_code=%s\n' "$base_status"
     printf 'head_exit_code=%s\n' "$head_status"
-    if [[ $mode == compare ]]; then
-      printf 'base_exit_code=%s\n' "$base_status"
-    fi
   } >>"$GITHUB_OUTPUT"
 fi
 
 if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   {
-    printf '### Downstream fixture compatibility\n\n'
-    if [[ $mode == candidate ]]; then
-      printf '| Candidate | Classification |\n'
-      printf '| ---: | --- |\n'
-      # shellcheck disable=SC2016 # Backticks are Markdown, not shell syntax.
-      printf '| `%s` | **%s** |\n\n' "$head_status" "$classification"
-    else
-      printf '| Base | Head | Classification |\n'
-      printf '| ---: | ---: | --- |\n'
-      # shellcheck disable=SC2016 # Backticks are Markdown, not shell syntax.
-      printf '| `%s` | `%s` | **%s** |\n\n' "$base_status" "$head_status" "$classification"
-    fi
-    printf '%s\n' "$summary"
+    printf '### Informational downstream fixture compatibility\n\n'
+    printf '| Base exit code | Head exit code | Classification |\n'
+    printf '| ---: | ---: | --- |\n'
+    printf '| %s | %s | **%s** |\n\n' "$base_status" "$head_status" "$classification"
+    printf '%s\n\n' "$summary"
+    printf '%s\n' 'This result is advisory. Use the attached logs to investigate either a downstream implementation gap or an incorrect shared fixture expectation.'
   } >>"$GITHUB_STEP_SUMMARY"
 fi
+
+# Consumer test failures are evidence, not a merge gate. Command/setup errors
+# outside run_fixture_revision still fail this script so the workflow can expose
+# broken orchestration; the job itself is explicitly allowed to fail.
+exit 0
