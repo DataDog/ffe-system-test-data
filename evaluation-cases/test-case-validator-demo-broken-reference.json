@@ -1,0 +1,13 @@
+[
+  {
+    "attributes": {},
+    "defaultValue": false,
+    "flag": "validator-demo-missing-flag",
+    "result": {
+      "reason": "DEFAULT",
+      "value": false
+    },
+    "targetingKey": "demo-user",
+    "variationType": "BOOLEAN"
+  }
+]
