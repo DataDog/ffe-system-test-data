@@ -3780,6 +3780,35 @@
         }
       ]
     },
+    "variant-type-mismatch-flag": {
+      "key": "variant-type-mismatch-flag",
+      "enabled": true,
+      "variationType": "INTEGER",
+      "comment": "This flag is intentionally invalid: one variation contains a string even though the flag declares INTEGER values.",
+      "variations": {
+        "invalid": {
+          "key": "invalid",
+          "value": "not-an-integer"
+        },
+        "valid": {
+          "key": "valid",
+          "value": 0
+        }
+      },
+      "allocations": [
+        {
+          "key": "default-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "invalid",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "malformed-allocations-flag": {
       "key": "malformed-allocations-flag",
       "enabled": true,

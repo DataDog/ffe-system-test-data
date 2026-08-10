@@ -1,0 +1,28 @@
+[
+  {
+    "description": "A variation value that violates the declared flag type is a configuration parse error.",
+    "attributes": {},
+    "defaultValue": 0,
+    "flag": "variant-type-mismatch-flag",
+    "result": {
+      "errorCode": "PARSE_ERROR",
+      "reason": "ERROR",
+      "value": 0
+    },
+    "targetingKey": "user-1",
+    "variationType": "INTEGER"
+  },
+  {
+    "description": "A wrong typed evaluation request remains a type mismatch even when the flag configuration is malformed.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "variant-type-mismatch-flag",
+    "result": {
+      "errorCode": "TYPE_MISMATCH",
+      "reason": "ERROR",
+      "value": "fallback"
+    },
+    "targetingKey": "user-1",
+    "variationType": "STRING"
+  }
+]
