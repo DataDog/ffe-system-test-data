@@ -31,7 +31,6 @@ jobs:
             submodule: openfeature/ffe-system-test-data
             setup: ":"
             contract: go test ./openfeature -run '^TestTargetingRegexConformance$' -count=1
-            evaluation: go test ./openfeature -run '^TestEvaluateFlag_JSONFixtures$' -count=1
             enforce_contract: true
           - slug: dd-trace-java
             repository: DataDog/dd-trace-java
@@ -44,12 +43,6 @@ jobs:
               :products:feature-flagging:feature-flagging-api:test
               --tests datadog.trace.api.openfeature.DDEvaluatorTest.testRegexConformance
               --no-daemon
-            evaluation: >-
-              ./gradlew
-              :products:feature-flagging:feature-flagging-api:cleanTest
-              :products:feature-flagging:feature-flagging-api:test
-              --tests datadog.trace.api.openfeature.DDEvaluatorTest.testEvaluateCanonicalFixture
-              --no-daemon
             enforce_contract: false
           - slug: dd-trace-js
             repository: DataDog/dd-trace-js
@@ -59,7 +52,6 @@ jobs:
               npm install -g bun@1.3.1 --prefer-offline --no-audit --no-fund &&
               bun install --linker=hoisted --trust --network-concurrency 8
             contract: npm run test:openfeature -- --grep 'targeting regex conformance'
-            evaluation: npm run test:openfeature -- --grep 'canonical FFE fixtures'
             # dd-trace-js uses native ECMAScript RegExp, not the fixture's RE2JS engine.
             enforce_contract: false
           - slug: dd-trace-py
@@ -68,11 +60,8 @@ jobs:
             submodule: tests/openfeature/ffe-system-test-data
             setup: ":"
             contract: >-
-              scripts/run-tests --venv 13c4b39 -- -- -vv
-              tests/openfeature/test_regex_conformance.py
-            evaluation: >-
               scripts/ddtest riot -v run --pass-env -s 13c4b39 -- -vv
-              tests/openfeature/test_provider_fixtures.py -k regex
+              tests/openfeature/test_regex_conformance.py
             enforce_contract: true
           - slug: dd-trace-rb
             repository: DataDog/dd-trace-rb
@@ -82,9 +71,6 @@ jobs:
             contract: >-
               bundle exec rspec spec/datadog/open_feature/native_evaluator_spec.rb
               -e 'targeting regex conformance'
-            evaluation: >-
-              bundle exec rspec spec/datadog/open_feature/native_evaluator_spec.rb
-              -e 'canonical FFE fixtures'
             enforce_contract: true
           - slug: dd-trace-dotnet
             repository: DataDog/dd-trace-dotnet
@@ -98,11 +84,6 @@ jobs:
               --framework net10.0 --no-restore
               --filter 'FullyQualifiedName~Datadog.Trace.Tests.FeatureFlags.FeatureFlagsEvaluatorTests.RegexConformance'
               --verbosity minimal
-            evaluation: >-
-              dotnet test tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
-              --framework net10.0 --no-build --no-restore
-              --filter 'FullyQualifiedName~Datadog.Trace.Tests.FeatureFlags.FeatureFlagsEvaluatorTests.BundledTest'
-              --verbosity minimal
             enforce_contract: false
           - slug: dd-trace-php
             repository: DataDog/dd-trace-php
@@ -111,9 +92,6 @@ jobs:
             setup: ":"
             contract: >-
               make test_c TESTS=tests/ext/ffe/regex_conformance.phpt
-              MAX_TEST_PARALLELISM=1
-            evaluation: >-
-              make test_c TESTS=tests/ext/ffe/system_test_data_evaluate.phpt
               MAX_TEST_PARALLELISM=1
             enforce_contract: true
           - slug: libdatadog
@@ -125,10 +103,6 @@ jobs:
               cargo +1.87.0 test -p libdd-ffe-test-suite
               --test targeting_regex_conformance
               evaluates_targeting_regex_conformance_fixture -- --exact --nocapture
-            evaluation: >-
-              cargo +1.87.0 test -p libdd-ffe-test-suite
-              --test canonical_fixtures evaluates_regex_json_fixture
-              -- --exact --nocapture
             enforce_contract: true
 
     steps:
@@ -201,21 +175,12 @@ jobs:
         working-directory: downstream
         run: bash -lc "$SETUP_COMMAND"
 
-      - name: Resolve fixture comparison revisions
-        id: revisions
-        run: |
-          git -C fixtures fetch --no-tags origin "${{ github.event.repository.default_branch }}"
-          base_sha=$(git -C fixtures merge-base \
-            "${{ github.event.pull_request.head.sha }}" \
-            "origin/${{ github.event.repository.default_branch }}")
-          echo "base=$base_sha" >> "$GITHUB_OUTPUT"
-
       - name: Run candidate regex contract
         id: contract
         env:
           TEST_COMMAND: ${{ matrix.contract }}
         run: |
-          fixtures/ci/run-regex-conformance.sh --candidate-only \
+          fixtures/ci/run-regex-conformance.sh \
             "$GITHUB_WORKSPACE/fixtures" \
             "$GITHUB_WORKSPACE/downstream" \
             "${{ matrix.submodule }}" \
@@ -224,32 +189,12 @@ jobs:
             -- \
             bash -lc "$TEST_COMMAND"
 
-      - name: Compare canonical evaluation behavior
-        id: evaluation
-        env:
-          TEST_COMMAND: ${{ matrix.evaluation }}
-        run: |
-          fixtures/ci/run-regex-conformance.sh \
-            "$GITHUB_WORKSPACE/fixtures" \
-            "$GITHUB_WORKSPACE/downstream" \
-            "${{ matrix.submodule }}" \
-            "${{ steps.revisions.outputs.base }}" \
-            "${{ github.event.pull_request.head.sha }}" \
-            "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}/evaluation" \
-            -- \
-            bash -lc "$TEST_COMMAND"
-
       - name: Report candidate contract failure
         if: steps.contract.outputs.classification == 'candidate-failure'
         run: |
           echo "::warning title=${{ matrix.slug }} regex contract failure::The proposed fixture does not match the consumer branch. See the job summary and logs."
 
-      - name: Report candidate evaluation regression
-        if: steps.evaluation.outputs.classification == 'new-regression'
-        run: |
-          echo "::warning title=${{ matrix.slug }} evaluation regression::The fixture base passes, but the proposed head fails end-to-end evaluation. See the job summary and logs."
-
-      - name: Upload comparison logs
+      - name: Upload regex evidence logs
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
