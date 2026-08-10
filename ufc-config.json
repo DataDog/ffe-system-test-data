@@ -3734,7 +3734,7 @@
       "key": "invalid-regex-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must ignore this flag rather than falling through to a later allocation or rejecting the whole config.",
+      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must report a parse error rather than falling through to a later allocation or rejecting the whole config.",
       "variations": {
         "invalid-regex-match": {
           "key": "invalid-regex-match",
@@ -3769,6 +3769,156 @@
         },
         {
           "key": "invalid-regex-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-gt-condition-flag": {
+      "key": "invalid-gt-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives GT a string operand. SDKs must report a parse error rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-gt-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "age",
+                  "operator": "GT",
+                  "value": "not-a-number"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-gt-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-one-of-condition-flag": {
+      "key": "invalid-one-of-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives ONE_OF a scalar operand. SDKs must report a parse error rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-one-of-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "role",
+                  "operator": "ONE_OF",
+                  "value": "admin"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-one-of-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-is-null-condition-flag": {
+      "key": "invalid-is-null-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives IS_NULL a non-boolean operand. SDKs must report a parse error rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-is-null-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "deleted_at",
+                  "operator": "IS_NULL",
+                  "value": "not-a-boolean"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-is-null-catch-all",
           "rules": [],
           "splits": [
             {
