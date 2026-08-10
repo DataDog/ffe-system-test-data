@@ -59,7 +59,7 @@ jobs:
             runtime: python
             submodule: tests/openfeature/ffe-system-test-data
             # ddtest runs as uid 1000 in Docker while the Actions checkout is uid 1001.
-            setup: chmod -R a+rwX .
+            setup: mkdir -p .cache .riot && chmod -R a+rwX .
             contract: >-
               scripts/run-tests --venv 14fc413 -- -- -vv
               -k targeting_regex_conformance
