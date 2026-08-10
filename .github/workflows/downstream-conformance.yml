@@ -58,10 +58,11 @@ jobs:
             repository: DataDog/dd-trace-py
             runtime: python
             submodule: tests/openfeature/ffe-system-test-data
-            setup: ":"
+            # ddtest runs as uid 1000 in Docker while the Actions checkout is uid 1001.
+            setup: chmod -R a+rwX .
             contract: >-
-              scripts/ddtest riot -v run --pass-env -s 13c4b39 -- -vv
-              tests/openfeature/test_regex_conformance.py
+              scripts/ddtest riot -v run --pass-env -s 14fc413 -- -vv
+              -k targeting_regex_conformance
             enforce_contract: true
           - slug: dd-trace-rb
             repository: DataDog/dd-trace-rb
