@@ -136,12 +136,14 @@ python3 ci/validate-fixtures.py
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
 | `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
+| `test-case-invalid-regex-isolation.json` | Flag with an invalid regular expression is ignored without poisoning valid flags |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
+| `test-case-null-shard-range-isolation.json` | Flag with a null shard range is ignored without poisoning valid flags |
 | `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
