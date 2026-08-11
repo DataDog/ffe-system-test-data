@@ -119,7 +119,7 @@
     "defaultValue": "unknown",
     "flag": "semver-invalid-comparand-test",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "unknown"
     },

@@ -118,6 +118,12 @@ The validator deliberately does not fully schema-check allocation internals.
 Some fixtures contain malformed flag fields on purpose to verify that consumers
 reject only the affected flag. Run the same check locally with:
 
+Consumers exclude malformed flags from the active evaluation map while retaining
+their rejected keys for the current configuration. Evaluating a rejected key
+returns the caller default with `ERROR` / `PARSE_ERROR`; a key absent from both
+maps returns `ERROR` / `FLAG_NOT_FOUND`. Each configuration refresh replaces both
+maps atomically so fixed or deleted flags do not leave stale rejection entries.
+
 ```bash
 python3 ci/validate-fixtures.py
 ```

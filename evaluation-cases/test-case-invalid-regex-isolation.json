@@ -7,7 +7,7 @@
     "defaultValue": "default",
     "flag": "invalid-regex-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },

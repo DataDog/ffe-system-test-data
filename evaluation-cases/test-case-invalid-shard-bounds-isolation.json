@@ -5,7 +5,7 @@
     "defaultValue": "default",
     "flag": "overflow-total-shards-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },
@@ -18,7 +18,7 @@
     "defaultValue": "default",
     "flag": "negative-shard-range-start-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },

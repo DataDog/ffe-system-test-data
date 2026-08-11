@@ -7,7 +7,7 @@
     "defaultValue": "default",
     "flag": "invalid-gt-condition-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },
@@ -22,7 +22,7 @@
     "defaultValue": "default",
     "flag": "invalid-one-of-condition-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },
@@ -37,7 +37,7 @@
     "defaultValue": "default",
     "flag": "invalid-is-null-condition-flag",
     "result": {
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "default"
     },
