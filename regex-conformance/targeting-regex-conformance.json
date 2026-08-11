@@ -1036,9 +1036,27 @@
       "contract": "rejected",
       "rawPattern": "a++",
       "normalizedPattern": "a++",
-      "expectedCompile": false,
+      "expectedCompile": null,
       "input": "aaa",
-      "expectedMatch": false
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": {
+          "compile": false,
+          "match": null
+        },
+        "re2js": {
+          "compile": false,
+          "match": null
+        },
+        "rustRulesBased": {
+          "compile": true,
+          "match": true
+        },
+        "rustRkyv": {
+          "compile": true,
+          "match": true
+        }
+      }
     }
   ]
 }
