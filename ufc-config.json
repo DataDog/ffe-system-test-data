@@ -3784,7 +3784,7 @@
       "key": "variant-type-mismatch-flag",
       "enabled": true,
       "variationType": "INTEGER",
-      "comment": "This flag is intentionally invalid: one variation contains a string even though the flag declares INTEGER values.",
+      "comment": "This flag is intentionally invalid: one variation contains a string even though the flag declares INTEGER values. SDKs must remove this flag without rejecting the full configuration.",
       "variations": {
         "invalid": {
           "key": "invalid",

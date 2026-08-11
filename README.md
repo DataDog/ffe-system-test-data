@@ -137,7 +137,7 @@ python3 ci/validate-fixtures.py
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
 | `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
 | `test-case-invalid-regex-isolation.json` | Flag with an invalid regular expression is ignored without poisoning valid flags |
-| `test-case-variant-type-mismatch.json` | Variant values that violate the declared flag type return parse errors without overriding request type mismatches |
+| `test-case-variant-type-mismatch.json` | A flag whose variant violates its declared type is removed without poisoning valid neighboring flags |
 | `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |

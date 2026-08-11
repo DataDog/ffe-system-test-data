@@ -1,11 +1,11 @@
 [
   {
-    "description": "A variation value that violates the declared flag type is a configuration parse error.",
+    "description": "A flag whose variation violates its declared type is removed while the rest of the configuration remains usable.",
     "attributes": {},
     "defaultValue": 0,
     "flag": "variant-type-mismatch-flag",
     "result": {
-      "errorCode": "PARSE_ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
       "reason": "ERROR",
       "value": 0
     },
@@ -13,16 +13,15 @@
     "variationType": "INTEGER"
   },
   {
-    "description": "A wrong typed evaluation request remains a type mismatch even when the flag configuration is malformed.",
+    "description": "A valid flag in the same configuration continues to evaluate after the malformed flag is removed.",
     "attributes": {},
-    "defaultValue": "fallback",
-    "flag": "variant-type-mismatch-flag",
+    "defaultValue": "default",
+    "flag": "valid-flag-after-invalid-config",
     "result": {
-      "errorCode": "TYPE_MISMATCH",
-      "reason": "ERROR",
-      "value": "fallback"
+      "reason": "STATIC",
+      "value": "expected"
     },
-    "targetingKey": "user-1",
+    "targetingKey": "valid-neighbor",
     "variationType": "STRING"
   }
 ]
