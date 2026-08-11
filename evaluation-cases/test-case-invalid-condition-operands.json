@@ -1,13 +1,13 @@
 [
   {
-    "description": "GT requires a numeric configured operand. A string operand must produce a parse error rather than falling through to the catch-all allocation.",
+    "description": "GT requires a numeric configured operand. A flag with a string operand must be removed rather than falling through to the catch-all allocation.",
     "attributes": {
       "age": 42
     },
     "defaultValue": "default",
     "flag": "invalid-gt-condition-flag",
     "result": {
-      "errorCode": "PARSE_ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
       "reason": "ERROR",
       "value": "default"
     },
@@ -15,14 +15,14 @@
     "variationType": "STRING"
   },
   {
-    "description": "ONE_OF requires an array configured operand. A scalar operand must produce a parse error rather than falling through to the catch-all allocation.",
+    "description": "ONE_OF requires an array configured operand. A flag with a scalar operand must be removed rather than falling through to the catch-all allocation.",
     "attributes": {
       "role": "admin"
     },
     "defaultValue": "default",
     "flag": "invalid-one-of-condition-flag",
     "result": {
-      "errorCode": "PARSE_ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
       "reason": "ERROR",
       "value": "default"
     },
@@ -30,14 +30,14 @@
     "variationType": "STRING"
   },
   {
-    "description": "IS_NULL requires a boolean configured operand. A string operand must produce a parse error rather than falling through to the catch-all allocation.",
+    "description": "IS_NULL requires a boolean configured operand. A flag with a string operand must be removed rather than falling through to the catch-all allocation.",
     "attributes": {
       "deleted_at": null
     },
     "defaultValue": "default",
     "flag": "invalid-is-null-condition-flag",
     "result": {
-      "errorCode": "PARSE_ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
       "reason": "ERROR",
       "value": "default"
     },

@@ -1,11 +1,12 @@
 [
   {
-    "description": "The malformed flag has a split that omits required shards, so SDKs should ignore that flag and return the caller default.",
+    "description": "The malformed flag has a split that omits required shards, so SDKs should remove that flag and return the caller default.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "missing-split-shards-flag",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": "default"
     },
     "targetingKey": "alice",

@@ -112,14 +112,14 @@
     "variationType": "STRING"
   },
   {
-    "description": "An invalid configured SemVer comparand aborts flag evaluation with an error.",
+    "description": "A flag with an invalid configured SemVer comparand is removed while the rest of the configuration remains usable.",
     "attributes": {
       "app_version": "1.2.3"
     },
     "defaultValue": "unknown",
     "flag": "semver-invalid-comparand-test",
     "result": {
-      "errorCode": "PARSE_ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
       "reason": "ERROR",
       "value": "unknown"
     },

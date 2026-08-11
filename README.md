@@ -136,16 +136,16 @@ python3 ci/validate-fixtures.py
 | `test-case-flag-with-empty-string.json` | Flag with empty string in configuration |
 | `test-case-integer-flag.json` | Integer-typed flag evaluation |
 | `test-case-kill-switch-flag.json` | Kill switch (emergency off) flag |
-| `test-case-invalid-condition-operands.json` | Invalid configured operands for GT, ONE_OF, and IS_NULL produce parse errors without poisoning valid flags |
-| `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are ignored without poisoning valid flags |
-| `test-case-invalid-regex-isolation.json` | Flag with an invalid regular expression produces a parse error without poisoning the configuration |
-| `test-case-malformed-flag-isolation.json` | Structurally malformed flag is ignored without poisoning valid flags |
+| `test-case-invalid-condition-operands.json` | Flags with invalid configured operands for GT, ONE_OF, and IS_NULL are removed without poisoning valid flags |
+| `test-case-invalid-shard-bounds-isolation.json` | Flags with shard bounds outside Rust/schema integer ranges are removed without poisoning valid flags |
+| `test-case-invalid-regex-isolation.json` | A flag with an invalid regular expression is removed without poisoning the configuration |
+| `test-case-malformed-flag-isolation.json` | A structurally malformed flag is removed without poisoning valid flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
-| `test-case-missing-split-shards-isolation.json` | Flag with a split missing required `shards` is ignored without poisoning valid flags |
+| `test-case-missing-split-shards-isolation.json` | A flag with a split missing required `shards` is removed without poisoning valid flags |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
-| `test-case-null-shard-range-isolation.json` | Flag with a null shard range is ignored without poisoning valid flags |
+| `test-case-null-shard-range-isolation.json` | A flag with a null shard range is removed without poisoning valid flags |
 | `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
@@ -156,7 +156,7 @@ python3 ci/validate-fixtures.py
 | `test-case-semver-validation-flag.json` | Rust-compatible SemVer parsing boundaries, invalid syntax, and invalid configured comparands |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
-| `test-case-unknown-operator-isolation.json` | Flag with unknown operator is ignored without poisoning valid flags |
+| `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
 | `test-json-config-flag.json` | JSON-typed flag returning object value |
 | `test-no-allocations-flag.json` | Another no-allocations variant |
