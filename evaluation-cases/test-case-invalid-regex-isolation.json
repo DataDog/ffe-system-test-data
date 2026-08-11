@@ -1,6 +1,6 @@
 [
   {
-    "description": "The malformed flag uses the invalid regex *@datadoghq.com before a catch-all allocation. SDKs must remove the flag without poisoning the full configuration.",
+    "description": "The malformed flag uses the invalid regex *@datadoghq.com before a catch-all allocation. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {
       "email": "harish@datadoghq.com"
     },

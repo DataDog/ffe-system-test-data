@@ -1,6 +1,6 @@
 [
   {
-    "description": "GT requires a numeric configured operand. A flag with a string operand must be removed rather than falling through to the catch-all allocation.",
+    "description": "GT requires a numeric configured operand. A flag with a string operand must return a parse error rather than falling through to the catch-all allocation.",
     "attributes": {
       "age": 42
     },
@@ -15,7 +15,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "ONE_OF requires an array configured operand. A flag with a scalar operand must be removed rather than falling through to the catch-all allocation.",
+    "description": "ONE_OF requires an array configured operand. A flag with a scalar operand must return a parse error rather than falling through to the catch-all allocation.",
     "attributes": {
       "role": "admin"
     },
@@ -30,7 +30,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "IS_NULL requires a boolean configured operand. A flag with a string operand must be removed rather than falling through to the catch-all allocation.",
+    "description": "IS_NULL requires a boolean configured operand. A flag with a string operand must return a parse error rather than falling through to the catch-all allocation.",
     "attributes": {
       "deleted_at": null
     },

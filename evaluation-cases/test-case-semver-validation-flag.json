@@ -112,7 +112,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "A flag with an invalid configured SemVer comparand is removed while the rest of the configuration remains usable.",
+    "description": "A flag with an invalid configured SemVer comparand returns a parse error while the rest of the configuration remains usable.",
     "attributes": {
       "app_version": "1.2.3"
     },

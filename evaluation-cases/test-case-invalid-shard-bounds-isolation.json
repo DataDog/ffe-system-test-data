@@ -1,6 +1,6 @@
 [
   {
-    "description": "The malformed flag has totalShards above the unsigned 32-bit range, so SDKs should remove that flag and return the caller default.",
+    "description": "The malformed flag has totalShards above the unsigned 32-bit range. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "overflow-total-shards-flag",
@@ -13,7 +13,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "The malformed flag has a negative shard range start, so SDKs should remove that flag and return the caller default.",
+    "description": "The malformed flag has a negative shard range start. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "negative-shard-range-start-flag",
