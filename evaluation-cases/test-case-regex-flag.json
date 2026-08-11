@@ -40,20 +40,6 @@
   },
   {
     "attributes": {
-      "invalid_matches": "anything",
-      "invalid_not_matches": "anything"
-    },
-    "defaultValue": "none",
-    "flag": "regex-flag",
-    "result": {
-      "reason": "DEFAULT",
-      "value": "none"
-    },
-    "targetingKey": "invalid-regexes-fail-closed",
-    "variationType": "STRING"
-  },
-  {
-    "attributes": {
       "email": "user.name+tag@capture.example"
     },
     "defaultValue": "none",

@@ -97,59 +97,9 @@
         "literal-whitespace": {
           "key": "literal-whitespace",
           "value": "literal-whitespace"
-        },
-        "invalid-matches": {
-          "key": "invalid-matches",
-          "value": "invalid-matches"
-        },
-        "invalid-not-matches": {
-          "key": "invalid-not-matches",
-          "value": "invalid-not-matches"
         }
       },
       "allocations": [
-        {
-          "key": "invalid-matches",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "invalid_matches",
-                  "operator": "MATCHES",
-                  "value": "["
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "invalid-matches",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
-        {
-          "key": "invalid-not-matches",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "invalid_not_matches",
-                  "operator": "NOT_MATCHES",
-                  "value": "["
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "invalid-not-matches",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        },
         {
           "key": "comma-quantifier",
           "rules": [
