@@ -1,11 +1,12 @@
 [
   {
-    "description": "The malformed flag has a null shard range before a catch-all allocation. SDKs must ignore the whole flag and return the caller default.",
+    "description": "The malformed flag has a null shard range before a catch-all allocation. SDKs must remove the flag and return the caller default.",
     "attributes": {},
     "defaultValue": "default",
     "flag": "null-shard-range-flag",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": "default"
     },
     "targetingKey": "alice",

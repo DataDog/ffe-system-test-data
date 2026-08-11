@@ -1,13 +1,14 @@
 [
   {
-    "description": "The first allocation uses an unknown operator and the second is a catch-all trap; SDKs should ignore the whole flag and return the caller default.",
+    "description": "The first allocation uses an unknown operator and the second is a catch-all trap; SDKs should remove the flag and return the caller default.",
     "attributes": {
       "country": "US"
     },
     "defaultValue": "default",
     "flag": "operator-grease-flag",
     "result": {
-      "reason": "DEFAULT",
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
       "value": "default"
     },
     "targetingKey": "alice",
