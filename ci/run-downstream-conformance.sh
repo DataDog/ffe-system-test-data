@@ -119,7 +119,11 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   } >>"$GITHUB_STEP_SUMMARY"
 fi
 
-# Reflect the proposed fixture result in the check conclusion. Branch protection
-# decides whether this advisory check blocks merging; the check itself stays red
-# until the downstream implementation accepts the proposed fixtures.
-exit "$head_status"
+# Fail only when the pull request introduces a downstream regression. Existing
+# drift remains visible in the job summary and artifacts without blocking an
+# unrelated fixture change.
+if [[ $classification == new-regression ]]; then
+  exit 1
+fi
+
+exit 0
