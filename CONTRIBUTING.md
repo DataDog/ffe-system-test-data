@@ -24,13 +24,23 @@ Thank you for your interest in contributing to the FFE system test data reposito
     "defaultValue": "<default value>",
     "targetingKey": "<user identifier>",
     "attributes": { "<key>": "<value>" },
-    "result": { "value": "<expected value>", "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED" }
+    "result": {
+      "value": "<expected value>",
+      "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED",
+      "errorCode": "<optional OpenFeature error code>"
+    }
   }
 ]
 ```
 
 3. If your test case requires a new flag, add the flag definition to `ufc-config.json`
 4. Keep the fixture SDK-neutral. Do not include SDK-specific fields such as `variant` or `flagMetadata`; downstream SDKs should derive those from `ufc-config.json` when they need them.
+
+Malformed flags must be isolated during configuration ingestion. Exclude them
+from the active evaluation map, retain only their rejected keys for the current
+configuration, and return the caller default with `ERROR` / `PARSE_ERROR` when
+those keys are evaluated. Reserve `ERROR` / `FLAG_NOT_FOUND` for keys absent from
+both the active and rejected maps. Replace both maps atomically on refresh.
 
 ### Updating Targeting Regex Conformance
 

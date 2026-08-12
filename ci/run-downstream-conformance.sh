@@ -119,7 +119,7 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   } >>"$GITHUB_STEP_SUMMARY"
 fi
 
-# Consumer test failures are evidence, not a merge gate. Command/setup errors
-# outside run_fixture_revision still fail this script so the workflow can expose
-# broken orchestration; the job itself is explicitly allowed to fail.
-exit 0
+# Reflect the proposed fixture result in the check conclusion. Branch protection
+# decides whether this advisory check blocks merging; the check itself stays red
+# until the downstream implementation accepts the proposed fixtures.
+exit "$head_status"
