@@ -888,6 +888,56 @@
         }
       ]
     },
+    "semver-invalid-comparand-waterfall-test": {
+      "key": "semver-invalid-comparand-waterfall-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately places an invalid configured SemVer comparand in a non-last allocation of a waterfall, followed by a valid default allocation. SDKs must reject the whole flag during parsing rather than skipping the invalid allocation and falling through to the default.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        },
+        "fallback": {
+          "key": "fallback",
+          "value": "fallback"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18446744073709551616.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "default",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "fallback",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "start-and-end-date-test": {
       "key": "start-and-end-date-test",
       "enabled": true,
