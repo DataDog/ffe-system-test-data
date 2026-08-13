@@ -13,6 +13,32 @@
     "variationType": "STRING"
   },
   {
+    "description": "The malformed flag has totalShards set to zero. SDKs must return a parse error without attempting a modulo by zero.",
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "zero-total-shards-flag",
+    "result": {
+      "errorCode": "PARSE_ERROR",
+      "reason": "ERROR",
+      "value": "default"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  },
+  {
+    "description": "The malformed flag has a negative totalShards value. SDKs must return a parse error without evaluating the invalid shard.",
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "negative-total-shards-flag",
+    "result": {
+      "errorCode": "PARSE_ERROR",
+      "reason": "ERROR",
+      "value": "default"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  },
+  {
     "description": "The malformed flag has a negative shard range start. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {},
     "defaultValue": "default",
