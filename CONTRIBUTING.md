@@ -61,8 +61,9 @@ When changing the contract:
 4. Use `contract` for the portable authoring decision. Use `expectedCompile`
    and `expectedMatch` only for common native-engine observations. Set a common
    field to `null` and add `engineExpectations` when native engines differ.
-5. Verify accepted cases in every supported engine. A compiler accepting a
-   pattern in one engine does not make it part of the portable contract.
+5. Verify accepted cases in every shipped SDK evaluator. Rejected cases may be
+   accepted by a native compiler; that does not make them part of the portable
+   contract or require an SDK production change.
 6. Recompute `targeting-regex-conformance.sha256` from the exact JSON bytes.
 
 Validate JSON syntax, unique case IDs, required field types, and the hash:
