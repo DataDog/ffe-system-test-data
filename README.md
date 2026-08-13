@@ -25,7 +25,7 @@ ffe-system-test-data/
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
 └── regex-conformance/
-    ├── targeting-regex-conformance.json   # Portable authoring and matching contract
+    ├── targeting-regex-conformance.json   # FFE authoring and matching contract
     ├── targeting-regex-conformance.sha256 # SHA-256 of the JSON bytes
     ├── validate-targeting-regex-conformance.jq # Canonical schema validator
     └── test-validate-targeting-regex-conformance.sh # Validator regression tests
@@ -114,16 +114,24 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 ### Targeting Regex Conformance
 
 `regex-conformance/targeting-regex-conformance.json` is a standalone, versioned
-contract for targeting regular expressions. It is intentionally outside
-`evaluation-cases/`; consumers of that directory parse every JSON file as a
-complete UFC evaluation case.
+contract for authoring targeting regular expressions in FFE. It is intentionally
+outside `evaluation-cases/`; consumers of that directory parse every JSON file
+as a complete UFC evaluation case.
 
-Each regex case has a stable ID, a portable authoring `contract`, raw and
-normalized patterns, native compile observations, an input, and an unanchored
-match observation when the engines agree. Go and browser consumers compile
-`normalizedPattern`; Rust consumers compile `rawPattern`. Cases with native
-engine differences include per-engine expectations. The adjacent SHA-256 file
-lets downstream tests detect fixture drift.
+The contract models four implementations: Go `regexp`, RE2JS, the Rust
+rules-based evaluator, and the Rust rkyv evaluator. It does not claim that every
+SDK's native regex engine accepts or evaluates the same syntax. In particular,
+Java `Pattern`, JavaScript `RegExp`, and .NET `Regex` are not represented by the
+current `engineExpectations` keys. Several SDKs also share the Rust evaluator,
+so agreement across those SDKs is not evidence from independent regex engines.
+
+Each regex case has a stable ID, an FFE authoring `contract`, raw and normalized
+patterns, native compile observations, an input, and an unanchored match
+observation when the modeled engines agree. Go and RE2JS consumers compile
+`normalizedPattern`; Rust consumers compile `rawPattern`. Cases with differences
+between modeled engines include per-engine expectations. A native engine
+accepting rejected syntax does not change the authoring contract. The adjacent
+SHA-256 file lets downstream tests detect fixture drift.
 
 ## Automated Validation
 
