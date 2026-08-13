@@ -1,7 +1,7 @@
 {
   "schema": "datadog.ffe.targeting-regex-conformance/v1",
   "schemaVersion": 1,
-  "contractVersion": "targeting-regex-v1",
+  "contractVersion": "targeting-regex-v2",
   "semantics": {
     "acceptedSyntax": "The portable intersection exercised by accepted cases, not every construct accepted by an individual engine.",
     "engines": [
