@@ -907,6 +907,7 @@
       "key": "semver-invalid-comparand-test",
       "enabled": true,
       "variationType": "STRING",
+      "comment": "This flag deliberately uses an invalid configured SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
       "variations": {
         "matched": {
           "key": "matched",
@@ -3734,7 +3735,7 @@
       "key": "operator-grease-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag deliberately uses an unknown condition operator. SDKs must ignore this flag rather than falling through to the catch-all allocation or rejecting the whole config.",
+      "comment": "This flag deliberately uses an unknown condition operator. SDKs must remove this flag rather than falling through to the catch-all allocation or rejecting the whole config.",
       "variations": {
         "trap": {
           "key": "trap",
@@ -3784,7 +3785,7 @@
       "key": "invalid-regex-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must ignore this flag rather than falling through to a later allocation or rejecting the whole config.",
+      "comment": "This flag deliberately uses the invalid regex *@datadoghq.com. SDKs must remove this flag rather than falling through to a later allocation or rejecting the whole config.",
       "variations": {
         "invalid-regex-match": {
           "key": "invalid-regex-match",
@@ -3830,11 +3831,190 @@
         }
       ]
     },
+    "variant-type-mismatch-flag": {
+      "key": "variant-type-mismatch-flag",
+      "enabled": true,
+      "variationType": "INTEGER",
+      "comment": "This flag is intentionally invalid: one variation contains a string even though the flag declares INTEGER values. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "invalid": {
+          "key": "invalid",
+          "value": "not-an-integer"
+        },
+        "valid": {
+          "key": "valid",
+          "value": 0
+        }
+      },
+      "allocations": [
+        {
+          "key": "default-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "invalid",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-gt-condition-flag": {
+      "key": "invalid-gt-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives GT a string operand. SDKs must remove this flag rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-gt-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "age",
+                  "operator": "GT",
+                  "value": "not-a-number"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-gt-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-one-of-condition-flag": {
+      "key": "invalid-one-of-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives ONE_OF a scalar operand. SDKs must remove this flag rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-one-of-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "role",
+                  "operator": "ONE_OF",
+                  "value": "admin"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-one-of-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "invalid-is-null-condition-flag": {
+      "key": "invalid-is-null-condition-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately gives IS_NULL a non-boolean operand. SDKs must remove this flag rather than falling through to the catch-all allocation.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        },
+        "catch-all": {
+          "key": "catch-all",
+          "value": "catch-all"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-is-null-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "deleted_at",
+                  "operator": "IS_NULL",
+                  "value": "not-a-boolean"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "invalid-is-null-catch-all",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "catch-all",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "malformed-allocations-flag": {
       "key": "malformed-allocations-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: allocations must be an array, but this fixture uses a string to verify per-flag parse error isolation.",
+      "comment": "This flag is intentionally UFC-schema-invalid: allocations must be an array. SDKs must remove this flag without rejecting the full configuration.",
       "variations": {
         "on": {
           "key": "on",
@@ -3871,7 +4051,7 @@
       "key": "overflow-total-shards-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].totalShards must fit in an unsigned 32-bit integer. SDKs must ignore this flag rather than overflowing or poisoning the whole config.",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].totalShards must fit in an unsigned 32-bit integer. SDKs must remove this flag rather than overflowing or poisoning the whole config.",
       "variations": {
         "trap": {
           "key": "trap",
@@ -3907,7 +4087,7 @@
       "key": "negative-shard-range-start-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[].start must be an unsigned integer. SDKs must ignore this flag rather than treating a negative range as matching traffic.",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[].start must be an unsigned integer. SDKs must remove this flag rather than treating a negative range as matching traffic.",
       "variations": {
         "trap": {
           "key": "trap",
@@ -3943,7 +4123,7 @@
       "key": "null-shard-range-flag",
       "enabled": true,
       "variationType": "STRING",
-      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[] contains null. SDKs must ignore this flag rather than panicking or poisoning the whole config.",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].ranges[] contains null. SDKs must remove this flag rather than panicking or poisoning the whole config.",
       "variations": {
         "trap": {
           "key": "trap",

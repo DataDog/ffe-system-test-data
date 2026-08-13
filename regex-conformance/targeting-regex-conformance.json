@@ -1,7 +1,7 @@
 {
   "schema": "datadog.ffe.targeting-regex-conformance/v1",
   "schemaVersion": 1,
-  "contractVersion": "targeting-regex-v1",
+  "contractVersion": "targeting-regex-v2",
   "semantics": {
     "acceptedSyntax": "The portable intersection exercised by accepted cases, not every construct accepted by an individual engine.",
     "engines": [
@@ -24,12 +24,11 @@
       "dot",
       "start and end anchors",
       "alternation",
-      "capturing, non-capturing, Python-style named groups, and JS-style named groups",
-      "positive and negated character classes",
+      "capturing and non-capturing groups",
+      "positive and negated character classes without a leading literal closing bracket",
       "star, plus, optional, and counted quantifiers",
-      "POSIX ASCII character classes",
-      "Unicode literals and Unicode character classes",
-      "case-insensitive, multiline, dot-all, and normalized Unicode inline flags"
+      "Unicode literals",
+      "case-insensitive, multiline, dot-all, and standalone normalized Unicode inline flags"
     ],
     "rejected": [
       "malformed expressions",
@@ -41,7 +40,11 @@
       "unsupported byte escapes",
       "Rust-only character class set operators and nested non-POSIX character classes",
       "inline Unicode flag forms whose raw Rust meaning differs from normalized Go and browser syntax",
-      "named capture groups with digit-prefixed or duplicate names",
+      "named capture groups",
+      "POSIX character classes",
+      "Unicode property character classes",
+      "combined or scoped Unicode inline flags",
+      "character classes with a leading literal closing bracket",
       "atomic groups",
       "possessive quantifiers"
     ]
@@ -136,10 +139,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-python-style-named-group",
-      "description": "The Python-style named capture spelling is portable; backreferences are not.",
+      "id": "rejected-python-style-named-group",
+      "description": "Python-style named captures are not accepted consistently by shipped SDK evaluators.",
       "category": "named-group",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^(?P<word>[[:alpha:]]+)$",
       "normalizedPattern": "^(?P<word>[[:alpha:]]+)$",
       "expectedCompile": true,
@@ -147,10 +150,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-js-style-named-group",
-      "description": "The JS-style named capture spelling is accepted by Go, RE2JS, and Rust; backreferences are still rejected.",
+      "id": "rejected-js-style-named-group",
+      "description": "JS-style named captures are not evaluated consistently by shipped SDK evaluators.",
       "category": "named-group",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^(?<word>[[:alpha:]]+)$",
       "normalizedPattern": "^(?<word>[[:alpha:]]+)$",
       "expectedCompile": true,
@@ -301,10 +304,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-posix-alpha-class",
-      "description": "The POSIX alpha class is portable for ASCII input.",
+      "id": "rejected-posix-alpha-class",
+      "description": "POSIX character classes are not evaluated consistently by shipped SDK evaluators.",
       "category": "posix-class",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^[[:alpha:]]+$",
       "normalizedPattern": "^[[:alpha:]]+$",
       "expectedCompile": true,
@@ -312,10 +315,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-unicode-letter-class",
-      "description": "A Unicode letter class is used for explicit Unicode matching.",
+      "id": "rejected-unicode-letter-class",
+      "description": "Unicode property character classes are not evaluated consistently by shipped SDK evaluators.",
       "category": "unicode-class",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^\\p{L}+$",
       "normalizedPattern": "^\\p{L}+$",
       "expectedCompile": true,
@@ -378,10 +381,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-inline-unicode-combined-normalized",
-      "description": "Removing Unicode from a combined global group preserves case-insensitive mode.",
+      "id": "rejected-inline-unicode-combined-normalized",
+      "description": "Combined Unicode inline flags are not normalized consistently by shipped SDK evaluators.",
       "category": "normalization",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "(?iu)^alice$",
       "normalizedPattern": "(?i)^alice$",
       "expectedCompile": true,
@@ -389,10 +392,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-inline-unicode-scoped-normalized",
-      "description": "Removing Unicode from an otherwise empty scoped group leaves a non-capturing group.",
+      "id": "rejected-inline-unicode-scoped-normalized",
+      "description": "Scoped Unicode inline flags are not normalized consistently by shipped SDK evaluators.",
       "category": "normalization",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "(?u:^mañana$)",
       "normalizedPattern": "(?:^mañana$)",
       "expectedCompile": true,
@@ -400,10 +403,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-inline-unicode-scoped-combined-normalized",
-      "description": "Removing Unicode from a combined scoped group preserves case-insensitive mode.",
+      "id": "rejected-inline-unicode-scoped-combined-normalized",
+      "description": "Combined scoped Unicode inline flags are not normalized consistently by shipped SDK evaluators.",
       "category": "normalization",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "(?iu:^alice$)",
       "normalizedPattern": "(?i:^alice$)",
       "expectedCompile": true,
@@ -455,10 +458,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-leading-closing-bracket-in-character-class",
-      "description": "A closing bracket immediately after the class opener is literal class text in every engine.",
+      "id": "rejected-leading-closing-bracket-in-character-class",
+      "description": "A leading literal closing bracket in a character class is not evaluated consistently by shipped SDK evaluators.",
       "category": "character-class",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^[]a]+$",
       "normalizedPattern": "^[]a]+$",
       "expectedCompile": true,
@@ -466,10 +469,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-leading-closing-bracket-in-negated-character-class",
-      "description": "A closing bracket immediately after the leading negation marker is literal class text in every engine.",
+      "id": "rejected-leading-closing-bracket-in-negated-character-class",
+      "description": "A leading literal closing bracket in a negated character class is not evaluated consistently by shipped SDK evaluators.",
       "category": "character-class",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "^[^]a]+$",
       "normalizedPattern": "^[^]a]+$",
       "expectedCompile": true,
@@ -1009,7 +1012,7 @@
     },
     {
       "id": "rejected-named-backreference",
-      "description": "Named backreferences are outside the portable syntax contract even though named capture groups are accepted.",
+      "description": "Named backreferences and named capture groups are outside the portable syntax contract.",
       "category": "backreference",
       "contract": "rejected",
       "rawPattern": "(?P<word>a)\\k<word>",

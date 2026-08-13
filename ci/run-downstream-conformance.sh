@@ -119,7 +119,11 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   } >>"$GITHUB_STEP_SUMMARY"
 fi
 
-# Consumer test failures are evidence, not a merge gate. Command/setup errors
-# outside run_fixture_revision still fail this script so the workflow can expose
-# broken orchestration; the job itself is explicitly allowed to fail.
+# Fail only when the pull request introduces a downstream regression. Existing
+# drift remains visible in the job summary and artifacts without blocking an
+# unrelated fixture change.
+if [[ $classification == new-regression ]]; then
+  exit 1
+fi
+
 exit 0

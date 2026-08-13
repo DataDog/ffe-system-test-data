@@ -24,13 +24,23 @@ Thank you for your interest in contributing to the FFE system test data reposito
     "defaultValue": "<default value>",
     "targetingKey": "<user identifier>",
     "attributes": { "<key>": "<value>" },
-    "result": { "value": "<expected value>", "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED" }
+    "result": {
+      "value": "<expected value>",
+      "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED",
+      "errorCode": "<optional OpenFeature error code>"
+    }
   }
 ]
 ```
 
 3. If your test case requires a new flag, add the flag definition to `ufc-config.json`
 4. Keep the fixture SDK-neutral. Do not include SDK-specific fields such as `variant` or `flagMetadata`; downstream SDKs should derive those from `ufc-config.json` when they need them.
+
+Malformed flags must be isolated during configuration ingestion. Exclude them
+from the active evaluation map, retain only their rejected keys for the current
+configuration, and return the caller default with `ERROR` / `PARSE_ERROR` when
+those keys are evaluated. Reserve `ERROR` / `FLAG_NOT_FOUND` for keys absent from
+both the active and rejected maps. Replace both maps atomically on refresh.
 
 ### Updating Targeting Regex Conformance
 
@@ -51,8 +61,9 @@ When changing the contract:
 4. Use `contract` for the portable authoring decision. Use `expectedCompile`
    and `expectedMatch` only for common native-engine observations. Set a common
    field to `null` and add `engineExpectations` when native engines differ.
-5. Verify accepted cases in every supported engine. A compiler accepting a
-   pattern in one engine does not make it part of the portable contract.
+5. Verify accepted cases in every shipped SDK evaluator. Rejected cases may be
+   accepted by a native compiler; that does not make them part of the portable
+   contract or require an SDK production change.
 6. Recompute `targeting-regex-conformance.sha256` from the exact JSON bytes.
 
 Validate JSON syntax, unique case IDs, required field types, and the hash:
