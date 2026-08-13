@@ -33,7 +33,26 @@ downstream_repository=$(cd "$downstream_repository" && pwd)
 fixture_checkout="$downstream_repository/$fixture_submodule_path"
 log_file="$log_directory/candidate.log"
 
+# pull_request workflows check out GitHub's synthetic merge commit. Its first
+# parent is the live stacked base (PR #21) and its second parent is this PR's
+# head. Resolve the exact fixture base without hard-coding Blake's branch SHA.
+if [[ -n ${GITHUB_BASE_REF:-} ]] &&
+  git -C "$fixture_repository" cat-file -e HEAD^2 2>/dev/null &&
+  [[ $(git -C "$fixture_repository" rev-parse HEAD^2) == "$candidate_fixture_sha" ]]; then
+  candidate_fixture_sha=$(git -C "$fixture_repository" rev-parse HEAD^1)
+fi
+
 git -C "$fixture_repository" cat-file -e "$candidate_fixture_sha^{commit}"
+downstream_sha=$(git -C "$downstream_repository" rev-parse HEAD)
+declared_fixture_sha=$(
+  git -C "$downstream_repository" ls-tree HEAD -- "$fixture_submodule_path" |
+    awk '{print $3}'
+)
+if [[ $declared_fixture_sha != "$candidate_fixture_sha" ]]; then
+  printf 'downstream branch %s pins fixture %s, expected PR #21 base %s\n' \
+    "$downstream_sha" "$declared_fixture_sha" "$candidate_fixture_sha" >&2
+  exit 1
+fi
 mkdir -p "$log_directory"
 
 git -C "$downstream_repository" submodule sync -- "$fixture_submodule_path"
@@ -56,6 +75,7 @@ status=$?
 set -e
 
 printf '\n===== candidate fixture (%s) =====\n' "$candidate_fixture_sha"
+printf '===== downstream branch (%s) =====\n' "$downstream_sha"
 if [[ $status -ne 0 ]]; then
   printf '%s\n' '----- first reported failure -----'
   grep -m 1 -A 3 ' FAILED' "$log_file" || true
@@ -85,6 +105,8 @@ fi
 if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   {
     printf '### Regex universality evidence\n\n'
+    printf -- '- Downstream branch: `%s`\n' "$downstream_sha"
+    printf -- '- PR #21 fixture base: `%s`\n\n' "$candidate_fixture_sha"
     printf '| Candidate exit code | Classification |\n'
     printf '| ---: | --- |\n'
     # shellcheck disable=SC2016 # Backticks are Markdown, not shell syntax.
@@ -94,6 +116,6 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   } >>"$GITHUB_STEP_SUMMARY"
 fi
 
-# Consumer test failures are captured as evidence so artifacts can be uploaded.
-# Broken orchestration outside the test command still fails under set -e.
-exit 0
+# The workflow's artifact step uses if: always(), so preserve the actual unit
+# test exit code while still retaining complete logs for the evidence report.
+exit "$status"
