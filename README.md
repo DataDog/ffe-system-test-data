@@ -22,8 +22,13 @@ This repository contains the canonical set of flag configurations and evaluation
 ```
 ffe-system-test-data/
 ├── ufc-config.json          # Master flag configuration (UFC format)
-└── evaluation-cases/
-    └── test-*.json          # Evaluation test case files
+├── evaluation-cases/
+│   └── test-*.json          # Evaluation test case files
+└── regex-conformance/
+    ├── targeting-regex-conformance.json   # FFE authoring and matching contract
+    ├── targeting-regex-conformance.sha256 # SHA-256 of the JSON bytes
+    ├── validate-targeting-regex-conformance.jq # Canonical schema validator
+    └── test-validate-targeting-regex-conformance.sh # Validator regression tests
 ```
 
 ## Usage
@@ -105,6 +110,29 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
 - **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+
+### Targeting Regex Conformance
+
+`regex-conformance/targeting-regex-conformance.json` is a standalone, versioned
+contract for authoring targeting regular expressions in FFE. It is intentionally
+outside `evaluation-cases/`; consumers of that directory parse every JSON file
+as a complete UFC evaluation case.
+
+The fixture records native observations for four implementations: Go `regexp`,
+RE2JS, the Rust rules-based evaluator, and the Rust rkyv evaluator. The accepted
+authoring subset is narrower: accepted cases must also evaluate consistently in
+the shipped Java, JavaScript, and .NET SDK evaluators. Several SDKs share the
+Rust evaluator, so agreement across those SDKs is not evidence from independent
+regex engines.
+
+Each regex case has a stable ID, an FFE authoring `contract`, raw and normalized
+patterns, native compile observations, an input, and an unanchored match
+observation when the modeled engines agree. Go and RE2JS consumers compile
+`normalizedPattern`; Rust consumers compile `rawPattern`. Cases with differences
+between modeled engines include per-engine expectations. Downstream SDK checks
+must require consistent behavior for accepted cases. A native engine accepting
+rejected syntax does not change the authoring contract. The adjacent SHA-256
+file lets downstream tests detect fixture drift.
 
 ## Automated Validation
 

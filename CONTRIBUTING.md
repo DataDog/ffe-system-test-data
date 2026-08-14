@@ -42,6 +42,39 @@ configuration, and return the caller default with `ERROR` / `PARSE_ERROR` when
 those keys are evaluated. Reserve `ERROR` / `FLAG_NOT_FOUND` for keys absent from
 both the active and rejected maps. Replace both maps atomically on refresh.
 
+### Updating Targeting Regex Conformance
+
+The standalone targeting regex contract lives in
+`regex-conformance/targeting-regex-conformance.json`. Do not put it in
+`evaluation-cases/`; consumers parse every JSON file there as a full UFC
+evaluation case.
+
+When changing the contract:
+
+1. Bump `schemaVersion` only for an incompatible schema change and bump
+   `contractVersion` when portable behavior changes.
+2. Keep case IDs stable. Add a new ID instead of changing the meaning of an
+   existing case.
+3. Include every required case field: `id`, `description`, `category`,
+   `contract`, `rawPattern`, `normalizedPattern`, `expectedCompile`, `input`,
+   and `expectedMatch`.
+4. Use `contract` for the portable authoring decision. Use `expectedCompile`
+   and `expectedMatch` only for common native-engine observations. Set a common
+   field to `null` and add `engineExpectations` when native engines differ.
+5. Verify accepted cases in every shipped SDK evaluator. Rejected cases may be
+   accepted by a native compiler; that does not make them part of the portable
+   contract or require an SDK production change.
+6. Recompute `targeting-regex-conformance.sha256` from the exact JSON bytes.
+
+Validate JSON syntax, unique case IDs, required field types, and the hash:
+
+```bash
+jq empty ufc-config.json evaluation-cases/*.json regex-conformance/targeting-regex-conformance.json
+jq -e -f regex-conformance/validate-targeting-regex-conformance.jq regex-conformance/targeting-regex-conformance.json
+regex-conformance/test-validate-targeting-regex-conformance.sh
+(cd regex-conformance && shasum -a 256 -c targeting-regex-conformance.sha256)
+```
+
 ### Modifying Flag Configuration
 
 When adding or modifying flags in `ufc-config.json`:

@@ -53,7 +53,10 @@ jobs:
             repository: DataDog/dd-trace-py
             runtime: python
             submodule: tests/openfeature/ffe-system-test-data
-            setup: ":"
+            # ddtest runs as uid 1000 in Docker while the Actions checkout is uid 1001.
+            setup: >-
+              mkdir -p .cache/cython .cache/pip .cache/sccache .riot &&
+              chmod -R a+rwX .
             evaluation: >-
               scripts/ddtest riot -v run --pass-env -s 13c4b39 -- -vv
               tests/openfeature/test_provider_fixtures.py
@@ -81,7 +84,7 @@ jobs:
             repository: DataDog/dd-trace-php
             runtime: php
             submodule: tests/FeatureFlags/ffe-system-test-data
-            setup: ":"
+            setup: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev
             evaluation: >-
               make test_c TESTS=tests/ext/ffe/system_test_data_evaluate.phpt
               MAX_TEST_PARALLELISM=1
