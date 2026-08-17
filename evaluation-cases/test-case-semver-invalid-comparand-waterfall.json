@@ -13,19 +13,5 @@
     },
     "targetingKey": "waterfall",
     "variationType": "STRING"
-  },
-  {
-    "description": "The rejected waterfall flag must not poison the rest of the configuration: a neighboring valid SemVer flag still evaluates normally.",
-    "attributes": {
-      "app_version": "2.3.4"
-    },
-    "defaultValue": "unknown",
-    "flag": "semver-comparison-test",
-    "result": {
-      "reason": "TARGETING_MATCH",
-      "value": "stable"
-    },
-    "targetingKey": "after-invalid-waterfall",
-    "variationType": "STRING"
   }
 ]

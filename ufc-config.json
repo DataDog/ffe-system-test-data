@@ -4589,6 +4589,111 @@
         }
       ]
     },
+    "semver-valid-comparand-hyphenated-prerelease-test": {
+      "key": "semver-valid-comparand-hyphenated-prerelease-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag uses a valid SemVer comparand with repeated hyphens inside its prerelease identifiers.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "valid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.2.3----R-S.12.9.1--.12+meta"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-consecutive-dots-test": {
+      "key": "semver-invalid-comparand-consecutive-dots-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses consecutive dots in its SemVer prerelease comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.0.0-alpha..1"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-dot-suffix-test": {
+      "key": "semver-invalid-comparand-dot-suffix-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a Ruby-style dot-suffixed SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.2.3.DEV"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "semver-invalid-comparand-short-test": {
       "key": "semver-invalid-comparand-short-test",
       "enabled": true,

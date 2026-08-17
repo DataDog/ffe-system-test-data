@@ -163,7 +163,7 @@ python3 ci/validate-fixtures.py
 | `test-case-semver-precedence-flag.json` | SemVer precedence edge cases that are easy to get wrong: multi-digit numeric prerelease ordering (beta.2 < beta.11), build-metadata-ignored across every operator (EQ/NEQ/LT/LTE/GT/GTE), and alphanumeric prerelease ordering (alpha < alpha.1 < alpha.beta < beta < release) |
 | `test-case-semver-validation-flag.json` | Rust-compatible SemVer parsing boundaries, invalid syntax, non-string attributes, and invalid configured comparands |
 | `test-case-semver-invalid-comparand-waterfall.json` | An invalid configured SemVer comparand in a non-last allocation of a waterfall must reject the whole flag at parse time rather than skipping it and falling through to a later valid default |
-| `test-case-semver-invalid-comparand-categories.json` | Invalid configured SemVer comparand categories (invalid syntax, short, v-prefix, leading zero, non-string) each reject their flag at parse time with PARSE_ERROR without poisoning the rest of the configuration |
+| `test-case-semver-invalid-comparand-categories.json` | Configured SemVer comparand boundaries: a valid hyphen-heavy prerelease matches, while invalid syntax (including consecutive dots and a Ruby-style `.DEV` suffix), short, v-prefixed, leading-zero, and non-string comparands reject their flag at parse time with PARSE_ERROR without poisoning the rest of the configuration |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
