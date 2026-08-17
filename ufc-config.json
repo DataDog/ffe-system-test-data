@@ -938,6 +938,56 @@
         }
       ]
     },
+    "semver-invalid-comparand-waterfall-test": {
+      "key": "semver-invalid-comparand-waterfall-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately places an invalid configured SemVer comparand in a non-last allocation of a waterfall, followed by a valid default allocation. SDKs must reject the whole flag during parsing rather than skipping the invalid allocation and falling through to the default.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        },
+        "fallback": {
+          "key": "fallback",
+          "value": "fallback"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18446744073709551616.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "default",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "fallback",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "start-and-end-date-test": {
       "key": "start-and-end-date-test",
       "enabled": true,
@@ -4185,6 +4235,648 @@
           "splits": [
             {
               "variationKey": "expected",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-precedence-test": {
+      "key": "semver-precedence-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Isolates SemVer precedence rules that are easy to get wrong: multi-digit numeric prerelease ordering (beta.2 < beta.11), build-metadata-ignored across every operator (EQ/NEQ/LT/LTE/GT/GTE), and alphanumeric prerelease ordering (alpha < alpha.1 < alpha.beta < beta < release). Each allocation gates on a unique SEMVER_EQ attribute version so test attributes cannot cross-match other allocations; negative build-metadata cases (NEQ/LT/GT) fall through to DEFAULT.",
+      "variations": {
+        "numeric-prerelease": {
+          "key": "numeric-prerelease",
+          "value": "numeric-prerelease"
+        },
+        "build-equal-precedence": {
+          "key": "build-equal-precedence",
+          "value": "build-equal-precedence"
+        },
+        "build-dotted-eq": {
+          "key": "build-dotted-eq",
+          "value": "build-dotted-eq"
+        },
+        "build-lte": {
+          "key": "build-lte",
+          "value": "build-lte"
+        },
+        "build-gte": {
+          "key": "build-gte",
+          "value": "build-gte"
+        },
+        "alpha-before-alpha-1": {
+          "key": "alpha-before-alpha-1",
+          "value": "alpha-before-alpha-1"
+        },
+        "alpha-1-before-alpha-beta": {
+          "key": "alpha-1-before-alpha-beta",
+          "value": "alpha-1-before-alpha-beta"
+        },
+        "alpha-beta-before-beta": {
+          "key": "alpha-beta-before-beta",
+          "value": "alpha-beta-before-beta"
+        },
+        "beta-before-release": {
+          "key": "beta-before-release",
+          "value": "beta-before-release"
+        },
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "numeric-prerelease",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "10.0.0-beta.2"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "10.0.0-beta.11"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "numeric-prerelease",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-equal-precedence",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "20.0.0+linux"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "20.0.0+darwin"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "build-equal-precedence",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-dotted-eq",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "30.0.0+exp.sha.5114f85"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "30.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "build-dotted-eq",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-lte",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "40.0.0+build.42"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LTE",
+                  "value": "40.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "build-lte",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-gte",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "50.0.0+build.42"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GTE",
+                  "value": "50.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "build-gte",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-neq",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "60.0.0+build.42"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_NEQ",
+                  "value": "60.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-lt",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "70.0.0+build.42"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "70.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "build-gt",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "80.0.0+build.42"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GT",
+                  "value": "80.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "alpha-before-alpha-1",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "90.0.0-alpha"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "90.0.0-alpha.1"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "alpha-before-alpha-1",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "alpha-1-before-alpha-beta",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "91.0.0-alpha.1"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "91.0.0-alpha.beta"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "alpha-1-before-alpha-beta",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "alpha-beta-before-beta",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "92.0.0-alpha.beta"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "92.0.0-beta"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "alpha-beta-before-beta",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "beta-before-release",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "93.0.0-beta"
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_LT",
+                  "value": "93.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "beta-before-release",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-syntax-test": {
+      "key": "semver-invalid-comparand-syntax-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a non-parseable SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "not-a-version"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-valid-comparand-hyphenated-prerelease-test": {
+      "key": "semver-valid-comparand-hyphenated-prerelease-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag uses a valid SemVer comparand with repeated hyphens inside its prerelease identifiers.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "valid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.2.3----R-S.12.9.1--.12+meta"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-consecutive-dots-test": {
+      "key": "semver-invalid-comparand-consecutive-dots-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses consecutive dots in its SemVer prerelease comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.0.0-alpha..1"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-dot-suffix-test": {
+      "key": "semver-invalid-comparand-dot-suffix-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a Ruby-style dot-suffixed SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.2.3.DEV"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-short-test": {
+      "key": "semver-invalid-comparand-short-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a short (two-component) SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "1.2"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-vprefix-test": {
+      "key": "semver-invalid-comparand-vprefix-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a v-prefixed SemVer comparand, which is not valid SemVer. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "v1.2.3"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-leading-zero-test": {
+      "key": "semver-invalid-comparand-leading-zero-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a leading-zero core component in its SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "01.2.3"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-invalid-comparand-non-string-test": {
+      "key": "semver-invalid-comparand-non-string-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag deliberately uses a non-string (JSON number) SemVer comparand. SDKs must reject this as an invalid comparand without rejecting the full configuration.",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "matched"
+        }
+      },
+      "allocations": [
+        {
+          "key": "invalid-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": 1.2
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
               "shards": []
             }
           ],
