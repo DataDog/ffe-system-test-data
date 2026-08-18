@@ -59,18 +59,18 @@
     "variationType": "STRING"
   },
   {
-    "description": "A short (two-component) SemVer comparand (\"1.2\") rejects the flag at parse time with a PARSE_ERROR.",
+    "description": "A SemVer comparand with six numeric parts (\"18.0.0.0.0.0\") rejects the flag at parse time with a PARSE_ERROR because versions may contain at most five parts.",
     "attributes": {
-      "app_version": "1.2.3"
+      "app_version": "18.0.0.0.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-invalid-comparand-short-test",
+    "flag": "semver-invalid-comparand-too-many-parts-test",
     "result": {
       "errorCode": "PARSE_ERROR",
       "reason": "ERROR",
       "value": "unknown"
     },
-    "targetingKey": "invalid-short",
+    "targetingKey": "invalid-too-many-parts",
     "variationType": "STRING"
   },
   {

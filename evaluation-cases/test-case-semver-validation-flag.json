@@ -14,20 +14,6 @@
     "variationType": "STRING"
   },
   {
-    "description": "Semver requires all three core components.",
-    "attributes": {
-      "app_version": "1.2"
-    },
-    "defaultValue": "unknown",
-    "flag": "semver-comparison-test",
-    "result": {
-      "reason": "DEFAULT",
-      "value": "unknown"
-    },
-    "targetingKey": "short-version",
-    "variationType": "STRING"
-  },
-  {
     "description": "Semver does not accept a v prefix.",
     "attributes": {
       "app_version": "v1.2.3"
@@ -123,34 +109,6 @@
       "value": "unknown"
     },
     "targetingKey": "empty-string",
-    "variationType": "STRING"
-  },
-  {
-    "description": "A single core component is not a valid SemVer version.",
-    "attributes": {
-      "app_version": "1"
-    },
-    "defaultValue": "unknown",
-    "flag": "semver-comparison-test",
-    "result": {
-      "reason": "DEFAULT",
-      "value": "unknown"
-    },
-    "targetingKey": "single-component",
-    "variationType": "STRING"
-  },
-  {
-    "description": "More than three core components is not a valid SemVer version.",
-    "attributes": {
-      "app_version": "1.2.3.4"
-    },
-    "defaultValue": "unknown",
-    "flag": "semver-comparison-test",
-    "result": {
-      "reason": "DEFAULT",
-      "value": "unknown"
-    },
-    "targetingKey": "four-components",
     "variationType": "STRING"
   },
   {
