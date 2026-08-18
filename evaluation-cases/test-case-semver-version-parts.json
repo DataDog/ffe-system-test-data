@@ -6,7 +6,7 @@
       "app_version": "18"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-input-test",
     "result": {
       "reason": "TARGETING_MATCH",
       "value": "one-part-input"
@@ -17,11 +17,10 @@
   {
     "description": "A one-part configured comparand is valid and normalized: \"18.0.0\" compares equal to configured \"18\".",
     "attributes": {
-      "scenario": "one-part-comparand",
       "app_version": "18.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-one-part-comparand-test",
     "result": {
       "reason": "TARGETING_MATCH",
       "value": "one-part-comparand"
@@ -36,7 +35,7 @@
       "app_version": "18.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-input-test",
     "result": {
       "reason": "TARGETING_MATCH",
       "value": "two-part-input"
@@ -47,11 +46,10 @@
   {
     "description": "A two-part configured comparand is valid and normalized: \"18.0.0\" compares equal to configured \"18.0\".",
     "attributes": {
-      "scenario": "two-part-comparand",
       "app_version": "18.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-two-part-comparand-test",
     "result": {
       "reason": "TARGETING_MATCH",
       "value": "two-part-comparand"
@@ -60,48 +58,76 @@
     "variationType": "STRING"
   },
   {
-    "description": "A version with four numeric parts is valid.",
+    "description": "A four-part version is accepted as an attribute and compares above a canonical three-part lower version.",
     "attributes": {
-      "scenario": "four-parts",
+      "scenario": "four-part-input",
       "app_version": "18.0.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-input-test",
     "result": {
       "reason": "TARGETING_MATCH",
-      "value": "four-parts"
+      "value": "four-part-input"
     },
-    "targetingKey": "four-parts",
+    "targetingKey": "four-part-input",
     "variationType": "STRING"
   },
   {
-    "description": "A version with five numeric parts is valid.",
+    "description": "A four-part configured comparand is accepted and compares below a canonical three-part higher version.",
     "attributes": {
-      "scenario": "five-parts",
+      "app_version": "19.0.0"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-version-parts-four-part-comparand-test",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "four-part-comparand"
+    },
+    "targetingKey": "four-part-comparand",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A five-part version is accepted as an attribute and compares above a canonical three-part lower version.",
+    "attributes": {
+      "scenario": "five-part-input",
       "app_version": "18.0.0.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-input-test",
     "result": {
       "reason": "TARGETING_MATCH",
-      "value": "five-parts"
+      "value": "five-part-input"
     },
-    "targetingKey": "five-parts",
+    "targetingKey": "five-part-input",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A five-part configured comparand is accepted and compares below a canonical three-part higher version.",
+    "attributes": {
+      "app_version": "19.0.0"
+    },
+    "defaultValue": "unknown",
+    "flag": "semver-version-parts-five-part-comparand-test",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "five-part-comparand"
+    },
+    "targetingKey": "five-part-comparand",
     "variationType": "STRING"
   },
   {
     "description": "A version with six numeric parts is invalid because versions may contain at most five parts.",
     "attributes": {
-      "scenario": "six-parts",
+      "scenario": "six-part-input",
       "app_version": "18.0.0.0.0.0"
     },
     "defaultValue": "unknown",
-    "flag": "semver-version-parts-test",
+    "flag": "semver-version-parts-input-test",
     "result": {
       "reason": "DEFAULT",
       "value": "unknown"
     },
-    "targetingKey": "six-parts",
+    "targetingKey": "six-part-input",
     "variationType": "STRING"
   }
 ]
