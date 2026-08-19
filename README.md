@@ -163,6 +163,7 @@ python3 ci/validate-fixtures.py
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
 | `test-case-boolean-one-of-matches.json` | Boolean flag with ONE_OF operator matching |
 | `test-case-comparator-operator-flag.json` | Flag using comparator operators (GT, LT, etc.) |
+| `test-case-dangling-variation-reference-isolation.json` | A flag whose split references an undefined variation is removed without poisoning valid flags |
 | `test-case-disabled-flag.json` | Disabled flag returning DISABLED reason |
 | `test-case-empty-flag.json` | Flag with empty configuration |
 | `test-case-empty-string-variation.json` | Flag returning empty string as value |

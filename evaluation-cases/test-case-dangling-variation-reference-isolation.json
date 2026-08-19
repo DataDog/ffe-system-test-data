@@ -1,0 +1,27 @@
+[
+  {
+    "description": "The malformed flag has a split whose variationKey is \"constructor\", but that key is absent from the variations map. SDKs must reject the flag using exact map-key membership rather than resolving inherited or ambient members.",
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "dangling-variation-reference-flag",
+    "result": {
+      "errorCode": "PARSE_ERROR",
+      "reason": "ERROR",
+      "value": "default"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  },
+  {
+    "description": "A valid flag in the same config must still evaluate after the dangling-variation flag is skipped.",
+    "attributes": {},
+    "defaultValue": "default",
+    "flag": "valid-flag-after-invalid-config",
+    "result": {
+      "reason": "STATIC",
+      "value": "expected"
+    },
+    "targetingKey": "alice",
+    "variationType": "STRING"
+  }
+]

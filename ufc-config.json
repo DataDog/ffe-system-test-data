@@ -4060,6 +4060,31 @@
         }
       ]
     },
+    "dangling-variation-reference-flag": {
+      "key": "dangling-variation-reference-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.variationKey references \"constructor\", which is not an own key of variations. SDKs must remove this flag rather than resolving inherited or ambient members.",
+      "variations": {
+        "defined": {
+          "key": "defined",
+          "value": "defined"
+        }
+      },
+      "allocations": [
+        {
+          "key": "dangling-variation-reference-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "constructor",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "malformed-allocations-flag": {
       "key": "malformed-allocations-flag",
       "enabled": true,
