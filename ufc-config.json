@@ -4604,6 +4604,284 @@
         }
       ]
     },
+    "semver-version-parts-input-test": {
+      "key": "semver-version-parts-input-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Exercises one- through five-part runtime attributes using only canonical three-part configured comparands, so comparand ingestion cannot prevent an input case from running. Scenario gates isolate each runtime comparison.",
+      "variations": {
+        "one-part-input": {
+          "key": "one-part-input",
+          "value": "one-part-input"
+        },
+        "two-part-input": {
+          "key": "two-part-input",
+          "value": "two-part-input"
+        },
+        "four-part-input": {
+          "key": "four-part-input",
+          "value": "four-part-input"
+        },
+        "five-part-input": {
+          "key": "five-part-input",
+          "value": "five-part-input"
+        }
+      },
+      "allocations": [
+        {
+          "key": "one-part-input",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "scenario",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "one-part-input"
+                  ]
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "one-part-input",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "two-part-input",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "scenario",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "two-part-input"
+                  ]
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "two-part-input",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "four-part-input",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "scenario",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "four-part-input"
+                  ]
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GT",
+                  "value": "17.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "four-part-input",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "five-part-input",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "scenario",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "five-part-input"
+                  ]
+                },
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GT",
+                  "value": "17.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "five-part-input",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-version-parts-one-part-comparand-test": {
+      "key": "semver-version-parts-one-part-comparand-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Isolates a one-part configured SemVer comparand from every other extended comparand shape.",
+      "variations": {
+        "one-part-comparand": {
+          "key": "one-part-comparand",
+          "value": "one-part-comparand"
+        }
+      },
+      "allocations": [
+        {
+          "key": "one-part-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "one-part-comparand",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-version-parts-two-part-comparand-test": {
+      "key": "semver-version-parts-two-part-comparand-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Isolates a two-part configured SemVer comparand from every other extended comparand shape.",
+      "variations": {
+        "two-part-comparand": {
+          "key": "two-part-comparand",
+          "value": "two-part-comparand"
+        }
+      },
+      "allocations": [
+        {
+          "key": "two-part-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_EQ",
+                  "value": "18.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "two-part-comparand",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-version-parts-four-part-comparand-test": {
+      "key": "semver-version-parts-four-part-comparand-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Isolates a four-part configured SemVer comparand while the runtime attribute remains a canonical three-part version.",
+      "variations": {
+        "four-part-comparand": {
+          "key": "four-part-comparand",
+          "value": "four-part-comparand"
+        }
+      },
+      "allocations": [
+        {
+          "key": "four-part-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GT",
+                  "value": "18.0.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "four-part-comparand",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "semver-version-parts-five-part-comparand-test": {
+      "key": "semver-version-parts-five-part-comparand-test",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Isolates a five-part configured SemVer comparand while the runtime attribute remains a canonical three-part version.",
+      "variations": {
+        "five-part-comparand": {
+          "key": "five-part-comparand",
+          "value": "five-part-comparand"
+        }
+      },
+      "allocations": [
+        {
+          "key": "five-part-comparand",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "app_version",
+                  "operator": "SEMVER_GT",
+                  "value": "18.0.0.0.0"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "five-part-comparand",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "semver-invalid-comparand-syntax-test": {
       "key": "semver-invalid-comparand-syntax-test",
       "enabled": true,
@@ -4730,41 +5008,6 @@
                   "attribute": "app_version",
                   "operator": "SEMVER_EQ",
                   "value": "1.2.3.DEV"
-                }
-              ]
-            }
-          ],
-          "splits": [
-            {
-              "variationKey": "matched",
-              "shards": []
-            }
-          ],
-          "doLog": true
-        }
-      ]
-    },
-    "semver-invalid-comparand-short-test": {
-      "key": "semver-invalid-comparand-short-test",
-      "enabled": true,
-      "variationType": "STRING",
-      "comment": "This flag deliberately uses a short (two-component) SemVer comparand. SDKs must remove this flag without rejecting the full configuration.",
-      "variations": {
-        "matched": {
-          "key": "matched",
-          "value": "matched"
-        }
-      },
-      "allocations": [
-        {
-          "key": "invalid-comparand",
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "attribute": "app_version",
-                  "operator": "SEMVER_EQ",
-                  "value": "1.2"
                 }
               ]
             }
