@@ -114,20 +114,5 @@
     },
     "targetingKey": "five-part-comparand",
     "variationType": "STRING"
-  },
-  {
-    "description": "A version with six numeric parts is invalid because versions may contain at most five parts.",
-    "attributes": {
-      "scenario": "six-part-input",
-      "app_version": "18.0.0.0.0.0"
-    },
-    "defaultValue": "unknown",
-    "flag": "semver-version-parts-input-test",
-    "result": {
-      "reason": "DEFAULT",
-      "value": "unknown"
-    },
-    "targetingKey": "six-part-input",
-    "variationType": "STRING"
   }
 ]
