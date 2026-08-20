@@ -616,6 +616,40 @@
       }
     },
     {
+      "id": "rejected-duplicate-enabled-inline-flag",
+      "description": "Go and RE2JS accept a repeated enabled flag, while both Rust evaluators reject it.",
+      "category": "inline-flag-dialect",
+      "contract": "rejected",
+      "rawPattern": "(?ii)foo",
+      "normalizedPattern": "(?ii)foo",
+      "expectedCompile": null,
+      "input": "FOO",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": { "compile": true, "match": true },
+        "re2js": { "compile": true, "match": true },
+        "rustRulesBased": { "compile": false, "match": null },
+        "rustRkyv": { "compile": false, "match": null }
+      }
+    },
+    {
+      "id": "rejected-inline-flag-enabled-and-disabled",
+      "description": "Go and RE2JS accept the same flag on both sides of the disable marker, while both Rust evaluators reject it as a duplicate.",
+      "category": "inline-flag-dialect",
+      "contract": "rejected",
+      "rawPattern": "(?i-i)foo",
+      "normalizedPattern": "(?i-i)foo",
+      "expectedCompile": null,
+      "input": "FOO",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": { "compile": true, "match": false },
+        "re2js": { "compile": true, "match": false },
+        "rustRulesBased": { "compile": false, "match": null },
+        "rustRkyv": { "compile": false, "match": null }
+      }
+    },
+    {
       "id": "rejected-disabled-unicode-scoped-class",
       "description": "Rust rejects a Unicode class inside a Unicode-disabled scope, while normalization removes the disabling flag and accepts it.",
       "category": "normalization-dialect",

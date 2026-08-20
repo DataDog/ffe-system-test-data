@@ -131,10 +131,10 @@ observation when the modeled engines agree. Go and RE2JS consumers compile
 `normalizedPattern`; Rust consumers compile `rawPattern`. Cases with differences
 between modeled engines include per-engine expectations. Downstream SDK checks
 must require consistent behavior for accepted cases. A native engine accepting
-rejected syntax does not change the authoring contract. Inline Unicode flags are
-rejected for authoring even when an engine can compile them or normalization can
-remove a redundant standalone flag. The adjacent SHA-256 file lets downstream
-tests detect fixture drift.
+rejected syntax does not change the authoring contract. Inline Unicode flags and
+repeated inline flags are rejected for authoring even when an engine can compile
+them or normalization can remove a redundant standalone flag. The adjacent
+SHA-256 file lets downstream tests detect fixture drift.
 
 ## Automated Validation
 
