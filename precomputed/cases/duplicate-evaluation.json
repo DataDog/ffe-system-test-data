@@ -53,5 +53,5 @@
   "skipForSdks": [
     "web"
   ],
-  "skipForSdks_reason": "Web browser SDK's FlagEvaluationAggregator deduplicates: evaluating the same flag twice produces one event with evaluation_count=2, not two events. Fixture expects flagevaluationEvents=2 which is correct for non-aggregating platforms."
+  "skipForSdksReason": "Web browser SDK's FlagEvaluationAggregator deduplicates: evaluating the same flag twice produces one event with evaluation_count=2, not two events. Fixture expects flagevaluationEvents=2 which is correct for non-aggregating platforms."
 }
