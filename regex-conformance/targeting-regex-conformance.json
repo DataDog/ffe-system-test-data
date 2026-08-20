@@ -1,7 +1,7 @@
 {
   "schema": "datadog.ffe.targeting-regex-conformance/v1",
   "schemaVersion": 1,
-  "contractVersion": "targeting-regex-v2",
+  "contractVersion": "targeting-regex-v3",
   "semantics": {
     "acceptedSyntax": "The portable intersection exercised by accepted cases, not every construct accepted by an individual engine.",
     "engines": [
@@ -28,7 +28,7 @@
       "positive and negated character classes without a leading literal closing bracket",
       "star, plus, optional, and counted quantifiers",
       "Unicode literals",
-      "case-insensitive, multiline, dot-all, and standalone normalized Unicode inline flags"
+      "case-insensitive, multiline, and dot-all inline flags"
     ],
     "rejected": [
       "malformed expressions",
@@ -43,7 +43,7 @@
       "named capture groups",
       "POSIX character classes",
       "Unicode property character classes",
-      "combined or scoped Unicode inline flags",
+      "all Unicode inline flags, including standalone, combined, and scoped forms",
       "character classes with a leading literal closing bracket",
       "atomic groups",
       "possessive quantifiers"
@@ -370,10 +370,10 @@
       "expectedMatch": true
     },
     {
-      "id": "accepted-inline-unicode-global-normalized",
-      "description": "A global Unicode flag is redundant and removed for Go and RE2JS.",
+      "id": "rejected-inline-unicode-global-normalized",
+      "description": "A standalone Unicode flag is redundant, but raw authoring syntax must compile without normalization.",
       "category": "normalization",
-      "contract": "accepted",
+      "contract": "rejected",
       "rawPattern": "(?u)foo",
       "normalizedPattern": "foo",
       "expectedCompile": true,
@@ -611,6 +611,40 @@
       "engineExpectations": {
         "go": { "compile": true, "match": true },
         "re2js": { "compile": true, "match": true },
+        "rustRulesBased": { "compile": false, "match": null },
+        "rustRkyv": { "compile": false, "match": null }
+      }
+    },
+    {
+      "id": "rejected-duplicate-enabled-inline-flag",
+      "description": "Go and RE2JS accept a repeated enabled flag, while both Rust evaluators reject it.",
+      "category": "inline-flag-dialect",
+      "contract": "rejected",
+      "rawPattern": "(?ii)foo",
+      "normalizedPattern": "(?ii)foo",
+      "expectedCompile": null,
+      "input": "FOO",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": { "compile": true, "match": true },
+        "re2js": { "compile": true, "match": true },
+        "rustRulesBased": { "compile": false, "match": null },
+        "rustRkyv": { "compile": false, "match": null }
+      }
+    },
+    {
+      "id": "rejected-inline-flag-enabled-and-disabled",
+      "description": "Go and RE2JS accept the same flag on both sides of the disable marker, while both Rust evaluators reject it as a duplicate.",
+      "category": "inline-flag-dialect",
+      "contract": "rejected",
+      "rawPattern": "(?i-i)foo",
+      "normalizedPattern": "(?i-i)foo",
+      "expectedCompile": null,
+      "input": "FOO",
+      "expectedMatch": null,
+      "engineExpectations": {
+        "go": { "compile": true, "match": false },
+        "re2js": { "compile": true, "match": false },
         "rustRulesBased": { "compile": false, "match": null },
         "rustRkyv": { "compile": false, "match": null }
       }
