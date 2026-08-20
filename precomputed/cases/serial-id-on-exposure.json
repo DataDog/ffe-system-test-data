@@ -63,5 +63,7 @@
     "exposures": [
       {"serial_id": 340132}
     ]
-  }
+  },
+  "skipForSdks": ["web"],
+  "skipForSdksReason": "@datadog/openfeature-browser does not yet forward serialId onto exposure events. Fix merged in openfeature-js-client#368; re-enable when @datadog/openfeature-browser > 1.2.5 is installed."
 }
