@@ -120,5 +120,5 @@
   "skipForSdks": [
     "web"
   ],
-  "skipForSdks_reason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
+  "skipForSdksReason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
 }

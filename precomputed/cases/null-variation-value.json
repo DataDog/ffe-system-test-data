@@ -84,5 +84,5 @@
   "skipForSdks": [
     "web"
   ],
-  "skipForSdks_reason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
+  "skipForSdksReason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
 }
