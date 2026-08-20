@@ -6,11 +6,12 @@ usage() {
   cat <<'EOF' >&2
 usage: run-regex-conformance.sh \
   <fixture-repository> <downstream-repository> <fixture-submodule-path> \
-  <candidate-fixture-sha> <log-directory> -- <test-command> [args...]
+  <downstream-fixture-sha> <candidate-fixture-sha> <log-directory> \
+  -- <test-command> [args...]
 EOF
 }
 
-if [[ $# -lt 7 ]]; then
+if [[ $# -lt 8 ]]; then
   usage
   exit 2
 fi
@@ -18,9 +19,10 @@ fi
 fixture_repository=$1
 downstream_repository=$2
 fixture_submodule_path=$3
-candidate_fixture_sha=$4
-log_directory=$5
-shift 5
+downstream_fixture_sha=$4
+candidate_fixture_sha=$5
+log_directory=$6
+shift 6
 
 if [[ $1 != "--" ]]; then
   usage
@@ -33,24 +35,16 @@ downstream_repository=$(cd "$downstream_repository" && pwd)
 fixture_checkout="$downstream_repository/$fixture_submodule_path"
 log_file="$log_directory/candidate.log"
 
-# pull_request workflows check out GitHub's synthetic merge commit. Its first
-# parent is the live stacked base (PR #21) and its second parent is this PR's
-# head. Resolve the exact fixture base without hard-coding Blake's branch SHA.
-if [[ -n ${GITHUB_BASE_REF:-} ]] &&
-  git -C "$fixture_repository" cat-file -e HEAD^2 2>/dev/null &&
-  [[ $(git -C "$fixture_repository" rev-parse HEAD^2) == "$candidate_fixture_sha" ]]; then
-  candidate_fixture_sha=$(git -C "$fixture_repository" rev-parse HEAD^1)
-fi
-
+git -C "$fixture_repository" cat-file -e "$downstream_fixture_sha^{commit}"
 git -C "$fixture_repository" cat-file -e "$candidate_fixture_sha^{commit}"
 downstream_sha=$(git -C "$downstream_repository" rev-parse HEAD)
 declared_fixture_sha=$(
   git -C "$downstream_repository" ls-tree HEAD -- "$fixture_submodule_path" |
     awk '{print $3}'
 )
-if [[ $declared_fixture_sha != "$candidate_fixture_sha" ]]; then
-  printf 'downstream branch %s pins fixture %s, expected PR #21 base %s\n' \
-    "$downstream_sha" "$declared_fixture_sha" "$candidate_fixture_sha" >&2
+if [[ $declared_fixture_sha != "$downstream_fixture_sha" ]]; then
+  printf 'downstream branch %s pins fixture %s, expected baseline %s\n' \
+    "$downstream_sha" "$declared_fixture_sha" "$downstream_fixture_sha" >&2
   exit 1
 fi
 mkdir -p "$log_directory"
@@ -106,7 +100,8 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   {
     printf '### Regex universality evidence\n\n'
     printf -- '- Downstream branch: `%s`\n' "$downstream_sha"
-    printf -- '- PR #21 fixture base: `%s`\n\n' "$candidate_fixture_sha"
+    printf -- '- Downstream fixture baseline: `%s`\n' "$downstream_fixture_sha"
+    printf -- '- Candidate fixture: `%s`\n\n' "$candidate_fixture_sha"
     printf '| Candidate exit code | Classification |\n'
     printf '| ---: | --- |\n'
     # shellcheck disable=SC2016 # Backticks are Markdown, not shell syntax.

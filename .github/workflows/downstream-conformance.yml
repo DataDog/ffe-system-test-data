@@ -187,6 +187,7 @@ jobs:
             "$GITHUB_WORKSPACE/fixtures" \
             "$GITHUB_WORKSPACE/downstream" \
             "${{ matrix.submodule }}" \
+            "8e8a6c26703fbd801c8877afdd80e078c5751b30" \
             "${{ github.event.pull_request.head.sha }}" \
             "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}/contract" \
             -- \
