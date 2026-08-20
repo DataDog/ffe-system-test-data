@@ -1,0 +1,213 @@
+name: Regex universality evidence
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/downstream-conformance.yml
+      - ci/run-regex-conformance.sh
+      - evaluation-cases/**
+      - regex-conformance/**
+      - ufc-config.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regex-universality-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  downstream:
+    name: ${{ matrix.slug }} regex evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - slug: dd-trace-go
+            repository: DataDog/dd-trace-go
+            runtime: go
+            submodule: openfeature/ffe-system-test-data
+            setup: ":"
+            contract: go test ./openfeature -run '^TestTargetingRegexConformance$' -count=1
+            enforce_contract: true
+          - slug: dd-trace-java
+            repository: DataDog/dd-trace-java
+            runtime: java
+            submodule: dd-smoke-tests/openfeature/src/test/resources/ffe-system-test-data
+            setup: ":"
+            contract: >-
+              ./gradlew
+              :products:feature-flagging:feature-flagging-api:cleanTest
+              :products:feature-flagging:feature-flagging-api:test
+              --tests datadog.trace.api.openfeature.DDEvaluatorTest.testRegexConformance
+              --no-daemon
+            enforce_contract: false
+          - slug: dd-trace-js
+            repository: DataDog/dd-trace-js
+            runtime: node
+            submodule: packages/dd-trace/test/openfeature/ffe-system-test-data
+            setup: >-
+              npm install -g bun@1.3.1 --prefer-offline --no-audit --no-fund &&
+              bun install --linker=hoisted --trust --network-concurrency 8
+            contract: npm run test:openfeature -- --grep 'targeting regex conformance'
+            # dd-trace-js uses native ECMAScript RegExp, not the fixture's RE2JS engine.
+            enforce_contract: false
+          - slug: dd-trace-py
+            repository: DataDog/dd-trace-py
+            runtime: python
+            submodule: tests/openfeature/ffe-system-test-data
+            # ddtest runs as uid 1000 in Docker while the Actions checkout is uid 1001.
+            setup: >-
+              mkdir -p .cache/cython .cache/pip .cache/sccache .riot &&
+              chmod -R a+rwX .
+            contract: >-
+              scripts/run-tests --venv 14fc413 -- -- -vv
+              -k targeting_regex_conformance
+            enforce_contract: true
+          - slug: dd-trace-rb
+            repository: DataDog/dd-trace-rb
+            runtime: ruby
+            submodule: spec/datadog/open_feature/ffe-system-test-data
+            setup: bundle install --jobs 4 && bundle exec rake compile
+            contract: >-
+              bundle exec rspec spec/datadog/open_feature/native_evaluator_spec.rb
+              -e 'targeting regex conformance'
+            enforce_contract: true
+          - slug: dd-trace-dotnet
+            repository: DataDog/dd-trace-dotnet
+            runtime: dotnet
+            submodule: tracer/test/Datadog.Trace.Tests/FeatureFlags/ffe-system-test-data
+            setup: >-
+              dotnet restore
+              tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
+            contract: >-
+              dotnet test tracer/test/Datadog.Trace.Tests/Datadog.Trace.Tests.csproj
+              --framework net10.0 --no-restore
+              --filter 'FullyQualifiedName~Datadog.Trace.Tests.FeatureFlags.FeatureFlagsEvaluatorTests.RegexConformance'
+              --verbosity minimal
+            enforce_contract: false
+          - slug: dd-trace-php
+            repository: DataDog/dd-trace-php
+            runtime: php
+            submodule: tests/FeatureFlags/ffe-system-test-data
+            setup: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev
+            contract: >-
+              make test_c TESTS=tests/ext/ffe/regex_conformance.phpt
+              MAX_TEST_PARALLELISM=1
+            enforce_contract: true
+          - slug: libdatadog
+            repository: DataDog/libdatadog
+            runtime: rust
+            submodule: libdd-ffe-test-suite/ffe-system-test-data
+            setup: rustup toolchain install 1.87.0 --profile minimal
+            contract: >-
+              cargo +1.87.0 test -p libdd-ffe-test-suite
+              --test targeting_regex_conformance
+              evaluates_targeting_regex_conformance_fixture -- --exact --nocapture
+            enforce_contract: true
+
+    steps:
+      - name: Check out proposed fixtures
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          path: fixtures
+          persist-credentials: false
+
+      - name: Check out ${{ matrix.slug }} conformance branch
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: ${{ matrix.repository }}
+          ref: leo.romanovsky/ffe-regex-conformance-pr21
+          path: downstream
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Set up Go
+        if: matrix.runtime == 'go'
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Set up Java
+        if: matrix.runtime == 'java'
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+          cache-dependency-path: downstream/**/*.gradle*
+
+      - name: Set up Node.js
+        if: matrix.runtime == 'node'
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Set up Python
+        if: matrix.runtime == 'python'
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+
+      - name: Set up Ruby
+        if: matrix.runtime == 'ruby'
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+        with:
+          ruby-version: "3.4"
+
+      - name: Set up .NET
+        if: matrix.runtime == 'dotnet'
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Set up PHP
+        if: matrix.runtime == 'php'
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2.37.2
+        with:
+          php-version: "8.3"
+          coverage: none
+
+      - name: Install ${{ matrix.slug }} dependencies
+        env:
+          SETUP_COMMAND: ${{ matrix.setup }}
+        working-directory: downstream
+        run: bash -lc "$SETUP_COMMAND"
+
+      - name: Run candidate regex contract
+        id: contract
+        env:
+          TEST_COMMAND: ${{ matrix.contract }}
+        run: |
+          fixtures/ci/run-regex-conformance.sh \
+            "$GITHUB_WORKSPACE/fixtures" \
+            "$GITHUB_WORKSPACE/downstream" \
+            "${{ matrix.submodule }}" \
+            "8e8a6c26703fbd801c8877afdd80e078c5751b30" \
+            "${{ github.event.pull_request.head.sha }}" \
+            "$RUNNER_TEMP/downstream-conformance/${{ matrix.slug }}/contract" \
+            -- \
+            bash -lc "$TEST_COMMAND"
+
+      - name: Report candidate contract failure
+        if: steps.contract.outputs.classification == 'candidate-failure'
+        run: |
+          echo "::warning title=${{ matrix.slug }} regex contract failure::The proposed fixture does not match the consumer branch. See the job summary and logs."
+
+      - name: Upload regex evidence logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: downstream-conformance-${{ matrix.slug }}
+          path: ${{ runner.temp }}/downstream-conformance/${{ matrix.slug }}/**/*.log
+          if-no-files-found: warn
+
+      - name: Enforce claimed engine observations
+        if: matrix.enforce_contract && steps.contract.outputs.classification == 'candidate-failure'
+        run: |
+          echo "${{ matrix.slug }} is an engine explicitly represented by the fixture, so this mismatch is blocking."
+          exit 1
