@@ -1,0 +1,67 @@
+{
+  "name": "serial-id-on-exposure",
+  "description": "Validates that serialId from the precomputed assignment is forwarded as serial_id on the exposure event. Requires @datadog/openfeature-browser > 1.2.5 (merged in openfeature-js-client#368, not yet released).",
+  "context": {
+    "targetingKey": "serial-id-test-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "flags": {
+          "serial.id.flag": {
+            "allocationKey": "holdout-allocation",
+            "variationKey": "on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true,
+            "serialId": 340132
+          },
+          "no.serial.id.flag": {
+            "allocationKey": "regular-allocation",
+            "variationKey": "off",
+            "variationType": "boolean",
+            "variationValue": false,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "serial.id.flag",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "result": {
+        "value": true,
+        "variant": "on",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    },
+    {
+      "flag": "no.serial.id.flag",
+      "variationType": "boolean",
+      "defaultValue": true,
+      "result": {
+        "value": false,
+        "variant": "off",
+        "reason": "TARGETING_MATCH",
+        "error": null
+      }
+    }
+  ],
+  "expectedEmissions": {
+    "exposures": 2,
+    "flagevaluationRequests": 1,
+    "flagevaluationEvents": 2
+  },
+  "expectedEvents": {
+    "exposures": [
+      {"serial_id": 340132}
+    ]
+  }
+}
