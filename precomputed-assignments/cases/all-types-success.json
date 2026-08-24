@@ -69,9 +69,9 @@
       "defaultValue": false,
       "result": {
         "value": true,
-        "variant": "enabled",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "enabled"
       }
     },
     {
@@ -80,9 +80,9 @@
       "defaultValue": "Fallback title",
       "result": {
         "value": "Datadog Flags",
-        "variant": "copy-a",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "copy-a"
       }
     },
     {
@@ -91,9 +91,9 @@
       "defaultValue": 0,
       "result": {
         "value": 5,
-        "variant": "limit-five",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "limit-five"
       }
     },
     {
@@ -102,9 +102,9 @@
       "defaultValue": 0.0,
       "result": {
         "value": 0.5,
-        "variant": "half",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "half"
       }
     },
     {
@@ -119,9 +119,9 @@
             "green"
           ]
         },
-        "variant": "object-a",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "object-a"
       }
     }
   ],

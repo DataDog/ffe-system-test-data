@@ -25,7 +25,7 @@ ffe-system-test-data/
 ├── ufc-config.json          # Master flag configuration (UFC format)
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
-└── precomputed/
+└── precomputed-assignments/
     ├── README.md            # Precomputed assignment fixture format
     └── cases/*.json         # Client-side precompute response fixtures
 ```
@@ -109,14 +109,40 @@ The shared fixtures intentionally exclude SDK-specific fields such as `variant` 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
 - **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
 
-### Precomputed Assignment Fixtures (`precomputed/cases/*.json`)
+### Precomputed Assignment Fixtures (`precomputed-assignments/cases/*.json`)
 
 Precomputed fixtures cover SDKs that consume Datadog's
 `/precompute-assignments` API instead of evaluating UFC locally. Each case
 contains the context, mocked precompute response, typed evaluations to run, and
 expected exposure/flagevaluation emission counts.
 
-See [precomputed/README.md](precomputed/README.md) for the schema.
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Fixture identifier (matches filename stem) |
+| `description` | string | Human-readable description of what the fixture covers |
+| `context` | object | Evaluation context: `targetingKey` (string) and `attributes` (object) |
+| `response` | object | Full precomputed-assignments JSON:API envelope served by the mock CDN |
+| `skipForSdks` | string[] | SDK platforms that skip this entire fixture (e.g. `["web"]`) |
+| `skipReason` | string | Required whenever `skipForSdks` is present |
+| `evaluations` | array | Ordered list of typed flag evaluations to run |
+| `evaluations[].flag` | string | Flag key to evaluate |
+| `evaluations[].variationType` | string | `boolean`, `string`, `integer`, `float`, or `object` |
+| `evaluations[].defaultValue` | any | Default value passed to the OpenFeature client |
+| `evaluations[].result.value` | any | Expected flag value |
+| `evaluations[].result.variantKey` | string? | Expected variation key |
+| `evaluations[].result.reason` | string? | Expected OpenFeature reason code |
+| `evaluations[].result.errorCode` | string? | Expected error code; presence implies evaluation error |
+| `evaluations[].skipForSdks` | string[] | Skip this evaluation for listed platforms |
+| `evaluations[].skipReason` | string | Required whenever `skipForSdks` is present on an evaluation |
+| `expectedEmissions.exposures` | int | Expected exposure event count at `/api/v2/exposures` |
+| `expectedEmissions.flagevaluationEvents` | int | Expected flagevaluation event count at `/api/v2/flagevaluation` |
+| `expectedEmissions.overrides` | array? | Per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationEvents": M}]` |
+| `expectedEvents.exposures` | array? | Field-level matchers for exposure events |
+| `expectedEvents.flagevaluations` | array? | Field-level matchers for flagevaluation events |
+| `expectedEvents.*.skipForSdks` | string[]? | Skip this matcher for listed platforms |
+| `expectedEvents.*.skipReason` | string? | Required whenever `skipForSdks` is present on a matcher |
+
+See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
 
 ## Evaluation Cases
 

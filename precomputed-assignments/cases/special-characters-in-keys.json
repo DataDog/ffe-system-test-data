@@ -52,9 +52,9 @@
       "defaultValue": false,
       "result": {
         "value": true,
-        "variant": "on",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "on"
       }
     },
     {
@@ -63,9 +63,9 @@
       "defaultValue": "no",
       "result": {
         "value": "yes",
-        "variant": "active",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "active"
       }
     },
     {
@@ -74,9 +74,9 @@
       "defaultValue": 0,
       "result": {
         "value": 100,
-        "variant": "v2-val",
         "reason": "DEFAULT",
-        "error": null
+        "errorCode": null,
+        "variantKey": "v2-val"
       }
     },
     {
@@ -85,9 +85,9 @@
       "defaultValue": 0.0,
       "result": {
         "value": 2.718,
-        "variant": "mixed-val",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "mixed-val"
       }
     }
   ],

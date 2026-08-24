@@ -1,4 +1,4 @@
-# Precomputed Assignment Fixtures
+# Precomputed Assignment Fixtures (`precomputed-assignments/`)
 
 These fixtures cover the Datadog precompute assignment API consumed by mobile
 and browser SDKs that do not run the full UFC evaluator locally.

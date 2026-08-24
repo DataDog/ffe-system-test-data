@@ -37,9 +37,9 @@
       "defaultValue": false,
       "result": {
         "value": true,
-        "variant": "on",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "on"
       }
     },
     {
@@ -48,9 +48,9 @@
       "defaultValue": true,
       "result": {
         "value": false,
-        "variant": "off",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "off"
       }
     }
   ],
@@ -61,7 +61,9 @@
   },
   "expectedEvents": {
     "exposures": [
-      {"serial_id": 340132}
+      {
+        "serial_id": 340132
+      }
     ]
   }
 }

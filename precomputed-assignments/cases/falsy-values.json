@@ -60,9 +60,9 @@
       "defaultValue": true,
       "result": {
         "value": false,
-        "variant": "off",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "off"
       }
     },
     {
@@ -71,9 +71,9 @@
       "defaultValue": 99,
       "result": {
         "value": 0,
-        "variant": "zero",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "zero"
       }
     },
     {
@@ -82,9 +82,9 @@
       "defaultValue": 1.0,
       "result": {
         "value": 0.0,
-        "variant": "zero-f",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "zero-f"
       }
     },
     {
@@ -93,20 +93,22 @@
       "defaultValue": "non-empty",
       "result": {
         "value": "",
-        "variant": "empty",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "empty"
       }
     },
     {
       "flag": "fixture.falsy.object",
       "variationType": "object",
-      "defaultValue": {"fallback": true},
+      "defaultValue": {
+        "fallback": true
+      },
       "result": {
         "value": {},
-        "variant": "empty-obj",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "empty-obj"
       }
     }
   ],

@@ -46,9 +46,9 @@
       "defaultValue": false,
       "result": {
         "value": true,
-        "variant": "on",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "on"
       }
     },
     {
@@ -57,9 +57,9 @@
       "defaultValue": "default",
       "result": {
         "value": "hello",
-        "variant": "greeting",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "greeting"
       }
     },
     {
@@ -68,9 +68,9 @@
       "defaultValue": 0,
       "result": {
         "value": 10,
-        "variant": "limit-ten",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "limit-ten"
       }
     }
   ],

@@ -19,9 +19,9 @@
       "defaultValue": false,
       "result": {
         "value": false,
-        "variant": null,
         "reason": null,
-        "error": "flagNotFound"
+        "errorCode": "flagNotFound",
+        "variantKey": null
       }
     },
     {
@@ -30,9 +30,9 @@
       "defaultValue": "fallback",
       "result": {
         "value": "fallback",
-        "variant": null,
         "reason": null,
-        "error": "flagNotFound"
+        "errorCode": "flagNotFound",
+        "variantKey": null
       }
     },
     {
@@ -41,9 +41,9 @@
       "defaultValue": 0,
       "result": {
         "value": 0,
-        "variant": null,
         "reason": null,
-        "error": "flagNotFound"
+        "errorCode": "flagNotFound",
+        "variantKey": null
       }
     }
   ],

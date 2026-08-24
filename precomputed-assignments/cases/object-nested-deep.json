@@ -18,7 +18,10 @@
                 "level2": {
                   "level3": {
                     "enabled": true,
-                    "tags": ["alpha", "beta"],
+                    "tags": [
+                      "alpha",
+                      "beta"
+                    ],
                     "threshold": 0.95
                   }
                 },
@@ -47,7 +50,10 @@
             "level2": {
               "level3": {
                 "enabled": true,
-                "tags": ["alpha", "beta"],
+                "tags": [
+                  "alpha",
+                  "beta"
+                ],
                 "threshold": 0.95
               }
             },
@@ -58,9 +64,9 @@
             "empty": {}
           }
         },
-        "variant": "deep-config",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "deep-config"
       }
     }
   ],
