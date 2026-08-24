@@ -1,6 +1,6 @@
 {
   "name": "type-mismatch-all-types",
-  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error.",
+  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent — SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
   "context": {
     "targetingKey": "mismatch-user",
     "attributes": {}

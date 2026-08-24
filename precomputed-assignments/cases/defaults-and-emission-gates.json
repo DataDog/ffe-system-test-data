@@ -70,7 +70,7 @@
       "result": {
         "value": false,
         "reason": null,
-        "errorCode": "flagNotFound",
+        "errorCode": "typeMismatch",
         "variantKey": null
       }
     },
