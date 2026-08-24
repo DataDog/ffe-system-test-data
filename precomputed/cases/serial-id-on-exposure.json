@@ -1,6 +1,6 @@
 {
   "name": "serial-id-on-exposure",
-  "description": "Validates that serialId from the precomputed assignment is forwarded as serial_id on the exposure event. Requires @datadog/openfeature-browser > 1.2.5 (merged in openfeature-js-client#368, not yet released).",
+  "description": "Validates that serialId from the precomputed assignment is forwarded as serial_id on the exposure event.",
   "context": {
     "targetingKey": "serial-id-test-user",
     "attributes": {}
@@ -63,7 +63,5 @@
     "exposures": [
       {"serial_id": 340132}
     ]
-  },
-  "skipForSdks": ["web"],
-  "skipForSdksReason": "@datadog/openfeature-browser does not yet forward serialId onto exposure events. Fix merged in openfeature-js-client#368; re-enable when @datadog/openfeature-browser > 1.2.5 is installed."
+  }
 }
