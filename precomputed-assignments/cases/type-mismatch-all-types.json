@@ -62,9 +62,9 @@
       "defaultValue": "fallback",
       "result": {
         "value": "fallback",
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -73,9 +73,9 @@
       "defaultValue": -1,
       "result": {
         "value": -1,
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -84,9 +84,9 @@
       "defaultValue": 0.0,
       "result": {
         "value": 0.0,
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -95,9 +95,9 @@
       "defaultValue": false,
       "result": {
         "value": false,
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -106,9 +106,9 @@
       "defaultValue": "none",
       "result": {
         "value": "none",
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     }
   ],
@@ -120,5 +120,5 @@
   "skipForSdks": [
     "web"
   ],
-  "skipForSdksReason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
+  "skipReason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
 }

@@ -44,9 +44,9 @@
       "defaultValue": true,
       "result": {
         "value": true,
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -55,9 +55,9 @@
       "defaultValue": "safe",
       "result": {
         "value": "safe",
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -70,9 +70,9 @@
         "value": {
           "fallback": true
         },
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     }
   ],
@@ -84,5 +84,5 @@
   "skipForSdks": [
     "web"
   ],
-  "skipForSdksReason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
+  "skipReason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
 }

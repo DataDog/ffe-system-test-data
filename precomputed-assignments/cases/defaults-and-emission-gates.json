@@ -47,9 +47,9 @@
       "defaultValue": false,
       "result": {
         "value": true,
-        "variant": "silent-on",
         "reason": "TARGETING_MATCH",
-        "error": null
+        "errorCode": null,
+        "variantKey": "silent-on"
       }
     },
     {
@@ -58,9 +58,9 @@
       "defaultValue": false,
       "result": {
         "value": false,
-        "variant": null,
         "reason": null,
-        "error": "typeMismatch"
+        "errorCode": "typeMismatch",
+        "variantKey": null
       }
     },
     {
@@ -69,9 +69,9 @@
       "defaultValue": false,
       "result": {
         "value": false,
-        "variant": null,
         "reason": null,
-        "error": "flagNotFound"
+        "errorCode": "flagNotFound",
+        "variantKey": null
       }
     },
     {
@@ -80,9 +80,9 @@
       "defaultValue": "fallback",
       "result": {
         "value": "fallback",
-        "variant": null,
         "reason": null,
-        "error": "flagNotFound"
+        "errorCode": "flagNotFound",
+        "variantKey": null
       }
     }
   ],
