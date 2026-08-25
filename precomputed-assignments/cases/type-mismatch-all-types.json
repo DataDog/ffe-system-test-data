@@ -1,6 +1,6 @@
 {
   "name": "type-mismatch-all-types",
-  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent — SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
+  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent \u2014 SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
   "context": {
     "targetingKey": "mismatch-user",
     "attributes": {}
@@ -88,7 +88,9 @@
         "errorCode": "typeMismatch",
         "variantKey": null
       },
-      "skipForSdks": ["web"],
+      "skipForSdks": [
+        "web"
+      ],
       "skipReason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations."
     },
     {
@@ -123,7 +125,7 @@
         "platform": "web",
         "exposures": 0,
         "flagevaluationRequests": 1,
-        "flagevaluationEvents": 4
+        "flagevaluationEvents": 0
       }
     ]
   }
