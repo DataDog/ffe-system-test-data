@@ -87,7 +87,9 @@
         "reason": null,
         "errorCode": "typeMismatch",
         "variantKey": null
-      }
+      },
+      "skipForSdks": ["web"],
+      "skipReason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations."
     },
     {
       "flag": "fixture.mismatch.float-as-bool",
@@ -115,10 +117,14 @@
   "expectedEmissions": {
     "exposures": 0,
     "flagevaluationRequests": 1,
-    "flagevaluationEvents": 5
-  },
-  "skipForSdks": [
-    "web"
-  ],
-  "skipReason": "Web browser SDK uses getNumberDetails for both integer and float evaluations (JavaScript does not distinguish int from float). Cross-numeric-type evaluations do not produce typeMismatch on web."
+    "flagevaluationEvents": 5,
+    "overrides": [
+      {
+        "platform": "web",
+        "exposures": 0,
+        "flagevaluationRequests": 1,
+        "flagevaluationEvents": 4
+      }
+    ]
+  }
 }
