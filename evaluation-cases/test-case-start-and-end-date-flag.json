@@ -7,7 +7,7 @@
     "defaultValue": "unknown",
     "flag": "start-and-end-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "current"
     },
     "targetingKey": "alice",
@@ -21,7 +21,7 @@
     "defaultValue": "unknown",
     "flag": "start-and-end-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "current"
     },
     "targetingKey": "bob",
@@ -34,7 +34,7 @@
     "defaultValue": "unknown",
     "flag": "start-and-end-date-test",
     "result": {
-      "reason": "STATIC",
+      "reason": "DEFAULT",
       "value": "current"
     },
     "targetingKey": "charlie",
