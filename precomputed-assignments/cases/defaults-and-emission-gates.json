@@ -89,6 +89,14 @@
   "expectedEmissions": {
     "exposures": 0,
     "flagevaluationRequests": 1,
-    "flagevaluationEvents": 4
+    "flagevaluationEvents": 4,
+    "overrides": [
+      {
+        "platform": "web",
+        "exposures": 0,
+        "flagevaluationRequests": 1,
+        "flagevaluationEvents": 1
+      }
+    ]
   }
 }
