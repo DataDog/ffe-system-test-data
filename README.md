@@ -27,7 +27,7 @@ ffe-system-test-data/
 │   └── test-*.json          # Evaluation test case files
 └── precomputed-assignments/
     ├── README.md            # Precomputed assignment fixture format
-    └── cases/*.json         # Client-side precompute response fixtures
+    └── cases/*.json         # Precomputed assignment test fixtures
 ```
 
 ## Usage
