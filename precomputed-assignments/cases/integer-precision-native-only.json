@@ -41,5 +41,6 @@
     "exposures": 1,
     "flagevaluationRequests": 1,
     "flagevaluationEvents": 1
-  }
+  },
+  "skipReason": "JavaScript cannot represent integers beyond 2^53-1 without loss of precision. Native SDKs (iOS, Android, etc.) have true 64-bit integer types. This fixture uses values outside safe JS integer range."
 }

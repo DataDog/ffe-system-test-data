@@ -48,10 +48,31 @@
   "expectedEmissions": {
     "exposures": 1,
     "flagevaluationRequests": 1,
-    "flagevaluationEvents": 2
+    "flagevaluationEvents": 2,
+    "overrides": [
+      {
+        "platform": "web",
+        "exposures": 1,
+        "flagevaluationRequests": 1,
+        "flagevaluationEvents": 1
+      }
+    ]
   },
-  "skipForSdks": [
-    "web"
-  ],
-  "skipReason": "Web browser SDK's FlagEvaluationAggregator deduplicates: evaluating the same flag twice produces one event with evaluation_count=2, not two events. Fixture expects flagevaluationEvents=2 which is correct for non-aggregating platforms."
+  "skipReason": "Web browser SDK's FlagEvaluationAggregator aggregates duplicate evaluations into one event with evaluation_count=2. The web override (flagevaluationEvents=1) and expectedEvents matcher verify this behaviour. Non-aggregating platforms emit two separate events.",
+  "expectedEvents": {
+    "flagevaluations": [
+      {
+        "evaluation_count": 2,
+        "skipForSdks": [
+          "ios",
+          "android",
+          "react-native",
+          "flutter",
+          "maui",
+          "kotlin-multiplatform",
+          "electron"
+        ]
+      }
+    ]
+  }
 }
