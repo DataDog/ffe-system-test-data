@@ -62,9 +62,7 @@
   "expectedEvents": {
     "exposures": [
       {
-        "serial_id": 340132,
-        "skipForSdks": ["web"],
-        "skipReason": "Browser SDK does not yet forward serialId from the precomputed response to the exposure payload"
+        "serial_id": 340132
       }
     ]
   }
