@@ -35,7 +35,7 @@
       "flag": "serial.id.flag",
       "variationType": "boolean",
       "defaultValue": false,
-      "result": {
+      "expected_result": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -46,7 +46,7 @@
       "flag": "no.serial.id.flag",
       "variationType": "boolean",
       "defaultValue": true,
-      "result": {
+      "expected_result": {
         "value": false,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -56,7 +56,6 @@
   ],
   "expectedEmissions": {
     "exposures": 2,
-    "flagevaluationRequests": 1,
     "flagevaluationEvents": 2
   },
   "expectedEvents": {

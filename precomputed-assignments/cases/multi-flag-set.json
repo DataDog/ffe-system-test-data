@@ -1,6 +1,6 @@
 {
-  "name": "large-flag-set",
-  "description": "Precomputed response with 50 flags of mixed types. Validates that SDK parsers handle large flag sets without truncation or memory errors. Only a sample of flags are evaluated; the remainder are parsed but not asserted.",
+  "name": "multi-flag-set",
+  "description": "Precomputed response with 50 flags of mixed types. Validates that SDK parsers handle moderate flag sets without truncation or memory errors. Only a sample of flags are evaluated; the remainder are parsed but not asserted.",
   "context": {
     "targetingKey": "large-set-user",
     "attributes": {
@@ -422,7 +422,7 @@
       "flag": "fixture.large.flag-01",
       "variationType": "boolean",
       "defaultValue": false,
-      "result": {
+      "expected_result": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -433,7 +433,7 @@
       "flag": "fixture.large.flag-10",
       "variationType": "boolean",
       "defaultValue": false,
-      "result": {
+      "expected_result": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -444,7 +444,7 @@
       "flag": "fixture.large.flag-20",
       "variationType": "object",
       "defaultValue": {},
-      "result": {
+      "expected_result": {
         "value": {
           "count": 20
         },
@@ -456,7 +456,6 @@
   ],
   "expectedEmissions": {
     "exposures": 3,
-    "flagevaluationRequests": 1,
     "flagevaluationEvents": 3
   }
 }

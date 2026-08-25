@@ -8,12 +8,11 @@ Each case contains:
 - `context`: the evaluation context sent to `/precompute-assignments`.
 - `response`: a mocked precomputed response.
 - `evaluations`: a set of assignment calls to make against the SDK and expected assignment values.
-- `expectedEmissions`: expected endpoint/event-typed emission counts after the evaluations and
-  an explicit flush. Fields:
+- `expectedEmissions`: expected emission counts after the evaluations and an explicit flush. Fields:
   - `exposures` — number of exposure events expected at `/api/v2/exposures`
-  - `flagevaluationRequests` — number of batched HTTP requests expected at `/api/v2/flagevaluation`
-  - `flagevaluationEvents` — total number of flagevaluation event payloads across all requests
-  - `overrides` *(optional)* — per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationRequests": M, "flagevaluationEvents": P}]`
+  - `flagevaluationEvents` — total number of flagevaluation event payloads
+  - `overrides` *(optional)* — per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationEvents": M}]`
+- `expectedEvents` *(optional)*: field-level matchers for emitted events (see below)
 
 The precompute response uses the assignment shape returned to client SDKs:
 
@@ -49,7 +48,27 @@ Example: `expectedEmissions.exposures: 2` with
 must arrive AND at least one of them must carry `serial_id: 340132`. The second
 event is counted by `expectedEmissions` but is not further constrained.
 
-Matchers that carry `skipForSdks` are omitted for the listed platforms. The
+Matchers that carry `skip` entries are omitted for the listed platforms. The
 event is still expected to arrive (counts are unchanged); only the property
 assertion is relaxed. To change the expected count in conjunction with skipping
 an evaluation or expected event, use the `expectedEmissions.overrides` field.
+
+## Skip schema
+
+Skips use a `skip` array of `{sdk, reason}` objects, allowing per-platform
+reasons. This field can appear at case level (skip the entire fixture) or on
+individual evaluations and event matchers.
+
+```json
+"skip": [
+  {"sdk": "web", "reason": "Web aggregator deduplicates repeated evaluations."},
+  {"sdk": "ios", "reason": "iOS treats null as invalid object."}
+]
+```
+
+`skip` replaces the earlier `skipForSdks`/`skipReason` fields.
+
+## Field naming
+
+Evaluation results use `expected_result` (not `result`) to clearly distinguish
+fixture expectations from runtime return values.

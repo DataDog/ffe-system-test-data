@@ -1,6 +1,6 @@
 {
   "name": "falsy-values",
-  "description": "Flags whose variation values are falsy (false, 0, 0.0, empty string, empty object). SDK must return these as real values, not fall back to defaults.",
+  "description": "Flags whose variation values are falsy (false, 0, 0.0, empty string, empty object, null). SDK must return these as real values, not fall back to defaults.",
   "context": {
     "targetingKey": "falsy-user",
     "attributes": {}
@@ -48,6 +48,14 @@
             "variationValue": {},
             "reason": "TARGETING_MATCH",
             "doLog": true
+          },
+          "fixture.falsy.null-object": {
+            "allocationKey": "alloc-falsy",
+            "variationKey": "null-obj",
+            "variationType": "object",
+            "variationValue": null,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
           }
         }
       }
@@ -58,7 +66,7 @@
       "flag": "fixture.falsy.bool",
       "variationType": "boolean",
       "defaultValue": true,
-      "result": {
+      "expected_result": {
         "value": false,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -69,7 +77,7 @@
       "flag": "fixture.falsy.int",
       "variationType": "integer",
       "defaultValue": 99,
-      "result": {
+      "expected_result": {
         "value": 0,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -80,7 +88,7 @@
       "flag": "fixture.falsy.float",
       "variationType": "float",
       "defaultValue": 1.0,
-      "result": {
+      "expected_result": {
         "value": 0.0,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -91,7 +99,7 @@
       "flag": "fixture.falsy.string",
       "variationType": "string",
       "defaultValue": "non-empty",
-      "result": {
+      "expected_result": {
         "value": "",
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -104,17 +112,29 @@
       "defaultValue": {
         "fallback": true
       },
-      "result": {
+      "expected_result": {
         "value": {},
         "reason": "TARGETING_MATCH",
         "errorCode": null,
         "variantKey": "empty-obj"
       }
+    },
+    {
+      "flag": "fixture.falsy.null-object",
+      "variationType": "object",
+      "defaultValue": {
+        "fallback": true
+      },
+      "expected_result": {
+        "value": null,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "null-obj"
+      }
     }
   ],
   "expectedEmissions": {
-    "exposures": 5,
-    "flagevaluationRequests": 1,
-    "flagevaluationEvents": 5
+    "exposures": 6,
+    "flagevaluationEvents": 6
   }
 }

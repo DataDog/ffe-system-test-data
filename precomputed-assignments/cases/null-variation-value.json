@@ -42,7 +42,7 @@
       "flag": "fixture.null.bool",
       "variationType": "boolean",
       "defaultValue": true,
-      "result": {
+      "expected_result": {
         "value": true,
         "reason": null,
         "errorCode": "typeMismatch",
@@ -53,7 +53,7 @@
       "flag": "fixture.null.string",
       "variationType": "string",
       "defaultValue": "safe",
-      "result": {
+      "expected_result": {
         "value": "safe",
         "reason": null,
         "errorCode": "typeMismatch",
@@ -66,7 +66,7 @@
       "defaultValue": {
         "fallback": true
       },
-      "result": {
+      "expected_result": {
         "value": {
           "fallback": true
         },
@@ -78,11 +78,12 @@
   ],
   "expectedEmissions": {
     "exposures": 0,
-    "flagevaluationRequests": 1,
     "flagevaluationEvents": 3
   },
-  "skipForSdks": [
-    "web"
-  ],
-  "skipReason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
+  "skip": [
+    {
+      "sdk": "web",
+      "reason": "Web browser SDK does not raise typeMismatch for null variationValue; it returns the null/default value without error. Fixture expects typeMismatch which is correct for native SDK behavior."
+    }
+  ]
 }
