@@ -8,8 +8,12 @@ Each case contains:
 - `context`: the evaluation context sent to `/precompute-assignments`.
 - `response`: a JSON:API-style precompute response.
 - `evaluations`: typed client calls to run against the response.
-- `expectedEmissions`: expected exposure and flagevaluation HTTP emissions after
-  the evaluations and an explicit flush.
+- `expectedEmissions`: expected HTTP emission counts after the evaluations and
+  an explicit flush. Fields:
+  - `exposures` — number of exposure events expected at `/api/v2/exposures`
+  - `flagevaluationRequests` — number of batched HTTP requests expected at `/api/v2/flagevaluation`
+  - `flagevaluationEvents` — total number of flagevaluation event payloads across all requests
+  - `overrides` *(optional)* — per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationRequests": M, "flagevaluationEvents": P}]`
 
 The precompute response uses the assignment shape returned to client SDKs:
 
@@ -21,7 +25,7 @@ The precompute response uses the assignment shape returned to client SDKs:
         "flag-key": {
           "allocationKey": "allocation-a",
           "variationKey": "variation-a",
-          "variationType": "boolean|string|integer|float|object",
+          "variationType": "boolean",
           "variationValue": true,
           "reason": "TARGETING_MATCH",
           "doLog": true
@@ -31,6 +35,10 @@ The precompute response uses the assignment shape returned to client SDKs:
   }
 }
 ```
+
+`variationType` is an open string. Known values are `boolean`, `string`,
+`integer`, `float`, and `object`. Clients must treat any unrecognized
+`variationType` as a type mismatch error and return the caller's default value.
 
 Downstream SDKs should validate typed values, details metadata, persistence
 behavior, exposure emission gates, and flagevaluation aggregation using these
