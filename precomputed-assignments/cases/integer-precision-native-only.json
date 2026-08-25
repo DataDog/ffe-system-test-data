@@ -1,9 +1,6 @@
 {
   "name": "integer-precision-native-only",
   "description": "Validates that native SDKs preserve integer values outside JavaScript's safe integer range (Number.MAX_SAFE_INTEGER = 2^53-1). Web browsers represent all numbers as IEEE 754 doubles and lose precision on integers larger than 2^53, so this fixture is skipped for the web SDK.",
-  "skipForSdks": [
-    "web"
-  ],
   "context": {
     "targetingKey": "precomputed-user",
     "attributes": {}
@@ -29,7 +26,7 @@
       "flag": "fixture.large-int",
       "variationType": "integer",
       "defaultValue": 0,
-      "result": {
+      "expected_result": {
         "value": 9007199254740993,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -39,8 +36,12 @@
   ],
   "expectedEmissions": {
     "exposures": 1,
-    "flagevaluationRequests": 1,
     "flagevaluationEvents": 1
   },
-  "skipReason": "JavaScript cannot represent integers beyond 2^53-1 without loss of precision. Native SDKs (iOS, Android, etc.) have true 64-bit integer types. This fixture uses values outside safe JS integer range."
+  "skip": [
+    {
+      "sdk": "web",
+      "reason": "JavaScript cannot represent integers beyond 2^53-1 without loss of precision. Native SDKs (iOS, Android, etc.) have true 64-bit integer types. This fixture uses values outside safe JS integer range."
+    }
+  ]
 }

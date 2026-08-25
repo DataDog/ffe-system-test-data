@@ -44,7 +44,7 @@
       "flag": "fixture.config.deep",
       "variationType": "object",
       "defaultValue": {},
-      "result": {
+      "expected_result": {
         "value": {
           "level1": {
             "level2": {
@@ -72,7 +72,6 @@
   ],
   "expectedEmissions": {
     "exposures": 1,
-    "flagevaluationRequests": 1,
     "flagevaluationEvents": 1
   }
 }

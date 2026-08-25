@@ -127,25 +127,22 @@ expected exposure/flagevaluation emission counts.
 | `description` | string | Human-readable description of what the fixture covers |
 | `context` | object | Evaluation context: `targetingKey` (string) and `attributes` (object) |
 | `response` | object | Full precomputed-assignments JSON:API envelope served by the mock CDN |
-| `skipForSdks` | string[] | SDK platforms that skip this entire fixture (e.g. `["web"]`) |
-| `skipReason` | string | Required whenever `skipForSdks` is present |
+| `skip` | array? | Per-SDK skip entries: `[{"sdk": "web", "reason": "..."}]` — skips entire fixture |
 | `evaluations` | array | Ordered list of typed flag evaluations to run |
 | `evaluations[].flag` | string | Flag key to evaluate |
 | `evaluations[].variationType` | string | `boolean`, `string`, `integer`, `float`, or `object` |
 | `evaluations[].defaultValue` | any | Default value passed to the OpenFeature client |
-| `evaluations[].result.value` | any | Expected flag value |
-| `evaluations[].result.variantKey` | string? | Expected variation key |
-| `evaluations[].result.reason` | string? | Expected OpenFeature reason code |
-| `evaluations[].result.errorCode` | string? | Expected error code; presence implies evaluation error |
-| `evaluations[].skipForSdks` | string[] | Skip this evaluation for listed platforms |
-| `evaluations[].skipReason` | string | Required whenever `skipForSdks` is present on an evaluation |
+| `evaluations[].expected_result.value` | any | Expected flag value |
+| `evaluations[].expected_result.variantKey` | string? | Expected variation key |
+| `evaluations[].expected_result.reason` | string? | Expected OpenFeature reason code |
+| `evaluations[].expected_result.errorCode` | string? | Expected error code; presence implies evaluation error |
+| `evaluations[].skip` | array? | Per-SDK skip entries for this evaluation |
 | `expectedEmissions.exposures` | int | Expected exposure event count at `/api/v2/exposures` |
-| `expectedEmissions.flagevaluationEvents` | int | Expected flagevaluation event count at `/api/v2/flagevaluation` |
+| `expectedEmissions.flagevaluationEvents` | int | Expected flagevaluation event count |
 | `expectedEmissions.overrides` | array? | Per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationEvents": M}]` |
-| `expectedEvents.exposures` | array? | Field-level matchers for exposure events |
-| `expectedEvents.flagevaluations` | array? | Field-level matchers for flagevaluation events |
-| `expectedEvents.*.skipForSdks` | string[]? | Skip this matcher for listed platforms |
-| `expectedEvents.*.skipReason` | string? | Required whenever `skipForSdks` is present on a matcher |
+| `expectedEvents` | object? | Field-level matchers for emitted events (subset match) |
+| `expectedEvents.exposures` | array? | Matchers for exposure events |
+| `expectedEvents.*.skip` | array? | Per-SDK skip entries for this matcher |
 
 See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
 
