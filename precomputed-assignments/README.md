@@ -1,14 +1,14 @@
 # Precomputed Assignment Fixtures (`precomputed-assignments/`)
 
 These fixtures cover the Datadog precompute assignment API consumed by mobile
-and browser SDKs that do not run the full UFC evaluator locally.
+and browser SDKs which do not run the evaluator locally.
 
 Each case contains:
 
 - `context`: the evaluation context sent to `/precompute-assignments`.
-- `response`: a JSON:API-style precompute response.
-- `evaluations`: typed client calls to run against the response.
-- `expectedEmissions`: expected HTTP emission counts after the evaluations and
+- `response`: a mocked precomputed response.
+- `evaluations`: a set of assignment calls to make against the SDK and expected assignment values.
+- `expectedEmissions`: expected endpoint/event-typed emission counts after the evaluations and
   an explicit flush. Fields:
   - `exposures` — number of exposure events expected at `/api/v2/exposures`
   - `flagevaluationRequests` — number of batched HTTP requests expected at `/api/v2/flagevaluation`
@@ -36,13 +36,6 @@ The precompute response uses the assignment shape returned to client SDKs:
 }
 ```
 
-`variationType` is an open string. Known values are `boolean`, `string`,
-`integer`, `float`, and `object`. Clients must treat any unrecognized
-`variationType` as a type mismatch error and return the caller's default value.
-
-Downstream SDKs should validate typed values, details metadata, persistence
-behavior, exposure emission gates, and flagevaluation aggregation using these
-fixtures. Live Datadog credentials are not required.
 
 ## expectedEvents — subset match contract
 
@@ -58,4 +51,5 @@ event is counted by `expectedEmissions` but is not further constrained.
 
 Matchers that carry `skipForSdks` are omitted for the listed platforms. The
 event is still expected to arrive (counts are unchanged); only the property
-assertion is relaxed.
+assertion is relaxed. To change the expected count in conjunction with skipping
+an evaluation or expected event, use the `expectedEmissions.overrides` field.
