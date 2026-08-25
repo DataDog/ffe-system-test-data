@@ -4133,6 +4133,78 @@
         }
       ]
     },
+    "zero-total-shards-flag": {
+      "key": "zero-total-shards-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].totalShards must be greater than zero. SDKs must remove this flag rather than evaluating it.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        }
+      },
+      "allocations": [
+        {
+          "key": "malformed-shard-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": [
+                {
+                  "salt": "zero-total-shards-flag",
+                  "totalShards": 0,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "negative-total-shards-flag": {
+      "key": "negative-total-shards-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "This flag is intentionally UFC-schema-invalid: split.shards[].totalShards must be unsigned. SDKs must remove this flag rather than evaluating it.",
+      "variations": {
+        "trap": {
+          "key": "trap",
+          "value": "trap"
+        }
+      },
+      "allocations": [
+        {
+          "key": "malformed-shard-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "trap",
+              "shards": [
+                {
+                  "salt": "negative-total-shards-flag",
+                  "totalShards": -1,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "negative-shard-range-start-flag": {
       "key": "negative-shard-range-start-flag",
       "enabled": true,

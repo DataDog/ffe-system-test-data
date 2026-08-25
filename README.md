@@ -82,7 +82,7 @@ Each evaluation case uses a universal schema with the following fields:
 | `attributes` | object | Additional context attributes for targeting rules |
 | `result.value` | any | The expected evaluation result value |
 | `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
-| `result.errorCode` | string | Optional OpenFeature error code, such as `PARSE_ERROR` or `FLAG_NOT_FOUND` |
+| `result.errorCode` | string | Required when `result.reason` is `ERROR`; omitted otherwise |
 
 Example:
 
