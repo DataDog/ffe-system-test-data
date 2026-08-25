@@ -45,7 +45,7 @@
       "expected_result": {
         "value": true,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -56,7 +56,7 @@
       "expected_result": {
         "value": "safe",
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -71,7 +71,7 @@
           "fallback": true
         },
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     }

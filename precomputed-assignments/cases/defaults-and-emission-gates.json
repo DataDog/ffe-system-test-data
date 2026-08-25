@@ -59,7 +59,7 @@
       "expected_result": {
         "value": false,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -70,7 +70,7 @@
       "expected_result": {
         "value": false,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -81,7 +81,7 @@
       "expected_result": {
         "value": "fallback",
         "reason": null,
-        "errorCode": "flagNotFound",
+        "errorCode": "FLAG_NOT_FOUND",
         "variantKey": null
       }
     }

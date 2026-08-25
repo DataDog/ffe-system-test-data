@@ -63,7 +63,7 @@
       "expected_result": {
         "value": "fallback",
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -74,7 +74,7 @@
       "expected_result": {
         "value": -1,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -85,7 +85,7 @@
       "expected_result": {
         "value": 0.0,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       },
       "skip": [
@@ -102,7 +102,7 @@
       "expected_result": {
         "value": false,
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     },
@@ -113,7 +113,7 @@
       "expected_result": {
         "value": "none",
         "reason": null,
-        "errorCode": "typeMismatch",
+        "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
     }
