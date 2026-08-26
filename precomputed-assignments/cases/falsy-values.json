@@ -58,7 +58,7 @@
       "flag": "fixture.falsy.bool",
       "variationType": "boolean",
       "defaultValue": true,
-      "expected_result": {
+      "expectedResult": {
         "value": false,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -69,7 +69,7 @@
       "flag": "fixture.falsy.int",
       "variationType": "integer",
       "defaultValue": 99,
-      "expected_result": {
+      "expectedResult": {
         "value": 0,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -80,7 +80,7 @@
       "flag": "fixture.falsy.float",
       "variationType": "float",
       "defaultValue": 1.0,
-      "expected_result": {
+      "expectedResult": {
         "value": 0.0,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -91,7 +91,7 @@
       "flag": "fixture.falsy.string",
       "variationType": "string",
       "defaultValue": "non-empty",
-      "expected_result": {
+      "expectedResult": {
         "value": "",
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -104,7 +104,7 @@
       "defaultValue": {
         "fallback": true
       },
-      "expected_result": {
+      "expectedResult": {
         "value": {},
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -112,8 +112,8 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 5,
-    "flagevaluationEvents": 5
+  "expectations": {
+    "exposureEventCount": 5,
+    "evaluationEventCount": 5
   }
 }

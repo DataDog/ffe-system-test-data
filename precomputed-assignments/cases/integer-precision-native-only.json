@@ -26,7 +26,7 @@
       "flag": "fixture.large-int",
       "variationType": "integer",
       "defaultValue": 0,
-      "expected_result": {
+      "expectedResult": {
         "value": 9007199254740993,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -34,14 +34,14 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 1,
-    "flagevaluationEvents": 1
-  },
   "skip": [
     {
       "sdk": "web",
       "reason": "JavaScript cannot represent integers beyond 2^53-1 without loss of precision. Native SDKs (iOS, Android, etc.) have true 64-bit integer types. This fixture uses values outside safe JS integer range."
     }
-  ]
+  ],
+  "expectations": {
+    "exposureEventCount": 1,
+    "evaluationEventCount": 1
+  }
 }

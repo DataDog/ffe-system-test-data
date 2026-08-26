@@ -60,7 +60,7 @@
       "flag": "fixture.mismatch.bool-as-string",
       "variationType": "string",
       "defaultValue": "fallback",
-      "expected_result": {
+      "expectedResult": {
         "value": "fallback",
         "reason": null,
         "errorCode": "TYPE_MISMATCH",
@@ -71,7 +71,7 @@
       "flag": "fixture.mismatch.string-as-int",
       "variationType": "integer",
       "defaultValue": -1,
-      "expected_result": {
+      "expectedResult": {
         "value": -1,
         "reason": null,
         "errorCode": "TYPE_MISMATCH",
@@ -82,24 +82,24 @@
       "flag": "fixture.mismatch.int-as-float",
       "variationType": "float",
       "defaultValue": 0.0,
-      "expected_result": {
-        "value": 0.0,
-        "reason": null,
-        "errorCode": "TYPE_MISMATCH",
-        "variantKey": null
-      },
       "skip": [
         {
           "sdk": "web",
           "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations."
         }
-      ]
+      ],
+      "expectedResult": {
+        "value": 0.0,
+        "reason": null,
+        "errorCode": "TYPE_MISMATCH",
+        "variantKey": null
+      }
     },
     {
       "flag": "fixture.mismatch.float-as-bool",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": false,
         "reason": null,
         "errorCode": "TYPE_MISMATCH",
@@ -110,7 +110,7 @@
       "flag": "fixture.mismatch.object-as-string",
       "variationType": "string",
       "defaultValue": "none",
-      "expected_result": {
+      "expectedResult": {
         "value": "none",
         "reason": null,
         "errorCode": "TYPE_MISMATCH",
@@ -118,14 +118,14 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 0,
-    "flagevaluationEvents": 5,
+  "expectations": {
+    "exposureEventCount": 0,
+    "evaluationEventCount": 5,
     "overrides": [
       {
         "platform": "web",
-        "exposures": 0,
-        "flagevaluationEvents": 0
+        "exposureEventCount": 0,
+        "evaluationEventCount": 0
       }
     ]
   }

@@ -8,11 +8,11 @@ Each case contains:
 - `context`: the evaluation context sent to `/precompute-assignments`.
 - `response`: a mocked precomputed response.
 - `evaluations`: a set of assignment calls to make against the SDK and expected assignment values.
-- `expectedEmissions`: expected emission counts after the evaluations and an explicit flush. Fields:
-  - `exposures` — number of exposure events expected at `/api/v2/exposures`
-  - `flagevaluationEvents` — total number of flagevaluation event payloads
-  - `overrides` *(optional)* — per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationEvents": M}]`
-- `expectedEvents` *(optional)*: field-level matchers for emitted events (see below)
+- `expectations`: expected outcomes after the evaluations and an explicit flush. Fields:
+  - `exposureEventCount` — number of exposure events expected at `/api/v2/exposures`
+  - `evaluationEventCount` — total number of flagevaluation event payloads
+  - `overrides` *(optional)* — per-platform count overrides: `[{"platform": "web", "exposureEventCount": N, "evaluationEventCount": M}]`
+  - `events` *(optional)* — field-level matchers for emitted events (see below)
 
 The precompute response uses the assignment shape returned to client SDKs:
 
@@ -36,22 +36,23 @@ The precompute response uses the assignment shape returned to client SDKs:
 ```
 
 
-## expectedEvents — subset match contract
+## expectations.events — subset match contract
 
-`expectedEvents` is an optional field that asserts field-level properties of
-specific emitted events. The matching contract is **subset**: each entry in
-`expectedEvents.exposures` or `expectedEvents.flagevaluations` must match at
-least one received event. Not every received event needs a corresponding entry.
+`expectations.events` is an optional field that asserts field-level properties
+of specific emitted events. The matching contract is **subset**: each entry in
+`expectations.events.exposures` or `expectations.events.flagevaluations` must
+match at least one received event. Not every received event needs a
+corresponding entry.
 
-Example: `expectedEmissions.exposures: 2` with
-`expectedEvents.exposures: [{"serial_id": 340132}]` means two exposure events
-must arrive AND at least one of them must carry `serial_id: 340132`. The second
-event is counted by `expectedEmissions` but is not further constrained.
+Example: `expectations.exposureEventCount: 2` with
+`expectations.events.exposures: [{"serial_id": 340132}]` means two exposure
+events must arrive AND at least one of them must carry `serial_id: 340132`. The
+second event is counted by `exposureEventCount` but is not further constrained.
 
 Matchers that carry `skip` entries are omitted for the listed platforms. The
 event is still expected to arrive (counts are unchanged); only the property
 assertion is relaxed. To change the expected count in conjunction with skipping
-an evaluation or expected event, use the `expectedEmissions.overrides` field.
+an evaluation or expected event, use the `expectations.overrides` field.
 
 ## Skip schema
 
@@ -61,7 +62,7 @@ reasons. This field can appear at three levels:
 - **Case level** — skip the entire fixture for a platform.
 - **Evaluation level** — skip a single evaluation within the fixture. The
   evaluation is not run, but the expected emission counts remain unchanged
-  unless `expectedEmissions.overrides` adjusts them.
+  unless `expectations.overrides` adjusts them.
 - **Event matcher level** — skip a property assertion on an emitted event.
   The event is still expected to arrive (counts unchanged); only the field
   assertion is relaxed.
@@ -77,5 +78,5 @@ reasons. This field can appear at three levels:
 
 ## Field naming
 
-Evaluation results use `expected_result` (not `result`) to clearly distinguish
-fixture expectations from runtime return values.
+Evaluation results use `expectedResult` to clearly distinguish fixture
+expectations from runtime return values.

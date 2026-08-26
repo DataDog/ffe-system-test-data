@@ -422,7 +422,7 @@
       "flag": "fixture.large.flag-01",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -433,7 +433,7 @@
       "flag": "fixture.large.flag-10",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -444,7 +444,7 @@
       "flag": "fixture.large.flag-20",
       "variationType": "object",
       "defaultValue": {},
-      "expected_result": {
+      "expectedResult": {
         "value": {
           "count": 20
         },
@@ -454,8 +454,8 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 3,
-    "flagevaluationEvents": 3
+  "expectations": {
+    "exposureEventCount": 3,
+    "evaluationEventCount": 3
   }
 }

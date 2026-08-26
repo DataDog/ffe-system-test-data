@@ -50,7 +50,7 @@
       "flag": "com.example.feature.enabled",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -61,7 +61,7 @@
       "flag": "my-team--feature-toggle",
       "variationType": "string",
       "defaultValue": "no",
-      "expected_result": {
+      "expectedResult": {
         "value": "yes",
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -72,7 +72,7 @@
       "flag": "legacy_flag_name_v2",
       "variationType": "integer",
       "defaultValue": 0,
-      "expected_result": {
+      "expectedResult": {
         "value": 100,
         "reason": "DEFAULT",
         "errorCode": null,
@@ -83,7 +83,7 @@
       "flag": "mix.ed-key_style.v1",
       "variationType": "float",
       "defaultValue": 0.0,
-      "expected_result": {
+      "expectedResult": {
         "value": 2.718,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -91,8 +91,8 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 4,
-    "flagevaluationEvents": 4
+  "expectations": {
+    "exposureEventCount": 4,
+    "evaluationEventCount": 4
   }
 }

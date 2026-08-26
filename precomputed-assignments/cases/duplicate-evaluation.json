@@ -1,6 +1,6 @@
 {
   "name": "duplicate-evaluation",
-  "description": "The same flag is evaluated twice. Validates that the SDK returns consistent values and that exposure dedup produces only one exposure event. Web SDK's FlagEvaluationAggregator aggregates duplicate evaluations into one event with evaluation_count=2; the web override and expectedEvents matcher verify this. Non-aggregating platforms emit two separate events.",
+  "description": "The same flag is evaluated twice. Validates that the SDK returns consistent values and that exposure dedup produces only one exposure event. Web SDK's FlagEvaluationAggregator aggregates duplicate evaluations into one event with evaluation_count=2; the web override and expectations.events matcher verify this. Non-aggregating platforms emit two separate events.",
   "context": {
     "targetingKey": "dedup-user",
     "attributes": {}
@@ -26,7 +26,7 @@
       "flag": "fixture.dedup.flag",
       "variationType": "string",
       "defaultValue": "default",
-      "expected_result": {
+      "expectedResult": {
         "value": "alpha",
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -37,7 +37,7 @@
       "flag": "fixture.dedup.flag",
       "variationType": "string",
       "defaultValue": "default",
-      "expected_result": {
+      "expectedResult": {
         "value": "alpha",
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -45,52 +45,52 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 1,
-    "flagevaluationEvents": 2,
+  "expectations": {
+    "exposureEventCount": 1,
+    "evaluationEventCount": 2,
     "overrides": [
       {
         "platform": "web",
-        "exposures": 1,
-        "flagevaluationEvents": 1
+        "exposureEventCount": 1,
+        "evaluationEventCount": 1
       }
-    ]
-  },
-  "expectedEvents": {
-    "flagevaluations": [
-      {
-        "evaluation_count": 2,
-        "skip": [
-          {
-            "sdk": "ios",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "android",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "react-native",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "flutter",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "maui",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "kotlin-multiplatform",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          },
-          {
-            "sdk": "electron",
-            "reason": "Non-aggregating platform; does not produce evaluation_count field"
-          }
-        ]
-      }
-    ]
+    ],
+    "events": {
+      "flagevaluations": [
+        {
+          "evaluation_count": 2,
+          "skip": [
+            {
+              "sdk": "ios",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "android",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "react-native",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "flutter",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "maui",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "kotlin-multiplatform",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            },
+            {
+              "sdk": "electron",
+              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

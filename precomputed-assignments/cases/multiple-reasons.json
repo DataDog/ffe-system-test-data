@@ -44,7 +44,7 @@
       "flag": "fixture.reason.targeted",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": true,
         "reason": "TARGETING_MATCH",
         "errorCode": null,
@@ -55,7 +55,7 @@
       "flag": "fixture.reason.default",
       "variationType": "string",
       "defaultValue": "fallback",
-      "expected_result": {
+      "expectedResult": {
         "value": "baseline",
         "reason": "DEFAULT",
         "errorCode": null,
@@ -66,7 +66,7 @@
       "flag": "fixture.reason.split",
       "variationType": "integer",
       "defaultValue": 0,
-      "expected_result": {
+      "expectedResult": {
         "value": 42,
         "reason": "SPLIT",
         "errorCode": null,
@@ -74,8 +74,8 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 3,
-    "flagevaluationEvents": 3
+  "expectations": {
+    "exposureEventCount": 3,
+    "evaluationEventCount": 3
   }
 }

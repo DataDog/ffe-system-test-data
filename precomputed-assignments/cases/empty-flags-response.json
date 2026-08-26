@@ -17,7 +17,7 @@
       "flag": "fixture.bool.missing",
       "variationType": "boolean",
       "defaultValue": false,
-      "expected_result": {
+      "expectedResult": {
         "value": false,
         "reason": null,
         "errorCode": "FLAG_NOT_FOUND",
@@ -28,7 +28,7 @@
       "flag": "fixture.string.missing",
       "variationType": "string",
       "defaultValue": "fallback",
-      "expected_result": {
+      "expectedResult": {
         "value": "fallback",
         "reason": null,
         "errorCode": "FLAG_NOT_FOUND",
@@ -39,7 +39,7 @@
       "flag": "fixture.int.missing",
       "variationType": "integer",
       "defaultValue": 0,
-      "expected_result": {
+      "expectedResult": {
         "value": 0,
         "reason": null,
         "errorCode": "FLAG_NOT_FOUND",
@@ -47,14 +47,14 @@
       }
     }
   ],
-  "expectedEmissions": {
-    "exposures": 0,
-    "flagevaluationEvents": 3,
+  "expectations": {
+    "exposureEventCount": 0,
+    "evaluationEventCount": 3,
     "overrides": [
       {
         "platform": "web",
-        "exposures": 0,
-        "flagevaluationEvents": 0
+        "exposureEventCount": 0,
+        "evaluationEventCount": 0
       }
     ]
   }
