@@ -56,8 +56,15 @@ an evaluation or expected event, use the `expectedEmissions.overrides` field.
 ## Skip schema
 
 Skips use a `skip` array of `{sdk, reason}` objects, allowing per-platform
-reasons. This field can appear at case level (skip the entire fixture) or on
-individual evaluations and event matchers.
+reasons. This field can appear at three levels:
+
+- **Case level** — skip the entire fixture for a platform.
+- **Evaluation level** — skip a single evaluation within the fixture. The
+  evaluation is not run, but the expected emission counts remain unchanged
+  unless `expectedEmissions.overrides` adjusts them.
+- **Event matcher level** — skip a property assertion on an emitted event.
+  The event is still expected to arrive (counts unchanged); only the field
+  assertion is relaxed.
 
 ```json
 "skip": [
