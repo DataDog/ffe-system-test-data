@@ -1,6 +1,6 @@
 {
   "name": "falsy-values",
-  "description": "Flags whose variation values are falsy (false, 0, 0.0, empty string, empty object). SDK must return these as real values, not fall back to defaults.",
+  "description": "Flags whose variation values are falsy (false, 0, 0.0, empty string, empty object, null). SDK must return these as real values, not fall back to defaults.",
   "context": {
     "targetingKey": "falsy-user",
     "attributes": {}
@@ -46,6 +46,14 @@
             "variationKey": "empty-obj",
             "variationType": "object",
             "variationValue": {},
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.falsy.null-object": {
+            "allocationKey": "alloc-falsy",
+            "variationKey": "null-obj",
+            "variationType": "object",
+            "variationValue": null,
             "reason": "TARGETING_MATCH",
             "doLog": true
           }
@@ -110,10 +118,23 @@
         "errorCode": null,
         "variantKey": "empty-obj"
       }
+    },
+    {
+      "flag": "fixture.falsy.null-object",
+      "variationType": "object",
+      "defaultValue": {
+        "fallback": true
+      },
+      "expected_result": {
+        "value": null,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "null-obj"
+      }
     }
   ],
   "expectedEmissions": {
-    "exposures": 5,
-    "flagevaluationEvents": 5
+    "exposures": 6,
+    "flagevaluationEvents": 6
   }
 }
