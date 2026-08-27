@@ -170,7 +170,7 @@
           },
           "description": "Ordered, exclusive matchers for exposure events."
         },
-        "evaluations": {
+        "evaluationEvents": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/EventMatcher"

@@ -137,7 +137,7 @@ expected exposure/flagevaluation emission counts.
 | `evaluations[]._skip` | array? | Skip this evaluation for listed platforms |
 | `expectations.noUnmatchedEvents` | bool? | Assert all received events are consumed by matchers |
 | `expectations.exposures` | array? | Ordered, exclusive matchers for exposure events |
-| `expectations.evaluations` | array? | Ordered, exclusive matchers for evaluation events |
+| `expectations.evaluationEvents` | array? | Ordered, exclusive matchers for evaluation events |
 
 See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
 

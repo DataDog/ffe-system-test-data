@@ -76,7 +76,8 @@
   ],
   "expectations": {
     "noUnmatchedEvents": true,
-    "evaluations": [
+    "exposures": [],
+    "evaluationEvents": [
       {
         "_count": 3
       }

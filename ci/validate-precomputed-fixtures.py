@@ -59,7 +59,7 @@ def check_matcher_counts(data, path="$"):
     """Check that all EventMatchers have _count >= 1."""
     errors = []
     expectations = data.get("expectations", {})
-    for list_name in ("exposures", "evaluations"):
+    for list_name in ("exposures", "evaluationEvents"):
         matchers = expectations.get(list_name, [])
         for i, matcher in enumerate(matchers):
             mpath = f"{path}.expectations.{list_name}[{i}]"

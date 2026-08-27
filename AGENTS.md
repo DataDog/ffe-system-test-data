@@ -115,7 +115,7 @@ Each fixture file is a single JSON object. Schema: `schemas/precomputed-assignme
 
 ### Event matchers
 
-Matchers in `expectations.exposures` and `expectations.evaluations` are
+Matchers in `expectations.exposures` and `expectations.evaluationEvents` are
 ordered and exclusive. Each received event is consumed by the first matching
 matcher.
 

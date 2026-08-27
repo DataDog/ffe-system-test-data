@@ -120,7 +120,7 @@
   ],
   "expectations": {
     "noUnmatchedEvents": true,
-    "evaluations": [
+    "evaluationEvents": [
       {
         "_count": 5,
         "_skip": [

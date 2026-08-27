@@ -154,7 +154,7 @@ Valid platform identifiers: `web`, `ios`, `android`, `react-native`, `flutter`,
    (not skipped for the current platform), greedily consume up to `_count`
    events whose fields are a superset of the matcher's non-`_` fields. Fail if
    fewer than `_count` matched.
-8. Repeat step 7 for `expectations.evaluations`.
+8. Repeat step 7 for `expectations.evaluationEvents`.
 9. If `noUnmatchedEvents` is `true`, fail if any unconsumed events remain.
 
 ## Field naming
