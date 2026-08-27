@@ -69,8 +69,8 @@ reasons. This field can appear at three levels:
 
 ```json
 "skip": [
-  {"sdk": "web", "reason": "Web aggregator deduplicates repeated evaluations."},
-  {"sdk": "ios", "reason": "iOS treats null as invalid object."}
+  {"platform": "web", "reason": "Web aggregator deduplicates repeated evaluations."},
+  {"platform": "ios", "reason": "iOS treats null as invalid object."}
 ]
 ```
 

@@ -84,8 +84,8 @@
       "defaultValue": 0.0,
       "skip": [
         {
-          "sdk": "web",
-          "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations."
+          "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations.",
+          "platform": "web"
         }
       ],
       "expectedResult": {

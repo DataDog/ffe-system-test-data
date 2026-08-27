@@ -127,22 +127,22 @@ expected exposure/flagevaluation emission counts.
 | `description` | string | Human-readable description of what the fixture covers |
 | `context` | object | Evaluation context: `targetingKey` (string) and `attributes` (object) |
 | `response` | object | Full precomputed-assignments JSON:API envelope served by the mock CDN |
-| `skip` | array? | Per-SDK skip entries: `[{"sdk": "web", "reason": "..."}]` — skips entire fixture |
+| `skip` | array? | Per-platform skip entries: `[{"platform": "web", "reason": "..."}]` — skips entire fixture |
 | `evaluations` | array | Ordered list of typed flag evaluations to run |
 | `evaluations[].flag` | string | Flag key to evaluate |
 | `evaluations[].variationType` | string | `boolean`, `string`, `integer`, `float`, or `object` |
 | `evaluations[].defaultValue` | any | Default value passed to the OpenFeature client |
-| `evaluations[].expected_result.value` | any | Expected flag value |
-| `evaluations[].expected_result.variantKey` | string? | Expected variation key |
-| `evaluations[].expected_result.reason` | string? | Expected OpenFeature reason code |
-| `evaluations[].expected_result.errorCode` | string? | Expected error code; presence implies evaluation error |
-| `evaluations[].skip` | array? | Per-SDK skip entries for this evaluation |
-| `expectedEmissions.exposures` | int | Expected exposure event count at `/api/v2/exposures` |
-| `expectedEmissions.flagevaluationEvents` | int | Expected flagevaluation event count |
-| `expectedEmissions.overrides` | array? | Per-platform count overrides: `[{"platform": "web", "exposures": N, "flagevaluationEvents": M}]` |
-| `expectedEvents` | object? | Field-level matchers for emitted events (subset match) |
-| `expectedEvents.exposures` | array? | Matchers for exposure events |
-| `expectedEvents.*.skip` | array? | Per-SDK skip entries for this matcher |
+| `evaluations[].expectedResult.value` | any | Expected flag value |
+| `evaluations[].expectedResult.variantKey` | string? | Expected variation key |
+| `evaluations[].expectedResult.reason` | string? | Expected OpenFeature reason code |
+| `evaluations[].expectedResult.errorCode` | string? | Expected error code; presence implies evaluation error |
+| `evaluations[].skip` | array? | Per-platform skip entries for this evaluation |
+| `expectations.exposureEventCount` | int | Expected exposure event count at `/api/v2/exposures` |
+| `expectations.evaluationEventCount` | int | Expected flagevaluation event count |
+| `expectations.overrides` | array? | Per-platform count overrides: `[{"platform": "web", "exposureEventCount": N, "evaluationEventCount": M}]` |
+| `expectations.events` | object? | Field-level matchers for emitted events (subset match) |
+| `expectations.events.exposures` | array? | Matchers for exposure events |
+| `expectations.events.*.skip` | array? | Per-platform skip entries for this matcher |
 
 See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
 

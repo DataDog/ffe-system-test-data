@@ -61,32 +61,32 @@
           "evaluation_count": 2,
           "skip": [
             {
-              "sdk": "ios",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "ios"
             },
             {
-              "sdk": "android",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "android"
             },
             {
-              "sdk": "react-native",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "react-native"
             },
             {
-              "sdk": "flutter",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "flutter"
             },
             {
-              "sdk": "maui",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "maui"
             },
             {
-              "sdk": "kotlin-multiplatform",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "kotlin-multiplatform"
             },
             {
-              "sdk": "electron",
-              "reason": "Non-aggregating platform; does not produce evaluation_count field"
+              "reason": "Non-aggregating platform; does not produce evaluation_count field",
+              "platform": "electron"
             }
           ]
         }
