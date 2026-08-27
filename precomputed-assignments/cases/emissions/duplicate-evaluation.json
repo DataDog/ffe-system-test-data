@@ -46,51 +46,30 @@
     }
   ],
   "expectations": {
-    "exposureEventCount": 1,
-    "evaluationEventCount": 2,
-    "overrides": [
+    "noUnmatchedEvents": true,
+    "exposures": [
       {
-        "platform": "web",
-        "exposureEventCount": 1,
-        "evaluationEventCount": 1
+        "_count": 1
       }
     ],
-    "events": {
-      "flagevaluations": [
-        {
-          "evaluation_count": 2,
-          "skip": [
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "ios"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "android"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "react-native"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "flutter"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "maui"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "kotlin-multiplatform"
-            },
-            {
-              "reason": "Non-aggregating platform; does not produce evaluation_count field",
-              "platform": "electron"
-            }
-          ]
-        }
-      ]
-    }
+    "evaluations": [
+      {
+        "_count": 2,
+        "_skip": [
+          {
+            "platform": "web"
+          }
+        ]
+      },
+      {
+        "_count": 1,
+        "_include": [
+          {
+            "platform": "web"
+          }
+        ],
+        "evaluation_count": 2
+      }
+    ]
   }
 }

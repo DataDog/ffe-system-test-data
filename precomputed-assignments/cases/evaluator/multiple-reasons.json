@@ -75,7 +75,16 @@
     }
   ],
   "expectations": {
-    "exposureEventCount": 3,
-    "evaluationEventCount": 3
+    "noUnmatchedEvents": true,
+    "exposures": [
+      {
+        "_count": 3
+      }
+    ],
+    "evaluations": [
+      {
+        "_count": 3
+      }
+    ]
   }
 }

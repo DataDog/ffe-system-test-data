@@ -82,18 +82,18 @@
       "flag": "fixture.mismatch.int-as-float",
       "variationType": "float",
       "defaultValue": 0.0,
-      "skip": [
-        {
-          "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations.",
-          "platform": "web"
-        }
-      ],
       "expectedResult": {
         "value": 0.0,
         "reason": null,
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
-      }
+      },
+      "_skip": [
+        {
+          "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations.",
+          "platform": "web"
+        }
+      ]
     },
     {
       "flag": "fixture.mismatch.float-as-bool",
@@ -119,13 +119,15 @@
     }
   ],
   "expectations": {
-    "exposureEventCount": 0,
-    "evaluationEventCount": 5,
-    "overrides": [
+    "noUnmatchedEvents": true,
+    "evaluations": [
       {
-        "platform": "web",
-        "exposureEventCount": 0,
-        "evaluationEventCount": 0
+        "_count": 5,
+        "_skip": [
+          {
+            "platform": "web"
+          }
+        ]
       }
     ]
   }

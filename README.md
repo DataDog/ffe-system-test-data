@@ -127,22 +127,17 @@ expected exposure/flagevaluation emission counts.
 | `description` | string | Human-readable description of what the fixture covers |
 | `context` | object | Evaluation context: `targetingKey` (string) and `attributes` (object) |
 | `response` | object | Full precomputed-assignments JSON:API envelope served by the mock CDN |
-| `skip` | array? | Per-platform skip entries: `[{"platform": "web", "reason": "..."}]` — skips entire fixture |
+| `_skip` | array? | Skip fixture for listed platforms: `[{"platform": "web", "reason": "..."}]` |
+| `_include` | array? | Run fixture only for listed platforms |
 | `evaluations` | array | Ordered list of typed flag evaluations to run |
 | `evaluations[].flag` | string | Flag key to evaluate |
 | `evaluations[].variationType` | string | `boolean`, `string`, `integer`, `float`, or `object` |
 | `evaluations[].defaultValue` | any | Default value passed to the OpenFeature client |
-| `evaluations[].expectedResult.value` | any | Expected flag value |
-| `evaluations[].expectedResult.variantKey` | string? | Expected variation key |
-| `evaluations[].expectedResult.reason` | string? | Expected OpenFeature reason code |
-| `evaluations[].expectedResult.errorCode` | string? | Expected error code; presence implies evaluation error |
-| `evaluations[].skip` | array? | Per-platform skip entries for this evaluation |
-| `expectations.exposureEventCount` | int | Expected exposure event count at `/api/v2/exposures` |
-| `expectations.evaluationEventCount` | int | Expected flagevaluation event count |
-| `expectations.overrides` | array? | Per-platform count overrides: `[{"platform": "web", "exposureEventCount": N, "evaluationEventCount": M}]` |
-| `expectations.events` | object? | Field-level matchers for emitted events (subset match) |
-| `expectations.events.exposures` | array? | Matchers for exposure events |
-| `expectations.events.*.skip` | array? | Per-platform skip entries for this matcher |
+| `evaluations[].expectedResult` | object | Expected outcome (`value`, `reason`, `errorCode`, `variantKey`) |
+| `evaluations[]._skip` | array? | Skip this evaluation for listed platforms |
+| `expectations.noUnmatchedEvents` | bool? | Assert all received events are consumed by matchers |
+| `expectations.exposures` | array? | Ordered, exclusive matchers for exposure events |
+| `expectations.evaluations` | array? | Ordered, exclusive matchers for evaluation events |
 
 See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
 

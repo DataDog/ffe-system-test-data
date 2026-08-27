@@ -48,13 +48,15 @@
     }
   ],
   "expectations": {
-    "exposureEventCount": 0,
-    "evaluationEventCount": 3,
-    "overrides": [
+    "noUnmatchedEvents": true,
+    "evaluations": [
       {
-        "platform": "web",
-        "exposureEventCount": 0,
-        "evaluationEventCount": 0
+        "_count": 3,
+        "_skip": [
+          {
+            "platform": "web"
+          }
+        ]
       }
     ]
   }
