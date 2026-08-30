@@ -76,7 +76,7 @@ Each fixture file is a single JSON object. Schema: `schemas/precomputed-assignme
     "exposures": [
       {"_count": 1}
     ],
-    "evaluations": [
+    "evaluationEvents": [
       {"_count": 1}
     ]
   }
@@ -197,7 +197,7 @@ rather than platform overrides.
 
 Example — web aggregates 2 evaluations into 1 event:
 ```json
-"evaluations": [
+"evaluationEvents": [
   {"_count": 2, "_skip": [{"platform": "web"}]},
   {"_count": 1, "_include": [{"platform": "web"}], "evaluation_count": 2}
 ]

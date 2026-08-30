@@ -76,7 +76,7 @@ exposure and evaluation events.
   "exposures": [
     {"_count": 1, "flag": "my-flag"}
   ],
-  "evaluations": [
+  "evaluationEvents": [
     {"_count": 2, "_skip": [{"platform": "web"}]},
     {"_count": 1, "_include": [{"platform": "web"}], "evaluation_count": 2}
   ]
