@@ -1,6 +1,6 @@
 {
   "name": "type-mismatch-all-types",
-  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent — SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
+  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent \u2014 SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
   "context": {
     "targetingKey": "mismatch-user",
     "attributes": {}
@@ -62,7 +62,7 @@
       "defaultValue": "fallback",
       "expectedResult": {
         "value": "fallback",
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
@@ -73,7 +73,7 @@
       "defaultValue": -1,
       "expectedResult": {
         "value": -1,
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
@@ -84,7 +84,7 @@
       "defaultValue": 0.0,
       "expectedResult": {
         "value": 0.0,
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       },
@@ -101,7 +101,7 @@
       "defaultValue": false,
       "expectedResult": {
         "value": false,
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
@@ -112,7 +112,7 @@
       "defaultValue": "none",
       "expectedResult": {
         "value": "none",
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "TYPE_MISMATCH",
         "variantKey": null
       }
