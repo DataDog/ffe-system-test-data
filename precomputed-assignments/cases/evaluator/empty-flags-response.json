@@ -19,7 +19,7 @@
       "defaultValue": false,
       "expectedResult": {
         "value": false,
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "FLAG_NOT_FOUND",
         "variantKey": null
       }
@@ -30,7 +30,7 @@
       "defaultValue": "fallback",
       "expectedResult": {
         "value": "fallback",
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "FLAG_NOT_FOUND",
         "variantKey": null
       }
@@ -41,7 +41,7 @@
       "defaultValue": 0,
       "expectedResult": {
         "value": 0,
-        "reason": null,
+        "reason": "ERROR",
         "errorCode": "FLAG_NOT_FOUND",
         "variantKey": null
       }
