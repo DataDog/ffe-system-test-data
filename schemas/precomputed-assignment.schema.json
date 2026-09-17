@@ -86,7 +86,7 @@
       "additionalProperties": false,
       "properties": {
         "value": {
-          "description": "Expected flag value."
+          "description": "Expected flag value; must match the evaluation variationType."
         },
         "reason": {
           "type": ["string", "null"],
@@ -117,7 +117,7 @@
           "description": "Type to request from the SDK getter."
         },
         "defaultValue": {
-          "description": "Default value passed to the getter."
+          "description": "Default value passed to the getter; must match variationType."
         },
         "expectedResult": {
           "$ref": "#/$defs/ExpectedResult"
@@ -129,6 +129,128 @@
           "$ref": "#/$defs/PlatformFilter"
         }
       },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "variationType": {
+                "const": "boolean"
+              }
+            },
+            "required": ["variationType"]
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "boolean"
+              },
+              "expectedResult": {
+                "properties": {
+                  "value": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "variationType": {
+                "const": "string"
+              }
+            },
+            "required": ["variationType"]
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "string"
+              },
+              "expectedResult": {
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "variationType": {
+                "const": "integer"
+              }
+            },
+            "required": ["variationType"]
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "integer"
+              },
+              "expectedResult": {
+                "properties": {
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "variationType": {
+                "const": "float"
+              }
+            },
+            "required": ["variationType"]
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "number"
+              },
+              "expectedResult": {
+                "properties": {
+                  "value": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "variationType": {
+                "const": "object"
+              }
+            },
+            "required": ["variationType"]
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "object"
+              },
+              "expectedResult": {
+                "properties": {
+                  "value": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
       "not": {
         "required": ["_skip", "_include"]
       }

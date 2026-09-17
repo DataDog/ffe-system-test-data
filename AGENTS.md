@@ -104,14 +104,19 @@ Each fixture file is a single JSON object. Schema: `schemas/precomputed-assignme
 |-------|------|----------|-------------|
 | `flag` | string | yes | Flag key to evaluate |
 | `variationType` | string | yes | `boolean`, `string`, `integer`, `float`, or `object` |
-| `defaultValue` | any | yes | Default value passed to the getter |
+| `defaultValue` | matches `variationType` | yes | Default value passed to the getter |
 | `expectedResult` | object | yes | Expected outcome |
-| `expectedResult.value` | any | yes | Expected flag value |
+| `expectedResult.value` | matches `variationType` | yes | Expected flag value |
 | `expectedResult.reason` | string? | no | Expected reason code (null if error) |
 | `expectedResult.errorCode` | string? | no | Expected error code (null if success) |
 | `expectedResult.variantKey` | string? | no | Expected variation key (null if error) |
 | `_skip` | array | no | Skip this evaluation for listed platforms |
 | `_include` | array | no | Run this evaluation only for listed platforms |
+
+`defaultValue` and `expectedResult.value` must use the JSON type declared by
+`variationType`: boolean, string, integer, number for `float`, or object.
+`float` accepts any JSON number; `integer` accepts only integral JSON numbers
+(including `1.0`). Arrays and null are not valid for either field.
 
 ### Event matchers
 
