@@ -63,6 +63,11 @@ Each evaluation calls a typed getter on the SDK and asserts the result:
 }
 ```
 
+`defaultValue` and `expectedResult.value` must use the JSON type declared by
+`variationType`: boolean, string, integer, number for `float`, or object.
+`float` accepts any JSON number; `integer` accepts only integral JSON numbers
+(including `1.0`). Arrays and null are not valid for either field.
+
 Evaluations may carry `_skip` or `_include` to control per-platform applicability.
 
 ## Expectations and event matchers

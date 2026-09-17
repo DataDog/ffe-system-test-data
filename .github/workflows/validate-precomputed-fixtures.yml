@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/validate-precomputed-fixtures.yml
       - ci/validate-precomputed-fixtures.py
+      - ci/test_precomputed_schema.py
       - schemas/precomputed-assignment.schema.json
       - precomputed-assignments/**
 
@@ -29,6 +30,9 @@ jobs:
 
       - name: Install dependencies
         run: pip install jsonschema
+
+      - name: Test precomputed schema
+        run: python3 -m unittest discover -s ci -p 'test_precomputed_schema.py'
 
       - name: Validate precomputed fixtures
         run: python3 ci/validate-precomputed-fixtures.py
