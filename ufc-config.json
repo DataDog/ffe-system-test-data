@@ -5092,6 +5092,75 @@
         }
       ]
     },
+    "optional-targeting-key-sharded": {
+      "key": "optional-targeting-key-sharded",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "assigned": {
+          "key": "assigned",
+          "value": "sharded-value"
+        }
+      },
+      "allocations": [
+        {
+          "key": "sharded-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "assigned",
+              "shards": [
+                {
+                  "salt": "optional-targeting-key",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "optional-targeting-key-id-rule": {
+      "key": "optional-targeting-key-id-rule",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "empty-id-value"
+        }
+      },
+      "allocations": [
+        {
+          "key": "empty-id-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "id",
+                  "operator": "MATCHES",
+                  "value": "^$"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
     "semver-invalid-comparand-non-string-test": {
       "key": "semver-invalid-comparand-non-string-test",
       "enabled": true,

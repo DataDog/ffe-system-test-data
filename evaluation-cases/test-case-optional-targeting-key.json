@@ -1,0 +1,73 @@
+[
+  {
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-sharded",
+    "result": {
+      "reason": "SPLIT",
+      "value": "sharded-value"
+    },
+    "targetingKey": "",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-sharded",
+    "result": {
+      "reason": "ERROR",
+      "value": "fallback",
+      "errorCode": "TARGETING_KEY_MISSING"
+    },
+    "targetingKey": null,
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-id-rule",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "empty-id-value"
+    },
+    "targetingKey": "",
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-id-rule",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "fallback"
+    },
+    "targetingKey": null,
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
+      "id": ""
+    },
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-id-rule",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "empty-id-value"
+    },
+    "targetingKey": null,
+    "variationType": "STRING"
+  },
+  {
+    "attributes": {
+      "id": "explicit-user"
+    },
+    "defaultValue": "fallback",
+    "flag": "optional-targeting-key-id-rule",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "fallback"
+    },
+    "targetingKey": "",
+    "variationType": "STRING"
+  }
+]
