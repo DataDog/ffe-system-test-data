@@ -140,6 +140,13 @@ def _validate_evaluation_case(
     if not isinstance(result.get("reason"), str) or not result["reason"]:
         _fail(path, f"{location} result.reason must be a non-empty string")
 
+    error_code = result.get("errorCode")
+    if result["reason"] == "ERROR":
+        if not isinstance(error_code, str) or not error_code:
+            _fail(path, f"{location} result.errorCode is required when result.reason is ERROR")
+    elif "errorCode" in result:
+        _fail(path, f"{location} result.errorCode is only valid when result.reason is ERROR")
+
     if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND":
         _fail(
             path,
