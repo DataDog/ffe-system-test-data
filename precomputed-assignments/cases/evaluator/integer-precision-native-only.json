@@ -1,6 +1,6 @@
 {
   "name": "integer-precision-native-only",
-  "description": "Validates that SDKs with 64-bit integer flag evaluation preserve values outside JavaScript's safe integer range (Number.MAX_SAFE_INTEGER = 2^53-1). Skipped for web, which cannot represent this value exactly, and Android, whose public integer flag evaluation API currently uses Int32.",
+  "description": "Validates that SDKs with 64-bit integer flag evaluation preserve values outside JavaScript's safe integer range (Number.MAX_SAFE_INTEGER = 2^53-1).",
   "context": {
     "targetingKey": "precomputed-user",
     "attributes": {}
