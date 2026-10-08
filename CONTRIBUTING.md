@@ -26,7 +26,7 @@ Thank you for your interest in contributing to the FFE system test data reposito
     "attributes": { "<key>": "<value>" },
     "result": {
       "value": "<expected value>",
-      "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR|DISABLED",
+      "reason": "STATIC|SPLIT|TARGETING_MATCH|DEFAULT|ERROR",
       "errorCode": "<optional OpenFeature error code>"
     }
   }

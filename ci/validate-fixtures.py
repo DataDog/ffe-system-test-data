@@ -146,6 +146,54 @@ def _validate_evaluation_case(
             f"{location} references unknown flag {flag!r} without a FLAG_NOT_FOUND expectation",
         )
 
+    expectations = value.get("expectations")
+    if expectations is None:
+        return
+    if not isinstance(expectations, dict):
+        _fail(path, f"{location} expectations must be an object")
+
+    unknown_expectations = sorted(
+        set(expectations).difference({"evaluationEvents", "exposures", "noUnmatchedEvents"})
+    )
+    if unknown_expectations:
+        _fail(
+            path,
+            f"{location} expectations contains unknown fields: {', '.join(unknown_expectations)}",
+        )
+
+    no_unmatched_events = expectations.get("noUnmatchedEvents")
+    if no_unmatched_events is not None and not isinstance(no_unmatched_events, bool):
+        _fail(path, f"{location} expectations.noUnmatchedEvents must be a boolean")
+
+    for event_kind in ("exposures", "evaluationEvents"):
+        matchers = expectations.get(event_kind)
+        if matchers is None:
+            continue
+        if not isinstance(matchers, list):
+            _fail(path, f"{location} expectations.{event_kind} must be an array")
+        for matcher_index, matcher in enumerate(matchers):
+            matcher_location = f"{location} expectations.{event_kind}[{matcher_index}]"
+            if not isinstance(matcher, dict):
+                _fail(path, f"{matcher_location} must be an object")
+            matcher_flag = matcher.get("flag")
+            if not isinstance(matcher_flag, str) or not matcher_flag:
+                _fail(path, f"{matcher_location}.flag must be a non-empty string")
+            allowed_matcher_fields = {"_count", "flag"}
+            if event_kind == "evaluationEvents":
+                allowed_matcher_fields.add("errorCode")
+            unknown_matcher_fields = sorted(set(matcher).difference(allowed_matcher_fields))
+            if unknown_matcher_fields:
+                _fail(
+                    path,
+                    f"{matcher_location} contains unknown fields: {', '.join(unknown_matcher_fields)}",
+                )
+            count = matcher.get("_count", 1)
+            if not isinstance(count, int) or isinstance(count, bool) or count < 1:
+                _fail(path, f"{matcher_location}._count must be a positive integer")
+            error_code = matcher.get("errorCode")
+            if error_code is not None and (not isinstance(error_code, str) or not error_code):
+                _fail(path, f"{matcher_location}.errorCode must be a non-empty string")
+
 
 def main() -> None:
     configured_flags = _validate_config(_load_json(CONFIG_PATH))

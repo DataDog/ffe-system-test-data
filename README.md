@@ -89,8 +89,20 @@ Each evaluation case uses a universal schema with the following fields:
 | `targetingKey` | string or null | The subject/user identifier for evaluation. Use `null` only for explicit missing-targeting-key coverage |
 | `attributes` | object | Additional context attributes for targeting rules |
 | `result.value` | any | The expected evaluation result value |
-| `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
+| `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, or `ERROR` |
 | `result.errorCode` | string | Optional OpenFeature error code, such as `PARSE_ERROR` or `FLAG_NOT_FOUND` |
+| `expectations` | object | Optional event expectations for an evaluation; omitted by cases that do not assert telemetry |
+| `expectations.exposures` | array | Unordered exposure-event matchers; an empty array asserts that no exposure is emitted |
+| `expectations.evaluationEvents` | array | Unordered evaluation-event matchers; an empty array asserts that no evaluation event is emitted |
+| `expectations.noUnmatchedEvents` | boolean | When true, fail if the harness observes an event not consumed by a matcher |
+
+An event matcher contains a non-empty `flag` and an optional positive `_count`
+(default `1`). Evaluation-event matchers may additionally specify `errorCode`:
+`null` asserts that the event has no error, while a non-null code asserts the
+propagated error and that the runtime default was used. Matchers are
+intentionally unordered because
+transports may batch or aggregate events. Timing and settling policy belong to
+each test harness rather than these semantic fixtures.
 
 Example:
 
@@ -193,7 +205,7 @@ python3 ci/validate-fixtures.py
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
 | `test-case-boolean-one-of-matches.json` | Boolean flag with ONE_OF operator matching |
 | `test-case-comparator-operator-flag.json` | Flag using comparator operators (GT, LT, etc.) |
-| `test-case-disabled-flag.json` | Disabled flag returning DISABLED reason |
+| `test-case-dependent-flags.json` | Direct and transitive dependencies, short-circuiting, memoization, atomic failure propagation, depth limiting, cycles, exposure rollback, and retained evaluation telemetry |
 | `test-case-empty-flag.json` | Flag with empty configuration |
 | `test-case-empty-string-variation.json` | Flag returning empty string as value |
 | `test-case-falsy-value-assignments.json` | Flags returning falsy values (0, false, empty) |
