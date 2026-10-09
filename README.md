@@ -4,18 +4,28 @@ Canonical test data for Datadog's Feature Flags & Experimentation (FFE) SDK impl
 
 ## Overview
 
-This repository contains the canonical set of flag configurations and evaluation test cases used to validate FFE SDK implementations across multiple languages. It serves as a single source of truth consumed via git submodules by:
+This repository contains the canonical set of flag configurations and evaluation test cases used to validate FFE SDK implementations across multiple languages.
 
-- [system-tests](https://github.com/DataDog/system-tests) - Parametric tests
-- [dd-trace-py](https://github.com/DataDog/dd-trace-py) - Python tracer
-- [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
-- [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
-- [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
-- [dd-trace-js](https://github.com/DataDog/dd-trace-js) - JavaScript tracer
-- [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) - Ruby tracer
-- [dd-trace-php](https://github.com/DataDog/dd-trace-php) - PHP tracer
-- [libdatadog](https://github.com/DataDog/libdatadog) - Shared Rust FFE evaluator
-- [openfeature-js-client](https://github.com/DataDog/openfeature-js-client) - Datadog OpenFeature JavaScript clients
+### Consumers
+
+The following repositories consume the corpus as a git submodule:
+
+- [openfeature-js-client](https://github.com/DataDog/openfeature-js-client)
+- [dd-trace-go](https://github.com/DataDog/dd-trace-go)
+- [dd-trace-java](https://github.com/DataDog/dd-trace-java)
+- [dd-trace-php](https://github.com/DataDog/dd-trace-php)
+- [libdatadog](https://github.com/DataDog/libdatadog)
+
+The following repositories maintain copied snapshots:
+
+- [dd-trace-py](https://github.com/DataDog/dd-trace-py), updated by `scripts/update-ffe-fixtures.py`
+- [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet), updated by `Build.FfeFixtures.cs`
+- [system-tests](https://github.com/DataDog/system-tests), maintained as checked-in parametric fixtures
+
+Additional consumption mechanisms:
+
+- [dd-source](https://github.com/DataDog/dd-source) uses a pinned Bazel `http_archive`.
+- Purpose-built compatibility branches for [dd-trace-js](https://github.com/DataDog/dd-trace-js) and [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) use submodules to run the advisory downstream suite. The compatibility branches for Python and .NET also use submodules, independently of their default-branch copy workflows.
 
 ## Directory Structure
 
@@ -238,7 +248,7 @@ These fixtures are derived from the Go SDK (`dd-trace-go`) reference implementat
 
 ## Downstream Updates
 
-Downstream repositories should consume this repository as a git submodule and run their fixture coverage by loading every JSON file in `evaluation-cases/`. Shared evaluator behavior should be added here first, then downstream repositories should update their submodule SHA. Do not add copied JSON fixture directories or language-only programmatic cases for behavior that belongs in this shared fixture set.
+Downstream repositories should consume this repository through their mechanism listed above and run fixture coverage by loading every JSON file in `evaluation-cases/`. Shared evaluator behavior should be added here first, then downstream repositories should update their submodule pin, archive pin, or copied snapshot. Do not add language-only programmatic cases for behavior that belongs in this shared fixture set.
 
 ### Informational Compatibility Preview
 
