@@ -100,6 +100,19 @@ def _validate_config(value: object) -> dict[str, object]:
     return flags
 
 
+def _validate_annotations(path: Path, value: dict[str, object]) -> None:
+    sdk_ids = {"go", "java", "python", "dotnet"}
+    skip = value.get("skip")
+    if not (skip is None or skip is True or
+            (isinstance(skip, list) and all(isinstance(s, str) and s in sdk_ids for s in skip))):
+        _fail(path, "skip must be true, an SDK identifier array, or null")
+    xfail = value.get("xfail")
+    if not (xfail is None or xfail is True or isinstance(xfail, str) or
+            (isinstance(xfail, dict) and all(
+                k in sdk_ids and (v is True or isinstance(v, str)) for k, v in xfail.items()))):
+        _fail(path, "xfail must be true, a reason, an SDK-to-reason/true map, or null")
+
+
 def _validate_evaluation_case(
     path: Path,
     index: int,
@@ -109,6 +122,8 @@ def _validate_evaluation_case(
     location = f"case {index}"
     if not isinstance(value, dict):
         _fail(path, f"{location} must be an object")
+
+    _validate_annotations(path, value)
 
     missing_fields = sorted(REQUIRED_CASE_FIELDS.difference(value))
     if missing_fields:
@@ -156,9 +171,15 @@ def main() -> None:
 
     case_count = 0
     for path in evaluation_paths:
-        cases = _load_json(path)
+        wrapper = _load_json(path)
+        if not isinstance(wrapper, dict):
+            _fail(path, "top-level value must be an object containing cases")
+        if set(wrapper) - {"cases", "skip", "xfail"}:
+            _fail(path, "unknown evaluation wrapper fields")
+        _validate_annotations(path, wrapper)
+        cases = wrapper.get("cases")
         if not isinstance(cases, list):
-            _fail(path, "top-level value must be an array")
+            _fail(path, "cases must be an array")
         if not cases:
             _fail(path, "evaluation-case array must not be empty")
 

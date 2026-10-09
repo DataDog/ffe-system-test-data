@@ -1,13 +1,15 @@
-[
-  {
-    "attributes": {},
-    "defaultValue": 0,
-    "flag": "numeric-one-of",
-    "result": {
-      "reason": "DEFAULT",
-      "value": 0
-    },
-    "targetingKey": "race-default",
-    "variationType": "INTEGER"
-  }
-]
+{
+  "cases": [
+    {
+      "attributes": {},
+      "defaultValue": 0,
+      "flag": "numeric-one-of",
+      "result": {
+        "reason": "DEFAULT",
+        "value": 0
+      },
+      "targetingKey": "race-default",
+      "variationType": "INTEGER"
+    }
+  ]
+}

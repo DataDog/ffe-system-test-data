@@ -55,7 +55,7 @@ git submodule update --init --recursive
 ### In Tests
 
 1. Load `ufc-config.json` to initialize your UFC evaluator
-2. For each file in `evaluation-cases/`, parse the JSON array
+2. For each file in `evaluation-cases/`, parse the wrapper object and read its `cases` array
 3. For each test case, call your evaluator with `flag`, `defaultValue`, `targetingKey`, and `attributes`
 4. Assert the result matches `result.value` and `result.reason`
 
@@ -95,7 +95,8 @@ Each evaluation case uses a universal schema with the following fields:
 Example:
 
 ```json
-[
+{
+  "cases": [
   {
     "flag": "flag-key",
     "variationType": "STRING",
@@ -104,8 +105,66 @@ Example:
     "attributes": { "country": "US" },
     "result": { "value": "expected-value", "reason": "TARGETING_MATCH" }
   }
-]
+  ]
+}
 ```
+
+### Evaluation file wrapper
+
+Each evaluation-case file contains an object with a required, non-empty `cases` array and optional `skip` and `xfail` annotations. Individual cases may also carry these annotations. Existing case fields remain unchanged.
+
+```json
+{
+  "xfail": {"dotnet": "Known issue"},
+  "cases": [
+    {
+      "flag": "flag-key",
+      "variationType": "STRING",
+      "defaultValue": "default",
+      "targetingKey": "user-123",
+      "attributes": {},
+      "result": {"value": "expected-value", "reason": "TARGETING_MATCH"},
+      "xfail": null
+    }
+  ]
+}
+```
+
+### `skip` and `xfail` annotation fields
+
+These fields appear at both the file level (on the wrapper object) and the case level (on individual test case objects). They let SDK test runners adjust behaviour without modifying canonical test data.
+
+**SkipValue** — controls whether the SDK executes a test:
+
+| Value | Meaning |
+|-------|---------|
+| `true` | Skip on all SDKs |
+| `["go", "java"]` | Skip on the listed SDKs only |
+| `null` | Run normally (use at case-level to opt out of a file-level skip) |
+
+**XfailValue** — marks a test as expected to fail:
+
+| Value | Meaning |
+|-------|---------|
+| `true` | Expect failure on all SDKs |
+| `"<reason>"` | Expect failure on all SDKs, reason attached |
+| `{"go": "reason", "dotnet": true}` | Expect failure on listed SDKs only, per-SDK reason |
+| `null` | Run normally (use at case-level to opt out of a file-level xfail) |
+
+**Canonical SDK identifiers:** `"go"`, `"java"`, `"python"`, `"dotnet"`
+
+**Precedence rules:**
+1. Case-level overrides file-level.
+2. `null` at case-level opts that case back in to normal execution.
+3. `skip` takes precedence over `xfail` when both apply to the same SDK.
+
+**SDK behaviour:**
+- `skip`: do not execute the assertion; report as skipped/pending; does not count as pass or fail.
+- `xfail`: execute the assertion; failure → report as expected failure (run passes); pass → report as unexpected pass (SDKs may treat this as a test failure).
+
+For example, a file can declare `"xfail": {"dotnet": "Known issue"}` and a case can set `"xfail": null` to run normally. An explicit null clears only its corresponding annotation; it does not clear the other field.
+
+**Migration:** This changes the root from an array to an object. Consumers must unwrap `cases` and implement annotation handling before advancing their fixture submodule. This branch defines fixture metadata, not downstream runner implementations. No current test is newly skipped or marked as expected to fail.
 
 ### SDK-Specific Fields
 
