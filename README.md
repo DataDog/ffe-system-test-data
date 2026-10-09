@@ -193,6 +193,7 @@ python3 ci/validate-fixtures.py
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
 | `test-case-boolean-one-of-matches.json` | Boolean flag with ONE_OF operator matching |
 | `test-case-comparator-operator-flag.json` | Flag using comparator operators (GT, LT, etc.) |
+| `test-case-dependent-flags.json` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
 | `test-case-disabled-flag.json` | Disabled flag returning DISABLED reason |
 | `test-case-empty-flag.json` | Flag with empty configuration |
 | `test-case-empty-string-variation.json` | Flag returning empty string as value |
