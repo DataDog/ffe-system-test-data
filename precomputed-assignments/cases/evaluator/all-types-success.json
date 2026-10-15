@@ -11,6 +11,7 @@
   "response": {
     "data": {
       "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
         "flags": {
           "flutter.fixture.enabled": {
             "allocationKey": "allocation-success",
