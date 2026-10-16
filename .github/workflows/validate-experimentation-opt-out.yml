@@ -1,0 +1,39 @@
+name: Experimentation opt-out fixture validation
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/validate-experimentation-opt-out.yml
+      - ci/validate-experimentation-opt-out.py
+      - ci/test-validate-experimentation-opt-out.py
+      - schemas/experimentation-opt-out.schema.json
+      - schemas/precomputed-assignment.schema.json
+      - experimentation-opt-out/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: experimentation-opt-out-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate experimentation opt-out contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out fixtures
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install schema validator
+        run: pip install jsonschema
+      - name: Validate the new contract and validator rejection cases
+        run: |
+          python3 ci/validate-experimentation-opt-out.py
+          python3 ci/test-validate-experimentation-opt-out.py
+      - name: Preserve legacy fixture validation
+        run: |
+          python3 ci/validate-fixtures.py
+          python3 ci/validate-precomputed-fixtures.py
