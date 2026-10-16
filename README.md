@@ -212,6 +212,7 @@ python3 ci/validate-fixtures.py
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
 | `test-case-null-shard-range-isolation.json` | A flag with a null shard range is removed without poisoning valid flags |
 | `test-case-null-targeting-key.json` | Evaluations with an explicit null targeting key |
+| `test-case-optional-targeting-key.json` | Empty-key sharding, null versus empty `id` fallback, and explicit `id` precedence |
 | `test-case-numeric-flag.json` | Numeric flag evaluation |
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
