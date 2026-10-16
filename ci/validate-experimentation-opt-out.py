@@ -242,6 +242,101 @@ def validate_sequence(sequence, cases):
     require(requests == completed, f"{location}: every started request must complete or fail")
 
 
+def validate_compiler_generation(root, manifest, checker, configs, evaluations, listed_files):
+    generated_entries = {
+        entry["id"]: entry for entry in manifest["configurations"]
+        if entry["provenance"]["kind"] == "compiler-generated"
+    }
+    generation = manifest.get("compilerGeneration")
+    require(bool(generated_entries) == bool(generation), "compiler generation: metadata/configuration mismatch")
+    if not generation:
+        return
+
+    def check_hash(path, expected):
+        try:
+            data = (root / path).read_bytes()
+        except OSError as error:
+            raise ContractError(f"compiler generation: missing artifact {path}") from error
+        require(bool(data), f"compiler generation: empty artifact {path}")
+        require(hashlib.sha256(data).hexdigest() == expected, f"compiler generation: SHA256 mismatch for {path}")
+
+    generated_files = set()
+    for path_key, hash_key in [
+        ("provenancePath", "provenanceSha256"),
+        ("observationsPath", "observationsSha256"),
+        ("hashVectorsPath", "hashVectorsSha256"),
+    ]:
+        path = generation[path_key]
+        check_hash(path, generation[hash_key])
+        generated_files.add(path)
+        if path.endswith(".json"):
+            require(path not in listed_files, "compiler generation: duplicate JSON path")
+            listed_files.add(path)
+    seen_configs, seen_scenarios = set(), set()
+    for pair in generation["pairs"]:
+        identifier = pair["configurationId"]
+        scenario = pair["scenario"]
+        require(identifier in generated_entries and identifier not in seen_configs,
+                "compiler generation: unknown/duplicate configuration pair")
+        require(scenario not in seen_scenarios, "compiler generation: duplicate scenario")
+        seen_configs.add(identifier)
+        seen_scenarios.add(scenario)
+        entry = generated_entries[identifier]
+        require(entry["provenance"]["scenario"] == scenario, "compiler generation: scenario provenance mismatch")
+        require(CAPABILITY in configs[identifier].get("evaluationCapabilities", []),
+                "compiler generation: missing capability")
+        check_hash(entry["path"], pair["jsonSha256"])
+        check_hash(pair["protobufPath"], pair["protobufSha256"])
+        require(pair["protobufPath"] not in generated_files, "compiler generation: duplicate protobuf path")
+        generated_files.add(pair["protobufPath"])
+    require(seen_configs == set(generated_entries), "compiler generation: every generated configuration needs a pair")
+    actual_generated = {str(path.relative_to(root)) for path in (root / "compiler-generated").rglob("*") if path.is_file()}
+    require(actual_generated == generated_files, "compiler generation: generated artifact enumeration mismatch")
+
+    observations = load(root / generation["observationsPath"])
+    require(isinstance(observations, list), "compiler generation: observations must be an array")
+    observed_names = [item.get("name") for item in observations if isinstance(item, dict)]
+    require(len(observed_names) == len(observations) == len(seen_scenarios) and set(observed_names) == seen_scenarios,
+            "compiler generation: observed scenario coverage mismatch")
+    for observation in observations:
+        pair = next(item for item in generation["pairs"] if item["scenario"] == observation["name"])
+        entry = generated_entries[pair["configurationId"]]
+        require(observation["configuration"] == Path(entry["path"]).name,
+                "compiler generation: observed configuration path mismatch")
+        flags = configs[pair["configurationId"]]["flags"]
+        require(observation["allocationOrder"] == [allocation["key"] for allocation in flags["planner"]["allocations"]],
+                "compiler generation: observed allocation order mismatch")
+
+    vectors = load(root / generation["hashVectorsPath"])
+    check_schema(checker, vectors, "compiler independent hash vectors")
+    require(vectors["kind"] == "independent-shard-vectors", "compiler generation: wrong vector kind")
+    identities, subjects = set(), set()
+    for vector in vectors["vectors"]:
+        key, salt, total = vector["targetingKey"], vector["salt"], vector["totalShards"]
+        identity = (key, salt, total)
+        require(identity not in identities, "compiler generation: duplicate hash vector")
+        identities.add(identity)
+        subjects.add(key)
+        digest = hashlib.md5(f"{salt}-{key}".encode(), usedforsecurity=False).digest()
+        require(digest.hex() == vector["md5"], "compiler generation: independent digest mismatch")
+        require(int.from_bytes(digest[:4], "big") % total == vector["shard"],
+                "compiler generation: independent shard mismatch")
+    roles = [role["targetingKey"] for role in vectors["subjectRoles"]]
+    require(len(roles) == len(set(roles)) and set(roles) == subjects,
+            "compiler generation: subject role coverage mismatch")
+    parity = {case["id"] for case in evaluations.values() if "generated-eligible-parity" in case["tags"]}
+    require(set(generation["eligibleParityCaseIds"]) == parity, "compiler generation: eligible parity case coverage mismatch")
+    covered_configs, covered_subjects = set(), set()
+    for identifier in parity:
+        case = evaluations[identifier]
+        require(not case["expected"]["effectiveExperimentationOptOut"], "compiler generation: parity case must be eligible")
+        require(case["configuration"] in generated_entries, "compiler generation: parity case must use generated configuration")
+        covered_configs.add(case["configuration"])
+        covered_subjects.add(case["context"]["targetingKey"])
+    require(covered_configs == seen_configs, "compiler generation: parity cases must cover all generated configurations")
+    require(covered_subjects == subjects, "compiler generation: vectors must cover the generated parity subjects")
+
+
 def validate(root=SUITE):
     root = Path(root)
     checker = validator()
@@ -278,6 +373,8 @@ def validate(root=SUITE):
                 collected.append(artifact)
             require(ids == entry["ids"], f"{entry['path']}: manifest IDs/order do not match")
         artifacts[kind] = collected
+    evaluations = {case["id"]: case for case in artifacts["evaluation"]}
+    validate_compiler_generation(root, manifest, checker, configs, evaluations, listed_files)
     actual_files = {str(path.relative_to(root)) for path in root.rglob("*.json")}
     require(actual_files == listed_files, f"manifest file coverage mismatch: missing={listed_files - actual_files}, unlisted={actual_files - listed_files}")
     counts = {"configurations": len(configs), "evaluations": len(artifacts["evaluation"]),
@@ -287,7 +384,6 @@ def validate(root=SUITE):
         validate_evaluation(case, configs)
     for case in artifacts["protocol"]:
         validate_protocol(case)
-    evaluations = {case["id"]: case for case in artifacts["evaluation"]}
     for sequence in artifacts["sequence"]:
         validate_sequence(sequence, evaluations)
     invariants = manifest["invariants"]

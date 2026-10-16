@@ -1,8 +1,9 @@
 # Experimentation opt-out contract, version 1
 
 This suite defines subject experimentation opt-out across providers, evaluators,
-the Precompute API, and precompute clients. The fixtures are **reviewed contract
-inputs**, not production compiler output or proof that an SDK implements them.
+the Precompute API, and precompute clients. It includes **reviewed contract
+inputs** and separately identified **compiler-generated artifacts**. Neither
+fixture validation nor compiler generation proves that an SDK implements opt-out.
 
 The contract uses the proposed winner-logging change: ordinary winner rollouts
 have doLog=false. Active experiments, generated holdouts, and experiment-backed
@@ -45,22 +46,50 @@ read it. Unlisted files, missing cases, duplicate IDs, and wrong counts fail val
 | configurations/supported.json | Ordinary rules, experiments, fallbacks, winner states, and holdout states. |
 | configurations/legacy-without-capability.json | Old winner logging and a pruned fallback. Exclusion cannot safely use this artifact. |
 | configurations/missing-dolog.json | Deliberately malformed marked JSON. Exclusion cannot treat a missing classification as ordinary. |
+| configurations/compiler-*.json | Seven verbatim lifecycle outputs from the actual compiler with the proposed changes. |
 | cases/activation.json | Explicit activation and strict boolean handling. |
 | cases/evaluation.json | Allocation order, every randomized arm, identity, ordinary rollouts, winners, canaries, and bandits. |
 | cases/holdouts.json | Both groups before shipment, after a non-control winner, and after a control winner. |
 | cases/compatibility.json | Old or malformed configurations do not silently admit excluded subjects. |
 | cases/telemetry.json | All four combinations of experimentation and evaluation-telemetry opt-out. |
+| cases/compiler-generated.json | Thirty independently authored evaluations against generated lifecycle outputs. |
+| compiler-generated/ | Paired protobuf bytes, generation provenance, observations, and independent shard vectors. |
 | protocol/request-and-response.json | Actual request and response envelopes, malformed options, and missing acknowledgements. |
 | sequences/ | Late responses, failed refresh, deduplication, logout, and cache identity. |
 
-There are 106 evaluation cases, 20 protocol cases, and 9 client sequences.
-The manifest also defines 32 eligible-parity cases and a concurrent-server
+There are 136 evaluation cases, 20 protocol cases, and 9 client sequences.
+The manifest defines 32 reviewed-input eligible-parity cases, 15 generated-input
+eligible-parity cases, and a concurrent-server
 check. Those checks reuse existing case IDs; they do not add new cases.
 
 ### Configuration provenance
 
-Configurations specify expected behavior. Their provenance is
-reviewed-contract-input. They must not be described as compiler-generated.
+The original three configurations specify expected behavior. Their provenance
+is reviewed-contract-input. They must not be described as compiler-generated.
+
+Seven additional configurations have compiler-generated provenance. The manifest
+pairs each JSON file with its deterministic protobuf bytes and checks SHA256 for
+both. It also checks the generation record and exact artifact enumeration.
+
+The generation receipt is in compiler-generated/PROVENANCE.md. It records fixed
+inputs, the command, exact source commit, generator hash, and successful invocation.
+Generation ran from that clean commit. All generated artifacts match its output
+byte for byte.
+
+The generated scenarios cover active 50/50, active 100% single-arm, both completed
+winners, and active/completed experiments combined with holdouts. Their JSON and
+protobuf files were copied verbatim. Do not edit them to satisfy a consumer test;
+regenerate them with the actual compiler and update the recorded provenance.
+
+The generator's eligible examples in compiler-scenarios.json are observations
+from its Go evaluator. They are **not** the shared expected-result oracle.
+The thirty shared cases use different subject IDs and explicit expected identities.
+Independent MD5 vectors establish holdout membership, group, and experimental arm.
+The validator checks the vectors, not an alternate targeting evaluator.
+
+The validator verifies protobuf bytes and pairing, but does not decode protobuf.
+Consumers with protobuf support must decode the paired file and run the same
+generated-input evaluation cases. Other adapters run the paired JSON.
 
 Compiler tests must construct real lifecycle models and run the actual compiler.
 Compare the relevant output with this contract. Establish these properties:
@@ -200,8 +229,9 @@ response. This is a mechanical field mapping, not another evaluator. Separately,
 run the real edge against the same configuration and case. Compare its response
 with the expected assignment.
 
-For each eligibleParityCaseIds case, run the same configuration and context with
-activation enabled and disabled. Require identical identity, value, serial ID,
+Run every case in manifest.invariants.eligibleParityCaseIds and
+manifest.compilerGeneration.eligibleParityCaseIds with activation enabled and disabled.
+Use the same configuration and context. Require identical identity, value, serial ID,
 features, exposure eligibility, and existing reason. The fixed MD5 vectors make
 known arm selection independently inspectable. MD5 is the existing bucketing
 contract, not a security mechanism.

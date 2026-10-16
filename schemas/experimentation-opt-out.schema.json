@@ -14,6 +14,9 @@
     },
     {
       "$ref": "#/$defs/sequence"
+    },
+    {
+      "$ref": "#/$defs/independentShardVectors"
     }
   ],
   "$defs": {
@@ -627,21 +630,47 @@
           "pattern": "^configurations/[a-z0-9-]+\\.json$"
         },
         "provenance": {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "const": "reviewed-contract-input"
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "reviewed-contract-input"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "kind",
+                "description"
+              ],
+              "additionalProperties": false
             },
-            "description": {
-              "type": "string",
-              "minLength": 1
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "compiler-generated"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "scenario": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]*$"
+                }
+              },
+              "required": [
+                "kind",
+                "description",
+                "scenario"
+              ],
+              "additionalProperties": false
             }
-          },
-          "required": [
-            "kind",
-            "description"
-          ],
-          "additionalProperties": false
+          ]
         }
       },
       "required": [
@@ -813,6 +842,89 @@
               "minItems": 1
             }
           }
+        },
+        "compilerGeneration": {
+          "type": "object",
+          "properties": {
+            "provenancePath": {
+              "const": "compiler-generated/PROVENANCE.md"
+            },
+            "provenanceSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "observationsPath": {
+              "const": "compiler-generated/compiler-scenarios.json"
+            },
+            "observationsSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "hashVectorsPath": {
+              "const": "compiler-generated/hash-vectors.json"
+            },
+            "hashVectorsSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pairs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scenario": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9-]*$"
+                  },
+                  "configurationId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9-]*$"
+                  },
+                  "jsonSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "protobufPath": {
+                    "type": "string",
+                    "pattern": "^compiler-generated/compiler-[a-z0-9-]+\\.pb$"
+                  },
+                  "protobufSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "scenario",
+                  "configurationId",
+                  "jsonSha256",
+                  "protobufPath",
+                  "protobufSha256"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "eligibleParityCaseIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "provenancePath",
+            "provenanceSha256",
+            "observationsPath",
+            "observationsSha256",
+            "hashVectorsPath",
+            "hashVectorsSha256",
+            "pairs",
+            "eligibleParityCaseIds"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -826,6 +938,88 @@
         "expectedCounts",
         "bucketing",
         "invariants"
+      ],
+      "additionalProperties": false
+    },
+    "independentShardVectors": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "independent-shard-vectors"
+        },
+        "algorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetingKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "salt": {
+                "type": "string",
+                "minLength": 1
+              },
+              "totalShards": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "md5": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{32}$"
+              },
+              "shard": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "targetingKey",
+              "salt",
+              "totalShards",
+              "md5",
+              "shard"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "subjectRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetingKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "targetingKey",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "algorithm",
+        "vectors",
+        "subjectRoles"
       ],
       "additionalProperties": false
     }

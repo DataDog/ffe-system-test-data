@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Regression tests: invalid contract data must fail before consumers use it."""
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -32,9 +33,13 @@ class ValidatorTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.ContractError, message):
             MODULE.validate(self.root)
 
+    def rehash_generation_file(self, relative, field):
+        digest = hashlib.sha256((self.root / relative).read_bytes()).hexdigest()
+        self.modify("manifest.json", lambda data: data["compilerGeneration"].update({field: digest}))
+
     def test_checked_in_contract(self):
         self.assertEqual(MODULE.validate(self.root), {
-            "configurations": 3, "evaluations": 106, "protocols": 20, "sequences": 9
+            "configurations": 10, "evaluations": 136, "protocols": 20, "sequences": 9
         })
 
     def test_duplicate_json_key(self):
@@ -168,6 +173,46 @@ class ValidatorTest(unittest.TestCase):
             concurrentServerCaseIds=["excluded-control", "excluded-treatment"]
         ))
         self.invalid("both participation states")
+
+    def test_generated_protobuf_corruption(self):
+        path = self.root / "compiler-generated/compiler-active-50-50.pb"
+        path.chmod(0o600)
+        path.write_bytes(path.read_bytes() + b"corruption")
+        self.invalid("SHA256 mismatch")
+
+    def test_generated_json_is_verbatim(self):
+        self.modify("configurations/compiler-active-50-50.json", lambda data: data.update(createdAt="2026-10-17T12:00:00Z"))
+        self.invalid("SHA256 mismatch")
+
+    def test_generated_configuration_requires_pair(self):
+        self.modify("manifest.json", lambda data: data["compilerGeneration"]["pairs"].pop())
+        self.invalid("every generated configuration needs a pair")
+
+    def test_generated_pair_configuration_must_exist(self):
+        self.modify("manifest.json", lambda data: data["compilerGeneration"]["pairs"][0].update(configurationId="unknown"))
+        self.invalid("unknown/duplicate configuration pair")
+
+    def test_unlisted_protobuf_is_rejected(self):
+        (self.root / "compiler-generated/unlisted.pb").write_bytes(b"unlisted")
+        self.invalid("generated artifact enumeration")
+
+    def test_generated_parity_case_cannot_be_omitted(self):
+        self.modify("manifest.json", lambda data: data["compilerGeneration"]["eligibleParityCaseIds"].pop())
+        self.invalid("eligible parity case coverage")
+
+    def test_independent_shard_vector_is_verified_after_rehash(self):
+        self.modify("compiler-generated/hash-vectors.json", lambda data: data["vectors"][0].update(shard=0))
+        self.rehash_generation_file("compiler-generated/hash-vectors.json", "hashVectorsSha256")
+        self.invalid("independent shard mismatch")
+
+    def test_observed_scenario_references_are_checked(self):
+        self.modify("compiler-generated/compiler-scenarios.json", lambda data: data[0].update(configuration="unknown.json"))
+        self.rehash_generation_file("compiler-generated/compiler-scenarios.json", "observationsSha256")
+        self.invalid("observed configuration path mismatch")
+
+    def test_generated_configuration_cannot_lose_provenance(self):
+        self.modify("manifest.json", lambda data: data.pop("compilerGeneration"))
+        self.invalid("metadata/configuration mismatch")
 
 
 if __name__ == "__main__":
