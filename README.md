@@ -175,11 +175,13 @@ old readers cannot silently ignore new inputs. Its manifest requires exact case
 coverage. Run its validator and rejection tests with:
 
 ```bash
+python3 -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
 python3 ci/validate-experimentation-opt-out.py
 python3 ci/test-validate-experimentation-opt-out.py
 ```
 
-These checks require `jsonschema`. They validate fixture data, not SDK behavior.
+These checks use the same schema validator versions as CI. They validate fixture
+data, not SDK behavior.
 
 ### Legacy evaluation fixtures
 

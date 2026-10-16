@@ -28,7 +28,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install schema validator
-        run: pip install jsonschema
+        run: python3 -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
       - name: Validate the new contract and validator rejection cases
         run: |
           python3 ci/validate-experimentation-opt-out.py
