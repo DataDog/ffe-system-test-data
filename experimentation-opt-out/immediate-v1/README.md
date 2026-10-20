@@ -1,7 +1,7 @@
 # Immediate experimentation opt-out
 
 This suite covers the timestamp-based MVP in [dd-trace-go#5666](https://github.com/DataDog/dd-trace-go/pull/5666).
-It contains 39 scenarios and 53 evaluations. SDKs must opt into this suite explicitly.
+It contains 41 scenarios and 57 evaluations. SDKs must opt into this suite explicitly.
 The existing `evaluation-cases/` format and cases remain unchanged.
 
 ## Contract
@@ -48,6 +48,7 @@ These anchors verify unchanged buckets, not exact population counts in a finite 
 | Default, disabled, missing, legacy boolean | Require explicit activation and the current timestamp attribute |
 | Valid and invalid timestamps | Accept supported timestamps; reject malformed context without an exposure |
 | Five value types, ordinary-first, targeted fallback, no fallback | Preserve ordinary delivery and caller defaults |
+| Ordinary percentage rollouts | Preserve non-experiment sharding for opted-out subjects |
 | Missing `doLog`, holdout, logged winner, disabled flag | Record the classifier's current behavior and limits |
 | Control/treatment baselines and withdrawal/re-entry | Preserve eligible buckets, exposure deduplication, and per-evaluation changes |
 | Initially excluded and independent subjects | Do not record false participation or leak state between subjects |

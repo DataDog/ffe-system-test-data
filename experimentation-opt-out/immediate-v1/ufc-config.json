@@ -583,6 +583,78 @@
           "doLog": false
         }
       ]
+    },
+    "ordinary-split": {
+      "key": "ordinary-split",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "rollout",
+          "doLog": false,
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "serialId": 101,
+              "shards": [
+                {
+                  "salt": "opt-out",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "treatment",
+              "serialId": 102,
+              "shards": [
+                {
+                  "salt": "opt-out",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
     }
   }
 }

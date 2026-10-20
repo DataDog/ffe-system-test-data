@@ -1185,5 +1185,83 @@
         "evaluationCount": 0
       }
     ]
+  },
+  {
+    "id": "ordinary-randomized-rollout-control",
+    "description": "Opt-out preserves a non-experiment percentage rollout even though it uses sharding.",
+    "providerOptions": {
+      "experimentationOptOutMode": "IMMEDIATE"
+    },
+    "evaluations": [
+      {
+        "flag": "ordinary-split",
+        "variationType": "STRING",
+        "defaultValue": "application-default",
+        "targetingKey": "subject-0",
+        "attributes": {},
+        "result": {
+          "value": "control",
+          "reason": "SPLIT",
+          "allocationKey": "rollout"
+        },
+        "exposureCount": 0,
+        "evaluationCount": 1
+      },
+      {
+        "flag": "ordinary-split",
+        "variationType": "STRING",
+        "defaultValue": "application-default",
+        "targetingKey": "subject-0",
+        "attributes": {
+          "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z"
+        },
+        "result": {
+          "value": "control",
+          "reason": "SPLIT",
+          "allocationKey": "rollout"
+        },
+        "exposureCount": 0,
+        "evaluationCount": 2
+      }
+    ]
+  },
+  {
+    "id": "ordinary-randomized-rollout-treatment",
+    "description": "Opt-out preserves a non-experiment percentage rollout even though it uses sharding.",
+    "providerOptions": {
+      "experimentationOptOutMode": "IMMEDIATE"
+    },
+    "evaluations": [
+      {
+        "flag": "ordinary-split",
+        "variationType": "STRING",
+        "defaultValue": "application-default",
+        "targetingKey": "subject-2",
+        "attributes": {},
+        "result": {
+          "value": "treatment",
+          "reason": "SPLIT",
+          "allocationKey": "rollout"
+        },
+        "exposureCount": 0,
+        "evaluationCount": 1
+      },
+      {
+        "flag": "ordinary-split",
+        "variationType": "STRING",
+        "defaultValue": "application-default",
+        "targetingKey": "subject-2",
+        "attributes": {
+          "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z"
+        },
+        "result": {
+          "value": "treatment",
+          "reason": "SPLIT",
+          "allocationKey": "rollout"
+        },
+        "exposureCount": 0,
+        "evaluationCount": 2
+      }
+    ]
   }
 ]
