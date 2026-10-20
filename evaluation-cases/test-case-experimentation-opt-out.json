@@ -142,5 +142,53 @@
     "capabilities": {
       "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
+  },
+  {
+    "flag": "new-user-onboarding", "variationType": "STRING", "defaultValue": "default", "targetingKey": "alice",
+    "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": "not-a-timestamp" },
+    "result": { "value": "green", "reason": "TARGETING_MATCH" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "new-user-onboarding", "variationType": "STRING", "defaultValue": "default", "targetingKey": "alice",
+    "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": false },
+    "result": { "value": "green", "reason": "TARGETING_MATCH" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "new-user-onboarding", "variationType": "STRING", "defaultValue": "default", "targetingKey": "alice",
+    "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": null },
+    "result": { "value": "green", "reason": "TARGETING_MATCH" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "special-characters", "variationType": "JSON", "defaultValue": {}, "targetingKey": "ben",
+    "attributes": { "dd_experimentation_opt_out_at": "not-a-timestamp" },
+    "result": { "value": { "a": "піклуватися", "b": "любов" }, "reason": "SPLIT" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": {}, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "integer-flag", "variationType": "INTEGER", "defaultValue": 0, "targetingKey": "5",
+    "attributes": { "dd_experimentation_opt_out_at": { "timestamp": "2026-10-19T12:00:00Z" } },
+    "result": { "value": 1, "reason": "SPLIT" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "integer-flag", "variationType": "INTEGER", "defaultValue": 0, "targetingKey": "5",
+    "attributes": { "dd_experimentation_opt_out_at": ["2026-10-19T12:00:00Z"] },
+    "result": { "value": 1, "reason": "SPLIT" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
   }
 ]

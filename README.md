@@ -138,6 +138,12 @@ RFC3339 timestamp excludes immediately, including a future timestamp. A missing
 attribute leaves evaluation unchanged. An invalid value returns the caller
 default with `ERROR` / `INVALID_CONTEXT`. Default mode ignores the attribute.
 
+Validation applies before allocation selection, including to ordinary flags with
+`doLog=false`. Invalid input must not select an experiment or an ordinary fallback.
+Do not coerce booleans, numbers, null, arrays, or objects into a timestamp or preference.
+SDK diagnostics must identify the attribute and required format without echoing its value.
+The caller must supply a valid timestamp to opt out, or omit the attribute to permit experimentation.
+
 Existing readers can ignore the additional field and continue testing default
 behavior. A supporting SDK adds the capability mapping to its existing reader;
 updating the submodule alone does not test the enabled behavior. SDK tests retain
