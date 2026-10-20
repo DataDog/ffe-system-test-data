@@ -138,6 +138,9 @@ RFC3339 timestamp excludes immediately, including a future timestamp. A missing
 attribute leaves evaluation unchanged. An invalid value returns the caller
 default with `ERROR` / `INVALID_CONTEXT`. Default mode ignores the attribute.
 
+Use the existing allocation `startAt`/`endAt` timestamp format and parsing
+behavior. Do not introduce stricter timestamp syntax for opt-out alone.
+
 Validation applies before allocation selection, including to ordinary flags with
 `doLog=false`. Invalid input must not select an experiment or an ordinary fallback.
 Do not coerce booleans, numbers, null, arrays, or objects into a timestamp or preference.
@@ -212,7 +215,8 @@ Pull requests run a blocking static validation check over `ufc-config.json`
 and every file in `evaluation-cases/`. It rejects invalid JSON, duplicate
 object keys, malformed evaluation-case envelopes, mismatched flag or variation
 map keys, and references to unknown flags without a `FLAG_NOT_FOUND`
-expectation.
+expectation. Capability expectations may instead use `INVALID_CONTEXT` when
+context validation precedes flag lookup. The baseline still requires `FLAG_NOT_FOUND`.
 
 The validator deliberately does not fully schema-check allocation internals.
 Some fixtures contain malformed flag fields on purpose to verify that consumers

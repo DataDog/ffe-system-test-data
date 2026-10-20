@@ -139,7 +139,10 @@ def _validate_evaluation_case(
     for capability, result in capabilities.items():
         if not capability:
             _fail(path, f"{location} capability name must not be empty")
-        _validate_result(path, f"{location} capabilities.{capability}", result, flag, configured_flags)
+        _validate_result(
+            path, f"{location} capabilities.{capability}", result, flag, configured_flags,
+            allow_invalid_context=True,
+        )
 
 
 def _validate_result(
@@ -148,6 +151,8 @@ def _validate_result(
     result: object,
     flag: str,
     configured_flags: dict[str, object],
+    *,
+    allow_invalid_context: bool = False,
 ) -> None:
     if not isinstance(result, dict):
         _fail(path, f"{location} must be an object")
@@ -158,7 +163,8 @@ def _validate_result(
     if "errorCode" in result and not isinstance(result["errorCode"], str):
         _fail(path, f"{location}.errorCode must be a string")
 
-    if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND":
+    pre_lookup_error = allow_invalid_context and result.get("errorCode") == "INVALID_CONTEXT"
+    if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND" and not pre_lookup_error:
         _fail(
             path,
             f"{location} references unknown flag {flag!r} without a FLAG_NOT_FOUND expectation",

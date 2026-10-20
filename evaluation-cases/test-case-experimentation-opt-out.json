@@ -1,5 +1,21 @@
 [
   {
+    "flag": "unknown-opt-out-flag", "variationType": "STRING", "defaultValue": "default", "targetingKey": "subject",
+    "attributes": { "dd_experimentation_opt_out_at": "not-a-timestamp" },
+    "result": { "value": "default", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+    }
+  },
+  {
+    "flag": "special-characters", "variationType": "JSON", "defaultValue": {}, "targetingKey": null,
+    "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
+    "result": { "value": {}, "reason": "ERROR", "errorCode": "TARGETING_KEY_MISSING" },
+    "capabilities": {
+      "experimentationOptOutImmediate": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" }
+    }
+  },
+  {
     "flag": "new-user-onboarding", "variationType": "STRING", "defaultValue": "default", "targetingKey": "19",
     "attributes": { "country": "UK" },
     "result": { "value": "red", "reason": "TARGETING_MATCH" },
