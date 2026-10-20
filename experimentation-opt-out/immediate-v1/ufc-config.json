@@ -1,0 +1,588 @@
+{
+  "createdAt": "2026-10-19T00:00:00Z",
+  "format": "SERVER",
+  "environment": {
+    "name": "test"
+  },
+  "flags": {
+    "string-fallback": {
+      "key": "string-fallback",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "boolean-fallback": {
+      "key": "boolean-fallback",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": false
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "integer-fallback": {
+      "key": "integer-fallback",
+      "enabled": true,
+      "variationType": "INTEGER",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": 1
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": 2
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "numeric-fallback": {
+      "key": "numeric-fallback",
+      "enabled": true,
+      "variationType": "NUMERIC",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": 1.5
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": 2.5
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "json-fallback": {
+      "key": "json-fallback",
+      "enabled": true,
+      "variationType": "JSON",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": {
+            "experience": "experiment"
+          }
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": {
+            "experience": "ordinary"
+          }
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "missing-dolog": {
+      "key": "missing-dolog",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ]
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "no-fallback": {
+      "key": "no-fallback",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "unused"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "targeted-fallback": {
+      "key": "targeted-fallback",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "beta",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "true"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "ordinary-first": {
+      "key": "ordinary-first",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "beta"
+        }
+      },
+      "allocations": [
+        {
+          "key": "beta",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "beta",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "true"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        },
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "disabled-flag": {
+      "key": "disabled-flag",
+      "enabled": false,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "experiment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "holdout": {
+      "key": "holdout",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "status-quo"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "shipped"
+        }
+      },
+      "allocations": [
+        {
+          "key": "holdout",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "logged-winner": {
+      "key": "logged-winner",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "experiment": {
+          "key": "experiment",
+          "value": "winner"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "winner",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "experiment",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "split": {
+      "key": "split",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        },
+        "ordinary": {
+          "key": "ordinary",
+          "value": "ordinary"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment",
+          "doLog": true,
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "serialId": 101,
+              "shards": [
+                {
+                  "salt": "opt-out",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "treatment",
+              "serialId": 102,
+              "shards": [
+                {
+                  "salt": "opt-out",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "ordinary",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "ordinary",
+              "serialId": 42,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    }
+  }
+}

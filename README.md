@@ -166,6 +166,16 @@ file lets downstream tests detect fixture drift.
 
 ## Automated Validation
 
+### Immediate experimentation opt-out
+
+[experimentation-opt-out/immediate-v1](experimentation-opt-out/immediate-v1/README.md)
+defines the timestamp-based immediate-mode contract. It includes provider options,
+ordered evaluations, fallback identity, and cumulative telemetry expectations.
+Consumers must add an explicit runner for this suite; legacy evaluation readers
+do not load it automatically. It does not define future-experiments-only behavior.
+
+### Existing evaluation fixtures
+
 Pull requests run a blocking static validation check over `ufc-config.json`
 and every file in `evaluation-cases/`. It rejects invalid JSON, duplicate
 object keys, malformed evaluation-case envelopes, mismatched flag or variation
