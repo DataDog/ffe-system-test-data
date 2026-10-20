@@ -91,6 +91,7 @@ Each evaluation case uses a universal schema with the following fields:
 | `result.value` | any | The expected evaluation result value |
 | `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
 | `result.errorCode` | string | Optional OpenFeature error code, such as `PARSE_ERROR` or `FLAG_NOT_FOUND` |
+| `capabilities` | object | Optional expected results when a named capability is enabled; uses the same result format |
 
 Example:
 
@@ -106,6 +107,41 @@ Example:
   }
 ]
 ```
+
+### Optional capabilities
+
+Every case still runs with default provider options and checks `result`.
+For each supported entry in `capabilities`, enable that capability and repeat the
+same evaluation. Check its expected result instead. Ignore unsupported entries,
+not the baseline case. Capabilities run separately, not in combination.
+
+`experimentationOptOutImmediate` enables immediate experimentation opt-out. The
+input stays in `attributes.dd_experimentation_opt_out_at`. For example:
+
+```json
+{
+  "flag": "integer-flag",
+  "variationType": "INTEGER",
+  "defaultValue": 0,
+  "targetingKey": "5",
+  "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
+  "result": { "value": 1, "reason": "SPLIT" },
+  "capabilities": {
+    "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+  }
+}
+```
+
+The new cases reuse `ufc-config.json`. Immediate mode skips allocations whose
+`doLog` is true (or omitted), then continues ordinary allocations. A valid
+RFC3339 timestamp excludes immediately, including a future timestamp. A missing
+attribute leaves evaluation unchanged. An invalid value returns the caller
+default with `ERROR` / `INVALID_CONTEXT`. Default mode ignores the attribute.
+
+Existing readers can ignore the additional field and continue testing default
+behavior. A supporting SDK adds the capability mapping to its existing reader;
+updating the submodule alone does not test the enabled behavior. SDK tests retain
+responsibility for telemetry, cache state, and provider lifecycle.
 
 ### SDK-Specific Fields
 
@@ -165,16 +201,6 @@ rejected syntax does not change the authoring contract. The adjacent SHA-256
 file lets downstream tests detect fixture drift.
 
 ## Automated Validation
-
-### Immediate experimentation opt-out
-
-[experimentation-opt-out/immediate-v1](experimentation-opt-out/immediate-v1/README.md)
-defines the timestamp-based immediate-mode contract. It includes provider options,
-ordered evaluations, fallback identity, and cumulative telemetry expectations.
-Consumers must add an explicit runner for this suite; legacy evaluation readers
-do not load it automatically. It does not define future-experiments-only behavior.
-
-### Existing evaluation fixtures
 
 Pull requests run a blocking static validation check over `ufc-config.json`
 and every file in `evaluation-cases/`. It rejects invalid JSON, duplicate

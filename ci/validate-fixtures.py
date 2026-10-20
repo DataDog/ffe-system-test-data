@@ -132,13 +132,31 @@ def _validate_evaluation_case(
     if not isinstance(value["attributes"], dict):
         _fail(path, f"{location} attributes must be an object")
 
-    result = value["result"]
+    _validate_result(path, f"{location} result", value["result"], flag, configured_flags)
+    capabilities = value.get("capabilities", {})
+    if not isinstance(capabilities, dict):
+        _fail(path, f"{location} capabilities must be an object")
+    for capability, result in capabilities.items():
+        if not capability:
+            _fail(path, f"{location} capability name must not be empty")
+        _validate_result(path, f"{location} capabilities.{capability}", result, flag, configured_flags)
+
+
+def _validate_result(
+    path: Path,
+    location: str,
+    result: object,
+    flag: str,
+    configured_flags: dict[str, object],
+) -> None:
     if not isinstance(result, dict):
-        _fail(path, f"{location} result must be an object")
+        _fail(path, f"{location} must be an object")
     if "value" not in result:
-        _fail(path, f"{location} result must include value")
+        _fail(path, f"{location} must include value")
     if not isinstance(result.get("reason"), str) or not result["reason"]:
-        _fail(path, f"{location} result.reason must be a non-empty string")
+        _fail(path, f"{location}.reason must be a non-empty string")
+    if "errorCode" in result and not isinstance(result["errorCode"], str):
+        _fail(path, f"{location}.errorCode must be a string")
 
     if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND":
         _fail(

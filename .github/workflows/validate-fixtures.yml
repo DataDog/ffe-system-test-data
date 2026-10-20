@@ -5,8 +5,6 @@ on:
     paths:
       - .github/workflows/validate-fixtures.yml
       - ci/validate-fixtures.py
-      - ci/validate-immediate-opt-out.py
-      - experimentation-opt-out/immediate-v1/**
       - evaluation-cases/**
       - ufc-config.json
 
@@ -31,6 +29,3 @@ jobs:
 
       - name: Validate fixtures
         run: python3 ci/validate-fixtures.py
-
-      - name: Validate immediate experimentation opt-out
-        run: python3 ci/validate-immediate-opt-out.py
