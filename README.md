@@ -537,8 +537,10 @@ for the integration checklist.
 Fixture pull requests also run the canonical evaluation suite from Go, Java,
 JavaScript, Python, Ruby, .NET, PHP, and `libdatadog` against both the
 pull-request merge base and proposed head. Each job classifies the result as
-compatible, a new regression, an improvement, or existing downstream drift and
-uploads the two logs.
+compatible, a new regression, an improvement, or inconclusive and uploads the
+two logs. A result is inconclusive when both revisions fail: whole-suite exit
+codes alone cannot prove that every failure in the proposed fixture set already
+existed at the merge base.
 
 These compatibility jobs are intentionally advisory and are allowed to fail.
 They must not be configured as required merge checks. Their purpose is to show
