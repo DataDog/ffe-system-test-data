@@ -1442,7 +1442,7 @@
           "value": {
             "integer": 1,
             "string": "one",
-            "float": 1
+            "float": 1.0
           }
         },
         "two": {
@@ -1450,7 +1450,7 @@
           "value": {
             "integer": 2,
             "string": "two",
-            "float": 2
+            "float": 2.0
           }
         },
         "empty": {
