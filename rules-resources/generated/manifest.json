@@ -76,6 +76,7 @@
     "evaluation-cases/test-case-disabled-flag.json": "55641ba8b7f844f5980a070b41e77d3f71c74ed7afb6f5d7cd7a451303a3b2e9",
     "evaluation-cases/test-case-empty-flag.json": "9c7128e8d783ffcf557dad0c440109334b4b8f0983c52ef97a68f2391a5a2158",
     "evaluation-cases/test-case-empty-string-variation.json": "99e6efa47cb3fee91e49d4ea5bdb46586dcd8bc725883acf5a58b5b662f43ccc",
+    "evaluation-cases/test-case-experimentation-opt-out.json": "d0eead2d94911b1aad22ec1e95adc814baed0b42a344e9bb897a880478158a68",
     "evaluation-cases/test-case-falsy-value-assignments.json": "19433503ea63bf34b65903e6fe30e5644647ea296c64d699d89ffbeaab26f312",
     "evaluation-cases/test-case-flag-with-empty-string.json": "c2bff6bec92732291626da7136ab643cb238b29158990517cf461e00ee241d6b",
     "evaluation-cases/test-case-integer-flag.json": "21c80fd9c03d7bc56ee304c7cae7db9d795a5257cda5bc9d9b171eae6b557d2f",
