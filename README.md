@@ -91,6 +91,8 @@ Each evaluation case uses a universal schema with the following fields:
 | `result.value` | any | The expected evaluation result value |
 | `result.reason` | string | The expected OpenFeature reason: `STATIC`, `SPLIT`, `TARGETING_MATCH`, `DEFAULT`, `ERROR`, `DISABLED` |
 | `result.errorCode` | string | Optional OpenFeature error code, such as `PARSE_ERROR` or `FLAG_NOT_FOUND` |
+| `result.serialId` | integer or null | Optional expected selected split serial ID. `0` is valid; `null` requires no serial ID; omission leaves it unspecified |
+| `result.doLog` | boolean | Optional expected selected allocation's logging decision |
 | `capabilities` | object | Optional expected results when a named capability is enabled; uses the same result format |
 
 Example:
@@ -183,12 +185,37 @@ The future-mode cases reuse existing flags. Added activation fields do not chang
 baseline or immediate results. Malformed activation parsing, configuration refresh,
 exposure deduplication, and telemetry independence also need SDK-local tests.
 
+### Selected split and allocation metadata
+
+`test-case-serial-id-metadata.json` and `test-case-span-enrichment-inputs.json`
+extract the reusable flag definitions and evaluation inputs from
+[`system-tests` at `f2cbbc901577b80b8b6e7bf8757a46e0b8a10ce5`](https://github.com/DataDog/system-tests/tree/f2cbbc901577b80b8b6e7bf8757a46e0b8a10ce5/tests/parametric/test_ffe).
+The nine flag definitions in `ufc-config.json` preserve the original configs'
+serial IDs, targeting rules, variations, and `doLog` values.
+
+Readers that expose selected split/allocation metadata should assert
+`result.serialId` and `result.doLog` when present. Preserve the distinction
+between a missing expectation, an explicit `null`, and the valid ID `0`.
+The VIP and standard contexts select different allocations and serial IDs;
+the repeated evaluations in the serial-ID file must run in order against the
+same initialized evaluator. These expectations describe the UFC selection and
+can be mapped to a native result or an SDK's evaluation-details metadata.
+
+Existing readers can continue checking value, reason, and error code. They need
+explicit metadata assertions to gain coverage for dropped zero IDs, fabricated
+missing IDs, selecting the wrong split's ID, or losing the `doLog=false` decision.
+The shared span-enrichment inputs provide IDs `100`, `108`, `128`, and `130` for
+combined encoding and ID `200` with logging disabled. Downstream integration tests
+retain trace construction, root-span propagation, subject hashing, encoding, and
+capacity-limit assertions.
+
 ### SDK-Specific Fields
 
 The shared fixtures intentionally exclude SDK-specific fields such as `variant` and `flagMetadata`. SDKs that need these fields should compute them at test load time from the universal fields. For example:
 
 - **variant**: Derive from the flag configuration in `ufc-config.json` by matching the result value
-- **flagMetadata**: Extract from the flag's metadata field in `ufc-config.json`
+- **flagMetadata**: Map the selected split's `serialId` and allocation's `doLog` to
+  the SDK's metadata keys; assert the optional expected fields above directly
 
 ### Precomputed Assignment Fixtures (`precomputed-assignments/cases/*.json`)
 

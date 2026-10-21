@@ -162,6 +162,10 @@ def _validate_result(
         _fail(path, f"{location}.reason must be a non-empty string")
     if "errorCode" in result and not isinstance(result["errorCode"], str):
         _fail(path, f"{location}.errorCode must be a string")
+    if "serialId" in result and result["serialId"] is not None and type(result["serialId"]) is not int:
+        _fail(path, f"{location}.serialId must be an integer or null")
+    if "doLog" in result and not isinstance(result["doLog"], bool):
+        _fail(path, f"{location}.doLog must be a boolean")
 
     pre_lookup_error = allow_invalid_context and result.get("errorCode") == "INVALID_CONTEXT"
     if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND" and not pre_lookup_error:
