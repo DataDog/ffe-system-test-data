@@ -36,6 +36,13 @@ Thank you for your interest in contributing to the FFE system test data reposito
 3. If your test case requires a new flag, add the flag definition to `ufc-config.json`
 4. Keep the fixture SDK-neutral. Do not include SDK-specific fields such as `variant` or `flagMetadata`; downstream SDKs should derive those from `ufc-config.json` when they need them.
 
+For selected split/allocation metadata, add optional `result.serialId` (integer or
+`null`) and `result.doLog` (boolean) expectations. A serial ID of `0` is valid;
+`null` asserts absence, while omitting the field leaves it unspecified. Keep
+SDK-specific metadata key names in the downstream adapter. See
+[selected metadata fixtures](README.md#selected-split-and-allocation-metadata)
+for the extraction from system-tests and the integration-test boundary.
+
 Malformed flags must be isolated during configuration ingestion. Exclude them
 from the active evaluation map, retain only their rejected keys for the current
 configuration, and return the caller default with `ERROR` / `PARSE_ERROR` when

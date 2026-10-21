@@ -5126,6 +5126,282 @@
           "doLog": true
         }
       ]
+    },
+    "serial-id-basic-flag": {
+      "key": "serial-id-basic-flag",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        },
+        "off": {
+          "key": "off",
+          "value": false
+        }
+      },
+      "allocations": [
+        {
+          "key": "on-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [],
+              "serialId": 42
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "serial-id-zero-flag": {
+      "key": "serial-id-zero-flag",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        },
+        "off": {
+          "key": "off",
+          "value": false
+        }
+      },
+      "allocations": [
+        {
+          "key": "zero-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [],
+              "serialId": 0
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "serial-id-missing-flag": {
+      "key": "serial-id-missing-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        }
+      },
+      "allocations": [
+        {
+          "key": "no-serial-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "serial-id-targeting-flag": {
+      "key": "serial-id-targeting-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "vip": {
+          "key": "vip",
+          "value": "vip"
+        },
+        "standard": {
+          "key": "standard",
+          "value": "standard"
+        }
+      },
+      "allocations": [
+        {
+          "key": "vip-allocation",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "segment",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "vip"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "vip",
+              "shards": [],
+              "serialId": 201
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "default-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "standard",
+              "shards": [],
+              "serialId": 200
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "basic-flag": {
+      "key": "basic-flag",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        },
+        "off": {
+          "key": "off",
+          "value": false
+        }
+      },
+      "allocations": [
+        {
+          "key": "on-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [],
+              "serialId": 100
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "experiment-flag": {
+      "key": "experiment-flag",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        }
+      },
+      "allocations": [
+        {
+          "key": "experiment-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "treatment",
+              "shards": [],
+              "serialId": 108
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "no-log-flag": {
+      "key": "no-log-flag",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        },
+        "off": {
+          "key": "off",
+          "value": false
+        }
+      },
+      "allocations": [
+        {
+          "key": "no-log-allocation",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [],
+              "serialId": 200
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "multi-serial-flag-1": {
+      "key": "multi-serial-flag-1",
+      "enabled": true,
+      "variationType": "INTEGER",
+      "variations": {
+        "v1": {
+          "key": "v1",
+          "value": 1
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation-1",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "v1",
+              "shards": [],
+              "serialId": 128
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "multi-serial-flag-2": {
+      "key": "multi-serial-flag-2",
+      "enabled": true,
+      "variationType": "INTEGER",
+      "variations": {
+        "v2": {
+          "key": "v2",
+          "value": 2
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation-2",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "v2",
+              "shards": [],
+              "serialId": 130
+            }
+          ],
+          "doLog": true
+        }
+      ]
     }
   }
 }
