@@ -152,6 +152,37 @@ behavior. A supporting SDK adds the capability mapping to its existing reader;
 updating the submodule alone does not test the enabled behavior. SDK tests retain
 responsibility for telemetry, cache state, and provider lifecycle.
 
+#### Future experiments only
+
+`experimentationOptOutFutureExperimentsOnly` uses the same subject timestamp.
+Map it to the provider's future-experiments-only mode, or
+`DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=future_experiments_only`.
+
+| Allocation | With a valid subject cutoff |
+| --- | --- |
+| `doLog=false` | Evaluate normally. |
+| `doLog=true`, activation before cutoff | Evaluate normally, including normal exposures. |
+| `doLog=true`, activation at or after cutoff | Skip before targeting and sharding. Continue later allocations. |
+| `doLog=true`, missing or null activation | Skip. Unknown activation does not establish an older experiment. |
+
+The allocation field is `randomizationActivatedAt`, an optional RFC3339 timestamp.
+Compare instants, not timestamp strings. Do not use `startAt`, `endAt`, the
+configuration's `createdAt`, or the SDK's clock as a substitute. Existing schedule
+checks still apply to eligible allocations. No subject history or SDK persistence is required.
+
+The cutoff concerns allocation activation, not subject enrollment. An older
+experiment can still assign a subject for the first time. Holdout allocations
+use the same rule; the compiler supplies their activation metadata.
+
+An absent subject timestamp preserves normal evaluation. Invalid subject input
+returns `ERROR` / `INVALID_CONTEXT` before allocation selection, as in immediate mode.
+A future cutoff is used directly; it does not schedule a future preference change.
+Removing the attribute permits experimentation again.
+
+The future-mode cases reuse existing flags. Added activation fields do not change
+baseline or immediate results. Malformed activation parsing, configuration refresh,
+exposure deduplication, and telemetry independence also need SDK-local tests.
+
 ### SDK-Specific Fields
 
 The shared fixtures intentionally exclude SDK-specific fields such as `variant` and `flagMetadata`. SDKs that need these fields should compute them at test load time from the universal fields. For example:
