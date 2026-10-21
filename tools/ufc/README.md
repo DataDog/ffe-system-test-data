@@ -16,14 +16,14 @@ attempts every flag and reports included or omitted with an explicit error reaso
 Generated JSON retains original metadata and included flag definitions; only
 reported failed flags are removed. Canonical JSON and evaluation cases never change.
 
-Each resource contains filtered `ufc.generated.json`, raw `ufc.pb`, the conversion
-`report.json`, and `configuration-wire.json`. The wire file is the UTF-8 portable
+Each resource commits raw `ufc.pb` and `configuration-wire.json`. Generation also
+writes local `ufc.generated.json`, `report.json` and `parity.json` diagnostics. The wire file is the UTF-8 portable
 wire string itself, without extra JSON quoting. Public pinned
 `@datadog/flagging-core@3.0.1` APIs decode protobuf, serialize wire, and parse it
 again. Parser failure, empty configurations, changed semantic payload and unstable
 wire serialization fail generation. No timestamps, ETags or split reasons are added.
 
-`parity.json` is diagnostic: existing expectations are compared with original JSON,
+`parity.json` is a gitignored local diagnostic: existing expectations are compared with original JSON,
 filtered JSON, binary and wire for cases whose flags were converted. It records
 mismatches and cases whose flags are absent from generated configuration.
 SDK mismatches never filter flags, rewrite expectations, or block artifact generation.
@@ -32,10 +32,14 @@ browser offline initialization proof. The evaluation clock is fixed in the diagn
 
 Generation stages the whole artifact set before replacing it. Check mode writes
 nothing in the repository and detects stale, missing and unexpected artifacts.
-The manifest hashes source, catalog, tooling, schemas, cases and all generated files.
+The manifest hashes source, catalogue, tooling, schemas, cases and the committed protobuf/wire artifacts. Local diagnostic files are excluded.
 The source lock records exact production codec/CLI sources. The supplied executable
 must match its expected SHA256. Source correspondence is declared build provenance,
 not a cryptographic build attestation. No immutable published converter distribution
 is configured; local generation uses the companion dd-source CLI. No CI added.
 
-`ufc.generated.json` and `report.json` are local diagnostics: gitignored and excluded from the committed artifact manifest. Regenerate them locally when inspecting conversion. The report includes a structural JSON comparison (ignoring whitespace/object-key order): exact source equality, equality after only reported omissions, and the omitted flag keys. With omitted flags, exact equality is false even when all retained content is unchanged.
+`ufc.generated.json`, `report.json` and `parity.json` are local diagnostics: gitignored and excluded from the committed artifact manifest. Regenerate them locally when inspecting conversion. The report includes a structural JSON comparison (ignoring whitespace/object-key order): exact source equality, equality after only reported omissions, and the omitted flag keys. With omitted flags, exact equality is false even when all retained content is unchanged.
+
+Validation works without local diagnostics. When present, they are checked against
+the source and current artifacts; missing diagnostics do not invalidate a clean
+checkout. Repeat-generation checks compare only committed artifacts.

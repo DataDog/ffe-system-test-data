@@ -125,12 +125,12 @@ export async function generate({ converter, converterSha256, converterSource, ch
       await fs.writeFile(path.join(directory, 'parity.json'), json(proof));
       if (proof.failures.length) console.warn(`${resource.id}: ${proof.failures.length} evaluation cases differ; see parity.json (diagnostic, not a generation filter)`);
       const artifacts = {};
-      for (const name of (await filesUnder(directory)).filter(name => !['ufc.generated.json', 'report.json'].includes(name))) artifacts[name] = { sha256: sha256(await fs.readFile(path.join(directory, name))) };
+      for (const name of (await filesUnder(directory)).filter(name => !['ufc.generated.json', 'report.json', 'parity.json'].includes(name))) artifacts[name] = { sha256: sha256(await fs.readFile(path.join(directory, name))) };
       manifest.resources.push({ id: resource.id, source: resource.source, sourceSha256: sha256(sourceBytes), convertedFlagKeys, omittedFlagKeys, artifacts });
     }
     await fs.writeFile(path.join(output, 'manifest.json'), json(manifest));
     const destination = path.join(base, 'rules-resources/generated');
-    const ignored = catalog.resources.flatMap(resource => ['ufc.generated.json', 'report.json'].map(name => `${resource.id}/${name}`));
+    const ignored = catalog.resources.flatMap(resource => ['ufc.generated.json', 'report.json', 'parity.json'].map(name => `${resource.id}/${name}`));
     const differences = await compareTrees(output, destination, ignored);
     if (check && differences.length) throw new Error(`Generated artifacts differ:\n${differences.join('\n')}\nRun npm --prefix tools/ufc run generate -- --converter PATH --converter-sha256 SHA256 --converter-source DD_SOURCE_PATH`);
     if (!check) {

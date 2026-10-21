@@ -39,8 +39,8 @@ export async function validate(base = root) {
     assert.equal(resource.sourceSha256, sha256(await fs.readFile(await sourcePath(resource.source, base))), `${resource.source} changed: regenerate rules resources`);
     const definition = catalog.resources.find(x => x.id === resource.id);
 
-    for (const required of ['ufc.pb', 'configuration-wire.json', 'parity.json']) assert.ok(Object.hasOwn(resource.artifacts, required), `Missing artifact contract: ${required}`);
-    assert.ok(!Object.hasOwn(resource.artifacts, 'ufc.generated.json') && !Object.hasOwn(resource.artifacts, 'report.json'), 'Local diagnostics must not be committed manifest artifacts');
+    for (const required of ['ufc.pb', 'configuration-wire.json']) assert.ok(Object.hasOwn(resource.artifacts, required), `Missing artifact contract: ${required}`);
+    for (const name of ['ufc.generated.json', 'report.json', 'parity.json']) assert.ok(!Object.hasOwn(resource.artifacts, name), 'Local diagnostics must not be committed manifest artifacts');
     for (const [name, entry] of Object.entries(resource.artifacts)) {
       assert.equal(path.basename(name), name, 'Artifact names must be local filenames');
       const relative = `${resource.id}/${name}`;
@@ -74,7 +74,8 @@ export async function validate(base = root) {
       }
     }
     const report = parity(base, binary, wire, filtered);
-    assert.deepEqual(report, JSON.parse(await fs.readFile(path.join(directory, 'parity.json'))), 'Evaluation diagnostics changed');
+    const localParity = await localDiagnostic('parity.json');
+    if (localParity) assert.deepEqual(report, localParity, 'Local evaluation diagnostics changed');
     exercised += report.exercisedCases;
   }
   async function walk(directory, prefix = '') {

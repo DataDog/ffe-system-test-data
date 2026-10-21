@@ -32,10 +32,13 @@ test('integrity gate rejects source drift, deletion, extra output and changed to
   await validate(directory);
   const generated = path.join(directory, 'rules-resources/generated/canonical-evaluator');
   const manifest = JSON.parse(await fs.readFile(path.join(directory, 'rules-resources/generated/manifest.json')));
-  assert.ok(!Object.hasOwn(manifest.resources[0].artifacts, 'ufc.generated.json'));
-  assert.ok(!Object.hasOwn(manifest.resources[0].artifacts, 'report.json'));
-  await fs.rm(path.join(generated, 'ufc.generated.json'), {force:true});
-  await fs.rm(path.join(generated, 'report.json'), {force:true});
+  const parityPath = path.join(generated, 'parity.json');
+  await fs.writeFile(parityPath, '{}');
+  await assert.rejects(validate(directory), /Local evaluation diagnostics changed/);
+  for (const name of ['ufc.generated.json', 'report.json', 'parity.json']) {
+    assert.ok(!Object.hasOwn(manifest.resources[0].artifacts, name));
+    await fs.rm(path.join(generated, name), { force: true });
+  }
   await validate(directory); // A fresh checkout has no local conversion diagnostics.
   const source = path.join(directory, 'ufc-config.json'), original = await fs.readFile(source);
   await fs.appendFile(source, '\n'); await assert.rejects(validate(directory)); await fs.writeFile(source, original);
