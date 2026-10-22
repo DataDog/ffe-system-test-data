@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean SDK audit"
+  short_description: "Compare Lean contracts with production SDK behavior"
+  default_prompt: "Use $lean-sdk-audit to complete the requested Lean to SDK workflow with pinned evidence."

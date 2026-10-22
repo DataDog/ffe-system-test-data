@@ -1,0 +1,601 @@
+{
+  "schema_version": 1,
+  "revision": "go-stack-5666-5700-proposal-v1",
+  "status": "proposal",
+  "fleet_approved": false,
+  "imported_browser_revision": "pr-423-proposal-v2-ack",
+  "conflicts": [
+    {
+      "id": "C001",
+      "decisions": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "input": "2026-10-19t08:00:00z",
+      "browser": "accepted",
+      "go": "rejected",
+      "action": "review a shared timestamp profile; do not rubber-stamp current native-parser parity"
+    },
+    {
+      "id": "C002",
+      "decisions": [
+        "D004"
+      ],
+      "input": {
+        "mode": "disabled",
+        "activation": "invalid",
+        "attribute": "valid"
+      },
+      "browser": "normal evaluation",
+      "go": "affected flag PARSE_ERROR",
+      "reviewer_alternative": "normal evaluation"
+    },
+    {
+      "id": "C003",
+      "decisions": [
+        "D004"
+      ],
+      "input": {
+        "mode": "future_experiments_only",
+        "activation": "invalid",
+        "attribute": "valid",
+        "doLog": true
+      },
+      "browser": "PARSE_ERROR",
+      "go": "PARSE_ERROR",
+      "reviewer_alternative": "skip allocation; ordinary fallback"
+    }
+  ],
+  "decisions": [
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D001",
+      "provenance": [
+        {
+          "source": "c4343858124",
+          "stage": "requested",
+          "summary": "Distinguish pending assignments from malformed input; reviewer reports mobile PROVIDER_NOT_READY and a withholding mutant surviving 514 browser tests.",
+          "version": "5e9709b84588b3e93f7847517840c375d05f0bd0"
+        },
+        {
+          "source": "c4344038513",
+          "stage": "initially_declined",
+          "summary": "Author considers request outside feature scope and suggests RECONCILING."
+        },
+        {
+          "source": "c4344393836",
+          "stage": "clarified",
+          "summary": "Reviewer distinguishes RECONCILING status from evaluation error code and demonstrates new enabled-mode behavior at d956b19 versus merge base.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "c4348000803",
+          "stage": "accepted",
+          "summary": "Author reports remap implemented, including failed refresh; malformed and parse errors preserved.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "c4348261555",
+          "stage": "reviewer_confirmed",
+          "summary": "Reviewer reruns probes and confirms both enabled modes, absent attribute, and malformed-input distinction.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "failed_refresh": "PROVIDER_NOT_READY",
+        "malformed": "INVALID_CONTEXT",
+        "pending_valid_context": "PROVIDER_NOT_READY",
+        "status_is_separate": true
+      },
+      "statement": "With either enabled mode, a well-formed requested context cannot use another context's assignments. Until usable assignments arrive, including after a failed refresh or missing acknowledgement, evaluation returns the default with PROVIDER_NOT_READY. Malformed input keeps INVALID_CONTEXT; configuration PARSE_ERROR is preserved. Disabled mode retains previous assignments during a context change.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D002",
+      "provenance": [
+        {
+          "source": "c4343858124",
+          "stage": "clarified",
+          "summary": "Pending context rules apply even when opt-out attribute is absent."
+        },
+        {
+          "source": "c4348261555",
+          "stage": "reviewer_confirmed",
+          "summary": "Malformed input remains INVALID_CONTEXT, independently of pending assignment behavior.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Absent versus malformed opt-out attribute"
+      },
+      "statement": "Disabled mode ignores the attribute. With an enabled mode, an absent own property means no opt-out policy; a present non-string or invalid timestamp is invalid context and prevents an assignment request. Absent does not exempt enabled online providers from context isolation.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4327104152"
+      ],
+      "go_reconciliation": "Go author explicitly retains strict invalid-subject handling; accepted in Go scope, fleet rollout still requires per-target validation."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D003",
+      "provenance": [
+        {
+          "source": "c4343858130",
+          "stage": "requested",
+          "summary": "Reviewer identifies repeated activation parsing and disabled-mode cost; proposed initial patch gates evaluation-time validation."
+        },
+        {
+          "source": "c4344174742",
+          "stage": "accepted_alternative",
+          "summary": "Author moves parsing to configuration preparation while retaining mode-independent validation.",
+          "version": "8a3e76c679ac290eb06c43936597c241029199b3"
+        },
+        {
+          "source": "c4344394017",
+          "stage": "partially_confirmed",
+          "summary": "Reviewer confirms one getter read through 1000 evaluations but identifies remaining global error-policy regression.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "c4348001493",
+          "stage": "accepted",
+          "summary": "Author records explicit valid/missing/invalid states and parse-once behavior.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Prepare activation once, preserve invalid state"
+      },
+      "statement": "Read and parse activation when configuration is prepared, retain valid/missing/invalid states, and reuse prepared data across evaluations. Configurations are snapshots; changed flags require replacement. This preparation policy does not itself determine which modes return errors.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D004",
+      "provenance": [
+        {
+          "source": "c4343858130",
+          "stage": "requested",
+          "summary": "Scope activation validation errors to opted-out future mode."
+        },
+        {
+          "source": "c4344174742",
+          "stage": "not_yet_resolved",
+          "summary": "Parse-once fix initially keeps validation independent of mode.",
+          "version": "8a3e76c679ac290eb06c43936597c241029199b3"
+        },
+        {
+          "source": "c4344394017",
+          "stage": "reiterated",
+          "summary": "Reviewer reports unrelated Node evaluations failing on unreachable malformed activation; recommends retaining validity and gating only its consumption.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "c4348001493",
+          "stage": "accepted",
+          "summary": "Author scopes failure to opted-out future mode.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "c4348262068",
+          "stage": "reviewer_confirmed",
+          "summary": "Reviewer confirms formerly failing Node cases now evaluate normally and four scope tests pass.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "activation_error_scope": "future-mode-and-valid-opt-out",
+        "parse_once": true
+      },
+      "statement": "An invalid activation, including on an unreachable allocation, causes PARSE_ERROR for that flag only when an opted-out subject uses FutureExperimentsOnly. Disabled, Immediate, and subjects without a cutoff do not require activation validity. Missing activation is a separate state that future mode excludes.",
+      "central_status": "unresolved-conflict",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5700-4340843853",
+        "go-5700-4342540303"
+      ],
+      "go_reconciliation": "OPEN CONFLICT: browser future-only PARSE_ERROR, Go all-mode per-flag quarantine, and reviewer invalid-as-missing are three distinct choices."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D005",
+      "provenance": [
+        {
+          "source": "c4343858199",
+          "stage": "requested",
+          "summary": "Reviewer asks for Chrono RFC3339 cutoff grammar and broader serde activation grammar, including space, leap second and Unicode minus extensions; reports chrono 0.4.45."
+        },
+        {
+          "source": "c4344361843",
+          "stage": "declined",
+          "summary": "Author chooses small canonical subset across Rust, Node and Go, rather than reproducing Chrono extensions."
+        },
+        {
+          "source": "c4344408103",
+          "stage": "implemented_then_partly_superseded",
+          "summary": "Author reports strict subset with rejection of excess precision. Lowercase and precision parts later changed by D006.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "c4348261012",
+          "stage": "narrowed_request",
+          "summary": "Reviewer asks only for four mobile-compatible lowercase/precision rows; says all three SDKs reject broader forms."
+        },
+        {
+          "source": "r5614240605",
+          "stage": "approved_with_caveat",
+          "summary": "Reviewer approves JS at 3704387 but leaves edge-versus-SDK inconsistency and a loosely held preference for edge as source of truth. This is not an approved fleet-wide policy.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "ascii_only": true,
+        "calendar": "proleptic-Gregorian",
+        "seconds": "00..59",
+        "separator": "T-or-t",
+        "zone": "Z-or-z-or-signed-HH:mm"
+      },
+      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric \u00b1HH:mm offsets or Z/z, seconds 00\u201359, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D006",
+      "provenance": [
+        {
+          "source": "c4344408103",
+          "stage": "earlier_decision",
+          "summary": "Excess fractional precision rejected deliberately, with uppercase-only subset.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "c4348261012",
+          "stage": "requested_reversal",
+          "summary": "Reviewer reports 4/18 input disagreements against copied Android f335b48 and iOS 4057c07 parsers, and Chrono 0.4.45 at edge 7a1f3c5. These are comment-reported probe results, not this audit's native runs.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "c4348403258",
+          "stage": "accepted",
+          "summary": "Author confirms lowercase and truncation in final head; redundant JavaScript regex check removed separately in 22d0fd4.",
+          "version": "38d611cf4c73b9687b97f7da0f8224d2fefab966"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "fraction": "truncate-to-nine-without-rounding",
+        "lowercase": true
+      },
+      "statement": "Accept lowercase t/z; truncate digits beyond nine fractional places without rounding; normalize offsets and trailing fractional zeros so equality uses the instant at nanosecond precision. Apply the same normalization to subject cutoff, JSON activation, and response acknowledgement.",
+      "central_status": "unresolved-conflict",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ],
+      "go_reconciliation": "OPEN CONFLICT: latest browser accepts lowercase and truncates excess precision; Go rejects lowercase. Earlier uppercase-only browser policy was superseded."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D007",
+      "provenance": [
+        {
+          "source": "c4343858199",
+          "stage": "identified",
+          "summary": "Reviewer reports year 0000 with +01:00 normalizes to year -1 at edge, whose acknowledgement cannot be parsed back by SDKs; suggests rejecting such edge inputs."
+        },
+        {
+          "source": "c4348261012",
+          "stage": "reviewer_reported_fixed_in_js",
+          "summary": "Reviewer says JS UTC-year boundary fixed by a96b572 and proposed mobile probes reject that case; edge still accepts.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "c4348403258",
+          "stage": "accepted",
+          "summary": "Author reports final docs/tests cover timezone offsets and nanosecond boundaries.",
+          "version": "38d611cf4c73b9687b97f7da0f8224d2fefab966"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "offset_hour_max": 23,
+        "offset_minute_max": 59,
+        "utc_year": "0000..9999",
+        "written_year": "0000..9999"
+      },
+      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000\u20139999; equivalent timezone representations acknowledge the same instant.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D008",
+      "provenance": [
+        {
+          "source": "c4343858155",
+          "stage": "requested",
+          "summary": "Remove branch-only opted-out cache prefix and unused default policy argument."
+        },
+        {
+          "source": "c4344307890",
+          "stage": "accepted",
+          "summary": "Author confirms both modes use mode-and-cutoff cache keys and acknowledgement helper requires explicit policy.",
+          "version": "232caeb9824fde1b08c4e9228b85322bb75a7859"
+        },
+        {
+          "source": "c4343858149",
+          "stage": "risk_identified",
+          "summary": "Unacknowledging edge responses fail; reviewer compares differing SDK error/retry behavior."
+        },
+        {
+          "source": "c4344255535",
+          "stage": "acknowledged_risk",
+          "summary": "Author considers capability header but does not commit to adopting one; describes deployment control."
+        },
+        {
+          "source": "reports/judge-phase1.md",
+          "stage": "independent-review-feedback",
+          "summary": "Judge found iOS skips validation for nil policy, while Android requires opt-out acknowledgement for enabled mode even when no attribute exists. Extend the central oracle before fixing call sites."
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "future": "future-mode-and-equal-normalized-instant",
+        "immediate": "boolean-true-and-missing-or-immediate-mode",
+        "none": "reject-explicit-filtering",
+        "policy": "effective-policy-not-configured-mode"
+      },
+      "statement": "Validate every precomputed response against effective policy. No effective opt-out rejects an explicitly filtered response. Immediate requires boolean true and missing/immediate mode. Future requires future mode and the same normalized cutoff, independent of the boolean acknowledgement.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D009",
+      "provenance": [],
+      "revision": 1,
+      "semantics": {
+        "rule": "Telemetry identity and independent controls"
+      },
+      "statement": "Experiment exclusion does not suppress ordinary evaluation telemetry. Retained experiment allocations still log exposures. In enabled browser modes, telemetry uses the requested/resolved subject even during pending or failed refresh and when a customer hook changes context before tracking; the separate telemetry opt-out policy remains independent.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D010",
+      "provenance": [
+        {
+          "source": "c4343858139",
+          "stage": "requested",
+          "summary": "Reviewer asks to align exposure logging with exclusion by treating missing doLog as true."
+        },
+        {
+          "source": "c4344233354",
+          "stage": "alternative_accepted",
+          "summary": "Author cites required UFC schema and producer guarantee; makes TS field required, deferring missing-field default changes.",
+          "version": "826386e7b38df50007d56ff1d7ce046ef0fb97c2"
+        },
+        {
+          "source": "c4344394223",
+          "stage": "reviewer_agreed",
+          "summary": "Reviewer confirms required schema and existing fixture completeness; reads agree on valid input.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Required doLog field versus permissive defaults"
+      },
+      "statement": "Valid UFC input requires an explicit boolean doLog. The PR does not adopt a new missing-field default; malformed-input compatibility remains a separate decision.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4329000462",
+        "go-5700-4342541096"
+      ],
+      "go_reconciliation": "Explicit boolean remains the valid UFC contract; this branch does not decide malformed doLog defaults."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D011",
+      "provenance": [
+        {
+          "source": "c4343858163",
+          "stage": "requested",
+          "summary": "Explain future timestamp separately for each mode to avoid implying immediate exclusion in future mode."
+        },
+        {
+          "source": "c4344317522",
+          "stage": "accepted",
+          "summary": "Author clarifies Immediate now versus activation-before-cutoff eligibility.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Future cutoff meaning"
+      },
+      "statement": "Immediate excludes exposure allocations now for any valid timestamp, even a future one. FutureExperimentsOnly retains allocations activated strictly before the supplied cutoff and excludes equal/later/missing activation; it does not schedule a change, freeze assignment, or test prior enrollment. Continue ordinary allocation order.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5700-4342540684",
+        "go-5700-4342541315"
+      ],
+      "go_reconciliation": "Clarify actual opt-out time versus a future-dated cutoff; preserve strict-before boundary and same-key refresh obligation."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D012",
+      "provenance": [
+        {
+          "source": "c4343858149",
+          "stage": "risk_identified",
+          "summary": "Reviewer describes 200-without-ack fail-closed behavior and no retry until next context change in browser."
+        },
+        {
+          "source": "c4344255535",
+          "stage": "acknowledged",
+          "summary": "Author acknowledges risk and mentions possible capability header without selecting it."
+        },
+        {
+          "source": "c4343858173",
+          "stage": "requested",
+          "summary": "Reviewer recommends release after edge #140422, winner/fallback #139368/#139379 and activation #139381 deploy across sites; requests merged fixture #52 pin."
+        },
+        {
+          "source": "c4344278157",
+          "stage": "acknowledged",
+          "summary": "Author acknowledges prerequisites; no rollout evidence supplied in this reply."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Backend deployment and fixture prerequisites"
+      },
+      "statement": "Precompute opt-out requires acknowledgement-capable edge; ordinary fallback requires compiler changes; future mode requires activation metadata on both delivery paths. SDK merge is not deployment evidence or proof the dependencies are live.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4329000682",
+        "go-5700-4342541667",
+        "go-5666-5590084362",
+        "go-5700-5604838787"
+      ],
+      "go_reconciliation": "Immediate fixture #49 merged; future fixture #52 remains open. Producer/edge activation and ordinary-fallback delivery remain deployment obligations."
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D013",
+      "provenance": [
+        {
+          "source": "c4343858189",
+          "stage": "risk_identified",
+          "summary": "Reviewer reports #420 uses new Date(value) while #423 uses explicit parser; merge resolution chooses behavior for both packages."
+        },
+        {
+          "source": "c4344314467",
+          "stage": "planned",
+          "summary": "Author says #420 will be restacked on #423."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "One shared JS parser across overlapping feature branches"
+      },
+      "statement": "Shared flagging-core owns timestamp policy used by browser and Node. Restacking Node PR #420 must preserve the chosen parser, while package-specific public mode names may differ.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "authority": "user requested local mobile synchronization with final browser behavior",
+      "id": "D014",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/blob/38d611cf4c73b9687b97f7da0f8224d2fefab966/packages/browser/src/transport/fetchConfiguration.ts#L118",
+          "stage": "source-observed",
+          "summary": "Browser transport behavior selected by user as local mobile synchronization target."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "options": "enabled-and-valid-attribute",
+        "request": "unless-enabled-and-invalid"
+      },
+      "statement": "Only effective opt-out adds evaluation_options. An absent attribute sends an ordinary request in every mode. Enabled malformed input sends no request. Disabled ignores the attribute.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": []
+    },
+    {
+      "id": "D015",
+      "revision": 1,
+      "statement": "When resolved configuration disables the provider, return NoopProvider before validating experimentation mode. Enabled providers reject unsupported modes.",
+      "central_status": "proposed",
+      "scope": "proposed Go construction order; audit other SDK constructors before reuse",
+      "authority": "reviewer proposal; no new user semantic approval",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+          "stage": "requested"
+        }
+      ],
+      "model": "lean/Review.lean:construct",
+      "native_obligations": [
+        "Kill switch, offline, unrecognized source and legacy disablement",
+        "Environment and explicit enum invalid values"
+      ]
+    },
+    {
+      "id": "D016",
+      "revision": 1,
+      "statement": "For a ready evaluator with a valid targeting key and an enabled opt-out mode, malformed subject input returns INVALID_CONTEXT/default before flag lookup, including missing flags. Disabled opt-out ignores the attribute.",
+      "central_status": "accepted-go-proposed-fleet-reuse",
+      "scope": "Go evaluation after existing readiness/targeting-key guards; not universal error precedence",
+      "authority": "Leo strict-input decision plus merged fixture and current source",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+          "stage": "accepted"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542328",
+          "stage": "documentation-request"
+        }
+      ],
+      "model": "lean/Review.lean:resolveReady",
+      "native_obligations": [
+        "unknown flag with invalid attribute",
+        "provider not ready / missing targeting key remain earlier checks"
+      ]
+    },
+    {
+      "id": "D017",
+      "revision": 1,
+      "statement": "Inactive effective opt-out must retain a measured baseline evaluation path. Measure full evaluations and register the enabled paths in repository performance CI.",
+      "central_status": "accepted-go-intent-native-validation-pending",
+      "scope": "Go hot path; no numeric fleet performance threshold is established",
+      "authority": "author accepted initial optimization; reviewer reports incomplete whole-evaluation fix",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+          "stage": "partial-implementation"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+          "stage": "follow-up"
+        }
+      ],
+      "model": null,
+      "native_obligations": [
+        "call-site guard",
+        "exact compiler inlining and whole-evaluation benchmarks",
+        "disabled and enabled-with-absent-attribute cases",
+        "CI benchmark registration"
+      ]
+    }
+  ]
+}

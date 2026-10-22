@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean SDK rollout"
+  short_description: "Coordinate native SDK diffs and verified draft PRs"
+  default_prompt: "Use $lean-sdk-rollout to complete the requested Lean to SDK workflow with pinned evidence."

@@ -334,6 +334,15 @@ those consumer-owned tests.
 
 ## Contributing
 
+### Proposed shared decisions
+
+The [experimentation opt-out decision proposal](contracts/experimentation-opt-out/README.md)
+preserves browser and Go review decisions, unresolved cross-SDK conflicts, a runnable
+Lean model, and pinned evidence. It is a proposal for review, not an accepted fleet
+contract. The existing evaluation fixtures remain the downstream test input.
+Reusable workflows are in [feedback reading](skills/lean-sdk-feedback/SKILL.md) and
+[central decisions](skills/lean-sdk-decisions/SKILL.md).
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or modifying test cases.
 
 ## License

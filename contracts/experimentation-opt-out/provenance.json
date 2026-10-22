@@ -1,0 +1,34 @@
+{
+  "imported_from": "ffe-contract-poc",
+  "thread_id": "01a1309a-1ca7-73e0-bc62-8bad9a0a6d07",
+  "browser_head": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+  "browser_merged_commit": "58bc213b51eb539d58ee4a5c7719ccf500f09b66",
+  "ffe_base": "89a0f339b83f0cb6fabed77cc1164d97c9d24356",
+  "import_status": "proposed central policy, not accepted fleet main",
+  "files": {
+    "browser-decisions.json": {
+      "source": "contracts/pr-423.json",
+      "sha256": "9f8a3e9d86b26b20918dfedaddb5b43013ab882205f9c729b97a5d9f16439c47"
+    },
+    "lean/Contract.lean": {
+      "source": "lean/Contract.lean",
+      "sha256": "4e6fb44f6aa3354dc264c6e74a9cf6239e9273ef19b61e90cd36d6e6288a88c8"
+    },
+    "lean/Proofs.lean": {
+      "source": "lean/Proofs.lean",
+      "sha256": "842c4d2bbd95fa259eca266d93495bcd638d4263452a1b3ecdb5b17a67602ef5"
+    },
+    "lean/Oracle.lean": {
+      "source": "lean/Oracle.lean",
+      "sha256": "f8133b0a96eeb3a3b9d368b727ed0247cfc3c2da19177beca2c573aca8b43786"
+    },
+    "corpus/browser-proposal.jsonl": {
+      "source": "corpus/proposal.jsonl",
+      "sha256": "c4a1b9c9eed7197b8d66c1d3e46fcaaa4ec70143a2583b31baa04086c8f652dd"
+    },
+    "corpus/independent-controls.json": {
+      "source": "corpus/independent-controls.json",
+      "sha256": "f4a32e35f61e35bf8b5e20563de57ee00d53d329a0b246a818fcb49b0ddfa06d"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# Go opt-out stack, 2026-10-22
+
+Example: DataDog/dd-trace-go #5666 at `d93b70746785718b6f43bf9ffee13d01e332f50e` and #5700 at `febcc185d27d8edbe4acf16ce2dee91d5aff730c`. Refresh before taking action.
+
+- [Strict invalid subject input](https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575): Leo explicitly accepts INVALID_CONTEXT/default, including ordinary flags, when opt-out is enabled. Preserve this answer instead of adopting a reviewer's fail-open proposal.
+- [Lowercase parity rows](https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542473): the proposed tests document Go's current parser. Later [browser acceptance](https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258) accepts lowercase and truncates excess fractional precision. Do not freeze lowercase rejection as fleet policy. Keep whitespace/calendar controls separately.
+- [Malformed activation](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303): distinguish three policies: current Go quarantines the affected flag in all modes; the reviewer proposes invalid-as-missing; browser D004 keeps invalid distinct and returns PARSE_ERROR only for an opted-out future-mode subject. These alternatives disagree even if they all preserve ordinary delivery in some cases.
+- [Performance follow-up](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461): a mode guard inside a non-inlined helper is not the requested call-site guard. The author's earlier helper benchmark does not close the full-evaluation regression. Preserve tested head and measurement limits.
+- [Nil Stringer](https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542617): pre-existing native panic, not evidence to change the central meaning of a present null attribute. Both flattening and logging require native checks.
+- [Missing fixture family](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541315): a capability count greater than zero missed removal of an entire file. Pin file inventory and expected case IDs/counts; execute a same-key update through the real Remote Config path.
+
+The persisted example lives at `contracts/experimentation-opt-out/` in the FFE data decision branch. It records proposals and conflicts without promoting them to accepted fleet policy. Branch-local validation and earlier POC observations are not deployment evidence.

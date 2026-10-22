@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "snapshot": "evidence/go-review-snapshot.json",
+  "items": [
+    {
+      "id": "go-5666-4327104152",
+      "pr": 5666,
+      "sources": [
+        4327104152,
+        4328999847,
+        4329524575
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4327104152",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4328999847",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575"
+      ],
+      "decision_ids": [
+        "D002",
+        "D016"
+      ],
+      "disposition": "accepted",
+      "kind": "shared-semantics",
+      "next_action": "Keep strict INVALID_CONTEXT/default in enabled modes, including ordinary flags; Leo explicitly accepts this delivery tradeoff.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "hhan2024",
+      "created_at": "2026-10-20T15:53:53Z",
+      "comment_commit_sha": "fdf75eb241a73f44ee79087a7b5ad22a4e023701",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4329000462",
+      "pr": 5666,
+      "sources": [
+        4329000462,
+        4329500016
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329000462",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329500016"
+      ],
+      "decision_ids": [
+        "D010"
+      ],
+      "disposition": "deferred",
+      "kind": "shared-semantics",
+      "next_action": "Explicit boolean doLog is the valid-input contract; missing/null normalization is separate work, not a new default in this stack.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "danyal002",
+      "created_at": "2026-10-20T18:57:56Z",
+      "comment_commit_sha": "fdf75eb241a73f44ee79087a7b5ad22a4e023701",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4329000682",
+      "pr": 5666,
+      "sources": [
+        4329000682,
+        4329023907
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329000682",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329023907"
+      ],
+      "decision_ids": [
+        "D012"
+      ],
+      "disposition": "implemented",
+      "kind": "dependency",
+      "next_action": "Immediate fixture pin now names merged #49 commit 52e43dc; source-verified.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "danyal002",
+      "created_at": "2026-10-20T18:57:57Z",
+      "comment_commit_sha": "fdf75eb241a73f44ee79087a7b5ad22a4e023701",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4339039461",
+      "pr": 5666,
+      "sources": [
+        4339039461,
+        4341237902
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4339039461",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4341237902"
+      ],
+      "decision_ids": [
+        "D017"
+      ],
+      "disposition": "implemented",
+      "kind": "native-performance",
+      "next_action": "BenchmarkBooleanEvaluationOptOut and CI registration exist at d93b707; no fresh performance result claimed.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "darccio",
+      "created_at": "2026-10-21T16:05:00Z",
+      "comment_commit_sha": "de3998517f6e18864727360a5f676d33be5a5e29",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4339119215",
+      "pr": 5666,
+      "sources": [
+        4339119215,
+        4341237537
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4339119215",
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4341237537"
+      ],
+      "decision_ids": [],
+      "disposition": "implemented",
+      "kind": "native-cleanup",
+      "next_action": "Both resolve errors use errortrace at d93b707; #5700 still has the older fmt.Errorf branch.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": true
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "darccio",
+      "created_at": "2026-10-21T16:12:36Z",
+      "comment_commit_sha": "de3998517f6e18864727360a5f676d33be5a5e29",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342541816",
+      "pr": 5666,
+      "sources": [
+        4342541816
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816"
+      ],
+      "decision_ids": [
+        "D015"
+      ],
+      "disposition": "proposed",
+      "kind": "shared-semantics",
+      "next_action": "Recommend disabled-provider precedence; validate all sources resolving to disabled, not only the kill switch. Current source validates the mode first.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P2",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:52Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342541964",
+      "pr": 5666,
+      "sources": [
+        4342541964
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541964"
+      ],
+      "decision_ids": [],
+      "disposition": "proposed",
+      "kind": "native-performance",
+      "next_action": "Reuse the constant invalid-attribute error while retaining errors.Is and redaction; no semantic change required.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:54Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342542113",
+      "pr": 5666,
+      "sources": [
+        4342542113
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542113"
+      ],
+      "decision_ids": [],
+      "disposition": "optional",
+      "kind": "native-cleanup",
+      "next_action": "Optional String method; include the future-mode enum when propagating to #5700.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:55Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342542328",
+      "pr": 5666,
+      "sources": [
+        4342542328
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542328"
+      ],
+      "decision_ids": [
+        "D016"
+      ],
+      "disposition": "documentation-gap",
+      "kind": "shared-semantics",
+      "next_action": "Document INVALID_CONTEXT before flag lookup, subject to earlier readiness and targeting-key checks; the unknown-flag fixture already expects it.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:56Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342542473",
+      "pr": 5666,
+      "sources": [
+        4342542473
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542473"
+      ],
+      "decision_ids": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "disposition": "unresolved-conflict",
+      "kind": "shared-semantics",
+      "next_action": "Whitespace/calendar controls are useful; lowercase rejection conflicts with the later accepted browser profile. Do not make current Go parity the fleet oracle.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:58Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5666-4342542617",
+      "pr": 5666,
+      "sources": [
+        4342542617
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542617"
+      ],
+      "decision_ids": [],
+      "disposition": "proposed",
+      "kind": "native-safety",
+      "next_action": "Pre-existing typed-nil fmt.Stringer panic: cover flattening and logging natively; do not redefine null-as-absent centrally.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:59Z",
+      "comment_commit_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5700-4340842185",
+      "pr": 5700,
+      "sources": [
+        4340842185,
+        4341001239,
+        4341206416
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4340842185",
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341001239",
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416"
+      ],
+      "decision_ids": [
+        "D017"
+      ],
+      "disposition": "implementation-incomplete",
+      "kind": "native-performance",
+      "next_action": "Inner mode guard landed, but later review reports non-inlining and remaining whole-evaluation regression; follow-up 4342540461 remains open.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "darccio",
+      "created_at": "2026-10-21T19:07:34Z",
+      "comment_commit_sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4340843853",
+      "pr": 5700,
+      "sources": [
+        4340843853,
+        4341206888
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4340843853",
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206888"
+      ],
+      "decision_ids": [
+        "D004"
+      ],
+      "disposition": "implemented-with-conflict",
+      "kind": "shared-semantics",
+      "next_action": "Global per-flag quarantine is documented and tested locally by author; later browser decision and Aaron proposal disagree with it.",
+      "thread_state": {
+        "resolved": true,
+        "outdated": true
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "darccio",
+      "created_at": "2026-10-21T19:07:46Z",
+      "comment_commit_sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342540303",
+      "pr": 5700,
+      "sources": [
+        4342540303
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303"
+      ],
+      "decision_ids": [
+        "D004"
+      ],
+      "disposition": "unresolved-conflict",
+      "kind": "shared-semantics",
+      "next_action": "Choose explicitly among Go global quarantine, reviewer invalid-as-missing, and browser future-only PARSE_ERROR with distinct invalid/missing states.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P1",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:40Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342540461",
+      "pr": 5700,
+      "sources": [
+        4342540461
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461"
+      ],
+      "decision_ids": [
+        "D017"
+      ],
+      "disposition": "proposed",
+      "kind": "native-performance",
+      "next_action": "Guard the excludes call at the evaluator call site when effective policy is inactive; require new exact-head end-to-end benchmark evidence.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P0",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:41Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342540684",
+      "pr": 5700,
+      "sources": [
+        4342540684
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540684"
+      ],
+      "decision_ids": [
+        "D011"
+      ],
+      "disposition": "documentation-gap",
+      "kind": "shared-semantics",
+      "next_action": "A future-dated cutoff retains experiments activated before that date, including after actual opt-out. Tell customers to send the actual opt-out time.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P2",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:43Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342540847",
+      "pr": 5700,
+      "sources": [
+        4342540847
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540847"
+      ],
+      "decision_ids": [
+        "D017"
+      ],
+      "disposition": "proposed",
+      "kind": "native-performance",
+      "next_action": "Register the exclusion benchmark and add future-mode whole-evaluation coverage; parent registration is not yet in this child.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:44Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342541096",
+      "pr": 5700,
+      "sources": [
+        4342541096
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541096"
+      ],
+      "decision_ids": [
+        "D010"
+      ],
+      "disposition": "optional",
+      "kind": "native-cleanup",
+      "next_action": "Move doLog default explanation next to the implementation; no semantic change.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:46Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342541315",
+      "pr": 5700,
+      "sources": [
+        4342541315
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541315"
+      ],
+      "decision_ids": [
+        "D011"
+      ],
+      "disposition": "proposed",
+      "kind": "native-integration",
+      "next_action": "Exercise same-key activation changes through processConfigUpdate, retaining exposure dedup assertions.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:48Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342541471",
+      "pr": 5700,
+      "sources": [
+        4342541471
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541471"
+      ],
+      "decision_ids": [],
+      "disposition": "optional",
+      "kind": "native-cleanup",
+      "next_action": "Optional active helper for the inactive sentinel; do not imply it solves non-inlining performance alone.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:49Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-4342541667",
+      "pr": 5700,
+      "sources": [
+        4342541667
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541667"
+      ],
+      "decision_ids": [
+        "D012"
+      ],
+      "disposition": "documentation-gap",
+      "kind": "deployment-dependency",
+      "next_action": "Until producer activation metadata is present, future mode excludes all exposure allocations for opted-out subjects; docs are not deployment proof.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:51Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5666-5590084362",
+      "pr": 5666,
+      "sources": [
+        5590084362
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5666#pullrequestreview-5590084362"
+      ],
+      "decision_ids": [
+        "D012"
+      ],
+      "disposition": "dependency-recorded",
+      "kind": "deployment-dependency",
+      "next_action": "Winner rollouts need doLog=false ordinary delivery. Current Go docs state the dependency; producer deployment was not verified here.",
+      "thread_state": null,
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "danyal002",
+      "created_at": "2026-10-20T18:57:55Z",
+      "comment_commit_sha": "fdf75eb241a73f44ee79087a7b5ad22a4e023701",
+      "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e"
+    },
+    {
+      "id": "go-5700-5604838787",
+      "pr": 5700,
+      "sources": [
+        5604838787,
+        6324548887
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#pullrequestreview-5604838787",
+        "https://github.com/DataDog/dd-trace-go/pull/5700#issuecomment-6324548887"
+      ],
+      "decision_ids": [
+        "D012"
+      ],
+      "disposition": "pending-dependency",
+      "kind": "dependency",
+      "next_action": "Fixture #52 remains open; merge and repin to landed main before adoption. Leo explicitly intends main-only downstream pins.",
+      "thread_state": null,
+      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "reviewer_priority": null,
+      "reviewer": "darccio",
+      "created_at": "2026-10-21T19:08:08Z",
+      "comment_commit_sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    },
+    {
+      "id": "go-5700-fixture-inventory",
+      "pr": 5700,
+      "sources": [
+        4342541315
+      ],
+      "urls": [
+        "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541315"
+      ],
+      "decision_ids": [],
+      "disposition": "proposed",
+      "kind": "acceptance-integrity",
+      "next_action": "Pin complete fixture inventory/case IDs/counts. Reviewer reports removal of 16 future-only cases still passes because 26 other future results remain.",
+      "thread_state": {
+        "resolved": false,
+        "outdated": false
+      },
+      "evidence_level": "reviewer-reported deletion control; not rerun",
+      "reviewer_priority": "P3",
+      "reviewer": "aarsilv",
+      "created_at": "2026-10-21T22:16:48Z",
+      "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+    }
+  ]
+}
