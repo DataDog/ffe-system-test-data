@@ -52,6 +52,34 @@ class AcceptanceControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'independently supplied pin'):
             verify.check_bundle(self.root, '0' * 64)
 
+    def edit_ledger_and_repin(self, mutate):
+        path = self.root / 'decisions.json'
+        ledger = json.loads(path.read_text())
+        mutate(ledger)
+        path.write_text(json.dumps(ledger, indent=2)+'\n')
+        manifest_path = self.root / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['files']['decisions.json'] = verify.sha(path)
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+        self.pin = verify.sha(manifest_path)
+
+    def test_setting_thread_from_another_pr_is_rejected(self):
+        self.edit_ledger_and_repin(lambda ledger: ledger['decisions'][0]['latest_setting'].update(
+            thread_url='https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303'))
+        with self.assertRaisesRegex(ValueError, 'thread must belong'):
+            verify.check_bundle(self.root, self.pin)
+
+    def test_unacknowledged_provenance_gap_is_rejected(self):
+        self.edit_ledger_and_repin(lambda ledger: ledger['decisions'][0]['latest_setting'].update(
+            thread_url=None, gap=None))
+        with self.assertRaisesRegex(ValueError, 'explicit provenance gap'):
+            verify.check_bundle(self.root, self.pin)
+
+    def test_dropped_historical_check_is_rejected(self):
+        self.edit_ledger_and_repin(lambda ledger: ledger['decisions'][0].update(validation_history_ids=[]))
+        with self.assertRaisesRegex(ValueError, 'links are missing or inconsistent'):
+            verify.check_bundle(self.root, self.pin)
+
 
 if __name__ == '__main__':
     unittest.main()

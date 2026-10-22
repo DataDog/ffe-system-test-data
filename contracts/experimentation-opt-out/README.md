@@ -71,6 +71,16 @@ The remaining optional helper/error/comment changes are in the complete ledger.
 
 - [decisions.json](decisions.json): 14 existing IDs, three additional Go decisions,
   explicit scope/authority, and three distinguishing conflict cases.
+- [decision-history.md](decision-history.md): each current decision-setting PR/thread
+  and a linked historical table of passing, failing and incomplete checks. Three
+  imported rules (D008, D009, D014) have PR context but no identified public
+  setting of the complete rule; those gaps remain explicit.
+- [validation-history.json](validation-history.json): append-only checks with
+  tested revisions/profiles, source/patch pins, evidence kinds and limits.
+  Regenerate the table with `python3 contracts/experimentation-opt-out/decision_history.py`.
+  A later test does not replace a decision-setting source. Earlier POC receipts
+  are preserved in [evidence/poc-receipts.json](evidence/poc-receipts.json), including
+  backend disagreements; those Go parser rows belong to dd-source, not dd-trace-go.
 - [feedback.json](feedback.json): 24 dispositions covering all inline conversations,
   release dependencies, and the split refresh/inventory concern.
 - [evidence/go-review-snapshot.json](evidence/go-review-snapshot.json): all paginated
@@ -107,14 +117,14 @@ python3 contracts/experimentation-opt-out/verify.py \
 ```
 
 The verifier checks frozen file hashes, exact case inventory and controls, decision
-references and complete thread classification; compiles the model/proofs; audits
+references, provenance/history links, rendered-table freshness and complete thread classification; compiles the model/proofs; audits
 every theorem's axioms; and replays all oracle inputs in a temporary build directory.
 A passing result means this proposal is internally checked, not fleet-approved.
 Changing semantics requires a new revision and new downstream receipts. The
 manifest is a reproducibility mechanism; it is not a substitute for review.
 
 [Saved local validation](evidence/local-validation.json) records 36 audited
-theorems, 313 matching oracle outputs and the axiom report. Five acceptance
+theorems, 313 matching oracle outputs and the axiom report. Eight acceptance
 negative controls pass (`python3 -m unittest discover -s
 contracts/experimentation-opt-out -p test_verify.py`). Existing repository
 checks also pass: 345 evaluation cases, four validator tests and 12 precomputed

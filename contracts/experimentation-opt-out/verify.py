@@ -3,6 +3,7 @@
 import argparse
 from collections import Counter
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -12,6 +13,9 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parent
+history_spec = importlib.util.spec_from_file_location('decision_history', ROOT / 'decision_history.py')
+decision_history = importlib.util.module_from_spec(history_spec)
+history_spec.loader.exec_module(decision_history)
 
 
 def sha(path):
@@ -45,6 +49,10 @@ def check_bundle(root, expected_manifest):
         raise ValueError('Duplicate decision IDs')
     if decisions['status'] != 'proposal' or decisions['fleet_approved'] is not False:
         raise ValueError('This bundle has no authority to claim fleet approval')
+    history = json.loads((root / decisions['validation_history_file']).read_text())
+    decision_history.validate(root, decisions, history)
+    if (root / 'decision-history.md').read_text() != decision_history.render(decisions, history):
+        raise ValueError('Linked decision history is stale; regenerate it')
     for row in rows:
         if not set(row['decision_ids']) <= set(decision_ids):
             raise ValueError(f'Unknown decision in {row["id"]}')
