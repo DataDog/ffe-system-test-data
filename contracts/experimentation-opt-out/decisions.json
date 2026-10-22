@@ -1053,7 +1053,8 @@
         "V032",
         "V033",
         "V034",
-        "V035"
+        "V035",
+        "V039"
       ],
       "revision_history": [
         {
@@ -1102,7 +1103,15 @@
         "source_sha": "627db08193d8019d33282024d8340327997205ec",
         "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
         "evidence": "evidence/d017/native-receipt.json",
-        "timing_status": "mixed-local-measurements-no-regression-free-claim"
+        "timing_status": "mixed-local-measurements-no-regression-free-claim",
+        "ci_registration_followup": {
+          "status": "deferred-to-base-pr",
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+          "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+          "evidence": "evidence/d017/ci-registration-deferral.json",
+          "note": "D017 r2 semantics and native obligations unchanged; CI registration obligation remains open in the base."
+        }
       }
     }
   ],

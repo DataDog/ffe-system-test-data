@@ -398,7 +398,7 @@
       ],
       "disposition": "implemented-native-validated-performance-ci-pending",
       "kind": "native-performance",
-      "next_action": "Observe the new performance CI report and assess parent-relative regressions separately from the verified call skip; other SDK adoption remains proposed.",
+      "next_action": "Retain validated call-site guard; new benchmark CI registration and performance assessment deferred to base #5666. Historical native/model/timing evidence remains pinned.",
       "thread_state": {
         "resolved": true,
         "outdated": false,
@@ -413,7 +413,8 @@
       "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
       "evidence_file": "evidence/d017/README.md",
       "verified_head_sha": "627db08193d8019d33282024d8340327997205ec",
-      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168"
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168",
+      "scope_update_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496"
     },
     {
       "id": "go-5700-4342540684",
@@ -459,9 +460,9 @@
       "decision_ids": [
         "D017"
       ],
-      "disposition": "implemented-benchmarks-registered",
+      "disposition": "benchmarks-retained-ci-registration-deferred-to-base",
       "kind": "native-performance",
-      "next_action": "Confirm benchmark discovery in the new CI run; new benchmarks have no comparison until a baseline exists.",
+      "next_action": "Register both new benchmarks and assess performance in dd-trace-go #5666 after folding in #5700; no child CI-file delta.",
       "thread_state": {
         "resolved": true,
         "outdated": false,
@@ -475,8 +476,10 @@
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
       "evidence_file": "evidence/d017/README.md",
-      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec",
-      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438"
+      "verified_head_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438",
+      "scope_update_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+      "scope_update_evidence": "evidence/d017/ci-registration-deferral.json"
     },
     {
       "id": "go-5700-4342541096",

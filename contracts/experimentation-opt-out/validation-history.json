@@ -827,6 +827,26 @@
       "evidence_file": "evidence/go-dolog-comment/verification.json",
       "receipt_target": null,
       "limits": "Two existing native cases only. Does not establish a fleet nil-doLog default or prove D010 conformance on malformed input. No fresh Lean, full-package, race, performance, staging or production claim. D010 latest setting and revision unchanged."
+    },
+    {
+      "id": "V039",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T20:22:29.905745+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+      "target": "Go benchmark CI delivery scope",
+      "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+      "patch": null,
+      "evidence_kind": "scope-deferral-and-native-regression-check",
+      "outcome": "registration-deferred; local-tests-pass",
+      "check": "OpenFeature package and CI-selection tests pass; child diff contains only OpenFeature files. New benchmark registration moved to base follow-up.",
+      "expectation_profile": "D017 r2 unchanged; logical guard remains implemented, CI registration obligation deferred to #5666.",
+      "evidence_file": "evidence/d017/ci-registration-deferral.json",
+      "receipt_target": null,
+      "limits": "No fresh Lean, timing, race or operational trace replay. Earlier evidence remains pinned to its original commits; new benchmark CI registration and base performance assessment remain open. No fleet scope change."
     }
   ]
 }
