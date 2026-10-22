@@ -1,0 +1,26 @@
+{
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "head_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "commits": [
+    {
+      "sha": "bb9b433e219a1235be8071f66adaec877086bc71",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}

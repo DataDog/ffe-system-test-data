@@ -35,9 +35,11 @@ The main remaining work is:
    whole-evaluation measurement after a fix. [Follow-up](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461).
 2. **Malformed activation: browser D004 selected for Go.** Leo explicitly chose
    the browser rule in this review session: preserve invalid separately and return
-   PARSE_ERROR only for an opted-out future-mode subject. Current Go still rejects
-   the affected flag in every mode; implementation and native tests remain pending.
-   The [decision reply is published](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041); its exact text is [saved locally](../../review-drafts/go-5700-malformed-activation.md).
+   PARSE_ERROR only for an opted-out future-mode subject. Go now implements the rule at
+   [`c5fec6a009ff`](https://github.com/DataDog/dd-trace-go/commit/c5fec6a009ffa29bf53f5377a21856c7c4aa5f56).
+   [Native evidence](evidence/go-d004/native-receipt.json) records 90 applicable
+   policy cases plus full-package/race checks and two negative controls.
+   The [decision reply is published](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041); the [updated body is saved locally](evidence/go-d004/published-implementation-reply.json).
    [Local adoption record](evidence/go-5700-d004-adoption.json); fleet adoption is separate.
    [Request](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303).
 3. **Disabled-provider precedence:** the current constructor validates mode before
@@ -134,7 +136,9 @@ checks also pass: 345 evaluation cases, four validator tests and 12 precomputed
 fixtures. The independent skill forward-test correctly distinguished all three
 activation policies, the browser casing reversal, partial performance fix and
 conditional approval; its collector pagination mocks exercised REST, thread and
-nested-reply pages. Native SDK suites and benchmarks were not run in this task.
+nested-reply pages. The original proposal ran no native SDK suites. The later D004 Go implementation
+now has native suite/race and 90-case policy evidence in [its receipt](evidence/go-d004/native-receipt.json).
+No performance benchmarks, system-tests at the new SHA or deployment checks were run for that update.
 
 The reusable workflow lives in [lean-sdk-feedback](../../skills/lean-sdk-feedback/SKILL.md)
 and [lean-sdk-decisions](../../skills/lean-sdk-decisions/SKILL.md).

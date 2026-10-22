@@ -10,8 +10,8 @@
   "public_origin": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
   "public_validation": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348262068",
   "inspected_go_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-  "implementation_status": "pending",
-  "native_go_validation_status": "pending",
+  "implementation_status": "published",
+  "native_go_validation_status": "90 applicable policy cases, full package and race pass",
   "reply_status": "posted; exact approved body verified by readback",
   "draft_path": "../../review-drafts/go-5700-malformed-activation.md",
   "draft_sha256": "aabd364383e3ed3ff295b7cd26b71f711110faf4f3a4ce448dc32ac298f772f8",
@@ -19,5 +19,8 @@
   "note": "This is scoped adoption of an existing rule, not a new test result. Historical validation rows remain unchanged.",
   "public_decision": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
   "published_at": "2026-10-22T17:28:43Z",
-  "published_evidence": "evidence/go-5700-d004-published-reply.json"
+  "published_evidence": "evidence/go-5700-d004-published-reply.json",
+  "implementation_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "implementation_evidence": "evidence/go-d004/native-receipt.json",
+  "implementation_reply_updated_at": "2026-10-22T17:44:57Z"
 }

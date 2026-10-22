@@ -536,6 +536,66 @@
       "evidence_file": "evidence/provenance-validation.json",
       "receipt_target": null,
       "limits": "Fresh local model replay only; no native SDK, lifecycle, performance, CI or deployment proof."
+    },
+    {
+      "id": "V025",
+      "decision_revisions": {
+        "D004": 2
+      },
+      "recorded_at": "2026-10-22T17:39:16.315311214Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+      "target": "dd-trace-go production decoder/provider",
+      "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "patch": "New regression tests at c5fec6a009ffa29bf53f5377a21856c7c4aa5f56 overlaid on unchanged baseline production code.",
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "Regressions reject all-mode per-flag quarantine; 32 failed test/subtest entries.",
+      "expectation_profile": "go-d004-policy-v1; profile SHA-256 f3f4b3d5f0010d80b18491e29323f8e083bf666835399b7d722ef7e67d33f830",
+      "evidence_file": "evidence/go-d004/native-receipt.json",
+      "receipt_target": "go-d004",
+      "limits": "Scoped D004 adoption. Existing Go timestamp grammar unchanged. This is local evidence, not CI, system-tests at the new SHA, staging, deployment or fleet approval."
+    },
+    {
+      "id": "V026",
+      "decision_revisions": {
+        "D004": 2
+      },
+      "recorded_at": "2026-10-22T17:39:19.83438111Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+      "target": "dd-trace-go production decoder/provider",
+      "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "patch": "Disabled only the new activation-validity guard using a Go source overlay.",
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "Regressions reject invalid-as-missing behavior; 56 failed test/subtest entries.",
+      "expectation_profile": "go-d004-policy-v1; profile SHA-256 f3f4b3d5f0010d80b18491e29323f8e083bf666835399b7d722ef7e67d33f830",
+      "evidence_file": "evidence/go-d004/native-receipt.json",
+      "receipt_target": "go-d004",
+      "limits": "Scoped D004 adoption. Existing Go timestamp grammar unchanged. This is local evidence, not CI, system-tests at the new SHA, staging, deployment or fleet approval."
+    },
+    {
+      "id": "V027",
+      "decision_revisions": {
+        "D004": 2
+      },
+      "recorded_at": "2026-10-22T17:44:57Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+      "target": "dd-trace-go production decoder/provider",
+      "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "patch": null,
+      "evidence_kind": "fresh-native-conformance-and-regression",
+      "outcome": "pass",
+      "check": "90/90 pinned policy cases through the production decoder/provider, including variant selection; full package and race each pass 278 top-level tests (1631 test/subtest entries). Remote Config refresh and strict schedule decoding covered.",
+      "expectation_profile": "go-d004-policy-v1; profile SHA-256 f3f4b3d5f0010d80b18491e29323f8e083bf666835399b7d722ef7e67d33f830",
+      "evidence_file": "evidence/go-d004/native-receipt.json",
+      "receipt_target": "go-d004",
+      "limits": "Scoped D004 adoption. Existing Go timestamp grammar unchanged. This is local evidence, not CI, system-tests at the new SHA, staging, deployment or fleet approval."
     }
   ]
 }
