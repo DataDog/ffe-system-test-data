@@ -19,3 +19,6 @@ The new native regression directly exercises the database service. Existing HTTP
 cross-DC and lifecycle suites provide surrounding coverage. No new exact HTTP
 sync-start reproduction, combined producer/future evaluator test, CI or deployed
 end-to-end result is claimed. The central contract remains a draft.
+
+[Posted replies](posted-review-replies.md) and [publication receipt](publication.json)
+link the shared evidence back to the native review.

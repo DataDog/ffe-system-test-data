@@ -83,3 +83,8 @@ The [main-merge receipt](evidence/activation-review-20261022/main-merge-native-v
 records seven passing native suites at the merged revision, including 26 sync
 regression leaf cases. The merged shared model checks 71 theorems and 529 cases;
 14 verifier controls pass. Model, native and deployment claims remain separate.
+
+Published replies: [sync activation fix](https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354604887) and
+[RFC-backed holdout decision](https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103).
+The [publication receipt](evidence/activation-review-20261022/publication.json)
+records verified source/proof revisions and readback.

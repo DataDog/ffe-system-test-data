@@ -895,7 +895,8 @@
         "V065",
         "V066",
         "A139381-001",
-        "A139381-002"
+        "A139381-002",
+        "A139381-003"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -941,8 +942,10 @@
         },
         "model": "lean/ActivationReview.lean",
         "new_rule": false,
-        "public_reaffirmation_reply": null,
-        "gap": "RFC authority is public to document collaborators; no new PR decision reply has been posted. The reviewer proposal is not authority for changing the RFC."
+        "public_reaffirmation_reply": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103",
+        "gap": "No fleet adoption or per-target rollout completion is implied; the RFC-backed scope is reaffirmed in the linked reply.",
+        "published_native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+        "publication_evidence": "evidence/activation-review-20261022/publication.json"
       }
     },
     {
@@ -1048,7 +1051,8 @@
         "V065",
         "V066",
         "A139381-001",
-        "A139381-002"
+        "A139381-002",
+        "A139381-003"
       ],
       "local_adoptions": [
         {
@@ -1086,8 +1090,10 @@
         },
         "model": "lean/ActivationReview.lean",
         "new_rule": false,
-        "public_reaffirmation_reply": null,
-        "gap": "RFC authority is public to document collaborators; no new PR decision reply has been posted. The reviewer proposal is not authority for changing the RFC."
+        "public_reaffirmation_reply": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354604887",
+        "gap": "No fleet adoption or per-target rollout completion is implied; the RFC-backed scope is reaffirmed in the linked reply.",
+        "published_native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+        "publication_evidence": "evidence/activation-review-20261022/publication.json"
       }
     },
     {

@@ -147,20 +147,21 @@
       "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
       "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
       "thread_id": "PRRT_kwDORrsQN86vBR6g",
-      "resolved": false,
+      "resolved": true,
       "outdated": false,
       "comment_ids": [
         4343813972
       ],
       "reviewer_priority": "P1",
-      "disposition": "implemented-and-validated-after-main-merge",
+      "disposition": "published-and-verified",
       "decision_ids": [
         "D011",
         "D012"
       ],
-      "next_action": "Publish the verified source and reply with exact native and shared-proof links.",
+      "next_action": "Fixed, validated, signed, published and replied; thread resolved.",
       "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately",
-      "evidence_file": "evidence/activation-review-20261022/main-merge-native-validation.json"
+      "evidence_file": "evidence/activation-review-20261022/main-merge-native-validation.json",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354604887"
     },
     {
       "id": "4343815683",
@@ -180,8 +181,9 @@
       "decision_ids": [
         "D011"
       ],
-      "next_action": "RFC explicitly retains pre-cutoff holdouts and requires their run activation metadata. Reviewer proposal would change the customer-selected future-only behavior.",
-      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+      "next_action": "RFC-backed reply published; holdout activation preserved. Await reviewer acknowledgement.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103"
     }
   ]
 }

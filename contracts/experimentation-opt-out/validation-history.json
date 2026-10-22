@@ -1633,6 +1633,26 @@
       "expectation_profile": "RFC activation continuity with preserved SemVer shared profile",
       "evidence_file": "evidence/activation-review-20261022/main-merge-native-validation.json",
       "limits": "Model, native, CI and deployment are separate evidence boundaries."
+    },
+    {
+      "id": "A139381-003",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T23:32:36.458706+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103",
+      "target": "Verified publication and authorized review reply readback",
+      "source_sha": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+      "patch": null,
+      "evidence_kind": "live-publication-and-comment-readback",
+      "outcome": "pass",
+      "check": "Initial publication verifies all 9 native and 25 shared PR commits. Both replies match readback; linked files and theorem match published revisions. Sync-fix thread resolved; holdout acknowledgement remains open.",
+      "expectation_profile": "Existing RFC scope, published proof/native evidence and signed history",
+      "evidence_file": "evidence/activation-review-20261022/publication.json",
+      "limits": "Shared draft is not fleet approval. CI and target deployment remain separate; full internal raw evidence is not publicly exported."
     }
   ]
 }
