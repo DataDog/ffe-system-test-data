@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "fallback-139379-proposal-v9-authored-semver-delivery",
+  "revision": "activation-and-semver-feedback-v10",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -819,6 +819,13 @@
           },
           "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
           "record": "evidence/edge-review-20261022/published-replies.json"
+        },
+        {
+          "source": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "stage": "RFC-decision-reconciled-in-activation-review",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "record": "evidence/activation-review-20261022/decision-reconciliation.json",
+          "scope": "Activation producer first-write and holdout continuity obligations; current evaluator decision-setting PR link is unchanged."
         }
       ],
       "revision": 1,
@@ -878,7 +885,17 @@
         "V054",
         "V055",
         "V057",
-        "V058"
+        "V058",
+        "V059",
+        "V060",
+        "V061",
+        "V062",
+        "V063",
+        "V064",
+        "V065",
+        "V066",
+        "A139381-001",
+        "A139381-002"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -900,7 +917,33 @@
           "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
           "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
         }
-      ]
+      ],
+      "activation_producer_obligations": {
+        "profile": "activation-producer-v1",
+        "record": "activation-feedback.md",
+        "authority": {
+          "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "comment_url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "author_reply_id": "AAACBEn6wPY",
+          "author_reply_date": "2026-10-19T21:57:09.020Z",
+          "paragraph_indices": [
+            8039,
+            8467,
+            8856,
+            8970,
+            10706,
+            10744,
+            10998,
+            11034
+          ],
+          "evidence_file": "evidence/activation-review-20261022/rfc-snapshot.json"
+        },
+        "model": "lean/ActivationReview.lean",
+        "new_rule": false,
+        "public_reaffirmation_reply": null,
+        "gap": "RFC authority is public to document collaborators; no new PR decision reply has been posted. The reviewer proposal is not authority for changing the RFC."
+      }
     },
     {
       "authority": "observed JS PR outcome; fleet adoption remains proposed",
@@ -947,6 +990,13 @@
           },
           "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
           "record": "evidence/edge-review-20261022/published-replies.json"
+        },
+        {
+          "source": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "stage": "RFC-decision-reconciled-in-activation-review",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "record": "evidence/activation-review-20261022/decision-reconciliation.json",
+          "scope": "Activation producer first-write and holdout continuity obligations; current evaluator decision-setting PR link is unchanged."
         }
       ],
       "revision": 1,
@@ -989,7 +1039,16 @@
         "V054",
         "V055",
         "V057",
-        "V058"
+        "V058",
+        "V059",
+        "V060",
+        "V062",
+        "V063",
+        "V064",
+        "V065",
+        "V066",
+        "A139381-001",
+        "A139381-002"
       ],
       "local_adoptions": [
         {
@@ -1003,7 +1062,33 @@
           "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
           "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
         }
-      ]
+      ],
+      "activation_producer_obligations": {
+        "profile": "activation-producer-v1",
+        "record": "activation-feedback.md",
+        "authority": {
+          "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "comment_url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "author_reply_id": "AAACBEn6wPY",
+          "author_reply_date": "2026-10-19T21:57:09.020Z",
+          "paragraph_indices": [
+            8039,
+            8467,
+            8856,
+            8970,
+            10706,
+            10744,
+            10998,
+            11034
+          ],
+          "evidence_file": "evidence/activation-review-20261022/rfc-snapshot.json"
+        },
+        "model": "lean/ActivationReview.lean",
+        "new_rule": false,
+        "public_reaffirmation_reply": null,
+        "gap": "RFC authority is public to document collaborators; no new PR decision reply has been posted. The reviewer proposal is not authority for changing the RFC."
+      }
     },
     {
       "authority": "observed JS PR outcome; fleet adoption remains proposed",
@@ -1770,6 +1855,6 @@
     }
   ],
   "previous_revision": "edge-140422-proposal-v8-regex-and-request-compatibility",
-  "revision_note": "Add scoped reviewer-requested authored SemVer delivery policy and native/Lean validation; preserve prior decisions and receipts.",
+  "revision_note": "Preserve existing D011/D012 semantic revisions; record RFC-backed producer obligations, distinguish contrary holdout proposal, and add model/native validation evidence. Add scoped reviewer-requested authored SemVer delivery policy and native/Lean validation; preserve prior decisions and receipts.",
   "validation_history_file": "validation-history.json"
 }

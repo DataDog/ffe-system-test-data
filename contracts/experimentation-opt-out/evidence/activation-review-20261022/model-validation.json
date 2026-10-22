@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-10-22T22:58:01.468672+00:00",
+  "source_base": "7853a11426a50691e748e64907e93d4682d91215",
+  "status": "local uncommitted proposal",
+  "tested_manifest_sha256": "533a1c8495b4452d491e9dc7793ff6210faf83b88e8e7660326ea368f1a3b4b7",
+  "tested_manifest_file": "model-tested-manifest.json",
+  "executable_inputs_sha256": {
+    "corpus/browser-proposal.jsonl": "c4a1b9c9eed7197b8d66c1d3e46fcaaa4ec70143a2583b31baa04086c8f652dd",
+    "corpus/independent-controls.json": "f4a32e35f61e35bf8b5e20563de57ee00d53d329a0b246a818fcb49b0ddfa06d",
+    "lean/Contract.lean": "4e6fb44f6aa3354dc264c6e74a9cf6239e9273ef19b61e90cd36d6e6288a88c8",
+    "lean/Oracle.lean": "f8133b0a96eeb3a3b9d368b727ed0247cfc3c2da19177beca2c573aca8b43786",
+    "lean/Proofs.lean": "842c4d2bbd95fa259eca266d93495bcd638d4263452a1b3ecdb5b17a67602ef5",
+    "lean/Review.lean": "e8778f0911e114b675af7d9d061c4b44611140e812489c0742767eaeb521bfa7",
+    "test_verify.py": "0684407dcb41e2712ab31dfc27009fd734f2700c7080910354e8b98d32d52b15",
+    "verify.py": "5596c78c7a14e2fc785fafce94ceff1b7d72fb7eb027daac695b40922eb40168",
+    "lean/InactivePath.lean": "2adfc9152460bf721fd826758ec0947b5f6596ac2d92effaaf791258efb38bc1",
+    "lean/InactiveOracle.lean": "1981c31fa4e8c4d335a1cb878f2aa6d67303fa76ba1eddb8c45e2a417e40e767",
+    "corpus/inactive-path.jsonl": "4cf1ee4ad0a47ad7cba92f80f04a7641e7a3bfc2055787813abfc85b0eb140c2",
+    "lean/BackendReview.lean": "3fdf482569ac71d446c60f20cdbf383cd3053767e7bd39715130ef8705007d09",
+    "corpus/activation-producer.jsonl": "5aad53bc4e89c1c2085936a14dcb92a25dacb638d2c835e78a566ee84bf13a2a",
+    "lean/ActivationReview.lean": "e9d0b99a792c63c3e6d74feb2da0514fe2af5b4fa468986e5d585ffa809ec39e",
+    "lean/ActivationOracle.lean": "847cb21ca29d7d5a4c16a42242cf1ef3f8f1462de4a13cca1a1118ce6d54e6eb"
+  },
+  "result_file": "model-final-validation.json",
+  "claim": "Lean model, verifier, tests and corpus inputs are unchanged since this run. Subsequent decision evidence links, ledger, log and receipt additions require a refreshed bundle integrity check; they do not establish native refinement.",
+  "tested_decisions_sha256": "fdb20cf2dc1dd757c340c0be160ab50eba8a9b76a28567d950aae26b0b74fdc3"
+}

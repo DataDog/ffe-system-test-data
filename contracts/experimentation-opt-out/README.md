@@ -13,6 +13,15 @@ The six imported files are byte-preserved with provenance hashes. Browser
 at `58bc213b51eb539d58ee4a5c7719ccf500f09b66`; the reviewed head was `38d611c`.
 Its outcomes establish browser behavior, not automatic adoption by other SDKs.
 
+## Activation producer feedback
+
+[The activation review](activation-feedback.md) preserves the RFC's explicit
+pre-cutoff holdout behavior and adds first-activation obligations for allocation
+sync. The evaluator decisions D011/D012 keep their existing revisions. Twelve
+additional Lean theorems and 156 abstract producer/holdout oracle cases are
+separate from the native database/HTTP/compiler evidence. No new fleet or
+publication approval is implied.
+
 ## Edge compatibility and regex decisions
 
 [Edge review decisions](edge-feedback.md) record Leo's published acceptance of flag-local
@@ -142,9 +151,10 @@ the historical axiom audit to 46 theorems. D018 adds seven producer/policy
 composition theorems in [lean/BackendReview.lean](lean/BackendReview.lean), for
 53 historical total; native partition classification remains outside the model proof.
 D021 adds six theorems in [lean/SemverDelivery.lean](lean/SemverDelivery.lean),
-bringing the current total to 59, plus a separate 24-case compiler/delivery profile.
-The separate `inactive-path-v1` profile contains 36 operation-trace cases.
-The original 313 semantic cases remain unchanged.
+and the activation review adds twelve in [lean/ActivationReview.lean](lean/ActivationReview.lean),
+bringing the current total to 71. Separate profiles cover 24 compiler/delivery,
+156 activation-producer and 36 inactive-path cases. The original 313 semantic
+cases remain unchanged.
 The operational model proves zero exclusion-check events for inactive policy and
 preservation of exclusion results; native runtime measurements remain required.
 
@@ -173,10 +183,10 @@ Changing semantics requires a new revision and new downstream receipts. The
 manifest is a reproducibility mechanism; it is not a substitute for review.
 
 [Saved local validation](evidence/local-validation.json) records 36 audited
-theorems, 313 matching oracle outputs and the axiom report. The current twelve
-acceptance controls retain the original eight, add two operational-profile
-checks, verify cross-repository commit links, and reject missing SemVer profile
-cases (`python3 -m unittest discover -s
+theorems, 313 matching oracle outputs and the axiom report. The current fourteen
+acceptance controls retain the existing checks, verify cross-repository commit
+links, and protect SemVer and activation profile inventories plus the RFC holdout
+distinction (`python3 -m unittest discover -s
 contracts/experimentation-opt-out -p test_verify.py`). Existing repository
 checks also pass: 345 evaluation cases, four validator tests and 12 precomputed
 fixtures. The independent skill forward-test correctly distinguished all three

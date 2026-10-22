@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-22T23:13:01.665402+00:00",
+  "parents": [
+    "52ddb686c5d8e4314e4fc45cedde84a00abab08e",
+    "9f23a1722ae24484cc7652a66a09a00d78ae35f3"
+  ],
+  "tested_manifest_sha256": "9e581478122f2d80d0c255f268ab45da9cc19a5b760f2f399a91a74e56cd2fa4",
+  "result_file": "merged-model-validation.json",
+  "theorems": 71,
+  "semantic_cases": 313,
+  "operational_cases": 36,
+  "activation_cases": 156,
+  "semver_cases": 24,
+  "verifier_controls": 14,
+  "limits": "Merged model and corpus validation only; native and deployment evidence remain separate."
+}

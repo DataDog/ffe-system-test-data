@@ -1,0 +1,22 @@
+{
+  "retrieved_at": "2026-10-22T22:30:43.581424+00:00",
+  "pull_requests": [
+    {
+      "repository": "ddoghq/dd-source",
+      "number": 139367,
+      "url": "https://github.com/ddoghq/dd-source/pull/139367",
+      "head_sha": "6d822c74e6deb3665e130a677fb7d558b7883ba7",
+      "base_sha": "a3fcdcde491cd39a090383cfdef4b03043f912c6",
+      "head_ref": "leo/opt-out-activation-validation",
+      "base_ref": "main",
+      "state": "closed",
+      "draft": false,
+      "review_decision": "APPROVED",
+      "thread_count": 1,
+      "inline_comment_count": 1
+    }
+  ],
+  "scope": "Full private PR conversations were inspected; reusable dispositions are in feedback-ledger.json.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "58d4ad1ee91fdab44109ec243de7bb5932022ae1b62fc477e8a0bfa43b277fc3"
+}

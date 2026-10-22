@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites evidence_format="public count summary" private_original_sha256="0d41ee878b5b32e7447cf0e0880cfb02801f289c504a4d00a1ea34765945b865"><testsuite name="github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/service.TestServiceSuite" tests="20" failures="4" errors="0" skipped="0" time="7.300" /></testsuites>

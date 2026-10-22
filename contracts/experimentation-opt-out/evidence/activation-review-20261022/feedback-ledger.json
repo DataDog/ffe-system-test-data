@@ -1,0 +1,187 @@
+{
+  "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+  "head": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+  "items": [
+    {
+      "id": "4336228484",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4336228484",
+      "author": "leo-romanovsky_ddog",
+      "created_at": "2026-10-21T11:28:11Z",
+      "source_sha": "7b9e4b4c4e84aaea272cf5aa67b21e843df813c3",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86uvecF",
+      "resolved": false,
+      "outdated": false,
+      "comment_ids": [
+        4336228484,
+        4340220946,
+        4343815358
+      ],
+      "reviewer_priority": "Reminder",
+      "disposition": "deployment-open",
+      "decision_ids": [
+        "D012"
+      ],
+      "next_action": "Migrated test image and database checks are implemented; per-target migration deployment remains independently unverified.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4338422254",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4338422254",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T15:03:17Z",
+      "source_sha": "de778dbd650d08ad1cceb11fb89b878c12ae8d78",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86u0q4e",
+      "resolved": true,
+      "outdated": false,
+      "comment_ids": [
+        4338422254,
+        4338709186
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "implemented-at-reviewed-head",
+      "decision_ids": [
+        "D012"
+      ],
+      "next_action": "First activation dispatches cross-DC replication for published allocations; lifecycle regression exists.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4338422268",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4338422268",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T15:03:17Z",
+      "source_sha": "de778dbd650d08ad1cceb11fb89b878c12ae8d78",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86u0q4k",
+      "resolved": true,
+      "outdated": false,
+      "comment_ids": [
+        4338422268,
+        4338730634,
+        4340219813,
+        4343815536
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "deployment-open-despite-resolved-thread",
+      "decision_ids": [
+        "D012"
+      ],
+      "next_action": "Merged validator and first-seen versions are reported; all-target deployment completion including staging and gov is unverified.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4339031726",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4339031726",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T16:04:10Z",
+      "source_sha": "aaa5fac7f3daeab70f97f39cedcea60d81edd89c",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86u2IES",
+      "resolved": true,
+      "outdated": false,
+      "comment_ids": [
+        4339031726,
+        4339065017,
+        4340218836
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "implemented-at-reviewed-head",
+      "decision_ids": [
+        "D011",
+        "D012"
+      ],
+      "next_action": "Generic start records first activation transactionally; UI/public start regressions exist.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4339031742",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4339031742",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T16:04:10Z",
+      "source_sha": "aaa5fac7f3daeab70f97f39cedcea60d81edd89c",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86u2IEc",
+      "resolved": true,
+      "outdated": false,
+      "comment_ids": [
+        4339031742,
+        4340218285
+      ],
+      "reviewer_priority": "P2",
+      "disposition": "implemented-at-reviewed-head",
+      "decision_ids": [
+        "D012"
+      ],
+      "next_action": "Replicated activation presence distinguishes legacy omission from authoritative clear.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4340357203",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4340357203",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T18:17:31Z",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86u5QAk",
+      "resolved": true,
+      "outdated": false,
+      "comment_ids": [
+        4340357203,
+        4342335725
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "deployment-open-despite-resolved-thread",
+      "decision_ids": [
+        "D012"
+      ],
+      "next_action": "Author says applied; historical migration log evidence does not independently prove schema at every target.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    },
+    {
+      "id": "4343813972",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:20Z",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86vBR6g",
+      "resolved": false,
+      "outdated": false,
+      "comment_ids": [
+        4343813972
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "implemented-and-validated-after-main-merge",
+      "decision_ids": [
+        "D011",
+        "D012"
+      ],
+      "next_action": "Publish the verified source and reply with exact native and shared-proof links.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately",
+      "evidence_file": "evidence/activation-review-20261022/main-merge-native-validation.json"
+    },
+    {
+      "id": "4343815683",
+      "source_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343815683",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:40Z",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "current_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "thread_id": "PRRT_kwDORrsQN86vBSKw",
+      "resolved": false,
+      "outdated": false,
+      "comment_ids": [
+        4343815683
+      ],
+      "reviewer_priority": "P1",
+      "disposition": "declined-preserve-RFC-decision",
+      "decision_ids": [
+        "D011"
+      ],
+      "next_action": "RFC explicitly retains pre-cutoff holdouts and requires their run activation metadata. Reviewer proposal would change the customer-selected future-only behavior.",
+      "evidence_level": "source inspection and stored discussion; fresh execution receipts recorded separately"
+    }
+  ]
+}

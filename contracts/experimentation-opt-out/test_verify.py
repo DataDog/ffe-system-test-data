@@ -57,6 +57,28 @@ class AcceptanceControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Operational corpus inventory'):
             verify.check_bundle(self.root, self.pin)
 
+    def test_missing_activation_case_is_rejected_after_repin(self):
+        path = self.root / 'corpus/activation-producer.jsonl'
+        path.write_text('\n'.join(path.read_text().splitlines()[1:])+'\n')
+        manifest_path = self.root / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['files']['corpus/activation-producer.jsonl'] = verify.sha(path)
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+        with self.assertRaisesRegex(ValueError, 'Activation producer corpus inventory'):
+            verify.check_bundle(self.root, verify.sha(manifest_path))
+
+    def test_holdout_policy_cannot_silently_follow_reviewer_alternative(self):
+        path = self.root / 'corpus/activation-producer.jsonl'
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        next(r for r in rows if r['id'] == 'holdout-future-before')['expected'] = True
+        path.write_text(''.join(json.dumps(row)+'\n' for row in rows))
+        manifest_path = self.root / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['files']['corpus/activation-producer.jsonl'] = verify.sha(path)
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+        with self.assertRaisesRegex(ValueError, 'Independent activation producer expectation'):
+            verify.check_bundle(self.root, verify.sha(manifest_path))
+
     def test_missing_case_is_rejected(self):
         corpus = self.root / 'corpus/browser-proposal.jsonl'
         corpus.write_text('\n'.join(corpus.read_text().splitlines()[1:])+'\n')

@@ -1,0 +1,41 @@
+{
+  "commits": [
+    {
+      "sha": "7b9e4b4c4e84aaea272cf5aa67b21e843df813c3",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0dc7615dc88c32d84dea43fec3532d635eb78e83",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3f01c5b32fc29118f8684fd487c62cb4a342e589",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "de778dbd650d08ad1cceb11fb89b878c12ae8d78",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "aaa5fac7f3daeab70f97f39cedcea60d81edd89c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a22b80a57e756a2f1cfe778ef5b0fee8f8ae4d5c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "verified": true,
+      "reason": "valid"
+    }
+  ],
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "ea041c6d2383722cbf02cb04228c220f6b91ced8f080a11e29e5bedb8e7248c7"
+}

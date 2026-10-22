@@ -61,6 +61,29 @@ def inactive_path_cases(root, manifest):
     return rows
 
 
+def activation_cases(root, manifest):
+    profile = manifest.get('activation_profile')
+    if not profile or profile['id'] != 'activation-producer-v1':
+        raise ValueError('Missing reviewed activation producer profile')
+    name = profile['corpus']
+    if name not in manifest['files']:
+        raise ValueError('Activation producer corpus is not frozen')
+    rows = [json.loads(line) for line in (root / name).read_text().splitlines()]
+    ids = [r['id'] for r in rows]
+    if len(set(ids)) != len(ids) or ids != profile['case_ids'] or len(rows) != profile['case_count']:
+        raise ValueError('Activation producer corpus inventory differs')
+    for row in rows:
+        if row['kind'] not in {'sync-activation', 'holdout-policy'} or not set(row['decision_ids']) <= {'D011', 'D012'}:
+            raise ValueError('Unknown activation producer case')
+    by_id = {r['id']: r['expected'] for r in rows}
+    controls = {'sync-028': 2, 'sync-024': None, 'sync-030': None, 'sync-029': None,
+                'sync-012': None, 'sync-044': 10, 'holdout-future-before': False,
+                'holdout-future-missing': True, 'holdout-immediate-before': True}
+    if any(by_id.get(key) != expected for key, expected in controls.items()):
+        raise ValueError('Independent activation producer expectation differs')
+    return rows
+
+
 def check_bundle(root, expected_manifest):
     manifest_path = root / 'manifest.json'
     if sha(manifest_path) != expected_manifest:
@@ -85,6 +108,10 @@ def check_bundle(root, expected_manifest):
     decisions = json.loads((root / 'decisions.json').read_text())
     decision_ids = [d['id'] for d in decisions['decisions']]
     inactive_path_cases(root, manifest)
+    activation_cases(root, manifest)
+    for key, revision in manifest['activation_profile']['decision_revisions'].items():
+        if next((d['revision'] for d in decisions['decisions'] if d['id'] == key), None) != revision:
+            raise ValueError('Activation profile refers to a different decision revision')
     semver_delivery_cases(root, manifest)
     if next((d['revision'] for d in decisions['decisions'] if d['id'] == 'D021'), None) != 1:
         raise ValueError('SemVer profile refers to a different decision revision')
@@ -126,7 +153,7 @@ def replay(root, lean, rows):
     with tempfile.TemporaryDirectory(prefix='ffe-lean-decisions-') as tmp:
         build = Path(tmp)
         env = dict(os.environ, LEAN_PATH=str(build))
-        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle', 'BackendReview', 'SemverDelivery', 'SemverOracle')
+        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle', 'BackendReview', 'ActivationReview', 'ActivationOracle', 'SemverDelivery', 'SemverOracle')
         for name in modules:
             shutil.copyfile(root / f'lean/{name}.lean', build / f'{name}.lean')
         logs = []
@@ -140,8 +167,8 @@ def replay(root, lean, rows):
                 raise ValueError(f'Proof warning or hole: {log}')
             logs.append(log)
         # Inspect every theorem, rather than relying on a hand-maintained #print list.
-        audits = ['import Proofs', 'import Review', 'import InactivePath', 'import BackendReview', 'import SemverDelivery']
-        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath'), ('BackendReview', 'BackendReview'), ('SemverDelivery', 'SemverDelivery')]:
+        audits = ['import Proofs', 'import Review', 'import InactivePath', 'import BackendReview', 'import ActivationReview', 'import SemverDelivery']
+        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath'), ('BackendReview', 'BackendReview'), ('ActivationReview', 'ActivationReview'), ('SemverDelivery', 'SemverDelivery')]:
             for theorem in re.findall(r'^theorem\s+(\w+)', (build / f'{file}.lean').read_text(), re.M):
                 audits.append(f'#print axioms {namespace}.{theorem}')
         (build / 'Audit.lean').write_text('\n'.join(audits) + '\n')
@@ -170,6 +197,15 @@ def replay(root, lean, rows):
         actual = {row['id']: row['observed'] for row in observed}
         if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in operational}:
             raise ValueError('Operational oracle results or exclusion-check counts differ')
+        activation = activation_cases(root, json.loads((root / 'manifest.json').read_text()))
+        run = subprocess.run([lean, '--run', 'ActivationOracle.lean'],
+                             input=''.join(json.dumps({k: v for k, v in row.items()
+                                         if k not in ('expected', 'decision_ids')})+'\n' for row in activation),
+                             cwd=build, env=env, text=True, capture_output=True, check=True)
+        observed = [json.loads(line) for line in run.stdout.splitlines()]
+        actual = {row['id']: row['observed'] for row in observed}
+        if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in activation}:
+            raise ValueError('Activation producer oracle results differ')
         semver = semver_delivery_cases(root, json.loads((root / 'manifest.json').read_text()))
         run = subprocess.run([lean, '--run', 'SemverOracle.lean'],
                              input=''.join(json.dumps({'id': row['id'], 'args': row['args']})+'\n' for row in semver),
@@ -178,8 +214,8 @@ def replay(root, lean, rows):
         actual = {row['id']: row['observed'] for row in observed}
         if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in semver}:
             raise ValueError('SemVer oracle results differ')
-        return {'lean_version': version, 'theorems_audited': len(audits)-5,
-                'semver_oracle_cases': len(semver),
+        return {'lean_version': version, 'theorems_audited': len(audits)-6,
+                'activation_oracle_cases': len(activation), 'semver_oracle_cases': len(semver),
                 'oracle_cases': len(rows), 'operational_oracle_cases': len(operational), 'axiom_audit': audit,
                 'native_sdk_tests_run': False, 'fleet_approved': False}
 

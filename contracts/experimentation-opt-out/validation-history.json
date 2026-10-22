@@ -1280,6 +1280,166 @@
       "limits": "Publication/link integrity only. Draft remains unapproved; no CI/review/deployment claim, no syntax-cache or timestamp-grammar implementation."
     },
     {
+      "id": "V059",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "target": "RFC text and complete comment history",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": null,
+      "evidence_kind": "live-document-and-author-comment-read",
+      "outcome": "decision-reconciled",
+      "check": "Explicit before-cutoff holdout row and producer timestamp rule retain existing behavior; earlier immediate-only answer is historical.",
+      "expectation_profile": "RFC two-mode customer choice",
+      "evidence_file": "evidence/activation-review-20261022/decision-reconciliation.json",
+      "limits": "Governing policy evidence, not test execution or a new author choice. Native evaluator decision-setting links remain unchanged."
+    },
+    {
+      "id": "V060",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "Reviewer sync-start regression and proposed patch",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "reviewer-suggested-patch",
+      "evidence_kind": "reviewer-reported-native-execution",
+      "outcome": "baseline-fail-patch-pass",
+      "check": "Reviewer reports update-branch failure then pass; 206 PASS lines in filtered service subset. Create path and full HTTP untested.",
+      "expectation_profile": "New standard-experiment sync starts establish first activation",
+      "evidence_file": "evidence/activation-review-20261022/snapshot.json",
+      "limits": "Local evidence only; no native refinement proof, CI, deployment, or fleet-approval claim."
+    },
+    {
+      "id": "V061",
+      "decision_revisions": {
+        "D011": 1
+      },
+      "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343815683",
+      "target": "Reviewer holdout-activation removal",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "reviewer-suggested-patch",
+      "evidence_kind": "reviewer-reported-native-execution",
+      "outcome": "passes-under-conflicting-expectations",
+      "check": "Reviewer reports 838 compiler tests passing only after changing/removing holdout activation expectations.",
+      "expectation_profile": "Alternate all-holdouts-excluded behavior, contrary to RFC future-only continuity",
+      "evidence_file": "evidence/activation-review-20261022/snapshot.json",
+      "limits": "Reported execution not rerun. Passing tests with changed expectations do not override the RFC; no combined compiler/evaluator test reported."
+    },
+    {
+      "id": "V062",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "target": "Database sync regression on original PR source",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "test-only-regression; exact initial test saved separately",
+      "evidence_kind": "fresh-local-native-execution",
+      "outcome": "expected-failure",
+      "check": "18 leaf cases executed; the update and schedule-replacement first-start cases fail because activation remains null; 16 invariant cases pass. XML counts 20 including two parent suites, with four failure records including parents.",
+      "expectation_profile": "First activation plus preservation/replication/draft/legacy/rollback controls",
+      "evidence_file": "evidence/activation-review-20261022/sync-baseline-test.xml",
+      "limits": "Local evidence only; no native refinement proof, CI, deployment, or fleet-approval claim."
+    },
+    {
+      "id": "V063",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "target": "Lean activation producer and holdout policy model",
+      "source_sha": "7853a11426a50691e748e64907e93d4682d91215",
+      "patch": "local-contract-proposal",
+      "evidence_kind": "fresh-local-model-proof-and-oracle",
+      "outcome": "pass",
+      "check": "65 theorem audits; 313 existing semantic, 36 operational and 156 activation-producer oracle rows pass.",
+      "expectation_profile": "activation-producer-v1",
+      "evidence_file": "evidence/activation-review-20261022/model-precheck.json",
+      "limits": "Local evidence only; no native refinement proof, CI, deployment, or fleet-approval claim.",
+      "source_repository_url": "https://github.com/DataDog/ffe-system-test-data"
+    },
+    {
+      "id": "V064",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:43:20.509486+00:00",
+      "executed_at": "2026-10-22T22:43:20.509486+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "First fixed native run with expanded create/update/replace matrix",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "local sync implementation and 26-case matrix before Time.Equal assertion correction",
+      "evidence_kind": "fresh-local-native-execution",
+      "outcome": "test-assertion-failure",
+      "check": "Activation is persisted correctly in all three first-start cases. Deep Equal rejects UTC versus Local Go location metadata for the same instant; assertion corrected to Time.Equal. Other 23 leaf cases pass.",
+      "expectation_profile": "Compare stored/returned timestamp instants, not Go location pointer representation.",
+      "evidence_file": "evidence/activation-review-20261022/sync-first-fixed-test.xml",
+      "limits": "This failed attempt is preserved as test-code evidence; it does not establish a product failure or passing final suite."
+    },
+    {
+      "id": "V065",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T22:54:50.764874+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "Five native suites with default test time limits",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "local sync fix and corrected 26-case regression matrix",
+      "evidence_kind": "fresh-local-native-execution",
+      "outcome": "partial-pass-timeout",
+      "check": "UFC compiler (842), cross-DC (58), and allocation HTTP (192) pass. Core service and experiment lifecycle exceed the four-minute default test limit while still progressing; no earlier assertion failure appears in either log.",
+      "expectation_profile": "Unchanged native expectations plus sync activation regression",
+      "evidence_file": "evidence/activation-review-20261022/native-default-suites.log.gz",
+      "limits": "Timeouts are execution limits, not passing suites or established product failures. Rerun separately with longer Bazel and Go limits; preserve this attempt."
+    },
+    {
+      "id": "V066",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T23:02:03.710563+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "Final native activation feedback validation",
+      "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "patch": "aee18df72ecc9db047d564cf871befa8044509348b4ab703337c02903be531af",
+      "evidence_kind": "fresh-local-native-execution",
+      "outcome": "pass",
+      "check": "All five native suites pass (2378 JUnit cases, including parent cases); all 26 new sync regression leaf cases pass. Service and lifecycle use longer limits after the retained default-limit timeout.",
+      "expectation_profile": "First activation and unchanged RFC holdout metadata semantics",
+      "evidence_file": "evidence/activation-review-20261022/native-validation.json",
+      "limits": "Local only; no new exact HTTP sync-start reproduction, combined evaluator test, CI or deployment proof."
+    },
+    {
       "id": "F139379-001",
       "decision_revisions": {
         "D021": 1
@@ -1433,6 +1593,46 @@
       "evidence_file": "evidence/fallback-review-20261022/posted-review-replies.json",
       "receipt_target": null,
       "limits": "Publication/readback evidence only. No new native run, CI acceptance, deployment, fleet approval, or parent rollout resolution."
+    },
+    {
+      "id": "A139381-001",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T23:23:33.588208+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "Merged shared contract verification",
+      "source_sha": null,
+      "patch": null,
+      "evidence_kind": "fresh-local-model-proof-and-oracle",
+      "outcome": "pass",
+      "check": "71 theorems; 313 semantic, 36 operational, 156 activation and 24 SemVer cases; 14 verifier controls pass.",
+      "expectation_profile": "RFC activation continuity with preserved SemVer shared profile",
+      "evidence_file": "evidence/activation-review-20261022/merge-model-provenance.json",
+      "limits": "Model, native, CI and deployment are separate evidence boundaries."
+    },
+    {
+      "id": "A139381-002",
+      "decision_revisions": {
+        "D011": 1,
+        "D012": 1
+      },
+      "recorded_at": "2026-10-22T23:23:33.588208+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343813972",
+      "target": "Native activation branch after latest-main merge",
+      "source_sha": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+      "patch": null,
+      "evidence_kind": "fresh-local-native-execution",
+      "outcome": "pass",
+      "check": "Seven native suites pass, including all 26 new sync regression leaf cases. Conflicts retain main bucketing semantics and stable activation metadata.",
+      "expectation_profile": "RFC activation continuity with preserved SemVer shared profile",
+      "evidence_file": "evidence/activation-review-20261022/main-merge-native-validation.json",
+      "limits": "Model, native, CI and deployment are separate evidence boundaries."
     }
   ]
 }

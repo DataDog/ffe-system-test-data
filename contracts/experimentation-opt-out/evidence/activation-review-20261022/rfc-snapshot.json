@@ -1,0 +1,12 @@
+{
+  "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+  "decision_record": "decision-reconciliation.json",
+  "rules": [
+    "Immediate mode excludes holdouts for a valid opt-out timestamp.",
+    "Future-only mode retains holdout runs activated strictly before the cutoff.",
+    "Generated allocations carry the holdout run activation, not their own creation time."
+  ],
+  "scope": "The full document and comments were read internally. This public record contains the task-relevant decision summary and original hash, not the internal document.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "a094c2c27cb76ee9d1ce1eda3932612c1bf082c2fa06bde4e8b4f2018d98cb07"
+}
