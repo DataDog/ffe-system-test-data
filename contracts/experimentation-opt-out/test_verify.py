@@ -63,6 +63,17 @@ class AcceptanceControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'acceptance input'):
             verify.check_bundle(self.root, self.pin)
 
+    def test_missing_semver_case_is_rejected_after_repin(self):
+        corpus = self.root / 'corpus/semver-delivery.json'
+        rows = json.loads(corpus.read_text())
+        corpus.write_text(json.dumps(rows[1:])+'\n')
+        path = self.root / 'manifest.json'
+        manifest = json.loads(path.read_text())
+        manifest['files']['corpus/semver-delivery.json'] = verify.sha(corpus)
+        path.write_text(json.dumps(manifest)+'\n')
+        with self.assertRaisesRegex(ValueError, 'SemVer corpus inventory'):
+            verify.check_bundle(self.root, verify.sha(path))
+
     def test_mutated_model_is_rejected(self):
         model = self.root / 'lean/Contract.lean'
         model.write_text(model.read_text().replace('seconds > 253402300799', 'seconds > 253402300798'))

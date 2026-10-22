@@ -1,0 +1,45 @@
+{
+  "command": "bzl test //domains/ffe/libs/flagging/ufc:go_default_test --test_filter=TestFilterSemverFlagsUsesAuthoredTargeting --nocache_test_results --test_output=errors",
+  "source": "Integrated parent and child, old unchanged semver_filter.go, new 24-case test",
+  "result": {
+    "counts": {
+      "tests": 25,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "test_cases": [
+      "TestFilterSemverFlagsUsesAuthoredTargeting",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-false/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-false/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-false/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-false/override-true/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-true/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-true/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-true/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/active/authored-true/override-true/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-false/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-false/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-false/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-false/override-true/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-true/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-true/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-true/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-true/override-true/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-false/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-false/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-false/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-false/override-true/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-true/override-false/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-true/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-true/override-true/rollout-false",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-true/override-true/rollout-true"
+    ],
+    "failing_entries": [
+      "TestFilterSemverFlagsUsesAuthoredTargeting",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/completed/authored-true/override-false/rollout-true",
+      "TestFilterSemverFlagsUsesAuthoredTargeting/semver-delivery/ordinary/authored-true/override-false/rollout-true"
+    ]
+  },
+  "limits": "Two failing leaf cases plus aggregate parent; fresh pre-fix execution, not reviewer-reported."
+}

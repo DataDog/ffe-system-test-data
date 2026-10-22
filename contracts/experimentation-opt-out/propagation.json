@@ -85,9 +85,10 @@
         "D010",
         "D011",
         "D012",
-        "D018"
+        "D018",
+        "D021"
       ],
-      "next": "D018 compiler change is published and locally validated in #139368; merge the published parent into #139379 without rewriting history and verify retained fallbacks. Deploy compiler and rebuild stored UFCs before opt-out consumers; activation coverage and other rollout gates remain separate.",
+      "next": "Published #139379 integrates the winner-classification parent, fixes authored SemVer compatibility, and validates retained defaults. Resolve the parent rollout-control review separately, then deploy the compiler and rebuild stored UFCs before opt-out enablement; activation and other rollout gates remain open.",
       "prs": [
         139368,
         139379,

@@ -1,0 +1,27 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:13 UTC
+INFO: Invocation ID: e908ae31-0159-40b9-b439-afa6daab369f
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+
+INFO: Analyzed target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured).
+[2,534 / 2,539] [Prepa] GoCompilePkgExternal domains/ffe/libs/flagging/ufc/go_default_test_test.external.a
+[2,538 / 2,539] GoLink domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test; 0s disk-cache, remote-cache, linux-sandbox
+[2,539 / 2,540] [Prepa] Testing //domains/ffe/libs/flagging/ufc:go_default_test
+[2,539 / 2,540] Testing //domains/ffe/libs/flagging/ufc:go_default_test; 1s linux-sandbox
+[2,539 / 2,540] Testing //domains/ffe/libs/flagging/ufc:go_default_test; 11s linux-sandbox
+[2,539 / 2,540] 1 / 1 tests; Testing //domains/ffe/libs/flagging/ufc:go_default_test; 18s linux-sandbox
+INFO: Found 1 test target...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+INFO: Elapsed time: 28.717s, Critical Path: 27.90s
+INFO: 10 processes: 14 action cache hit, 1 internal, 9 linux-sandbox.
+INFO: Build completed successfully, 10 total actions
+INFO: 
+//domains/ffe/libs/flagging/ufc:go_default_test                          PASSED in 18.8s
+
+Executed 1 out of 1 test: 1 test passes.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

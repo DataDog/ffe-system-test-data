@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "edge-140422-proposal-v8-regex-and-request-compatibility",
+  "revision": "fallback-139379-proposal-v9-authored-semver-delivery",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -1476,7 +1476,10 @@
         "V054",
         "V055",
         "V057",
-        "V058"
+        "V058",
+        "F139379-003",
+        "F139379-004",
+        "F139379-006"
       ],
       "implementation": {
         "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
@@ -1683,9 +1686,84 @@
         "V057",
         "V058"
       ]
+    },
+    {
+      "id": "D021",
+      "revision": 1,
+      "statement": "For server UFC delivery, a flag whose authored allocations contain a SEMVER_* condition is omitted from the compatibility payload, even when optimization prunes every SemVer rule. With server SemVer rollout disabled it is omitted at build time. An override replaces the waterfall and bypasses this requirement. Capable-client payloads retain the flag when rollout is enabled; unrelated flags are preserved. Decoded configurations without build metadata are still scanned for surviving SEMVER_* conditions.",
+      "central_status": "reviewer-requested-published-implementation-central-proposal",
+      "scope": "dd-source compiler and cache-worker compatibility payload. No new tracer versions, wire metadata, SDK semantics, or fleet acceptance.",
+      "authority": "Aaron Silverman states the intended SemVer policy in the review. Leo requested addressing feedback and then explicitly authorized push; no public author acceptance reply has been posted.",
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+        "kind": "reviewer-policy-clarification",
+        "author": "aaron-silverman_ddog",
+        "recorded_at": "2026-10-22T01:56:14Z",
+        "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+        "scope_note": "Reviewer explicitly rejects older-SDK preservation for flags with authored SemVer targeting and preserves the override exception. Implemented and published under Leo's feedback and push requests; not fleet approval.",
+        "gap": null
+      },
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4342416262",
+          "stage": "superseded-bot-alternative",
+          "summary": "Preserve historical experiment assignments for older SDKs after retaining SemVer fallbacks."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+          "stage": "reviewer-policy-clarification",
+          "summary": "Authored SemVer targeting governs delivery before and after optimization; override bypasses it."
+        }
+      ],
+      "model": {
+        "files": [
+          "lean/SemverDelivery.lean",
+          "lean/SemverOracle.lean"
+        ],
+        "profile": "authored-semver-delivery-v1",
+        "corpus": "corpus/semver-delivery.json"
+      },
+      "modeling_note": "Finite two-allocation compiler-input profile, including ordinary/completed/active first allocation, override and rollout. Model does not prove native optimizer correctness, arbitrary malformed decoded payloads, RC predicates, deployment or SDK isolation.",
+      "counterexamples": [
+        {
+          "input": "Ordinary full-population allocation followed by SEMVER_GTE; rollout enabled; no override",
+          "old_result": "Optimizer prunes SemVer rule and old filter sends flag to older SDKs.",
+          "selected": "Capable payload includes flag; compatibility omits it."
+        },
+        {
+          "input": "Same authored allocations with override",
+          "selected": "Both payloads include the override."
+        }
+      ],
+      "implementation_owners": [
+        "dd-source UFC compiler",
+        "feature-flagging-cache-worker compatibility serialization",
+        "Remote Config tracer targeting"
+      ],
+      "native_obligations": [
+        "Run BuildFlagsConfiguration followed by FilterSemverFlags on all 24 pinned cases.",
+        "Check JSON/protobuf compatibility output, source non-mutation, unrelated flags and eligible capable-client assignment.",
+        "Retain decoded-rule scan, nil handling and existing operator coverage.",
+        "Run compiler, remote-config and cache-worker suites; restore the old filter as a negative control."
+      ],
+      "validation_history_ids": [
+        "F139379-001",
+        "F139379-002",
+        "F139379-003",
+        "F139379-004",
+        "F139379-005",
+        "F139379-006"
+      ],
+      "implementation": {
+        "repository": "ddoghq/dd-source",
+        "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+        "commit_url": "https://github.com/ddoghq/dd-source/commit/50775244ad95c65017b7890a81fde9806e330b80",
+        "evidence_file": "evidence/fallback-review-20261022/publication.json"
+      }
     }
   ],
-  "previous_revision": "backend-139368-proposal-v7-d018-producer-randomization",
-  "revision_note": "Record published edge author decisions and scoped adoptions with exact reply backlinks; preserve D018 producer semantics and original validation receipts.",
+  "previous_revision": "edge-140422-proposal-v8-regex-and-request-compatibility",
+  "revision_note": "Add scoped reviewer-requested authored SemVer delivery policy and native/Lean validation; preserve prior decisions and receipts.",
   "validation_history_file": "validation-history.json"
 }

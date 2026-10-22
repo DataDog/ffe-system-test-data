@@ -1,0 +1,25 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:13 UTC
+INFO: Invocation ID: dab8246e-78e4-41b6-96f0-26cda38724c6
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+
+INFO: Analyzed target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured).
+ERROR: /home/bits/go/src/github.com/DataDog/dd-source-fallback-feedback-20261022/domains/ffe/libs/flagging/ufc/BUILD.bazel:45:11: GoCompilePkg domains/ffe/libs/flagging/ufc/go_default_test.internal.a failed: (Exit 1): builder failed: error executing GoCompilePkg command (from target //domains/ffe/libs/flagging/ufc:go_default_test) bazel-out/x86_64-unknown-linux-opt-exec/bin/external/rules_go++go_sdk+go_sdk/builder_reset/builder compilepkg -sdk external/rules_go++go_sdk+go_sdk -goroot ... (remaining 159 arguments skipped)
+
+Use --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging
+domains/ffe/libs/flagging/ufc/optimizer_test.go:634:38: flag.Allocations[0].LogExposureEvent undefined (type AllocationConfiguration has no field or method LogExposureEvent)
+domains/ffe/libs/flagging/ufc/optimizer_test.go:635:39: flag.Allocations[1].LogExposureEvent undefined (type AllocationConfiguration has no field or method LogExposureEvent)
+compilepkg: error running subcommand /home/bits/.cache/bazel/_bazel_bits/4ef940a64ee9cedc7dcf5d2e86175dca/sandbox/linux-sandbox/9641/execroot/_main/external/rules_go++go_sdk+go_sdk/pkg/tool/linux_amd64/compile: exit status 2
+Target //domains/ffe/libs/flagging/ufc:go_default_test failed to build
+Use --verbose_failures to see the command lines of failed build steps.
+INFO: Elapsed time: 2.014s, Critical Path: 0.47s
+INFO: 5 processes: 11 action cache hit, 4 internal, 1 linux-sandbox.
+ERROR: Build did NOT complete successfully
+FAILED: 
+//domains/ffe/libs/flagging/ufc:go_default_test                       NO STATUS
+
+Executed 0 out of 1 test: 1 was skipped.

@@ -123,6 +123,12 @@ The remaining optional helper/error/comment changes are in the complete ledger.
 
 ## Runnable model and limits
 
+[D021 and fallback feedback](fallback-feedback.md) record authored SemVer
+compatibility delivery for dd-source #139379, including optimizer pruning and
+the override exception. The signed native fix integrates the published
+winner-classification parent and matches the tested source hashes. The parent's
+rollout-control review and deployment remain separate obligations.
+
 The imported Lean model covers timestamp parsing, allocation policy, browser
 pending errors, request options and acknowledgement admission. Its 30 existing
 theorems and 313 oracle rows are retained. Six new theorems in
@@ -134,8 +140,11 @@ for Go in the local adoption record; the model itself does not confer approval.
 D017 adds ten theorems in [lean/InactivePath.lean](lean/InactivePath.lean), bringing
 the historical axiom audit to 46 theorems. D018 adds seven producer/policy
 composition theorems in [lean/BackendReview.lean](lean/BackendReview.lean), for
-53 total; native partition classification remains outside the model proof. Its separate `inactive-path-v1` profile
-contains 36 operation-trace cases. The original 313 semantic cases remain unchanged.
+53 historical total; native partition classification remains outside the model proof.
+D021 adds six theorems in [lean/SemverDelivery.lean](lean/SemverDelivery.lean),
+bringing the current total to 59, plus a separate 24-case compiler/delivery profile.
+The separate `inactive-path-v1` profile contains 36 operation-trace cases.
+The original 313 semantic cases remain unchanged.
 The operational model proves zero exclusion-check events for inactive policy and
 preservation of exclusion results; native runtime measurements remain required.
 
@@ -164,9 +173,10 @@ Changing semantics requires a new revision and new downstream receipts. The
 manifest is a reproducibility mechanism; it is not a substitute for review.
 
 [Saved local validation](evidence/local-validation.json) records 36 audited
-theorems, 313 matching oracle outputs and the axiom report. The current eleven
+theorems, 313 matching oracle outputs and the axiom report. The current twelve
 acceptance controls retain the original eight, add two operational-profile
-checks and verify cross-repository commit links (`python3 -m unittest discover -s
+checks, verify cross-repository commit links, and reject missing SemVer profile
+cases (`python3 -m unittest discover -s
 contracts/experimentation-opt-out -p test_verify.py`). Existing repository
 checks also pass: 345 evaluation cases, four validator tests and 12 precomputed
 fixtures. The independent skill forward-test correctly distinguished all three

@@ -1278,6 +1278,141 @@
       "evidence_file": "evidence/edge-review-20261022/published-replies.json",
       "receipt_target": null,
       "limits": "Publication/link integrity only. Draft remains unapproved; no CI/review/deployment claim, no syntax-cache or timestamp-grammar implementation."
+    },
+    {
+      "id": "F139379-001",
+      "decision_revisions": {
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T01:56:14Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "target": "Reviewer probe of authored SemVer after full-population allocation",
+      "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "patch": null,
+      "evidence_kind": "reviewer-reported-negative-probe-and-fix",
+      "outcome": "fail-before-pass-with-suggested-patch",
+      "check": "Reviewer reports the regression fails at PR head; one-line fix passes with 805 compiler, 108 remote-config and 84 cache-worker test entries.",
+      "expectation_profile": "Authored SemVer excludes compatibility delivery after optimizer pruning, with existing override exception.",
+      "evidence_file": "evidence/fallback-review-20261022/stack-snapshot.json",
+      "receipt_target": null,
+      "limits": "Reviewer-reported execution; comment date is not execution date. Fresh local native evidence will be appended separately."
+    },
+    {
+      "id": "F139379-002",
+      "decision_revisions": {
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T22:48:09.783803+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "target": "Local fallback/SemVer review validation",
+      "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "patch": {
+        "merged_parent_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "sha256": "77cdcffd545aa1b181b7ec56739eab0ace8e5923b0dda4e5dbeb66f8c1e9d03d"
+      },
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "Two pruning cases fail against the old filter; all 24 cases executed.",
+      "expectation_profile": "D021 r1 authored SemVer delivery profile; D018 parent classification unchanged.",
+      "evidence_file": "evidence/fallback-review-20261022/native-negative-control.json",
+      "receipt_target": null,
+      "limits": "Local proposal evidence. See receipt for exact boundary and chronology; not CI, deployment or fleet approval. Exact execution timestamps are preserved where available in saved test XML; recorded_at is receipt assembly time."
+    },
+    {
+      "id": "F139379-003",
+      "decision_revisions": {
+        "D018": 1,
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T22:48:09.783803+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "target": "Local fallback/SemVer review validation",
+      "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "patch": {
+        "merged_parent_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "sha256": "77cdcffd545aa1b181b7ec56739eab0ace8e5923b0dda4e5dbeb66f8c1e9d03d"
+      },
+      "evidence_kind": "fresh-native-integration-regression",
+      "outcome": "partial-pass",
+      "check": "SemVer matrix passes; three inherited leaf assertions still expect discarded ordinary fallbacks. Remote Config and cache worker pass.",
+      "expectation_profile": "D021 r1 authored SemVer delivery profile; D018 parent classification unchanged.",
+      "evidence_file": "evidence/fallback-review-20261022/native-validation.json",
+      "receipt_target": null,
+      "limits": "Local proposal evidence. See receipt for exact boundary and chronology; not CI, deployment or fleet approval. Exact execution timestamps are preserved where available in saved test XML; recorded_at is receipt assembly time."
+    },
+    {
+      "id": "F139379-004",
+      "decision_revisions": {
+        "D018": 1,
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T22:48:09.783803+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "target": "Local fallback/SemVer review validation",
+      "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "patch": {
+        "merged_parent_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "sha256": "77cdcffd545aa1b181b7ec56739eab0ace8e5923b0dda4e5dbeb66f8c1e9d03d"
+      },
+      "evidence_kind": "fresh-local-native-tests",
+      "outcome": "pass",
+      "check": "//domains/ffe/libs/flagging/ufc:go_default_test: 947 test entries; //domains/ffe/libs/flagging/remote-config:go_default_test: 108 test entries; //domains/ffe/apps/apis/feature-flagging-cache-worker:go_default_test: 85 test entries; all pass. 24 identical central/native cases pass; JSON/protobuf/non-mutation/eligible assignment checked.",
+      "expectation_profile": "D021 r1 authored SemVer delivery profile; D018 parent classification unchanged.",
+      "evidence_file": "evidence/fallback-review-20261022/native-validation.json",
+      "receipt_target": null,
+      "limits": "Local proposal evidence. See receipt for exact boundary and chronology; not CI, deployment or fleet approval. Exact execution timestamps are preserved where available in saved test XML; recorded_at is receipt assembly time."
+    },
+    {
+      "id": "F139379-005",
+      "decision_revisions": {
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T22:48:09.783803+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "target": "Local fallback/SemVer review validation",
+      "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "patch": {
+        "merged_parent_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "sha256": "77cdcffd545aa1b181b7ec56739eab0ace8e5923b0dda4e5dbeb66f8c1e9d03d"
+      },
+      "evidence_kind": "fresh-lean-model-and-oracle",
+      "outcome": "pass",
+      "check": "59 theorem axiom audits including six new SemVer theorems; 24 SemVer, 313 existing semantic and 36 operational oracle cases pass. 12 verifier controls pass.",
+      "expectation_profile": "D021 r1 authored SemVer delivery profile; D018 parent classification unchanged.",
+      "evidence_file": "evidence/fallback-review-20261022/model-validation.json",
+      "receipt_target": null,
+      "limits": "Local proposal evidence. See receipt for exact boundary and chronology; not CI, deployment or fleet approval. Exact execution timestamps are preserved where available in saved test XML; recorded_at is receipt assembly time."
+    },
+    {
+      "id": "F139379-006",
+      "decision_revisions": {
+        "D018": 1,
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T22:58:22.071072+00:00",
+      "executed_at": "2026-10-22T22:58:22.071072+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "target": "Published fallback/SemVer fix with tested parent integration",
+      "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+      "patch": null,
+      "evidence_kind": "signed-publication-and-source-binding",
+      "outcome": "pass",
+      "check": "All nine changed native files match tested hashes. The remote head matches the signed merge commit; both PR commits are GitHub-verified with reason valid.",
+      "expectation_profile": "D021 r1 authored SemVer delivery; D018 parent classification unchanged.",
+      "evidence_file": "evidence/fallback-review-20261022/publication.json",
+      "receipt_target": null,
+      "limits": "Publication binds the local native receipts to the signed remote commit. It is not new CI, deployment, fleet approval, or closure of the parent rollout-control concern. Review replies remain unposted."
     }
   ]
 }

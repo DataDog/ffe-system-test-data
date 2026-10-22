@@ -22,6 +22,25 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def semver_delivery_cases(root, manifest):
+    profile = manifest['semver_delivery_profile']
+    if profile['id'] != 'authored-semver-delivery-v1' or profile['decision_revisions'] != {'D021': 1}:
+        raise ValueError('Unexpected SemVer delivery profile')
+    if profile['corpus'] not in manifest['files']:
+        raise ValueError('SemVer corpus is not frozen in the manifest')
+    rows = json.loads((root / profile['corpus']).read_text())
+    ids = [row['id'] for row in rows]
+    if len(set(ids)) != len(ids) or ids != profile['case_ids'] or len(rows) != profile['case_count']:
+        raise ValueError('SemVer corpus inventory differs from reviewed profile')
+    expected_keys = {'primaryContains', 'compatibilityContains', 'semverRetained'}
+    for row in rows:
+        if row['decision_ids'] != ['D021'] or set(row['expected']) != expected_keys:
+            raise ValueError('Unexpected SemVer decision or expected fields')
+        if any(type(value) is not bool for value in row['expected'].values()):
+            raise ValueError('SemVer outputs must be booleans')
+    return rows
+
+
 def inactive_path_cases(root, manifest):
     profile = manifest.get('operational_profile')
     if not profile or profile['id'] != 'inactive-path-v1':
@@ -66,6 +85,9 @@ def check_bundle(root, expected_manifest):
     decisions = json.loads((root / 'decisions.json').read_text())
     decision_ids = [d['id'] for d in decisions['decisions']]
     inactive_path_cases(root, manifest)
+    semver_delivery_cases(root, manifest)
+    if next((d['revision'] for d in decisions['decisions'] if d['id'] == 'D021'), None) != 1:
+        raise ValueError('SemVer profile refers to a different decision revision')
     for key, revision in manifest['operational_profile']['decision_revisions'].items():
         if next((d['revision'] for d in decisions['decisions'] if d['id'] == key), None) != revision:
             raise ValueError('Operational profile refers to a different decision revision')
@@ -104,7 +126,7 @@ def replay(root, lean, rows):
     with tempfile.TemporaryDirectory(prefix='ffe-lean-decisions-') as tmp:
         build = Path(tmp)
         env = dict(os.environ, LEAN_PATH=str(build))
-        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle', 'BackendReview')
+        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle', 'BackendReview', 'SemverDelivery', 'SemverOracle')
         for name in modules:
             shutil.copyfile(root / f'lean/{name}.lean', build / f'{name}.lean')
         logs = []
@@ -118,8 +140,8 @@ def replay(root, lean, rows):
                 raise ValueError(f'Proof warning or hole: {log}')
             logs.append(log)
         # Inspect every theorem, rather than relying on a hand-maintained #print list.
-        audits = ['import Proofs', 'import Review', 'import InactivePath', 'import BackendReview']
-        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath'), ('BackendReview', 'BackendReview')]:
+        audits = ['import Proofs', 'import Review', 'import InactivePath', 'import BackendReview', 'import SemverDelivery']
+        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath'), ('BackendReview', 'BackendReview'), ('SemverDelivery', 'SemverDelivery')]:
             for theorem in re.findall(r'^theorem\s+(\w+)', (build / f'{file}.lean').read_text(), re.M):
                 audits.append(f'#print axioms {namespace}.{theorem}')
         (build / 'Audit.lean').write_text('\n'.join(audits) + '\n')
@@ -148,7 +170,16 @@ def replay(root, lean, rows):
         actual = {row['id']: row['observed'] for row in observed}
         if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in operational}:
             raise ValueError('Operational oracle results or exclusion-check counts differ')
-        return {'lean_version': version, 'theorems_audited': len(audits)-4,
+        semver = semver_delivery_cases(root, json.loads((root / 'manifest.json').read_text()))
+        run = subprocess.run([lean, '--run', 'SemverOracle.lean'],
+                             input=''.join(json.dumps({'id': row['id'], 'args': row['args']})+'\n' for row in semver),
+                             cwd=build, env=env, text=True, capture_output=True, check=True)
+        observed = [json.loads(line) for line in run.stdout.splitlines()]
+        actual = {row['id']: row['observed'] for row in observed}
+        if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in semver}:
+            raise ValueError('SemVer oracle results differ')
+        return {'lean_version': version, 'theorems_audited': len(audits)-5,
+                'semver_oracle_cases': len(semver),
                 'oracle_cases': len(rows), 'operational_oracle_cases': len(operational), 'axiom_audit': audit,
                 'native_sdk_tests_run': False, 'fleet_approved': False}
 

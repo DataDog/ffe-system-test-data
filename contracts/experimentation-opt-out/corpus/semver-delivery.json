@@ -1,0 +1,410 @@
+[
+  {
+    "id": "semver-delivery/ordinary/authored-false/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-false/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-false/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-false/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-true/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": false,
+      "compatibilityContains": false,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-true/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": false,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-true/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/ordinary/authored-true/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "ordinary",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-false/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-false/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-false/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-false/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-true/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": false,
+      "compatibilityContains": false,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-true/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": false,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-true/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/completed/authored-true/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "completed",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-false/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-false/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": false,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-false/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-false/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": false,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-true/override-false/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": false,
+      "compatibilityContains": false,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-true/override-false/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": true,
+      "override": false,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": false,
+      "semverRetained": true
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-true/override-true/rollout-false",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": false
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  },
+  {
+    "id": "semver-delivery/active/authored-true/override-true/rollout-true",
+    "decision_ids": [
+      "D021"
+    ],
+    "args": {
+      "firstAllocation": "active",
+      "authoredSemver": true,
+      "override": true,
+      "rolloutEnabled": true
+    },
+    "expected": {
+      "primaryContains": true,
+      "compatibilityContains": true,
+      "semverRetained": false
+    }
+  }
+]

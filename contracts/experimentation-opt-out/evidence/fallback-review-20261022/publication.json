@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-22T22:58:22.071072+00:00",
+  "authorization": "Leo explicitly requested push after local feedback implementation and validation.",
+  "repository": "ddoghq/dd-source",
+  "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+  "head_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+  "base_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+  "parents": [
+    "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+    "0ae33d8f112685502bb8f16d8c96efbecb70219b"
+  ],
+  "remote_ref": "refs/heads/leo/opt-out-preserve-fallbacks",
+  "push": "regular fast-forward; no history rewrite",
+  "signing_account": "leo-romanovsky_ddog",
+  "committer_email": "leo.romanovsky@datadoghq.com",
+  "registered_signing_key": {
+    "id": 1091757,
+    "key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEOV2Fr6JXkiurO1flAjnBITC7rmYFWq8/Ye1QCTQyqm",
+    "title": "Datadog workspace leo-romanovsky signing key",
+    "created_at": "2026-08-04T15:29:26.906Z"
+  },
+  "local_cryptographic_verification": true,
+  "tested_source_hashes_match": true,
+  "native_validation_receipt": "native-validation.json",
+  "pr_commit_audit": [
+    {
+      "sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "committer_login": "leo-romanovsky_ddog",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgQ5XYWvoleSK6s7V+UCOc\nEhMLuuZgVarz9h7VAJNDKqYAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3Nz\naC1lZDI1NTE5AAAAQGjtFGwBJqsQgeO7GXo0g1NJ3NMxSp8NOEGEpHEw/3ieyAWF\nuKm7YorMKGFvLiSv6aKfUNbW7SlvgOyl4G4/mQw=\n-----END SSH SIGNATURE-----",
+        "payload": "tree ba663781355ba7630689bc181fc8380e028d02ff\nparent 3e99ba2aee24479054e1018c7ac80bd06adb7478\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792549409 -0400\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792549409 -0400\n\nfeat(ffe): retain ordinary fallbacks after experiment allocations\n",
+        "verified_at": "2026-10-21T02:23:43Z"
+      }
+    },
+    {
+      "sha": "50775244ad95c65017b7890a81fde9806e330b80",
+      "committer_login": "leo-romanovsky_ddog",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgQ5XYWvoleSK6s7V+UCOcEhMLuu\nZgVarz9h7VAJNDKqYAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5\nAAAAQNetMLpbrgNU8DL7vPw+etVWjvMN+NAeBnBXIXfg+e9OBWt9zJCtASvEbPBNzVUK71\nzjVn+Muv/VlPC6VlGq/wM=\n-----END SSH SIGNATURE-----",
+        "payload": "tree b74a202a0babf5b4db14c3387a6b0df85d37410b\nparent 1a71c67a6f1de54e0ee9754bcf36da54100f553f\nparent 0ae33d8f112685502bb8f16d8c96efbecb70219b\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792709778 +0000\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792709778 +0000\n\nPreserve authored SemVer delivery and integrate winner fixes\n",
+        "verified_at": "2026-10-22T22:58:05Z"
+      }
+    }
+  ],
+  "limits": "Publication binds the local native receipts to the signed remote commit. It is not new CI, deployment, fleet approval, or closure of the parent rollout-control concern. Review replies remain unposted."
+}
