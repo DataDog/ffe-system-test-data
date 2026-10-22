@@ -181,8 +181,12 @@ capacity-limit assertions.
 
 ### Split features and destinations
 
-`test-case-split-features.json` adds expectations for the selected split's
-`features`, using SDK-neutral destination names:
+`test-case-split-features.json` checks four evaluations across three flags:
+scalar routing (including unknown/repeated destinations), malformed entries and
+first-valid-key deduplication, and two allocations returning the same value with
+different split features and `doLog` decisions.
+
+Optional `result.features` contains exact maps for all three destinations:
 
 ```json
 "features": {
@@ -192,57 +196,26 @@ capacity-limit assertions.
 }
 ```
 
-When `result.features` is present, all three maps are required and comparisons
-must be exact: unexpected keys fail just like missing keys. `{}` asserts that
-destination has no features; omitting `result.features` makes no assertion.
-Compare JSON scalar types without coercion (`false`, `0`, and `""` are valid and
-distinct). Native integer and floating-point representations of the same JSON
-number may compare numerically. Use the original feature keys without internal
-metadata prefixes. Do not derive expectations from the SDK output or recompute
-them from the configuration in the test adapter.
+`{}` asserts no features at that destination; omitting `result.features` makes
+no assertion. Compare original keys and scalar types without coercion, allowing
+native integer/float representations of the same JSON number. Unexpected keys
+must fail. The first valid entry for each key wins across destinations, even if
+it only names unknown destinations; invalid entries do not reserve keys. Invalid
+entries must not change flag selection. Destination names are case sensitive;
+unknown, empty, and non-string destinations do not route values.
 
-The cases specify the following parsing and selection behavior:
+Downstream readers must explicitly assert these maps: updating the fixture pin
+alone does not add coverage. Compare `HOOK` with callback features and the other
+maps with selected event metadata or serialized event features, never with
+expectations recomputed from configuration. Raw OpenFeature metadata is not a
+destination-isolation boundary. These are selected metadata expectations;
+`doLog=false` preserves them while suppressing exposure delivery. Downstream
+integration tests own emission counts, consent, cache, and transport checks.
 
-- Only the selected split contributes features, even if another split or
-  allocation returns the same value. Subject attributes do not override them.
-- A feature needs a non-empty string key, a string/boolean/finite-number value,
-  and at least one non-empty string destination. Invalid entries are skipped
-  without rejecting the flag or changing its selected value, reason, or `doLog`.
-  Missing, null, or non-array `features` contributes no feature entries.
-- Ignore non-string and empty destinations within an array. Names are case
-  sensitive; unknown names route nowhere. Repeated destinations do not duplicate
-  values. Unknown fields on a feature are ignored.
-- The first valid occurrence of a key wins across all destinations. Later
-  occurrences cannot overwrite it or add destinations. An entry containing only
-  unknown destinations still reserves its key; an invalid entry does not.
-- Retain at most 256 valid unique entries per split, in input order. Invalid
-  entries and duplicates do not consume the budget; entries containing only
-  unknown destinations do. Keys and string values accept at most 256 UTF-8
-  bytes, inclusive. Oversized entries are skipped, never truncated. The ASCII
-  and multibyte cases distinguish byte length from character count, and a later
-  valid occurrence can reuse the key of a rejected oversized value.
-
-The limit cases propose Go's bounded behavior as the shared contract. At
-`dd-trace-go@885b16d2` these limits are enforced; inspection of the Java parser at
-`dd-trace-java@fab3bc8b` shows no corresponding feature-count or byte-length
-limits. Review these expectations as a cross-SDK decision, not a claim that
-all consumers already conform.
-
-Downstream readers must add explicit feature assertions to gain this coverage;
-updating the fixture pin alone still checks only the fields their reader uses.
-Map `HOOK` to the public exposure callback's feature accessor. Map `EXPOSURE`
-and `EVALUATION` to the corresponding selected feature snapshots and, in
-integration tests, the serialized event `features` objects. Raw OpenFeature
-metadata may contain internal fields for multiple destinations and is not a
-destination-isolation boundary.
-
-These expectations describe selected metadata, not event counts or exposure
-eligibility. `doLog=false` preserves the selected maps but suppresses exposure
-delivery. Downstream integration tests own error/cache/consent gates, callback
-ordering, aggregation, and transport. Normalize a missing event `features` field
-to an empty map for comparison, but do not normalize non-scalar values or discard
-unexpected keys. Older readers may ignore the new field; a green advisory job
-without feature assertions is not evidence of destination conformance.
+Count and byte limits are outside these cases: `dd-trace-go@885b16d2` caps features
+at 256 entries and keys/string values at 256 UTF-8 bytes; inspection of the Java
+parser at `dd-trace-java@fab3bc8b` shows no equivalent limits. Agree on that policy
+before adding shared boundary expectations; Go's local limit tests remain.
 
 ### SDK-Specific Fields
 
@@ -363,7 +336,7 @@ python3 ci/validate-fixtures.py
 | `test-case-semver-invalid-comparand-waterfall.json` | An invalid configured SemVer comparand in a non-last allocation of a waterfall must reject the whole flag at parse time rather than skipping it and falling through to a later valid default |
 | `test-case-semver-invalid-comparand-categories.json` | Configured SemVer comparand boundaries: a valid hyphen-heavy prerelease matches, while invalid syntax (including consecutive dots and a Ruby-style `.DEV` suffix), v-prefixed, leading-zero, and non-string comparands reject their flag at parse time with PARSE_ERROR without poisoning the rest of the configuration |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
-| `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and count/UTF-8 byte boundaries |
+| `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and logging decisions |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
