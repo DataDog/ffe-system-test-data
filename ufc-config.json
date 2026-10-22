@@ -5349,6 +5349,7 @@
       "allocations": [
         {
           "key": "no-log-allocation",
+          "randomizationActivatedAt": "2026-10-19T12:00:00Z",
           "rules": [],
           "splits": [
             {
