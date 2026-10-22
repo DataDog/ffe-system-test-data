@@ -596,6 +596,36 @@
       "evidence_file": "evidence/go-d004/native-receipt.json",
       "receipt_target": "go-d004",
       "limits": "Scoped D004 adoption. Existing Go timestamp grammar unchanged. This is local evidence, not CI, system-tests at the new SHA, staging, deployment or fleet approval."
+    },
+    {
+      "id": "V028",
+      "decision_revisions": {
+        "D001": 2,
+        "D002": 1,
+        "D004": 2,
+        "D005": 2,
+        "D006": 2,
+        "D007": 1,
+        "D008": 2,
+        "D011": 1,
+        "D014": 1,
+        "D015": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-22T18:00:45.713560Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "target": "Lean 4.19.0 local proposal",
+      "source_sha": "8e13ad6d4cad04e7bea6b921d0be9b98ba90beb5",
+      "patch": "Publication README wording and reply-skill updates only; Lean source and corpus unchanged.",
+      "evidence_kind": "local-model-verification",
+      "outcome": "pass",
+      "check": "Fresh draft-publication replay: 36 theorem axiom audits and 313 oracle rows pass.",
+      "expectation_profile": "go-stack-5666-5700-proposal-v5-go-d004-implemented; tested manifest SHA-256 3b2c39183b3b055b8fdb6630993bbe2d00d0bb42306bfee61a65cbb6022abe9a",
+      "evidence_file": "evidence/draft-publication-validation.json",
+      "receipt_target": null,
+      "limits": "Local model verification at the manifest pinned in the receipt. Native Go evidence remains V027; no fleet approval or deployment proof."
     }
   ]
 }

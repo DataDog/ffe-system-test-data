@@ -116,7 +116,8 @@
         "V002",
         "V014",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -168,7 +169,8 @@
         "V015",
         "V016",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -315,7 +317,8 @@
         "V024",
         "V025",
         "V026",
-        "V027"
+        "V027",
+        "V028"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -378,7 +381,7 @@
         "separator": "T-or-t",
         "zone": "Z-or-z-or-signed-HH:mm"
       },
-      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric ±HH:mm offsets or Z/z, seconds 00–59, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
+      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric \u00b1HH:mm offsets or Z/z, seconds 00\u201359, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -405,7 +408,8 @@
         "V019",
         "V020",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -463,7 +467,8 @@
         "V019",
         "V020",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -495,7 +500,7 @@
         "utc_year": "0000..9999",
         "written_year": "0000..9999"
       },
-      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000–9999; equivalent timezone representations acknowledge the same instant.",
+      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000\u20139999; equivalent timezone representations acknowledge the same instant.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -522,7 +527,8 @@
         "V019",
         "V020",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -583,7 +589,8 @@
         "V015",
         "V016",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -703,7 +710,8 @@
         "V009",
         "V014",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -831,7 +839,8 @@
         "V015",
         "V016",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -865,7 +874,8 @@
       "validation_history_ids": [
         "V010",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {
@@ -903,7 +913,8 @@
       "validation_history_ids": [
         "V011",
         "V021",
-        "V024"
+        "V024",
+        "V028"
       ]
     },
     {

@@ -1,8 +1,10 @@
 # Opt-out decisions from browser and Go review
 
-This is a **local central-contract proposal**, based on FFE data main
-`89a0f339b83f0cb6fabed77cc1164d97c9d24356`. No fleet approval, SDK modification,
-publication, or deployment is implied. The existing evaluation fixtures are unchanged.
+This is a **draft central-contract proposal**, based on FFE data main
+[`89a0f33`](https://github.com/DataDog/ffe-system-test-data/commit/89a0f339b83f0cb6fabed77cc1164d97c9d24356).
+The existing evaluation fixtures are unchanged. D004 has separate published Go
+implementation and native validation evidence below; fleet approval and deployment
+remain separate.
 
 The source workflow is the Codex chat **LEAN**, ID
 `01a1309a-1ca7-73e0-bc62-8bad9a0a6d07`, and its `ffe-contract-poc` experiment.
@@ -11,7 +13,7 @@ The six imported files are byte-preserved with provenance hashes. Browser
 at `58bc213b51eb539d58ee4a5c7719ccf500f09b66`; the reviewed head was `38d611c`.
 Its outcomes establish browser behavior, not automatic adoption by other SDKs.
 
-## Review result
+## Initial review snapshot
 
 | PR | Reviewed head | Relationship and review state |
 | --- | --- | --- |

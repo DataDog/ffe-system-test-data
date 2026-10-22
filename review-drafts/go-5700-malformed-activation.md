@@ -1,3 +1,5 @@
+> Historical draft, superseded by the [published reply](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041).
+
 🤖 **Comment from Codex working with Leo:**
 
 **Decision: align Go with the browser's scoped activation-error policy.**
