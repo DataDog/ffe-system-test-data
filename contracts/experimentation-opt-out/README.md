@@ -41,7 +41,7 @@ The main remaining work is:
    [`c5fec6a009ff`](https://github.com/DataDog/dd-trace-go/commit/c5fec6a009ffa29bf53f5377a21856c7c4aa5f56).
    [Native evidence](evidence/go-d004/native-receipt.json) records 90 applicable
    policy cases plus full-package/race checks and two negative controls.
-   The [decision reply is published](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041); the [updated body is saved locally](evidence/go-d004/published-implementation-reply.json).
+   The [decision reply is published](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041); the [updated reply links the draft proofs PR](evidence/go-d004/published-proof-links-reply.json).
    [Local adoption record](evidence/go-5700-d004-adoption.json); fleet adoption is separate.
    [Request](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303).
 3. **Disabled-provider precedence:** the current constructor validates mode before

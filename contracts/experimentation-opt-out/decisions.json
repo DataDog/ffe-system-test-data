@@ -334,6 +334,13 @@
         "publication": "evidence/go-d004/publication.json",
         "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
         "status": "published-local-native-validated"
+      },
+      "proofs_publication": {
+        "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+        "status": "draft",
+        "source_sha": "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+        "decision_url": "https://github.com/DataDog/ffe-system-test-data/blob/7894c5971626d9a8b1b146f0368e03bb149e4c65/contracts/experimentation-opt-out/decision-history.md#d004",
+        "reply_evidence_file": "evidence/go-d004/published-proof-links-reply.json"
       }
     },
     {
