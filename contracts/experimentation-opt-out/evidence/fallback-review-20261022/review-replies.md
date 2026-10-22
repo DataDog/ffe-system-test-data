@@ -1,7 +1,9 @@
 # Historical unposted review drafts
 
 These drafts preserve the pre-publication wording. See [publication.json](publication.json)
-for the subsequent signed native publication; the drafts have not been posted.
+for the subsequent signed native publication. The finalized replies were later posted;
+see [their exact bodies and stable URLs](posted-review-replies.json). This file preserves
+the earlier draft wording.
 
 These drafts use local artifact links and explicitly identify unpublished work.
 Before posting, publish the signed native change and central proposal only with

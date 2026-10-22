@@ -29,8 +29,8 @@ are omitted by the compiler. Filtering still scans remaining rules for decoded
 configurations, which have no private build metadata. No wire field or tracer
 version threshold changes. Unrelated flags remain available.
 
-This is a reviewer-requested compiler/delivery policy implemented and published under
-Leo's feedback and push requests. It is not a new fleet-approved SDK contract.
+This compiler/delivery policy was requested by the reviewer and reaffirmed in
+[Leo's published reply](https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325) after implementation and publication. It is not a new fleet-approved SDK contract.
 The exact authority, superseded alternative and scope are in
 [decisions.json](decisions.json) and the [linked history](decision-history.md#d021).
 D018's producer-owned randomization classification remains unchanged.
@@ -86,7 +86,9 @@ records 59 audited theorems, all 24 SemVer cases, 313 existing semantic cases,
 use the exact same SemVer corpus bytes as the central model. These are local
 results bound to the published native revision; they do not establish CI or deployment success.
 
-Review replies remain unposted drafts. The original PR's approval and green
+The [SemVer decision reply](https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325) and
+[helper-name reply](https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447607) are published and
+[read back](evidence/fallback-review-20261022/posted-review-replies.json). The original PR's approval and green
 checks apply to its old head; fresh CI and reviewer acceptance remain separate
 from the local validation and verified publication.
 The parent's [new rollout-control concern](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4354101407)

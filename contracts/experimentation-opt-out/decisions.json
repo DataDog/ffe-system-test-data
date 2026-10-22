@@ -1691,17 +1691,17 @@
       "id": "D021",
       "revision": 1,
       "statement": "For server UFC delivery, a flag whose authored allocations contain a SEMVER_* condition is omitted from the compatibility payload, even when optimization prunes every SemVer rule. With server SemVer rollout disabled it is omitted at build time. An override replaces the waterfall and bypasses this requirement. Capable-client payloads retain the flag when rollout is enabled; unrelated flags are preserved. Decoded configurations without build metadata are still scanned for surviving SEMVER_* conditions.",
-      "central_status": "reviewer-requested-published-implementation-central-proposal",
+      "central_status": "author-selected-dd-source-implementation-central-proposal",
       "scope": "dd-source compiler and cache-worker compatibility payload. No new tracer versions, wire metadata, SDK semantics, or fleet acceptance.",
-      "authority": "Aaron Silverman states the intended SemVer policy in the review. Leo requested addressing feedback and then explicitly authorized push; no public author acceptance reply has been posted.",
+      "authority": "Leo requested addressing feedback and pushing, then explicitly confirmed that posting the replies is part of pushing. The published author reply reaffirms Aaron's authored-SemVer delivery policy for dd-source.",
       "latest_setting": {
         "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
-        "thread_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
-        "kind": "reviewer-policy-clarification",
-        "author": "aaron-silverman_ddog",
-        "recorded_at": "2026-10-22T01:56:14Z",
-        "source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
-        "scope_note": "Reviewer explicitly rejects older-SDK preservation for flags with authored SemVer targeting and preserves the override exception. Implemented and published under Leo's feedback and push requests; not fleet approval.",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325",
+        "kind": "author-reaffirmation-of-reviewer-policy",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T23:04:50Z",
+        "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+        "scope_note": "Published author reply reaffirms authored SemVer delivery after optimization, the override exception, and the signed native fix. The shared contract remains a draft; no fleet approval.",
         "gap": null
       },
       "provenance": [
@@ -1714,6 +1714,11 @@
           "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
           "stage": "reviewer-policy-clarification",
           "summary": "Authored SemVer targeting governs delivery before and after optimization; override bypasses it."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325",
+          "stage": "published-author-reaffirmation",
+          "summary": "Confirms the implemented authored-SemVer policy and links the signed native fix, exact shared decision, model, corpus, negative control, and local validation."
         }
       ],
       "model": {
@@ -1753,7 +1758,8 @@
         "F139379-003",
         "F139379-004",
         "F139379-005",
-        "F139379-006"
+        "F139379-006",
+        "F139379-007"
       ],
       "implementation": {
         "repository": "ddoghq/dd-source",

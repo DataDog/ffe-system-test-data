@@ -1413,6 +1413,26 @@
       "evidence_file": "evidence/fallback-review-20261022/publication.json",
       "receipt_target": null,
       "limits": "Publication binds the local native receipts to the signed remote commit. It is not new CI, deployment, fleet approval, or closure of the parent rollout-control concern. Review replies remain unposted."
+    },
+    {
+      "id": "F139379-007",
+      "decision_revisions": {
+        "D021": 1
+      },
+      "recorded_at": "2026-10-22T23:04:53.859419+00:00",
+      "executed_at": "2026-10-22T23:04:53.859419+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325",
+      "target": "Published feedback replies and bidirectional evidence links",
+      "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+      "patch": null,
+      "evidence_kind": "published-review-reply-readback",
+      "outcome": "pass",
+      "check": "Both posted replies were read back and matched the intended body, author, and parent thread. SemVer reply links exact verified implementation and contract revisions.",
+      "expectation_profile": "D021 r1 remains unchanged; author reaffirms the implemented reviewer policy.",
+      "evidence_file": "evidence/fallback-review-20261022/posted-review-replies.json",
+      "receipt_target": null,
+      "limits": "Publication/readback evidence only. No new native run, CI acceptance, deployment, fleet approval, or parent rollout resolution."
     }
   ]
 }
