@@ -1,0 +1,156 @@
+[
+  {
+    "comment": {
+      "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352857168",
+      "pull_request_review_id": 5620028625,
+      "id": 4352857168,
+      "node_id": "PRRC_kwDOBAi6ic8AAAABA3NUUA",
+      "diff_hunk": "@@ -73,7 +73,7 @@ func evaluateFlag(flag *flag, defaultValue any, context map[string]any, now time\n \tfor _, allocation := range flag.Allocations {\n \t\t// Match the existing exposure-logging default when doLog is omitted.\n \t\t// Exclude before targeting or sharding, without changing eligible subjects' buckets.\n-\t\tif excludeExperiments && (allocation.DoLog == nil || *allocation.DoLog) {\n+\t\tif exclusion.excludes(allocation) {",
+      "path": "openfeature/evaluator.go",
+      "commit_id": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "original_commit_id": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "user": {
+        "login": "leoromanovsky",
+        "id": 57361,
+        "node_id": "MDQ6VXNlcjU3MzYx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/leoromanovsky",
+        "html_url": "https://github.com/leoromanovsky",
+        "followers_url": "https://api.github.com/users/leoromanovsky/followers",
+        "following_url": "https://api.github.com/users/leoromanovsky/following{/other_user}",
+        "gists_url": "https://api.github.com/users/leoromanovsky/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/leoromanovsky/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/leoromanovsky/subscriptions",
+        "organizations_url": "https://api.github.com/users/leoromanovsky/orgs",
+        "repos_url": "https://api.github.com/users/leoromanovsky/repos",
+        "events_url": "https://api.github.com/users/leoromanovsky/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/leoromanovsky/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "**Agreed. Implemented in [627db08](https://github.com/DataDog/dd-trace-go/commit/627db08193d8019d33282024d8340327997205ec).** The allocation loop now short-circuits before `excludes` when the effective policy is inactive; the inner guard remains.\n\n**Decision:** adopting [D017 r2](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/decision-history.md#d017) for Go: disabled mode or an absent cutoff performs zero exclusion checks. Invalid enabled input still returns `INVALID_CONTEXT`, and active policies retain their existing behavior. This follows your suggestion here; broader SDK adoption remains a proposal.\n\n<details>\n<summary><b>Proof preview</b> \u2014 model, native check, and negative control</summary>\n\nThe [shared proof draft](https://github.com/DataDog/ffe-system-test-data/pull/55) now includes an [executable Lean model](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/lean/InactivePath.lean), a 36-case trace oracle, and [reproducible native evidence](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/evidence/d017/README.md).\n\n| Check | Result |\n| --- | --- |\n| Lean | Guard preserves exclusion results; inactive policies execute zero checks. All 46 theorem audits, 313 semantic cases, and 36 trace cases pass. |\n| Actual Go helper entry | 36/36 trace cases pass through the production provider/evaluator. |\n| Restore the old evaluator | 15 expected failures from unwanted inactive calls, despite unchanged results. |\n| Uninstrumented compiled branch | Zero mode jumps past the helper call on Go 1.26.0/linux/amd64. |\n| Package / race | 278 top-level tests pass in each run. |\n\nThe trace adapter deliberately forces full traversal; it does not prove arbitrary targeting or whole-program equivalence. [Independent review](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/evidence/d017/independent-review.json) checked the mapping and artifacts.\n\n</details>\n\n**Timing:** [10 alternating rounds across 34 whole-evaluation cases](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/evidence/d017/go/benchmarks.json) produced mixed median changes (\u22121.61% to +2.99%), with unchanged allocation counts. That comparison is against [c5fec6a](https://github.com/DataDog/dd-trace-go/commit/c5fec6a009ffa29bf53f5377a21856c7c4aa5f56), so it does not establish that the earlier parent-relative CI regressions are gone. Both the helper benchmark and new whole-evaluation profiles are registered for CI; the new CI result remains separate.",
+      "created_at": "2026-10-22T19:53:37Z",
+      "updated_at": "2026-10-22T19:53:37Z",
+      "html_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168",
+      "pull_request_url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700",
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352857168"
+        },
+        "html": {
+          "href": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700"
+        }
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352857168/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "start_line": null,
+      "original_start_line": null,
+      "start_side": null,
+      "line": null,
+      "original_line": 76,
+      "side": "RIGHT",
+      "in_reply_to_id": 4342540461,
+      "author_association": "MEMBER",
+      "original_position": 14,
+      "position": 1,
+      "subject_type": "line"
+    },
+    "thread_id": "PRRT_kwDOBAi6ic6u-Wck",
+    "resolution": {
+      "id": "PRRT_kwDOBAi6ic6u-Wck",
+      "isResolved": true
+    }
+  },
+  {
+    "comment": {
+      "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352859438",
+      "pull_request_review_id": 5620031348,
+      "id": 4352859438,
+      "node_id": "PRRC_kwDOBAi6ic8AAAABA3NdLg",
+      "diff_hunk": "@@ -0,0 +1,246 @@\n+// Unless explicitly stated otherwise all files in this repository are licensed\n+// under the Apache License Version 2.0.\n+// This product includes software developed at Datadog (https://www.datadoghq.com/).\n+// Copyright 2026 Datadog, Inc.\n+\n+package openfeature\n+\n+import (\n+\t\"context\"\n+\t\"encoding/json\"\n+\t\"strconv\"\n+\t\"sync\"\n+\t\"testing\"\n+\t\"time\"\n+\n+\tof \"github.com/open-feature/go-sdk/openfeature\"\n+\t\"github.com/stretchr/testify/assert\"\n+\t\"github.com/stretchr/testify/require\"\n+)\n+\n+func TestExperimentationOptOutFutureExposures(t *testing.T) {\n+\tcutoff, err := time.Parse(time.RFC3339Nano, experimentOptOutTestTime)\n+\trequire.NoError(t, err)\n+\tfor _, tc := range []struct {\n+\t\tname       string\n+\t\tactivation *time.Time\n+\t\tdoLog      *bool\n+\t\tcontinues  bool\n+\t\texposures  int\n+\t}{\n+\t\t{\"older experiment\", new(cutoff.Add(-time.Second)), new(true), true, 2},\n+\t\t{\"older experiment with default doLog\", new(cutoff.Add(-time.Second)), nil, true, 2},\n+\t\t{\"equal activation\", new(cutoff), new(true), false, 1},\n+\t\t{\"newer activation\", new(cutoff.Add(time.Second)), new(true), false, 1},\n+\t\t{\"unknown activation\", nil, new(true), false, 1},\n+\t\t{\"ordinary allocation\", nil, new(false), true, 0},\n+\t} {\n+\t\tt.Run(tc.name, func(t *testing.T) {\n+\t\t\th := newOptOutHarness(t, ProviderConfig{\n+\t\t\t\tExperimentationOptOutMode:                ExperimentationOptOutFutureExperimentsOnly,\n+\t\t\t\tEnableEvaluationTelemetryOptOutParameter: new(true),\n+\t\t\t})\n+\t\t\ta := h.provider.configuration.Flags[\"experiment\"].Allocations[0]\n+\t\t\ta.RandomizationActivatedAt, a.DoLog = tc.activation, tc.doLog\n+\t\t\th.evaluate(t, \"enrolled\", nil)\n+\t\t\tattrs := map[string]any{experimentationOptOutAtAttribute: experimentOptOutTestTime}\n+\t\t\tfor _, subject := range []string{\"enrolled\", \"enrolled\", \"first-evaluation\"} {\n+\t\t\t\tdetails, err := h.client.BooleanValueDetails(context.Background(), \"experiment\", false,\n+\t\t\t\t\tof.NewEvaluationContext(subject, attrs))\n+\t\t\t\trequire.NoError(t, err)\n+\t\t\t\tassert.Equal(t, tc.continues, details.Value)\n+\t\t\t}\n+\t\t\t// Restoring consent does not invalidate an unchanged exposure cache entry.\n+\t\t\th.evaluate(t, \"enrolled\", nil)\n+\t\t\th.provider.exposureWriter.flush()\n+\t\t\tassert.Len(t, h.sink.exposures, tc.exposures, \"normal deduplication; no withdrawal event\")\n+\t\t\tfor _, exposure := range h.sink.exposures {\n+\t\t\t\tassert.Equal(t, \"allocation\", exposure.Allocation.Key)\n+\t\t\t\tassert.Equal(t, \"on\", exposure.Variant.Key)\n+\t\t\t}\n+\t\t\th.provider.flagEvalLoggingWriter.drainAndFlush()\n+\t\t\tvar count int64\n+\t\t\tfor _, event := range h.sink.events {\n+\t\t\t\tcount += event.EvaluationCount\n+\t\t\t}\n+\t\t\tassert.Equal(t, int64(5), count, \"experimentation opt-out does not suppress evaluations\")\n+\t\t})\n+\t}\n+}\n+\n+func TestExperimentationOptOutFutureTelemetryIndependence(t *testing.T) {\n+\th := newOptOutHarness(t, ProviderConfig{\n+\t\tExperimentationOptOutMode:                ExperimentationOptOutFutureExperimentsOnly,\n+\t\tEnableEvaluationTelemetryOptOutParameter: new(true),\n+\t})\n+\told := time.Date(2026, 10, 1, 12, 0, 0, 0, time.UTC)\n+\th.provider.configuration.Flags[\"experiment\"].Allocations[0].RandomizationActivatedAt = &old\n+\th.evaluate(t, \"subject\", map[string]any{\n+\t\texperimentationOptOutAtAttribute: experimentOptOutTestTime,\n+\t\toptOutTestParameter:              true,\n+\t})\n+\th.assertCounts(t, 0, 1, 1)\n+}\n+\n+func TestExperimentationOptOutFutureConfigurationRefresh(t *testing.T) {\n+\th := newOptOutHarness(t, ProviderConfig{ExperimentationOptOutMode: ExperimentationOptOutFutureExperimentsOnly})\n+\told := time.Date(2026, 10, 1, 12, 0, 0, 0, time.UTC)\n+\th.provider.configuration.Flags[\"experiment\"].Allocations[0].RandomizationActivatedAt = &old\n+\tattrs := map[string]any{experimentationOptOutAtAttribute: experimentOptOutTestTime}\n+\th.evaluate(t, \"subject\", attrs)\n+\n+\t// A later configuration date and an edited schedule do not create a new run.\n+\tdata, err := json.Marshal(h.provider.configuration)\n+\trequire.NoError(t, err)\n+\tvar refreshed universalFlagsConfiguration\n+\trequire.NoError(t, json.Unmarshal(data, &refreshed))\n+\trefreshed.CreatedAt = old.AddDate(1, 0, 0)\n+\trefreshed.Flags[\"experiment\"].Allocations[0].StartAt = new(old.AddDate(-1, 0, 0))\n+\th.provider.mu.Lock()\n+\th.provider.configuration = &refreshed\n+\th.provider.mu.Unlock()\n+\th.evaluate(t, \"subject\", attrs)\n+\th.evaluate(t, \"new-subject\", attrs)\n+\n+\t// A new allocation has its own activation timestamp.\n+\trefreshed.Flags[\"experiment\"].Allocations[0].Key = \"new-allocation\"\n+\trefreshed.Flags[\"experiment\"].Allocations[0].RandomizationActivatedAt = new(old.AddDate(0, 1, 0))\n+\tresult, err := h.client.BooleanValueDetails(context.Background(), \"experiment\", false, of.NewEvaluationContext(\"subject\", attrs))\n+\trequire.NoError(t, err)\n+\tassert.False(t, result.Value)\n+\tassert.Equal(t, of.DefaultReason, result.Reason)\n+\th.provider.exposureWriter.flush()\n+\tassert.Len(t, h.sink.exposures, 2, \"refresh did not create a new exposure for the existing subject\")\n+}\n+\n+func TestExperimentationOptOutFutureInput(t *testing.T) {\n+\tfor _, tc := range []struct {\n+\t\tname  string\n+\t\tvalue any\n+\t}{\n+\t\t{\"malformed\", \"invalid\"},\n+\t\t{\"empty\", \"\"},\n+\t\t{\"null\", nil},\n+\t\t{\"boolean\", false},\n+\t\t{\"number\", 123},\n+\t\t{\"array\", []any{experimentOptOutTestTime}},\n+\t\t{\"object\", map[string]any{\"timestamp\": experimentOptOutTestTime}},\n+\t} {\n+\t\tt.Run(tc.name, func(t *testing.T) {\n+\t\t\texclusion, err := ExperimentationOptOutFutureExperimentsOnly.exclusion(map[string]any{experimentationOptOutAtAttribute: tc.value})\n+\t\t\trequire.ErrorIs(t, err, errInvalidContext)\n+\t\t\tassert.Equal(t, experimentationExclusion{}, exclusion)\n+\t\t})\n+\t}\n+}\n+\n+func TestExperimentationOptOutFutureActivationParsing(t *testing.T) {\n+\tfor _, tc := range []struct {\n+\t\tname    string\n+\t\traw     string\n+\t\tvalid   bool\n+\t\tunknown bool\n+\t}{\n+\t\t{\"missing\", \"\", true, true},\n+\t\t{\"null\", \",\\\"randomizationActivatedAt\\\":null\", true, true},\n+\t\t{\"timestamp\", \",\\\"randomizationActivatedAt\\\":\\\"2026-10-01T12:00:00Z\\\"\", true, false},\n+\t\t{\"malformed\", \",\\\"randomizationActivatedAt\\\":\\\"invalid\\\"\", false, false},\n+\t\t{\"empty\", \",\\\"randomizationActivatedAt\\\":\\\"\\\"\", false, false},\n+\t\t{\"number\", \",\\\"randomizationActivatedAt\\\":123\", false, false},\n+\t\t{\"boolean\", \",\\\"randomizationActivatedAt\\\":true\", false, false},\n+\t\t{\"array\", \",\\\"randomizationActivatedAt\\\":[]\", false, false},\n+\t\t{\"object\", \",\\\"randomizationActivatedAt\\\":{}\", false, false},\n+\t} {\n+\t\tt.Run(tc.name, func(t *testing.T) {\n+\t\t\tvar config universalFlagsConfiguration\n+\t\t\trequire.NoError(t, json.Unmarshal([]byte(`{\"format\":\"SERVER\",\"flags\":{\n+\t\t\t\t\"test\":{\"key\":\"test\",\"enabled\":true,\"variationType\":\"BOOLEAN\",\n+\t\t\t\t\"variations\":{\"on\":{\"key\":\"on\",\"value\":true}},\n+\t\t\t\t\"allocations\":[{\"key\":\"a\",\"doLog\":true,\"splits\":[{\"variationKey\":\"on\",\"shards\":[]}]`+tc.raw+`}]},\n+\t\t\t\t\"neighbor\":{\"key\":\"neighbor\",\"enabled\":true,\"variationType\":\"BOOLEAN\",\n+\t\t\t\t\"variations\":{\"on\":{\"key\":\"on\",\"value\":true}},\n+\t\t\t\t\"allocations\":[{\"key\":\"a\",\"doLog\":false,\"splits\":[{\"variationKey\":\"on\",\"shards\":[]}]}]}\n+\t\t\t}}`), &config))\n+\t\t\tassert.Contains(t, config.Flags, \"neighbor\")\n+\t\t\tif tc.valid {\n+\t\t\t\trequire.Contains(t, config.Flags, \"test\")\n+\t\t\t\tassert.Equal(t, tc.unknown, config.Flags[\"test\"].Allocations[0].RandomizationActivatedAt == nil)\n+\t\t\t} else {\n+\t\t\t\trequire.NotContains(t, config.Flags, \"test\")\n+\t\t\t\tfor _, mode := range []ExperimentationOptOutMode{\n+\t\t\t\t\tExperimentationOptOutDisabled,\n+\t\t\t\t\tExperimentationOptOutImmediate,\n+\t\t\t\t\tExperimentationOptOutFutureExperimentsOnly,\n+\t\t\t\t} {\n+\t\t\t\t\texclusion, err := mode.exclusion(map[string]any{experimentationOptOutAtAttribute: experimentOptOutTestTime})\n+\t\t\t\t\trequire.NoError(t, err)\n+\t\t\t\t\tresult := evaluateConfiguredFlag(&config, \"test\", false, nil, time.Now(), exclusion)\n+\t\t\t\t\tassert.ErrorIs(t, result.Error, errParseError)\n+\t\t\t\t\tassert.Equal(t, false, result.Value)\n+\t\t\t\t\tneighbor := evaluateConfiguredFlag(&config, \"neighbor\", false, nil, time.Now(), exclusion)\n+\t\t\t\t\tassert.NoError(t, neighbor.Error)\n+\t\t\t\t\tassert.Equal(t, true, neighbor.Value)\n+\t\t\t\t}\n+\t\t\t}\n+\t\t})\n+\t}\n+}\n+\n+func TestExperimentationOptOutFutureConcurrentBuckets(t *testing.T) {\n+\th := newOptOutHarness(t, ProviderConfig{ExperimentationOptOutMode: ExperimentationOptOutFutureExperimentsOnly})\n+\tf := h.provider.configuration.Flags[\"experiment\"]\n+\tactivation := time.Date(2026, 10, 19, 12, 0, 0, 0, time.UTC)\n+\tf.Allocations[0].RandomizationActivatedAt = &activation\n+\tf.Variations[\"off\"] = &variant{Key: \"off\", Value: false}\n+\tf.Allocations[0].Splits = []*split{\n+\t\t{VariationKey: \"on\", Shards: []*shard{{Salt: \"holdout\", TotalShards: 10000, Ranges: []*shardRange{{Start: 0, End: 1000}}}}},\n+\t\t{VariationKey: \"off\", Shards: []*shard{{Salt: \"holdout\", TotalShards: 10000, Ranges: []*shardRange{{Start: 1000, End: 10000}}}}},\n+\t}\n+\tvar wg sync.WaitGroup\n+\tvar groups sync.Map\n+\tfor i := range 100 {\n+\t\twg.Go(func() {\n+\t\t\tattrs := of.FlattenedContext{of.TargetingKey: strconv.Itoa(i)}\n+\t\t\tbaseline := h.provider.BooleanEvaluation(context.Background(), \"experiment\", false, attrs)\n+\t\t\tassert.NotEmpty(t, baseline.Variant)\n+\t\t\tgroups.Store(baseline.Variant, true)\n+\t\t\tattrs[experimentationOptOutAtAttribute] = activation.Add(time.Second).Format(time.RFC3339Nano)\n+\t\t\tcontinued := h.provider.BooleanEvaluation(context.Background(), \"experiment\", false, attrs)\n+\t\t\tassert.Equal(t, baseline.Value, continued.Value)\n+\t\t\tassert.Equal(t, baseline.Variant, continued.Variant)\n+\t\t\tassert.Equal(t, baseline.Reason, continued.Reason)\n+\t\t\tattrs[experimentationOptOutAtAttribute] = activation.Format(time.RFC3339Nano)\n+\t\t\texcluded := h.provider.BooleanEvaluation(context.Background(), \"experiment\", false, attrs)\n+\t\t\tassert.Equal(t, of.DefaultReason, excluded.Reason)\n+\t\t\tassert.Empty(t, excluded.Variant)\n+\t\t})\n+\t}\n+\twg.Wait()\n+\t_, on := groups.Load(\"on\")\n+\t_, off := groups.Load(\"off\")\n+\tassert.True(t, on && off, \"both randomized groups must be exercised\")\n+}\n+\n+func BenchmarkExperimentationExclusion(b *testing.B) {",
+      "path": "openfeature/experimentation_opt_out_future_test.go",
+      "commit_id": "627db08193d8019d33282024d8340327997205ec",
+      "original_commit_id": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "user": {
+        "login": "leoromanovsky",
+        "id": 57361,
+        "node_id": "MDQ6VXNlcjU3MzYx",
+        "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/leoromanovsky",
+        "html_url": "https://github.com/leoromanovsky",
+        "followers_url": "https://api.github.com/users/leoromanovsky/followers",
+        "following_url": "https://api.github.com/users/leoromanovsky/following{/other_user}",
+        "gists_url": "https://api.github.com/users/leoromanovsky/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/leoromanovsky/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/leoromanovsky/subscriptions",
+        "organizations_url": "https://api.github.com/users/leoromanovsky/orgs",
+        "repos_url": "https://api.github.com/users/leoromanovsky/repos",
+        "events_url": "https://api.github.com/users/leoromanovsky/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/leoromanovsky/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "**Implemented in [627db08](https://github.com/DataDog/dd-trace-go/commit/627db08193d8019d33282024d8340327997205ec).** Both `BenchmarkExperimentationExclusion` and the new `BenchmarkBooleanEvaluationExclusion` are registered in `microbenchmarks-3`.\n\nThe whole-evaluation benchmark has 24 profiles covering disabled mode, immediate/future modes without a cutoff, active exclusion, and retained older experiments, with allocation/context-size variation. All profiles execute successfully; the CI benchmark inventory check passes.\n\n[Evidence and D017](https://github.com/DataDog/ffe-system-test-data/blob/f4ba2a0de5f807bc618411db2640552d428c479c/contracts/experimentation-opt-out/evidence/d017/README.md) retain the local measurements and limits. As CONTRIBUTING notes, a newly introduced benchmark needs a baseline before CI can compare it.",
+      "created_at": "2026-10-22T19:53:51Z",
+      "updated_at": "2026-10-22T19:53:51Z",
+      "html_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438",
+      "pull_request_url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700",
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352859438"
+        },
+        "html": {
+          "href": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700"
+        }
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352859438/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "start_line": null,
+      "original_start_line": null,
+      "start_side": null,
+      "line": 296,
+      "original_line": 224,
+      "side": "RIGHT",
+      "in_reply_to_id": 4342540847,
+      "author_association": "MEMBER",
+      "original_position": 224,
+      "position": 296,
+      "subject_type": "line"
+    },
+    "thread_id": "PRRT_kwDOBAi6ic6u-Wgp",
+    "resolution": {
+      "id": "PRRT_kwDOBAi6ic6u-Wgp",
+      "isResolved": true
+    }
+  }
+]

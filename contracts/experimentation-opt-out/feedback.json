@@ -400,8 +400,9 @@
       "kind": "native-performance",
       "next_action": "Observe the new performance CI report and assess parent-relative regressions separately from the verified call skip; other SDK adoption remains proposed.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "outdated": false,
+        "resolution_recorded_at": "2026-10-22T19:55:38.314459+00:00"
       },
       "evidence_level": "Fresh native trace and package/race execution, compiled branch inspection, uninstrumented local timings, CI registration check and independent review; see linked receipt.",
       "reviewer_priority": "P0",
@@ -411,7 +412,8 @@
       "current_head_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
       "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
       "evidence_file": "evidence/d017/README.md",
-      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec"
+      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168"
     },
     {
       "id": "go-5700-4342540684",
@@ -455,8 +457,9 @@
       "kind": "native-performance",
       "next_action": "Confirm benchmark discovery in the new CI run; new benchmarks have no comparison until a baseline exists.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "outdated": false,
+        "resolution_recorded_at": "2026-10-22T19:55:38.314473+00:00"
       },
       "evidence_level": "Fresh native trace and package/race execution, compiled branch inspection, uninstrumented local timings, CI registration check and independent review; see linked receipt.",
       "reviewer_priority": "P3",
@@ -466,7 +469,8 @@
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
       "evidence_file": "evidence/d017/README.md",
-      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec"
+      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438"
     },
     {
       "id": "go-5700-4342541096",

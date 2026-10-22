@@ -1,9 +1,9 @@
 # D017 r2: inactive opt-out skips allocation-exclusion work
 
 Leo accepted the [call-site guard request](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461)
-in the review chat. Acceptance is scoped to Go; this document is the proposed
-contract for other rules-based SDKs. The current public decision-setting reply
-still describes the earlier partial fix; r2 has not been posted there yet.
+in the review chat and [published the Go decision](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168).
+Acceptance is scoped to Go; this document is the proposed contract for other
+rules-based SDKs. The earlier partial fix remains in the decision history.
 
 ## English rule and scope
 
