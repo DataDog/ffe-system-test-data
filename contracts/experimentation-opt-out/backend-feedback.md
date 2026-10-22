@@ -8,13 +8,13 @@ merge approval, deployment, and configuration rebuilds remain separate.
 
 ## D018: randomization is represented by doLog
 
-Leo clarified in this chat: allocations that randomize must be excluded, and
+Leo [reaffirmed the decision in the review thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956): allocations that randomize must be excluded, and
 `doLog` is the evaluator-facing signal that the backend must populate correctly.
 The earlier “Keep” selection was withdrawn before implementation. The exact
 statement and correction are retained in [local-decision.json](evidence/backend-review-20261022/local-decision.json).
-There is no public author decision-setting reply yet; the
-[review thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763)
-is context and counterexample evidence, not a substitute for that missing source.
+The [posted reply readback](evidence/backend-review-20261022/published-replies.json)
+now supplies the public decision-setting source. The earlier local setting is
+retained in provenance; historical test receipts retain their original pins.
 
 | Allocation | Producer output | Immediate mode with valid cutoff |
 | --- | --- | --- |
@@ -56,7 +56,8 @@ consumer tests; they are not examples of correctly compiled randomized allocatio
 See the [machine-readable ledger](evidence/backend-review-20261022/feedback-ledger.json),
 [full four-PR review snapshot](evidence/backend-review-20261022/stack-snapshot.json),
 and [source pins](evidence/backend-review-20261022/source-pins.json).
-Thread resolution and review approval remain remote actions; neither was performed.
+All three fixes have [published replies](evidence/backend-review-20261022/review-replies.md).
+Threads remain open for reviewer confirmation; publication does not imply approval.
 
 ## Propagation and release obligations
 

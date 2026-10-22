@@ -1086,6 +1086,27 @@
       "evidence_file": "evidence/backend-review-20261022/native-publication.json",
       "receipt_target": null,
       "limits": "No native rerun or deployment claim; existing executions remain pinned to baseline plus exact patch."
+    },
+    {
+      "id": "V051",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T21:50:08.983630+00:00",
+      "executed_at": "2026-10-22T21:50:08.983630+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "target": "Published central contract and authorized review replies",
+      "source_sha": "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+      "source_repository_url": "https://github.com/DataDog/ffe-system-test-data",
+      "patch": null,
+      "evidence_kind": "central-publication-and-comment-readback",
+      "outcome": "pass",
+      "check": "All 16 central PR commits GitHub verified/valid; published manifest, D018, model and native receipt match local bytes. All three authorized replies read back exactly.",
+      "expectation_profile": "D018 r1; published author reaffirmation changes provenance only, not the rule or native acceptance baseline.",
+      "evidence_file": "evidence/backend-review-20261022/central-publication.json",
+      "receipt_target": null,
+      "limits": "Publication/link integrity only. Model proof remains distinct from compiler classification tests, CI and deployment; followup backlinks are separate from this published revision."
     }
   ]
 }

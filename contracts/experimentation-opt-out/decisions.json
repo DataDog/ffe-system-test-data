@@ -1229,17 +1229,35 @@
         {
           "source": "evidence/backend-review-20261022/local-decision.json",
           "stage": "author-decision"
+        },
+        {
+          "stage": "prior-local-setting-published-without-semantic-change",
+          "setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:28:39.093354+00:00",
+            "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+            "scope_note": "Backend populates doLog from randomization; source SHA is the reviewed baseline, not the unpublished implementation.",
+            "gap": "No public comment yet records this clarification; exact local statement and withdrawn earlier selection are saved in local-decision.json."
+          }
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+          "stage": "authorized-author-reaffirmation",
+          "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1"
         }
       ],
       "latest_setting": {
         "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
-        "thread_url": null,
-        "kind": "local-decision",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+        "kind": "author-decision",
         "author": "leo-romanovsky_ddog",
-        "recorded_at": "2026-10-22T21:28:39.093354+00:00",
-        "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
-        "scope_note": "Backend populates doLog from randomization; source SHA is the reviewed baseline, not the unpublished implementation.",
-        "gap": "No public comment yet records this clarification; exact local statement and withdrawn earlier selection are saved in local-decision.json."
+        "recorded_at": "2026-10-22T21:49:16Z",
+        "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+        "scope_note": "Author reaffirms backend-owned randomization classification through existing doLog; D018 r1 unchanged. Native publication and model validation remain separately linked.",
+        "gap": null
       },
       "model": {
         "file": "lean/BackendReview.lean",
@@ -1265,7 +1283,8 @@
         "V047",
         "V048",
         "V049",
-        "V050"
+        "V050",
+        "V051"
       ],
       "implementation": {
         "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",

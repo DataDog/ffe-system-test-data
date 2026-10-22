@@ -16,7 +16,7 @@ Its outcomes establish browser behavior, not automatic adoption by other SDKs.
 ## Backend compiler clarification
 
 [D018 and the bottom-stack feedback ledger](backend-feedback.md) record Leo's
-local decision that randomized allocations must be represented by `doLog=true`
+published decision that randomized allocations must be represented by `doLog=true`
 by the backend. The existing evaluator predicate and future cutoff rule remain.
 The published producer change, model evidence, native checks, and deployment gates
 are tracked separately. The central contract remains a draft proposal.

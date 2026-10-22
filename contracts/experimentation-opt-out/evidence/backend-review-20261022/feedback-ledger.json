@@ -17,15 +17,17 @@
         "path": "domains/ffe/libs/flagging/ufc/ufc.go",
         "line": 179,
         "comment_ids": [
-          4343813763
+          4343813763,
+          4353896956
         ]
       },
       "decision_ids": [
         "D018"
       ],
-      "disposition": "implemented-published",
+      "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
-      "next_action": "Publish central evidence, reply to the reviewer, and refresh thread state."
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956"
     },
     {
       "id": "backend-139368-4343814230",
@@ -42,13 +44,15 @@
         "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
         "line": 44,
         "comment_ids": [
-          4343814230
+          4343814230,
+          4353897263
         ]
       },
       "decision_ids": [],
-      "disposition": "implemented-published",
+      "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
-      "next_action": "Publish central evidence, reply to the reviewer, and refresh thread state."
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263"
     },
     {
       "id": "backend-139368-4343814608",
@@ -61,17 +65,19 @@
       "thread": {
         "id": "PRRT_kwDORrsQN86vBR_7",
         "isResolved": false,
-        "isOutdated": false,
+        "isOutdated": true,
         "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
-        "line": 508,
+        "line": null,
         "comment_ids": [
-          4343814608
+          4343814608,
+          4353897591
         ]
       },
       "decision_ids": [],
-      "disposition": "implemented-published",
+      "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
-      "next_action": "Publish central evidence, reply to the reviewer, and refresh thread state."
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591"
     }
   ]
 }

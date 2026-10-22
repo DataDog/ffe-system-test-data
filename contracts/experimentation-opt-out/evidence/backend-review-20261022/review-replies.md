@@ -1,26 +1,25 @@
-# Draft review replies
+# Published review replies
 
-These replies are local drafts. Publish the implementation and central decision
-before replacing this header with verified commit and decision permalinks.
-No comment or thread resolution has been posted.
+Posted with authorization and read back from GitHub. Threads remain open for reviewer confirmation.
 
-## P1: compiler classification
+## P1: [discussion_r4353896956](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956)
 
-The intended contract is to exclude randomizing allocations, with `doLog` carrying
-that signal from the backend. The compiler now sets it when shard selection can
-change the variation or match/fallthrough outcome, including concluded experiments
-that still split and ordinary percentage rollouts. Deterministic completed winners
-remain `doLog=false`; existing active-experiment and holdout logging stays intact.
-This also enables exposures for ordinary randomized allocations. Evaluators retain
-the existing `doLog` predicate and future-mode cutoff rule.
+Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1). The policy is to exclude allocations that randomize; the backend must represent that through the existing `doLog` field. The compiler now sets `doLog=true` when shard selection changes the variation or match/fallthrough outcome, covering completed 50/50 experiments, ordinary percentage splits, and partial enrollment. Deterministic completed winners remain `false`; existing active-experiment, canary, bandit, and holdout logging requirements are preserved. This deliberately enables exposure logging for ordinary randomized allocations. The evaluator predicate and future-mode cutoff rule stay unchanged.
 
-## P2: synthetic holdout runner
+Recorded as [D018](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55), published at [656696f84f](https://github.com/DataDog/ffe-system-test-data/commit/656696f84fb83fea87798a0d4151af0f7e2fc16d), with this [decision thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763) and the earlier withdrawn selection retained in provenance.
 
-The runner accepts either logging value for a concluded ordinary winner, while
-still checking its variant and requiring exposure logging for active experiments.
-The holdout runner and primary-analysis suites pass all 255 tests.
+[Native evidence](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json): 817 compiler tests and 269 database repository tests pass, including 500 independent raw-bucket enumeration cases. Restoring the old `doLog` output fails the three added scenarios above; restoring the fix passes both suites uncached. [Lean evidence](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/model-validation.json): seven new composition theorems, 53 total audited; 313 existing semantic cases and 36 operational cases pass. The Lean abstraction does not prove the native classifier; the native tests cover that boundary.
 
-## P3: query parameters
+Deployment still requires the fallback-preserving child and regenerated UFCs. Newly logging allocations without activation metadata retain the existing conservative future-mode exclusion; activation coverage remains a separate rollout obligation.
 
-The organization-scoped snapshot query now binds the experiment IDs with
-`id = ANY(?::uuid[])` and `pq.Array`, matching the existing holdout query pattern.
+## P2: [discussion_r4353897263](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263)
+
+Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1). The holdout runner now accepts either `doLog` value for a concluded ordinary winner, still checks the selected winner, and continues requiring logging for active ordinary experiments. Regression cases cover both logging values and reject the wrong winner.
+
+The holdout-runner and primary-analysis suites pass all 255 tests. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json), retained in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) alongside the [D018](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) producer contract. This is local runner validation; it does not claim a deployed lifecycle run.
+
+## P3: [discussion_r4353897591](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591)
+
+Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1): the organization-scoped bulk snapshot query uses `id = ANY(?::uuid[])` with `pq.Array(experimentIDs)`, matching the existing holdout-query pattern.
+
+All 269 database repository tests pass with the change. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json) is published in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55); this query-binding fix is native evidence, outside the Lean model proof.

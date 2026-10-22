@@ -1,0 +1,90 @@
+{
+  "central_pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+  "central_source_sha": "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+  "manifest_sha256": "b64e8abc7c119b6127367dc52fbbe93c41d7dff5c521415fd1a04556e9d0fa71",
+  "decision_url": "https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog",
+  "all_pr_commits": [
+    {
+      "sha": "ec72cdbd67df374ed5df0472831c15a415449013",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3e1d010e072d0762f1f086ea04caccee487948ba",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "acc963954b8cd8422b50ab6124d9ccfc05cd3434",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "843f3baeb1bce55ca391b0caa9ef41dc747b44b3",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "8e13ad6d4cad04e7bea6b921d0be9b98ba90beb5",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "f4ba2a0de5f807bc618411db2640552d428c479c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0705b517d71e213fc402f456b6ea9a8dbff55b01",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "531e69f0b943e76d6f34144dbc1303a136febadf",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ec4af07fdae4c0349d5d39fe4135016eee12529c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "4c113a1032b5c347e0eac7de50cf223ca63d7f6f",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "277d414757270ae1e2e5ecf8f00030977d470193",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "1651131dc3472f0922608d0de2b618be670231ac",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "7119c9c71d8e76a48b898a6b9d91aed8a3795901",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+      "verified": true,
+      "reason": "valid"
+    }
+  ],
+  "recorded_at": "2026-10-22T21:50:08.983630+00:00",
+  "limits": "Verified publication of the central draft, its exact decision/model/native-evidence bytes, manifest and all PR commit signatures. This does not grant fleet approval."
+}
