@@ -65,7 +65,8 @@
               "shards": []
             }
           ],
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": null
         }
       ]
     },
@@ -1016,7 +1017,8 @@
             }
           ],
           "endAt": "2002-10-31T09:00:00.594Z",
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2000-01-01T00:00:00Z"
         },
         {
           "key": "future-versions",
@@ -1027,7 +1029,8 @@
             }
           ],
           "startAt": "2052-10-31T09:00:00.594Z",
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-01T12:00:00Z"
         },
         {
           "key": "current-versions",
@@ -1039,7 +1042,8 @@
           ],
           "startAt": "2022-10-31T09:00:00.594Z",
           "endAt": "2050-10-31T09:00:00.594Z",
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-20T12:00:00Z"
         }
       ]
     },
@@ -1278,7 +1282,8 @@
               ]
             }
           ],
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-01T12:00:00Z"
         },
         {
           "key": "rollout",
@@ -1384,7 +1389,8 @@
               ]
             }
           ],
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-20T12:00:00Z"
         },
         {
           "key": "50/50 split",
@@ -1421,7 +1427,8 @@
               ]
             }
           ],
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-01T12:00:00Z"
         }
       ]
     },
@@ -1644,7 +1651,8 @@
               ]
             }
           ],
-          "doLog": true
+          "doLog": true,
+          "randomizationActivatedAt": "2026-10-19T12:00:00.123Z"
         },
         {
           "key": "allocation-default",
@@ -5341,6 +5349,7 @@
       "allocations": [
         {
           "key": "no-log-allocation",
+          "randomizationActivatedAt": "2026-10-19T12:00:00Z",
           "rules": [],
           "splits": [
             {

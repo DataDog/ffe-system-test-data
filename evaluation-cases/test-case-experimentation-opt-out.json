@@ -4,7 +4,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "not-a-timestamp" },
     "result": { "value": "default", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -12,7 +13,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": {}, "reason": "ERROR", "errorCode": "TARGETING_KEY_MISSING" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" }
+      "experimentationOptOutImmediate": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" }
     }
   },
   {
@@ -20,7 +22,8 @@
     "attributes": { "country": "UK" },
     "result": { "value": "red", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "red", "reason": "TARGETING_MATCH" }
+      "experimentationOptOutImmediate": { "value": "red", "reason": "TARGETING_MATCH" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "red", "reason": "TARGETING_MATCH" }
     }
   },
   {
@@ -28,7 +31,8 @@
     "attributes": { "country": "UK", "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": "red", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "default", "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": "default", "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "red", "reason": "TARGETING_MATCH" }
     }
   },
   {
@@ -36,7 +40,8 @@
     "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": "green", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "green", "reason": "TARGETING_MATCH" }
+      "experimentationOptOutImmediate": { "value": "green", "reason": "TARGETING_MATCH" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "green", "reason": "TARGETING_MATCH" }
     }
   },
   {
@@ -44,7 +49,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": { "a": "піклуватися", "b": "любов" }, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" }
+      "experimentationOptOutImmediate": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": { "a": "kümmert", "b": "schön" }, "reason": "STATIC" }
     }
   },
   {
@@ -52,7 +58,8 @@
     "attributes": {},
     "result": { "value": 2, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 2, "reason": "SPLIT" }
+      "experimentationOptOutImmediate": { "value": 2, "reason": "SPLIT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 2, "reason": "SPLIT" }
     }
   },
   {
@@ -60,7 +67,8 @@
     "attributes": {},
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 1, "reason": "SPLIT" }
+      "experimentationOptOutImmediate": { "value": 1, "reason": "SPLIT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 1, "reason": "SPLIT" }
     }
   },
   {
@@ -68,7 +76,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": 2, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 2, "reason": "SPLIT" }
     }
   },
   {
@@ -76,7 +85,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 1, "reason": "SPLIT" }
     }
   },
   {
@@ -84,7 +94,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": 3.1415926, "reason": "STATIC" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "DEFAULT" }
     }
   },
   {
@@ -92,7 +103,8 @@
     "attributes": { "country": "US", "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z" },
     "result": { "value": true, "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": false, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": false, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": false, "reason": "DEFAULT" }
     }
   },
   {
@@ -100,7 +112,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T12:00:00.123456789Z" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 1, "reason": "SPLIT" }
     }
   },
   {
@@ -108,7 +121,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2026-10-19T08:00:00-04:00" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 1, "reason": "SPLIT" }
     }
   },
   {
@@ -116,7 +130,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "2099-01-01T00:00:00Z" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "DEFAULT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 1, "reason": "SPLIT" }
     }
   },
   {
@@ -124,7 +139,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "not-a-timestamp" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -132,7 +148,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "" },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -140,7 +157,8 @@
     "attributes": { "dd_experimentation_opt_out_at": true },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -148,7 +166,8 @@
     "attributes": { "dd_experimentation_opt_out_at": null },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -156,7 +175,8 @@
     "attributes": { "dd_experimentation_opt_out_at": 1792411200 },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -164,7 +184,8 @@
     "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": "not-a-timestamp" },
     "result": { "value": "green", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -172,7 +193,8 @@
     "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": false },
     "result": { "value": "green", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -180,7 +202,8 @@
     "attributes": { "email": "alice@mycompany.com", "dd_experimentation_opt_out_at": null },
     "result": { "value": "green", "reason": "TARGETING_MATCH" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": "default", "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -188,7 +211,8 @@
     "attributes": { "dd_experimentation_opt_out_at": "not-a-timestamp" },
     "result": { "value": { "a": "піклуватися", "b": "любов" }, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": {}, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": {}, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": {  }, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -196,7 +220,8 @@
     "attributes": { "dd_experimentation_opt_out_at": { "timestamp": "2026-10-19T12:00:00Z" } },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   },
   {
@@ -204,7 +229,8 @@
     "attributes": { "dd_experimentation_opt_out_at": ["2026-10-19T12:00:00Z"] },
     "result": { "value": 1, "reason": "SPLIT" },
     "capabilities": {
-      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
+      "experimentationOptOutImmediate": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" },
+      "experimentationOptOutFutureExperimentsOnly": { "value": 0, "reason": "ERROR", "errorCode": "INVALID_CONTEXT" }
     }
   }
 ]
