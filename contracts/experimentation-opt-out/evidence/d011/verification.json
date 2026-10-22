@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-10-22T20:06:17.261373+00:00",
+  "decision": "D011",
+  "revision": 1,
+  "change_kind": "documentation clarification; semantics, runtime, model and corpus unchanged",
+  "go": {
+    "tested_worktree_base": "627db08193d8019d33282024d8340327997205ec",
+    "published_same_tree": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+    "changed_file": "openfeature/doc.go",
+    "reviewed_file_sha256": "06beb7170d68a85394cb577c29c74cd009569263e8acfab05f7b796e5812afae",
+    "command": [
+      "go",
+      "test",
+      "./openfeature",
+      "-run",
+      "^TestEvaluateFlag_JSONFixtures$/^test-case-experimentation-opt-out-future[.]json$/^case(6|7)$/^5$/^experimentationOptOutFutureExperimentsOnly$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 0,
+    "expected_leaf_cases": 2,
+    "observed_passed_leaf_cases": 2,
+    "log_sha256": "754cd0cbd5d8c0ec622967440fa25c8a8416c2ef190f61f946487ccc4b18b433",
+    "fixture_pin": "1c831fed02a428a1b0a4ac412da9b773e22df257"
+  },
+  "fixtures": {
+    "tested_worktree_base": "92d737360cec4b0b3ea7c4177a5a4510addf3dce",
+    "published_same_tree": "8aba25473785f502de660618ca864fba2ed1e0cc",
+    "changed_file": "README.md",
+    "reviewed_file_sha256": "93852b58c7a5c5dbc52f2b427e0a7b3b01a1e70045b1a23fcc4dfaccfc618d5a",
+    "command": [
+      "python3",
+      "ci/validate-fixtures.py"
+    ],
+    "exit_code": 0,
+    "case_count": 363,
+    "file_count": 46,
+    "pair_and_flag_equal_to_go_pin": true
+  },
+  "independent_review": {
+    "agent": "go_d004_review",
+    "outcome": "no-findings",
+    "scope": "Wording-only diffs, fixture-pair and complete flag equivalence across fixture pins, existing Lean boundary theorem mapping."
+  },
+  "model_evidence": {
+    "source_sha": "0705b517d71e213fc402f456b6ea9a8dbff55b01",
+    "file": "lean/Proofs.lean",
+    "theorems": [
+      "before_cutoff_retains_experiment",
+      "equality_excludes_experiment"
+    ],
+    "prior_validation": "evidence/d017/publication-validation.json",
+    "fresh_lean_execution": false
+  },
+  "limits": "Two existing native cases only; no new Go tests or full/race/model/benchmark rerun for a documentation-only change. Pair demonstrates concrete cutoff-dependent selection, not a scheduling-mutant rejection. No fleet/deployment claim."
+}

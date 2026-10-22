@@ -767,6 +767,46 @@
       "evidence_file": "evidence/d017/independent-review.json",
       "receipt_target": null,
       "limits": "Reviewer independently replayed the pinned model and checked native artifacts; native package/race execution is implementer evidence. No timing conclusion."
+    },
+    {
+      "id": "V036",
+      "decision_revisions": {
+        "D011": 1
+      },
+      "recorded_at": "2026-10-22T20:06:17.261373+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+      "target": "Go existing future-cutoff fixture pair",
+      "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+      "patch": null,
+      "evidence_kind": "fresh-native-fixture-pair",
+      "outcome": "pass",
+      "check": "Both existing cases pass in the real Go fixture runner: Oct19 cutoff selects 1/SPLIT; Oct21 selects 3/TARGETING_MATCH for the Oct20 targeted allocation.",
+      "expectation_profile": "D011 r1; existing future-opt-out cases6/7 and unchanged integer-flag configuration",
+      "evidence_file": "evidence/d011/verification.json",
+      "receipt_target": null,
+      "limits": "Exactly two leaf tests, unchanged across fixture pins. Documentation-only diff; no fresh full/race/model/performance run and no scheduling-mutant claim."
+    },
+    {
+      "id": "V037",
+      "decision_revisions": {
+        "D011": 1
+      },
+      "recorded_at": "2026-10-22T20:06:17.261373+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/52",
+      "evidence_url": "https://github.com/DataDog/ffe-system-test-data/pull/52",
+      "target": "Shared fixture documentation and static validation",
+      "source_sha": "8aba25473785f502de660618ca864fba2ed1e0cc",
+      "patch": null,
+      "evidence_kind": "fresh-fixture-validation-and-documentation-review",
+      "outcome": "pass",
+      "check": "363 evaluation cases across 46 files validate; independent review confirms unchanged semantics and exact pair/flag equivalence with Go fixtures.",
+      "expectation_profile": "D011 r1; existing future-opt-out cases6/7 and unchanged integer-flag configuration",
+      "evidence_file": "evidence/d011/verification.json",
+      "receipt_target": null,
+      "limits": "Static validation does not prove native SDK conformance. Fixture expectations and configuration unchanged; native evidence is V036."
     }
   ]
 }

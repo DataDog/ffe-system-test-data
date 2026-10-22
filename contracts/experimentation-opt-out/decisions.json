@@ -676,7 +676,7 @@
       ]
     },
     {
-      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "authority": "Browser author setting, reaffirmed for Go and shared fixture documentation in the linked Go author reply; fleet adoption remains proposed.",
       "id": "D011",
       "provenance": [
         {
@@ -689,6 +689,22 @@
           "stage": "accepted",
           "summary": "Author clarifies Immediate now versus activation-before-cutoff eligibility.",
           "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+          "stage": "go-documentation-reaffirmation",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:40:26Z",
+            "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+            "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+            "gap": null
+          },
+          "record": "evidence/d011/published-reply.json"
         }
       ],
       "revision": 1,
@@ -696,30 +712,50 @@
         "rule": "Future cutoff meaning"
       },
       "statement": "Immediate excludes exposure allocations now for any valid timestamp, even a future one. FutureExperimentsOnly retains allocations activated strictly before the supplied cutoff and excludes equal/later/missing activation; it does not schedule a change, freeze assignment, or test prior enrollment. Continue ordinary allocation order.",
-      "central_status": "proposed-fleet-reuse",
-      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "central_status": "browser-observed-go-documentation-reaffirmed-fleet-proposed",
+      "scope": "Browser observation and Go/shared-fixture documentation clarification; fleet adoption not approved",
       "go_feedback": [
         "go-5700-4342540684",
         "go-5700-4342541315"
       ],
       "go_reconciliation": "Clarify actual opt-out time versus a future-dated cutoff; preserve strict-before boundary and same-key refresh obligation.",
       "latest_setting": {
-        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
-        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
-        "kind": "author-decision",
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+        "kind": "author-reaffirmation",
         "author": "leoromanovsky",
-        "recorded_at": "2026-10-22T03:40:26Z",
-        "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
-        "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
-        "gap": null
+        "recorded_at": "2026-10-22T20:04:13Z",
+        "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+        "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+          "kind": "author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T03:40:26Z",
+          "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+          "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V009",
         "V014",
         "V021",
         "V024",
-        "V028"
-      ]
+        "V028",
+        "V036",
+        "V037"
+      ],
+      "documentation_guidance": {
+        "record": "evidence/d011/README.md",
+        "semantic_revision_changed": false,
+        "published_sources": {
+          "go": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+          "fixtures": "8aba25473785f502de660618ca864fba2ed1e0cc"
+        }
+      }
     },
     {
       "authority": "observed JS PR outcome; fleet adoption remains proposed",
@@ -1070,6 +1106,6 @@
     }
   ],
   "previous_revision": "go-stack-5666-5700-proposal-v5-go-d004-implemented",
-  "revision_note": "D017 r2 is implemented in Go with native trace validation and local timing observations. Wider adoption and parent-relative performance CI follow-up remain pending.",
+  "revision_note": "D011 r1 documentation clarification and Go reaffirmation recorded without semantic changes; D017 native/timing evidence retained. Broader adoption remains proposed.",
   "validation_history_file": "validation-history.json"
 }

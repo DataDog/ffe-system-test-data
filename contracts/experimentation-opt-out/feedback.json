@@ -427,19 +427,25 @@
       "decision_ids": [
         "D011"
       ],
-      "disposition": "documentation-gap",
+      "disposition": "implemented-documentation-clarification",
       "kind": "shared-semantics",
-      "next_action": "A future-dated cutoff retains experiments activated before that date, including after actual opt-out. Tell customers to send the actual opt-out time.",
+      "next_action": "None for this wording request; continue remaining review threads.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "outdated": false,
+        "resolution_recorded_at": "2026-10-22T20:05:02.768624+00:00"
       },
-      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "evidence_level": "Fresh two-case native replay, static fixture validation and independent wording review; evidence/d011/verification.json.",
       "reviewer_priority": "P2",
       "reviewer": "aarsilv",
       "created_at": "2026-10-21T22:16:43Z",
       "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "implementation_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+      "shared_fixture_sha": "8aba25473785f502de660618ca864fba2ed1e0cc",
+      "verified_head_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+      "evidence_file": "evidence/d011/README.md"
     },
     {
       "id": "go-5700-4342540847",
