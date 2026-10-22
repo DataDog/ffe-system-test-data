@@ -1107,6 +1107,49 @@
       "evidence_file": "evidence/backend-review-20261022/central-publication.json",
       "receipt_target": null,
       "limits": "Publication/link integrity only. Model proof remains distinct from compiler classification tests, CI and deployment; followup backlinks are separate from this published revision."
+    },
+    {
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T22:05:48.555642+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "expectation_profile": "D018 r1 unchanged after integrating main; native regression, not a new policy setting.",
+      "receipt_target": null,
+      "id": "V052",
+      "target": "Compiler golden newly inherited from main",
+      "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "patch": {
+        "main_parent_sha": "304c4133fb6d4d04a2036b98251a0bef80fb7321",
+        "resolved_tree": "2f3bef0b2217310080a1606e6a07b7c069ec13bb"
+      },
+      "evidence_kind": "fresh-native-post-merge-regression",
+      "outcome": "fail",
+      "check": "Only TestNativeBucketingIsByteIdentical failed: seven doLog expectations still used false for randomized allocations. All assignment data was identical.",
+      "evidence_file": "evidence/backend-review-20261022/main-merge-first-compiler-result.json",
+      "limits": "Initial resolved merge before golden correction; final published merge includes the corrected expectations. Not a deployment observation."
+    },
+    {
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T22:05:48.555642+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "expectation_profile": "D018 r1 unchanged after integrating main; native regression, not a new policy setting.",
+      "receipt_target": null,
+      "id": "V053",
+      "target": "dd-source after signed main integration",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "patch": null,
+      "evidence_kind": "fresh-native-post-merge-regression",
+      "outcome": "pass",
+      "check": "918 compiler tests, 283 database repository tests and 275 runner/primary-analysis tests pass. Both conflicting helpers preserved; seven golden doLog bits updated with assignment data unchanged.",
+      "evidence_file": "evidence/backend-review-20261022/main-merge-native-validation.json",
+      "limits": "Repository suite passed before the compiler-test-only golden correction; compiler rerun uncached after correction. Published merge tree is pinned. Earlier negative-control/model receipts remain at their original source; no child integration, CI or deployed proof."
     }
   ]
 }

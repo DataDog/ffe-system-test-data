@@ -8,14 +8,14 @@
       "author": "aaron-silverman_ddog",
       "created_at": "2026-10-22T01:56:16Z",
       "reviewer_priority": "P1",
-      "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
       "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
       "thread": {
         "id": "PRRT_kwDORrsQN86vBR43",
         "isResolved": false,
         "isOutdated": false,
         "path": "domains/ffe/libs/flagging/ufc/ufc.go",
-        "line": 179,
+        "line": 195,
         "comment_ids": [
           4343813763,
           4353896956
@@ -27,7 +27,8 @@
       "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
       "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
-      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956"
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
     },
     {
       "id": "backend-139368-4343814230",
@@ -35,7 +36,7 @@
       "author": "aaron-silverman_ddog",
       "created_at": "2026-10-22T01:56:23Z",
       "reviewer_priority": "P2",
-      "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
       "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
       "thread": {
         "id": "PRRT_kwDORrsQN86vBR8w",
@@ -52,7 +53,8 @@
       "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
       "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
-      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263"
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
     },
     {
       "id": "backend-139368-4343814608",
@@ -60,7 +62,7 @@
       "author": "aaron-silverman_ddog",
       "created_at": "2026-10-22T01:56:28Z",
       "reviewer_priority": "P3",
-      "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
       "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
       "thread": {
         "id": "PRRT_kwDORrsQN86vBR_7",
@@ -77,7 +79,8 @@
       "disposition": "implemented-published-replied",
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
       "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
-      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591"
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
     }
   ]
 }

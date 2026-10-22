@@ -1,0 +1,13 @@
+{
+  "failed": [
+    "TestNativeBucketingIsByteIdentical"
+  ],
+  "counts": {
+    "tests": 918,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reason": "New main golden expected old logging metadata; only doLog false-to-true changes, with all assignment fields identical.",
+  "golden_diff": "main-merge-golden-diff.json"
+}

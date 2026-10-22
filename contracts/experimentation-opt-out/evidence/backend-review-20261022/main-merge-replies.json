@@ -1,0 +1,214 @@
+{
+  "replies": [
+    {
+      "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956",
+      "pull_request_review_id": 5621295860,
+      "id": 4353896956,
+      "node_id": "PRRC_kwDORrsQN88AAAABA4Mx_A",
+      "diff_hunk": "@@ -176,7 +176,7 @@ func BuildAllocationConfiguration(\n \t\tlog.Int(\"rules_count\", len(rules)),\n \t)\n \n-\tlogExposureEvent := allocation.IsStandardExperimentAllocation() || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()\n+\tlogExposureEvent := (allocation.IsStandardExperimentAllocation() && !allocation.ExperimentRolloutComplete) || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()",
+      "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+      "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "user": {
+        "login": "leo-romanovsky_ddog",
+        "id": 234807440,
+        "node_id": "U_kgDODf7gkA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/234807440?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/leo-romanovsky_ddog",
+        "html_url": "https://github.com/leo-romanovsky_ddog",
+        "followers_url": "https://api.github.com/users/leo-romanovsky_ddog/followers",
+        "following_url": "https://api.github.com/users/leo-romanovsky_ddog/following{/other_user}",
+        "gists_url": "https://api.github.com/users/leo-romanovsky_ddog/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/leo-romanovsky_ddog/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/leo-romanovsky_ddog/subscriptions",
+        "organizations_url": "https://api.github.com/users/leo-romanovsky_ddog/orgs",
+        "repos_url": "https://api.github.com/users/leo-romanovsky_ddog/repos",
+        "events_url": "https://api.github.com/users/leo-romanovsky_ddog/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/leo-romanovsky_ddog/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1). The policy is to exclude allocations that randomize; the backend must represent that through the existing `doLog` field. The compiler now sets `doLog=true` when shard selection changes the variation or match/fallthrough outcome, covering completed 50/50 experiments, ordinary percentage splits, and partial enrollment. Deterministic completed winners remain `false`; existing active-experiment, canary, bandit, and holdout logging requirements are preserved. This deliberately enables exposure logging for ordinary randomized allocations. The evaluator predicate and future-mode cutoff rule stay unchanged.\n\nRecorded as [D018](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55), published at [656696f84f](https://github.com/DataDog/ffe-system-test-data/commit/656696f84fb83fea87798a0d4151af0f7e2fc16d), with this [decision thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763) and the earlier withdrawn selection retained in provenance.\n\n[Native evidence](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json): 817 compiler tests and 269 database repository tests pass, including 500 independent raw-bucket enumeration cases. Restoring the old `doLog` output fails the three added scenarios above; restoring the fix passes both suites uncached. [Lean evidence](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/model-validation.json): seven new composition theorems, 53 total audited; 313 existing semantic cases and 36 operational cases pass. The Lean abstraction does not prove the native classifier; the native tests cover that boundary.\n\nDeployment still requires the fallback-preserving child and regenerated UFCs. Newly logging allocations without activation metadata retain the existing conservative future-mode exclusion; activation coverage remains a separate rollout obligation.\n\nPost-merge validation at [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b): 918 compiler tests, 283 database repository tests, and 275 runner/primary-analysis tests pass. Both repository helpers are preserved from their respective parents. Main added a bucketing golden snapshot: its seven randomized `doLog` expectations were updated, with every assignment field unchanged. The earlier negative-control and Lean receipts retain their original source pins; D018 is unchanged.",
+      "created_at": "2026-10-22T21:49:16Z",
+      "updated_at": "2026-10-22T22:04:40Z",
+      "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "pull_request_url": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368",
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956"
+        },
+        "html": {
+          "href": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368"
+        }
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "start_line": null,
+      "original_start_line": null,
+      "start_side": null,
+      "line": 195,
+      "original_line": 179,
+      "side": "RIGHT",
+      "in_reply_to_id": 4343813763,
+      "author_association": "MEMBER",
+      "original_position": 5,
+      "position": 5,
+      "subject_type": "line"
+    },
+    {
+      "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897263",
+      "pull_request_review_id": 5621296186,
+      "id": 4353897263,
+      "node_id": "PRRC_kwDORrsQN88AAAABA4MzLw",
+      "diff_hunk": "@@ -0,0 +1,74 @@\n+package lifecycle\n+\n+import (\n+\t\"encoding/json\"\n+\t\"os\"\n+\t\"path/filepath\"\n+\t\"time\"\n+\n+\t\"github.com/DataDog/dd-source/domains/ffe/apps/apis/ffe-service/internal/experiment/tests/harness\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/experimentation/orchestration\"\n+\tflaggingModel \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/model\"\n+\tflaggingRepository \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/repository\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/flagging/ufc\"\n+)\n+\n+func (s *Suite) TestConcludeStopsWinnerExposuresWithoutRemovingExperimentLink() {\n+\tsetup, err := s.CreateLinkedExperimentInState(harness.TestOrgID, false, false, false, false)\n+\ts.Require().NoError(err)\n+\tlifecycle := s.NewExperimentLifecycleService(s.AllocationService)\n+\t_, err = lifecycle.StartExperiment(s.Ctx, orchestration.StartExperimentInput{\n+\t\tExperimentID: setup.ExperimentID, OrgID: harness.TestOrgID, UserID: harness.TestUserUUID,\n+\t})\n+\ts.Require().NoError(err)\n+\trepo := flaggingRepository.NewUfcRepository()\n+\ts.Require().NoError(repo.Start(s.Ctx))\n+\tcompile := func(phase string, completed bool) {\n+\t\tflags, env, vacs, holdouts, err := repo.GetFlagsWithRelations(s.Ctx, harness.TestOrgID,\n+\t\t\t[]flaggingModel.EnvironmentLookup{flaggingModel.LookupByUUID(setup.EnvironmentID)}, nil, nil)\n+\t\ts.Require().NoError(err)\n+\t\ts.Require().Len(flags, 1)\n+\t\ts.Empty(holdouts, \"completion must load without any holdout\")\n+\t\tallocations := flags[0].CurrentEnvironment.Allocations\n+\t\ts.Require().Len(allocations, 1)\n+\t\ts.Require().NotNil(allocations[0].ExperimentID)\n+\t\ts.Equal(setup.ExperimentID, *allocations[0].ExperimentID)\n+\t\ts.True(allocations[0].RequiresExperimentsWritePermission(), \"completion does not remove edit authorization\")\n+\t\tcompiled := ufc.BuildFlagsConfiguration(s.Ctx, env, flags, nil, time.Now(), vacs, holdouts).ToJSON()\n+\t\tflag := compiled.Flags[flags[0].Key]\n+\t\ts.Require().NotNil(flag)\n+\t\tfound := false\n+\t\tfor _, allocation := range flag.Allocations {\n+\t\t\tif allocation.Key == allocations[0].Key {\n+\t\t\t\tfound = true\n+\t\t\t\ts.Equal(!completed, allocation.DoLog, \"only active experiments log exposures\")",
+      "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
+      "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "user": {
+        "login": "leo-romanovsky_ddog",
+        "id": 234807440,
+        "node_id": "U_kgDODf7gkA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/234807440?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/leo-romanovsky_ddog",
+        "html_url": "https://github.com/leo-romanovsky_ddog",
+        "followers_url": "https://api.github.com/users/leo-romanovsky_ddog/followers",
+        "following_url": "https://api.github.com/users/leo-romanovsky_ddog/following{/other_user}",
+        "gists_url": "https://api.github.com/users/leo-romanovsky_ddog/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/leo-romanovsky_ddog/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/leo-romanovsky_ddog/subscriptions",
+        "organizations_url": "https://api.github.com/users/leo-romanovsky_ddog/orgs",
+        "repos_url": "https://api.github.com/users/leo-romanovsky_ddog/repos",
+        "events_url": "https://api.github.com/users/leo-romanovsky_ddog/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/leo-romanovsky_ddog/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1). The holdout runner now accepts either `doLog` value for a concluded ordinary winner, still checks the selected winner, and continues requiring logging for active ordinary experiments. Regression cases cover both logging values and reject the wrong winner.\n\nThe holdout-runner and primary-analysis suites pass all 255 tests. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json), retained in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) alongside the [D018](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) producer contract. This is local runner validation; it does not claim a deployed lifecycle run.\n\nAfter integrating main in [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b), the expanded runner/primary-analysis suites pass all 275 tests. The concluded-winner and active-experiment logging checks remain intact.",
+      "created_at": "2026-10-22T21:49:18Z",
+      "updated_at": "2026-10-22T22:04:42Z",
+      "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263",
+      "pull_request_url": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368",
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897263"
+        },
+        "html": {
+          "href": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368"
+        }
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897263/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "start_line": null,
+      "original_start_line": null,
+      "start_side": null,
+      "line": 44,
+      "original_line": 44,
+      "side": "RIGHT",
+      "in_reply_to_id": 4343814230,
+      "author_association": "MEMBER",
+      "original_position": 44,
+      "position": 44,
+      "subject_type": "line"
+    },
+    {
+      "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897591",
+      "pull_request_review_id": 5621296540,
+      "id": 4353897591,
+      "node_id": "PRRC_kwDORrsQN88AAAABA4M0dw",
+      "diff_hunk": "@@ -475,6 +478,44 @@ func (r *ufcRepository) GetFlagsWithRelations(ctx context.Context, orgID int64,\n \treturn featureFlags, activeEnvironment, vacs, applicableHoldouts, nil\n }\n \n+// loadExperimentRolloutState reads lifecycle state in the allocation snapshot.\n+// Missing or deleted experiments retain logging. Only a known completed standard\n+// experiment becomes ordinary winner delivery. Generated holdouts log separately.\n+func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.FeatureFlag) error {\n+\tallocationsByExperiment := make(map[string][]*model.Allocation)\n+\tvar experimentIDs []string\n+\tfor _, flag := range flags {\n+\t\tif flag.CurrentEnvironment == nil {\n+\t\t\tcontinue\n+\t\t}\n+\t\tfor i := range flag.CurrentEnvironment.Allocations {\n+\t\t\tallocation := &flag.CurrentEnvironment.Allocations[i]\n+\t\t\tallocation.ExperimentRolloutComplete = false\n+\t\t\tif !allocation.IsStandardExperimentAllocation() {\n+\t\t\t\tcontinue\n+\t\t\t}\n+\t\t\tid := *allocation.ExperimentID\n+\t\t\tif _, exists := allocationsByExperiment[id]; !exists {\n+\t\t\t\texperimentIDs = append(experimentIDs, id)\n+\t\t\t}\n+\t\t\tallocationsByExperiment[id] = append(allocationsByExperiment[id], allocation)\n+\t\t}\n+\t}\n+\tif len(experimentIDs) == 0 {\n+\t\treturn nil\n+\t}\n+\tvar experiments []experimentModel.Experiment\n+\tif err := tx.Select(\"id\", \"state\").Where(\"org_id = ? AND id IN ?\", orgID, experimentIDs).Find(&experiments).Error; err != nil {",
+      "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
+      "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "user": {
+        "login": "leo-romanovsky_ddog",
+        "id": 234807440,
+        "node_id": "U_kgDODf7gkA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/234807440?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/leo-romanovsky_ddog",
+        "html_url": "https://github.com/leo-romanovsky_ddog",
+        "followers_url": "https://api.github.com/users/leo-romanovsky_ddog/followers",
+        "following_url": "https://api.github.com/users/leo-romanovsky_ddog/following{/other_user}",
+        "gists_url": "https://api.github.com/users/leo-romanovsky_ddog/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/leo-romanovsky_ddog/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/leo-romanovsky_ddog/subscriptions",
+        "organizations_url": "https://api.github.com/users/leo-romanovsky_ddog/orgs",
+        "repos_url": "https://api.github.com/users/leo-romanovsky_ddog/repos",
+        "events_url": "https://api.github.com/users/leo-romanovsky_ddog/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/leo-romanovsky_ddog/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1): the organization-scoped bulk snapshot query uses `id = ANY(?::uuid[])` with `pq.Array(experimentIDs)`, matching the existing holdout-query pattern.\n\nAll 269 database repository tests pass with the change. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json) is published in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55); this query-binding fix is native evidence, outside the Lean model proof.\n\nAfter integrating main in [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b), all 283 database repository tests pass. The rollout-state loader and main's bandit-ordering helper are both preserved.",
+      "created_at": "2026-10-22T21:49:20Z",
+      "updated_at": "2026-10-22T22:04:43Z",
+      "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591",
+      "pull_request_url": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368",
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897591"
+        },
+        "html": {
+          "href": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591"
+        },
+        "pull_request": {
+          "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368"
+        }
+      },
+      "reactions": {
+        "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353897591/reactions",
+        "total_count": 0,
+        "+1": 0,
+        "-1": 0,
+        "laugh": 0,
+        "hooray": 0,
+        "confused": 0,
+        "heart": 0,
+        "rocket": 0,
+        "eyes": 0
+      },
+      "start_line": null,
+      "original_start_line": null,
+      "start_side": null,
+      "line": null,
+      "original_line": 508,
+      "side": "RIGHT",
+      "in_reply_to_id": 4343814608,
+      "author_association": "MEMBER",
+      "original_position": 41,
+      "position": 1,
+      "subject_type": "line"
+    }
+  ]
+}

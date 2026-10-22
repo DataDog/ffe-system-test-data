@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-22T22:04:40.522334+00:00",
+  "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+  "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+  "all_pr_commits": [
+    {
+      "sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}

@@ -1284,15 +1284,25 @@
         "V048",
         "V049",
         "V050",
-        "V051"
+        "V051",
+        "V052",
+        "V053"
       ],
       "implementation": {
-        "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
-        "patch_sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
-        "status": "published-github-signatures-verified",
-        "evidence": "evidence/backend-review-20261022/native-validation.json",
-        "baseline_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
-        "publication_evidence": "evidence/backend-review-20261022/native-publication.json"
+        "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "status": "published-main-merged-native-validated",
+        "evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+        "publication_evidence": "evidence/backend-review-20261022/main-merge-publication.json",
+        "main_parent_sha": "304c4133fb6d4d04a2036b98251a0bef80fb7321",
+        "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+        "initial_implementation": {
+          "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+          "baseline_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "patch_sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+          "evidence": "evidence/backend-review-20261022/native-validation.json",
+          "publication_evidence": "evidence/backend-review-20261022/native-publication.json"
+        },
+        "source_tree_sha": "bc32a2ba6a9b205ad25e2deea65321445757f18b"
       }
     }
   ],

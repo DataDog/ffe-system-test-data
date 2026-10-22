@@ -73,7 +73,7 @@ consumers. A previously published randomized allocation with `doLog=false` remai
 misclassified until its configuration is regenerated. Preserve the remaining
 activation, fallback, validator, and edge rollout gates from D012.
 
-## Local validation
+## Validation before main integration
 
 - Compiler suite: 817 tests passed; repository/database suite: 269 passed.
 - Holdout runner and primary-analysis suites: 255 passed.
@@ -96,3 +96,23 @@ The [pre-publication remote snapshot](evidence/backend-review-20261022/final-rev
 is retained as historical review evidence. The [publication receipt](evidence/backend-review-20261022/native-publication.json)
 binds the signed implementation to the exact tested patch. The broader stack remains
 pending; these records do not claim its other feedback is addressed.
+
+## Validation after main integration
+
+[Signed merge 0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b)
+incorporates main and retains both the rollout-state loader and bandit-ordering
+helper byte-for-byte from their respective parents. The first compiler run found
+main's new bucketing snapshot still expected seven randomized `doLog` values to
+be false. Updating only those bits leaves every assignment field unchanged.
+
+The final compiler run passes 918 tests; the repository suite passes 283 and the
+runner/primary-analysis suites pass 275. The repository run preceded only the
+compiler-test snapshot/comment correction; its library source did not change.
+[Native receipt](evidence/backend-review-20261022/main-merge-native-validation.json),
+[initial failure](evidence/backend-review-20261022/main-merge-first-compiler-result.json),
+and [golden-only differences](evidence/backend-review-20261022/main-merge-golden-diff.json)
+retain that distinction. All three implementation PR commits are GitHub-verified
+with reason valid. [Refreshed reply readbacks](evidence/backend-review-20261022/main-merge-replies.json)
+and [review state](evidence/backend-review-20261022/main-merge-feedback.json) are saved.
+D018 and its decision-setting source are unchanged; local tests do not confer
+review approval, passing CI, or deployed validation.
