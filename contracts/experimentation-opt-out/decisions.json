@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "go-stack-5666-5700-proposal-v6-d017-operational-contract",
+  "revision": "backend-139368-proposal-v7-d018-producer-randomization",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -53,6 +53,27 @@
       "selected": "browser",
       "resolution": "evidence/go-5700-d004-adoption.json",
       "implementation_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56"
+    },
+    {
+      "id": "C004",
+      "decisions": [
+        "D011",
+        "D018"
+      ],
+      "input": {
+        "mode": "immediate",
+        "subject_cutoff": "valid",
+        "experiment_state": "ROLLOUT_COMPLETE",
+        "weights": [
+          50,
+          50
+        ]
+      },
+      "baseline": "doLog=false; allocation remains eligible",
+      "reviewer_alternative": "separate randomized bit OR doLog in evaluator",
+      "selected": "compiler emits doLog=true; evaluator keeps existing predicate",
+      "status": "resolved-by-local-author-clarification",
+      "resolution": "evidence/backend-review-20261022/local-decision.json"
     }
   ],
   "decisions": [
@@ -1187,9 +1208,76 @@
           }
         }
       }
+    },
+    {
+      "id": "D018",
+      "revision": 1,
+      "statement": "The compiler must set doLog=true when an allocation uses shard buckets to vary the selected variation or whether it matches. A completed experiment that still randomizes and an ordinary percentage split remain opt-out eligible. Deterministic completed winners may use doLog=false. Preserve existing active-experiment, canary, bandit and generated-holdout logging requirements; evaluators continue using doLog with the existing mode/cutoff rule.",
+      "central_status": "author-selected-backend-published-central-proposal",
+      "scope": "dd-source compiler producer contract. This extends doLog exposure logging to ordinary randomized allocations; no new SDK wire field or fleet/deployment approval.",
+      "authority": "Explicit author clarification in the current Codex chat; earlier Keep selection was withdrawn.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+          "stage": "reviewer-counterexample-and-policy-request"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343813859",
+          "stage": "reviewer-proposal-for-separate-randomization-bit",
+          "disposition": "intent accepted; compiler uses existing doLog field instead"
+        },
+        {
+          "source": "evidence/backend-review-20261022/local-decision.json",
+          "stage": "author-decision"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+        "thread_url": null,
+        "kind": "local-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T21:28:39.093354+00:00",
+        "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+        "scope_note": "Backend populates doLog from randomization; source SHA is the reviewed baseline, not the unpublished implementation.",
+        "gap": "No public comment yet records this clarification; exact local statement and withdrawn earlier selection are saved in local-decision.json."
+      },
+      "model": {
+        "file": "lean/BackendReview.lean",
+        "namespace": "BackendReview",
+        "mapping": "compiledDoLog(existingExposure, randomized); compiledPolicy delegates to D011 policy",
+        "limits": "Boolean abstraction establishes producer/evaluator composition, not correctness of native shard classification."
+      },
+      "native_obligations": [
+        "Classify compiled first-match shard outcomes, including fallthrough and partial enrollment.",
+        "Keep deterministic targeting, full-population single winners, unreachable variants and zero-width ranges from introducing false randomization.",
+        "Preserve holdout metadata, assignment results, active experiment logging, and JSON/protobuf agreement.",
+        "Validate actual compiler paths and independent raw bucket enumeration.",
+        "Integrate with fallback-preserving child #139379 before rollout; deploy compiler and rebuild stored UFCs before SDK enablement.",
+        "Revalidate future-mode activation coverage for newly logging ordinary allocations; unknown activation keeps the existing conservative exclusion rule."
+      ],
+      "implementation_owners": [
+        "dd-source UFC compiler and repository",
+        "cache-worker publication/rebuild",
+        "edge and SDK evaluators as existing doLog consumers"
+      ],
+      "validation_history_ids": [
+        "V046",
+        "V047",
+        "V048",
+        "V049",
+        "V050"
+      ],
+      "implementation": {
+        "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+        "patch_sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+        "status": "published-github-signatures-verified",
+        "evidence": "evidence/backend-review-20261022/native-validation.json",
+        "baseline_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+        "publication_evidence": "evidence/backend-review-20261022/native-publication.json"
+      }
     }
   ],
-  "previous_revision": "go-stack-5666-5700-proposal-v5-go-d004-implemented",
-  "revision_note": "D011 r1 documentation clarification and Go reaffirmation recorded without semantic changes; D017 native/timing evidence retained. Broader adoption remains proposed.",
+  "previous_revision": "go-stack-5666-5700-proposal-v6-d017-operational-contract",
+  "revision_note": "D018 records explicit local author acceptance of compiler-owned randomization classification through doLog; existing evaluator cutoff rules and prior evidence remain unchanged.",
   "validation_history_file": "validation-history.json"
 }

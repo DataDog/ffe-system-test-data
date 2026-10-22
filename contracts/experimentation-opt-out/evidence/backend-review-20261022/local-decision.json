@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-22T21:28:39.093354+00:00",
+  "authority": "Leo Romanovsky, current Codex chat",
+  "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+  "review_thread": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+  "public_setting_thread": null,
+  "provenance_gap": "The clarification is in this local conversation; no public author reply has been posted.",
+  "history": [
+    {
+      "selection": "Keep the current doLog-based contract",
+      "status": "withdrawn before implementation",
+      "correction": "wait ask me again i missed something"
+    },
+    {
+      "statement": "we want allocations which randomize. doLog is the \"frontend\" of this; the backend must populate it the way we need",
+      "status": "current explicit author decision"
+    }
+  ],
+  "interpretation": "The backend must set doLog for randomized allocations; evaluators continue consuming doLog. Randomization includes variation selection and percentage enrollment/fallthrough. Existing active-experiment, canary, bandit and holdout exposure requirements remain intact.",
+  "limits": "This does not decide the separate holdout activation proposal, change future-mode cutoff semantics, authorize publication, or prove deployment."
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-10-22T21:14:43.176997+00:00",
+  "knowledge_base_base_sha": "7119c9c71d8e76a48b898a6b9d91aed8a3795901",
+  "pull_requests": [
+    {
+      "number": 139368,
+      "url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "head_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "base_sha": "a3fcdcde491cd39a090383cfdef4b03043f912c6",
+      "head_ref": "leo/opt-out-winner-logging",
+      "base_ref": "main",
+      "review_decision": "REVIEW_REQUIRED"
+    },
+    {
+      "number": 139379,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "base_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "head_ref": "leo/opt-out-preserve-fallbacks",
+      "base_ref": "leo/opt-out-winner-logging",
+      "review_decision": "APPROVED"
+    },
+    {
+      "number": 139381,
+      "url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "head_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "base_sha": "2747ede8a372d0a1ac8adc952e38b08f54b5aab2",
+      "head_ref": "leo/opt-out-allocation-activation",
+      "base_ref": "main",
+      "review_decision": "APPROVED"
+    },
+    {
+      "number": 140422,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "head_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "base_sha": "07b7e9f403dd14c1f205485251116cf69c22280a",
+      "head_ref": "leo/edge-experimentation-opt-out-modes",
+      "base_ref": "main",
+      "review_decision": "REVIEW_REQUIRED"
+    }
+  ],
+  "relationships": [
+    {
+      "parent": 139368,
+      "child": 139379,
+      "merge_base": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "parent_head_in_child": true
+    },
+    {
+      "prs": [
+        139368,
+        139381
+      ],
+      "merge_base": "a3fcdcde491cd39a090383cfdef4b03043f912c6",
+      "relationship": "independent branches"
+    },
+    {
+      "prs": [
+        139368,
+        140422
+      ],
+      "merge_base": "a3fcdcde491cd39a090383cfdef4b03043f912c6",
+      "relationship": "independent branches; deployment dependency"
+    }
+  ]
+}

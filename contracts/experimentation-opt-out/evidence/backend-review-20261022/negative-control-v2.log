@@ -1,0 +1,110 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:13 UTC
+INFO: Invocation ID: 35f771e2-b2b2-4ad2-b3af-38696f856ff8
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+
+INFO: Analyzed target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 13 targets configured).
+[8,116 / 8,121] [Prepa] GoCompilePkgExternal domains/ffe/libs/flagging/ufc/go_default_test_test.external.a
+[8,120 / 8,121] GoLink domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test; 1s disk-cache, remote-cache, linux-sandbox
+[8,121 / 8,122] [Prepa] Testing //domains/ffe/libs/flagging/ufc:go_default_test
+FAIL: //domains/ffe/libs/flagging/ufc:go_default_test (Exit 1) (see /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/execroot/_main/bazel-out/x86_64-unknown-linux-fastbuild/testlogs/domains/ffe/libs/flagging/ufc/go_default_test/test.log)
+INFO: From Testing //domains/ffe/libs/flagging/ufc:go_default_test:
+==================== Test output for //domains/ffe/libs/flagging/ufc:go_default_test:
+=== RUN   TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/active_full_enrollment
+--- PASS: TestWinnerExposureLifecycle/active_full_enrollment (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/active_single_treatment
+--- PASS: TestWinnerExposureLifecycle/active_single_treatment (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/active_single_control
+--- PASS: TestWinnerExposureLifecycle/active_single_control (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/completed_treatment_winner
+--- PASS: TestWinnerExposureLifecycle/completed_treatment_winner (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/completed_control_winner
+--- PASS: TestWinnerExposureLifecycle/completed_control_winner (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/completed_experiment_still_randomizing
+    winner_holdout_test.go:56: 
+        	Error Trace:	domains/ffe/libs/flagging/ufc/winner_holdout_test.go:56
+        	Error:      	Not equal: 
+        	            	expected: true
+        	            	actual  : false
+        	Test:       	TestWinnerExposureLifecycle/completed_experiment_still_randomizing
+    winner_holdout_test.go:60: 
+        	Error Trace:	domains/ffe/libs/flagging/ufc/winner_holdout_test.go:60
+        	Error:      	Not equal: 
+        	            	expected: true
+        	            	actual  : false
+        	Test:       	TestWinnerExposureLifecycle/completed_experiment_still_randomizing
+--- FAIL: TestWinnerExposureLifecycle/completed_experiment_still_randomizing (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/ordinary_rollout
+--- PASS: TestWinnerExposureLifecycle/ordinary_rollout (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/ordinary_randomized_split
+    winner_holdout_test.go:56: 
+        	Error Trace:	domains/ffe/libs/flagging/ufc/winner_holdout_test.go:56
+        	Error:      	Not equal: 
+        	            	expected: true
+        	            	actual  : false
+        	Test:       	TestWinnerExposureLifecycle/ordinary_randomized_split
+    winner_holdout_test.go:60: 
+        	Error Trace:	domains/ffe/libs/flagging/ufc/winner_holdout_test.go:60
+        	Error:      	Not equal: 
+        	            	expected: true
+        	            	actual  : false
+        	Test:       	TestWinnerExposureLifecycle/ordinary_randomized_split
+--- FAIL: TestWinnerExposureLifecycle/ordinary_randomized_split (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/canary_unchanged
+--- PASS: TestWinnerExposureLifecycle/canary_unchanged (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+=== RUN   TestWinnerExposureLifecycle/bandit_unchanged
+--- PASS: TestWinnerExposureLifecycle/bandit_unchanged (0.00s)
+=== NAME  TestWinnerExposureLifecycle
+--- FAIL: TestWinnerExposureLifecycle (0.00s)
+=== NAME  
+=== RUN   TestOrdinaryRolloutLoggingFollowsCompiledRandomization
+=== RUN   TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_0
+2026-10-22T21:33:55.579666+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=control-id
+2026-10-22T21:33:55.579716+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=treatment-id
+--- PASS: TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_0 (0.00s)
+=== NAME  TestOrdinaryRolloutLoggingFollowsCompiledRandomization
+=== RUN   TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_0.5
+2026-10-22T21:33:55.579776+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=control-id
+2026-10-22T21:33:55.579788+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=treatment-id
+    winner_holdout_test.go:81: 
+        	Error Trace:	domains/ffe/libs/flagging/ufc/winner_holdout_test.go:81
+        	Error:      	Not equal: 
+        	            	expected: true
+        	            	actual  : false
+        	Test:       	TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_0.5
+--- FAIL: TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_0.5 (0.00s)
+=== NAME  TestOrdinaryRolloutLoggingFollowsCompiledRandomization
+=== RUN   TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_1
+--- PASS: TestOrdinaryRolloutLoggingFollowsCompiledRandomization/exposure_1 (0.00s)
+=== NAME  TestOrdinaryRolloutLoggingFollowsCompiledRandomization
+--- FAIL: TestOrdinaryRolloutLoggingFollowsCompiledRandomization (0.00s)
+=== NAME  
+FAIL
+2026-10-22T21:33:55.579869+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=control-id
+2026-10-22T21:33:55.579879+00:00 WARN (ufc/ufc.go:226) - VAC miss: no serial ID for real allocation allocation_id=allocation-id variant_id=treatment-id
+================================================================================
+INFO: Found 1 test target...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+INFO: Elapsed time: 9.349s, Critical Path: 8.07s
+INFO: 9 processes: 16 action cache hit, 1 internal, 8 linux-sandbox.
+INFO: Build completed, 1 test FAILED, 9 total actions
+INFO: 
+//domains/ffe/libs/flagging/ufc:go_default_test                          FAILED in 0.3s
+  /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/execroot/_main/bazel-out/x86_64-unknown-linux-fastbuild/testlogs/domains/ffe/libs/flagging/ufc/go_default_test/test.log
+
+Executed 1 out of 1 test: 1 fails locally.

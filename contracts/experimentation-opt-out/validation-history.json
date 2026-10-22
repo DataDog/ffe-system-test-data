@@ -977,6 +977,115 @@
       "evidence_file": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
       "receipt_target": null,
       "limits": "Local native regression and fixture schema validation. No fresh Lean run, performance acceptance, remote CI, deployment or complete optional fixture metadata conformance claim."
+    },
+    {
+      "id": "V046",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T01:56:16Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+      "target": "dd-source compiler and edge evaluator counterexample",
+      "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "patch": null,
+      "evidence_kind": "reviewer-reported-negative-probe",
+      "outcome": "fail",
+      "check": "Completed 50/50 standard experiment compiles with doLog=false; reviewer edge probe at 7a1f3c52639d6bdd74dd4609fba716c50127e2e2 assigned 106/94 subjects and no fallback.",
+      "expectation_profile": "D018 intended randomization eligibility; baseline predates this local setting.",
+      "evidence_file": "evidence/backend-review-20261022/stack-snapshot.json",
+      "receipt_target": null,
+      "limits": "Reviewer-reported native executions; comment time is not execution time. Current task inspected source; no deployment observation."
+    },
+    {
+      "id": "V047",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T21:35:58.826493+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+      "target": "dd-source compiler producer",
+      "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "patch": {
+        "sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+        "file": "evidence/backend-review-20261022/implementation.patch"
+      },
+      "evidence_kind": "fresh-native-regression",
+      "outcome": "pass",
+      "check": "817 compiler tests, 269 database repository tests and 255 holdout runner/primary tests pass. Includes 500 raw-bucket enumeration cases.",
+      "expectation_profile": "D018 r1 compiler-owned randomization through doLog; D011 mode/cutoff unchanged.",
+      "evidence_file": "evidence/backend-review-20261022/native-validation.json",
+      "receipt_target": null,
+      "limits": "Local unpublished patch only; no child integration, combined edge validation, CI or deployed proof. Build prerequisite failures and their repair are preserved in the receipt."
+    },
+    {
+      "id": "V048",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T21:35:58.826493+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+      "target": "Lean producer/evaluator abstraction",
+      "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "patch": {
+        "sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+        "file": "evidence/backend-review-20261022/implementation.patch"
+      },
+      "evidence_kind": "fresh-lean-model-and-oracle",
+      "outcome": "pass",
+      "check": "53 theorem axiom audits, 313 semantic oracle cases and 36 inactive-path cases pass; seven added D018 theorems model producer/evaluator composition.",
+      "expectation_profile": "D018 r1 compiler-owned randomization through doLog; D011 mode/cutoff unchanged.",
+      "evidence_file": "evidence/backend-review-20261022/model-validation.json",
+      "receipt_target": null,
+      "limits": "Model proof does not establish native classifier refinement; existing oracle corpus has no new D018 producer classification cases. Local manifest pin is consistency evidence, not independent fleet acceptance."
+    },
+    {
+      "id": "V049",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T21:35:58.826493+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+      "target": "dd-source compiler producer",
+      "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "patch": {
+        "sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+        "file": "evidence/backend-review-20261022/implementation.patch"
+      },
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "Discarding the classifier result restores old doLog output and fails the completed split, ordinary split and partial-enrollment tests.",
+      "expectation_profile": "D018 r1 compiler-owned randomization through doLog; D011 mode/cutoff unchanged.",
+      "evidence_file": "evidence/backend-review-20261022/native-validation.json",
+      "receipt_target": null,
+      "limits": "Three failing leaf scenarios; two parent test failures are aggregates. Earlier unused-code lint failure did not reach assertions. Final code restored and full suites pass."
+    },
+    {
+      "id": "V050",
+      "decision_revisions": {
+        "D018": 1
+      },
+      "recorded_at": "2026-10-22T21:47:11.435921+00:00",
+      "executed_at": "2026-10-22T21:47:11.435921+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "target": "Published dd-source implementation",
+      "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "patch": null,
+      "evidence_kind": "publication-source-identity-and-signature-verification",
+      "outcome": "pass",
+      "check": "Published diff exactly matches the tested patch; both PR commits are GitHub verified with reason valid.",
+      "expectation_profile": "D018 r1; unchanged implementation from V047 and V049.",
+      "evidence_file": "evidence/backend-review-20261022/native-publication.json",
+      "receipt_target": null,
+      "limits": "No native rerun or deployment claim; existing executions remain pinned to baseline plus exact patch."
     }
   ]
 }

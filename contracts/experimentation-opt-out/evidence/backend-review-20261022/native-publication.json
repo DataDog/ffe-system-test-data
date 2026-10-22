@@ -1,0 +1,26 @@
+{
+  "implementation_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+  "baseline_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+  "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+  "all_pr_commits": [
+    {
+      "sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "committer": "leo-romanovsky_ddog",
+      "email": "leo.romanovsky@datadoghq.com",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+      "committer": "leo-romanovsky_ddog",
+      "email": "leo.romanovsky@datadoghq.com",
+      "verified": true,
+      "reason": "valid"
+    }
+  ],
+  "recorded_at": "2026-10-22T21:47:11.435921+00:00",
+  "patch_sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+  "patch_identity": "Published commit diff is byte-identical to the validated local patch.",
+  "central_draft_pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+  "limits": "Publication and signatures only; native receipts retain their actual baseline-plus-patch execution pins. No new test run or deployment claim."
+}

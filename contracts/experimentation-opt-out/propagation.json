@@ -84,9 +84,22 @@
       "decisions": [
         "D010",
         "D011",
-        "D012"
+        "D012",
+        "D018"
       ],
-      "next": "Verify explicit doLog, winner ordinary fallback and activation metadata; record deployed revision separately."
+      "next": "D018 compiler change is published and locally validated in #139368; merge the published parent into #139379 without rewriting history and verify retained fallbacks. Deploy compiler and rebuild stored UFCs before opt-out consumers; activation coverage and other rollout gates remain separate.",
+      "prs": [
+        139368,
+        139379,
+        139381,
+        140422
+      ],
+      "dependency_order": [
+        "compiler classification #139368",
+        "fallback retention #139379 inherits current parent",
+        "activation coverage #139381 and edge #140422 are independent Git branches with rollout prerequisites",
+        "rebuild stored configurations before consumer enablement"
+      ]
     },
     {
       "owner": "other server SDKs and system-tests",

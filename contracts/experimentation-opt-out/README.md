@@ -1,4 +1,4 @@
-# Opt-out decisions from browser and Go review
+# Opt-out decisions from browser, Go and backend review
 
 This is a **draft central-contract proposal**, based on FFE data main
 [`89a0f33`](https://github.com/DataDog/ffe-system-test-data/commit/89a0f339b83f0cb6fabed77cc1164d97c9d24356).
@@ -12,6 +12,14 @@ The six imported files are byte-preserved with provenance hashes. Browser
 [#423](https://github.com/DataDog/openfeature-js-client/pull/423) is now merged
 at `58bc213b51eb539d58ee4a5c7719ccf500f09b66`; the reviewed head was `38d611c`.
 Its outcomes establish browser behavior, not automatic adoption by other SDKs.
+
+## Backend compiler clarification
+
+[D018 and the bottom-stack feedback ledger](backend-feedback.md) record Leo's
+local decision that randomized allocations must be represented by `doLog=true`
+by the backend. The existing evaluator predicate and future cutoff rule remain.
+The published producer change, model evidence, native checks, and deployment gates
+are tracked separately. The central contract remains a draft proposal.
 
 ## Initial review snapshot
 
@@ -82,7 +90,7 @@ The remaining optional helper/error/comment changes are in the complete ledger.
 
 ## Persisted review surface
 
-- [decisions.json](decisions.json): 14 existing IDs, three additional Go decisions,
+- [decisions.json](decisions.json): 14 existing IDs, three additional Go decisions and D018 for the backend,
   explicit scope/authority, and three distinguishing conflict cases.
 - [decision-history.md](decision-history.md): each current decision-setting PR/thread
   and a linked historical table of passing, failing and incomplete checks. Three
@@ -117,7 +125,9 @@ The model keeps the alternatives distinguishable. Leo selected the browser polic
 for Go in the local adoption record; the model itself does not confer approval.
 
 D017 adds ten theorems in [lean/InactivePath.lean](lean/InactivePath.lean), bringing
-the current axiom audit to 46 theorems. Its separate `inactive-path-v1` profile
+the historical axiom audit to 46 theorems. D018 adds seven producer/policy
+composition theorems in [lean/BackendReview.lean](lean/BackendReview.lean), for
+53 total; native partition classification remains outside the model proof. Its separate `inactive-path-v1` profile
 contains 36 operation-trace cases. The original 313 semantic cases remain unchanged.
 The operational model proves zero exclusion-check events for inactive policy and
 preservation of exclusion results; native runtime measurements remain required.

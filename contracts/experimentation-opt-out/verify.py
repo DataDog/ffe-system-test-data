@@ -104,7 +104,7 @@ def replay(root, lean, rows):
     with tempfile.TemporaryDirectory(prefix='ffe-lean-decisions-') as tmp:
         build = Path(tmp)
         env = dict(os.environ, LEAN_PATH=str(build))
-        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle')
+        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle', 'BackendReview')
         for name in modules:
             shutil.copyfile(root / f'lean/{name}.lean', build / f'{name}.lean')
         logs = []
@@ -118,8 +118,8 @@ def replay(root, lean, rows):
                 raise ValueError(f'Proof warning or hole: {log}')
             logs.append(log)
         # Inspect every theorem, rather than relying on a hand-maintained #print list.
-        audits = ['import Proofs', 'import Review', 'import InactivePath']
-        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath')]:
+        audits = ['import Proofs', 'import Review', 'import InactivePath', 'import BackendReview']
+        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath'), ('BackendReview', 'BackendReview')]:
             for theorem in re.findall(r'^theorem\s+(\w+)', (build / f'{file}.lean').read_text(), re.M):
                 audits.append(f'#print axioms {namespace}.{theorem}')
         (build / 'Audit.lean').write_text('\n'.join(audits) + '\n')
@@ -148,7 +148,7 @@ def replay(root, lean, rows):
         actual = {row['id']: row['observed'] for row in observed}
         if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in operational}:
             raise ValueError('Operational oracle results or exclusion-check counts differ')
-        return {'lean_version': version, 'theorems_audited': len(audits)-3,
+        return {'lean_version': version, 'theorems_audited': len(audits)-4,
                 'oracle_cases': len(rows), 'operational_oracle_cases': len(operational), 'axiom_audit': audit,
                 'native_sdk_tests_run': False, 'fleet_approved': False}
 
