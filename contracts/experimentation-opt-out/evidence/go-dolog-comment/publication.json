@@ -1,0 +1,48 @@
+{
+  "repository": "DataDog/dd-trace-go",
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "before": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+  "after": "0f6f2f798afac67604e1acd223e9b3ac199dc151",
+  "reviewed_files": {
+    "openfeature/evaluator.go": "a7661f84d0278a2e129424b93c9a97f64dc9e6fffdd7461c09c109c900a979ac",
+    "openfeature/experimentation_opt_out.go": "2a6a2a0fdddedda4793908ae6cf90c922700be22e7f9b1217ac07f14bfc8685b"
+  },
+  "all_pr_commits_valid": true,
+  "commits": [
+    {
+      "sha": "bb9b433e219a1235be8071f66adaec877086bc71",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "627db08193d8019d33282024d8340327997205ec",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0f6f2f798afac67604e1acd223e9b3ac199dc151",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}

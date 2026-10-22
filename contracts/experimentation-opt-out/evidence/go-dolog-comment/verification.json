@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-22T20:14:53.131298+00:00",
+  "related_decision": "D010",
+  "decision_revision": 1,
+  "relationship": "Go malformed-input compatibility outside the valid-UFC contract; no new decision setting",
+  "change_kind": "comment placement only; runtime, model and corpus unchanged",
+  "go": {
+    "tested_worktree_base": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+    "published_same_tree": "0f6f2f798afac67604e1acd223e9b3ac199dc151",
+    "reviewed_files": {
+      "openfeature/evaluator.go": "a7661f84d0278a2e129424b93c9a97f64dc9e6fffdd7461c09c109c900a979ac",
+      "openfeature/experimentation_opt_out.go": "2a6a2a0fdddedda4793908ae6cf90c922700be22e7f9b1217ac07f14bfc8685b"
+    },
+    "command": [
+      "go",
+      "test",
+      "./openfeature",
+      "-run",
+      "^TestExperimentationOptOutFutureExposures$/^(older_experiment_with_default_doLog|ordinary_allocation)$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 0,
+    "passed_leaf_cases": [
+      "TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog",
+      "TestExperimentationOptOutFutureExposures/ordinary_allocation"
+    ],
+    "log_sha256": "62d8d3940ea2febf4d4fc98cd72f29d6564dc403b8fc121499389aa718bedcb2"
+  },
+  "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541096",
+  "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353046544",
+  "limits": "Two existing native cases only. Does not establish a fleet nil-doLog default or prove D010 conformance on malformed input. No fresh Lean, full-package, race, performance, staging or production claim."
+}

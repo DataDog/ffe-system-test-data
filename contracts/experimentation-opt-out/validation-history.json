@@ -807,6 +807,26 @@
       "evidence_file": "evidence/d011/verification.json",
       "receipt_target": null,
       "limits": "Static validation does not prove native SDK conformance. Fixture expectations and configuration unchanged; native evidence is V036."
+    },
+    {
+      "id": "V038",
+      "decision_revisions": {
+        "D010": 1
+      },
+      "recorded_at": "2026-10-22T20:14:53.131298+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353046544",
+      "target": "Go compatibility outside D010 valid-input contract",
+      "source_sha": "0f6f2f798afac67604e1acd223e9b3ac199dc151",
+      "patch": null,
+      "evidence_kind": "fresh-native-compatibility-check",
+      "outcome": "pass",
+      "check": "Comment-only diff; existing nil-doLog and ordinary-allocation cases both pass.",
+      "expectation_profile": "Existing Go nil-doLog compatibility, outside D010 r1 valid-input contract; not adoption of a fleet missing-field default.",
+      "evidence_file": "evidence/go-dolog-comment/verification.json",
+      "receipt_target": null,
+      "limits": "Two existing native cases only. Does not establish a fleet nil-doLog default or prove D010 conformance on malformed input. No fresh Lean, full-package, race, performance, staging or production claim. D010 latest setting and revision unchanged."
     }
   ]
 }
