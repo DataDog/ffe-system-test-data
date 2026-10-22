@@ -1,0 +1,21 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:13 UTC
+INFO: Invocation ID: e4bbd171-b4df-4654-91b1-b64532826f3d
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: 2 targets (0 packages loaded, 0 targets configured)
+Analyzing: 2 targets (0 packages loaded, 0 targets configured)
+
+INFO: Analyzed 2 targets (3 packages loaded, 181 targets configured).
+[1,140 / 1,142] Clippy //domains/ffe/apps/edge-assignments:test.wasm; 1s disk-cache, remote-cache, linux-sandbox ... (2 actions running)
+[1,141 / 1,142] Clippy //domains/ffe/apps/edge-assignments:test.wasm; 2s disk-cache, remote-cache, linux-sandbox
+INFO: Found 2 targets...
+Target //domains/ffe/apps/edge-assignments:test.wasm.clippy.test up-to-date:
+  bazel-out/wasm32-wasip1-fastbuild/bin/domains/ffe/apps/edge-assignments/test.wasm.clippy.ok
+Target //domains/ffe/apps/edge-assignments:ffe-edge-assignments.clippy.test up-to-date:
+  bazel-bin/domains/ffe/apps/edge-assignments/ffe-edge-assignments.clippy.ok
+INFO: Elapsed time: 4.476s, Critical Path: 3.39s
+INFO: 3 processes: 44 action cache hit, 1 internal, 2 linux-sandbox.
+INFO: Build completed successfully, 3 total actions
+INFO: 

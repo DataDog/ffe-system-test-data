@@ -116,6 +116,28 @@
         "D016"
       ],
       "next": "Discover actual implementation/dependency owners; no universal parity claim from this Go review."
+    },
+    {
+      "owner": "dd-source edge HTTP and Go/Rust evaluator adapters",
+      "prs": [
+        140422
+      ],
+      "decisions": [
+        "D008",
+        "D011",
+        "D012",
+        "D018",
+        "D019",
+        "D020"
+      ],
+      "next": "Validate and publish the local edge feedback changes only when authorized. Keep compiler/UFC rebuild and activation requirements as enablement gates. Coordinate invalid-regex authoring/audit and grammar parity separately.",
+      "dependency_order": [
+        "merged fixture #52 pin",
+        "native edge/Go/Rust tests and compatibility negative controls",
+        "independent PR review/CI",
+        "compiler and fallback publication plus UFC rebuild before opt-out enablement",
+        "activation coverage/backfill before future-mode enablement"
+      ]
     }
   ],
   "operational_profiles": [

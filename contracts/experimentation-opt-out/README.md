@@ -13,6 +13,13 @@ The six imported files are byte-preserved with provenance hashes. Browser
 at `58bc213b51eb539d58ee4a5c7719ccf500f09b66`; the reviewed head was `38d611c`.
 Its outcomes establish browser behavior, not automatic adoption by other SDKs.
 
+## Edge compatibility and regex decisions
+
+[Edge review decisions](edge-feedback.md) record Leo's local acceptance of flag-local
+regex errors (D019), tolerant request options (D020), and the existing acknowledgement,
+cutoff, doLog, and customer-enablement rules. Native evidence is separate from the
+unchanged Lean model. These additions remain scoped decisions within this draft proposal.
+
 ## Backend compiler clarification
 
 [D018 and the bottom-stack feedback ledger](backend-feedback.md) record Leo's

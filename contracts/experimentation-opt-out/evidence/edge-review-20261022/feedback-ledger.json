@@ -1,0 +1,184 @@
+{
+  "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+  "snapshot_at": "2026-10-22T22:06:33.531613+00:00",
+  "entries": [
+    {
+      "comment_id": 4343813395,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343813395",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:12Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR1V",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Move import before test module",
+      "disposition": "implemented",
+      "evidence_level": "Two exact Clippy targets pass.",
+      "decision_ids": [],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343813859,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343813859",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:18Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR5j",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Exclude randomization through compiler doLog classification",
+      "disposition": "accepted-producer-owned",
+      "evidence_level": "D018 producer decision retained; evaluator predicate unchanged.",
+      "decision_ids": [
+        "D018",
+        "D012"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814088,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814088",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:21Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR7g",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Keep flag-local regex errors",
+      "disposition": "accepted-with-separate-operational-followups",
+      "evidence_level": "Native canonical fixture and disabled-mode sibling-isolation test pass; save-time validation, production scan and grammar convergence remain open.",
+      "decision_ids": [
+        "D019"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814352,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814352",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:24Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR9u",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Clarify future cutoff wording",
+      "disposition": "implemented",
+      "evidence_level": "README now states strict-before semantics including future cutoffs.",
+      "decision_ids": [
+        "D011"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814459,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814459",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:25Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR-y",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Literal acknowledgement and normalization coverage",
+      "disposition": "implemented",
+      "evidence_level": "JSON/archive and buffered/streaming; removal of cutoff fails.",
+      "decision_ids": [
+        "D008"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814538,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814538",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:26Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBR_c",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Tolerate null and unknown request options",
+      "disposition": "implemented",
+      "evidence_level": "Native compatibility matrix; restoring strict parser fails.",
+      "decision_ids": [
+        "D020"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814731,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814731",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:29Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBSBG",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Cache regex syntax checks",
+      "disposition": "deferred",
+      "evidence_level": "Performance suggestion remains open; no cache change or benchmark claim.",
+      "decision_ids": [],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343814957,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814957",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:32Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBSDW",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Converge Go and Chrono timestamp parsing",
+      "disposition": "deferred",
+      "evidence_level": "Existing D005/D006/D007 conflict remains; parser not changed by this patch.",
+      "decision_ids": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343815097,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343815097",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:33Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBSE7",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Compiler, fallback and UFC rebuild ordering",
+      "disposition": "accepted-enablement-dependency",
+      "evidence_level": "Standalone landing documented; customer enablement still depends on producer and stored UFC updates.",
+      "decision_ids": [
+        "D012",
+        "D018"
+      ],
+      "next_action": "Post authorized reply after central publication."
+    },
+    {
+      "comment_id": 4343815224,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343815224",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:34Z",
+      "original_source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "current_source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "thread_id": "PRRT_kwDORrsQN86vBSGV",
+      "is_resolved": false,
+      "is_outdated_at_snapshot": false,
+      "request": "Repin merged fixtures and assert metadata",
+      "disposition": "implemented",
+      "evidence_level": "Merged #52 pin; Go metadata assertions including serial zero/null; three suites pass.",
+      "decision_ids": [],
+      "next_action": "Post authorized reply after central publication."
+    }
+  ]
+}

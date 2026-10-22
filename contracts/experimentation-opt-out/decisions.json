@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "backend-139368-proposal-v7-d018-producer-randomization",
+  "revision": "edge-140422-proposal-v8-regex-and-request-compatibility",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -594,6 +594,11 @@
           "source": "evidence/poc-receipts.json",
           "stage": "corrected-local-review-provenance",
           "summary": "POC revision-v2 notes correct an initial Android suspicion: its caller passes null when not opted out. The supported omission was acceptance of explicitly filtered responses with no effective opt-out. The earlier judge-phase1 attribution in the original import is not authority for the final v2 rule."
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged."
         }
       ],
       "revision": 2,
@@ -624,7 +629,24 @@
         "V016",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V054",
+        "V055",
+        "V056",
+        "V057"
+      ],
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
       ]
     },
     {
@@ -733,6 +755,11 @@
             "gap": null
           },
           "record": "evidence/d011/published-reply.json"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics."
         }
       ],
       "revision": 1,
@@ -777,7 +804,10 @@
         "V037",
         "V042",
         "V044",
-        "V045"
+        "V045",
+        "V054",
+        "V055",
+        "V057"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -786,7 +816,20 @@
           "go": "535d4a35ef18e1c202b293b5ca55d79259f90492",
           "fixtures": "8aba25473785f502de660618ca864fba2ed1e0cc"
         }
-      }
+      },
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ]
     },
     {
       "authority": "observed JS PR outcome; fleet adoption remains proposed",
@@ -811,6 +854,11 @@
           "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
           "stage": "acknowledged",
           "summary": "Author acknowledges prerequisites; no rollout evidence supplied in this reply."
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval."
         }
       ],
       "revision": 1,
@@ -826,7 +874,7 @@
         "go-5666-5590084362",
         "go-5700-5604838787"
       ],
-      "go_reconciliation": "Immediate fixture #49 merged; future fixture #52 remains open. Producer/edge activation and ordinary-fallback delivery remain deployment obligations.",
+      "go_reconciliation": "Fixtures #52 merged at 0781ce2c55f9da7f9290035c768bbc46570556c0. Compiler classification/fallback preservation, configuration rebuilding and activation remain customer-enablement obligations; edge can remain an independent Git branch.",
       "latest_setting": {
         "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
         "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
@@ -838,7 +886,23 @@
         "gap": null
       },
       "validation_history_ids": [
-        "V023"
+        "V023",
+        "V054",
+        "V055",
+        "V057"
+      ],
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
       ]
     },
     {
@@ -1247,6 +1311,11 @@
           "source": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
           "stage": "authorized-author-reaffirmation",
           "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations."
         }
       ],
       "latest_setting": {
@@ -1286,7 +1355,10 @@
         "V050",
         "V051",
         "V052",
-        "V053"
+        "V053",
+        "V054",
+        "V055",
+        "V057"
       ],
       "implementation": {
         "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
@@ -1303,10 +1375,148 @@
           "publication_evidence": "evidence/backend-review-20261022/native-publication.json"
         },
         "source_tree_sha": "bc32a2ba6a9b205ad25e2deea65321445757f18b"
-      }
+      },
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ]
+    },
+    {
+      "id": "D019",
+      "revision": 1,
+      "statement": "An invalid regex makes its containing flag fail with PARSE_ERROR in the rules-based evaluator; precompute omits the invalid flag. Other valid flags remain usable. Do not silently treat the invalid condition as false and select a later allocation. This configuration-validity rule applies independently of experimentation opt-out.",
+      "central_status": "author-selected-edge-local-implementation-central-proposal",
+      "scope": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+      "authority": "Explicit local instruction from Leo Romanovsky.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814088",
+          "stage": "reviewer-proposal"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "author-local-decision"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": null,
+        "kind": "local-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "scope_note": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+        "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+        "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+      },
+      "model": null,
+      "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
+      "counterexamples": [
+        {
+          "input": "Flag A has MATCHES \"*@corp\\.com\" followed by a catch-all; flag B is valid; opt-out disabled.",
+          "selected": "A is invalid/omitted; B still evaluates.",
+          "rejected_alternative": "A silently selects catch-all."
+        },
+        {
+          "input": "[\\w-.]+@corp\\.com versus a{1001}",
+          "selected": "Grammar remains implementation-dependent pending convergence; reviewer-reported Go/Rust disagreement is retained.",
+          "limits": "Not rerun as a fresh grammar differential in this record."
+        }
+      ],
+      "implementation_owners": [
+        "dd-source Go UFC evaluator",
+        "edge Rust JSON and archived evaluator",
+        "FFE authoring validators and configuration owners",
+        "shared fixture owners"
+      ],
+      "native_obligations": [
+        "Exercise invalid-regex isolation with opt-out disabled and valid sibling flags.",
+        "Retain canonical PARSE_ERROR rather than weakening the fixture to condition-local fallthrough.",
+        "Track save-time validation and production-pattern audit separately; this acceptance does not establish deployment safety.",
+        "Retain parser-grammar counterexamples without assuming Go and Rust accept identical patterns."
+      ],
+      "validation_history_ids": [
+        "V054",
+        "V055",
+        "V057"
+      ]
+    },
+    {
+      "id": "D020",
+      "revision": 1,
+      "statement": "The precompute request boundary ignores unknown option names. Null evaluation_options, null or unknown named mode, and null legacy boolean count as unset. Recognized options still apply alongside unknown fields or modes; legacy true retains immediate mode. Wrong value types, duplicate evaluation_options, conflicting legacy true with a known enabled mode, and invalid subject timestamps for a known enabled mode remain request errors. Acknowledge only the applied recognized policy.",
+      "central_status": "author-selected-edge-local-implementation-central-proposal",
+      "scope": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+      "authority": "Explicit local instruction from Leo Romanovsky.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814538",
+          "stage": "reviewer-proposal"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "author-local-decision"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": null,
+        "kind": "local-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "scope_note": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+        "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+        "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+      },
+      "model": null,
+      "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
+      "counterexamples": [
+        {
+          "input": "evaluation_options={\"future_option\":true} with no recognized mode",
+          "selected": "Ordinary response; no opt-out acknowledgement.",
+          "rejected_alternative": "HTTP 400 for every flag."
+        },
+        {
+          "input": "legacy true plus unknown named mode",
+          "selected": "Immediate acknowledgement and exclusion.",
+          "rejected_alternative": "Drop the recognized legacy policy."
+        },
+        {
+          "input": "named immediate plus invalid timestamp",
+          "selected": "HTTP 400 before origin.",
+          "rejected_alternative": "Silently disable valid recognized opt-out option."
+        }
+      ],
+      "implementation_owners": [
+        "edge request parser and precompute serializers",
+        "browser/mobile acknowledgement consumers"
+      ],
+      "native_obligations": [
+        "Ordinary old SDK requests preserve assignments and omit opt-out acknowledgement.",
+        "Unknown/null options preserve ordinary delivery without validating ignored context.",
+        "Recognized options survive unknown options; wrong types and mode conflicts still fail before origin/streaming.",
+        "Use literal wire acknowledgements for JSON/archive and buffered/streaming paths; preserve nanosecond instant equality.",
+        "Retain client-side acknowledgement validation when a requested option is unsupported."
+      ],
+      "validation_history_ids": [
+        "V054",
+        "V055",
+        "V056",
+        "V057"
+      ]
     }
   ],
-  "previous_revision": "go-stack-5666-5700-proposal-v6-d017-operational-contract",
-  "revision_note": "D018 records explicit local author acceptance of compiler-owned randomization classification through doLog; existing evaluator cutoff rules and prior evidence remain unchanged.",
+  "previous_revision": "backend-139368-proposal-v7-d018-producer-randomization",
+  "revision_note": "Record local author acceptance of flag-local regex errors and tolerant edge request options; preserve D018 producer semantics and clarify merge versus enablement.",
   "validation_history_file": "validation-history.json"
 }

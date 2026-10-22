@@ -1,0 +1,65 @@
+{
+  "recorded_at": "2026-10-22T22:01:02.538106+00:00",
+  "repository": "ddoghq/dd-source",
+  "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+  "source_state": "uncommitted local patch",
+  "patch_file": "evidence/edge-review-20261022/implementation.patch",
+  "patch_sha256": "9cba4adc08867e2d3adcb985c66c9acb2f1b94152cb334b5d410ccdfd843b13e",
+  "file_sha256": {
+    "domains/ffe/apps/edge-assignments/README.md": "545a452c7906eb36702d8f74a85425a3206fe576779b961cf33a2db7ddfaa2ac",
+    "domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments.rs": "f8a7e1a0ad27e2c02b77f8b8d0805948af9b7b3c7cccf7549e2f364c02cfc4d3",
+    "domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs": "4b6d142ea6f67e45d788f8fde0f4840ea897671bce5eca482583f1343cf1d210",
+    "domains/ffe/etc/bazel/ffe_system_test_data.bzl": "627407d28a3fd8825d4dee51f857c9efefe2d42c8befd9d7fb160f244324cabd",
+    "domains/ffe/libs/flagging/ufc/evaluator_test.go": "72fc3c720d4908abbe04dd47e24d702effa79f9916fffe6354412300f1262d96"
+  },
+  "fixture_sha": "0781ce2c55f9da7f9290035c768bbc46570556c0",
+  "fixture_counts": {
+    "baseline": 363,
+    "immediate": 28,
+    "future": 44
+  },
+  "checks": [
+    {
+      "command": [
+        "bzl",
+        "test",
+        "//domains/ffe/apps/edge-assignments:test",
+        "//domains/ffe/libs/flagging/ufc:go_default_test",
+        "//domains/ffe/libs/flagging/rust/evaluation:test",
+        "--test_output=errors",
+        "--nocache_test_results"
+      ],
+      "exit_code": 0,
+      "executed_at": "2026-10-22T21:59:42.976750+00:00",
+      "log": "evidence/edge-review-20261022/native-check-0.log",
+      "log_sha256": "6c9afae4976175636a29a49838e14c130b85004fcfab6f089c157a0dfc8886d8"
+    },
+    {
+      "command": [
+        "bzl",
+        "build",
+        "//domains/ffe/apps/edge-assignments:test.wasm.clippy.test",
+        "//domains/ffe/apps/edge-assignments:ffe-edge-assignments.clippy.test"
+      ],
+      "exit_code": 0,
+      "executed_at": "2026-10-22T21:59:48.063339+00:00",
+      "log": "evidence/edge-review-20261022/native-check-1.log",
+      "log_sha256": "3804c92e90822cc4c4132854f25b92b3978b19a7183d96d44fe122f26c531b7c"
+    }
+  ],
+  "summary": {
+    "go_xml_entries": 1100,
+    "go_failures": 0,
+    "edge": {
+      "passed": 244,
+      "failed": 0,
+      "ignored": 9
+    },
+    "rust": {
+      "passed": 60,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "scope": "Final repository-supported native tests rerun after all mutations were restored. Includes real Fastly WASM handler, Go canonical fixtures/metadata/regex-isolation test, and Rust JSON/archive tests. No CI, publication, staging, production, or compiler rollout claim."
+}

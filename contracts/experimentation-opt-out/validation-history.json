@@ -1150,6 +1150,108 @@
       "check": "918 compiler tests, 283 database repository tests and 275 runner/primary-analysis tests pass. Both conflicting helpers preserved; seven golden doLog bits updated with assignment data unchanged.",
       "evidence_file": "evidence/backend-review-20261022/main-merge-native-validation.json",
       "limits": "Repository suite passed before the compiler-test-only golden correction; compiler rerun uncached after correction. Published merge tree is pinned. Earlier negative-control/model receipts remain at their original source; no child integration, CI or deployed proof."
+    },
+    {
+      "id": "V054",
+      "decision_revisions": {
+        "D008": 2,
+        "D011": 1,
+        "D012": 1,
+        "D018": 1,
+        "D019": 1,
+        "D020": 1
+      },
+      "recorded_at": "2026-10-22T22:01:02.538106+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "target": "Edge feedback acceptance and source trace",
+      "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "patch": null,
+      "evidence_kind": "local-author-decision-and-source-inspection",
+      "outcome": "accepted-in-edge-scope",
+      "check": "Author selects regex flag isolation and tolerant request options; reaffirms doLog. Source defaults to disabled for omitted options; compiler/UFC requirements apply when enabling opt-out.",
+      "expectation_profile": "D019/D020 r1 plus unchanged D008/D011/D012/D018.",
+      "evidence_file": "evidence/edge-review-20261022/local-decisions.json",
+      "receipt_target": null,
+      "limits": "Local instruction; no public setting thread, fleet approval, merge authorization or deployment evidence. Existing parser grammar and unrelated proposals are not adopted."
+    },
+    {
+      "id": "V055",
+      "decision_revisions": {
+        "D008": 2,
+        "D011": 1,
+        "D012": 1,
+        "D018": 1,
+        "D019": 1,
+        "D020": 1
+      },
+      "recorded_at": "2026-10-22T22:01:02.538106+00:00",
+      "executed_at": "2026-10-22T21:59:42.976750+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "target": "Go evaluator, Rust JSON/archive and Fastly request suites; Clippy",
+      "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "patch": {
+        "sha256": "9cba4adc08867e2d3adcb985c66c9acb2f1b94152cb334b5d410ccdfd843b13e",
+        "file": "evidence/edge-review-20261022/implementation.patch"
+      },
+      "evidence_kind": "fresh-local-native-tests-and-lint",
+      "outcome": "pass",
+      "check": "Merged fixture pin; 1100 Go XML test entries, 60 Rust tests and 244 edge tests pass; 9 existing edge ignores. Two Clippy targets pass.",
+      "expectation_profile": "363 baseline, 28 immediate, 44 future fixture rows; selected Go metadata; literal acknowledgements; null/unknown options and legacy requests; disabled-mode regex isolation.",
+      "evidence_file": "evidence/edge-review-20261022/native-validation.json",
+      "receipt_target": null,
+      "limits": "Go count includes parent/subtest XML entries. Native local validation only; D018 producer classification and D012 actual rebuild/deployment are not exercised. D019 does not establish regex grammar parity; new decisions are not Lean-modeled."
+    },
+    {
+      "id": "V056",
+      "decision_revisions": {
+        "D008": 2,
+        "D020": 1
+      },
+      "recorded_at": "2026-10-22T22:01:02.538106+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "target": "Native acknowledgement, compatibility and metadata negative controls",
+      "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "patch": {
+        "sha256": "9cba4adc08867e2d3adcb985c66c9acb2f1b94152cb334b5d410ccdfd843b13e",
+        "file": "evidence/edge-review-20261022/implementation.patch"
+      },
+      "evidence_kind": "local-negative-controls",
+      "outcome": "expected-failures-observed",
+      "check": "Removing acknowledged cutoff, restoring strict request parsing, removing serial IDs and forcing doLog=false each fail the relevant tests. Original broad/detector attempts are retained separately.",
+      "expectation_profile": "D008/D020 wire behavior; supplemental selected serialId/doLog fixture expectations, including serial zero.",
+      "evidence_file": "evidence/edge-review-20261022/negative-controls.json",
+      "receipt_target": null,
+      "limits": "Finite negative controls only; relevant tests unchanged in final patch. All mutations restored. No claim that regex, compiler behavior or every parser branch was mutation-tested."
+    },
+    {
+      "id": "V057",
+      "decision_revisions": {
+        "D008": 2,
+        "D011": 1,
+        "D012": 1,
+        "D018": 1,
+        "D019": 1,
+        "D020": 1
+      },
+      "recorded_at": "2026-10-22T22:10:28.019940+00:00",
+      "executed_at": "2026-10-22T22:09:25.670807+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "target": "Published edge source and complete PR signing audit",
+      "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "patch": null,
+      "evidence_kind": "publication-and-exact-source-binding",
+      "outcome": "pass",
+      "check": "All four PR commits GitHub verified/valid; published diff and all changed files match the earlier native validation receipt.",
+      "expectation_profile": "No semantic change from V055/V056; publication only.",
+      "evidence_file": "evidence/edge-review-20261022/native-publication.json",
+      "receipt_target": null,
+      "limits": "No CI, review approval, compiler rollout or deployed proof."
     }
   ]
 }

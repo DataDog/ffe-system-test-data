@@ -1,0 +1,69 @@
+{
+  "recorded_at": "2026-10-22T22:09:25.670807+00:00",
+  "target": "ddoghq/dd-source",
+  "pr": 140422,
+  "phase": "after",
+  "account": "leo-romanovsky_ddog",
+  "committer_email": "leo.romanovsky@datadoghq.com",
+  "configured_key_fingerprint": "SHA256:kwOO2RGaH0Xg61k/qrIWod3sScsZGxzh8LHj/QL5jn8",
+  "committer_identity_evidence": [
+    "67716b736a2fe4da07ebee1c56c018b71e91a95b",
+    "cd1e259ca1d0be46256ad9087fa799518e370332",
+    "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+    "939db39e166fdd40cf7744399477bfe9053964b0"
+  ],
+  "head": "939db39e166fdd40cf7744399477bfe9053964b0",
+  "base": "07b7e9f403dd14c1f205485251116cf69c22280a",
+  "branch": "leo/edge-experimentation-opt-out-modes",
+  "draft": false,
+  "local_head": "939db39e166fdd40cf7744399477bfe9053964b0",
+  "entire_pr_commit_count": 4,
+  "outgoing": [],
+  "commits": [
+    {
+      "sha": "67716b736a2fe4da07ebee1c56c018b71e91a95b",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leo-romanovsky_ddog",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-21T16:39:16Z"
+      }
+    },
+    {
+      "sha": "cd1e259ca1d0be46256ad9087fa799518e370332",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leo-romanovsky_ddog",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-21T17:38:58Z"
+      }
+    },
+    {
+      "sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leo-romanovsky_ddog",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-21T17:44:55Z"
+      }
+    },
+    {
+      "sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leo-romanovsky_ddog",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T22:09:02Z"
+      }
+    }
+  ],
+  "tested_baseline_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+  "tested_patch_sha256": "9cba4adc08867e2d3adcb985c66c9acb2f1b94152cb334b5d410ccdfd843b13e",
+  "published_source_matches_tested_patch": true,
+  "native_receipt": "native-validation.json",
+  "limits": "Publication identity and exact source binding; preserves original local native execution provenance. Does not establish CI, review approval or deployment."
+}
