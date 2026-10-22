@@ -190,6 +190,7 @@ Each evaluation case uses a universal schema with the following fields:
 | `result.errorCode` | string | Optional OpenFeature error code, such as `PARSE_ERROR` or `FLAG_NOT_FOUND` |
 | `result.serialId` | integer or null | Optional expected selected split serial ID. `0` is valid; `null` requires no serial ID; omission leaves it unspecified |
 | `result.doLog` | boolean | Optional expected selected allocation's logging decision |
+| `result.features` | object | Optional exact feature maps for `HOOK`, `EXPOSURE`, and `EVALUATION`; empty maps assert no features, omission leaves routing unspecified |
 | `capabilities` | object | Optional expected results when a named capability is enabled; uses the same result format |
 
 Example:
@@ -315,6 +316,44 @@ The shared span-enrichment inputs provide IDs `100`, `108`, `128`, and `130` for
 combined encoding and ID `200` with logging disabled. Downstream integration tests
 retain trace construction, root-span propagation, subject hashing, encoding, and
 capacity-limit assertions.
+
+### Split features and destinations
+
+`test-case-split-features.json` checks four evaluations across three flags:
+scalar routing (including unknown/repeated destinations), malformed entries and
+first-valid-key deduplication, and two allocations returning the same value with
+different split features and `doLog` decisions.
+
+Optional `result.features` contains exact maps for all three destinations:
+
+```json
+"features": {
+  "HOOK": {"holdout.key": "holdout-q3", "shared": true},
+  "EXPOSURE": {"shared": true},
+  "EVALUATION": {"shared": true}
+}
+```
+
+`{}` asserts no features at that destination; omitting `result.features` makes
+no assertion. Compare original keys and scalar types without coercion, allowing
+native integer/float representations of the same JSON number. Unexpected keys
+must fail. The first valid entry for each key wins across destinations, even if
+it only names unknown destinations; invalid entries do not reserve keys. Invalid
+entries must not change flag selection. Destination names are case sensitive;
+unknown, empty, and non-string destinations do not route values.
+
+Downstream readers must explicitly assert these maps: updating the fixture pin
+alone does not add coverage. Compare `HOOK` with callback features and the other
+maps with selected event metadata or serialized event features, never with
+expectations recomputed from configuration. Raw OpenFeature metadata is not a
+destination-isolation boundary. These are selected metadata expectations;
+`doLog=false` preserves them while suppressing exposure delivery. Downstream
+integration tests own emission counts, consent, cache, and transport checks.
+
+Count and byte limits are outside these cases: `dd-trace-go@885b16d2` caps features
+at 256 entries and keys/string values at 256 UTF-8 bytes; inspection of the Java
+parser at `dd-trace-java@fab3bc8b` shows no equivalent limits. Agree on that policy
+before adding shared boundary expectations; Go's local limit tests remain.
 
 ### SDK-Specific Fields
 
@@ -453,6 +492,7 @@ fixture defining the intended behavior.
 | `test-case-serial-id-metadata.json` | Selected split IDs, including zero, absence, targeting, and repeated evaluations |
 | `test-case-span-enrichment-inputs.json` | Selected IDs and logging decisions used by downstream span-enrichment tests |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
+| `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and logging decisions |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |

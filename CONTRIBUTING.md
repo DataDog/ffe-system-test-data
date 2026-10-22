@@ -59,6 +59,11 @@ SDK-specific metadata key names in the downstream adapter. See
 [selected metadata fixtures](README.md#selected-split-and-allocation-metadata)
 for the extraction from system-tests and the integration-test boundary.
 
+Use optional `result.features` for exact `HOOK`, `EXPOSURE`, and `EVALUATION`
+maps, without internal metadata prefixes. Empty maps assert absence; omission
+leaves features unspecified. See [split features and destinations](README.md#split-features-and-destinations)
+for the native assertion requirements and the separate limit-policy question.
+
 Malformed flags must be isolated during configuration ingestion. Exclude them
 from the active evaluation map, retain only their rejected keys for the current
 configuration, and return the caller default with `ERROR` / `PARSE_ERROR` when
