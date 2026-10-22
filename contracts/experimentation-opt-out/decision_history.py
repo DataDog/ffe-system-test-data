@@ -20,7 +20,7 @@ def validate(root, decisions, history):
         if thread:
             if not re.fullmatch(re.escape(source['pr_url']) + r'#(?:discussion_r|pullrequestreview-)[0-9]+', thread):
                 raise ValueError('Decision thread must belong to its provenance PR')
-        elif not source['gap'] or source['kind'] not in {'local-proposal', 'source-observation'}:
+        elif not source['gap'] or source['kind'] not in {'local-decision', 'local-proposal', 'source-observation'}:
             raise ValueError('Missing decision-setting thread needs an explicit provenance gap')
         linked = decision['validation_history_ids']
         expected = {e['id'] for e in entries.values() if decision['id'] in e['decision_revisions']}
@@ -51,7 +51,7 @@ def render(decisions, history):
     lines = [
         '# Decision sources and validation history', '',
         'Generated from [decisions.json](decisions.json) and [validation-history.json](validation-history.json) with `python3 decision_history.py`.', '',
-        'The current source points to the latest recorded decision-setting statement in its stated scope. A later test, approval or proposal does not replace it. PR-only links below explicitly mark missing public decision-setting provenance; they do not imply acceptance. The Go activation choice remains open.', '',
+        'The current source points to the latest recorded decision-setting statement in its stated scope. A later test, approval or proposal does not replace it. PR-only links below explicitly mark missing public decision-setting provenance; any local acceptance is recorded separately. See each decision for its adoption and implementation status.', '',
         '## Current decision sources', '',
         '| Decision | Current rule | Latest setting / scope | Historical checks |',
         '| --- | --- | --- | --- |',
@@ -63,6 +63,8 @@ def render(decisions, history):
         setting = f'[{label}]({url}) — {source["kind"]}. {source["scope_note"]}'
         if source['gap']:
             setting += ' ' + source['gap']
+        if source.get('last_public_setting'):
+            setting += f' [Prior public setting]({source["last_public_setting"]["thread_url"]}).'
         if source['recorded_at']:
             setting += ' Recorded ' + source['recorded_at'] + '.'
         checks = ', '.join(f'[{key}](#{key.lower()})' for key in d['validation_history_ids'])

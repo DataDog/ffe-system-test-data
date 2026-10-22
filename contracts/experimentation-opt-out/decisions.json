@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "go-stack-5666-5700-proposal-v2-provenance",
+  "revision": "go-stack-5666-5700-proposal-v3-go-d004-adoption",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -29,7 +29,10 @@
       },
       "browser": "normal evaluation",
       "go": "affected flag PARSE_ERROR",
-      "reviewer_alternative": "normal evaluation"
+      "reviewer_alternative": "normal evaluation",
+      "status": "policy-resolved-for-go-implementation-pending",
+      "selected": "browser",
+      "resolution": "evidence/go-5700-d004-adoption.json"
     },
     {
       "id": "C003",
@@ -44,7 +47,10 @@
       },
       "browser": "PARSE_ERROR",
       "go": "PARSE_ERROR",
-      "reviewer_alternative": "skip allocation; ordinary fallback"
+      "reviewer_alternative": "skip allocation; ordinary fallback",
+      "status": "policy-resolved-for-go-implementation-pending",
+      "selected": "browser",
+      "resolution": "evidence/go-5700-d004-adoption.json"
     }
   ],
   "decisions": [
@@ -215,7 +221,7 @@
       ]
     },
     {
-      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "authority": "Leo explicitly selected browser D004 for Go in the current Codex conversation; original public browser decision retained.",
       "id": "D004",
       "provenance": [
         {
@@ -246,6 +252,12 @@
           "stage": "reviewer_confirmed",
           "summary": "Reviewer confirms formerly failing Node cases now evaluate normally and four scope tests pass.",
           "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "evidence/go-5700-d004-adoption.json",
+          "stage": "accepted-go-locally",
+          "summary": "Adopt the existing browser D004 rule for dd-trace-go PR #5700; no fleet-wide approval.",
+          "target_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303"
         }
       ],
       "revision": 2,
@@ -254,22 +266,33 @@
         "parse_once": true
       },
       "statement": "An invalid activation, including on an unreachable allocation, causes PARSE_ERROR for that flag only when an opted-out subject uses FutureExperimentsOnly. Disabled, Immediate, and subjects without a cutoff do not require activation validity. Missing activation is a separate state that future mode excludes.",
-      "central_status": "unresolved-conflict",
-      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "central_status": "accepted-go-implementation-pending-proposed-fleet-reuse",
+      "scope": "Browser behavior observed; adopted by Leo for Go #5700; native Go implementation and fleet adoption remain pending.",
       "go_feedback": [
         "go-5700-4340843853",
         "go-5700-4342540303"
       ],
-      "go_reconciliation": "OPEN CONFLICT: browser future-only PARSE_ERROR, Go all-mode per-flag quarantine, and reviewer invalid-as-missing are three distinct choices.",
+      "go_reconciliation": "POLICY SELECTED: browser future-only PARSE_ERROR with distinct valid/missing/invalid states. Current Go all-mode quarantine must change; reviewer invalid-as-missing is not selected. Native implementation pending.",
       "latest_setting": {
-        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
-        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
-        "kind": "author-decision",
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "thread_url": null,
+        "kind": "local-decision",
         "author": "leoromanovsky",
-        "recorded_at": "2026-10-22T11:56:15Z",
-        "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
-        "scope_note": "Browser scope only; Go and fleet conflict remains unresolved.",
-        "gap": null
+        "recorded_at": "2026-10-22T17:12:45.310115+00:00",
+        "source_sha": null,
+        "scope_note": "Leo adopted browser D004 r2 for Go #5700 in Codex. Current Go head remains unchanged; native implementation pending.",
+        "gap": "No public decision-setting reply posted for Go yet; the linked PR is the adoption target.",
+        "local_evidence": "evidence/go-5700-d004-adoption.json",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+          "kind": "author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T11:56:15Z",
+          "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
+          "scope_note": "Browser scope only; Go and fleet conflict remains unresolved.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V004",
@@ -277,6 +300,12 @@
         "V014",
         "V021",
         "V024"
+      ],
+      "native_obligations": [
+        "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
+        "Before allocation selection, return per-flag PARSE_ERROR only for future mode with a valid subject cutoff and invalid activation, including unreachable allocations.",
+        "Preserve normal disabled/immediate/absent-cutoff behavior, missing/null experiment exclusion, valid-neighbor isolation and existing startAt/endAt failures.",
+        "Run focused Go regression tests and relevant full-package/race checks against the updated head; record receipts separately."
       ]
     },
     {
@@ -892,7 +921,7 @@
       ]
     }
   ],
-  "previous_revision": "go-stack-5666-5700-proposal-v1",
-  "revision_note": "Provenance and validation history only; no semantic decision revision changed.",
+  "previous_revision": "go-stack-5666-5700-proposal-v2-provenance",
+  "revision_note": "Leo selected browser D004 r2 for Go; implementation pending. No semantic statements or existing receipt revisions changed.",
   "validation_history_file": "validation-history.json"
 }

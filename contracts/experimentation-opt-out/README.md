@@ -33,11 +33,12 @@ The main remaining work is:
    reports 7 CI regressions at `febcc185`, +2.1% to +6.7%; this task did not rerun
    those benchmarks. Preserve that head-specific evidence and obtain a fresh
    whole-evaluation measurement after a fix. [Follow-up](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461).
-2. **Malformed activation is unresolved centrally:** current Go rejects the
-   affected flag in all modes; Aaron proposes invalid-as-missing; browser D004
-   preserves invalid separately and returns PARSE_ERROR only for an opted-out
-   future-mode subject. Recommend reviewing the browser rule as the shared
-   candidate, without silently adopting either Go alternative.
+2. **Malformed activation: browser D004 selected for Go.** Leo explicitly chose
+   the browser rule in this review session: preserve invalid separately and return
+   PARSE_ERROR only for an opted-out future-mode subject. Current Go still rejects
+   the affected flag in every mode; implementation and native tests remain pending.
+   The public reply is [drafted locally](../../review-drafts/go-5700-malformed-activation.md).
+   [Local adoption record](evidence/go-5700-d004-adoption.json); fleet adoption is separate.
    [Request](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303).
 3. **Disabled-provider precedence:** the current constructor validates mode before
    resolving disablement. D015 proposes returning NoopProvider first when settings
@@ -74,7 +75,8 @@ The remaining optional helper/error/comment changes are in the complete ledger.
 - [decision-history.md](decision-history.md): each current decision-setting PR/thread
   and a linked historical table of passing, failing and incomplete checks. Three
   imported rules (D008, D009, D014) have PR context but no identified public
-  setting of the complete rule; those gaps remain explicit.
+  setting of the complete rule. D004 additionally records local Go acceptance
+  with its public reply still pending; its prior browser-setting link is retained.
 - [validation-history.json](validation-history.json): append-only checks with
   tested revisions/profiles, source/patch pins, evidence kinds and limits.
   Regenerate the table with `python3 contracts/experimentation-opt-out/decision_history.py`.
@@ -99,7 +101,8 @@ pending errors, request options and acknowledgement admission. Its 30 existing
 theorems and 313 oracle rows are retained. Six new theorems in
 [lean/Review.lean](lean/Review.lean) cover proposed provider-disablement ordering,
 scoped lookup precedence, and the fact that activation alternatives differ.
-The model deliberately **does not choose** between those conflicting policies.
+The model keeps the alternatives distinguishable. Leo selected the browser policy
+for Go in the local adoption record; the model itself does not confer approval.
 
 These are model properties. They do not prove full parser correctness, native
 SDK refinement, nil safety, latency, lifecycle, transport, concurrency or deployed

@@ -339,9 +339,9 @@
       "decision_ids": [
         "D004"
       ],
-      "disposition": "implemented-with-conflict",
+      "disposition": "superseded-policy-implementation-pending",
       "kind": "shared-semantics",
-      "next_action": "Global per-flag quarantine is documented and tested locally by author; later browser decision and Aaron proposal disagree with it.",
+      "next_action": "Earlier all-mode quarantine was documented at febcc185; Leo now selected browser D004 for Go. Update source/tests/docs together while retaining this historical discussion.",
       "thread_state": {
         "resolved": true,
         "outdated": true
@@ -365,9 +365,9 @@
       "decision_ids": [
         "D004"
       ],
-      "disposition": "unresolved-conflict",
+      "disposition": "alternative-accepted-implementation-pending",
       "kind": "shared-semantics",
-      "next_action": "Choose explicitly among Go global quarantine, reviewer invalid-as-missing, and browser future-only PARSE_ERROR with distinct invalid/missing states.",
+      "next_action": "Implement browser D004 r2 in Go as selected by Leo; retain malformed versus missing distinction. Reply drafted, not posted; native Go tests pending.",
       "thread_state": {
         "resolved": false,
         "outdated": false
@@ -377,7 +377,8 @@
       "reviewer": "aarsilv",
       "created_at": "2026-10-21T22:16:40Z",
       "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "local_decision_evidence": "evidence/go-5700-d004-adoption.json"
     },
     {
       "id": "go-5700-4342540461",

@@ -1,0 +1,20 @@
+{
+  "decision_id": "D004",
+  "semantic_revision": 2,
+  "recorded_at": "2026-10-22T17:12:45.310115+00:00",
+  "authority": "Leo explicit choice in current Codex conversation",
+  "user_choice": "browser",
+  "scope": "Adopt the existing browser D004 rule for dd-trace-go PR #5700; no fleet-wide approval.",
+  "target_pr": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "target_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303",
+  "public_origin": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+  "public_validation": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348262068",
+  "inspected_go_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+  "implementation_status": "pending",
+  "native_go_validation_status": "pending",
+  "reply_status": "draft-only; not posted",
+  "draft_path": "../../review-drafts/go-5700-malformed-activation.md",
+  "draft_sha256": "aabd364383e3ed3ff295b7cd26b71f711110faf4f3a4ce448dc32ac298f772f8",
+  "semantics_changed": false,
+  "note": "This is scoped adoption of an existing rule, not a new test result. Historical validation rows remain unchanged."
+}
