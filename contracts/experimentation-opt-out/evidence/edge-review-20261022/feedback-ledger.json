@@ -18,7 +18,10 @@
       "decision_ids": [],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082200",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:27Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343813859,
@@ -39,7 +42,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:29Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814088,
@@ -59,7 +65,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:31Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814352,
@@ -79,7 +88,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:32Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814459,
@@ -99,7 +111,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:34Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814538,
@@ -119,7 +134,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:36Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814731,
@@ -137,7 +155,10 @@
       "decision_ids": [],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084073",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:38Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343814957,
@@ -159,7 +180,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084359",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:39Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343815097,
@@ -180,7 +204,10 @@
       ],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:41Z",
+      "reply_rendered_format_verified": true
     },
     {
       "comment_id": 4343815224,
@@ -198,7 +225,10 @@
       "decision_ids": [],
       "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084943",
-      "reply_readback_verified": true
+      "reply_readback_verified": true,
+      "latest_reply_evidence": "evidence/edge-review-20261022/formatted-replies.json",
+      "reply_format_updated_at": "2026-10-22T22:23:43Z",
+      "reply_rendered_format_verified": true
     }
   ]
 }

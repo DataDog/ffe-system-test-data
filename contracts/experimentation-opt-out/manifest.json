@@ -162,12 +162,13 @@
     "evidence/edge-review-20261022/native-check-0.log": "6c9afae4976175636a29a49838e14c130b85004fcfab6f089c157a0dfc8886d8",
     "evidence/edge-review-20261022/native-validation.json": "b0e033492b54c270392a2b5d587ec7fd1123efb2ac833ab7a5ad7844f7f8080f",
     "evidence/edge-review-20261022/local-decisions.json": "7e0afa8e763f2fa76a813990c542d55493ff1716aabf55ad71a402edc2896a54",
-    "edge-feedback.md": "2a3eb547a03e3fabf388e01d13844846d45c6e637d178886caf0fc8d6d5495c6",
-    "evidence/edge-review-20261022/feedback-ledger.json": "4c50df2aa1df377c193112cc10a0e99e9558a4f72bddaf16333f34dac6292951",
+    "edge-feedback.md": "7bb5f45e16a8b5d90389e93ac68c644799f8567c74c34088fb6fa787ff1aaef0",
+    "evidence/edge-review-20261022/feedback-ledger.json": "d40c4e600f3acc49ba3b6bfd38e9fd2fc56b9f918d7dde25096837ae67f0d9ce",
     "evidence/edge-review-20261022/native-publication.json": "03741a12952921f007a2f79f53055c73ce042c8fdb2d52cf97082d0a4cc6bd45",
     "evidence/edge-review-20261022/central-publication.json": "5de90bce9357b4c530843996ab9506dde10b5a11842a62af58a335e19ddac423",
     "evidence/edge-review-20261022/published-replies.json": "1c470c35e1689b3dc840c24a1fdbfd4daea89fbcc44a3be61fd6da34a28b56f3",
-    "evidence/backend-review-20261022/formatted-reply.json": "4705dc2e59dd1eabb681d149915834f7e035172d9d8ff69d18bf63fdca995a9a"
+    "evidence/backend-review-20261022/formatted-reply.json": "4705dc2e59dd1eabb681d149915834f7e035172d9d8ff69d18bf63fdca995a9a",
+    "evidence/edge-review-20261022/formatted-replies.json": "231e1c3d74bdf6423a988d1436a1b46914b80d95b302c0990d76fcea0120299b"
   },
   "case_count": 313,
   "counts_by_kind": {

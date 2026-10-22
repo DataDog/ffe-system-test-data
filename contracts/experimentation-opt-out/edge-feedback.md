@@ -6,8 +6,10 @@ for [dd-source #140422](https://github.com/ddoghq/dd-source/pull/140422), review
 [current local decision record](evidence/edge-review-20261022/local-decisions.json).
 The implementation is published at [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0);
 [publication evidence](evidence/edge-review-20261022/native-publication.json) binds it
-to the tested patch. [Published replies](evidence/edge-review-20261022/published-replies.json) were read back
-and are linked below as the decision sources.
+to the tested patch. The [formatted replies](evidence/edge-review-20261022/formatted-replies.json)
+were read back with their rendered sections verified, and retain the decision URLs below.
+The [original reply readback](evidence/edge-review-20261022/published-replies.json) remains as history.
+This presentation update changes no decision, source code, proof or native test expectation.
 This is not fleet approval or merge/deployment evidence.
 
 ## D019: invalid regex rejects its flag
