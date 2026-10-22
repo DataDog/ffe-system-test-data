@@ -425,7 +425,7 @@
       ],
       "disposition": "implemented-native-validated-performance-ci-pending",
       "kind": "native-performance",
-      "next_action": "Retain validated call-site guard; new benchmark CI registration and performance assessment deferred to base #5666. Historical native/model/timing evidence remains pinned.",
+      "next_action": "No additional benchmark CI registration in Go PR #5666 per author scope decision; preserve local benchmarks and existing evidence limits.",
       "thread_state": {
         "resolved": true,
         "outdated": false,
@@ -441,7 +441,14 @@
       "evidence_file": "evidence/d017/README.md",
       "verified_head_sha": "627db08193d8019d33282024d8340327997205ec",
       "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168",
-      "scope_update_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496"
+      "scope_update_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+      "delivery_scope_update": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+        "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+        "evidence": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
+        "status": "additional-ci-registration-skipped-by-author",
+        "source_gap": "Decision set in local conversation; PR body records it, no public decision-setting review thread"
+      }
     },
     {
       "id": "go-5700-4342540684",
@@ -487,9 +494,9 @@
       "decision_ids": [
         "D017"
       ],
-      "disposition": "benchmarks-retained-ci-registration-deferred-to-base",
+      "disposition": "benchmarks-retained-additional-ci-registration-skipped-by-author",
       "kind": "native-performance",
-      "next_action": "Register both new benchmarks and assess performance in dd-trace-go #5666 after folding in #5700; no child CI-file delta.",
+      "next_action": "No additional benchmark CI registration in Go PR #5666 per author scope decision; preserve local benchmarks and existing evidence limits.",
       "thread_state": {
         "resolved": true,
         "outdated": false,
@@ -506,7 +513,14 @@
       "verified_head_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
       "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352859438",
       "scope_update_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
-      "scope_update_evidence": "evidence/d017/ci-registration-deferral.json"
+      "scope_update_evidence": "evidence/d017/ci-registration-deferral.json",
+      "delivery_scope_update": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+        "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+        "evidence": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
+        "status": "additional-ci-registration-skipped-by-author",
+        "source_gap": "Decision set in local conversation; PR body records it, no public decision-setting review thread"
+      }
     },
     {
       "id": "go-5700-4342541096",

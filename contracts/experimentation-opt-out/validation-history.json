@@ -956,6 +956,27 @@
       "evidence_file": "evidence/aaron-completion/main-merge.json",
       "receipt_target": null,
       "limits": "Local package/race/configuration/CI-selection tests after main merge; no fresh Lean or instrumented adapter replay, timing claim, remote CI or system-tests claim."
+    },
+    {
+      "id": "V045",
+      "decision_revisions": {
+        "D004": 2,
+        "D011": 1
+      },
+      "recorded_at": "2026-10-22T20:53:35.483017+00:00",
+      "executed_at": "2026-10-22T20:53:35.483017+00:00",
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "target": "Go evaluator using merged fixture main",
+      "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+      "patch": null,
+      "evidence_kind": "fresh-native-fixture-main-regression",
+      "outcome": "pass",
+      "check": "All 1678 Go test cases pass; fixture validator accepts 367 cases across 47 files.",
+      "expectation_profile": "Existing Go opt-out rules against merged fixture main; no semantic revision.",
+      "evidence_file": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
+      "receipt_target": null,
+      "limits": "Local native regression and fixture schema validation. No fresh Lean run, performance acceptance, remote CI, deployment or complete optional fixture metadata conformance claim."
     }
   ]
 }

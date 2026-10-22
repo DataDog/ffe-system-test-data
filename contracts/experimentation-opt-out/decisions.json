@@ -320,7 +320,8 @@
         "V027",
         "V028",
         "V042",
-        "V044"
+        "V044",
+        "V045"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -754,7 +755,8 @@
         "V036",
         "V037",
         "V042",
-        "V044"
+        "V044",
+        "V045"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -1081,7 +1083,7 @@
         "Observe the production exclusion boundary; do not derive a fake count from the input policy.",
         "Retain full native regressions for values, errors, targeting order, telemetry, and activation policy.",
         "Measure uninstrumented whole evaluations on pinned compiler/architecture and baseline/candidate SHAs.",
-        "Cover disabled, enabled-with-absent-cutoff and active modes; register relevant performance CI benchmarks.",
+        "Cover disabled, enabled-with-absent-cutoff and active modes; register relevant performance CI benchmarks. Go PR #5666 has an author-scoped exception skipping additional CI registration; see implementation.ci_registration_followup. Existing registration remains unchanged.",
         "Record statistical results separately from gate status and return counterexamples centrally."
       ],
       "latest_setting": {
@@ -1168,12 +1170,21 @@
         "evidence": "evidence/d017/native-receipt.json",
         "timing_status": "mixed-local-measurements-no-regression-free-claim",
         "ci_registration_followup": {
-          "status": "deferred-to-base-pr",
+          "status": "skipped-by-author-for-this-pr",
           "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
-          "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
-          "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
-          "evidence": "evidence/d017/ci-registration-deferral.json",
-          "note": "D017 r2 semantics and native obligations unchanged; CI registration obligation remains open in the base."
+          "source_thread": null,
+          "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+          "evidence": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
+          "note": "Additional Go benchmark CI registration only; no change to D017 r2 semantic rule or other SDK obligations",
+          "source_gap": "Decision set in local conversation; PR body records it, no public decision-setting review thread",
+          "previous_setting": {
+            "status": "deferred-to-base-pr",
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+            "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+            "evidence": "evidence/d017/ci-registration-deferral.json",
+            "note": "D017 r2 semantics and native obligations unchanged; CI registration obligation remains open in the base."
+          }
         }
       }
     }
