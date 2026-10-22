@@ -129,7 +129,7 @@
     "evidence/aaron-completion/fixture-main-and-ci-scope.json": "b2dcbe34e6605b7150a01c997fc74ec5bbb17674f70e678ea8c0d8ac6adda988",
     "backend-feedback.md": "86ebb8d9e94bdbd720e8f3b8454a922496ca4295c731491dc96fb784edcb8188",
     "evidence/backend-review-20261022/local-decision.json": "00d936275bfc5881a9bdf7bad8305e512640bda79822f7eb11ae6c3ad5b4c3c0",
-    "evidence/backend-review-20261022/feedback-ledger.json": "8a3011bf2a66e0d690a49398c613e6d36937d241df6bacd163647cc4ea442c13",
+    "evidence/backend-review-20261022/feedback-ledger.json": "c3d78c8c71a03763782f891dab5b611a3c78952fc0d0baa908872085603f31eb",
     "evidence/backend-review-20261022/commits-139368.json": "5708bd718f378c163becf85050e491f69c70c90225b7ed4bca1cce2517485b48",
     "evidence/backend-review-20261022/stack-snapshot.json": "b7fd43495ba7e2b6da2b773fd0a61a0e2dc027080821a536da02f2677639a6e7",
     "evidence/backend-review-20261022/source-pins.json": "c647697bcc7decc91f0f61fef18614eabdf7e68613fd98fa9611804427d00189",
@@ -139,7 +139,7 @@
     "evidence/backend-review-20261022/negative-control-v2.log": "22a6870440396efda6f0d669b1504309388fc588c059b91c51d64833236ea671",
     "evidence/backend-review-20261022/model-validation.json": "1c1e15e66d02c7a1f81ea202829090f9b3230b8fd4db8d651e4b396ab5383f47",
     "evidence/backend-review-20261022/runner-tests.log": "da50ddec3c2da7ad0b46dec235d9851d063d9ce02019311f61b621f057d117bb",
-    "evidence/backend-review-20261022/review-replies.md": "b64664e14667b9f5d80b633ca565747b49176144be7a64f9145b46d2feb965e9",
+    "evidence/backend-review-20261022/review-replies.md": "93eeaef130f368619cb048505121f08bd0143e1957433599e203f7f50b25b935",
     "evidence/backend-review-20261022/implementation.patch": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
     "evidence/backend-review-20261022/native-final-v2.log": "b5af4d6cb855c56b38b78b3babf58b2352b260de8e7eb8211640fd4d78b6f225",
     "evidence/backend-review-20261022/native-publication.json": "c2fbd0b408a0fc7788ca59c64ef276ba638947ee93b6660ab46698c8dc26d0ae",
@@ -166,7 +166,8 @@
     "evidence/edge-review-20261022/feedback-ledger.json": "4c50df2aa1df377c193112cc10a0e99e9558a4f72bddaf16333f34dac6292951",
     "evidence/edge-review-20261022/native-publication.json": "03741a12952921f007a2f79f53055c73ce042c8fdb2d52cf97082d0a4cc6bd45",
     "evidence/edge-review-20261022/central-publication.json": "5de90bce9357b4c530843996ab9506dde10b5a11842a62af58a335e19ddac423",
-    "evidence/edge-review-20261022/published-replies.json": "1c470c35e1689b3dc840c24a1fdbfd4daea89fbcc44a3be61fd6da34a28b56f3"
+    "evidence/edge-review-20261022/published-replies.json": "1c470c35e1689b3dc840c24a1fdbfd4daea89fbcc44a3be61fd6da34a28b56f3",
+    "evidence/backend-review-20261022/formatted-reply.json": "4705dc2e59dd1eabb681d149915834f7e035172d9d8ff69d18bf63fdca995a9a"
   },
   "case_count": 313,
   "counts_by_kind": {

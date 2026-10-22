@@ -28,7 +28,12 @@
       "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
       "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
       "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
-      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+      "presentation_update": {
+        "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+        "evidence": "evidence/backend-review-20261022/formatted-reply.json",
+        "semantics_changed": false
+      }
     },
     {
       "id": "backend-139368-4343814230",
