@@ -1,0 +1,698 @@
+[
+  {
+    "flag": "split-features-destinations",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "holdout.key": "holdout-q3",
+          "holdout.assignment_group": "status_quo",
+          "shared": true,
+          "empty": ""
+        },
+        "EXPOSURE": {
+          "holdout.assignment_group": "status_quo",
+          "exposure.only": false,
+          "shared": true
+        },
+        "EVALUATION": {
+          "evaluation.only": 1.25,
+          "shared": true,
+          "zero": 0
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-unknown-destinations",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "known": "yes"
+        },
+        "EXPOSURE": {
+          "known": "yes"
+        },
+        "EVALUATION": {
+          "known": "yes"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-first-valid-key",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "invalid-first": "accepted"
+        },
+        "EXPOSURE": {
+          "first-wins": "first"
+        },
+        "EVALUATION": {
+          "empty-destinations": false
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-malformed-entries",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "mixed-destinations": "retained"
+        },
+        "EXPOSURE": {
+          "mixed-destinations": "retained"
+        },
+        "EVALUATION": {
+          "mixed-destinations": "retained"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-absent",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-null",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-object",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-boolean",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-number",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-string",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-list-empty",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {},
+        "EXPOSURE": {},
+        "EVALUATION": {}
+      }
+    }
+  },
+  {
+    "flag": "split-features-selected-allocation",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {
+      "tier": "vip"
+    },
+    "result": {
+      "value": true,
+      "reason": "TARGETING_MATCH",
+      "serialId": 0,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "selected": "vip"
+        },
+        "EXPOSURE": {
+          "selected": "vip"
+        },
+        "EVALUATION": {
+          "selected": "vip"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-selected-allocation",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {
+      "tier": "standard"
+    },
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "selected": "fallback"
+        },
+        "EXPOSURE": {
+          "selected": "fallback"
+        },
+        "EVALUATION": {
+          "selected": "fallback"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-selected-split",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "selected": "matched"
+        },
+        "EXPOSURE": {
+          "selected": "matched"
+        },
+        "EVALUATION": {
+          "selected": "matched"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-logging-disabled",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": false,
+      "features": {
+        "HOOK": {
+          "retained": false
+        },
+        "EXPOSURE": {
+          "retained": false
+        },
+        "EVALUATION": {
+          "retained": false
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-subject-independent",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {
+      "holdout.key": "subject",
+      "features": {
+        "holdout.key": "subject"
+      }
+    },
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "holdout.key": "configuration",
+          "targetingKey": "feature-metadata"
+        },
+        "EXPOSURE": {
+          "holdout.key": "configuration",
+          "targetingKey": "feature-metadata"
+        },
+        "EVALUATION": {
+          "holdout.key": "configuration",
+          "targetingKey": "feature-metadata"
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-byte-limit-ascii",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "long-value": "fallback",
+          "after-long": true
+        },
+        "EXPOSURE": {
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "long-value": "fallback",
+          "after-long": true
+        },
+        "EVALUATION": {
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "long-value": "fallback",
+          "after-long": true
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-byte-limit-utf8",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+          "long-value": "fallback",
+          "after-long": true
+        },
+        "EXPOSURE": {
+          "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+          "long-value": "fallback",
+          "after-long": true
+        },
+        "EVALUATION": {
+          "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+          "long-value": "fallback",
+          "after-long": true
+        }
+      }
+    }
+  },
+  {
+    "flag": "split-features-count-limit",
+    "variationType": "BOOLEAN",
+    "defaultValue": false,
+    "targetingKey": "feature-subject",
+    "attributes": {},
+    "result": {
+      "value": true,
+      "reason": "STATIC",
+      "serialId": 7,
+      "doLog": true,
+      "features": {
+        "HOOK": {
+          "feature.001": 1,
+          "feature.002": 2,
+          "feature.003": 3,
+          "feature.004": 4,
+          "feature.005": 5,
+          "feature.006": 6,
+          "feature.007": 7,
+          "feature.008": 8,
+          "feature.009": 9,
+          "feature.010": 10,
+          "feature.011": 11,
+          "feature.012": 12,
+          "feature.013": 13,
+          "feature.014": 14,
+          "feature.015": 15,
+          "feature.016": 16,
+          "feature.017": 17,
+          "feature.018": 18,
+          "feature.019": 19,
+          "feature.020": 20,
+          "feature.021": 21,
+          "feature.022": 22,
+          "feature.023": 23,
+          "feature.024": 24,
+          "feature.025": 25,
+          "feature.026": 26,
+          "feature.027": 27,
+          "feature.028": 28,
+          "feature.029": 29,
+          "feature.030": 30,
+          "feature.031": 31,
+          "feature.032": 32,
+          "feature.033": 33,
+          "feature.034": 34,
+          "feature.035": 35,
+          "feature.036": 36,
+          "feature.037": 37,
+          "feature.038": 38,
+          "feature.039": 39,
+          "feature.040": 40,
+          "feature.041": 41,
+          "feature.042": 42,
+          "feature.043": 43,
+          "feature.044": 44,
+          "feature.045": 45,
+          "feature.046": 46,
+          "feature.047": 47,
+          "feature.048": 48,
+          "feature.049": 49,
+          "feature.050": 50,
+          "feature.051": 51,
+          "feature.052": 52,
+          "feature.053": 53,
+          "feature.054": 54,
+          "feature.055": 55,
+          "feature.056": 56,
+          "feature.057": 57,
+          "feature.058": 58,
+          "feature.059": 59,
+          "feature.060": 60,
+          "feature.061": 61,
+          "feature.062": 62,
+          "feature.063": 63,
+          "feature.064": 64,
+          "feature.065": 65,
+          "feature.066": 66,
+          "feature.067": 67,
+          "feature.068": 68,
+          "feature.069": 69,
+          "feature.070": 70,
+          "feature.071": 71,
+          "feature.072": 72,
+          "feature.073": 73,
+          "feature.074": 74,
+          "feature.075": 75,
+          "feature.076": 76,
+          "feature.077": 77,
+          "feature.078": 78,
+          "feature.079": 79,
+          "feature.080": 80,
+          "feature.081": 81,
+          "feature.082": 82,
+          "feature.083": 83,
+          "feature.084": 84,
+          "feature.085": 85,
+          "feature.086": 86,
+          "feature.087": 87,
+          "feature.088": 88,
+          "feature.089": 89,
+          "feature.090": 90,
+          "feature.091": 91,
+          "feature.092": 92,
+          "feature.093": 93,
+          "feature.094": 94,
+          "feature.095": 95,
+          "feature.096": 96,
+          "feature.097": 97,
+          "feature.098": 98,
+          "feature.099": 99,
+          "feature.100": 100,
+          "feature.101": 101,
+          "feature.102": 102,
+          "feature.103": 103,
+          "feature.104": 104,
+          "feature.105": 105,
+          "feature.106": 106,
+          "feature.107": 107,
+          "feature.108": 108,
+          "feature.109": 109,
+          "feature.110": 110,
+          "feature.111": 111,
+          "feature.112": 112,
+          "feature.113": 113,
+          "feature.114": 114,
+          "feature.115": 115,
+          "feature.116": 116,
+          "feature.117": 117,
+          "feature.118": 118,
+          "feature.119": 119,
+          "feature.120": 120,
+          "feature.121": 121,
+          "feature.122": 122,
+          "feature.123": 123,
+          "feature.124": 124,
+          "feature.125": 125,
+          "feature.126": 126,
+          "feature.127": 127,
+          "feature.128": 128,
+          "feature.129": 129,
+          "feature.130": 130,
+          "feature.131": 131,
+          "feature.132": 132,
+          "feature.133": 133,
+          "feature.134": 134,
+          "feature.135": 135,
+          "feature.136": 136,
+          "feature.137": 137,
+          "feature.138": 138,
+          "feature.139": 139,
+          "feature.140": 140,
+          "feature.141": 141,
+          "feature.142": 142,
+          "feature.143": 143,
+          "feature.144": 144,
+          "feature.145": 145,
+          "feature.146": 146,
+          "feature.147": 147,
+          "feature.148": 148,
+          "feature.149": 149,
+          "feature.150": 150,
+          "feature.151": 151,
+          "feature.152": 152,
+          "feature.153": 153,
+          "feature.154": 154,
+          "feature.155": 155,
+          "feature.156": 156,
+          "feature.157": 157,
+          "feature.158": 158,
+          "feature.159": 159,
+          "feature.160": 160,
+          "feature.161": 161,
+          "feature.162": 162,
+          "feature.163": 163,
+          "feature.164": 164,
+          "feature.165": 165,
+          "feature.166": 166,
+          "feature.167": 167,
+          "feature.168": 168,
+          "feature.169": 169,
+          "feature.170": 170,
+          "feature.171": 171,
+          "feature.172": 172,
+          "feature.173": 173,
+          "feature.174": 174,
+          "feature.175": 175,
+          "feature.176": 176,
+          "feature.177": 177,
+          "feature.178": 178,
+          "feature.179": 179,
+          "feature.180": 180,
+          "feature.181": 181,
+          "feature.182": 182,
+          "feature.183": 183,
+          "feature.184": 184,
+          "feature.185": 185,
+          "feature.186": 186,
+          "feature.187": 187,
+          "feature.188": 188,
+          "feature.189": 189,
+          "feature.190": 190,
+          "feature.191": 191,
+          "feature.192": 192,
+          "feature.193": 193,
+          "feature.194": 194,
+          "feature.195": 195,
+          "feature.196": 196,
+          "feature.197": 197,
+          "feature.198": 198,
+          "feature.199": 199,
+          "feature.200": 200,
+          "feature.201": 201,
+          "feature.202": 202,
+          "feature.203": 203,
+          "feature.204": 204,
+          "feature.205": 205,
+          "feature.206": 206,
+          "feature.207": 207,
+          "feature.208": 208,
+          "feature.209": 209,
+          "feature.210": 210,
+          "feature.211": 211,
+          "feature.212": 212,
+          "feature.213": 213,
+          "feature.214": 214,
+          "feature.215": 215,
+          "feature.216": 216,
+          "feature.217": 217,
+          "feature.218": 218,
+          "feature.219": 219,
+          "feature.220": 220,
+          "feature.221": 221,
+          "feature.222": 222,
+          "feature.223": 223,
+          "feature.224": 224,
+          "feature.225": 225,
+          "feature.226": 226,
+          "feature.227": 227,
+          "feature.228": 228,
+          "feature.229": 229,
+          "feature.230": 230,
+          "feature.231": 231,
+          "feature.232": 232,
+          "feature.233": 233,
+          "feature.234": 234,
+          "feature.235": 235,
+          "feature.236": 236,
+          "feature.237": 237,
+          "feature.238": 238,
+          "feature.239": 239,
+          "feature.240": 240,
+          "feature.241": 241,
+          "feature.242": 242,
+          "feature.243": 243,
+          "feature.244": 244,
+          "feature.245": 245,
+          "feature.246": 246,
+          "feature.247": 247,
+          "feature.248": 248,
+          "feature.249": 249,
+          "feature.250": 250,
+          "feature.251": 251,
+          "feature.252": 252,
+          "feature.253": 253,
+          "feature.254": 254
+        },
+        "EXPOSURE": {},
+        "EVALUATION": {
+          "first": 0
+        }
+      }
+    }
+  }
+]

@@ -5402,6 +5402,2749 @@
           "doLog": true
         }
       ]
+    },
+    "split-features-destinations": {
+      "key": "split-features-destinations",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "holdout.key",
+                  "value": "holdout-q3",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "holdout.assignment_group",
+                  "value": "status_quo",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE"
+                  ]
+                },
+                {
+                  "key": "exposure.only",
+                  "value": false,
+                  "destinations": [
+                    "EXPOSURE"
+                  ]
+                },
+                {
+                  "key": "evaluation.only",
+                  "value": 1.25,
+                  "destinations": [
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "shared",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "empty",
+                  "value": "",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "zero",
+                  "value": 0,
+                  "destinations": [
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-unknown-destinations": {
+      "key": "split-features-unknown-destinations",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "known",
+                  "value": "yes",
+                  "destinations": [
+                    "HOOK",
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION",
+                    "FUTURE"
+                  ]
+                },
+                {
+                  "key": "unknown",
+                  "value": "no",
+                  "destinations": [
+                    "FUTURE"
+                  ]
+                },
+                {
+                  "key": "lowercase",
+                  "value": "no",
+                  "destinations": [
+                    "hook",
+                    "exposure",
+                    "evaluation"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-first-valid-key": {
+      "key": "split-features-first-valid-key",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "invalid-first",
+                  "value": {},
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "invalid-first",
+                  "value": "accepted",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "invalid-first",
+                  "value": "later",
+                  "destinations": [
+                    "EXPOSURE"
+                  ]
+                },
+                {
+                  "key": "first-wins",
+                  "value": "first",
+                  "destinations": [
+                    "EXPOSURE"
+                  ]
+                },
+                {
+                  "key": "first-wins",
+                  "value": "later",
+                  "destinations": [
+                    "HOOK",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "unknown-first",
+                  "value": "first",
+                  "destinations": [
+                    "FUTURE"
+                  ]
+                },
+                {
+                  "key": "unknown-first",
+                  "value": "later",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "empty-destinations",
+                  "value": "invalid",
+                  "destinations": []
+                },
+                {
+                  "key": "empty-destinations",
+                  "value": false,
+                  "destinations": [
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-malformed-entries": {
+      "key": "split-features-malformed-entries",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                null,
+                false,
+                1,
+                "not-an-entry",
+                [],
+                {},
+                {
+                  "key": 1,
+                  "value": true,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "value": true,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "missing-value",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "null",
+                  "value": null,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "object",
+                  "value": {},
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "array",
+                  "value": [],
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "missing-destinations",
+                  "value": true
+                },
+                {
+                  "key": "null-destinations",
+                  "value": true,
+                  "destinations": null
+                },
+                {
+                  "key": "string-destinations",
+                  "value": true,
+                  "destinations": "HOOK"
+                },
+                {
+                  "key": "object-destinations",
+                  "value": true,
+                  "destinations": {}
+                },
+                {
+                  "key": "empty-destinations",
+                  "value": true,
+                  "destinations": []
+                },
+                {
+                  "key": "invalid-destinations",
+                  "value": true,
+                  "destinations": [
+                    null,
+                    false,
+                    5,
+                    {},
+                    [],
+                    ""
+                  ]
+                },
+                {
+                  "key": "mixed-destinations",
+                  "value": "retained",
+                  "destinations": [
+                    "HOOK",
+                    null,
+                    false,
+                    5,
+                    {},
+                    [],
+                    "",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ],
+                  "futureField": {
+                    "ignored": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-absent": {
+      "key": "split-features-list-absent",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": []
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-null": {
+      "key": "split-features-list-null",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": null
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-object": {
+      "key": "split-features-list-object",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": {}
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-boolean": {
+      "key": "split-features-list-boolean",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": true
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-number": {
+      "key": "split-features-list-number",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": 3
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-string": {
+      "key": "split-features-list-string",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": "HOOK"
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-list-empty": {
+      "key": "split-features-list-empty",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": []
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-selected-allocation": {
+      "key": "split-features-selected-allocation",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "vip",
+          "doLog": true,
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "tier",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "vip"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 0,
+              "shards": [],
+              "features": [
+                {
+                  "key": "selected",
+                  "value": "vip",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "selected",
+                  "value": "fallback",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-selected-split": {
+      "key": "split-features-selected-split",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 99,
+              "shards": [
+                {
+                  "salt": "feature-selection",
+                  "totalShards": 100,
+                  "ranges": []
+                }
+              ],
+              "features": [
+                {
+                  "key": "selected",
+                  "value": "unmatched",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "unmatched.only",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "selected",
+                  "value": "matched",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-logging-disabled": {
+      "key": "split-features-logging-disabled",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": false,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "retained",
+                  "value": false,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-subject-independent": {
+      "key": "split-features-subject-independent",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "holdout.key",
+                  "value": "configuration",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "targetingKey",
+                  "value": "feature-metadata",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-byte-limit-ascii": {
+      "key": "split-features-byte-limit-ascii",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "discarded",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "long-value",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "long-value",
+                  "value": "fallback",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "after-long",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-byte-limit-utf8": {
+      "key": "split-features-byte-limit-utf8",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééx",
+                  "value": "discarded",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+                  "value": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "long-value",
+                  "value": "ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééx",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "long-value",
+                  "value": "fallback",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "after-long",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "split-features-count-limit": {
+      "key": "split-features-count-limit",
+      "enabled": true,
+      "variationType": "BOOLEAN",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": true
+        }
+      },
+      "allocations": [
+        {
+          "key": "allocation",
+          "doLog": true,
+          "splits": [
+            {
+              "variationKey": "on",
+              "serialId": 7,
+              "shards": [],
+              "features": [
+                {
+                  "key": "invalid",
+                  "value": {},
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "too-long-value",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "first",
+                  "value": 0,
+                  "destinations": [
+                    "EVALUATION"
+                  ]
+                },
+                {
+                  "key": "first",
+                  "value": "duplicate",
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "future.reserved",
+                  "value": true,
+                  "destinations": [
+                    "FUTURE"
+                  ]
+                },
+                {
+                  "key": "feature.001",
+                  "value": 1,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.002",
+                  "value": 2,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.003",
+                  "value": 3,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.004",
+                  "value": 4,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.005",
+                  "value": 5,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.006",
+                  "value": 6,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.007",
+                  "value": 7,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.008",
+                  "value": 8,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.009",
+                  "value": 9,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.010",
+                  "value": 10,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.011",
+                  "value": 11,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.012",
+                  "value": 12,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.013",
+                  "value": 13,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.014",
+                  "value": 14,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.015",
+                  "value": 15,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.016",
+                  "value": 16,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.017",
+                  "value": 17,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.018",
+                  "value": 18,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.019",
+                  "value": 19,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.020",
+                  "value": 20,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.021",
+                  "value": 21,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.022",
+                  "value": 22,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.023",
+                  "value": 23,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.024",
+                  "value": 24,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.025",
+                  "value": 25,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.026",
+                  "value": 26,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.027",
+                  "value": 27,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.028",
+                  "value": 28,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.029",
+                  "value": 29,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.030",
+                  "value": 30,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.031",
+                  "value": 31,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.032",
+                  "value": 32,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.033",
+                  "value": 33,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.034",
+                  "value": 34,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.035",
+                  "value": 35,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.036",
+                  "value": 36,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.037",
+                  "value": 37,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.038",
+                  "value": 38,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.039",
+                  "value": 39,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.040",
+                  "value": 40,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.041",
+                  "value": 41,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.042",
+                  "value": 42,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.043",
+                  "value": 43,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.044",
+                  "value": 44,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.045",
+                  "value": 45,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.046",
+                  "value": 46,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.047",
+                  "value": 47,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.048",
+                  "value": 48,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.049",
+                  "value": 49,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.050",
+                  "value": 50,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.051",
+                  "value": 51,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.052",
+                  "value": 52,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.053",
+                  "value": 53,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.054",
+                  "value": 54,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.055",
+                  "value": 55,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.056",
+                  "value": 56,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.057",
+                  "value": 57,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.058",
+                  "value": 58,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.059",
+                  "value": 59,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.060",
+                  "value": 60,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.061",
+                  "value": 61,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.062",
+                  "value": 62,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.063",
+                  "value": 63,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.064",
+                  "value": 64,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.065",
+                  "value": 65,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.066",
+                  "value": 66,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.067",
+                  "value": 67,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.068",
+                  "value": 68,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.069",
+                  "value": 69,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.070",
+                  "value": 70,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.071",
+                  "value": 71,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.072",
+                  "value": 72,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.073",
+                  "value": 73,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.074",
+                  "value": 74,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.075",
+                  "value": 75,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.076",
+                  "value": 76,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.077",
+                  "value": 77,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.078",
+                  "value": 78,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.079",
+                  "value": 79,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.080",
+                  "value": 80,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.081",
+                  "value": 81,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.082",
+                  "value": 82,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.083",
+                  "value": 83,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.084",
+                  "value": 84,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.085",
+                  "value": 85,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.086",
+                  "value": 86,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.087",
+                  "value": 87,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.088",
+                  "value": 88,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.089",
+                  "value": 89,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.090",
+                  "value": 90,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.091",
+                  "value": 91,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.092",
+                  "value": 92,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.093",
+                  "value": 93,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.094",
+                  "value": 94,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.095",
+                  "value": 95,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.096",
+                  "value": 96,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.097",
+                  "value": 97,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.098",
+                  "value": 98,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.099",
+                  "value": 99,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.100",
+                  "value": 100,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.101",
+                  "value": 101,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.102",
+                  "value": 102,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.103",
+                  "value": 103,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.104",
+                  "value": 104,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.105",
+                  "value": 105,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.106",
+                  "value": 106,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.107",
+                  "value": 107,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.108",
+                  "value": 108,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.109",
+                  "value": 109,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.110",
+                  "value": 110,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.111",
+                  "value": 111,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.112",
+                  "value": 112,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.113",
+                  "value": 113,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.114",
+                  "value": 114,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.115",
+                  "value": 115,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.116",
+                  "value": 116,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.117",
+                  "value": 117,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.118",
+                  "value": 118,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.119",
+                  "value": 119,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.120",
+                  "value": 120,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.121",
+                  "value": 121,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.122",
+                  "value": 122,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.123",
+                  "value": 123,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.124",
+                  "value": 124,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.125",
+                  "value": 125,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.126",
+                  "value": 126,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.127",
+                  "value": 127,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.128",
+                  "value": 128,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.129",
+                  "value": 129,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.130",
+                  "value": 130,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.131",
+                  "value": 131,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.132",
+                  "value": 132,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.133",
+                  "value": 133,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.134",
+                  "value": 134,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.135",
+                  "value": 135,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.136",
+                  "value": 136,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.137",
+                  "value": 137,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.138",
+                  "value": 138,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.139",
+                  "value": 139,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.140",
+                  "value": 140,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.141",
+                  "value": 141,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.142",
+                  "value": 142,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.143",
+                  "value": 143,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.144",
+                  "value": 144,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.145",
+                  "value": 145,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.146",
+                  "value": 146,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.147",
+                  "value": 147,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.148",
+                  "value": 148,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.149",
+                  "value": 149,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.150",
+                  "value": 150,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.151",
+                  "value": 151,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.152",
+                  "value": 152,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.153",
+                  "value": 153,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.154",
+                  "value": 154,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.155",
+                  "value": 155,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.156",
+                  "value": 156,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.157",
+                  "value": 157,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.158",
+                  "value": 158,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.159",
+                  "value": 159,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.160",
+                  "value": 160,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.161",
+                  "value": 161,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.162",
+                  "value": 162,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.163",
+                  "value": 163,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.164",
+                  "value": 164,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.165",
+                  "value": 165,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.166",
+                  "value": 166,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.167",
+                  "value": 167,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.168",
+                  "value": 168,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.169",
+                  "value": 169,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.170",
+                  "value": 170,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.171",
+                  "value": 171,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.172",
+                  "value": 172,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.173",
+                  "value": 173,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.174",
+                  "value": 174,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.175",
+                  "value": 175,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.176",
+                  "value": 176,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.177",
+                  "value": 177,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.178",
+                  "value": 178,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.179",
+                  "value": 179,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.180",
+                  "value": 180,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.181",
+                  "value": 181,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.182",
+                  "value": 182,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.183",
+                  "value": 183,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.184",
+                  "value": 184,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.185",
+                  "value": 185,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.186",
+                  "value": 186,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.187",
+                  "value": 187,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.188",
+                  "value": 188,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.189",
+                  "value": 189,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.190",
+                  "value": 190,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.191",
+                  "value": 191,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.192",
+                  "value": 192,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.193",
+                  "value": 193,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.194",
+                  "value": 194,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.195",
+                  "value": 195,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.196",
+                  "value": 196,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.197",
+                  "value": 197,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.198",
+                  "value": 198,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.199",
+                  "value": 199,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.200",
+                  "value": 200,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.201",
+                  "value": 201,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.202",
+                  "value": 202,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.203",
+                  "value": 203,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.204",
+                  "value": 204,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.205",
+                  "value": 205,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.206",
+                  "value": 206,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.207",
+                  "value": 207,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.208",
+                  "value": 208,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.209",
+                  "value": 209,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.210",
+                  "value": 210,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.211",
+                  "value": 211,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.212",
+                  "value": 212,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.213",
+                  "value": 213,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.214",
+                  "value": 214,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.215",
+                  "value": 215,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.216",
+                  "value": 216,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.217",
+                  "value": 217,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.218",
+                  "value": 218,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.219",
+                  "value": 219,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.220",
+                  "value": 220,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.221",
+                  "value": 221,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.222",
+                  "value": 222,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.223",
+                  "value": 223,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.224",
+                  "value": 224,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.225",
+                  "value": 225,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.226",
+                  "value": 226,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.227",
+                  "value": 227,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.228",
+                  "value": 228,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.229",
+                  "value": 229,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.230",
+                  "value": 230,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.231",
+                  "value": 231,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.232",
+                  "value": 232,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.233",
+                  "value": 233,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.234",
+                  "value": 234,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.235",
+                  "value": 235,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.236",
+                  "value": 236,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.237",
+                  "value": 237,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.238",
+                  "value": 238,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.239",
+                  "value": 239,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.240",
+                  "value": 240,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.241",
+                  "value": 241,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.242",
+                  "value": 242,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.243",
+                  "value": 243,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.244",
+                  "value": 244,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.245",
+                  "value": 245,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.246",
+                  "value": 246,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.247",
+                  "value": 247,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.248",
+                  "value": 248,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.249",
+                  "value": 249,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.250",
+                  "value": 250,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.251",
+                  "value": 251,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.252",
+                  "value": 252,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.253",
+                  "value": 253,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "feature.254",
+                  "value": 254,
+                  "destinations": [
+                    "HOOK"
+                  ]
+                },
+                {
+                  "key": "over-limit",
+                  "value": true,
+                  "destinations": [
+                    "HOOK",
+                    "EXPOSURE",
+                    "EVALUATION"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }
