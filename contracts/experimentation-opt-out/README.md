@@ -15,7 +15,7 @@ Its outcomes establish browser behavior, not automatic adoption by other SDKs.
 
 ## Edge compatibility and regex decisions
 
-[Edge review decisions](edge-feedback.md) record Leo's local acceptance of flag-local
+[Edge review decisions](edge-feedback.md) record Leo's published acceptance of flag-local
 regex errors (D019), tolerant request options (D020), and the existing acknowledgement,
 cutoff, doLog, and customer-enablement rules. Native evidence is separate from the
 unchanged Lean model. These additions remain scoped decisions within this draft proposal.

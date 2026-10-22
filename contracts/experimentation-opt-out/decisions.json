@@ -599,6 +599,24 @@
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "edge-local-reaffirmation",
           "scope": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+          "stage": "published-edge-author-decision",
+          "revision": 2,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": null,
+            "kind": "local-proposal",
+            "author": null,
+            "recorded_at": null,
+            "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+            "scope_note": "Imported local browser baseline; PR link is context, not public acceptance of this complete rule.",
+            "gap": "No decision-setting PR comment for the complete current rule was identified in the imported evidence.",
+            "local_evidence": "evidence/poc-receipts.json"
+          },
+          "scope": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "revision": 2,
@@ -633,7 +651,8 @@
         "V054",
         "V055",
         "V056",
-        "V057"
+        "V057",
+        "V058"
       ],
       "local_adoptions": [
         {
@@ -646,6 +665,19 @@
           "scope_note": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
           "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
           "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ],
+      "published_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+          "kind": "author-reaffirmation",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T22:13:39Z",
+          "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+          "scope_note": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "gap": null,
+          "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
         }
       ]
     },
@@ -760,6 +792,33 @@
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "edge-local-reaffirmation",
           "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+            "kind": "author-reaffirmation",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T20:04:13Z",
+            "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+            "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+            "gap": null,
+            "last_public_setting": {
+              "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+              "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+              "kind": "author-decision",
+              "author": "leoromanovsky",
+              "recorded_at": "2026-10-22T03:40:26Z",
+              "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+              "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+              "gap": null
+            }
+          },
+          "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "revision": 1,
@@ -775,23 +834,34 @@
       ],
       "go_reconciliation": "Clarify actual opt-out time versus a future-dated cutoff; preserve strict-before boundary and same-key refresh obligation.",
       "latest_setting": {
-        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
-        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
         "kind": "author-reaffirmation",
-        "author": "leoromanovsky",
-        "recorded_at": "2026-10-22T20:04:13Z",
-        "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
-        "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:37Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
         "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json",
         "last_public_setting": {
-          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
-          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
-          "kind": "author-decision",
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+          "kind": "author-reaffirmation",
           "author": "leoromanovsky",
-          "recorded_at": "2026-10-22T03:40:26Z",
-          "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
-          "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
-          "gap": null
+          "recorded_at": "2026-10-22T20:04:13Z",
+          "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+          "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+          "gap": null,
+          "last_public_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:40:26Z",
+            "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+            "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+            "gap": null
+          }
         }
       },
       "validation_history_ids": [
@@ -807,7 +877,8 @@
         "V045",
         "V054",
         "V055",
-        "V057"
+        "V057",
+        "V058"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -859,6 +930,23 @@
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "edge-local-reaffirmation",
           "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
+            "kind": "acknowledged-dependency",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:31:57Z",
+            "source_sha": null,
+            "scope_note": "Acknowledged dependency only; no rollout choice or deployment evidence.",
+            "gap": null
+          },
+          "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "revision": 1,
@@ -876,20 +964,32 @@
       ],
       "go_reconciliation": "Fixtures #52 merged at 0781ce2c55f9da7f9290035c768bbc46570556c0. Compiler classification/fallback preservation, configuration rebuilding and activation remain customer-enablement obligations; edge can remain an independent Git branch.",
       "latest_setting": {
-        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
-        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
-        "kind": "acknowledged-dependency",
-        "author": "leoromanovsky",
-        "recorded_at": "2026-10-22T03:31:57Z",
-        "source_sha": null,
-        "scope_note": "Acknowledged dependency only; no rollout choice or deployment evidence.",
-        "gap": null
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+        "kind": "author-reaffirmation",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:49Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
+          "kind": "acknowledged-dependency",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T03:31:57Z",
+          "source_sha": null,
+          "scope_note": "Acknowledged dependency only; no rollout choice or deployment evidence.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V023",
         "V054",
         "V055",
-        "V057"
+        "V057",
+        "V058"
       ],
       "local_adoptions": [
         {
@@ -1316,6 +1416,23 @@
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "edge-local-reaffirmation",
           "scope": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+            "thread_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+            "kind": "author-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:49:16Z",
+            "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+            "scope_note": "Author reaffirms backend-owned randomization classification through existing doLog; D018 r1 unchanged. Native publication and model validation remain separately linked.",
+            "gap": null
+          },
+          "scope": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "latest_setting": {
@@ -1358,7 +1475,8 @@
         "V053",
         "V054",
         "V055",
-        "V057"
+        "V057",
+        "V058"
       ],
       "implementation": {
         "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
@@ -1388,6 +1506,19 @@
           "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
           "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
         }
+      ],
+      "published_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+          "kind": "author-reaffirmation",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T22:13:32Z",
+          "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+          "scope_note": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "gap": null,
+          "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
+        }
       ]
     },
     {
@@ -1405,18 +1536,36 @@
         {
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "author-local-decision"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+            "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+            "scope_note": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+            "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+            "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+          },
+          "scope": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "latest_setting": {
         "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
-        "thread_url": null,
-        "kind": "local-decision",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+        "kind": "author-decision",
         "author": "leo-romanovsky_ddog",
-        "recorded_at": "2026-10-22T21:55:47.008112+00:00",
-        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "recorded_at": "2026-10-22T22:13:34Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
         "scope_note": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
-        "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
-        "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
       },
       "model": null,
       "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
@@ -1447,7 +1596,8 @@
       "validation_history_ids": [
         "V054",
         "V055",
-        "V057"
+        "V057",
+        "V058"
       ]
     },
     {
@@ -1465,18 +1615,36 @@
         {
           "source": "evidence/edge-review-20261022/local-decisions.json",
           "stage": "author-local-decision"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+            "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+            "scope_note": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+            "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+            "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+          },
+          "scope": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
         }
       ],
       "latest_setting": {
         "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
-        "thread_url": null,
-        "kind": "local-decision",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+        "kind": "author-decision",
         "author": "leo-romanovsky_ddog",
-        "recorded_at": "2026-10-22T21:55:47.008112+00:00",
-        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "recorded_at": "2026-10-22T22:13:42Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
         "scope_note": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
-        "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
-        "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
       },
       "model": null,
       "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
@@ -1512,11 +1680,12 @@
         "V054",
         "V055",
         "V056",
-        "V057"
+        "V057",
+        "V058"
       ]
     }
   ],
   "previous_revision": "backend-139368-proposal-v7-d018-producer-randomization",
-  "revision_note": "Record local author acceptance of flag-local regex errors and tolerant edge request options; preserve D018 producer semantics and clarify merge versus enablement.",
+  "revision_note": "Record published edge author decisions and scoped adoptions with exact reply backlinks; preserve D018 producer semantics and original validation receipts.",
   "validation_history_file": "validation-history.json"
 }

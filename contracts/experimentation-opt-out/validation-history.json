@@ -1252,6 +1252,32 @@
       "evidence_file": "evidence/edge-review-20261022/native-publication.json",
       "receipt_target": null,
       "limits": "No CI, review approval, compiler rollout or deployed proof."
+    },
+    {
+      "id": "V058",
+      "decision_revisions": {
+        "D008": 2,
+        "D011": 1,
+        "D012": 1,
+        "D018": 1,
+        "D019": 1,
+        "D020": 1
+      },
+      "recorded_at": "2026-10-22T22:14:42.926487+00:00",
+      "executed_at": "2026-10-22T22:13:53.733694+00:00",
+      "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "evidence_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+      "target": "Central draft publication and authorized edge reply readback",
+      "source_sha": "06a49f93344481ca13da1535185a8b7d76472118",
+      "source_repository_url": "https://github.com/DataDog/ffe-system-test-data",
+      "patch": null,
+      "evidence_kind": "central-publication-and-author-comment-readback",
+      "outcome": "pass",
+      "check": "All 19 central PR commits GitHub verified/valid; manifest and decision/evidence bytes match publication. All 10 authorized edge review replies read back exactly.",
+      "expectation_profile": "No semantic revision: publish D019/D020 and scoped D008/D011/D012/D018 adoptions with provenance separate from native/model validation.",
+      "evidence_file": "evidence/edge-review-20261022/published-replies.json",
+      "receipt_target": null,
+      "limits": "Publication/link integrity only. Draft remains unapproved; no CI/review/deployment claim, no syntax-cache or timestamp-grammar implementation."
     }
   ]
 }

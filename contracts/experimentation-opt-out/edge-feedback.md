@@ -6,10 +6,13 @@ for [dd-source #140422](https://github.com/ddoghq/dd-source/pull/140422), review
 [current local decision record](evidence/edge-review-20261022/local-decisions.json).
 The implementation is published at [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0);
 [publication evidence](evidence/edge-review-20261022/native-publication.json) binds it
-to the tested patch. Decision-setting replies are recorded separately after readback.
+to the tested patch. [Published replies](evidence/edge-review-20261022/published-replies.json) were read back
+and are linked below as the decision sources.
 This is not fleet approval or merge/deployment evidence.
 
 ## D019: invalid regex rejects its flag
+
+[Author decision](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717).
 
 Retain the modern rules-based SDK contract represented by the canonical fixture:
 an invalid regex produces a flag-local `PARSE_ERROR`, while valid sibling flags
@@ -24,6 +27,8 @@ existing production patterns, and grammar convergence remain separate operationa
 work. The decision is deliberately not represented as a new Lean theorem.
 
 ## D020: tolerate unsupported request options
+
+[Author decision](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691).
 
 At the edge request boundary, unknown names are ignored; null options, a null or
 unknown named mode, and a null legacy boolean mean no option. Known options remain
@@ -43,17 +48,17 @@ this rule is not yet modeled in Lean.
 
 ## Reaffirmed decisions
 
-- D018: evaluators use `doLog`; the compiler must mark randomized allocations.
+- [D018](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423): evaluators use `doLog`; the compiler must mark randomized allocations.
   No new wire bit or evaluator-local split analysis is introduced. Existing
   `doLog=false` fixture inputs test consumer behavior, not producer correctness.
-- D008: immediate keeps its legacy boolean acknowledgement. Future mode returns
+- [D008](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320): immediate keeps its legacy boolean acknowledgement. Future mode returns
   the named mode and UTC cutoff. Fraction formatting may change to 0, 3, 6, or 9
   digits; clients compare instants at nanosecond precision. Literal tests cover
   JSON/archive and buffered/streaming responses without reusing the serializer
   under test to compute expected values.
-- D011: a future cutoff retains allocations activated strictly before that
+- [D011](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029): a future cutoff retains allocations activated strictly before that
   supplied instant, including an activation after the request time.
-- D012: this edge PR can remain standalone. Compiler classification and fallback
+- [D012](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692): this edge PR can remain standalone. Compiler classification and fallback
   retention plus stored-UFC rebuilds are prerequisites for enabling opt-out.
   Activation coverage/backfill is an additional future-mode prerequisite. An old
   UFC can have a pruned fallback or a randomized `doLog=false` allocation; neither

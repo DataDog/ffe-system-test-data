@@ -16,7 +16,9 @@
       "disposition": "implemented",
       "evidence_level": "Two exact Clippy targets pass.",
       "decision_ids": [],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082200",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343813859,
@@ -35,7 +37,9 @@
         "D018",
         "D012"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814088,
@@ -53,7 +57,9 @@
       "decision_ids": [
         "D019"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814352,
@@ -71,7 +77,9 @@
       "decision_ids": [
         "D011"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814459,
@@ -89,7 +97,9 @@
       "decision_ids": [
         "D008"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814538,
@@ -107,7 +117,9 @@
       "decision_ids": [
         "D020"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814731,
@@ -123,7 +135,9 @@
       "disposition": "deferred",
       "evidence_level": "Performance suggestion remains open; no cache change or benchmark claim.",
       "decision_ids": [],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084073",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343814957,
@@ -143,7 +157,9 @@
         "D006",
         "D007"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084359",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343815097,
@@ -162,7 +178,9 @@
         "D012",
         "D018"
       ],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+      "reply_readback_verified": true
     },
     {
       "comment_id": 4343815224,
@@ -178,7 +196,9 @@
       "disposition": "implemented",
       "evidence_level": "Merged #52 pin; Go metadata assertions including serial zero/null; three suites pass.",
       "decision_ids": [],
-      "next_action": "Post authorized reply after central publication."
+      "next_action": "Reviewer follow-up; thread left open. Operational and deferred items retain the scope described in the reply.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084943",
+      "reply_readback_verified": true
     }
   ]
 }
