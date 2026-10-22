@@ -1,0 +1,78 @@
+{
+  "base_commit": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "profile_id": "inactive-path-v1",
+  "reviewed_profile_manifest_sha256": "4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+  "corpus_sha256": "4cf1ee4ad0a47ad7cba92f80f04a7641e7a3bfc2055787813abfc85b0eb140c2",
+  "adapter_sha256": "1f48d29e2690bcddc175250e137d83c2f90333deab42ffa4fe50e5f2676e9689",
+  "toolchain": "go version go1.26.0 linux/amd64",
+  "source_sha256": {
+    "openfeature/evaluator.go": "c3d5c50402aa6a3033961f37f514a7de635c0dfd7d43d7ee58308255d6a93cca",
+    "openfeature/experimentation_opt_out.go": "3fab676697c1cf252d725856da01512df1e306a1021577d0505a527fa773b6c2",
+    "openfeature/provider.go": "9a7f700e6e851e5b0c223bc8edd1e75fb796ade7abdcc4e0c9ea0b4ccb7dff7e"
+  },
+  "runs": {
+    "candidate": {
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/d017-go-evidence/final-conformance/candidate_overlay.json",
+        "-count=1",
+        "-json",
+        "./openfeature",
+        "-run",
+        "^TestLeanD017OperationalConformance$"
+      ],
+      "cwd": "/home/bits/go/src/github.com/DataDog/dd-trace-go-5700-d004",
+      "env": {
+        "LEAN_D017_CASES": "/home/bits/go/src/github.com/DataDog/ffe-system-test-data-lean-decisions/contracts/experimentation-opt-out/corpus/inactive-path.jsonl"
+      },
+      "exit_code": 0,
+      "cases_executed": 36,
+      "passed": 36,
+      "failed": 0,
+      "failed_case_ids": [],
+      "log_sha256": "aaafece19a0bf00c889ab98827884b36f82cddb3913c2bd4819150749dfa288e"
+    },
+    "baseline": {
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/d017-go-evidence/final-conformance/baseline_overlay.json",
+        "-count=1",
+        "-json",
+        "./openfeature",
+        "-run",
+        "^TestLeanD017OperationalConformance$"
+      ],
+      "cwd": "/home/bits/go/src/github.com/DataDog/dd-trace-go-5700-d004",
+      "env": {
+        "LEAN_D017_CASES": "/home/bits/go/src/github.com/DataDog/ffe-system-test-data-lean-decisions/contracts/experimentation-opt-out/corpus/inactive-path.jsonl"
+      },
+      "exit_code": 1,
+      "cases_executed": 36,
+      "passed": 21,
+      "failed": 15,
+      "failed_case_ids": [
+        "inactive-path/disabled/absent/retain",
+        "inactive-path/disabled/absent/exclude",
+        "inactive-path/disabled/absent/mixed",
+        "inactive-path/disabled/valid/retain",
+        "inactive-path/disabled/valid/exclude",
+        "inactive-path/disabled/valid/mixed",
+        "inactive-path/disabled/invalid/retain",
+        "inactive-path/disabled/invalid/exclude",
+        "inactive-path/disabled/invalid/mixed",
+        "inactive-path/immediate/absent/retain",
+        "inactive-path/immediate/absent/exclude",
+        "inactive-path/immediate/absent/mixed",
+        "inactive-path/future_experiments_only/absent/retain",
+        "inactive-path/future_experiments_only/absent/exclude",
+        "inactive-path/future_experiments_only/absent/mixed"
+      ],
+      "log_sha256": "6379c4d58ebadffaee5d45180e35c0b06d5c8b0d23fa8eed8a193698baa9301c"
+    }
+  },
+  "scope": "36 operational cases through production BooleanEvaluation; excludes entry counts and allocation traversal observations; instrumentation is test-only; no timing claim"
+}

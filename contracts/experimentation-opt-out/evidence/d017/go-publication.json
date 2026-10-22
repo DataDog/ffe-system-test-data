@@ -1,0 +1,60 @@
+{
+  "repository": "DataDog/dd-trace-go",
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "before": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "after": "627db08193d8019d33282024d8340327997205ec",
+  "commits": [
+    {
+      "sha": "bb9b433e219a1235be8071f66adaec877086bc71",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeW\nAzaSo1DXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3Nz\naC1lZDI1NTE5AAAAQEsxtuXLf81ear99N8pbNrsU7tL8cjHQbVUOJGbD6Y6gR/6L\n/F2rU5dcR/Y0yII8fB+zGvdkCWi4SlJifDcsgA4=\n-----END SSH SIGNATURE-----",
+        "payload": "tree f69a2ffc8c8685838d640da46612a71a2dec56fd\nparent de3998517f6e18864727360a5f676d33be5a5e29\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792592341 -0400\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792592341 -0400\n\nfeat(openfeature): support opt-out from future experiments\n",
+        "verified_at": "2026-10-21T14:20:25Z"
+      }
+    },
+    {
+      "sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeW\nAzaSo1DXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3Nz\naC1lZDI1NTE5AAAAQL6FvMmK7pphZKNfpLemm7u6K/LtEuS2EqVL9JogtkvBF8ri\nlfk0RifNvoVx0AT3AJ7XbRMohyUoQCQVJJiVqwA=\n-----END SSH SIGNATURE-----",
+        "payload": "tree dbce3758e9c0a4a44639f96760bc3adab2ed04ec\nparent bb9b433e219a1235be8071f66adaec877086bc71\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792600233 -0400\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792600233 -0400\n\ndocs(openfeature): trim activation field comment\n",
+        "verified_at": "2026-10-21T16:31:11Z"
+      }
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeW\nAzaSo1DXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3Nz\naC1lZDI1NTE5AAAAQLIg3+rTbJOmSCM3D5Ck6Xg4cqKVVX1/DPgdbnVcrMtDTreL\nhBXnnzjSFa4+w/CZHkLU8eo8YM70Kkjozh/RDgI=\n-----END SSH SIGNATURE-----",
+        "payload": "tree a185a7bd21057ab2604012d4c6e17157a7b79fa8\nparent fdfd091368e7399e37f54fd8050dfebb3419664c\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792611122 -0400\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792611122 -0400\n\nfix(openfeature): skip allocation reads when opt-out is inactive\n",
+        "verified_at": "2026-10-21T19:32:45Z"
+      }
+    },
+    {
+      "sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeWAzaSo1\nDXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5\nAAAAQF0WxoaHRmpa8voEeHAjqt947h3L09kw4x/ZB27doeqfUooGq0AjD5DJgCwmPHE7g+\nQNFQgwe913pfHalU15aAs=\n-----END SSH SIGNATURE-----",
+        "payload": "tree e96e24c6578965c2de5ac60a51a289d32f3aed95\nparent febcc185d27d8edbe4acf16ce2dee91d5aff730c\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792690938 +0000\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792690938 +0000\n\nfix(openfeature): scope invalid activation errors to future opt-out\n\nPreserve valid, missing and invalid activation metadata when preparing\nconfiguration. Reject the affected flag only for a subject with a valid\nfuture-mode cutoff, including malformed unreachable allocations. Other\nmodes and absent cutoffs retain normal behavior, while schedule decoding\nremains strict.\n\nCover modes, cutoff presence, malformed types, ordinary fallbacks, neighbor\nisolation and validity transitions through Remote Config. Full package,\nrace and 90 pinned Lean policy cases pass; regression tests reject the\nprevious all-mode quarantine and an invalid-as-missing mutation.\n\nDecision: https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041\n",
+        "verified_at": "2026-10-22T17:43:41Z"
+      }
+    },
+    {
+      "sha": "627db08193d8019d33282024d8340327997205ec",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeWAzaSo1\nDXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5\nAAAAQEgj5aDTFD8LNio5vhFAHBvD9ouAroff7lvzm8aPrBhzn290//ZreFCju2105znQhx\nl6++hhtsCyazeRNxm9UQU=\n-----END SSH SIGNATURE-----",
+        "payload": "tree dda72fce0099087fb87f258940b3c71d5a9323a8\nparent c5fec6a009ffa29bf53f5377a21856c7c4aa5f56\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792698185 +0000\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792698185 +0000\n\nfix(openfeature): skip inactive exclusion calls and benchmark evaluation\n",
+        "verified_at": "2026-10-22T19:46:06Z"
+      }
+    }
+  ],
+  "all_pr_commits_valid": true,
+  "committer_login": "leoromanovsky"
+}

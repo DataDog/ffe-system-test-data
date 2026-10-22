@@ -23,7 +23,7 @@
         "D016",
         "D017"
       ],
-      "next": "D004 implemented with native evidence at c5fec6a009ffa29bf53f5377a21856c7c4aa5f56; continue the remaining Go threads and timestamp-policy decision independently."
+      "next": "D004 and D017 implemented with scoped native evidence; D017 local timings mixed, new CI results separate. Continue remaining Go comments; wider operational fan-out remains proposed."
     },
     {
       "owner": "openfeature-js-client shared flagging-core",
@@ -103,6 +103,24 @@
         "D016"
       ],
       "next": "Discover actual implementation/dependency owners; no universal parity claim from this Go review."
+    }
+  ],
+  "operational_profiles": [
+    {
+      "id": "inactive-path-v1",
+      "decision": "D017",
+      "revision": 2,
+      "accepted_scope": "Go call-site guard",
+      "proposed_scope": "Rules-based shared evaluators; precomputed-only clients require explicit applicability assessment.",
+      "native_receipt_required": [
+        "actual exclusion-boundary observation",
+        "semantic regressions",
+        "uninstrumented whole-evaluation benchmark results",
+        "source/compiler/architecture/baseline pins"
+      ],
+      "status": "go-native-conformance-validated-timing-observed-other-owners-proposed",
+      "go_source_sha": "627db08193d8019d33282024d8340327997205ec",
+      "go_receipt": "evidence/d017/native-receipt.json"
     }
   ]
 }

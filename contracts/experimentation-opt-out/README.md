@@ -32,9 +32,17 @@ The main remaining work is:
 
 1. **Default-path performance:** the mode guard inside `excludes` did not satisfy
    the later request for a guard at the allocation-loop call site. The reviewer
-   reports 7 CI regressions at `febcc185`, +2.1% to +6.7%; this task did not rerun
+   reports 7 CI regressions at [febcc185](https://github.com/DataDog/dd-trace-go/commit/febcc185d27d8edbe4acf16ce2dee91d5aff730c), +2.1% to +6.7%; this task did not rerun
    those benchmarks. Preserve that head-specific evidence and obtain a fresh
    whole-evaluation measurement after a fix. [Follow-up](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461).
+   Leo has now accepted the call-site guard as D017 r2. Its
+   [English rule, operation-trace oracle and native fan-out obligations](inactive-path.md)
+   distinguish skipped exclusion work from measured runtime. The subsequent CI
+   report at [c5fec6a](https://github.com/DataDog/dd-trace-go/commit/c5fec6a009ffa29bf53f5377a21856c7c4aa5f56)
+   reports six regressions despite a passing gate; [V029](decision-history.md#v029)
+   preserves that pre-fix evidence. The [implemented guard and native proof](evidence/d017/README.md)
+   now pass 36 trace cases and package/race tests. Ten alternating local benchmark
+   rounds have mixed timing results; new CI evidence remains separate.
 2. **Malformed activation: browser D004 selected for Go.** Leo explicitly chose
    the browser rule in this review session: preserve invalid separately and return
    PARSE_ERROR only for an opted-out future-mode subject. Go now implements the rule at
@@ -108,6 +116,12 @@ scoped lookup precedence, and the fact that activation alternatives differ.
 The model keeps the alternatives distinguishable. Leo selected the browser policy
 for Go in the local adoption record; the model itself does not confer approval.
 
+D017 adds ten theorems in [lean/InactivePath.lean](lean/InactivePath.lean), bringing
+the current axiom audit to 46 theorems. Its separate `inactive-path-v1` profile
+contains 36 operation-trace cases. The original 313 semantic cases remain unchanged.
+The operational model proves zero exclusion-check events for inactive policy and
+preservation of exclusion results; native runtime measurements remain required.
+
 These are model properties. They do not prove full parser correctness, native
 SDK refinement, nil safety, latency, lifecycle, transport, concurrency or deployed
 behavior. Earlier mobile POC results are historical evidence and are not rerun here.
@@ -126,13 +140,16 @@ python3 contracts/experimentation-opt-out/verify.py \
 The verifier checks frozen file hashes, exact case inventory and controls, decision
 references, provenance/history links, rendered-table freshness and complete thread classification; compiles the model/proofs; audits
 every theorem's axioms; and replays all oracle inputs in a temporary build directory.
+A separate executable oracle checks all 36 D017 traces, including check counts,
+so matching return values alone cannot hide the original unconditional-call shape.
 A passing result means this proposal is internally checked, not fleet-approved.
 Changing semantics requires a new revision and new downstream receipts. The
 manifest is a reproducibility mechanism; it is not a substitute for review.
 
 [Saved local validation](evidence/local-validation.json) records 36 audited
-theorems, 313 matching oracle outputs and the axiom report. Eight acceptance
-negative controls pass (`python3 -m unittest discover -s
+theorems, 313 matching oracle outputs and the axiom report. The current eleven
+acceptance controls retain the original eight, add two operational-profile
+checks and verify cross-repository commit links (`python3 -m unittest discover -s
 contracts/experimentation-opt-out -p test_verify.py`). Existing repository
 checks also pass: 345 evaluation cases, four validator tests and 12 precomputed
 fixtures. The independent skill forward-test correctly distinguished all three

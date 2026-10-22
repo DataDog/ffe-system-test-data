@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-22T19:45:32.583984+00:00",
+  "decision": "D017",
+  "revision": 2,
+  "profile": "inactive-path-v1",
+  "reviewed_manifest_sha256": "4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+  "source_sha": "627db08193d8019d33282024d8340327997205ec",
+  "baseline_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "native": "go/operational-receipt.json",
+  "tests": "go/native-validation.json",
+  "independent_review": "independent-review.json",
+  "benchmarks": "go/benchmarks.json",
+  "ci_registration_check": {
+    "command": "go test ./scripts/ciselect/",
+    "result": "pass",
+    "initial_failures": "First sandbox lacked cache write access; first inventory run excluded the untracked new benchmark. Outside-sandbox run after staging passed."
+  },
+  "source_scope": "Only production change is the short-circuit in evaluateFlag; additional files add benchmark coverage and CI registration.",
+  "claims": {
+    "native_trace_cases_passed": 36,
+    "baseline_expected_failures": 15,
+    "package_top_level_tests": 278,
+    "race_top_level_tests": 278,
+    "whole_evaluation_benchmark_cases": 34,
+    "local_performance_regression_free": false,
+    "ci_at_new_sha": "not yet observed",
+    "system_tests_at_new_sha": false,
+    "staging_or_production": false,
+    "fleet_approved": false
+  }
+}

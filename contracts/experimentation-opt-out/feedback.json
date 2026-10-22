@@ -396,19 +396,22 @@
       "decision_ids": [
         "D017"
       ],
-      "disposition": "proposed",
+      "disposition": "implemented-native-validated-performance-ci-pending",
       "kind": "native-performance",
-      "next_action": "Guard the excludes call at the evaluator call site when effective policy is inactive; require new exact-head end-to-end benchmark evidence.",
+      "next_action": "Observe the new performance CI report and assess parent-relative regressions separately from the verified call skip; other SDK adoption remains proposed.",
       "thread_state": {
         "resolved": false,
         "outdated": false
       },
-      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "evidence_level": "Fresh native trace and package/race execution, compiled branch inspection, uninstrumented local timings, CI registration check and independent review; see linked receipt.",
       "reviewer_priority": "P0",
       "reviewer": "aarsilv",
       "created_at": "2026-10-21T22:16:41Z",
       "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+      "current_head_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
+      "evidence_file": "evidence/d017/README.md",
+      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec"
     },
     {
       "id": "go-5700-4342540684",
@@ -448,19 +451,22 @@
       "decision_ids": [
         "D017"
       ],
-      "disposition": "proposed",
+      "disposition": "implemented-benchmarks-registered",
       "kind": "native-performance",
-      "next_action": "Register the exclusion benchmark and add future-mode whole-evaluation coverage; parent registration is not yet in this child.",
+      "next_action": "Confirm benchmark discovery in the new CI run; new benchmarks have no comparison until a baseline exists.",
       "thread_state": {
         "resolved": false,
         "outdated": false
       },
-      "evidence_level": "discussion plus source inspection; reviewer/author executions not rerun in this task",
+      "evidence_level": "Fresh native trace and package/race execution, compiled branch inspection, uninstrumented local timings, CI registration check and independent review; see linked receipt.",
       "reviewer_priority": "P3",
       "reviewer": "aarsilv",
       "created_at": "2026-10-21T22:16:44Z",
       "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c"
+      "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "implementation_sha": "627db08193d8019d33282024d8340327997205ec",
+      "evidence_file": "evidence/d017/README.md",
+      "verified_head_sha": "627db08193d8019d33282024d8340327997205ec"
     },
     {
       "id": "go-5700-4342541096",

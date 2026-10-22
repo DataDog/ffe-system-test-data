@@ -625,7 +625,148 @@
       "expectation_profile": "go-stack-5666-5700-proposal-v5-go-d004-implemented; tested manifest SHA-256 3b2c39183b3b055b8fdb6630993bbe2d00d0bb42306bfee61a65cbb6022abe9a",
       "evidence_file": "evidence/draft-publication-validation.json",
       "receipt_target": null,
-      "limits": "Local model verification at the manifest pinned in the receipt. Native Go evidence remains V027; no fleet approval or deployment proof."
+      "limits": "Local model verification at the manifest pinned in the receipt. Native Go evidence remains V027; no fleet approval or deployment proof.",
+      "source_repository_url": "https://github.com/DataDog/ffe-system-test-data"
+    },
+    {
+      "id": "V029",
+      "decision_revisions": {
+        "D017": 1
+      },
+      "recorded_at": "2026-10-22T18:22:19Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#issuecomment-6319082919",
+      "target": "dd-trace-go whole-evaluation CI benchmarks",
+      "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "patch": null,
+      "evidence_kind": "ci-reported-benchmarks",
+      "outcome": "regressions-reported",
+      "check": "Six performance regressions, approximately +2.3% to +6.2%; performance gate reports success.",
+      "expectation_profile": "D017 r1 measured inactive-path intent; candidate against parent de3998517f6e18864727360a5f676d33be5a5e29",
+      "evidence_file": "evidence/d017/current-go-benchmark.json",
+      "receipt_target": null,
+      "limits": "Reported CI measurements before the accepted call-site guard. Gate success is not absence of regressions; no native D017 r2 validation claimed."
+    },
+    {
+      "id": "V030",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:28:13.017093Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+      "evidence_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+      "target": "Lean 4.19.0 D017 operational model",
+      "source_sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+      "patch": "Local uncommitted D017 r2 additions; model, oracle and corpus hashes are recorded in the receipt.",
+      "evidence_kind": "local-model-and-operational-oracle",
+      "outcome": "pass",
+      "check": "All 46 theorem axiom audits, 313 unchanged semantic oracle cases and 36 inactive-path trace cases pass; 10 verifier tests pass.",
+      "expectation_profile": "inactive-path-v1; D017 r2; tested manifest ed36b311982ce0e35558a32d0a530a97e968d67f49f45f486e64d8b95274933b",
+      "evidence_file": "evidence/d017/model-validation.json",
+      "receipt_target": null,
+      "limits": "Local model and trace oracle only. No native Go guard implementation, observed native check counts, benchmarks, CI at a new SDK SHA or fleet approval."
+    },
+    {
+      "id": "V031",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:28:13.017093Z",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+      "evidence_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+      "target": "Lean 4.19.0 D017 operational model",
+      "source_sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+      "patch": "Local uncommitted D017 r2 additions; model, oracle and corpus hashes are recorded in the receipt.",
+      "evidence_kind": "local-model-negative-control",
+      "outcome": "expected-failure",
+      "check": "Restoring unconditional helper calls makes the zero-check proofs fail while the value-only equivalence theorem remains valid.",
+      "expectation_profile": "inactive-path-v1; D017 r2; tested manifest ed36b311982ce0e35558a32d0a530a97e968d67f49f45f486e64d8b95274933b",
+      "evidence_file": "evidence/d017/negative-control.json",
+      "receipt_target": null,
+      "limits": "Local model and trace oracle only. No native Go guard implementation, observed native check counts, benchmarks, CI at a new SDK SHA or fleet approval."
+    },
+    {
+      "id": "V032",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:45:32.583984+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+      "target": "Go D017 call-site guard",
+      "source_sha": "627db08193d8019d33282024d8340327997205ec",
+      "patch": null,
+      "evidence_kind": "fresh-native-conformance-and-regression",
+      "outcome": "pass",
+      "check": "36/36 operational traces through production provider; package and race each pass 278 top-level tests; CI benchmark inventory check passes.",
+      "expectation_profile": "D017 r2 inactive-path-v1; reviewed manifest 4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+      "evidence_file": "evidence/d017/native-receipt.json",
+      "receipt_target": null,
+      "limits": "Local Go 1.26.0/linux amd64; forced full traversal for trace cases. No whole-program equivalence, system-tests, staging or production claim."
+    },
+    {
+      "id": "V033",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:45:32.583984+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+      "target": "Go D017 call-site guard",
+      "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "patch": "Test-only observation overlay; same benchmark/test additions on both binaries.",
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "Restoring the pre-guard evaluator yields exactly 15 unwanted inactive helper-call failures while values and errors remain unchanged.",
+      "expectation_profile": "D017 r2 inactive-path-v1; reviewed manifest 4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+      "evidence_file": "evidence/d017/go/operational-receipt.json",
+      "receipt_target": null,
+      "limits": "Same instrumented native adapter and 36 pinned cases. Return-value-only checks would miss these 15 call-count failures; instrumentation is not timing evidence."
+    },
+    {
+      "id": "V034",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:45:32.583984+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+      "target": "Go D017 call-site guard",
+      "source_sha": "627db08193d8019d33282024d8340327997205ec",
+      "patch": null,
+      "evidence_kind": "fresh-local-uninstrumented-benchmarks",
+      "outcome": "mixed-observations",
+      "check": "10 alternating rounds across 34 evaluation cases. Inactive medians -1.61% to +1.38%, active/retained -0.30% to +2.99%; allocations unchanged.",
+      "expectation_profile": "D017 r2 inactive-path-v1; reviewed manifest 4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+      "evidence_file": "evidence/d017/go/benchmarks.json",
+      "receipt_target": null,
+      "limits": "Compared with pre-guard child c5fec, not PR parent. Shared host and no hypothesis test; no speedup or regression-free claim. Earlier CI regressions remain historical evidence; new CI results separate."
+    },
+    {
+      "id": "V035",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T19:45:32.583984+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+      "target": "D017 model and Go implementation review",
+      "source_sha": "627db08193d8019d33282024d8340327997205ec",
+      "patch": null,
+      "evidence_kind": "independent-model-and-native-review",
+      "outcome": "pass",
+      "check": "Independent model replay and negative control pass; native source/adapter/receipt review finds no remaining blockers after benchmark cleanup fix.",
+      "expectation_profile": "D017 r2 inactive-path-v1; reviewed manifest 4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+      "evidence_file": "evidence/d017/independent-review.json",
+      "receipt_target": null,
+      "limits": "Reviewer independently replayed the pinned model and checked native artifacts; native package/race execution is implementer evidence. No timing conclusion."
     }
   ]
 }

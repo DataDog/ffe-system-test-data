@@ -24,6 +24,39 @@ class AcceptanceControls(unittest.TestCase):
         _, rows = verify.check_bundle(self.root, self.pin)
         self.assertEqual(len(rows), 313)
 
+    def test_cross_repository_validation_links_the_tested_commit(self):
+        decisions = json.loads((self.root / 'decisions.json').read_text())
+        history = json.loads((self.root / 'validation-history.json').read_text())
+        row = next(e for e in history['entries'] if e['id'] == 'V028')
+        rendered = verify.decision_history.render(decisions, history)
+        self.assertIn('https://github.com/DataDog/ffe-system-test-data/commit/' + row['source_sha'], rendered)
+        self.assertNotIn('https://github.com/DataDog/dd-trace-go/commit/' + row['source_sha'], rendered)
+
+    def test_value_only_operational_oracle_is_rejected(self):
+        path = self.root / 'corpus/inactive-path.jsonl'
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        for row in rows:
+            del row['expected']['exclusionChecks']
+        path.write_text(''.join(json.dumps(row)+'\n' for row in rows))
+        manifest_path = self.root / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['files']['corpus/inactive-path.jsonl'] = verify.sha(path)
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+        self.pin = verify.sha(manifest_path)
+        with self.assertRaisesRegex(ValueError, 'must include exclusion-check counts'):
+            verify.check_bundle(self.root, self.pin)
+
+    def test_missing_operational_case_is_rejected_after_repin(self):
+        path = self.root / 'corpus/inactive-path.jsonl'
+        path.write_text('\n'.join(path.read_text().splitlines()[1:])+'\n')
+        manifest_path = self.root / 'manifest.json'
+        manifest = json.loads(manifest_path.read_text())
+        manifest['files']['corpus/inactive-path.jsonl'] = verify.sha(path)
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+        self.pin = verify.sha(manifest_path)
+        with self.assertRaisesRegex(ValueError, 'Operational corpus inventory'):
+            verify.check_bundle(self.root, self.pin)
+
     def test_missing_case_is_rejected(self):
         corpus = self.root / 'corpus/browser-proposal.jsonl'
         corpus.write_text('\n'.join(corpus.read_text().splitlines()[1:])+'\n')

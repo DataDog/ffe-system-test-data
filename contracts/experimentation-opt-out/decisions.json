@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "go-stack-5666-5700-proposal-v5-go-d004-implemented",
+  "revision": "go-stack-5666-5700-proposal-v6-d017-operational-contract",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -926,11 +926,11 @@
     },
     {
       "id": "D017",
-      "revision": 1,
-      "statement": "Inactive effective opt-out must retain a measured baseline evaluation path. Measure full evaluations and register the enabled paths in repository performance CI.",
-      "central_status": "accepted-go-intent-native-validation-pending",
-      "scope": "Go hot path; no numeric fleet performance threshold is established",
-      "authority": "author accepted initial optimization; reviewer reports incomplete whole-evaluation fix",
+      "revision": 2,
+      "statement": "Inactive effective opt-out skips allocation-exclusion operations and preserves evaluation behavior. Disabled mode and an absent cutoff are inactive; invalid enabled context remains an error. Validate logical skipped work separately from full-evaluation runtime cost.",
+      "central_status": "accepted-go-implemented-native-validated-performance-observed",
+      "scope": "Go call-site guard accepted; inactive-path-v1 is a proposed reusable profile for rules-based SDK owners. No fleet approval or numeric performance threshold.",
+      "authority": "Leo accepted the reviewer call-site guard in this chat; public r2 decision-setting reply pending.",
       "provenance": [
         {
           "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
@@ -939,32 +939,112 @@
         {
           "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
           "stage": "follow-up"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+          "stage": "accepted-locally",
+          "record": "evidence/d017/local-acceptance.json"
         }
       ],
-      "model": null,
+      "model": {
+        "file": "lean/InactivePath.lean",
+        "namespace": "InactivePath",
+        "oracle": "lean/InactiveOracle.lean",
+        "profile": "inactive-path-v1",
+        "english": "inactive-path.md",
+        "limits": "Proofs cover the abstract guard, result preservation and exclusion-check trace; no native SDK refinement or timing proof."
+      },
       "native_obligations": [
-        "call-site guard",
-        "exact compiler inlining and whole-evaluation benchmarks",
-        "disabled and enabled-with-absent-attribute cases",
-        "CI benchmark registration"
+        "Short-circuit before allocation-exclusion work when effective policy is inactive; preserve invalid-context and D004 errors.",
+        "Observe the production exclusion boundary; do not derive a fake count from the input policy.",
+        "Retain full native regressions for values, errors, targeting order, telemetry, and activation policy.",
+        "Measure uninstrumented whole evaluations on pinned compiler/architecture and baseline/candidate SHAs.",
+        "Cover disabled, enabled-with-absent-cutoff and active modes; register relevant performance CI benchmarks.",
+        "Record statistical results separately from gate status and return counterexamples centrally."
       ],
       "latest_setting": {
         "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
-        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
-        "kind": "partial-author-decision",
+        "thread_url": null,
+        "kind": "local-decision",
         "author": "leoromanovsky",
-        "recorded_at": "2026-10-21T19:44:40Z",
-        "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-        "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
-        "gap": null
+        "recorded_at": "2026-10-22T19:26:16.351222Z",
+        "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+        "scope_note": "Leo accepted the call-site guard in chat. The reviewer request is provenance; it is not itself an author setting.",
+        "gap": "No public comment yet records the r2 acceptance.",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+          "kind": "partial-author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-21T19:44:40Z",
+          "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+          "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V012",
-        "V013"
-      ]
+        "V013",
+        "V029",
+        "V030",
+        "V031",
+        "V032",
+        "V033",
+        "V034",
+        "V035"
+      ],
+      "revision_history": [
+        {
+          "id": "D017",
+          "revision": 1,
+          "statement": "Inactive effective opt-out must retain a measured baseline evaluation path. Measure full evaluations and register the enabled paths in repository performance CI.",
+          "central_status": "accepted-go-intent-native-validation-pending",
+          "scope": "Go hot path; no numeric fleet performance threshold is established",
+          "authority": "author accepted initial optimization; reviewer reports incomplete whole-evaluation fix",
+          "provenance": [
+            {
+              "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+              "stage": "partial-implementation"
+            },
+            {
+              "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+              "stage": "follow-up"
+            }
+          ],
+          "model": null,
+          "native_obligations": [
+            "call-site guard",
+            "exact compiler inlining and whole-evaluation benchmarks",
+            "disabled and enabled-with-absent-attribute cases",
+            "CI benchmark registration"
+          ],
+          "latest_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+            "kind": "partial-author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-21T19:44:40Z",
+            "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+            "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
+            "gap": null
+          },
+          "validation_history_ids": [
+            "V012",
+            "V013"
+          ]
+        }
+      ],
+      "adoption_record": "evidence/d017/local-acceptance.json",
+      "implementation": {
+        "repository": "DataDog/dd-trace-go",
+        "source_sha": "627db08193d8019d33282024d8340327997205ec",
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "evidence": "evidence/d017/native-receipt.json",
+        "timing_status": "mixed-local-measurements-no-regression-free-claim"
+      }
     }
   ],
-  "previous_revision": "go-stack-5666-5700-proposal-v4-go-d004-published",
-  "revision_note": "D004 r2 implemented and signed-published in Go; native receipt and history added. No semantic rule changed; other policy decisions and fleet approval unchanged.",
+  "previous_revision": "go-stack-5666-5700-proposal-v5-go-d004-implemented",
+  "revision_note": "D017 r2 is implemented in Go with native trace validation and local timing observations. Wider adoption and parent-relative performance CI follow-up remain pending.",
   "validation_history_file": "validation-history.json"
 }

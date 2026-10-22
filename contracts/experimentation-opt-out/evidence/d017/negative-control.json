@@ -1,0 +1,11 @@
+{
+  "mutation": "Replace evaluate dispatch from guarded to unconditional helper calls; keep all theorem statements unchanged.",
+  "result": "expected-proof-rejection",
+  "returncode": 1,
+  "stdout": "InactivePath.lean:90:61: error: unsolved goals\ncase absent\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\n\ncase valid\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\n\ncase invalid\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\nInactivePath.lean:94:59: error: unsolved goals\ncase disabled\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\n\ncase immediate\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\n\ncase future\nchecks : List Bool\n\u22a2 (run (unconditional false checks)).checkCalls = 0\n",
+  "stderr": "",
+  "limits": "Model mutation, not native Go test or benchmark.",
+  "recorded_at": "2026-10-22T19:28:13.017093Z",
+  "source_sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+  "input_model_sha256": "2adfc9152460bf721fd826758ec0947b5f6596ac2d92effaaf791258efb38bc1"
+}

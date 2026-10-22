@@ -80,7 +80,7 @@ def render(decisions, history):
         refs = ', '.join(f'[{key}{" r"+str(rev) if rev is not None else " (revision unrecorded)"}](#{key.lower()})' for key, rev in e['decision_revisions'].items())
         target = e['target']
         if e['source_sha']:
-            repo = e['pr_url'].split('/pull/')[0]
+            repo = e.get('source_repository_url', e['pr_url'].split('/pull/')[0])
             target += f' @ [{e["source_sha"][:12]}]({repo}/commit/{e["source_sha"]})'
         else:
             target += ' — source SHA unrecorded / not applicable'

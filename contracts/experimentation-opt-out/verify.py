@@ -22,6 +22,26 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def inactive_path_cases(root, manifest):
+    profile = manifest.get('operational_profile')
+    if not profile or profile['id'] != 'inactive-path-v1':
+        raise ValueError('Missing reviewed inactive-path operational profile')
+    name = profile['corpus']
+    if name not in manifest['files']:
+        raise ValueError('Operational corpus is not frozen in the manifest')
+    rows = [json.loads(line) for line in (root / name).read_text().splitlines()]
+    ids = [row['id'] for row in rows]
+    if len(ids) != len(set(ids)) or ids != profile['case_ids'] or len(rows) != profile['case_count']:
+        raise ValueError('Operational corpus inventory differs from reviewed profile')
+    for row in rows:
+        if row['decision_ids'] != ['D017'] or row['kind'] != 'allocation-check-trace':
+            raise ValueError('Unexpected operational decision or case kind')
+        expected = row['expected']
+        if set(expected) != {'error', 'excluded', 'exclusionChecks'} or type(expected['exclusionChecks']) is not int or expected['exclusionChecks'] < 0:
+            raise ValueError('Operational oracle must include exclusion-check counts')
+    return rows
+
+
 def check_bundle(root, expected_manifest):
     manifest_path = root / 'manifest.json'
     if sha(manifest_path) != expected_manifest:
@@ -45,6 +65,10 @@ def check_bundle(root, expected_manifest):
             raise ValueError(f'Independent expectation disagrees: {key}')
     decisions = json.loads((root / 'decisions.json').read_text())
     decision_ids = [d['id'] for d in decisions['decisions']]
+    inactive_path_cases(root, manifest)
+    for key, revision in manifest['operational_profile']['decision_revisions'].items():
+        if next((d['revision'] for d in decisions['decisions'] if d['id'] == key), None) != revision:
+            raise ValueError('Operational profile refers to a different decision revision')
     if len(set(decision_ids)) != len(decision_ids):
         raise ValueError('Duplicate decision IDs')
     if decisions['status'] != 'proposal' or decisions['fleet_approved'] is not False:
@@ -80,10 +104,11 @@ def replay(root, lean, rows):
     with tempfile.TemporaryDirectory(prefix='ffe-lean-decisions-') as tmp:
         build = Path(tmp)
         env = dict(os.environ, LEAN_PATH=str(build))
-        for name in ('Contract', 'Proofs', 'Oracle', 'Review'):
+        modules = ('Contract', 'Proofs', 'Oracle', 'Review', 'InactivePath', 'InactiveOracle')
+        for name in modules:
             shutil.copyfile(root / f'lean/{name}.lean', build / f'{name}.lean')
         logs = []
-        for name in ('Contract', 'Proofs', 'Oracle', 'Review'):
+        for name in modules:
             run = subprocess.run([lean, '-o', f'{name}.olean', f'{name}.lean'], cwd=build,
                                  env=env, text=True, capture_output=True)
             log = run.stdout + run.stderr
@@ -93,8 +118,8 @@ def replay(root, lean, rows):
                 raise ValueError(f'Proof warning or hole: {log}')
             logs.append(log)
         # Inspect every theorem, rather than relying on a hand-maintained #print list.
-        audits = ['import Proofs', 'import Review']
-        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview')]:
+        audits = ['import Proofs', 'import Review', 'import InactivePath']
+        for file, namespace in [('Proofs', 'PR423'), ('Review', 'GoReview'), ('InactivePath', 'InactivePath')]:
             for theorem in re.findall(r'^theorem\s+(\w+)', (build / f'{file}.lean').read_text(), re.M):
                 audits.append(f'#print axioms {namespace}.{theorem}')
         (build / 'Audit.lean').write_text('\n'.join(audits) + '\n')
@@ -114,8 +139,17 @@ def replay(root, lean, rows):
         expected = {r['id']: r['expected'] for r in rows}
         if len(actual) != len(actual_rows) or actual != expected:
             raise ValueError('Oracle output missing, duplicated or different from frozen expectations')
-        return {'lean_version': version, 'theorems_audited': len(audits)-2,
-                'oracle_cases': len(rows), 'axiom_audit': audit,
+        operational = inactive_path_cases(root, json.loads((root / 'manifest.json').read_text()))
+        run = subprocess.run([lean, '--run', 'InactiveOracle.lean'],
+                             input=''.join(json.dumps({k: v for k, v in row.items()
+                                         if k not in ('expected', 'decision_ids')})+'\n' for row in operational),
+                             cwd=build, env=env, text=True, capture_output=True, check=True)
+        observed = [json.loads(line) for line in run.stdout.splitlines()]
+        actual = {row['id']: row['observed'] for row in observed}
+        if len(actual) != len(observed) or actual != {row['id']: row['expected'] for row in operational}:
+            raise ValueError('Operational oracle results or exclusion-check counts differ')
+        return {'lean_version': version, 'theorems_audited': len(audits)-3,
+                'oracle_cases': len(rows), 'operational_oracle_cases': len(operational), 'axiom_audit': audit,
                 'native_sdk_tests_run': False, 'fleet_approved': False}
 
 
