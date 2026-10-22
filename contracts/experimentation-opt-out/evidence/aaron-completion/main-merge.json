@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-10-22T20:47:12.288436+00:00",
+  "source_sha": "1ceb5e2b977d151352874b6c772abfd84466143b",
+  "main_sha": "f35835218b0dba1277222b6ebafd818e6e896115",
+  "base_before": "609a2d96e41519e5b88951adcae710ec6e9b1606",
+  "conflict_resolution": "Union of benchmark registrations, retaining immediate OptOut and main StartSpanManyTags. Deferred new benchmark registrations remain absent.",
+  "tests": {
+    "package": {
+      "top_level": 283,
+      "entries": 1652,
+      "log_sha256": "451aad4d5fc9b2df0dfd72006a1cd6732476e74cf5c0b35f5172c78dd98b0aec"
+    },
+    "race": {
+      "top_level": 283,
+      "entries": 1652,
+      "log_sha256": "1e7c7025c3add5f6d08de971a052b97b878a7c0e7c8f307bc7870d127caf6b03"
+    }
+  },
+  "other_checks": [
+    "go test ./scripts/ciselect ./internal/config/... -count=1"
+  ],
+  "other_checks_result": "pass",
+  "other_checks_log_sha256": "e04bcf912f323dcd4295dc9415da9c1227476640bd83a92161dee35c73e28c1c",
+  "all_pr_commits_verified": 25,
+  "limits": "Local package/race/configuration/CI-selection tests after main merge; no fresh Lean or instrumented adapter replay, timing claim, remote CI or system-tests claim."
+}

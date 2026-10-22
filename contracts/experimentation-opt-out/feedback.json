@@ -157,10 +157,10 @@
       ],
       "disposition": "implemented-disabled-provider-precedence",
       "kind": "shared-semantics",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P2",
@@ -185,10 +185,10 @@
       "decision_ids": [],
       "disposition": "implemented-shared-error",
       "kind": "native-performance",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -198,7 +198,8 @@
       "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
       "implementation_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
       "verified_head_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353287602"
     },
     {
       "id": "go-5666-4342542113",
@@ -212,10 +213,10 @@
       "decision_ids": [],
       "disposition": "implemented-readable-mode",
       "kind": "native-cleanup",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -225,7 +226,8 @@
       "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
       "implementation_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
       "verified_head_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353288473"
     },
     {
       "id": "go-5666-4342542328",
@@ -241,10 +243,10 @@
       ],
       "disposition": "implemented-precedence-documentation",
       "kind": "shared-semantics",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -254,7 +256,8 @@
       "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
       "implementation_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
       "verified_head_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250"
     },
     {
       "id": "go-5666-4342542473",
@@ -272,10 +275,10 @@
       ],
       "disposition": "implemented-go-parser-parity-controls",
       "kind": "shared-semantics",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -285,7 +288,8 @@
       "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
       "implementation_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
       "verified_head_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289930"
     },
     {
       "id": "go-5666-4342542617",
@@ -299,10 +303,10 @@
       "decision_ids": [],
       "disposition": "implemented-native-nil-stringer-guards",
       "kind": "native-safety",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": null,
@@ -312,7 +316,8 @@
       "current_head_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
       "implementation_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
       "verified_head_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353290762"
     },
     {
       "id": "go-5700-4340842185",
@@ -386,10 +391,10 @@
       ],
       "disposition": "implemented-scoped-malformed-activation-policy",
       "kind": "shared-semantics",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P1",
@@ -403,7 +408,8 @@
       "implementation_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
       "implementation_evidence": "evidence/go-d004/native-receipt.json",
       "verified_head_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353291451"
     },
     {
       "id": "go-5700-4342540461",
@@ -547,10 +553,10 @@
       ],
       "disposition": "implemented-remote-config-refresh-and-fixture-inventory",
       "kind": "native-integration",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -560,7 +566,8 @@
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "implementation_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
       "verified_head_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353292336"
     },
     {
       "id": "go-5700-4342541471",
@@ -574,10 +581,10 @@
       "decision_ids": [],
       "disposition": "implemented-active-predicate",
       "kind": "native-cleanup",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": "P3",
@@ -587,7 +594,8 @@
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "implementation_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
       "verified_head_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353296394"
     },
     {
       "id": "go-5700-4342541667",
@@ -603,10 +611,10 @@
       ],
       "disposition": "implemented-producer-dependency-documentation",
       "kind": "deployment-dependency",
-      "next_action": "Read back author reply and resolve addressed thread; no additional implementation for this request.",
+      "next_action": "None for this addressed request; benchmark CI registration remains separately deferred.",
       "thread_state": {
-        "resolved": false,
-        "outdated": false
+        "resolved": true,
+        "resolution_recorded_at": "2026-10-22T20:45:36.653013+00:00"
       },
       "evidence_level": "Fresh native checks and independent review; limits and historical model evidence remain separate.",
       "reviewer_priority": null,
@@ -616,7 +624,8 @@
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "implementation_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
       "verified_head_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
-      "evidence_file": "evidence/aaron-completion/verification.json"
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "author_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353297082"
     },
     {
       "id": "go-5666-5590084362",

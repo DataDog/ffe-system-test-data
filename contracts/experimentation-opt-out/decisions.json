@@ -319,7 +319,8 @@
         "V026",
         "V027",
         "V028",
-        "V042"
+        "V042",
+        "V044"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -752,7 +753,8 @@
         "V028",
         "V036",
         "V037",
-        "V042"
+        "V042",
+        "V044"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -950,7 +952,8 @@
         "V021",
         "V024",
         "V028",
-        "V040"
+        "V040",
+        "V044"
       ]
     },
     {
@@ -968,6 +971,20 @@
         {
           "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542328",
           "stage": "documentation-request"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250",
+          "stage": "documented-go-reaffirmation",
+          "prior_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-20T19:46:08Z",
+            "source_sha": null,
+            "scope_note": "Strict Go input policy; finer lookup precedence is source/fixture-backed. Comment position SHA is not a claimed implementation SHA.",
+            "gap": null
+          }
         }
       ],
       "model": "lean/Review.lean:resolveReady",
@@ -977,20 +994,31 @@
       ],
       "latest_setting": {
         "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
-        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
-        "kind": "author-decision",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250",
+        "kind": "author-reaffirmation",
         "author": "leoromanovsky",
-        "recorded_at": "2026-10-20T19:46:08Z",
-        "source_sha": null,
-        "scope_note": "Strict Go input policy; finer lookup precedence is source/fixture-backed. Comment position SHA is not a claimed implementation SHA.",
-        "gap": null
+        "recorded_at": "2026-10-22T20:39:41Z",
+        "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+        "scope_note": "Go invalid-context precedence before lookup, after existing readiness and targeting-key guards; unchanged r1 rule.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+          "kind": "author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-20T19:46:08Z",
+          "source_sha": null,
+          "scope_note": "Strict Go input policy; finer lookup precedence is source/fixture-backed. Comment position SHA is not a claimed implementation SHA.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V011",
         "V021",
         "V024",
         "V028",
-        "V040"
+        "V040",
+        "V044"
       ]
     },
     {
@@ -1088,7 +1116,8 @@
         "V035",
         "V039",
         "V042",
-        "V043"
+        "V043",
+        "V044"
       ],
       "revision_history": [
         {

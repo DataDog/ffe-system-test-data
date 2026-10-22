@@ -932,6 +932,30 @@
       "evidence_file": "evidence/aaron-completion/operational-receipt.json",
       "receipt_target": null,
       "limits": "Test-only instrumented overlay; not historical whole-program replay or timing evidence."
+    },
+    {
+      "id": "V044",
+      "decision_revisions": {
+        "D004": 2,
+        "D011": 1,
+        "D015": 1,
+        "D016": 1,
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T20:47:12.288436+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "target": "Combined Go opt-out stack after main integration",
+      "source_sha": "1ceb5e2b977d151352874b6c772abfd84466143b",
+      "patch": null,
+      "evidence_kind": "fresh-native-regression-after-main-merge",
+      "outcome": "pass",
+      "check": "Package and race pass; configuration and CI-selection tests pass. No remaining addressed Aaron threads on base or merged child.",
+      "expectation_profile": "Existing adopted Go rules; native regression only, no new semantic setting.",
+      "evidence_file": "evidence/aaron-completion/main-merge.json",
+      "receipt_target": null,
+      "limits": "Local package/race/configuration/CI-selection tests after main merge; no fresh Lean or instrumented adapter replay, timing claim, remote CI or system-tests claim."
     }
   ]
 }
