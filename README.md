@@ -283,7 +283,9 @@ use the same rule; the compiler supplies their activation metadata.
 
 An absent subject timestamp preserves normal evaluation. Invalid subject input
 returns `ERROR` / `INVALID_CONTEXT` before allocation selection, as in immediate mode.
-A future cutoff is used directly; it does not schedule a future preference change.
+Supply the time the subject opted out. A later cutoff keeps experiments activated
+before that later time eligible, including experiments started after the subject
+opted out. Targeting and schedules still apply.
 Removing the attribute permits experimentation again.
 
 The future-mode cases reuse existing flags. Added activation fields do not change
