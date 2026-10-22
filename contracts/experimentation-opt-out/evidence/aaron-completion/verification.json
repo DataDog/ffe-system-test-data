@@ -1,0 +1,99 @@
+{
+  "recorded_at": "2026-10-22T20:37:08.328167+00:00",
+  "base_pr": "https://github.com/DataDog/dd-trace-go/pull/5666",
+  "base_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+  "child_pr": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "child_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
+  "child_tests": {
+    "package": {
+      "top_level": 283,
+      "test_entries": 1652
+    },
+    "race": {
+      "top_level": 283,
+      "test_entries": 1652
+    }
+  },
+  "child_commands": [
+    "go test ./openfeature -count=1 -json",
+    "go test -race ./openfeature -count=1 -json",
+    "go vet ./openfeature"
+  ],
+  "child_vet_exit_code": 0,
+  "native_profile": "inactive-path-v1",
+  "native_operational_cases": {
+    "passed": 36,
+    "old_guard_expected_failures": 15
+  },
+  "fixture_inventory": "Per-family minima: generic immediate26/future26, future-only16; additions allowed. Not semantic case-identity protection.",
+  "independent_review": {
+    "agent": "aaron_final_review",
+    "base": "no findings; independent focused replay",
+    "child": "no findings; independent focused replay",
+    "combined": "no findings; independent ten-group focused replay",
+    "reviewed_combined_diff_sha256": "f10ce5b2b3bcaf11dfc7baf3b20c34fed3bbbfe9b6dde271b5352bb31f6448b4"
+  },
+  "logs": {
+    "base-focused.jsonl": {
+      "file": "evidence/aaron-completion/base-focused.jsonl.gz",
+      "raw_sha256": "82d824379428450eaab0b7177e8d3efed809d689143e31118a20b2bfc48fb786"
+    },
+    "base-package.jsonl": {
+      "file": "evidence/aaron-completion/base-package.jsonl.gz",
+      "raw_sha256": "4c380ef271df8152dc3f41eba0d4f36e37e712d7f0dd4d3d1949e005b3e2b1e9"
+    },
+    "base-race.jsonl": {
+      "file": "evidence/aaron-completion/base-race.jsonl.gz",
+      "raw_sha256": "30ab5a4d1d4e9c380da7acae95e8ad2548e21ca8e1ac9976dc7b625c4182b74c"
+    },
+    "child-package.jsonl": {
+      "file": "evidence/aaron-completion/child-package.jsonl.gz",
+      "raw_sha256": "1e34885b426b53a30fb00b48a82345a3fbf1858f22fc5d23b00ec345923cfd38"
+    },
+    "child-race.jsonl": {
+      "file": "evidence/aaron-completion/child-race.jsonl.gz",
+      "raw_sha256": "656a977cd8590601c3bbba4ceae0ca7ad2e03e446b8aad2e6e412ecfea972b5c"
+    },
+    "base-control-disabled-precedence.jsonl": {
+      "file": "evidence/aaron-completion/base-control-disabled-precedence.jsonl.gz",
+      "raw_sha256": "6f276c6c03b43383fee36d0efa5df02646ee2f5b9dcb18a6dec8bb00eac826cc"
+    },
+    "base-control-nil-exposure.jsonl": {
+      "file": "evidence/aaron-completion/base-control-nil-exposure.jsonl.gz",
+      "raw_sha256": "b76e1cdbab47baac46b9b9f9c654dee41c101bb42d619645381d26db6faf332b"
+    },
+    "base-control-nil-logging.jsonl": {
+      "file": "evidence/aaron-completion/base-control-nil-logging.jsonl.gz",
+      "raw_sha256": "2b6aed66f8a0e0e96dec4a242d94e3eb07fb219ba43e2a7519c900066fc821c0"
+    },
+    "base-control-normalization.jsonl": {
+      "file": "evidence/aaron-completion/base-control-normalization.jsonl.gz",
+      "raw_sha256": "5becbb221cdf0f80d49bad805d368b039310daded0f65560983e3682ff461fa9"
+    },
+    "child-control-equal-allowed.jsonl": {
+      "file": "evidence/aaron-completion/child-control-equal-allowed.jsonl.gz",
+      "raw_sha256": "3bb73984664d4dfb08422cd4d213a07c0b2fa191dbd323e0435cc3dd957d5181"
+    },
+    "child-control-unknown-allowed.jsonl": {
+      "file": "evidence/aaron-completion/child-control-unknown-allowed.jsonl.gz",
+      "raw_sha256": "79e459a4d9dbb7004ff8c6ca86fd0f59a8a7485132572056f6e7e808ad3ad02a"
+    },
+    "child-control-missing-family.jsonl": {
+      "file": "evidence/aaron-completion/child-control-missing-family.jsonl.gz",
+      "raw_sha256": "3f4c84bbae69fd462bda5fe4ddfc8780b2ecc1b24e42c369c62d187184736273"
+    },
+    "child-control-missing-capability-case.jsonl": {
+      "file": "evidence/aaron-completion/child-control-missing-capability-case.jsonl.gz",
+      "raw_sha256": "1a2941483174424214bb70b250d625879562aea47a41eef2ad7cfbf979c93e5d"
+    },
+    "operational-candidate.jsonl": {
+      "file": "evidence/aaron-completion/operational-candidate.jsonl.gz",
+      "raw_sha256": "337fcbc7bfa2de7342fe2581fda132ff13198bc69d64296ede8573e62e49369d"
+    },
+    "operational-baseline.jsonl": {
+      "file": "evidence/aaron-completion/operational-baseline.jsonl.gz",
+      "raw_sha256": "aa4fbe4d019e781d66cb4c33ea708c27d4ecf1d7809d13cb877e455ed7808ed9"
+    }
+  },
+  "limits": "Local native checks and synchronous mock intake. No new Lean execution, timing conclusion, concurrent RC delivery, CI, system-tests, staging or production claim. Existing Lean definitions/proofs unchanged. Timestamp controls preserve Go parsing and do not adopt browser/fleet grammar. Benchmark CI registration remains deferred to base PR5666."
+}

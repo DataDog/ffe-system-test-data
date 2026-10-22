@@ -847,6 +847,91 @@
       "evidence_file": "evidence/d017/ci-registration-deferral.json",
       "receipt_target": null,
       "limits": "No fresh Lean, timing, race or operational trace replay. Earlier evidence remains pinned to its original commits; new benchmark CI registration and base performance assessment remain open. No fleet scope change."
+    },
+    {
+      "id": "V040",
+      "decision_revisions": {
+        "D015": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-22T20:37:08.328167+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+      "target": "Go base constructor and error precedence",
+      "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+      "patch": null,
+      "evidence_kind": "fresh-native-regression-and-negative-control",
+      "outcome": "pass",
+      "check": "Package and race each275 top-level/1296 entries; disabled-order negative control fails all4 sources. Existing unknown-flag precedence fixtures pass.",
+      "expectation_profile": "Go D015r1 and D016r1 after existing readiness/targeting guards.",
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "receipt_target": null,
+      "limits": "Local native checks and synchronous mock intake. No new Lean execution, timing conclusion, concurrent RC delivery, CI, system-tests, staging or production claim. Existing Lean definitions/proofs unchanged. Timestamp controls preserve Go parsing and do not adopt browser/fleet grammar. Benchmark CI registration remains deferred to base PR5666."
+    },
+    {
+      "id": "V041",
+      "decision_revisions": {
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-22T20:37:08.328167+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542473",
+      "target": "Existing Go timestamp dialect",
+      "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+      "patch": null,
+      "evidence_kind": "fresh-native-compatibility-negative-control",
+      "outcome": "go-compatibility-pass; browser-profile-not-adopted",
+      "check": "Five parser controls added; uppercase/TrimSpace mutant fails three.",
+      "expectation_profile": "Existing Go parser/allocation parity, not conformance to browser lowercase or UTC-year policy.",
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "receipt_target": null,
+      "limits": "Known Go/browser grammar differences remain unresolved for fleet reuse. This does not validate every D005/D006/D007 clause."
+    },
+    {
+      "id": "V042",
+      "decision_revisions": {
+        "D004": 2,
+        "D011": 1,
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T20:37:08.328167+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541315",
+      "target": "Combined Go child regression and operational conformance",
+      "source_sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
+      "patch": null,
+      "evidence_kind": "fresh-native-regression-and-negative-controls",
+      "outcome": "pass",
+      "check": "Package/race each283 top-level/1652 entries; 36 operational cases pass. Same-key RC transitions/dedup pass; equality/unknown and missing fixture/case controls fail. active() is inlined.",
+      "expectation_profile": "Go adopted D004/D011 plus D017r2 inactive-path-v1; model unchanged.",
+      "evidence_file": "evidence/aaron-completion/verification.json",
+      "receipt_target": null,
+      "limits": "Local native checks and synchronous mock intake. No new Lean execution, timing conclusion, concurrent RC delivery, CI, system-tests, staging or production claim. Existing Lean definitions/proofs unchanged. Timestamp controls preserve Go parsing and do not adopt browser/fleet grammar. Benchmark CI registration remains deferred to base PR5666."
+    },
+    {
+      "id": "V043",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-22T20:37:08.328167+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342541471",
+      "target": "Restored pre-guard evaluator with final helper",
+      "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "patch": "Pre-guard evaluator and observation overlay on final child; exact sources and commands in receipt.",
+      "evidence_kind": "fresh-native-negative-control",
+      "outcome": "expected-failure",
+      "check": "All36 traces execute; exactly15 fail unwanted exclusion-call counts.",
+      "expectation_profile": "D017r2 inactive-path-v1; baseline evaluator overlaid onto final child.",
+      "evidence_file": "evidence/aaron-completion/operational-receipt.json",
+      "receipt_target": null,
+      "limits": "Test-only instrumented overlay; not historical whole-program replay or timing evidence."
     }
   ]
 }

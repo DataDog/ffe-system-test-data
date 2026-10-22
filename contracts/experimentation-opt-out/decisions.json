@@ -318,7 +318,8 @@
         "V025",
         "V026",
         "V027",
-        "V028"
+        "V028",
+        "V042"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -416,7 +417,8 @@
         "V020",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V041"
       ]
     },
     {
@@ -475,7 +477,8 @@
         "V020",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V041"
       ]
     },
     {
@@ -535,7 +538,8 @@
         "V020",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V041"
       ]
     },
     {
@@ -747,7 +751,8 @@
         "V024",
         "V028",
         "V036",
-        "V037"
+        "V037",
+        "V042"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -891,13 +896,28 @@
       "id": "D015",
       "revision": 1,
       "statement": "When resolved configuration disables the provider, return NoopProvider before validating experimentation mode. Enabled providers reject unsupported modes.",
-      "central_status": "proposed",
-      "scope": "proposed Go construction order; audit other SDK constructors before reuse",
-      "authority": "reviewer proposal; no new user semantic approval",
+      "central_status": "accepted-go-implemented-native-validated",
+      "scope": "Go construction order accepted and implemented; audit other SDK constructors before reuse",
+      "authority": "Leo authorized completing Aaron feedback; author accepted Go D015 in the linked reply after native validation.",
       "provenance": [
         {
           "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
           "stage": "requested"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+          "stage": "accepted-go-implemented",
+          "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+          "prior_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+            "kind": "reviewer-proposal",
+            "author": "aarsilv",
+            "recorded_at": "2026-10-21T22:16:52Z",
+            "source_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+            "scope_note": "Constructor ordering is proposed, not accepted by Leo.",
+            "gap": null
+          }
         }
       ],
       "model": "lean/Review.lean:construct",
@@ -907,19 +927,30 @@
       ],
       "latest_setting": {
         "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
-        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
-        "kind": "reviewer-proposal",
-        "author": "aarsilv",
-        "recorded_at": "2026-10-21T22:16:52Z",
-        "source_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
-        "scope_note": "Constructor ordering is proposed, not accepted by Leo.",
-        "gap": null
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T20:34:57Z",
+        "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+        "scope_note": "Go disabled-source precedence adopted; enabled providers still reject invalid modes. Fleet adoption not approved.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+          "kind": "reviewer-proposal",
+          "author": "aarsilv",
+          "recorded_at": "2026-10-21T22:16:52Z",
+          "source_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+          "scope_note": "Constructor ordering is proposed, not accepted by Leo.",
+          "gap": null
+        }
       },
       "validation_history_ids": [
         "V010",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V040"
       ]
     },
     {
@@ -958,7 +989,8 @@
         "V011",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "V040"
       ]
     },
     {
@@ -1054,7 +1086,9 @@
         "V033",
         "V034",
         "V035",
-        "V039"
+        "V039",
+        "V042",
+        "V043"
       ],
       "revision_history": [
         {

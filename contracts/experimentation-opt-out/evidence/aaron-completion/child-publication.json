@@ -1,0 +1,65 @@
+{
+  "pr": 5700,
+  "before": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+  "after": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
+  "files": {
+    "openfeature/doc.go": "6a048490708919b40a24ba22562c12b79668e2c27a5838f57c3fcb3ad6318656",
+    "openfeature/evaluator.go": "de450b59d54d7f8cdf43c1bbeda3cb66d8ef394e05ff2fc194e15a5750abe519",
+    "openfeature/evaluator_test.go": "835916157b753faf199fe6c64efc162fa618cecaf4c7aa58755766934793091f",
+    "openfeature/experimentation_opt_out.go": "9f6eac3929dd2aaa5e9a7bc4d6b8ebf8c818d0ab0c103b6e6fc3a5b5f47109d9",
+    "openfeature/experimentation_opt_out_future_test.go": "7356949c48208ed4f357945c47da715de99d6e0d46baafcf4ad19a330bba94c6",
+    "openfeature/experimentation_opt_out_test.go": "06d0845966d4d3a79e822eef255b0a78e01b29766c62f44060812ea30ad28eac",
+    "openfeature/flageval_logging.go": "52abda91e14c29b197c4b60e7e35b98a3e15ab50e17486df397d52f9dbb0549a",
+    "openfeature/flatten.go": "60713ad8bc7859d0a542c91b6fbf85b89921f8a5f1cf515066141bbda3ea357e",
+    "openfeature/nil_stringer_attribute_test.go": "37042d1a749372b68c01996774bf8f8d0d64bae41ed516bcce9fa0532bbc3f73",
+    "openfeature/provider.go": "f7136d4a053f6c4789852b6adc09033a7e5f606d764f18ed69310b931f80b1d3"
+  },
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+  "commits": [
+    {
+      "sha": "bb9b433e219a1235be8071f66adaec877086bc71",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "fdfd091368e7399e37f54fd8050dfebb3419664c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "627db08193d8019d33282024d8340327997205ec",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0f6f2f798afac67604e1acd223e9b3ac199dc151",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}
