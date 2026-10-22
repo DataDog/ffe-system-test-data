@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "go-stack-5666-5700-proposal-v3-go-d004-adoption",
+  "revision": "go-stack-5666-5700-proposal-v4-go-d004-published",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -221,7 +221,7 @@
       ]
     },
     {
-      "authority": "Leo explicitly selected browser D004 for Go in the current Codex conversation; original public browser decision retained.",
+      "authority": "Leo selected browser D004 for Go and published that decision in the linked PR reply; original browser setting retained.",
       "id": "D004",
       "provenance": [
         {
@@ -258,6 +258,11 @@
           "stage": "accepted-go-locally",
           "summary": "Adopt the existing browser D004 rule for dd-trace-go PR #5700; no fleet-wide approval.",
           "target_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+          "stage": "accepted-go-published",
+          "summary": "User-approved reply published with browser origin, reviewer validation and bounded Lean proof preview. Exact body read back; no implementation claim."
         }
       ],
       "revision": 2,
@@ -275,14 +280,14 @@
       "go_reconciliation": "POLICY SELECTED: browser future-only PARSE_ERROR with distinct valid/missing/invalid states. Current Go all-mode quarantine must change; reviewer invalid-as-missing is not selected. Native implementation pending.",
       "latest_setting": {
         "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
-        "thread_url": null,
-        "kind": "local-decision",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+        "kind": "author-decision",
         "author": "leoromanovsky",
-        "recorded_at": "2026-10-22T17:12:45.310115+00:00",
+        "recorded_at": "2026-10-22T17:28:43Z",
         "source_sha": null,
-        "scope_note": "Leo adopted browser D004 r2 for Go #5700 in Codex. Current Go head remains unchanged; native implementation pending.",
-        "gap": "No public decision-setting reply posted for Go yet; the linked PR is the adoption target.",
-        "local_evidence": "evidence/go-5700-d004-adoption.json",
+        "scope_note": "Leo adopted browser D004 r2 for Go #5700 and published the decision; Go implementation and native validation remain pending.",
+        "gap": null,
+        "local_evidence": "evidence/go-5700-d004-published-reply.json",
         "last_public_setting": {
           "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
           "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
@@ -921,7 +926,7 @@
       ]
     }
   ],
-  "previous_revision": "go-stack-5666-5700-proposal-v2-provenance",
-  "revision_note": "Leo selected browser D004 r2 for Go; implementation pending. No semantic statements or existing receipt revisions changed.",
+  "previous_revision": "go-stack-5666-5700-proposal-v3-go-d004-adoption",
+  "revision_note": "Published the approved Go adoption reply and recorded its exact URL; implementation pending. Semantic statements and historical receipts unchanged.",
   "validation_history_file": "validation-history.json"
 }

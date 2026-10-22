@@ -12,9 +12,12 @@
   "inspected_go_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
   "implementation_status": "pending",
   "native_go_validation_status": "pending",
-  "reply_status": "draft-only; not posted",
+  "reply_status": "posted; exact approved body verified by readback",
   "draft_path": "../../review-drafts/go-5700-malformed-activation.md",
   "draft_sha256": "aabd364383e3ed3ff295b7cd26b71f711110faf4f3a4ce448dc32ac298f772f8",
   "semantics_changed": false,
-  "note": "This is scoped adoption of an existing rule, not a new test result. Historical validation rows remain unchanged."
+  "note": "This is scoped adoption of an existing rule, not a new test result. Historical validation rows remain unchanged.",
+  "public_decision": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+  "published_at": "2026-10-22T17:28:43Z",
+  "published_evidence": "evidence/go-5700-d004-published-reply.json"
 }

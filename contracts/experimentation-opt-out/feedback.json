@@ -367,7 +367,7 @@
       ],
       "disposition": "alternative-accepted-implementation-pending",
       "kind": "shared-semantics",
-      "next_action": "Implement browser D004 r2 in Go as selected by Leo; retain malformed versus missing distinction. Reply drafted, not posted; native Go tests pending.",
+      "next_action": "Implement browser D004 r2 in Go as selected by Leo; retain malformed versus missing distinction. Decision reply posted; native Go tests pending.",
       "thread_state": {
         "resolved": false,
         "outdated": false
@@ -378,7 +378,9 @@
       "created_at": "2026-10-21T22:16:40Z",
       "comment_commit_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
       "current_head_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
-      "local_decision_evidence": "evidence/go-5700-d004-adoption.json"
+      "local_decision_evidence": "evidence/go-5700-d004-adoption.json",
+      "decision_reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+      "decision_reply_evidence": "evidence/go-5700-d004-published-reply.json"
     },
     {
       "id": "go-5700-4342540461",

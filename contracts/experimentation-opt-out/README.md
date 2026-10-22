@@ -37,7 +37,7 @@ The main remaining work is:
    the browser rule in this review session: preserve invalid separately and return
    PARSE_ERROR only for an opted-out future-mode subject. Current Go still rejects
    the affected flag in every mode; implementation and native tests remain pending.
-   The public reply is [drafted locally](../../review-drafts/go-5700-malformed-activation.md).
+   The [decision reply is published](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041); its exact text is [saved locally](../../review-drafts/go-5700-malformed-activation.md).
    [Local adoption record](evidence/go-5700-d004-adoption.json); fleet adoption is separate.
    [Request](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303).
 3. **Disabled-provider precedence:** the current constructor validates mode before
@@ -75,8 +75,8 @@ The remaining optional helper/error/comment changes are in the complete ledger.
 - [decision-history.md](decision-history.md): each current decision-setting PR/thread
   and a linked historical table of passing, failing and incomplete checks. Three
   imported rules (D008, D009, D014) have PR context but no identified public
-  setting of the complete rule. D004 additionally records local Go acceptance
-  with its public reply still pending; its prior browser-setting link is retained.
+  setting of the complete rule. D004 now links to the published Go decision;
+  its prior browser-setting link and historical checks are retained.
 - [validation-history.json](validation-history.json): append-only checks with
   tested revisions/profiles, source/patch pins, evidence kinds and limits.
   Regenerate the table with `python3 contracts/experimentation-opt-out/decision_history.py`.
