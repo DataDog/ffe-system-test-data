@@ -1,0 +1,389 @@
+{
+  "fixture_hashes": {
+    "lookup-cases.json": "2538e44437c075adba6a58b354a307d6d67901f1b653daeaf3898fe5d5104961",
+    "runtime-cases.json": "c47cf29d64d176b418c916229208875b904cb871ed43a78c57a3838987911226"
+  },
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "image_id": "sha256:f81b0aadaef53266591ff417fb5fde087a8306d22b9e214635d287508acf42f5",
+  "initial_attempt": {
+    "cause": "Rails net-imap0.5.9 Ractor compatibility with Ruby4.0",
+    "correction": "Evidence-only net-imap0.6.2 pin matches the Ruby4.0 engine bundled version",
+    "record": "../attempt1-ruby4-boot",
+    "status": "application boot failed before test execution",
+    "tested_ruby_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef"
+  },
+  "lean_source_manifest_sha256": "0407fb0330aefbeb086f16784aba0e5629f9e0241e80cd1416308146cbc9679d",
+  "modes": {
+    "disabled": {
+      "captured_evaluation_count_sum": 939,
+      "captured_evaluation_rows": 305,
+      "captured_exposure_events": 305,
+      "extension_sha256": [
+        "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031"
+      ],
+      "groups": {
+        "test_configuration_updates": {
+          "case_stages": 6,
+          "error_codes": {
+            "": 18
+          },
+          "http_200": 18,
+          "http_responses": 18,
+          "reasons": {
+            "DEFAULT": 18
+          }
+        },
+        "test_cutoff_matrix": {
+          "case_stages": 17,
+          "error_codes": {
+            "": 51
+          },
+          "http_200": 51,
+          "http_responses": 51,
+          "reasons": {
+            "STATIC": 51
+          }
+        },
+        "test_holdout_assignments": {
+          "case_stages": 192,
+          "error_codes": {
+            "": 576
+          },
+          "http_200": 576,
+          "http_responses": 576,
+          "reasons": {
+            "SPLIT": 576
+          }
+        },
+        "test_independent_telemetry_control": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 12
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "STATIC": 12
+          }
+        },
+        "test_lean_context_recovery": {
+          "case_stages": 8,
+          "error_codes": {
+            "": 24
+          },
+          "http_200": 24,
+          "http_responses": 24,
+          "reasons": {
+            "STATIC": 24
+          }
+        },
+        "test_lean_lookup_precedence": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 3,
+            "FLAG_NOT_FOUND": 9
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "ERROR": 9,
+            "STATIC": 3
+          }
+        },
+        "test_lean_policy_contract": {
+          "case_stages": 168,
+          "error_codes": {
+            "": 504
+          },
+          "http_200": 504,
+          "http_responses": 504,
+          "reasons": {
+            "STATIC": 498,
+            "TARGETING_MATCH": 6
+          }
+        }
+      },
+      "http_responses": 1197,
+      "libdatadog_gem_version": "46.0.0.1.1",
+      "loaded_native_sha256": [
+        "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921"
+      ],
+      "openfeature_version": "0.6.5",
+      "runtime_ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+      "test_counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 7,
+        "skipped": 0,
+        "tests": 7
+      }
+    },
+    "future": {
+      "captured_evaluation_count_sum": 939,
+      "captured_evaluation_rows": 309,
+      "captured_exposure_events": 171,
+      "extension_sha256": [
+        "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031"
+      ],
+      "groups": {
+        "test_configuration_updates": {
+          "case_stages": 6,
+          "error_codes": {
+            "": 18
+          },
+          "http_200": 18,
+          "http_responses": 18,
+          "reasons": {
+            "DEFAULT": 15,
+            "STATIC": 3
+          }
+        },
+        "test_cutoff_matrix": {
+          "case_stages": 17,
+          "error_codes": {
+            "": 42,
+            "INVALID_CONTEXT": 9
+          },
+          "http_200": 51,
+          "http_responses": 51,
+          "reasons": {
+            "DEFAULT": 3,
+            "ERROR": 9,
+            "STATIC": 39
+          }
+        },
+        "test_holdout_assignments": {
+          "case_stages": 192,
+          "error_codes": {
+            "": 576
+          },
+          "http_200": 576,
+          "http_responses": 576,
+          "reasons": {
+            "SPLIT": 384,
+            "STATIC": 192
+          }
+        },
+        "test_independent_telemetry_control": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 12
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "STATIC": 12
+          }
+        },
+        "test_lean_context_recovery": {
+          "case_stages": 8,
+          "error_codes": {
+            "": 18,
+            "INVALID_CONTEXT": 6
+          },
+          "http_200": 24,
+          "http_responses": 24,
+          "reasons": {
+            "ERROR": 6,
+            "STATIC": 18
+          }
+        },
+        "test_lean_lookup_precedence": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 3,
+            "FLAG_NOT_FOUND": 6,
+            "INVALID_CONTEXT": 3
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "ERROR": 9,
+            "STATIC": 3
+          }
+        },
+        "test_lean_policy_contract": {
+          "case_stages": 168,
+          "error_codes": {
+            "": 264,
+            "INVALID_CONTEXT": 204,
+            "PARSE_ERROR": 36
+          },
+          "http_200": 504,
+          "http_responses": 504,
+          "reasons": {
+            "DEFAULT": 18,
+            "ERROR": 240,
+            "STATIC": 240,
+            "TARGETING_MATCH": 6
+          }
+        }
+      },
+      "http_responses": 1197,
+      "libdatadog_gem_version": "46.0.0.1.1",
+      "loaded_native_sha256": [
+        "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921"
+      ],
+      "openfeature_version": "0.6.5",
+      "runtime_ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+      "test_counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 7,
+        "skipped": 0,
+        "tests": 7
+      }
+    },
+    "immediate": {
+      "captured_evaluation_count_sum": 939,
+      "captured_evaluation_rows": 309,
+      "captured_exposure_events": 94,
+      "extension_sha256": [
+        "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031"
+      ],
+      "groups": {
+        "test_configuration_updates": {
+          "case_stages": 6,
+          "error_codes": {
+            "": 18
+          },
+          "http_200": 18,
+          "http_responses": 18,
+          "reasons": {
+            "DEFAULT": 9,
+            "STATIC": 9
+          }
+        },
+        "test_cutoff_matrix": {
+          "case_stages": 17,
+          "error_codes": {
+            "": 42,
+            "INVALID_CONTEXT": 9
+          },
+          "http_200": 51,
+          "http_responses": 51,
+          "reasons": {
+            "DEFAULT": 3,
+            "ERROR": 9,
+            "STATIC": 39
+          }
+        },
+        "test_holdout_assignments": {
+          "case_stages": 192,
+          "error_codes": {
+            "": 576
+          },
+          "http_200": 576,
+          "http_responses": 576,
+          "reasons": {
+            "SPLIT": 192,
+            "STATIC": 384
+          }
+        },
+        "test_independent_telemetry_control": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 12
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "STATIC": 12
+          }
+        },
+        "test_lean_context_recovery": {
+          "case_stages": 8,
+          "error_codes": {
+            "": 18,
+            "INVALID_CONTEXT": 6
+          },
+          "http_200": 24,
+          "http_responses": 24,
+          "reasons": {
+            "ERROR": 6,
+            "STATIC": 18
+          }
+        },
+        "test_lean_lookup_precedence": {
+          "case_stages": 4,
+          "error_codes": {
+            "": 3,
+            "FLAG_NOT_FOUND": 6,
+            "INVALID_CONTEXT": 3
+          },
+          "http_200": 12,
+          "http_responses": 12,
+          "reasons": {
+            "ERROR": 9,
+            "STATIC": 3
+          }
+        },
+        "test_lean_policy_contract": {
+          "case_stages": 168,
+          "error_codes": {
+            "": 300,
+            "INVALID_CONTEXT": 204
+          },
+          "http_200": 504,
+          "http_responses": 504,
+          "reasons": {
+            "DEFAULT": 30,
+            "ERROR": 204,
+            "STATIC": 270
+          }
+        }
+      },
+      "http_responses": 1197,
+      "libdatadog_gem_version": "46.0.0.1.1",
+      "loaded_native_sha256": [
+        "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921"
+      ],
+      "openfeature_version": "0.6.5",
+      "runtime_ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+      "test_counts": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 7,
+        "skipped": 0,
+        "tests": 7
+      }
+    }
+  },
+  "native_matrix": {
+    "31": [
+      {
+        "examples": 1039,
+        "failed": 0,
+        "pending": 0
+      },
+      {
+        "examples": 1039,
+        "failed": 0,
+        "pending": 0
+      }
+    ],
+    "40": [
+      {
+        "examples": 1043,
+        "failed": 0,
+        "pending": 0
+      },
+      {
+        "examples": 1039,
+        "failed": 0,
+        "pending": 0
+      }
+    ]
+  },
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "qualification_limits": [
+    "Linux x86_64. Native OpenFeature matrix on Ruby3.1.7 and4.0.1; HTTP intake on Ruby4.0.1 only.",
+    "Real Ruby C extension and exact temporary libdatadog source override; released gem version46.0.0.1.1 is unchanged.",
+    "Remote Config test server and captured local Agent HTTP intake; no production edge or deployment proof.",
+    "Namespace, loopback ports, Ruby4 engine, and net-imap compatibility are recorded runtime overrides.",
+    "Shared assertions and provisional activation are unchanged. Native runtime evidence does not extend Lean theorem scope.",
+    "No standalone transport, hosted CI, released SDK/native package, or mobile/browser grammar qualification."
+  ],
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "ruby_source_archive_sha256": "f69f676096cf2758f8239bda574a4cd53f5265f42a1a8465357eb59b4222208f"
+}

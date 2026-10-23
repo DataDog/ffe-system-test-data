@@ -1,0 +1,11 @@
+standard-custom extension supports plugin, specify `plugins: standard-custom` instead of `require: standard-custom` in /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/.rubocop.yml.
+For more information, see https://docs.rubocop.org/rubocop/plugin_migration_guide.html.
+standard-performance extension supports plugin, specify `plugins: standard-performance` instead of `require: standard-performance` in /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/.rubocop.yml.
+For more information, see https://docs.rubocop.org/rubocop/plugin_migration_guide.html.
+rubocop-performance extension supports plugin, specify `plugins: rubocop-performance` instead of `require: rubocop-performance` in /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/.rubocop.yml.
+For more information, see https://docs.rubocop.org/rubocop/plugin_migration_guide.html.
+Running RuboCop...
+Inspecting 1 file
+.
+
+1 file inspected, no offenses detected

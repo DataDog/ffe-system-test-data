@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-10-23T15:26:56.433094+00:00",
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "image_id": "sha256:f81b0aadaef53266591ff417fb5fde087a8306d22b9e214635d287508acf42f5",
+  "build_exit_code": 0,
+  "build_log_sha256": "63992db544e20a1ce0605fa7b0f0b8f32ebc418d21b6acc8c1eb70ae0deacb8c",
+  "libdatadog_gem_version": "46.0.0.1.1",
+  "source_hashes_verified": true,
+  "native_shared_library_sha256": "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921",
+  "overlay_manifests": [
+    "isolation-manifest.json",
+    "ruby4-runtime-manifest.json"
+  ],
+  "dependency_lock_sha256": "f17e175d1d85457d03b20356afd4db2fe156174964a6757311ae8e09c510e5c0",
+  "dependency_lock_diff": "runtime-dependency-lock.patch",
+  "dirty_paths": [
+    "utils/_context/_scenarios/endtoend.py",
+    "utils/_context/containers.py",
+    "utils/build/build.sh",
+    "utils/build/docker/overwrite_waf_rules.Dockerfile",
+    "utils/build/docker/ruby/rails72.Dockerfile",
+    "utils/build/docker/ruby/rails72/Gemfile",
+    "utils/proxy/ports.py"
+  ],
+  "boundary": "Built source and installed extension identity. Native process maps are captured separately during HTTP scenarios."
+}

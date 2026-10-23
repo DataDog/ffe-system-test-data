@@ -1,0 +1,35 @@
+{
+  "repository": "DataDog/dd-trace-rb",
+  "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "clean_before_and_after": true,
+  "commands": [
+    {
+      "command": [
+        "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+        "exec",
+        "rake",
+        "test:open_feature"
+      ],
+      "environment_overrides": {},
+      "start": "2026-10-23T15:20:34.912203+00:00",
+      "exit_code": 0,
+      "log": "native-exact-head.log",
+      "log_sha256": "fd0de97a65970c9f36e3c35ebeef3dc431f5c2b78937ab5ca84f401d8c90014f"
+    },
+    {
+      "command": [
+        "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+        "exec",
+        "rake",
+        "test:core_with_libdatadog_api"
+      ],
+      "environment_overrides": {
+        "SPEC": "spec/datadog/core/feature_flags_spec.rb"
+      },
+      "start": "2026-10-23T15:20:45.892962+00:00",
+      "exit_code": 0,
+      "log": "core-exact-head.log",
+      "log_sha256": "81bbfb47ad8ccfd658b39a5efe42654649f9db55c3fd1c902882631fa52fd645"
+    }
+  ]
+}

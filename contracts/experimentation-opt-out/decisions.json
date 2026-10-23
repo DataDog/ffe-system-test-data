@@ -229,7 +229,26 @@
         "SDK-ADOPTION-ANDROID-012",
         "LIBDATADOG-2698-003",
         "LIBDATADOG-2698-004",
-        "LIBDATADOG-2698-006"
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-001",
+        "RUBY-6521-002",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ],
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 1,
+          "scope_note": "Preserve exact attribute identity and invalid-input state across Ruby-to-C conversion.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
       ]
     },
     {
@@ -395,7 +414,11 @@
         "LIBDATADOG-2698-001",
         "LIBDATADOG-2698-003",
         "LIBDATADOG-2698-004",
-        "LIBDATADOG-2698-006"
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -429,6 +452,17 @@
           "recorded_at": "2026-10-23T12:59:11.313264+00:00",
           "evidence": "evidence/libdatadog-adoption-20261023/local-adoption.json",
           "authorization_scope": "Current user request to apply the same contract completion process to this PR. No fleet approval."
+        },
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Use existing effective-future, flag-wide activation validation.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
         }
       ]
     },
@@ -519,7 +553,10 @@
         "LIBDATADOG-2698-002",
         "LIBDATADOG-2698-003",
         "LIBDATADOG-2698-004",
-        "LIBDATADOG-2698-006"
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-006"
       ],
       "implementation_adoptions": [
         {
@@ -531,6 +568,17 @@
           "recorded_at": "2026-10-23T12:59:11.313264+00:00",
           "evidence": "evidence/libdatadog-adoption-20261023/local-adoption.json",
           "authorization_scope": "Current user request to apply the same contract completion process to this PR. No fleet approval."
+        },
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Inherit native surrounding-whitespace rule; preserve remaining Chrono grammar. No browser parser parity claim.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
         }
       ]
     },
@@ -842,7 +890,9 @@
         "SDK-ADOPTION-ANDROID-010",
         "SDK-ADOPTION-ANDROID-011",
         "SDK-ADOPTION-ANDROID-012",
-        "SDK-ADOPTION-JAVA-008"
+        "SDK-ADOPTION-JAVA-008",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
       ]
     },
     {
@@ -900,7 +950,11 @@
         "SDK-ADOPTION-JAVA-004",
         "SDK-ADOPTION-JAVA-005",
         "LIBDATADOG-2698-003",
-        "LIBDATADOG-2698-004"
+        "LIBDATADOG-2698-004",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
       ]
     },
     {
@@ -1052,7 +1106,13 @@
         "SDK-ADOPTION-JAVA-004",
         "LIBDATADOG-2698-003",
         "LIBDATADOG-2698-004",
-        "LIBDATADOG-2698-006"
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006",
+        "RUBY-6521-007",
+        "RUBY-6521-008"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -1102,7 +1162,20 @@
         "gap": "No fleet adoption or per-target rollout completion is implied; the RFC-backed scope is reaffirmed in the linked reply.",
         "published_native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
         "publication_evidence": "evidence/activation-review-20261022/publication.json"
-      }
+      },
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 1,
+          "scope_note": "Disabled, immediate, and future modes use the pinned native implementation.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
+      ]
     },
     {
       "authority": "observed JS PR outcome; fleet adoption remains proposed",
@@ -1467,7 +1540,11 @@
         "SDK-REFRESH-GO-001",
         "LIBDATADOG-2698-003",
         "LIBDATADOG-2698-004",
-        "LIBDATADOG-2698-006"
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
       ]
     },
     {

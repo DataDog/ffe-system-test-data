@@ -2471,6 +2471,179 @@
       "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
       "evidence_file": "evidence/libdatadog-adoption-20261023/independent-review.md",
       "limits": "Review is not runtime execution, merge approval, release, or wrapper adoption."
+    },
+    {
+      "id": "RUBY-6521-001",
+      "decision_revisions": {
+        "D002": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": null,
+      "patch": "Historical negative control; restored source before signed execution.",
+      "evidence_kind": "native-validation",
+      "outcome": "expected-failure-detected",
+      "check": "Removing the byte-validation guard causes 6 of 21 native provider boundary examples to fail.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/invalid-encoding-negative-control.log",
+      "limits": "Candidate mutation only. Restored before final signed execution; no change to expected results."
+    },
+    {
+      "id": "RUBY-6521-002",
+      "decision_revisions": {
+        "D002": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": null,
+      "patch": "Historical negative control; restored source before signed execution.",
+      "evidence_kind": "native-validation",
+      "outcome": "expected-failure-detected",
+      "check": "Removing the C attribute-name guard causes 2 of 21 native provider boundary examples to fail.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/nul-attribute-alias-negative-control.log",
+      "limits": "Candidate mutation only. Embedded NUL names must not become the reserved key; source restored."
+    },
+    {
+      "id": "RUBY-6521-003",
+      "decision_revisions": {
+        "D002": 1,
+        "D004": 2,
+        "D005": 2,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "patch": null,
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "Ruby 3.4.7: 1043 + 1039 OpenFeature examples and 44 C-binding examples pass; each OpenFeature lane executes all 90 policy cases.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/native-receipt.json",
+      "limits": "Native Chrono grammar and omitted-doLog compatibility remain scoped. Unit/provider tests do not prove HTTP event delivery."
+    },
+    {
+      "id": "RUBY-6521-004",
+      "decision_revisions": {
+        "D002": 1,
+        "D004": 2,
+        "D005": 2,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "patch": null,
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "Linux Ruby 3.1.7 passes 1039 + 1039 examples; Ruby 4.0.1 passes 1043 + 1039. Zero failures or pending examples.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/native-receipt.json",
+      "limits": "Pinned native ead implementation. Ruby 3.1 minimum/latest lanes both resolve OpenFeature 0.5.1 in repository locks."
+    },
+    {
+      "id": "RUBY-6521-005",
+      "decision_revisions": {
+        "D002": 1,
+        "D004": 2,
+        "D009": 1,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "patch": null,
+      "evidence_kind": "system-test-validation",
+      "outcome": "pass",
+      "check": "Shared system tests exercise all 3 modes through public OpenFeature resolution and captured event intake; counts are in the reviewed receipt.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/runtime-review.json",
+      "limits": "Temporary native dependency and documented isolated harness overlays. No released-package or production-backend claim."
+    },
+    {
+      "id": "RUBY-6521-006",
+      "decision_revisions": {
+        "D002": 1,
+        "D004": 2,
+        "D005": 2,
+        "D009": 1,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "patch": null,
+      "evidence_kind": "independent-source-review",
+      "outcome": "pass",
+      "check": "Independent signed-source and evidence review finds no open correctness finding.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/independent-review.md",
+      "limits": "Review is not human approval, merge, release, or fleet policy approval."
+    },
+    {
+      "id": "RUBY-6521-007",
+      "decision_revisions": {
+        "D011": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+      "patch": null,
+      "evidence_kind": "hosted-ci-validation",
+      "outcome": "fail",
+      "check": "Ten hosted CI jobs report 140 test-setup failures with released libdatadog. The outer hook constructs enabled providers before the native capability skip.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/ci-triage/summary.json",
+      "limits": "Historical test setup failure. Production rejection of unsupported enabled modes remains correct. No shared semantics changed."
+    },
+    {
+      "id": "RUBY-6521-008",
+      "decision_revisions": {
+        "D011": 1
+      },
+      "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "evidence_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+      "target": "Ruby OpenFeature provider and libdatadog boundary",
+      "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "patch": null,
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "Released-native provider checks pass in both OpenFeature lanes: 98 examples, 0 failures, 21 pending per lane.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
+      "evidence_file": "evidence/ruby-adoption-20261023/ci-triage/summary.json",
+      "limits": "The 21 pending cases require unreleased native modes. All execute without skips in the separate pinned-native matrix. This is not full hosted CI qualification."
     }
   ]
 }

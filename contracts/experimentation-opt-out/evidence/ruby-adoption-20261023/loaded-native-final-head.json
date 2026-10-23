@@ -1,0 +1,40 @@
+{
+  "ruby": "ruby 3.4.7 (2025-10-08 revision 7a5688e2a2) +PRISM [arm64-darwin24]",
+  "rbconfig_ruby": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby",
+  "vendor_override": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/libdatadog-vendor",
+  "libdatadog_gem": "46.0.0.1.1",
+  "libdatadog_library_path": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/libdatadog-vendor/arm64-darwin/lib",
+  "loaded_features": [
+    "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/lib/libdatadog_api.3.4_arm64-darwin24.bundle"
+  ],
+  "loaded_native_images": [
+    {
+      "path": "/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/libruby.3.4.dylib",
+      "realpath": "/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/libruby.3.4.dylib",
+      "sha256": "800ad4b0733acd9b91fe2b3d93fc0073d58c952960b34d48ec5a1c4d07a49d49"
+    },
+    {
+      "path": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/native/lib/libgmp.10.dylib",
+      "realpath": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/native/lib/libgmp.10.dylib",
+      "sha256": "55cc39f953cedfaa481e81f0abcf3cffca3c41aea9bb79779e5d632da7ed0edf"
+    },
+    {
+      "path": "/usr/lib/libcrypto.46.dylib",
+      "disk_file_available": false
+    },
+    {
+      "path": "/usr/lib/libssl.48.dylib",
+      "disk_file_available": false
+    },
+    {
+      "path": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/lib/libdatadog_api.3.4_arm64-darwin24.bundle",
+      "realpath": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/lib/libdatadog_api.3.4_arm64-darwin24.bundle",
+      "sha256": "db4d205d15e5f3014d2163cd74be1c64a366e63574222e76481d30a7db1c8c39"
+    },
+    {
+      "path": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.dylib",
+      "realpath": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.dylib",
+      "sha256": "7a09b43e8d1693ae22ae65fa1afebfec08407901c4ca53e2091aafc4acb79818"
+    }
+  ]
+}

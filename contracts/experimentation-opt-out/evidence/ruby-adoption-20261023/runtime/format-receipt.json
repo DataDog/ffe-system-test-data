@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-23T14:47:03.468971+00:00",
+  "harness_base": "a45f53c4aef20eb130116556598e593785657159",
+  "command": "./format.sh",
+  "exit_code": 0,
+  "changed_files": {
+    "utils/build/docker/ruby/rails72/app/controllers/open_feature_controller.rb": "c3be144260841e9f1b4bc774d3b9ccd30404deefb0fbf2f290a4542db0960a95"
+  },
+  "format_log_sha256": "79b091d6acc3999419b244495d3aab8d9a2f7f5f9161594cd951e41cd92b30c4"
+}

@@ -1,0 +1,302 @@
+{
+  "acceptance_scope": "Independent source and recorded evidence review only. Not merge, release, deployment, or fleet approval.",
+  "accepted": true,
+  "approved_export_bytes": 3598608,
+  "evidence_files": [
+    "controller-probe.log",
+    "disabled-loaded-identity.json",
+    "format-receipt.json",
+    "future-loaded-identity.json",
+    "immediate-loaded-identity.json",
+    "initial-boot-failure.json",
+    "intake-observations.json",
+    "isolation-manifest.json",
+    "isolation.patch",
+    "native-artifact-files.json",
+    "native-build-receipt.json",
+    "native-ffe-symbols.txt",
+    "native-observations.json",
+    "native-ruby31-loaded-identity.json",
+    "native-ruby31-receipt.json",
+    "native-ruby40-loaded-identity.json",
+    "native-ruby40-receipt.json",
+    "native-source-binding.json",
+    "production-source-equivalence.json",
+    "qualification-exits.json",
+    "ruby-build-receipt.json",
+    "ruby-image-installed-identity.json",
+    "ruby-runtime-receipt.json",
+    "ruby-source-files.json",
+    "ruby4-runtime-manifest.json",
+    "ruby4-runtime.patch",
+    "runtime-Gemfile.lock",
+    "runtime-dependency-lock.patch",
+    "runtime-summary.json",
+    "signed-source-preparation.json"
+  ],
+  "evidence_sha256": {
+    "controller-probe.log": "7dc292ae94f15d3b180530785d646504614eb8c7e1a68922e44bc8bab21651f4",
+    "disabled-loaded-identity.json": "20420a914d7059698458d045d0fe03a773571776aa3896a4541bf39ab44411ce",
+    "format-receipt.json": "1118e440097259d97ef41790f23a5f016bef3bddc0ee3dde15cc16416da7ab10",
+    "future-loaded-identity.json": "e1cc16ff28a5eabb93e0999717e294fd664a9897b68312c128f04df1b147cdfd",
+    "immediate-loaded-identity.json": "2faa9ffcf42be3d20eef6d6a41852cc5325ef24f2cf3cf92f50a3bca08bb3b17",
+    "initial-boot-failure.json": "6febdfb7bdcf705a7e2d8750ebbaea95953d5a8aa9ddfc4faf90bc8c7c1255ef",
+    "intake-observations.json": "9fc2a248ba9b2e1cd28e7e47272c87a6c503b3e8d4c41b51e9a9b65ea466ab67",
+    "isolation-manifest.json": "33ad982088d314b3667ffa455cd0ccb9dcbf938c56a74efacc659c08ed85b2db",
+    "isolation.patch": "a05a1c03e95ad4080e0d92aca6247a099069605bf7d37984625149f0130c0918",
+    "native-artifact-files.json": "1335fb0b3f393301e5a12ed1e616c67b08e93880e26b1a85823fc4c1246d0288",
+    "native-build-receipt.json": "fe5c06cd3b55ead2d75f15873c42ddb67d7c6fb950475c49c16f20f6f699a1a9",
+    "native-ffe-symbols.txt": "e9e15faa7f18befad0254385798b21693d4695b917999e1f2ebb6de4056a3cae",
+    "native-observations.json": "5044c3215475d0abada54ace86b35bec89b4981c13061dca0eb2aec74991639b",
+    "native-ruby31-loaded-identity.json": "78c5aab00b6c84adb8ef8d44a5d53ad363b94b8eeefb2affbaf16bdac889755a",
+    "native-ruby31-receipt.json": "d3fb9def6d060606725b9178189cf64c5cd421dbc6c58a2f1b72391dd7d868bf",
+    "native-ruby40-loaded-identity.json": "da1dcd4d68ad62ed662e03ca7e3c68ae97b1e1b2b49ab9c3d29eda90de863883",
+    "native-ruby40-receipt.json": "637b2f7d27817c46fcb9a4899100e96d56eea7fae96b873e0d7d6956073376bb",
+    "native-source-binding.json": "fda34b33c83903552394f4cb7e15e62db4d5034ba74d76fa4756e4493b18ceb7",
+    "production-source-equivalence.json": "4810c7885550187456f1e2f010268f9d963c106103823d46c17bb01ddc780e1a",
+    "qualification-exits.json": "498d820581cfe773e295102dbf8c4996b07c32e54ca3da6aa1272bea345e0257",
+    "ruby-build-receipt.json": "38626ee0d4da59c1dd18901c66e32245ac35ab5e88effbb3e4a3f9080f7e4896",
+    "ruby-image-installed-identity.json": "d59e10f1363da74b848b212da0e243c472b85e02cd215c0d49b594832df33f71",
+    "ruby-runtime-receipt.json": "e4b995b612766ae6fbea29d4d08ca3ea5cf4021b9697266ee346b97b41efa32b",
+    "ruby-source-files.json": "02cb9840bd3e87c48b248750c51165d67fb7906a804a4ad93ded46353626e316",
+    "ruby4-runtime-manifest.json": "f81b800d621f029b0efc6ad1a1b035508545cc44654113ee48d6fb4aabaff2ef",
+    "ruby4-runtime.patch": "b48c10715cf1d50ede80d26b86bca89fd25b49efbb55cf880b9ac6daa74b594b",
+    "runtime-Gemfile.lock": "f17e175d1d85457d03b20356afd4db2fe156174964a6757311ae8e09c510e5c0",
+    "runtime-dependency-lock.patch": "508e088c02468ec992b1de8169ce84e3f36b78e7e4b9659455ec0d5250f9905b",
+    "runtime-summary.json": "e6207ef208beb00c3266492290096744bea5167d3cc33b83d93b6282384ca577",
+    "signed-source-preparation.json": "356f2043e3a8bcf9bcde130d18b4409bea11596ce007b47975188c4c5829e758"
+  },
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "http_image_id": "sha256:f81b0aadaef53266591ff417fb5fde087a8306d22b9e214635d287508acf42f5",
+  "independent_record_source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "independent_saved_capture_replay": {
+    "disabled": {
+      "lookup": {
+        "evaluation_count": 12,
+        "evaluation_events": 4,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 0,
+        "missing_flag_cases": 3,
+        "readiness_control": 1,
+        "responses": 12
+      },
+      "mode": "disabled",
+      "policy": {
+        "evaluation_count": 252,
+        "evaluation_events": 84,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 88,
+        "materializations": 84,
+        "responses": 504,
+        "subjects": 168
+      },
+      "recorded_harness": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "recorded_junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      },
+      "recovery": {
+        "evaluation_count": 24,
+        "evaluation_events": 4,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 4,
+        "responses": 24,
+        "sequences": 4
+      },
+      "replay_checkout_head": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "replay_helper_sha256": "7b5294ac41c018988ee27e82461f4bb31d913a48bade92c294bf2650f86efb28",
+      "source_manifest_sha256": "0407fb0330aefbeb086f16784aba0e5629f9e0241e80cd1416308146cbc9679d"
+    },
+    "future": {
+      "lookup": {
+        "evaluation_count": 12,
+        "evaluation_events": 4,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 0,
+        "missing_flag_cases": 3,
+        "readiness_control": 1,
+        "responses": 12
+      },
+      "mode": "future_experiments_only",
+      "policy": {
+        "evaluation_count": 252,
+        "evaluation_events": 84,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 28,
+        "materializations": 84,
+        "responses": 504,
+        "subjects": 168
+      },
+      "recorded_harness": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "recorded_junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      },
+      "recovery": {
+        "evaluation_count": 24,
+        "evaluation_events": 7,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 4,
+        "responses": 24,
+        "sequences": 4
+      },
+      "replay_checkout_head": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "replay_helper_sha256": "7b5294ac41c018988ee27e82461f4bb31d913a48bade92c294bf2650f86efb28",
+      "source_manifest_sha256": "0407fb0330aefbeb086f16784aba0e5629f9e0241e80cd1416308146cbc9679d"
+    },
+    "immediate": {
+      "lookup": {
+        "evaluation_count": 12,
+        "evaluation_events": 4,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 0,
+        "missing_flag_cases": 3,
+        "readiness_control": 1,
+        "responses": 12
+      },
+      "mode": "immediate",
+      "policy": {
+        "evaluation_count": 252,
+        "evaluation_events": 84,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 22,
+        "materializations": 84,
+        "responses": 504,
+        "subjects": 168
+      },
+      "recorded_harness": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "recorded_junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      },
+      "recovery": {
+        "evaluation_count": 24,
+        "evaluation_events": 8,
+        "exact_exposure_multiset": true,
+        "exact_hashed_requested_identity_counts": true,
+        "exposure_events": 4,
+        "responses": 24,
+        "sequences": 4
+      },
+      "replay_checkout_head": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+      "replay_helper_sha256": "7b5294ac41c018988ee27e82461f4bb31d913a48bade92c294bf2650f86efb28",
+      "source_manifest_sha256": "0407fb0330aefbeb086f16784aba0e5629f9e0241e80cd1416308146cbc9679d"
+    }
+  },
+  "limits": [
+    "HTTP qualification uses Linux x86_64, Ruby 4.0.1, and OpenFeature 0.6.5. Other HTTP runtimes are not qualified.",
+    "Native matrix uses Ruby 3.1.7 and 4.0.1. Its loaded-image probes use separate post-test processes. HTTP identity is captured from the running app.",
+    "The exact native source override is required. Released libdatadog gem 46.0.0.1.1 remains installed; these results do not prove released-package opt-out capability.",
+    "Evidence-only overlays isolate names and ports, select Ruby 4.0 and the native vendor, and pin net-imap 0.6.2. SDK assertions and expectations remain unchanged.",
+    "Independent replay covers policy, context recovery, and lookup precedence. Four other integration methods have saved passing JUnit results and captured observations.",
+    "Local Remote Config and Agent captures do not prove production deployment, edge behavior, or hosted CI.",
+    "Full parser parity, concurrency properties, and D017 performance timing are outside this result.",
+    "Historical ce7658 boot failure and successful runs remain separate. Final acceptance binds the full 6c4e268 rerun."
+  ],
+  "loaded_http_extension_sha256": "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031",
+  "loaded_http_native_sha256": "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921",
+  "native_matrix": {
+    "ruby 3.1.7p261 (2025-03-26 revision 0a3704f218) [x86_64-linux]": {
+      "failures": 0,
+      "log_sha256": "3ef7ad015d935a4f0550c750d62cb0c5a82eaa29cef1c710d2cd182bbeaba868",
+      "pending": 0,
+      "probe_boundary": "Separate post-test process loads the same compiled extension from the native matrix worktree. OpenFeature test results are in the matrix receipt.",
+      "task_example_counts": [
+        1039,
+        1039
+      ]
+    },
+    "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]": {
+      "failures": 0,
+      "log_sha256": "3dbfe6afab7ea93f550505c08009d677bf2a7f140e7a827ebdd260aabfbd545b",
+      "pending": 0,
+      "probe_boundary": "Separate post-test process loads the same compiled extension from the native matrix worktree. OpenFeature test results are in the matrix receipt.",
+      "task_example_counts": [
+        1043,
+        1039
+      ]
+    }
+  },
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "observed_http_counts": {
+    "disabled": {
+      "evaluation_count": 939,
+      "evaluation_rows": 305,
+      "exposure_events": 305,
+      "http_200": 1197,
+      "http_responses": 1197,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      }
+    },
+    "future": {
+      "evaluation_count": 939,
+      "evaluation_rows": 309,
+      "exposure_events": 171,
+      "http_200": 1197,
+      "http_responses": 1197,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      }
+    },
+    "immediate": {
+      "evaluation_count": 939,
+      "evaluation_rows": 309,
+      "exposure_events": 94,
+      "http_200": 1197,
+      "http_responses": 1197,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      }
+    }
+  },
+  "observed_http_totals": {
+    "errors": 0,
+    "evaluation_count": 2817,
+    "exposure_events": 570,
+    "failed_tests": 0,
+    "passed_tests": 21,
+    "responses": 3591,
+    "skipped_tests": 0
+  },
+  "privacy_review": {
+    "approved_files_sha256_bound": true,
+    "excluded": "Bulk raw headers, logs, environment file, and capture archive. Raw captures were read locally for verification.",
+    "public_url_hosts": [
+      "rubygems.org"
+    ],
+    "result": "The reviewed bounded export contains synthetic test observations. No secrets or private URLs were found."
+  },
+  "raw_capture_manifest_sha256": {
+    "disabled": "5742dc20a68eba2418996efda671426907a267a49f4c4324d3a43e4ed19b55b7",
+    "future": "714d0f6d9cfefe606d10c0949e9f5c03aab38478f7a4ee13262452bbefed0ca6",
+    "immediate": "81f05953a4b58bd10fc32613e086e580dfdc2474325337f61b46dd7ae0c75790"
+  },
+  "recorded_at": "2026-10-23T15:40:24.980182+00:00",
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "schema_version": 1,
+  "verified_compact_files": 34
+}

@@ -1,0 +1,376 @@
+{
+  "dd-trace-rb": [
+    {
+      "sha": "2c7d764bfb1f19ddca20823418acee28a653acd2",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d32aed5f5e1a02f774de93d747f02790b976a059",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "2d9db040edfbac55d95c6a1a5eac1aa4a7ec0413",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ae37a103c4cc4524bd48a62723b261d63d7b8e31",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "08d63752f28308279b8c1410879d81f195c437b3",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ec6165a14580c54119029d940a4c3f97c87cc705",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3c59360edd1bc14f9cd3c4aefe9dae1e0013c8fb",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+      "verified": true,
+      "reason": "valid"
+    }
+  ],
+  "system-tests": [
+    {
+      "sha": "26f22ff078e6f8a61447cad75b432058f911b8c4",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "031a11f165555381a2bafef512c17e443194b513",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "732b940dd1ff115d10b05bd3bdb764afc05c808f",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "652f3c95d3979856d201ee217fdc3bdf9744b49d",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "1beae32fbff474bb5d8f035dc0eaf30c3629aa70",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "eb794b794a10b1f22e3a4779d8c5e18c9d702f9b",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d35013faeedc09f6626275def115de04dff726e4",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "6307cb34ede722656a8edf8e4b3f52633a296807",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "18dac5eb37636d952a50bc0ca0c85a013dcfdb8d",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "c09695f007ba8dc3bc5f50945466b285c33dc693",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "e0285b6f2aefce3c1bdbc99058fe410de6926266",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "f5b4b132bf0a118a355794e2fb1627af7c990a48",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "84604513f3f14b4beb65f5e573b54e23c1351b39",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ee201f32fd1fe1bb513a060ce7c0712392d4d324",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "4c3dde50e59c28c4042adc1a137d412f89c0d8fc",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "5f24e0c74c960b785ea6d43ac33f686f30e5a4d4",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d8dfa7eaeaa10e4ae4a0994d0fa70d8b92f939e7",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "b5876687f8464f1a17f5a41eddb383b2f6489bd7",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d3b4e1b23c429ae5a35145d93eb2402c4f23f07e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "8bbf719e05d1c64f0c3700570ca8ec458426e331",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "36b426e0190a95e99595c56a5b33bf146e767138",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a9ebca39bb467901cf9bff27d6104def52f63c1b",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d893ffa38a63ed363e170a1a8852354a6824a2ef",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "9b706ee5be439fc7471dafd9099b53f63a229f8d",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "af34323b40f62876c82d287175fa4b3c04eb6f07",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "878a87866d00cd553d091b7d58f9be7288a3f9e9",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "2be10e05bffc9ff3967835d1bdb4ab147374bfd3",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "895e21a431a926eed8c5cee276f6eb785166f984",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "71abe7ef5f053cdd38fce8a9a512cbb57762c546",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "0f5fc45e45f3ae68c045048c1124f2e8fe4079e9",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "f96fc0c87def8db5eea943254d74ba81370f6cbe",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "e7d860477ffa4c2fb632f30283c95d67e2fdffeb",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "7e47448cf197f9f412b14c9e89414a7e596f22f5",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "9d19cf26b2487a37e86d707026f0c0a5f77a8b07",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a32a1c5da74f3ab9445254dc64b8c604f072adfd",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d40bff7f200bef6b49a694da1da1e85113f944ad",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "f8d7b76e3104f1ac82a7021863b0317ae6ebdf73",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "11297050ce1fb7ef56c6f2d372cd40c312578293",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "65fb24cc6c0dc0bccd6cf19280f8622b1fcbdc1e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "85279d634a5065eccba4206e97237e5e2d6d4e86",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "dd7de482b1809adc5fecfd1453c812033533cf8e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "5c855def53ce7c58988e6398ca631c83e19d9ab1",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "46da33c3f0cffdfbdd46cbc1c0b315710fb26dc9",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "5fd59633aa185d13e67c2288a3f84d20fbb515fc",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "4e3b701e07129cf11b0a5be417906b866d202605",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "1e819fcccb65c28a2b5d0ba9e0928f3453ea27fb",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "eef6f098d337e0fd9ade95bd98b285c96cec7d16",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "f2cbbc901577b80b8b6e7bf8757a46e0b8a10ce5",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "6418472371431d01fbdb26cd220b90cd04077aa9",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "69a1111003ef732222bd810ffe109aabee87a106",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "89be3a8227b7595548d992d5b3d7009987b7cda1",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "11b996acb682945fb365de4afb0b1ed7be762d87",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "285c8cffae56c984129a57cf1a9e37206a4cb8ee",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a13ab31fbc0fe9800ea833badd70cae4006eb351",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "bb629ec9ddfd57199dd56977fbb58080b029b4ef",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "483dceaaa23059469858a2d3fcdfd0368fc8d3e0",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3f9f99bbbbc6c796af764c6cca3d6ae6c9fdc83e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "3c00b8ae029d9c32fd6bb2228c3651966ad9c185",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "bcaa306f04f5dd4bcd15f0cff10d6777eed87675",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "7fe8af9491d06c52295f4e9c559e734b4ccc0a1a",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "31fc9f0c7e0516db9eaedb01ebf0983bf89ad964",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "23b69bd59edaf9a6a3fdc71873d18d14616f550c",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "05f6a718be3abec4bf4dc4d3fd648ef3ad7ffcb3",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "447117bcf2c50e1205173470a0cd923935c23a5d",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "5e918d2ac4dce471b6de254eb4a2fc9e8e0d496b",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a45f53c4aef20eb130116556598e593785657159",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}

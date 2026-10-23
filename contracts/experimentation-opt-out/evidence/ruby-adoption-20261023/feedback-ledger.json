@@ -1,0 +1,63 @@
+{
+  "own_pass_before_feedback": true,
+  "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "shared_semantic_change": false,
+  "review_threads": {
+    "6521": 0,
+    "6542": 0
+  },
+  "observations": [
+    {
+      "source": "https://github.com/DataDog/dd-trace-rb/pull/6521#pullrequestreview-5592651950",
+      "kind": "validation-gap",
+      "request": "Validate immediate allocation behavior against required libdatadog.",
+      "disposition": "Exact-head production-native tests pass; HTTP run tracked separately."
+    },
+    {
+      "source": "https://github.com/DataDog/dd-trace-rb/pull/6521#issuecomment-6303203584",
+      "kind": "older-codex-review",
+      "source_sha": "ae37a103c4cc4524bd48a62723b261d63d7b8e31",
+      "findings": 0,
+      "limits": "Not current-head review."
+    },
+    {
+      "source": "https://github.com/DataDog/dd-trace-rb/pull/6542",
+      "kind": "bot-status-only",
+      "disposition": "No new semantic observation."
+    },
+    {
+      "source": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257",
+      "kind": "test-setup-defect",
+      "source_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+      "disposition": "Moved the native capability skip before provider construction. Assertions and production behavior are unchanged.",
+      "fixed_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+      "decision_impact": "no_shared_impact",
+      "evidence": "ci-triage/summary.json"
+    }
+  ],
+  "own_findings": [
+    {
+      "id": "ruby-invalid-byte-cutoff",
+      "decision": "D002r1",
+      "disposition": "fixed;negative control6 failures"
+    },
+    {
+      "id": "ruby-nul-name-alias",
+      "decision": "D002r1",
+      "disposition": "fixed;negative control2 failures"
+    },
+    {
+      "id": "ruby-stale-activation-scope",
+      "decision": "D004r2",
+      "disposition": "Tests and documentation align with existing native contract."
+    }
+  ],
+  "limits": "No human approval or fleet policy inferred from reviews.",
+  "refreshed_review_summary": "No new Codex observations or inline threads after 6c4e268 publication. Codex review remains bound to ae37a103c4cc4524bd48a62723b261d63d7b8e31.",
+  "consolidation": {
+    "target_pr": 6521,
+    "stacked_pr": 6542,
+    "observed_stacked_state": "closed; merged into PR6521 branch by ancestry",
+    "master_merged": false
+  }
+}

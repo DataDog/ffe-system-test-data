@@ -1,0 +1,99 @@
+--- a/utils/_context/containers.py
++++ b/utils/_context/containers.py
+@@ -52,7 +52,7 @@
+ # fake key of length 32
+ FAKE_DD_API_KEY = "0123456789abcdef0123456789abcdef"
+ 
+-_DEFAULT_NETWORK_NAME = "system-tests_default"
++_DEFAULT_NETWORK_NAME = "optout-ruby-20261023-default"
+ _NETWORK_NAME = "bridge" if "GITLAB_CI" in os.environ else _DEFAULT_NETWORK_NAME
+ 
+ 
+@@ -198,7 +198,7 @@
+ 
+     @property
+     def container_name(self):
+-        return f"system-tests-{self.name}"
++        return f"optout-ruby-20261023-{self.name}"
+ 
+     @property
+     def log_folder_path(self):
+@@ -1080,7 +1080,7 @@
+         environment = base_environment | (environment or {})
+ 
+         super().__init__(
+-            image_name="system_tests/weblog",
++            image_name="system_tests/optout-ruby-20261023-weblog",
+             name="weblog",
+             environment=environment,
+             volumes=volumes,
+@@ -1092,8 +1092,8 @@
+                 "retries": 60,
+             },
+             ports={
+-                f"{self.host_port}/tcp": self.container_port,
+-                f"{self.host_grpc_port}/tcp": self.container_grpc_port,
++                f"{self.container_port}/tcp": ("127.0.0.1", self.host_port),
++                f"{self.container_grpc_port}/tcp": ("127.0.0.1", self.host_grpc_port),
+             },
+             stdout_interface=interfaces.library_stdout,
+             local_image_only=True,
+--- a/utils/_context/_scenarios/endtoend.py
++++ b/utils/_context/_scenarios/endtoend.py
+@@ -151,7 +151,7 @@
+         observer.start()
+ 
+     def _create_network(self) -> None:
+-        name = "system-tests-ipv6" if self.enable_ipv6 else "system-tests-ipv4"
++        name = "optout-ruby-20261023-ipv6" if self.enable_ipv6 else "optout-ruby-20261023-ipv4"
+ 
+         for network in get_docker_client().networks.list(names=[name]):
+             self._network = network
+--- a/utils/proxy/ports.py
++++ b/utils/proxy/ports.py
+@@ -4,7 +4,7 @@
+ class ProxyPorts(IntEnum):
+     """Proxy port are used by the proxy to determine the provenance of the request"""
+ 
+-    proxy_commands = 11111
++    proxy_commands = 22111
+     """ Used to change proxy state (mostly what controls mocked responses)"""
+ 
+     upstream_tls_server = 11112
+--- a/utils/build/build.sh
++++ b/utils/build/build.sh
+@@ -379,7 +379,7 @@
+                     -f ${DOCKERFILE} \
+                     --label "system-tests-library=${TEST_LIBRARY}" \
+                     --label "system-tests-weblog-variant=${WEBLOG_VARIANT}" \
+-                    -t system_tests/weblog \
++                    -t system_tests/optout-ruby-20261023-weblog \
+                     $CACHE_TO \
+                     $CACHE_FROM \
+                     $MIRROR_BUILDER_ARG \
+@@ -394,7 +394,7 @@
+                         --progress=plain \
+                         ${DOCKER_PLATFORM_ARGS} \
+                         -f utils/build/docker/overwrite_waf_rules.Dockerfile \
+-                        -t system_tests/weblog \
++                        -t system_tests/optout-ruby-20261023-weblog \
+                         $MIRROR_BUILDER_ARG \
+                         $EXTRA_DOCKER_ARGS \
+                         .
+@@ -402,7 +402,7 @@
+ 
+                 if [[ $SAVE_TO_BINARIES == 1 ]]; then
+                     echo "Saving image to $BINARIES_FILENAME"
+-                    docker save system_tests/weblog | zstd > "$BINARIES_FILENAME"
++                    docker save system_tests/optout-ruby-20261023-weblog | zstd > "$BINARIES_FILENAME"
+                 fi
+             fi
+         elif [[ $IMAGE_NAME == lambda-proxy ]]; then
+--- a/utils/build/docker/overwrite_waf_rules.Dockerfile
++++ b/utils/build/docker/overwrite_waf_rules.Dockerfile
+@@ -1,4 +1,4 @@
+-FROM system_tests/weblog
++FROM system_tests/optout-ruby-20261023-weblog
+ 
+ COPY ./binaries/waf_rule_set.json  /waf_rule_set.json
+ ENV DD_APPSEC_RULES=/waf_rule_set.json

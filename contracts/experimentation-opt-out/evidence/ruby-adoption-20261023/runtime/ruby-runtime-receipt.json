@@ -1,0 +1,68 @@
+{
+  "recorded_at": "2026-10-23T15:31:59.068168+00:00",
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "image": "sha256:f81b0aadaef53266591ff417fb5fde087a8306d22b9e214635d287508acf42f5",
+  "isolation": "isolation-manifest.json",
+  "results": {
+    "disabled": {
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "test_names": [
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_policy_contract[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_context_recovery[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_lookup_precedence[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_cutoff_matrix[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_configuration_updates[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_holdout_assignments[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_independent_telemetry_control[rails72]"
+      ],
+      "capture_manifest_sha256": "5742dc20a68eba2418996efda671426907a267a49f4c4324d3a43e4ed19b55b7",
+      "capture_files": 13
+    },
+    "immediate": {
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "test_names": [
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_policy_contract[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_context_recovery[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_lookup_precedence[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_cutoff_matrix[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_configuration_updates[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_holdout_assignments[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_independent_telemetry_control[rails72]"
+      ],
+      "capture_manifest_sha256": "81f05953a4b58bd10fc32613e086e580dfdc2474325337f61b46dd7ae0c75790",
+      "capture_files": 12
+    },
+    "future": {
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "test_names": [
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_policy_contract[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_context_recovery[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_lean_lookup_precedence[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_cutoff_matrix[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_configuration_updates[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_holdout_assignments[rails72]",
+        "tests.ffe.test_experimentation_opt_out.Test_FFE_Experimentation_Opt_Out.test_independent_telemetry_control[rails72]"
+      ],
+      "capture_manifest_sha256": "714d0f6d9cfefe606d10c0949e9f5c03aab38478f7a4ee13262452bbefed0ca6",
+      "capture_files": 13
+    }
+  },
+  "boundary": "Linux amd64 real SDK via public OpenFeature APIs, Remote Config and captured Agent HTTP intake. Includes exact detailed evaluation and delivery assertions. Excludes standalone transport, mobile/browser grammar, D017 internal operation counts, production edge service and hosted CI."
+}

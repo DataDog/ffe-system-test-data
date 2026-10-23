@@ -1,0 +1,30 @@
+--- a/utils/build/docker/ruby/rails72.Dockerfile
++++ b/utils/build/docker/ruby/rails72.Dockerfile
+@@ -1,4 +1,4 @@
+-FROM ghcr.io/datadog/images-rb/engines/ruby:3.4-gnu-gcc
++FROM ghcr.io/datadog/images-rb/engines/ruby:4.0-gnu-gcc
+ 
+ RUN mkdir -p /app
+ WORKDIR /app
+@@ -15,6 +15,7 @@
+ COPY utils/build/docker/ruby/shared/rails/ .
+ 
+ COPY utils/build/docker/ruby/install_ddtrace.sh binaries* /binaries/
++ENV LIBDATADOG_VENDOR_OVERRIDE=/binaries/native-vendor
+ RUN /binaries/install_ddtrace.sh
+ 
+ RUN bundle exec rails db:prepare
+--- a/utils/build/docker/ruby/rails72/Gemfile
++++ b/utils/build/docker/ruby/rails72/Gemfile
+@@ -1,8 +1,10 @@
+ source 'https://rubygems.org'
+ 
+-ruby '~> 3.4.0'
++ruby '~> 4.0.0'
+ 
+ gem 'rails', '~> 7.2.2'
++# Ruby 4.0 bundles this version; 0.5.9 fails during Rails boot.
++gem 'net-imap', '= 0.6.2'
+ gem 'sqlite3', '~> 1.4'
+ gem 'puma', '~> 6.0'
+ gem 'bootsnap', require: false

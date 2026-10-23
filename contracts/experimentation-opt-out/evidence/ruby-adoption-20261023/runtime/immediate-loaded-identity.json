@@ -1,0 +1,43 @@
+{
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "ruby_platform": "x86_64-linux",
+  "datadog_version": "2.47.0.dev",
+  "datadog_path": "/usr/local/bundle/gems/datadog-2.47.0.dev",
+  "libdatadog_gem_version": "46.0.0.1.1",
+  "libdatadog_gem_path": "/usr/local/bundle/gems/libdatadog-46.0.0.1.1-x86_64-linux",
+  "libdatadog_vendor_override": "/binaries/native-vendor",
+  "openfeature_version": "0.6.5",
+  "source_hashes": {
+    "lib/datadog/open_feature/provider.rb": "9ce08754968fbf2b24350c704fb2275738e1da7d2959556d4817710f82504340",
+    "lib/datadog/open_feature/native_evaluator.rb": "d006548da1f2cd59c127186c41712c017423d02dbf8d241f7131289c494582a8",
+    "lib/datadog/open_feature/evaluation_engine.rb": "7b4eb48a3929cec9201a9aba4e515e24d301482367e203948b2ea2a26c030fa6",
+    "lib/datadog/open_feature/ext.rb": "96cf087676f4206c6b044a8406344cf0ee345fbc4ab81e8f0a385b020c7ffdef",
+    "lib/datadog/open_feature/resolution_details.rb": "60c40e034e83f5a6a4167114bbed27917e40ffb7f9cbcb4a48d2f433483203a7",
+    "lib/datadog/core/feature_flags.rb": "d1c8ebf6dfc38018530995d1c9cfbbd48bd06fe6620f8263c1ea94060465a319",
+    "lib/datadog/core/configuration/settings.rb": "27e2ab76d568076570a6d0583695833c1e62d0bf6a9dc6049ca8460a393a751c"
+  },
+  "extensions": {
+    "/usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so": "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031"
+  },
+  "native_process_maps": [
+    {
+      "pid": "16",
+      "command": "puma: cluster worker 0: 7 [app]                                           ",
+      "maps": [
+        "72dfcd755000-72dfce1f1000 r--p 00000000 00:55 105075215                  /binaries/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "72dfce1f1000-72dfcfdf4000 r-xp 00a9b000 00:55 105075215                  /binaries/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "72dfcfdf4000-72dfcffcd000 r--p 0269d000 00:55 105075215                  /binaries/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "72dfcffcd000-72dfcffd4000 rw-p 02875000 00:55 105075215                  /binaries/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "72dfd52f8000-72dfd52fd000 r--p 00000000 00:55 105076642                  /usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "72dfd52fd000-72dfd530a000 r-xp 00005000 00:55 105076642                  /usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "72dfd530a000-72dfd530e000 r--p 00012000 00:55 105076642                  /usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "72dfd530e000-72dfd530f000 r--p 00016000 00:55 105076642                  /usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "72dfd530f000-72dfd5310000 rw-p 00017000 00:55 105076642                  /usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so"
+      ],
+      "mapped_files": {
+        "/binaries/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so": "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921",
+        "/usr/local/bundle/gems/datadog-2.47.0.dev/lib/libdatadog_api.4.0_x86_64-linux.so": "f75027fb3371779b5de23c893a3fe84eb0935df60c06005bd3c60e360c917031"
+      }
+    }
+  ]
+}

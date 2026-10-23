@@ -208,3 +208,5 @@ The reusable workflow lives in [lean-sdk-feedback](../../skills/lean-sdk-feedbac
 and [lean-sdk-decisions](../../skills/lean-sdk-decisions/SKILL.md).
 
 [libdatadog adoption and native evidence](libdatadog-adoption.md).
+
+[Ruby adoption and native/runtime evidence](ruby-adoption.md).

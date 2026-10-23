@@ -1,0 +1,50 @@
+{
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "image_id": "sha256:f81b0aadaef53266591ff417fb5fde087a8306d22b9e214635d287508acf42f5",
+  "runs": [
+    {
+      "mode": "disabled",
+      "command": [
+        "./run.sh",
+        "FEATURE_FLAGGING_EXPERIMENTATION_OPT_OUT_DISABLED",
+        "tests/ffe/test_experimentation_opt_out.py",
+        "-F",
+        "tests/ffe/test_experimentation_opt_out.py"
+      ],
+      "started_at": "2026-10-23T15:27:35.345630+00:00",
+      "finished_at": "2026-10-23T15:28:54.773503+00:00",
+      "exit_code": 0,
+      "loaded_identity_saved": true
+    },
+    {
+      "mode": "immediate",
+      "command": [
+        "./run.sh",
+        "FEATURE_FLAGGING_EXPERIMENTATION_OPT_OUT_IMMEDIATE",
+        "tests/ffe/test_experimentation_opt_out.py",
+        "-F",
+        "tests/ffe/test_experimentation_opt_out.py"
+      ],
+      "started_at": "2026-10-23T15:28:54.773882+00:00",
+      "finished_at": "2026-10-23T15:30:11.733086+00:00",
+      "exit_code": 0,
+      "loaded_identity_saved": true
+    },
+    {
+      "mode": "future",
+      "command": [
+        "./run.sh",
+        "FEATURE_FLAGGING_EXPERIMENTATION_OPT_OUT_FUTURE",
+        "tests/ffe/test_experimentation_opt_out.py",
+        "-F",
+        "tests/ffe/test_experimentation_opt_out.py"
+      ],
+      "started_at": "2026-10-23T15:30:11.733568+00:00",
+      "finished_at": "2026-10-23T15:31:28.667576+00:00",
+      "exit_code": 0,
+      "loaded_identity_saved": true
+    }
+  ]
+}

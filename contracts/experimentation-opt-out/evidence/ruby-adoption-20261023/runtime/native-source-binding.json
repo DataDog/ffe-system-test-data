@@ -1,0 +1,10 @@
+{
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "native_tree": "061229c06108e5e5b7c6a8d6db852d571c8da6af",
+  "source_archive_sha256": "5caf3658d96b210101dd3778b7e197f7136f084fc8ec3f4184e7ee6fb74a3cc3",
+  "rustc": "rustc 1.87.0 (17067e9ac 2025-05-09)",
+  "builder_cargo_sha256": "a23e6164c6c7151a87539707cf564e0271ecaae57abd0d1c5c6665a0faac006e",
+  "source_status": "clean",
+  "build_receipt": "native-build-receipt.json",
+  "artifact_manifest": "native-artifact-files.json"
+}

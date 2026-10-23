@@ -1,0 +1,19 @@
+--- original-runtime/Gemfile.lock
++++ ruby4-net-imap/Gemfile.lock
+@@ -166,7 +166,7 @@
+     msgpack (1.8.0)
+     net-http (0.6.0)
+       uri
+-    net-imap (0.5.9)
++    net-imap (0.6.2)
+       date
+       net-protocol
+     net-pop (0.1.2)
+@@ -303,6 +303,7 @@
+   dogstatsd-ruby
+   faraday (~> 2.13.0)
+   faraday-follow_redirects (~> 0.3)
++  net-imap (= 0.6.2)
+   openfeature-sdk (~> 0.5)
+   opentelemetry-api (~> 1.5.0)
+   opentelemetry-common (>= 0.23.0)

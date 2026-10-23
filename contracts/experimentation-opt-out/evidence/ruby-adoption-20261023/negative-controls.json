@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+    "exec",
+    "rake",
+    "spec:open_feature"
+  ],
+  "results": [
+    {
+      "name": "invalid-encoding",
+      "exit_code": 1,
+      "log": "invalid-encoding-negative-control.log"
+    },
+    {
+      "name": "nul-attribute-alias",
+      "exit_code": 1,
+      "log": "nul-attribute-alias-negative-control.log"
+    }
+  ],
+  "restored": true
+}

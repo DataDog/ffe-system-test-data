@@ -1,0 +1,210 @@
+BUNDLE_GEMFILE=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/gemfiles/ruby_3.4_openfeature_latest.gemfile bundle check || bundle install && bundle exec rake spec:open_feature
+The Gemfile's dependencies are satisfied
+(cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+/usr/bin/install -c -m 0755 libdatadog_api.3.4_arm64-darwin24.bundle ../../../../lib
+cp tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7/libdatadog_api.3.4_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/libdatadog_api.3.4_arm64-darwin24.bundle
+FFE fixtures cached at /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/tmp/ffe-system-test-data/0c467473aa8dc1f1cbfc0ef9a60d5c1c7a8826e6
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec --pattern spec/datadog/open_feature/\*\*/\*_spec.rb
+Run options: include {focus: true}
+
+All examples were filtered out; ignoring {focus: true}
+
+Randomized with seed 12147
+.....................................................................................................................................................................................................................................................................................................................................................................W, [2026-10-23T11:20:37.402774 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.405034 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.407536 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.409144 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.411139 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.418889 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.420163 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.421324 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.426191 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.427883 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.429383 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.430580 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.431813 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.433102 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.434365 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.435826 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.437161 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.438515 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.439874 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.440996 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.442038 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.443052 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.444903 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.446684 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.447864 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.449188 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.450601 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.451765 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.453136 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.455001 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.455977 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.457305 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.461823 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.463825 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.465683 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.467299 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.469097 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.470711 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.472373 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.473992 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.475178 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.476688 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.478684 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.480077 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.481515 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.483103 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.484361 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.485457 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.486706 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.487985 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.488948 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.493781 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.495203 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.497370 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.498677 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.500092 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.501420 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.502398 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.503408 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:37.504282 #74239]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+...............W, [2026-10-23T11:20:37.507993 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:37.508213 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:37.508492 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:37.508764 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.......................................................................................................................................................................................................................W, [2026-10-23T11:20:37.671314 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.............................................................................................................................................................................................................W, [2026-10-23T11:20:39.552031 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.552930 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.554074 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.555582 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.556270 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.557165 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..W, [2026-10-23T11:20:39.559227 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.560285 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.561062 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.562051 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.563171 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.563925 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.564500 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.565535 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.566286 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.567237 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.567886 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.568588 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.569594 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.570254 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.571012 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.571642 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:39.572747 #74239]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+......................................................................................................................................................................
+
+Finished in 3.38 seconds (files took 1 second to load)
+1043 examples, 0 failures
+
+Randomized with seed 12147
+
+BUNDLE_GEMFILE=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/gemfiles/ruby_3.4_openfeature_min.gemfile bundle check || bundle install && bundle exec rake spec:open_feature
+The Gemfile's dependencies are satisfied
+(cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+/usr/bin/install -c -m 0755 libdatadog_api.3.4_arm64-darwin24.bundle ../../../../lib
+cp tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7/libdatadog_api.3.4_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/libdatadog_api.3.4_arm64-darwin24.bundle
+FFE fixtures cached at /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/tmp/ffe-system-test-data/0c467473aa8dc1f1cbfc0ef9a60d5c1c7a8826e6
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec --pattern spec/datadog/open_feature/\*\*/\*_spec.rb
+Run options: include {focus: true}
+
+All examples were filtered out; ignoring {focus: true}
+
+Randomized with seed 41099
+............................................................................W, [2026-10-23T11:20:44.190388 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.193992 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.196267 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.197912 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.199524 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.201115 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.202615 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.204149 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.205437 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.206447 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.207706 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.208993 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.210892 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.212222 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.214017 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.215140 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.216299 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.217403 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.218595 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.221094 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.223969 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.228085 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.233141 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.240136 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.241768 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.244021 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.245410 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.247293 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.248436 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.249848 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.250710 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.252039 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.253789 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.255031 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.256233 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.257651 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.259026 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.260031 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.261018 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.262239 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.263127 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.264409 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.265994 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.267400 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.268721 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.269864 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.270973 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.272342 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.277061 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.279961 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.281966 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.283666 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.285379 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.287123 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.288653 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T11:20:44.290197 #74314]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.................................................................W, [2026-10-23T11:20:44.331051 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.........................................................................................................................................................................................................................................................................W, [2026-10-23T11:20:45.194689 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.196188 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.196954 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.197817 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.198484 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.199621 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.200831 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.201587 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.202299 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.202997 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.203743 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.204482 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.205159 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.205909 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.206650 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.207321 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.207961 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.208689 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.209292 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.209965 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..W, [2026-10-23T11:20:45.211373 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.212209 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.212923 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+................................................................W, [2026-10-23T11:20:45.236776 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.237209 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T11:20:45.237534 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..W, [2026-10-23T11:20:45.238098 #74314]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+
+Finished in 3.36 seconds (files took 0.72627 seconds to load)
+1039 examples, 0 failures
+
+Randomized with seed 41099
+

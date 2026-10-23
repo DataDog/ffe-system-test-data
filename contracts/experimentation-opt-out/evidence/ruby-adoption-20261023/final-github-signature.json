@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "reason": "valid",
+  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgDoH6TGhUZ6c7qT0ilTeWAzaSo1\nDXG/Sr2usxcoMfP7wAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5\nAAAAQNqolbP2yyGh9j1cbCM6ZYX5LikVGVFYHjIg1TPm5lwvf5dQaoziMXoBxS1V9dyfKW\n4iGQArFuFS+KPPzNZ1jAI=\n-----END SSH SIGNATURE-----",
+  "payload": "tree c75d6b58b416d78baf54c74fb858aa8560605b9b\nparent ce7658cbeace9cc60c4f22729d923badabcd4aef\nauthor Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792768799 -0400\ncommitter Leo Romanovsky <leo.romanovsky@datadoghq.com> 1792768799 -0400\n\nGuard native boundary specs before provider construction\n",
+  "verified_at": "2026-10-23T15:21:12Z",
+  "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "repository": "DataDog/dd-trace-rb"
+}
