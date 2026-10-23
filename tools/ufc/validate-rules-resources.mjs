@@ -38,6 +38,7 @@ export async function validate(base = root) {
     assert.match(resource.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.equal(resource.sourceSha256, sha256(await fs.readFile(await sourcePath(resource.source, base))), `${resource.source} changed: regenerate rules resources`);
     const definition = catalog.resources.find(x => x.id === resource.id);
+    assert.equal(resource.source, definition.source, 'Resource source differs from catalogue');
 
     for (const required of ['ufc.pb', 'configuration-wire.json']) assert.ok(Object.hasOwn(resource.artifacts, required), `Missing artifact contract: ${required}`);
     for (const name of ['ufc.generated.json', 'report.json', 'parity.json']) assert.ok(!Object.hasOwn(resource.artifacts, name), 'Local diagnostics must not be committed manifest artifacts');

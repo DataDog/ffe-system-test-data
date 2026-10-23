@@ -62,6 +62,13 @@ test('integrity gate rejects source drift, deletion, extra output and changed to
       await assert.rejects(validate(directory), /flag inventory differs/, `${field}: ${mutation}`);
     }
   }
+  // An alternate identical UFC must not override the catalogue's source contract.
+  await fs.copyFile(path.join(directory, 'ufc-config.json'), path.join(directory, 'alternate-ufc.json'));
+  const redirected = structuredClone(manifest);
+  redirected.resources[0].source = 'alternate-ufc.json';
+  await fs.writeFile(manifestPath, JSON.stringify(redirected));
+  await assert.rejects(validate(directory), /Resource source differs from catalogue/);
+  await fs.rm(path.join(directory, 'alternate-ufc.json'));
   const swapped = structuredClone(manifest);
   const resource = swapped.resources[0];
   [resource.convertedFlagKeys[0], resource.omittedFlagKeys[0]] = [resource.omittedFlagKeys[0], resource.convertedFlagKeys[0]];
