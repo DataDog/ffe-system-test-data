@@ -80,6 +80,10 @@ ffe-system-test-data/
 ├── ufc-config.json          # Shared rules-based configuration, including malformed test inputs
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
+├── evaluation-suites/       # Self-contained, explicitly activated feature suites
+│   └── dependent-flags/
+│       ├── ufc-config.json  # UFC containing only dependent-flag fixtures
+│       └── cases/           # Evaluation cases for this feature
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
@@ -518,6 +522,17 @@ fixture defining the intended behavior.
 | `test-special-characters.json` | Flag keys/values with special characters |
 | `test-string-with-special-characters.json` | String values with special characters |
 
+## Feature Evaluation Suites
+
+Feature-specific UFC syntax is isolated from the shared root configuration in
+self-contained `evaluation-suites/<suite>/` directories. Consumers explicitly
+activate the suites they support and use each suite's adjacent `ufc-config.json`
+and `cases/` directory.
+
+| Suite | Description |
+|-------|-------------|
+| `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
+
 ## Origin
 
 These fixtures originated in the Go SDK (`dd-trace-go`). This repository now
@@ -536,8 +551,10 @@ for the integration checklist.
 Fixture pull requests also run the canonical evaluation suite from Go, Java,
 JavaScript, Python, Ruby, .NET, PHP, and `libdatadog` against both the
 pull-request merge base and proposed head. Each job classifies the result as
-compatible, a new regression, an improvement, or existing downstream drift and
-uploads the two logs.
+compatible, a new regression, an improvement, or inconclusive and uploads the
+two logs. A result is inconclusive when both revisions fail: whole-suite exit
+codes alone cannot prove that every failure in the proposed fixture set already
+existed at the merge base.
 
 These compatibility jobs are intentionally advisory and are allowed to fail.
 They must not be configured as required merge checks. Their purpose is to show
