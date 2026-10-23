@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-23T03:52:49.200279+00:00",
+  "recorded_at": "2026-10-23T04:09:29.490195+00:00",
   "contract_status": "draft proposal",
   "semantic_authority": "Existing decisions and semantic revisions are unchanged. Native validation does not establish fleet approval.",
   "targets": {
@@ -18,8 +18,8 @@
       "pr_url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
       "native_validation": "Native suites and runtime evidence are saved with exact sources.",
       "current_checks": "No failed check reported; pending checks and review approval remain.",
-      "review_threads": 23,
-      "resolved_threads": 21,
+      "review_threads": 24,
+      "resolved_threads": 22,
       "all_threads_have_verified_replies": true,
       "detail": "android/final-review-state.json"
     },
@@ -44,7 +44,7 @@
   "sdk_merges_performed": false,
   "releases_performed": false,
   "deployments_performed": false,
-  "review_threads": 39,
-  "resolved_threads": 36,
+  "review_threads": 40,
+  "resolved_threads": 37,
   "open_threads": 3
 }

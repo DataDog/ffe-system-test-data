@@ -40,7 +40,9 @@ The Android Foundation documentation gate remains unavailable because this host 
 Its [traceback](android/review6-foundation-worktree.txt) retains the original bytes; an [export path map](android/export-path-map.json) corrects its source filename suffix.
 
 Review backlinks are recorded for [iOS](ios/published-replies.json), [Android](android/published-replies.json), and [Java](java/published-replies.json).
-All 39 SDK review threads have verified replies. Thirty-six are resolved; three retain explicit delivery or grammar dispositions.
+All 40 SDK review threads have verified replies. Thirty-seven are resolved; three retain explicit delivery or grammar dispositions.
+The [unknown response-mode assessment](android/review7-semantic-assessment.md) preserves browser/iOS/Android parity.
+Its [published reply](android/review7-reply.md) records the separate policy proposal and the model coverage gap.
 The [rollout state](rollout-state.json) records current heads, CI snapshots and remaining gates. Thread resolution does not establish correctness.
 The [older Java Boolean prototype](java-obsolete-pr-closure.json) was closed as superseded. One active implementation PR remains per language.
 

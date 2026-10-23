@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "sdk-adoption-20261023-v1",
+  "revision": "sdk-adoption-20261023-v2",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -732,7 +732,9 @@
         "SDK-ADOPTION-IOS-005",
         "SDK-ADOPTION-IOS-006",
         "SDK-ADOPTION-ANDROID-009",
-        "SDK-ADOPTION-ANDROID-010"
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-013",
+        "SDK-ADOPTION-ANDROID-014"
       ],
       "local_adoptions": [
         {
@@ -1987,7 +1989,7 @@
       }
     }
   ],
-  "previous_revision": "sdk-refresh-20261022-v1",
-  "revision_note": "Append scoped SDK adoption, native controls, runtime observations and review replies. Existing semantic revisions and decision-setting authority remain unchanged.",
+  "previous_revision": "sdk-adoption-20261023-v1",
+  "revision_note": "Append the unknown response-mode source assessment and verified review disposition. Preserve all semantic revisions, authority, and prior evidence.",
   "validation_history_file": "validation-history.json"
 }

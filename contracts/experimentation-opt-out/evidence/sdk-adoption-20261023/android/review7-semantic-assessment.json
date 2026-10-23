@@ -1,0 +1,84 @@
+{
+  "review_root": 4355919118,
+  "review_thread": "PRRT_kwDODRXddM6vdzm0",
+  "recorded_at_utc": "2026-10-23T04:02:35.220104+00:00",
+  "assessment": "Proposed cross-SDK response compatibility extension; no demonstrated violation of the existing supported response contract.",
+  "recommendation": "Preserve the explicit browser baseline. Do not change Android alone or silently extend the acceptance corpus. Record unknown response-mode handling as a separate policy gap/proposal.",
+  "sources": [
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/android",
+      "commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt",
+      "sha256": "6048aa83e2203e729b80f7ee29d4e58b746bd64119ba7ba57220b2eea8b7582b"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/android",
+      "commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapperOptOutTest.kt",
+      "sha256": "69090a82ae18cb55b6701b73ba73520da06bf88ee5fb822b122c014f074e80b8"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/ios",
+      "commit": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "path": "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift",
+      "sha256": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/ios",
+      "commit": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "path": "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift",
+      "sha256": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/ios",
+      "commit": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "path": "DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift",
+      "sha256": "d681bdd543b9ffb361d6b86b67e294ce6303a26edab42ad35b7fe669100fd13c"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/laptop-replay/worktrees/browser",
+      "commit": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+      "path": "packages/core/src/evaluation/experimentation-opt-out.ts",
+      "sha256": "bef09b2c903c6bbe1b59939b553720b8330ce710323d9493b120b550cc0553d7"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/laptop-replay/worktrees/browser",
+      "commit": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+      "path": "packages/browser/test/openfeature/experimentation-opt-out.spec.ts",
+      "sha256": "db45eb9692e9f2f4a3b0dfebadee413073e440a718146466dcaa65d8928b2c46"
+    },
+    {
+      "root": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/go",
+      "commit": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+      "path": "openfeature/experimentation_opt_out.go",
+      "sha256": "9f6eac3929dd2aaa5e9a7bc4d6b8ebf8c818d0ab0c103b6e6fc3a5b5f47109d9"
+    }
+  ],
+  "authority": {
+    "D008": "decisions.json D008 r2: no effective policy rejects explicitly filtered responses; imported browser baseline, no public setting for complete v2 rule identified. Edge reaffirmation concerns supported acknowledgement shape only.",
+    "D020": "decisions.json D020 r1 and edge-feedback.md31-49: request parser compatibility, not unknown response-mode handling.",
+    "user_scope": "sdk-refresh.md9-12: apply existing merged-browser/Go decisions to target PRs; not new fleet approval."
+  },
+  "source_trace": {
+    "input": "No effective policy; evaluation_options={\"experimentation_opt_out_mode\":\"future_unrecognized_mode\"}; legacy boolean absent or false.",
+    "android": "accepts",
+    "ios": "accepts",
+    "browser": "accepts",
+    "legacy_true": "All three reject, including with an unknown mode.",
+    "enabled_effective_policy": "All three reject unknown mode; immediate still requires true plus absent/immediate mode, future requires matching known mode and cutoff.",
+    "scope": "Source inspection only. No new native execution or server response observed."
+  },
+  "coverage": {
+    "android": "PrecomputeMapperOptOutTest covers no-options acceptance and rejection of legacy true / future mode under all configured modes.",
+    "ios": "FlagAssignmentsFetcherTests.testOptedOutRequestRequiresBooleanAcknowledgement covers absent/false/string/null legacy values; true legacy; malformed mode with legacy true; and both known modes. Unknown-mode-only acceptance/rejection is not asserted.",
+    "browser": "experimentation-opt-out.spec.ts known immediate/future filtered snapshot tests and immediate boolean acknowledgement cases; no unknown response-mode rule identified.",
+    "mobile_profile": "135 acknowledgement cases use mode missing/immediate/future only; unknown modes and arbitrary response value types are outside this 187-case profile.",
+    "Go": "54b5ad7 is a local rules evaluator. Its configuration-mode validation is not a precompute-response acknowledgement policy."
+  },
+  "proposed_change_requires": [
+    "Select treatment of unknown strings, empty strings, null, numbers, booleans, arrays/objects, and explicitly disabled mode.",
+    "Record request-versus-response compatibility separately.",
+    "Revise the cross-SDK contract/profile and review browser/iOS/Android consumers together."
+  ],
+  "product_or_acceptance_changes": false
+}

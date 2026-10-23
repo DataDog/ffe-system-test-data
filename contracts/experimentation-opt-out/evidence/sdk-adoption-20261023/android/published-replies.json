@@ -3,7 +3,7 @@
   "pr": 4024,
   "implementation_sha": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
   "contract_sha": "0520866bedb8c059df9c493cfe27ad294390c603",
-  "reply_count": 25,
+  "reply_count": 26,
   "replies": [
     {
       "thread_id": "PRRT_kwDODRXddM6u7Mj4",
@@ -231,6 +231,16 @@
       "resolved": true,
       "created_at": "2026-10-23T03:49:46Z",
       "verified_at": "2026-10-23T03:50:20.760937+00:00"
+    },
+    {
+      "root_comment_id": 4355919118,
+      "thread_id": "PRRT_kwDODRXddM6vdzm0",
+      "reply_id": 4355987710,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355987710",
+      "body_verified": true,
+      "resolved": true,
+      "created_at": "2026-10-23T04:08:37Z",
+      "verified_at": "2026-10-23T04:08:50.342120+00:00"
     }
   ],
   "followup_implementation_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",

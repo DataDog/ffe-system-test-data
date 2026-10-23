@@ -2302,6 +2302,44 @@
       "expectation_profile": "Hosted exposure-smoke execution after the native A-to-B-to-A oracle correction; no new shared semantic rule.",
       "evidence_file": "evidence/sdk-adoption-20261023/java/payara-ci-retry-result.json",
       "limits": "Dependent end-to-end jobs are still running at this snapshot. The initial dependency failure remains recorded. A targeted retry can rerun dependent jobs; this is not a complete current-workflow success claim."
+    },
+    {
+      "decision_revisions": {
+        "D008": 2
+      },
+      "recorded_at": "2026-10-23T04:10:11.683211+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
+      "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "patch": null,
+      "expectation_profile": "Existing browser/iOS/Android source behavior under D008 revision 2. Unknown response modes remain outside the finite AckMode domain and mobile-precompute-v1.",
+      "id": "SDK-ADOPTION-ANDROID-013",
+      "evidence_url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355919118",
+      "target": "Unknown response-mode compatibility proposal",
+      "evidence_kind": "independent-source-inspection",
+      "outcome": "reference-parity-preserved-with-policy-gap",
+      "check": "Android, iOS and the merged browser accept an unknown mode when no effective policy applies and legacy true is absent. Each rejects unknown modes for an effective immediate or future policy. An Android-only rule change was declined.",
+      "evidence_file": "evidence/sdk-adoption-20261023/android/review7-semantic-assessment.json",
+      "limits": "No new test or runtime probe ran. Unknown values are outside the current model and corpus. No current-server counterexample was supplied. D008 provenance and semantic authority remain unchanged; D020 concerns requests. A stricter response policy requires a separate coordinated decision."
+    },
+    {
+      "decision_revisions": {
+        "D008": 2
+      },
+      "recorded_at": "2026-10-23T04:10:11.683211+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
+      "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "patch": null,
+      "expectation_profile": "Existing browser/iOS/Android source behavior under D008 revision 2. Unknown response modes remain outside the finite AckMode domain and mobile-precompute-v1.",
+      "id": "SDK-ADOPTION-ANDROID-014",
+      "evidence_url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355987710",
+      "target": "Unknown response-mode review disposition",
+      "evidence_kind": "published-comment-readback",
+      "outcome": "proposal-recorded-thread-resolved",
+      "check": "The published reply links the existing decision, exact source behavior, native evidence and finite proof boundary. The reply was read back and the thread was resolved. Android has 26 verified replies across 24 threads.",
+      "evidence_file": "evidence/sdk-adoption-20261023/android/review7-published-reply.json",
+      "limits": "Resolution records the scoped proposal disposition. It does not establish unknown-response safety, acceptance of the proposal, new native validation, or merge approval."
     }
   ]
 }
