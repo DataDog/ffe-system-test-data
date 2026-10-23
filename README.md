@@ -80,6 +80,10 @@ ffe-system-test-data/
 ├── ufc-config.json          # Shared rules-based configuration, including malformed test inputs
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
+├── evaluation-suites/       # Self-contained, explicitly activated feature suites
+│   └── dependent-flags/
+│       ├── ufc-config.json  # UFC containing only dependent-flag fixtures
+│       └── cases/           # Evaluation cases for this feature
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
@@ -473,7 +477,6 @@ fixture defining the intended behavior.
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
 | `test-case-boolean-one-of-matches.json` | Boolean flag with ONE_OF operator matching |
 | `test-case-comparator-operator-flag.json` | Flag using comparator operators (GT, LT, etc.) |
-| `test-case-dependent-flags.json` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
 | `test-case-disabled-flag.json` | Disabled flag returning DISABLED reason |
 | `test-case-empty-flag.json` | Flag with empty configuration |
 | `test-case-empty-string-variation.json` | Flag returning empty string as value |
@@ -518,6 +521,17 @@ fixture defining the intended behavior.
 | `test-no-allocations-flag.json` | Another no-allocations variant |
 | `test-special-characters.json` | Flag keys/values with special characters |
 | `test-string-with-special-characters.json` | String values with special characters |
+
+## Feature Evaluation Suites
+
+Feature-specific UFC syntax is isolated from the shared root configuration in
+self-contained `evaluation-suites/<suite>/` directories. Consumers explicitly
+activate the suites they support and use each suite's adjacent `ufc-config.json`
+and `cases/` directory.
+
+| Suite | Description |
+|-------|-------------|
+| `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
 
 ## Origin
 
