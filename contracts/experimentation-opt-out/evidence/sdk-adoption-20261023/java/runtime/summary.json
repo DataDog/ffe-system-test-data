@@ -1,0 +1,64 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "environment": "Linux amd64, Docker, JDK 21 application",
+  "harness_commit": "abe62eb21f53adba0d8ac038fe0539f8f05fb124",
+  "harness_has_external_uncommitted_adapters": true,
+  "implementations": {
+    "legacy": {
+      "source": "remote_config",
+      "policy_cases": 90,
+      "test_counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "retained_delivery": [
+        {
+          "telemetry_suppressed": false,
+          "retained_value": "experiment",
+          "evaluations_performed": 3,
+          "captured_exposures": 1,
+          "captured_retained_evaluation_count": 3,
+          "captured_control_evaluation_count": 1
+        },
+        {
+          "telemetry_suppressed": true,
+          "retained_value": "experiment",
+          "evaluations_performed": 3,
+          "captured_exposures": 1,
+          "captured_retained_evaluation_count": 0,
+          "captured_control_evaluation_count": 1
+        }
+      ]
+    },
+    "standalone": {
+      "source": "agentless",
+      "policy_cases": 90,
+      "test_counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "retained_delivery": [
+        {
+          "telemetry_suppressed": false,
+          "retained_value": "experiment",
+          "evaluations_performed": 3,
+          "captured_exposures": 1,
+          "captured_retained_evaluation_count": 3,
+          "captured_control_evaluation_count": 1
+        },
+        {
+          "telemetry_suppressed": true,
+          "retained_value": "experiment",
+          "evaluations_performed": 3,
+          "captured_exposures": 1,
+          "captured_retained_evaluation_count": 0,
+          "captured_control_evaluation_count": 1
+        }
+      ]
+    }
+  }
+}

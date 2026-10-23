@@ -1,0 +1,13 @@
+{
+  "workflow_path": ".github/workflows/run-system-tests.yaml",
+  "merged_master": "3718fdc518506e5700df8b7d448639971cd3470c",
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "workflow_unchanged": true,
+  "workflow_sha256": "7b28e5d8635fafdb6bf62be358c835b3c9aef57d7d6ca17e5fcf12070519dc9e",
+  "system_tests_sha": "7fe8af9491d06c52295f4e9c559e734b4ccc0a1a",
+  "dockerfile_url": "https://github.com/DataDog/system-tests/blob/7fe8af9491d06c52295f4e9c559e734b4ccc0a1a/utils/build/docker/java/spring-boot-payara.Dockerfile",
+  "dockerfile_failure_line": 10,
+  "dockerfile_agent_copy_line": 14,
+  "dockerfile_agent_install_line": 15,
+  "interpretation": "Dependency resolution fails before the candidate agent is copied into or installed in the build stage."
+}

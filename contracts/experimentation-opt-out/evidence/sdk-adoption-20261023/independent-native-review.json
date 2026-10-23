@@ -1,0 +1,67 @@
+{
+  "reviewer": "parent independent review",
+  "status": "Source review complete; signed native commits published; runtime and CI evidence tracked separately",
+  "java": {
+    "files": "Both production parser/evaluator paths, Allocation representations, activation reflection guards, corpus adapters and telemetry tests",
+    "findings": [
+      {
+        "issue": "Legacy telemetry table lacked mode column after adding mode parameter",
+        "resolution": "Implementation agent corrected the table and added retained-future rows before native execution."
+      }
+    ],
+    "scope": "D004 error precedence matches merged Go. Invalid activation state survives ingestion. Both inactive call sites are guarded. Timestamp grammar and provider lifecycle remain unchanged. All 2454 native tests passed; runtime and operational receipts remain separate.",
+    "source_sha": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+    "tree": "f1eed0c54a5677ecb29666a4dbbfdae1511fce21",
+    "worktree_clean_at_review": true,
+    "hosted_followup": "Five hosted JDK smoke jobs exposed a test-oracle defect. Local baseline expected 231 events but received 232 because it suppressed the return to assignment A after B. Production cache and old helper matched merged master. Signed 578ffa77 changes only the smoke test; exact-head verification passes 4 tests. Full frozen-source suites pass 373 tests each on JDK 11 and 25; the lifetime-set mutant fails.",
+    "current_source_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+    "followup_evidence": "java/smoke-followup/README.md",
+    "hosted_dependency_gap": "The initial Payara build failed on Maven Central HTTP 429 before agent installation. The targeted retry passed; dependent end-to-end jobs remain a separate pending check."
+  },
+  "ios": {
+    "files": "Repository snapshot and cache lifecycle, public configuration, acknowledgement mapper, request serialization, telemetry identity",
+    "findings": [],
+    "assessment": "Opt-out context/policy/assignment are read from one RepositoryState. A separate readiness read is inherited from develop; no deterministic scoped failure was established. Do not claim atomic readiness proof beyond this invariant. Native controls exercise pending absent-attribute isolation and requested-subject error identity.",
+    "source_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+    "tree": "2b4bb3da63bf34357b40295884f65c691dd11ba5",
+    "worktree_clean_at_review": true,
+    "hosted_followup": "All 19 added tests pass on five platforms. TIA skip counts and removed internal state-manager tests remain explicit in ios/HOSTED-FLAGS-386f8c5.md."
+  },
+  "android": {
+    "files": "Policy/context snapshots, repository memory/storage split, effect queue and callback dispatch, OpenFeature recovery, parser/request/ack, persistence namespace",
+    "findings": [
+      {
+        "issue": "DatadogFlagsClient KDoc still said invalid context was silently ignored",
+        "resolution": "Fixed before signed commit 9c18ede; context-update KDoc describes Error and callback failure."
+      }
+    ],
+    "scope": "No remaining demonstrated policy, acknowledgement, or lock-order defect in reviewed source. All 880 tests, 187 profile cases, generated-file checks, detekt and ktlint passed. Native-device evidence remains a separate receipt.",
+    "source_sha": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+    "tree": "ab56c9eddd5b6ea9b62768654c8689acbb56a6ca",
+    "worktree_clean_at_review": true,
+    "initial_review_superseded_by": "Subsequent concrete review probes found a synchronous persistence wait, missing callback-worker shutdown, and callbacks lost under IGNORE_NEWEST.",
+    "current_review": "android/CALLBACK-REVIEW.md",
+    "current_source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+    "native_model_boundary": "Callback scheduling, lifetime and queue delivery are outside the Lean model.",
+    "named_client_followup": {
+      "evidence": "android/exact-347884b-receipt.json",
+      "result": "Atomic lookup-or-create preserves the winning client and validates every losing mode. Logging remains outside the registry lock.",
+      "boundary": "The regression proves warning delivery and lock availability, not a deterministic replay of the former scheduling window."
+    },
+    "later_findings": {
+      "snapshot": "android/review6-347884b-snapshot.json",
+      "status": "Both findings are fixed in the signed follow-up. Startup failure schedules autonomous worker-start retries; README resolution waits for successful context completion."
+    },
+    "retry_followup": {
+      "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "reviewer": "parent source review",
+      "owned_files": 3,
+      "assessment": "One drain reservation spans retry. Customer callbacks remain on background workers. Retry scheduling and logging occur outside the queue lock. The README waits for success and handles failure. No additional scoped defect found.",
+      "native_evidence": "android/exact-6e5fe6c-receipt.json",
+      "runtime_evidence": "android/review6-runtime/exact-6e5fe6c-receipt.json",
+      "limits": "OS recovery and a processing main looper are required after persistent startup denial. Looper/process shutdown is not a delivery guarantee. No Lean concurrency proof."
+    }
+  },
+  "recorded_at": "2026-10-23T02:25:03.028041+00:00",
+  "updated_at": "2026-10-23T03:53:34.919290+00:00"
+}

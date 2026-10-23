@@ -1,0 +1,21 @@
+{
+  "verified_at": "2026-10-22T20:14:15.293115+00:00",
+  "comment_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353046544",
+  "comment_id": 4353046544,
+  "root_comment_id": 4342541096,
+  "body": "**Moved in [0f6f2f7](https://github.com/DataDog/dd-trace-go/commit/0f6f2f798afac67604e1acd223e9b3ac199dc151).** The nil-`doLog` explanation now sits beside the check in `excludes`, matching `evaluateFlag`\u2019s exposure metadata default.\n\n<details>\n<summary><b>Verification and shared decision</b></summary>\n\nThe diff changes comments only. Both existing cases\u2014`older_experiment_with_default_doLog` and `ordinary_allocation`\u2014pass.\n\n[D010](https://github.com/DataDog/ffe-system-test-data/blob/531e69f0b943e76d6f34144dbc1303a136febadf/contracts/experimentation-opt-out/decision-history.md#d010) retains the [existing decision](https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344233354): valid UFC requires an explicit boolean. Go\u2019s existing nil-field compatibility remains separate; this cleanup does not establish a fleet default. The linked history is maintained in the [central proof draft](https://github.com/DataDog/ffe-system-test-data/pull/55).\n\n</details>",
+  "thread": {
+    "id": "PRRT_kwDOBAi6ic6u-WjC",
+    "isResolved": true,
+    "isOutdated": false,
+    "comments": {
+      "nodes": [
+        {
+          "databaseId": 4353046544,
+          "body": "**Moved in [0f6f2f7](https://github.com/DataDog/dd-trace-go/commit/0f6f2f798afac67604e1acd223e9b3ac199dc151).** The nil-`doLog` explanation now sits beside the check in `excludes`, matching `evaluateFlag`\u2019s exposure metadata default.\n\n<details>\n<summary><b>Verification and shared decision</b></summary>\n\nThe diff changes comments only. Both existing cases\u2014`older_experiment_with_default_doLog` and `ordinary_allocation`\u2014pass.\n\n[D010](https://github.com/DataDog/ffe-system-test-data/blob/531e69f0b943e76d6f34144dbc1303a136febadf/contracts/experimentation-opt-out/decision-history.md#d010) retains the [existing decision](https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344233354): valid UFC requires an explicit boolean. Go\u2019s existing nil-field compatibility remains separate; this cleanup does not establish a fleet default. The linked history is maintained in the [central proof draft](https://github.com/DataDog/ffe-system-test-data/pull/55).\n\n</details>"
+        }
+      ]
+    }
+  },
+  "verified_go_head": "0f6f2f798afac67604e1acd223e9b3ac199dc151"
+}

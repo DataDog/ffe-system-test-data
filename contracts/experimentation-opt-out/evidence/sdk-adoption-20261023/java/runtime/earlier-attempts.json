@@ -1,0 +1,50 @@
+[
+  {
+    "folder": "runtime-legacy-stock-agent",
+    "receipt_sha256": "2caebb6c161ed2b6bb5626c162c2fc607b11cb60fcb28dd37836d6d0563e580b",
+    "tests": {
+      "tests": 5,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "diagnosis": "Stock test agent lacks flagevaluation capture route; SDK policy and exposure assertions passed.",
+    "production_changes": false
+  },
+  {
+    "folder": "runtime-legacy-source-only-agent-patch",
+    "receipt_sha256": "dd802d88aa468fe71b0145b5bac46e785381ca9a86000c84d6c0dc3cba8f6382",
+    "tests": {
+      "tests": 5,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "diagnosis": "Capture patch targeted unused /src module; installed module still lacked route.",
+    "production_changes": false
+  },
+  {
+    "folder": "runtime-standalone-rc-unavailable",
+    "receipt_sha256": "be875e98c080b05974373edf0bb7a3593a3b25f6d7f0e92e5000a7d0e46ceee1",
+    "tests": {
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "diagnosis": "Standalone base has AgentBridges.detect()==NONE and no compatible RC bridge in this agent; inherited capability boundary.",
+    "production_changes": false
+  },
+  {
+    "folder": "runtime-standalone-raw-configuration-envelope",
+    "receipt_sha256": "5f3d34086f633a928cf2f16de917429f1c5ac7bb5b4debc3f8449f27cdf42424",
+    "tests": {
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "diagnosis": "HTTP fixture used raw RC payload; public CDN source requires JSON:API envelope.",
+    "production_changes": false
+  }
+]

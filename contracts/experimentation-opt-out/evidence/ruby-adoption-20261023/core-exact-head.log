@@ -1,0 +1,79 @@
+ bundle check || bundle install && bundle exec rake spec:core_with_libdatadog_api
+The Gemfile's dependencies are satisfied
+(cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+/usr/bin/install -c -m 0755 libdatadog_api.3.4_arm64-darwin24.bundle ../../../../lib
+(cd tmp/arm64-darwin24/datadog_profiling_native_extension.3.4.7_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+cp tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7/libdatadog_api.3.4_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/libdatadog_api.3.4_arm64-darwin24.bundle
+/usr/bin/install -c -m 0755 datadog_profiling_native_extension.3.4.7_arm64-darwin24.bundle ../../../../lib
+cp tmp/arm64-darwin24/datadog_profiling_native_extension.3.4.7_arm64-darwin24/3.4.7/datadog_profiling_native_extension.3.4.7_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/datadog_profiling_native_extension.3.4.7_arm64-darwin24.bundle
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec spec/datadog/core/feature_flags_spec.rb
+Run options: include {focus: true}
+
+All examples were filtered out; ignoring {focus: true}
+
+Randomized with seed 10951
+
+Datadog::Core::FeatureFlags
+  Configuration
+    .new
+      creates a new configuration from valid JSON
+      raises an error with invalid JSON
+    #get_assignment_with_opt_out_mode
+      evaluates activation "2026-10-19T11:59:59.999999999Z" in immediate
+      rejects unsupported modes before native evaluation
+      isolates malformed activation in future_experiments_only
+      isolates malformed activation in disabled
+      rejects invalid subject input true
+      isolates malformed activation in immediate
+      evaluates activation "2026-10-19T17:30:00+05:30" in immediate
+      rejects invalid subject input "invalid"
+      evaluates activation "2026-10-19T12:00:00.000000001Z" in immediate
+      evaluates activation "2026-10-19T12:00:00Z" in immediate
+      evaluates activation "2026-10-19T12:00:00.000000001Z" in future_experiments_only
+      evaluates activation "2026-10-19T11:59:59.999999999Z" in disabled
+      evaluates activation "2026-10-19T17:30:00+05:30" in future_experiments_only
+      evaluates activation nil in future_experiments_only
+      evaluates activation "2026-10-19T12:00:00.000000001Z" in disabled
+      rejects invalid subject input 123
+      evaluates activation "2026-10-19T12:00:00Z" in disabled
+      rejects invalid subject input ""
+      evaluates activation "2026-10-19T17:30:00+05:30" in disabled
+      evaluates activation "2026-10-19T12:00:00Z" in future_experiments_only
+      evaluates activation nil in disabled
+      evaluates activation "2026-10-19T11:59:59.999999999Z" in future_experiments_only
+      evaluates activation nil in immediate
+      excludes unknown activation but evaluates an absent subject attribute normally
+      returns the default state when no ordinary allocation matches
+    #get_assignment_with_options
+      evaluates {"dd_experimentation_opt_out_at" => ""} with immediate=true
+      evaluates {"dd_experimentation_opt_out_at" => "not-a-timestamp"} with immediate=true
+      returns the default state when no ordinary allocation matches
+      treats omitted doLog as an experiment allocation
+      evaluates {"dd_experimentation_opt_out_at" => "2099-01-01T01:02:03.123456789+05:30"} with immediate=true
+      evaluates {"dd_experimentation_opt_out_at" => true} with immediate=true
+      evaluates {} with immediate=true
+      evaluates {"dd_experimentation_opt_out_at" => "not-a-timestamp"} with immediate=false
+      evaluates {"dd_experimentation_opt_out_at" => "2026-10-01T00:00:00Z"} with immediate=true
+    #get_assignment
+      when value lazy evaluation fails
+        raises error for JSON parsing error
+      when flag is missing
+        returns error details
+      when expected type is unknown
+        raises error for unknown type
+      when flag eveluatino was successfull
+        evaluates flag successfully and returns all expected fields
+      when falling through all allocations
+        returns default state with no assignment
+    #observe_full_evaluation_data
+      defaults to false when absent
+      when the field has the malformed value from FFL-3125
+        is expected to equal false
+      when enabled
+        is expected to equal true
+
+Finished in 0.01114 seconds (files took 0.72861 seconds to load)
+44 examples, 0 failures
+
+Randomized with seed 10951
+

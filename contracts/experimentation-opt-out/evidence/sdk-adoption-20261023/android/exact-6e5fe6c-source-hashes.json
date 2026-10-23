@@ -1,0 +1,18 @@
+{
+  "base_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "files": [
+    {
+      "path": "features/dd-sdk-android-flags/README.md",
+      "sha256": "d13b98f7644f77e3c240afd90d635004ca991dcfa87bc223d33e81516d4d9ff4"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcher.kt",
+      "sha256": "5d684c011a28b004838db1a815be1aaaa8388ac3c88c72ab12ee95b7268bf271"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcherTest.kt",
+      "sha256": "558fcbf9c00cc41a966478c2fb2bb2093f911b617c866217c4c25302c94a1562"
+    }
+  ],
+  "repository_commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735"
+}

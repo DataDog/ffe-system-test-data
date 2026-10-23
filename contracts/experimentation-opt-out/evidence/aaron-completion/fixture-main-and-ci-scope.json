@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-22T20:53:35.483017+00:00",
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+  "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+  "fixture_sha": "8c4d2410aa643aa6b97c8547ae5fe358c46b7f6f",
+  "authority": "Leo explicit local instruction: skip; I do not want new reviewers",
+  "scope": "Additional Go benchmark CI registration only; no change to D017 r2 semantic rule or other SDK obligations",
+  "source_gap": "Decision set in local conversation; PR body records it, no public decision-setting review thread",
+  "ci_registration_status": "skipped-by-author-for-this-pr",
+  "checks": {
+    "go test ./openfeature -count=1 -json": {
+      "exit_code": 0,
+      "passed_test_cases": 1678
+    },
+    "python3 ci/validate-fixtures.py": {
+      "exit_code": 0,
+      "cases": 367,
+      "files": 47
+    }
+  },
+  "limits": "Local native regression and fixture schema validation. No fresh Lean run, performance acceptance, remote CI, deployment or complete optional fixture metadata conformance claim."
+}

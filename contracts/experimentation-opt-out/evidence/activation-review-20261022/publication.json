@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-10-22T23:32:36.458706+00:00",
+  "native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+  "shared_proof_commit": "188da74973dda1afe1e3ca17aac2654ad4fa016e",
+  "manifest_sha256": "f3f247e90cba32ee123d3cfdfbaea98f94b4ee7a63b2e63e9b92d0af17129196",
+  "native_pr": "https://github.com/ddoghq/dd-source/pull/139381",
+  "shared_draft_pr": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+  "all_native_pr_commits_verified": 9,
+  "all_shared_pr_commits_verified_at_initial_publication": 25,
+  "verification_reason": "valid",
+  "verifier_controls": 14,
+  "model_result_file": "publication-model-validation.json",
+  "replies": [
+    {
+      "url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354604887",
+      "in_reply_to_id": 4343813972,
+      "readback_matches": true
+    },
+    {
+      "url": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103",
+      "in_reply_to_id": 4343815683,
+      "readback_matches": true
+    }
+  ],
+  "sync_thread_resolved": true,
+  "holdout_thread": "left open for reviewer acknowledgement",
+  "private_evidence": "Raw internal snapshots, source patches and logs excluded from public branch history; retained locally.",
+  "limits": "Local/model and GitHub signing verification; no fleet acceptance or deployment assertion."
+}

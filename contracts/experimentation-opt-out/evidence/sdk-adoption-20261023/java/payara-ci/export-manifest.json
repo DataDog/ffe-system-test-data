@@ -1,0 +1,28 @@
+{
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "scope": "Read-only classification of Payara GitHub Actions failure",
+  "files": {
+    "README.md": {
+      "sha256": "d90d7af8767559acbb3bbae3758f15fa81a141cafeec14474ee2dc59036ca0f7",
+      "bytes": 826
+    },
+    "failure-receipt.json": {
+      "sha256": "71dade75a82ce15f2f4d31f956748ced56bad24ad82d5064f80a6ac8ca2f5989",
+      "bytes": 2120
+    },
+    "job-log-excerpt.txt": {
+      "sha256": "72127b236ed28feba08e58519a689204a69f4fbec07549fbf396b623828c46a4",
+      "bytes": 4606
+    },
+    "source-binding.json": {
+      "sha256": "d18c6bd83dc7b1da7d23cd6f68449556ee8145210c9f2421accfd6c27edd0a78",
+      "bytes": 764
+    },
+    "spring-boot-payara.Dockerfile": {
+      "sha256": "6d4ed8266791a12a21d115f372699285115df83b800ced7a55592f10a91624db",
+      "bytes": 1804
+    }
+  },
+  "payload_file_count": 5,
+  "payload_bytes": 10120
+}

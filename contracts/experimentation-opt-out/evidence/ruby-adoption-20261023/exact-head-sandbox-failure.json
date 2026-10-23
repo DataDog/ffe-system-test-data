@@ -1,0 +1,20 @@
+{
+  "repository": "DataDog/dd-trace-rb",
+  "source_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+  "clean_before_and_after": true,
+  "commands": [
+    {
+      "command": [
+        "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+        "exec",
+        "rake",
+        "test:open_feature"
+      ],
+      "environment_overrides": {},
+      "start": "2026-10-23T14:50:51.685815+00:00",
+      "exit_code": 1,
+      "log": "native-exact-head-sandbox-failure.log",
+      "log_sha256": "9355438c377b1faac2dfecb7f91dc6213da638adf06f577e8f9876df26ac9404"
+    }
+  ]
+}

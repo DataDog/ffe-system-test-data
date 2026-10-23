@@ -1,0 +1,115 @@
+{
+  "purpose": "Compact callback-remediation evidence supplement. Earlier Android exports stay immutable.",
+  "repository_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "baseline_commit": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "files": [
+    {
+      "path": "exact-cda7955-receipt.json",
+      "sha256": "dbddd73d2a443b7c349bbd0d0cba0765a17836385e49f5ee7c9ffec18fbb1f64",
+      "bytes": 3668
+    },
+    {
+      "path": "exact-cda7955-source-hashes.json",
+      "sha256": "465dff55618130c4ee961de30dcba4be4cfc7b318cf89f37e19d77347588e90f",
+      "bytes": 8504
+    },
+    {
+      "path": "exact-cda7955-suite-counts.json",
+      "sha256": "8c82e10272ef4069f1e9058b1f20d7725d6a60027ed2058ea71a06804ee164d1",
+      "bytes": 676
+    },
+    {
+      "path": "exact-cda7955-profile187-comparison.json",
+      "sha256": "7555bdc058866a157da3133af7db553d7bd1f6762a07737ea82970ffe8983ac1",
+      "bytes": 628
+    },
+    {
+      "path": "exact-cda7955-profile-observations.jsonl",
+      "sha256": "151e3c9d82aa29502fb705f9d73fc65ce96f085e2364a885f891ad5f4756c3d5",
+      "bytes": 16210
+    },
+    {
+      "path": "profile-probes-cda/MobileProfileProbeTest.kt",
+      "sha256": "3dbb9665c11ba2cc59ed90b3a70dd793ad669df5e8bcd3c736cab6067aa9059c",
+      "bytes": 8106
+    },
+    {
+      "path": "profile-probes-cda.init.gradle",
+      "sha256": "e63927a0044e8c7a4a40c01149e6ca646888cbf5e84e79684e8c0f78ff642bb6",
+      "bytes": 460
+    },
+    {
+      "path": "judge-profile-cda.py",
+      "sha256": "0b4430481cde6dfa1aaac7ead0d9e2d011d3125620dea083c6999e729b8d9e85",
+      "bytes": 1962
+    },
+    {
+      "path": "review4-audit.md",
+      "sha256": "7f892cbf75926672003558dd356a19a7fdc7dfb2766e08d7f64147100d56d77f",
+      "bytes": 2662
+    },
+    {
+      "path": "review4-baseline-receipt.json",
+      "sha256": "8f10c312be513131f8665d7f433f5165ff50d0718030189db8198bd33b5e6de5",
+      "bytes": 4273
+    },
+    {
+      "path": "review4-runtime/baseline-observations.json",
+      "sha256": "0d18b519476d68be44b8fd03337794fa67bf232f61316f6bc7249a57387a112b",
+      "bytes": 765
+    },
+    {
+      "path": "review4-runtime/baseline-CallbackRuntimeProbeTest.kt",
+      "sha256": "f804b4cb4988f674414945762a5a5f81301b1234e3f4a85d8bffdc9649664263",
+      "bytes": 4045
+    },
+    {
+      "path": "review4-runtime/baseline-artifacts.json",
+      "sha256": "0fb50d8e691e201ac29cff4eeffff655477e71bc658e3e38c2e46c1f186a7933",
+      "bytes": 487
+    },
+    {
+      "path": "review4-runtime/baseline-instrumentation.log",
+      "sha256": "4324f868fb39b5ec310597d2774873d049b18dc942f3cfe9e958e9ded7eeca01",
+      "bytes": 2145
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-receipt.json",
+      "sha256": "89b452771e493e608952bd5f0ae67e938b903bebaa7f670614ca8d7b71b5c150",
+      "bytes": 3972
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-callback-observations.json",
+      "sha256": "456fbbcb0c8cf6b773731de960d250f5dfb70776305d932702e8340a37b14dc0",
+      "bytes": 594
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-optout-observations.json",
+      "sha256": "ac6cb4c14c9d838cbb66f209fd116e1f71a941c9b4ef5f2e5d877f5889fb3ace",
+      "bytes": 7387
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-instrumentation.log",
+      "sha256": "090870fb9d697228b02c84aebfeb919c168eff9a5ad03a5d8204a6dfe3ae8011",
+      "bytes": 1621
+    },
+    {
+      "path": "review4-runtime/test-src/CallbackRuntimeProbeTest.kt",
+      "sha256": "1514742438c4e432f38f6930390dc296dae068450eda8446c605c05f9c29f63a",
+      "bytes": 4221
+    },
+    {
+      "path": "review4-runtime/test-src/OptOutRuntimeProbeTest.kt",
+      "sha256": "1d02b4f1b051410c2025d37c0ddf2dca7135219fde702d8a0dd5f266a6e95994",
+      "bytes": 9901
+    },
+    {
+      "path": "review4-runtime/probe.init.gradle",
+      "sha256": "054ca5d5ce5fd46033002f92fc92765295e0d7d5b5f105821e113b5e87a74571",
+      "bytes": 419
+    }
+  ],
+  "excluded": "APKs, emulator images, build outputs, full logs and suite XML. Original local artifacts are retained.",
+  "total_bytes": 82706
+}

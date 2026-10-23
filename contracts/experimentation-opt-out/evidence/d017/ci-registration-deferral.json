@@ -1,0 +1,41 @@
+{
+  "recorded_at": "2026-10-22T20:22:29.905745+00:00",
+  "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+  "base_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+  "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+  "scope": "Benchmark CI registration deferred from child #5700 to base #5666 at Leo request. Go benchmark functions and inactive-call guard retained.",
+  "native_validation": {
+    "commands": [
+      "go test ./openfeature -count=1",
+      "go test ./scripts/ciselect -count=1"
+    ],
+    "results": [
+      "pass",
+      "pass"
+    ]
+  },
+  "ci_configuration": "Byte-identical to current base; no .gitlab file in child PR diff.",
+  "review_requests_removed": [
+    "dd-trace-go-guild",
+    "apm-ecosystems-performance"
+  ],
+  "changed_files": [
+    "openfeature/doc.go",
+    "openfeature/evaluator.go",
+    "openfeature/evaluator_test.go",
+    "openfeature/experimentation_opt_out.go",
+    "openfeature/experimentation_opt_out_bench_test.go",
+    "openfeature/experimentation_opt_out_future_test.go",
+    "openfeature/experimentation_opt_out_test.go",
+    "openfeature/ffe-system-test-data",
+    "openfeature/provider.go",
+    "openfeature/remoteconfig_test.go",
+    "openfeature/types.go"
+  ],
+  "reply": {
+    "url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+    "body": "**Scope update \u2014 CI registration moves to [#5666](https://github.com/DataDog/dd-trace-go/pull/5666).** [e282fff](https://github.com/DataDog/dd-trace-go/commit/e282fff2c1e7972c2211d999e5486beacc5a8d5e) syncs the current base and restores its exact benchmark CI configuration, keeping this child limited to OpenFeature changes.\n\nThe two Go benchmark functions and the inactive-call guard remain. Their CI registration and performance review are **deferred**, not completed at this head; the earlier registration evidence above applies to its linked commit. We will address that work in the base after folding in this child.\n\n[D017\u2019s inactive-path rule](https://github.com/DataDog/ffe-system-test-data/blob/ec4af07fdae4c0349d5d39fe4135016eee12529c/contracts/experimentation-opt-out/decision-history.md#d017) is unchanged. OpenFeature package and CI-selection tests pass after the base sync; current remote CI is separate.",
+    "created_at": "2026-10-22T20:21:20Z"
+  },
+  "limits": "No fresh Lean, timing, race or operational trace replay. Earlier evidence remains pinned to its original commits; new benchmark CI registration and base performance assessment remain open. No fleet scope change."
+}

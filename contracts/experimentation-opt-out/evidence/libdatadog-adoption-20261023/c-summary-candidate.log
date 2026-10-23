@@ -1,0 +1,4 @@
+FAIL policy/immediate/invalid/before/1/invalid-type-whitespace entry=0 error=0 reason=0
+FAIL policy/immediate/invalid/before/1/invalid-type-whitespace entry=1 error=0 reason=0
+FAIL policy/future_experiments_only/invalid/before/1/invalid-type-whitespace entry=0 error=0 reason=0
+C contract: 250 passed, 2 failed, 504 evaluations

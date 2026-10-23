@@ -1,0 +1,70 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:12 UTC
+INFO: Invocation ID: 2b4eaf26-859f-4cd9-8bda-4c7d4b5cb169
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: 3 targets (0 packages loaded, 0 targets configured)
+Analyzing: 3 targets (0 packages loaded, 0 targets configured)
+
+Analyzing: 3 targets (23 packages loaded, 22827 targets configured)
+
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:crypto in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:rust_wrapper in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:ssl in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_zstd_linux-x86_64//:libzstd in 'deps' of @@crates_vendor_do_not_use_directly__zstd-sys-2.0.16-zstd.1.5.7//:zstd_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:crypto in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:rust_wrapper in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:ssl in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_zstd_linux-x86_64//:libzstd in 'deps' of @@crates_vendor_do_not_use_directly__zstd-sys-2.0.16-zstd.1.5.7//:zstd_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/3e31c3f277f502f44df36629af924ee1/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_lz4_linux-x86_64//:liblz4 in 'deps' of @@crates_vendor_do_not_use_directly__lz4-sys-1.11.1-lz4-1.10.0//:lz4_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+Analyzing: 3 targets (23 packages loaded, 48721 targets configured)
+[1 / 1] no actions running
+Analyzing: 3 targets (23 packages loaded, 56192 targets configured)
+[957 / 1,077] checking cached actions
+Analyzing: 3 targets (23 packages loaded, 56439 targets configured)
+[1,077 / 1,079] Testing //domains/ffe/libs/flagging/rust/evaluation:test; 0s linux-sandbox ... (2 actions, 1 running)
+Analyzing: 3 targets (23 packages loaded, 58877 targets configured)
+[1,077 / 1,079] Testing //domains/ffe/libs/flagging/rust/evaluation:test; 1s linux-sandbox ... (2 actions running)
+Analyzing: 3 targets (23 packages loaded, 59973 targets configured)
+[1,077 / 1,079] Testing //domains/ffe/libs/flagging/rust/evaluation:test; 2s linux-sandbox ... (2 actions running)
+INFO: Analyzed 3 targets (23 packages loaded, 59973 targets configured).
+[2,970 / 8,436] Testing //domains/ffe/libs/flagging/rust/evaluation:test; 4s linux-sandbox ... (2 actions running)
+[3,308 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 3s linux-sandbox
+[6,145 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 5s linux-sandbox
+[8,523 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 8s linux-sandbox ... (2 actions, 1 running)
+[8,559 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 9s linux-sandbox ... (3 actions running)
+[8,562 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 11s linux-sandbox ... (2 actions, 1 running)
+[8,565 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 12s linux-sandbox ... (2 actions running)
+[8,566 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 13s linux-sandbox ... (2 actions running)
+[8,566 / 8,568] 1 / 3 tests; Testing //domains/ffe/apps/edge-assignments:test; 16s disk-cache, linux-sandbox ... (2 actions running)
+[8,567 / 8,568] 2 / 3 tests; GoLink domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test; 4s disk-cache, remote-cache, linux-sandbox
+[8,568 / 8,569] 2 / 3 tests; [Prepa] Testing //domains/ffe/libs/flagging/ufc:go_default_test
+[8,568 / 8,569] 2 / 3 tests; Testing //domains/ffe/libs/flagging/ufc:go_default_test; 1s linux-sandbox
+[8,568 / 8,569] 2 / 3 tests; Testing //domains/ffe/libs/flagging/ufc:go_default_test; 11s linux-sandbox
+INFO: Found 3 test targets...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+Target //domains/ffe/apps/edge-assignments:test up-to-date:
+  bazel-bin/domains/ffe/apps/edge-assignments/test_/test.sh
+Target //domains/ffe/libs/flagging/rust/evaluation:test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/rust/evaluation/test
+INFO: Elapsed time: 44.756s, Critical Path: 27.58s
+INFO: 13 processes: 8568 action cache hit, 2 disk cache hit, 11 linux-sandbox.
+INFO: Build completed successfully, 13 total actions
+INFO: 
+//domains/ffe/apps/edge-assignments:test                                 PASSED in 16.1s
+//domains/ffe/libs/flagging/rust/evaluation:test                         PASSED in 5.0s
+//domains/ffe/libs/flagging/ufc:go_default_test                          PASSED in 11.7s
+
+Executed 3 out of 3 tests: 3 tests pass.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

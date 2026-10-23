@@ -1,0 +1,125 @@
+{
+  "schema": "ruby-tooling-summary-v1",
+  "recorded_at": "2026-10-23T14:52:11.963681+00:00",
+  "scope": "Local environment setup only. Product validation belongs to separate parent receipts.",
+  "platform": "macOS ARM64",
+  "ruby": {
+    "version": "3.4.7",
+    "original_binary": "/Users/leo.romanovsky/.rbenv/versions/3.4.7/bin/ruby",
+    "wrapper": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby",
+    "gem_home": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/gems",
+    "bundler": "4.0.19"
+  },
+  "repair": {
+    "gmp": {
+      "version": "6.3.0",
+      "source": "https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz",
+      "source_sha256": "a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898",
+      "prefix": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/native"
+    },
+    "DYLD_LIBRARY_PATH": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/native/lib",
+    "libraries_sha256": {
+      "libgmp.10.dylib": "55cc39f953cedfaa481e81f0abcf3cffca3c41aea9bb79779e5d632da7ed0edf",
+      "libssl.3.dylib": "a6ef3db86f6902ebe0da65912263681f7360130ace3ea864e01e5afaf1f0ddef",
+      "libcrypto.3.dylib": "8e9eefcd0f4725f479b7e2e5de7da1e872793911878e136856ea1632dcbc7fbf",
+      "libyaml-0.2.dylib": "4944345a52041c320ebd4f92701ac41857fc570e812dc27cb0da1ff7b92ce352"
+    },
+    "copied_library_origin": "Existing /opt/datadog-agent/embedded/lib: OpenSSL 3.5.8 and libyaml 0.2",
+    "child_process_fix": "RUBYOPT runtime-prelude.rb sets process-local RbConfig.ruby and Gem.ruby to the task wrapper. Shell-child probe passed.",
+    "make_fix": "Task-local make wrapper and process-local RbConfig use /bin/mkdir and /usr/bin/install. Global runtime files remain unchanged."
+  },
+  "lint": {
+    "gemfile": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/Gemfile",
+    "lockfile": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/Gemfile.lock",
+    "sha256": {
+      "Gemfile": "25cafc619c64b1cceb9ee4d0778a9dabfb6f8af8a67dccfdaa0f89b719a65307",
+      "Gemfile.lock": "a680d6b20602506aedc43bee7f08bbc3dce3b92515df9bb96c5751e494080c46"
+    },
+    "base": "Evaluates repository gemfiles/ruby-3.4.gemfile",
+    "versions": {
+      "rbs": "4.2.0",
+      "steep": "2.1.0",
+      "standard": "1.49.0",
+      "rubocop": "1.75.8",
+      "tsort": "0.2.0"
+    },
+    "version_authority": "Repository gemfiles/ruby-4.0.gemfile.lock",
+    "repository_gemfiles_unchanged": true,
+    "file_selection": "Optional rubocop-scope.rb only sets repository RuboCop rake task patterns. No rule changes.",
+    "cache_correction": "Set RUBOCOP_CACHE_ROOT to a directory under evidence/ruby to avoid writes to sandbox-denied ~/.cache/rubocop_cache."
+  },
+  "native": {
+    "source_commit": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+    "source_clean_at_inspection": true,
+    "LIBDATADOG_VENDOR_OVERRIDE": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/libdatadog-vendor",
+    "platform_directory": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/libdatadog-vendor/arm64-darwin",
+    "platform_directory_target": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release",
+    "libraries": {
+      "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.dylib": "7a09b43e8d1693ae22ae65fa1afebfec08407901c4ca53e2091aafc4acb79818",
+      "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.a": "dd6d3ac4a3b18b3c6078784f9b05274518842a567273739bcfba99c1bcb10f81"
+    },
+    "opt_out_api_exported": true,
+    "linux_additional_features": [
+      "otel-thread-ctx",
+      "data-pipeline-external-observations"
+    ],
+    "linux_instruction": "Preserve builder defaults. Use a separate output directory."
+  },
+  "vale": {
+    "version": "3.20.0",
+    "binary": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/vale/bin/vale",
+    "wrapper": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/vale",
+    "VALE_STYLES_PATH": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/vale/styles",
+    "packages": {
+      "write-good": "0.4.1",
+      "proselint": "0.3.4",
+      "Harper": "0.1.0"
+    },
+    "archive_checksums": "All verified against repository pins or the official macOS release asset digest.",
+    "repository_config": "Unchanged .vale.ini and live repository Changelog rules.",
+    "dependency_receipt": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/vale/install-receipt.json",
+    "positive_probe_exit": 0,
+    "negative_NoCatchalls_probe_exit": 1
+  },
+  "extension_linkage": {
+    "status": "verified",
+    "recorded_at": "2026-10-23T14:55:12.912805+00:00",
+    "ruby_commit": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+    "ruby_worktree_clean": true,
+    "method": "After parent completion signal: bundle exec Ruby loads datadog; macOS dyld API enumerates loaded image paths and hashes; otool records linked libraries and RPATHs.",
+    "probe_command": "../evidence/ruby/tooling/bin/bundle exec ruby -Ilib ../evidence/ruby/tooling/loaded-native-probe.rb",
+    "extension": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/lib/libdatadog_api.3.4_arm64-darwin24.bundle",
+    "extension_sha256": "db4d205d15e5f3014d2163cd74be1c64a366e63574222e76481d30a7db1c8c39",
+    "linked_libdatadog_install_name": "@rpath/libdatadog_profiling.dylib",
+    "rpaths": [
+      "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/libdatadog-vendor/arm64-darwin/lib/pkgconfig/../../lib",
+      "${ORIGIN}/../../evidence/ruby/tooling/libdatadog-vendor/arm64-darwin/lib",
+      "${ORIGIN}/../../../../../libdatadog-vendor/arm64-darwin/lib",
+      "${ORIGIN}/../../../../../../../libdatadog-vendor/arm64-darwin/lib"
+    ],
+    "loaded_native_library": {
+      "path": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.dylib",
+      "realpath": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release/lib/libdatadog_profiling.dylib",
+      "sha256": "7a09b43e8d1693ae22ae65fa1afebfec08407901c4ca53e2091aafc4acb79818"
+    },
+    "matches_recorded_ead_artifact": true,
+    "hash_unchanged_after_load": true,
+    "loaded_feature_receipt": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/loaded-native-probe.json",
+    "loaded_feature_receipt_sha256": "825396d98699a72dfa82bc40b5031254dbf5250fafeb54a27fcd6e2c53f468a1",
+    "otool_receipt": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/logs/extension-otool-L.log",
+    "otool_receipt_sha256": "ecc0292f417acf0673f03fd39d7a4117e57be8825465fa080756bc46564336a1",
+    "load_commands_receipt": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/logs/extension-otool-load-commands.log",
+    "load_commands_receipt_sha256": "ae09039ebca11c81648af9f16bc237851305c717b1001ece0618c760c815f78b",
+    "probe_source_sha256": "11feca4cd5ab2881331a40a9201c64c7215ccaa9408e9e0d09b0cea29fb87fe4",
+    "probe_note": "The initial diagnostic probe tried to hash macOS shared-cache system libraries without disk files. Final probe reports those separately. The initial diagnostic failure is retained in logs/loaded-native-probe.stderr.log.",
+    "product_tests_run_by_probe": false
+  },
+  "boundaries": [
+    "Ruby 3.1 and 4.0 are absent locally.",
+    "Local Docker is absent; separate Linux runtime owner handles Docker work.",
+    "Native compilation passes with an Apple Clang warning in Ruby headers. Optional flag probes fail under -Werror.",
+    "No product test outcome is asserted by this setup receipt."
+  ],
+  "detailed_setup_receipt": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/setup-receipt.json",
+  "detailed_setup_receipt_sha256": "45c5fd278405d80adcdbe0a36ff5c32e471bd9bf536cf75e2572fbbbdc174b6a"
+}

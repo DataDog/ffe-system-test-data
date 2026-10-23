@@ -1,0 +1,126 @@
+{
+  "evidence_level": "source-inspection",
+  "stack_merge_base": "de3998517f6e18864727360a5f676d33be5a5e29",
+  "files": [
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/experimentation_opt_out.go",
+      "sha256": "6c14e1c1ac9f5ab166698ea79b72cedaddd2c4bfdc4a9b230572ce6b8abfabcb",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/experimentation_opt_out.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/provider.go",
+      "sha256": "9faf7d1155ae7c22638bb3531dd85773ab0f785d3e411a81733fd412c5ca19c2",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/provider.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/types.go",
+      "sha256": "2fdf4d332531a3f5e059e8007c21008908fafb647b698e8123342f414f66f68c",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/types.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/evaluator.go",
+      "sha256": "11c4ce6096dad46dbe63dc551baea7a4fa36dded9a86f969836196f5bff88841",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/evaluator.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/doc.go",
+      "sha256": "06578ca5d0590324e37119f7475ecb1a2061020f48cb970340615e3ec4eda13c",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/doc.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/provider_bench_test.go",
+      "sha256": "7d2bddf46450922093efc5b315f69cf256587282b4d687d09447a4df5cd13e15",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/provider_bench_test.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/flatten.go",
+      "sha256": "7575a209f72318f3d4ee26cbe24f3e0c837e4b1c0e75df778103ad70f4e18faa",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/flatten.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": "openfeature/flageval_logging.go",
+      "sha256": "a1cac653f772f62756be52ade6ca2bf721da93f3e8d677f51a1351ad6672b204",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/openfeature/flageval_logging.go"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "path": ".gitlab/benchmarks/micro/gitlab-ci.yml",
+      "sha256": "faa57e6d2c8fbc0b1421d598452ef231f9277389f0693e71e033ce459c04d985",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/d93b70746785718b6f43bf9ffee13d01e332f50e/.gitlab/benchmarks/micro/gitlab-ci.yml"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/experimentation_opt_out.go",
+      "sha256": "3fab676697c1cf252d725856da01512df1e306a1021577d0505a527fa773b6c2",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/experimentation_opt_out.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/provider.go",
+      "sha256": "9a7f700e6e851e5b0c223bc8edd1e75fb796ade7abdcc4e0c9ea0b4ccb7dff7e",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/provider.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/types.go",
+      "sha256": "850e0dba7d595f1938574945b0eefbd66a357f3ecc444fdfbd8439a055607b65",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/types.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/evaluator.go",
+      "sha256": "b7d5733f3b416f176052be33abe17e1d09d1d646bb5f82f2afdc5a1312cd587f",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/evaluator.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/doc.go",
+      "sha256": "a581abdb7453903f4f21d86058a42efe98fc7763b2159fde58fd22af6fc3e44c",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/doc.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/provider_bench_test.go",
+      "sha256": "05d1cffe8430dc16b78d537c7dcbbc1a436290d84db4016d6debcae8177935da",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/provider_bench_test.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/flatten.go",
+      "sha256": "7575a209f72318f3d4ee26cbe24f3e0c837e4b1c0e75df778103ad70f4e18faa",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/flatten.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": "openfeature/flageval_logging.go",
+      "sha256": "a1cac653f772f62756be52ade6ca2bf721da93f3e8d677f51a1351ad6672b204",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/openfeature/flageval_logging.go"
+    },
+    {
+      "sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+      "path": ".gitlab/benchmarks/micro/gitlab-ci.yml",
+      "sha256": "6fe0c81a99340a2005dd0f28e46e2895d546c83d5360fb3498ff5fd1a0362b5e",
+      "url": "https://github.com/DataDog/dd-trace-go/blob/febcc185d27d8edbe4acf16ce2dee91d5aff730c/.gitlab/benchmarks/micro/gitlab-ci.yml"
+    }
+  ],
+  "fixture_pins": {
+    "5666": "52e43dc2693e5af14fd60210f9471d0dc08ce73f",
+    "5700": "1c831fed02a428a1b0a4ac412da9b773e22df257"
+  },
+  "fixture_pr_49": {
+    "merged": true,
+    "merge_commit": "52e43dc2693e5af14fd60210f9471d0dc08ce73f"
+  },
+  "fixture_pr_52": {
+    "merged": false,
+    "head": "b28876200152f00c7d5eb04616f721afa5955c1d"
+  }
+}

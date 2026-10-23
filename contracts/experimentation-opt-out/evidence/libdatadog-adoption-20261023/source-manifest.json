@@ -1,0 +1,28 @@
+{
+  "repository": "DataDog/libdatadog",
+  "original_head": "3eb48e6999b3792267b5179c9e1f4132298b958d",
+  "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "merged_main": "9c3464f5d",
+  "files": {
+    ".github/CODEOWNERS": "6dca9e05a2273d3d40b7f8eb48f92ecda79a503489ac785925b92d28ab6f96b5",
+    "Cargo.lock": "061ba520979f3abb49b0c1dfb63fadb7ec2d8c71838ef12b4d776843fc7788fe",
+    "libdd-data-pipeline-core/src/agentless/exporter.rs": "2d5caef4cf42a871b042edf877cf94210b4cec36316d1f8436914124c7f755fe",
+    "libdd-ffe-ffi/src/assignment.rs": "50316fbdfcd982691d166ef4f96fb5a3ec3d668c18bde0410a03f523f48b4458",
+    "libdd-ffe-test-suite/tests/data/README.md": "49c1c9a4a07b2ca84baa432669d2e47723d6c770080d93783c19960951b18a26",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-policy.jsonl": "0d396beb2b627606f795386340d5e9d7443a40c51e84200b60527938969f7175",
+    "libdd-ffe-test-suite/tests/experimentation_opt_out.rs": "9ed2ee2744d7f149d844486b8f1f685a0f5a20a0d5b1123de35fde8c75838f76",
+    "libdd-ffe/README.md": "f593fbb0531d1314fc97f681cc9d28846d28b980ca8967ae08414d04d733f694",
+    "libdd-ffe/src/rules_based/eval/eval_assignment.rs": "f1135369ee455399ab811202d516b106f613ed2beab180f99c189836623140ee",
+    "libdd-ffe/src/rules_based/timestamp.rs": "7c1665f72723050db6819be068ef7f0e872b6392ca8c8f9a36889932b74b0ab7",
+    "libdd-ffe/src/rules_based/ufc/compiled_flag_config.rs": "46d0da6dda9f6bdbe37443855845b2df0824930ff1a494f0fb5f0653815b33c9",
+    "libdd-ffe/src/rules_based/ufc/models.rs": "0384b9964972a10f73b7c03e6c079c84e091e4ad70ae6f43228ba7cc46598719",
+    "libdd-ipc/src/platform/unix/sockets/linux.rs": "c49639e18f7332e693bf83d21c0bc70c44c0eefb2c95507f30bad4b507bf5e76",
+    "libdd-ipc/src/platform/unix/sockets/mod.rs": "5624e18827e6eba63ebaa1514b16adee921bfc1e8b0b2bc1f33397792ddeb558",
+    "libdd-profiling/src/internal/profile/mod.rs": "0df6a70b290c2b736e6b7581a77be98844619a6e85dfddc4a8f753cbc42da860",
+    "libdd-trace-obfuscation/Cargo.toml": "eb5525d928ed9e38e742976f1d5b1d51846ab22231804d1f64e47ac271610016",
+    "libdd-trace-obfuscation/src/obfuscate.rs": "45ec325e01f4c8cbd5e6d47abfb31bb1e5f7c9974f270f8fe943ee46916fb81d",
+    "libdd-trace-obfuscation/src/replacer.rs": "cd415e7c56ef8742bac7f7b9befee2c41a18ac1c357d559474b76289310aa77c",
+    "libdd-trace-utils/src/span/span_pool.rs": "dac190d5c2e66683a3856385487e86cfcdba7f36f3f0765a809c1ebee261c182"
+  },
+  "profile_sha256": "8ac6156a05ed49667647afbd0ec800a11276e6b961fcb5b07540281dee4733ef"
+}

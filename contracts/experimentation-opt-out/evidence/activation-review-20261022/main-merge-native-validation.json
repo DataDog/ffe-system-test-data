@@ -1,0 +1,209 @@
+{
+  "recorded_at": "2026-10-22T23:23:33.588208+00:00",
+  "repository": "ddoghq/dd-source",
+  "source_sha": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+  "source_tree": "dfbcd56bcf4f7f72abaa864d21a26b4b244dc7ef",
+  "merged_main": "83b80db35fbfb4c3b9696de95ea187f882a9c33d",
+  "fix_commit": "3c0214a3b5497b70673e774f07aad9d52f582676",
+  "suites": [
+    {
+      "target": "//domains/ffe/libs/flagging/core/service:go_default_test",
+      "counts": {
+        "tests": 1146,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-service.xml.gz",
+      "log": "main-merge-service.log.gz"
+    },
+    {
+      "target": "//domains/ffe/libs/flagging/ufc:go_default_test",
+      "counts": {
+        "tests": 896,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-ufc.xml.gz",
+      "log": "main-merge-ufc.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle:go_default_test",
+      "counts": {
+        "tests": 176,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-lifecycle.xml.gz",
+      "log": "main-merge-lifecycle.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/crossdc:go_default_test",
+      "counts": {
+        "tests": 58,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-crossdc.xml.gz",
+      "log": "main-merge-crossdc.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/allocation:go_default_test",
+      "counts": {
+        "tests": 193,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-allocation-http.xml.gz",
+      "log": "main-merge-allocation-http.log.gz"
+    },
+    {
+      "target": "//domains/ffe/libs/flagging/core/model:go_default_test",
+      "counts": {
+        "tests": 297,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-model.xml.gz",
+      "log": "main-merge-model.log.gz"
+    },
+    {
+      "target": "//domains/ffe/libs/flagging/core/repository:go_default_test",
+      "counts": {
+        "tests": 282,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "main-merge-repository.xml.gz",
+      "log": "main-merge-repository.log.gz"
+    }
+  ],
+  "new_regression_leaf_cases": 26,
+  "source_files_sha256": {
+    "domains/ffe/apps/apis/ffe-service/internal/allocation/allocation_handler_permissions_test.go": "ebcd1a4c4021a1c8f21ee9f79170dc58e52c7ff856971f22e97848db18cacc4e",
+    "domains/ffe/apps/apis/ffe-service/internal/crossdc/crossdc_integration_test.go": "fd7fac7234325e343501a85da88ad7e2c276c0798714409387b0b72832736b15",
+    "domains/ffe/apps/apis/ffe-service/internal/crossdc/flag_replication.go": "8de6b03d65622b442d7a01c84bda533fb517f082ad55ed2164787cd69f081985",
+    "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/BUILD.bazel": "dbfc9fba97147596437ffb905d7c754825e255ca3a60cf0bab1ca5d0831e94e2",
+    "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_lifecycle_transaction_test.go": "99e7e56ac95fa1f17b39d2ebc47a8ce8641ceb0fc9118f809a231b09e2a3227d",
+    "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/randomization_activation_test.go": "edbf037dbc73305a8c3969890d619c2b0ec0efc621e2a37a924181640a8c8702",
+    "domains/ffe/libs/experimentation/orchestration/experiment_lifecycle_service.go": "9e7ee538587440b511b64655b42d2f174411c6852df71fc8d416756478c19a23",
+    "domains/ffe/libs/flagging/common/validation_context.go": "6de103b523c81b291c4288433dc0dfb900fc9901eee0cfae0556a74b97a4c0a1",
+    "domains/ffe/libs/flagging/core/model/BUILD.bazel": "afc508f956af471bd1d15d92abb0dbfa4361a33d0602f959a8b91ac2e929a0d6",
+    "domains/ffe/libs/flagging/core/model/allocation.go": "5982641696a04c9174d5a3579daa28218c3d6accc8bef456d63114ff177c59a6",
+    "domains/ffe/libs/flagging/core/model/crossdc_replication.go": "2b83045ef3432b50fdad17412da050815d59940ac59fa7618f218c29cdde4024",
+    "domains/ffe/libs/flagging/core/model/randomization_activation_test.go": "ca1095ede9a8e63d3a38d05f12e59ea39f4bcb6bd97daed3a2eda902165c1cf1",
+    "domains/ffe/libs/flagging/core/repository/BUILD.bazel": "d38e4ceb9daa4f9aa53cf8fb98f090c231df5bb5ae0e19ff2642e2b25c569ed3",
+    "domains/ffe/libs/flagging/core/repository/allocation_repository.go": "b7b6702bba6d427f392539a3967a195a715aea7f88860aeeb56a7975bb20907c",
+    "domains/ffe/libs/flagging/core/repository/randomization_activation_test.go": "6ce5db22c09a09e9710016a7dcc61832b8dd7cb03a1ff9a5cbdeb461e1e84391",
+    "domains/ffe/libs/flagging/core/repository/ufc_repository.go": "5e34b3863a24f3058bb5899a7f5b91e797e0c67853b0caee82d6771a6555a4ad",
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service.go": "4a20ee152de58d76d5de5d75f40c20c4a9947a9851fce8862748d81bb38a0ac0",
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service_test.go": "86e5459332b212855f4b2279fe6fade39fe9c1def1ba68ca8a4a5f8b8c520b3e",
+    "domains/ffe/libs/flagging/core/service/allocation_service.go": "78463b14b32cea37ce9051be8fe9bbaba97e7cf969ac200f36052b9a19d78297",
+    "domains/ffe/libs/flagging/ufc/BUILD.bazel": "f87b60429755232d89bdf418d7cf5671246af502600d478c65a94074a3cfdac3",
+    "domains/ffe/libs/flagging/ufc/holdout.go": "8e087697d6ed7030a164187c21d696bf8bc31930f6e8f76dc29c00955ae0a7ab",
+    "domains/ffe/libs/flagging/ufc/holdout_test.go": "f5d4c45660a64ce7571e591b0979dab133873ab595b6cff667b0b923b92ed652",
+    "domains/ffe/libs/flagging/ufc/randomization_activation_test.go": "53a12e361b55f51ca5896f5b1eb5ffeedea59779421c0fbcff1731ea0bc020fa",
+    "domains/ffe/libs/flagging/ufc/ufc.go": "31cad95afc143418e99d90cc7bfcbcd6972b880a4db87e5767d8152192f96b6b",
+    "domains/ffe/libs/flagging/ufc/ufc_core.go": "c475d8ec7e18ea1294788b5c5e32cdffc11664b2d9a0a4ad320ccc8f90faeabc",
+    "domains/ffe/libs/flagging/ufc/ufc_json.go": "e440d9f4d4b2d43daa6f1184e2f654ce59dbd419903bb453407d03c13b9193c1",
+    "domains/ffe/libs/flagging/ufc/ufc_json_decode.go": "f22e2b2c6b1955d5dd3eeeb527d4e0d1463f664c0075dae82f05a36c17eef710",
+    "domains/ffe/libs/flagging/ufc/ufc_proto.go": "172c896250d55029f5a955828a899c961a8bbb0a39256fdffc889277b1234934",
+    "domains/ffe/libs/flagging/ufc/ufcpb/ufc.pb.go": "0c5a39d685ac491b24c31739464f8e852133d19e7ffd76fb734a4b9fb0de5f8a",
+    "domains/ffe/libs/flagging/ufc/ufcpb/ufc.proto": "b8f540e8d3c26efbd150e7bfe33fa396579ed6e7f1ae9247d853513bb3e7249d",
+    "domains/orgstore/shared/values/pgsm_image_values.bzl": "2b7e078debb950dd11fdd437907cf8fa3b519023d6243a467d3f71d103fa91e4"
+  },
+  "conflict_resolutions": {
+    "domains/ffe/libs/flagging/core/model/BUILD.bazel": "Regenerated with Gazelle; retain prerequisite and activation tests.",
+    "domains/ffe/libs/flagging/ufc/holdout.go": "Retain activation helper and main common-bucket-space semantics.",
+    "domains/ffe/libs/flagging/ufc/ufc.go": "Retain activation metadata and main variant shard salt.",
+    "domains/orgstore/shared/values/pgsm_image_values.bzl": "Keep main dogweb image and activation-capable Feature Flags image."
+  },
+  "command": "bzl test //domains/ffe/libs/flagging/core/service:go_default_test //domains/ffe/libs/flagging/ufc:go_default_test //domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle:go_default_test //domains/ffe/apps/apis/ffe-service/internal/crossdc:go_default_test //domains/ffe/apps/apis/ffe-service/internal/allocation:go_default_test //domains/ffe/libs/flagging/core/model:go_default_test //domains/ffe/libs/flagging/core/repository:go_default_test --test_timeout=1200 --test_arg=-test.timeout=15m --test_output=errors",
+  "raw_evidence": [
+    {
+      "file": "main-merge-native.log.gz",
+      "sha256": "0770ab6c56001723bb0b4e5c1618dc32f93a0d984743ed277a309424402fb927",
+      "uncompressed_sha256": "b05a616c5533a5263ac179ad4002c7d795adaadd3216be796727a570d5b85aa6"
+    },
+    {
+      "file": "main-merge-service.xml.gz",
+      "sha256": "3ff9378c65e53a58337b439cd37b4a872e8d331c8427e58ac41ebcf7a1451a06",
+      "uncompressed_sha256": "69c93a8fd2e07360d64ffc797b91991441bedadc1e6f82c061ecabb215bac43e"
+    },
+    {
+      "file": "main-merge-service.log.gz",
+      "sha256": "eb51f3165890bc996db45537046b31df0d383887482a8c8dbf20d750be61de12",
+      "uncompressed_sha256": "153727954e115b2b467c584fae679efdd0638b85ccaa1fafdf0a17e4f84da99e"
+    },
+    {
+      "file": "main-merge-ufc.xml.gz",
+      "sha256": "dd22b84dde029ef7574999de1cbac8f5d697d1bebd06b16f33c69638812cd989",
+      "uncompressed_sha256": "30a0597e8e3d1879cf505e9c9997eb352c569d3968560997adae1d768c01ce71"
+    },
+    {
+      "file": "main-merge-ufc.log.gz",
+      "sha256": "3a0f5eff2048c79d117bb96825d485f11f300763860111a820ecb79205893fa2",
+      "uncompressed_sha256": "ad96c04596828311364188eb813e7a558d77dad6c9b5b97b7faee5f949b79684"
+    },
+    {
+      "file": "main-merge-lifecycle.xml.gz",
+      "sha256": "e4f85347af6a21a6ec44e232cbc99287a5f906eab566d8ef874877ce34386974",
+      "uncompressed_sha256": "87271aa1b97a09b736bfeee0c215a9f5fdb748157a92c87eed04182b27242e65"
+    },
+    {
+      "file": "main-merge-lifecycle.log.gz",
+      "sha256": "40f1fe542cc8d0c09c9ddf362ae34731fcf67617cda33d838cbd208260b0afab",
+      "uncompressed_sha256": "9ec415a1cdd478214b9abc4a889a42fb67d282123c6867828335ff207449ea07"
+    },
+    {
+      "file": "main-merge-crossdc.xml.gz",
+      "sha256": "e34a7fbeb7f77d32149ce92b636795d94e5b1213d4dbc1c7b565219dea1cc159",
+      "uncompressed_sha256": "2c6aea911a64675659a2507ad7af10851d901e570edaa2abb427bae0b6fe53a9"
+    },
+    {
+      "file": "main-merge-crossdc.log.gz",
+      "sha256": "e255bc62c823ed3c1823e13735d2008adbf534ff0cd1f3ebe2e1bd04c101af62",
+      "uncompressed_sha256": "7b8145fb6e601706f57bdcda88ececc6cd5c9d1f51e510c28baaa2f4c3847c84"
+    },
+    {
+      "file": "main-merge-allocation-http.xml.gz",
+      "sha256": "f80e0df8fadb749502e20fd2eda52b4551d9c823fccac93dd1e6736e472b6118",
+      "uncompressed_sha256": "ccfc2b9b15a44b2b958273b772a8f7044ffcadec1a74d9d7dc2f327ea4b9eab6"
+    },
+    {
+      "file": "main-merge-allocation-http.log.gz",
+      "sha256": "74505d95cad771dd7360888f77b0d3ee11105a242dc60ee1423117e0d4865195",
+      "uncompressed_sha256": "5de3201fbd2384f4141610f4d4b9133965b4f63b503b57148d3a522d38f61b26"
+    },
+    {
+      "file": "main-merge-model.xml.gz",
+      "sha256": "9ad1c6573b0c8b7281ca98fbb26cbbaa9fd59828fcb79104e369be64fb755d89",
+      "uncompressed_sha256": "753e52cbff0e3e96d559fd2c4853fe1a9e3cbfe3880331eefe262ebeb0b37304"
+    },
+    {
+      "file": "main-merge-model.log.gz",
+      "sha256": "a34865765e413916be7fac1352f1d46da0fce5809535dacf177e496afb114927",
+      "uncompressed_sha256": "393176466562b89026ab14fa14840b260ad8194ea05923c1e4d7a619274af1dc"
+    },
+    {
+      "file": "main-merge-repository.xml.gz",
+      "sha256": "8c67bb25f9876ebeb96ff9775cbaf9f631a5db195134e8fc01baf50dd0b43f25",
+      "uncompressed_sha256": "0d1f36b2da060f3fe1b7c35a27293296170541bf084706627c5fad852e0901dd"
+    },
+    {
+      "file": "main-merge-repository.log.gz",
+      "sha256": "301f024971409ef2294771c31d980cb50747b5f47c783117f44cd25fa9d70be1",
+      "uncompressed_sha256": "10399db44058d0cb8c0986d2394a8a4d2b0073e89123dc91b76381ac73a04e49"
+    }
+  ],
+  "limits": "Local native tests; JUnit counts include parent cases. No combined producer/future evaluator, CI, per-target migration or validator rollout proof. Earlier failed attempts remain in native-validation.json.",
+  "raw_evidence_scope": "Raw log/patch hashes refer to privately retained originals. Public files are explicitly labeled count or provenance summaries.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "bb95ed546f346ecea7b19d96d4981c8f165e8e6c954240491f15c928de7029c1"
+}

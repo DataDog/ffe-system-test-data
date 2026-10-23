@@ -1,0 +1,9 @@
+{
+  "sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "base": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "test_file": "dd-smoke-tests/openfeature/src/test/groovy/datadog/smoketest/springboot/OpenFeatureProviderSmokeTest.groovy",
+  "test_file_sha256": "f7b25b52ce91c614d7e67ecf49eb95f683594a99478c803d2283f2eb08723c5f",
+  "production_unchanged": true,
+  "signature_verified": true,
+  "recorded_at": "2026-10-23T03:14:05.586650+00:00"
+}

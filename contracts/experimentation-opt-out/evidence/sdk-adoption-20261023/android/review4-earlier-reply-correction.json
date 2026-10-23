@@ -1,0 +1,7 @@
+{
+  "reply_id": 4355477903,
+  "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355477903",
+  "body_verified": true,
+  "updated_at": "2026-10-23T03:08:48Z",
+  "correction": "Replaced core-owned with core-created and linked the later ownership/delivery correction."
+}

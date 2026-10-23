@@ -1,0 +1,2131 @@
+{
+  "schema_version": 2,
+  "revision": "sdk-adoption-20261023-v2",
+  "status": "proposal",
+  "fleet_approved": false,
+  "imported_browser_revision": "pr-423-proposal-v2-ack",
+  "conflicts": [
+    {
+      "id": "C001",
+      "decisions": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "input": "2026-10-19t08:00:00z",
+      "browser": "accepted",
+      "go": "rejected",
+      "action": "review a shared timestamp profile; do not rubber-stamp current native-parser parity"
+    },
+    {
+      "id": "C002",
+      "decisions": [
+        "D004"
+      ],
+      "input": {
+        "mode": "disabled",
+        "activation": "invalid",
+        "attribute": "valid"
+      },
+      "browser": "normal evaluation",
+      "go": "affected flag PARSE_ERROR",
+      "reviewer_alternative": "normal evaluation",
+      "status": "resolved-for-go-implemented-native-validated",
+      "selected": "browser",
+      "resolution": "evidence/go-5700-d004-adoption.json",
+      "implementation_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56"
+    },
+    {
+      "id": "C003",
+      "decisions": [
+        "D004"
+      ],
+      "input": {
+        "mode": "future_experiments_only",
+        "activation": "invalid",
+        "attribute": "valid",
+        "doLog": true
+      },
+      "browser": "PARSE_ERROR",
+      "go": "PARSE_ERROR",
+      "reviewer_alternative": "skip allocation; ordinary fallback",
+      "status": "resolved-for-go-implemented-native-validated",
+      "selected": "browser",
+      "resolution": "evidence/go-5700-d004-adoption.json",
+      "implementation_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56"
+    },
+    {
+      "id": "C004",
+      "decisions": [
+        "D011",
+        "D018"
+      ],
+      "input": {
+        "mode": "immediate",
+        "subject_cutoff": "valid",
+        "experiment_state": "ROLLOUT_COMPLETE",
+        "weights": [
+          50,
+          50
+        ]
+      },
+      "baseline": "doLog=false; allocation remains eligible",
+      "reviewer_alternative": "separate randomized bit OR doLog in evaluator",
+      "selected": "compiler emits doLog=true; evaluator keeps existing predicate",
+      "status": "resolved-by-local-author-clarification",
+      "resolution": "evidence/backend-review-20261022/local-decision.json"
+    }
+  ],
+  "decisions": [
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D001",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858124",
+          "stage": "requested",
+          "summary": "Distinguish pending assignments from malformed input; reviewer reports mobile PROVIDER_NOT_READY and a withholding mutant surviving 514 browser tests.",
+          "version": "5e9709b84588b3e93f7847517840c375d05f0bd0"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344038513",
+          "stage": "initially_declined",
+          "summary": "Author considers request outside feature scope and suggests RECONCILING."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344393836",
+          "stage": "clarified",
+          "summary": "Reviewer distinguishes RECONCILING status from evaluation error code and demonstrates new enabled-mode behavior at d956b19 versus merge base.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348000803",
+          "stage": "accepted",
+          "summary": "Author reports remap implemented, including failed refresh; malformed and parse errors preserved.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348261555",
+          "stage": "reviewer_confirmed",
+          "summary": "Reviewer reruns probes and confirms both enabled modes, absent attribute, and malformed-input distinction.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "failed_refresh": "PROVIDER_NOT_READY",
+        "malformed": "INVALID_CONTEXT",
+        "pending_valid_context": "PROVIDER_NOT_READY",
+        "status_is_separate": true
+      },
+      "statement": "With either enabled mode, a well-formed requested context cannot use another context's assignments. Until usable assignments arrive, including after a failed refresh or missing acknowledgement, evaluation returns the default with PROVIDER_NOT_READY. Malformed input keeps INVALID_CONTEXT; configuration PARSE_ERROR is preserved. Disabled mode retains previous assignments during a context change.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348000803",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T11:56:10Z",
+        "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
+        "scope_note": "Browser pending/failed refresh error policy.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V001",
+        "V002",
+        "V014",
+        "V021",
+        "V024",
+        "V028",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-IOS-006",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-011",
+        "SDK-ADOPTION-ANDROID-012"
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D002",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858124",
+          "stage": "clarified",
+          "summary": "Pending context rules apply even when opt-out attribute is absent."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348261555",
+          "stage": "reviewer_confirmed",
+          "summary": "Malformed input remains INVALID_CONTEXT, independently of pending assignment behavior.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348000803",
+          "stage": "author-decision",
+          "summary": "Malformed versus pending browser errors reaffirmed; Go strict-input authority remains in provenance."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Absent versus malformed opt-out attribute"
+      },
+      "statement": "Disabled mode ignores the attribute. With an enabled mode, an absent own property means no opt-out policy; a present non-string or invalid timestamp is invalid context and prevents an assignment request. Absent does not exempt enabled online providers from context isolation.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4327104152"
+      ],
+      "go_reconciliation": "Go author explicitly retains strict invalid-subject handling; accepted in Go scope, fleet rollout still requires per-target validation.",
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348000803",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T11:56:10Z",
+        "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
+        "scope_note": "Malformed versus pending browser errors reaffirmed; Go strict-input authority remains in provenance.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V001",
+        "V002",
+        "V014",
+        "V015",
+        "V016",
+        "V021",
+        "V024",
+        "V028",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-ANDROID-007",
+        "SDK-ADOPTION-ANDROID-008",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-012",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-001",
+        "RUBY-6521-002",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ],
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 1,
+          "scope_note": "Preserve exact attribute identity and invalid-input state across Ruby-to-C conversion.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D003",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858130",
+          "stage": "requested",
+          "summary": "Reviewer identifies repeated activation parsing and disabled-mode cost; proposed initial patch gates evaluation-time validation."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344174742",
+          "stage": "accepted_alternative",
+          "summary": "Author moves parsing to configuration preparation while retaining mode-independent validation.",
+          "version": "8a3e76c679ac290eb06c43936597c241029199b3"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344394017",
+          "stage": "partially_confirmed",
+          "summary": "Reviewer confirms one getter read through 1000 evaluations but identifies remaining global error-policy regression.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+          "stage": "accepted",
+          "summary": "Author records explicit valid/missing/invalid states and parse-once behavior.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Prepare activation once, preserve invalid state"
+      },
+      "statement": "Read and parse activation when configuration is prepared, retain valid/missing/invalid states, and reuse prepared data across evaluations. Configurations are snapshots; changed flags require replacement. This preparation policy does not itself determine which modes return errors.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T11:56:15Z",
+        "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
+        "scope_note": "Parse once and preserve three activation states.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V003",
+        "V005",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-JAVA-001",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-006"
+      ]
+    },
+    {
+      "authority": "Leo selected browser D004 for Go and published that decision in the linked PR reply; original browser setting retained.",
+      "id": "D004",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858130",
+          "stage": "requested",
+          "summary": "Scope activation validation errors to opted-out future mode."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344174742",
+          "stage": "not_yet_resolved",
+          "summary": "Parse-once fix initially keeps validation independent of mode.",
+          "version": "8a3e76c679ac290eb06c43936597c241029199b3"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344394017",
+          "stage": "reiterated",
+          "summary": "Reviewer reports unrelated Node evaluations failing on unreachable malformed activation; recommends retaining validity and gating only its consumption.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+          "stage": "accepted",
+          "summary": "Author scopes failure to opted-out future mode.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348262068",
+          "stage": "reviewer_confirmed",
+          "summary": "Reviewer confirms formerly failing Node cases now evaluate normally and four scope tests pass.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "evidence/go-5700-d004-adoption.json",
+          "stage": "accepted-go-locally",
+          "summary": "Adopt the existing browser D004 rule for dd-trace-go PR #5700; no fleet-wide approval.",
+          "target_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540303"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+          "stage": "accepted-go-published",
+          "summary": "User-approved reply published with browser origin, reviewer validation and bounded Lean proof preview. Exact body read back; no implementation claim."
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+          "stage": "implemented-go-published",
+          "version": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+          "summary": "Updated the same decision reply with verified implementation SHA and scoped native validation; public origin remains the browser thread."
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "activation_error_scope": "future-mode-and-valid-opt-out",
+        "parse_once": true
+      },
+      "statement": "An invalid activation, including on an unreachable allocation, causes PARSE_ERROR for that flag only when an opted-out subject uses FutureExperimentsOnly. Disabled, Immediate, and subjects without a cutoff do not require activation validity. Missing activation is a separate state that future mode excludes.",
+      "central_status": "implemented-go-native-validated-proposed-fleet-reuse",
+      "scope": "Browser behavior observed; Go #5700 implements D004 at c5fec6a009ffa29bf53f5377a21856c7c4aa5f56 with local native validation. Fleet adoption remains proposed.",
+      "go_feedback": [
+        "go-5700-4340843853",
+        "go-5700-4342540303"
+      ],
+      "go_reconciliation": "Browser future-only PARSE_ERROR implemented in Go; invalid remains distinct from missing. 90 applicable native policy cases, full package and race pass; CI/system-tests at this SHA remain separate.",
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T17:28:43Z",
+        "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+        "scope_note": "Leo adopted browser D004 r2 for Go; the same decision reply now links the signed implementation and native evidence.",
+        "gap": null,
+        "local_evidence": "evidence/go-d004/published-implementation-reply.json",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348001493",
+          "kind": "author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T11:56:15Z",
+          "source_sha": "3704387fc1f33220ffe261539aff59d4e3bb1e6d",
+          "scope_note": "Browser scope only; Go and fleet conflict remains unresolved.",
+          "gap": null
+        }
+      },
+      "validation_history_ids": [
+        "V004",
+        "V005",
+        "V014",
+        "V021",
+        "V024",
+        "V025",
+        "V026",
+        "V027",
+        "V028",
+        "V042",
+        "V044",
+        "V045",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-003",
+        "SDK-ADOPTION-JAVA-004",
+        "LIBDATADOG-2698-001",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ],
+      "native_obligations": [
+        "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
+        "Before allocation selection, return per-flag PARSE_ERROR only for future mode with a valid subject cutoff and invalid activation, including unreachable allocations.",
+        "Preserve normal disabled/immediate/absent-cutoff behavior, missing/null experiment exclusion, valid-neighbor isolation and existing startAt/endAt failures.",
+        "Run focused Go regression tests and relevant full-package/race checks against the updated head; record receipts separately."
+      ],
+      "implementation": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+        "receipt": "evidence/go-d004/native-receipt.json",
+        "profile_id": "go-d004-policy-v1",
+        "publication": "evidence/go-d004/publication.json",
+        "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+        "status": "published-local-native-validated"
+      },
+      "proofs_publication": {
+        "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+        "status": "draft",
+        "source_sha": "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+        "decision_url": "https://github.com/DataDog/ffe-system-test-data/blob/7894c5971626d9a8b1b146f0368e03bb149e4c65/contracts/experimentation-opt-out/decision-history.md#d004",
+        "reply_evidence_file": "evidence/go-d004/published-proof-links-reply.json"
+      },
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Effective future mode only; flag-wide invalid activation, including unreachable allocations.",
+          "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+          "evidence": "evidence/libdatadog-adoption-20261023/local-adoption.json",
+          "authorization_scope": "Current user request to apply the same contract completion process to this PR. No fleet approval."
+        },
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Use existing effective-future, flag-wide activation validation.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D005",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858199",
+          "stage": "requested",
+          "summary": "Reviewer asks for Chrono RFC3339 cutoff grammar and broader serde activation grammar, including space, leap second and Unicode minus extensions; reports chrono 0.4.45."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344361843",
+          "stage": "declined",
+          "summary": "Author chooses small canonical subset across Rust, Node and Go, rather than reproducing Chrono extensions."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344408103",
+          "stage": "implemented_then_partly_superseded",
+          "summary": "Author reports strict subset with rejection of excess precision. Lowercase and precision parts later changed by D006.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348261012",
+          "stage": "narrowed_request",
+          "summary": "Reviewer asks only for four mobile-compatible lowercase/precision rows; says all three SDKs reject broader forms."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#pullrequestreview-5614240605",
+          "stage": "approved_with_caveat",
+          "summary": "Reviewer approves JS at 3704387 but leaves edge-versus-SDK inconsistency and a loosely held preference for edge as source of truth. This is not an approved fleet-wide policy.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+          "stage": "author-decision",
+          "summary": "Latest parser refinement; earlier small-subset selection remains in provenance."
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "ascii_only": true,
+        "calendar": "proleptic-Gregorian",
+        "seconds": "00..59",
+        "separator": "T-or-t",
+        "zone": "Z-or-z-or-signed-HH:mm"
+      },
+      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric \u00b1HH:mm offsets or Z/z, seconds 00\u201359, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T12:39:35Z",
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Latest parser refinement; earlier small-subset selection remains in provenance.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V006",
+        "V007",
+        "V014",
+        "V015",
+        "V016",
+        "V017",
+        "V018",
+        "V019",
+        "V020",
+        "V021",
+        "V024",
+        "V028",
+        "V041",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "LIBDATADOG-2698-002",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-006"
+      ],
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Surrounding-whitespace rejection only for subject and activation; other Chrono grammar retained. Not full browser parser adoption.",
+          "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+          "evidence": "evidence/libdatadog-adoption-20261023/local-adoption.json",
+          "authorization_scope": "Current user request to apply the same contract completion process to this PR. No fleet approval."
+        },
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Inherit native surrounding-whitespace rule; preserve remaining Chrono grammar. No browser parser parity claim.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D006",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344408103",
+          "stage": "earlier_decision",
+          "summary": "Excess fractional precision rejected deliberately, with uppercase-only subset.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348261012",
+          "stage": "requested_reversal",
+          "summary": "Reviewer reports 4/18 input disagreements against copied Android f335b48 and iOS 4057c07 parsers, and Chrono 0.4.45 at edge 7a1f3c5. These are comment-reported probe results, not this audit's native runs.",
+          "version": "3704387fc1f33220ffe261539aff59d4e3bb1e6d"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+          "stage": "accepted",
+          "summary": "Author confirms lowercase and truncation in final head; redundant JavaScript regex check removed separately in 22d0fd4.",
+          "version": "38d611cf4c73b9687b97f7da0f8224d2fefab966"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "fraction": "truncate-to-nine-without-rounding",
+        "lowercase": true
+      },
+      "statement": "Accept lowercase t/z; truncate digits beyond nine fractional places without rounding; normalize offsets and trailing fractional zeros so equality uses the instant at nanosecond precision. Apply the same normalization to subject cutoff, JSON activation, and response acknowledgement.",
+      "central_status": "unresolved-conflict",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ],
+      "go_reconciliation": "OPEN CONFLICT: latest browser accepts lowercase and truncates excess precision; Go rejects lowercase. Earlier uppercase-only browser policy was superseded.",
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T12:39:35Z",
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Supersedes browser uppercase-only and excess-precision rejection.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V007",
+        "V014",
+        "V015",
+        "V016",
+        "V017",
+        "V018",
+        "V019",
+        "V020",
+        "V021",
+        "V024",
+        "V028",
+        "V041",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-009"
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D007",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858199",
+          "stage": "identified",
+          "summary": "Reviewer reports year 0000 with +01:00 normalizes to year -1 at edge, whose acknowledgement cannot be parsed back by SDKs; suggests rejecting such edge inputs."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348261012",
+          "stage": "reviewer_reported_fixed_in_js",
+          "summary": "Reviewer says JS UTC-year boundary fixed by a96b572 and proposed mobile probes reject that case; edge still accepts.",
+          "version": "a96b5726a767bfb4acf3adbfda4b6909947f0508"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+          "stage": "accepted",
+          "summary": "Author reports final docs/tests cover timezone offsets and nanosecond boundaries.",
+          "version": "38d611cf4c73b9687b97f7da0f8224d2fefab966"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "offset_hour_max": 23,
+        "offset_minute_max": 59,
+        "utc_year": "0000..9999",
+        "written_year": "0000..9999"
+      },
+      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000\u20139999; equivalent timezone representations acknowledge the same instant.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4342542473"
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T12:39:35Z",
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Shared normalization and boundary coverage; detailed boundary rationale in earlier thread.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V006",
+        "V007",
+        "V014",
+        "V015",
+        "V016",
+        "V017",
+        "V018",
+        "V019",
+        "V020",
+        "V021",
+        "V024",
+        "V028",
+        "V041",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-009"
+      ]
+    },
+    {
+      "authority": "local POC v2 proposal derived from browser callers; no public setting of the complete v2 rule identified",
+      "id": "D008",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858155",
+          "stage": "requested",
+          "summary": "Remove branch-only opted-out cache prefix and unused default policy argument."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344307890",
+          "stage": "accepted",
+          "summary": "Author confirms both modes use mode-and-cutoff cache keys and acknowledgement helper requires explicit policy.",
+          "version": "232caeb9824fde1b08c4e9228b85322bb75a7859"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858149",
+          "stage": "risk_identified",
+          "summary": "Unacknowledging edge responses fail; reviewer compares differing SDK error/retry behavior."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344255535",
+          "stage": "acknowledged_risk",
+          "summary": "Author considers capability header but does not commit to adopting one; describes deployment control."
+        },
+        {
+          "source": "evidence/poc-receipts.json",
+          "stage": "corrected-local-review-provenance",
+          "summary": "POC revision-v2 notes correct an initial Android suspicion: its caller passes null when not opted out. The supported omission was acceptance of explicitly filtered responses with no effective opt-out. The earlier judge-phase1 attribution in the original import is not authority for the final v2 rule."
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+          "stage": "published-edge-author-decision",
+          "revision": 2,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": null,
+            "kind": "local-proposal",
+            "author": null,
+            "recorded_at": null,
+            "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+            "scope_note": "Imported local browser baseline; PR link is context, not public acceptance of this complete rule.",
+            "gap": "No decision-setting PR comment for the complete current rule was identified in the imported evidence.",
+            "local_evidence": "evidence/poc-receipts.json"
+          },
+          "scope": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ],
+      "revision": 2,
+      "semantics": {
+        "future": "future-mode-and-equal-normalized-instant",
+        "immediate": "boolean-true-and-missing-or-immediate-mode",
+        "none": "reject-explicit-filtering",
+        "policy": "effective-policy-not-configured-mode"
+      },
+      "statement": "Validate every precomputed response against effective policy. No effective opt-out rejects an explicitly filtered response. Immediate requires boolean true and missing/immediate mode. Future requires future mode and the same normalized cutoff, independent of the boolean acknowledgement.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": null,
+        "kind": "local-proposal",
+        "author": null,
+        "recorded_at": null,
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Imported local browser baseline; PR link is context, not public acceptance of this complete rule.",
+        "gap": "No decision-setting PR comment for the complete current rule was identified in the imported evidence.",
+        "local_evidence": "evidence/poc-receipts.json"
+      },
+      "validation_history_ids": [
+        "V014",
+        "V015",
+        "V016",
+        "V021",
+        "V024",
+        "V028",
+        "V054",
+        "V055",
+        "V056",
+        "V057",
+        "V058",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-IOS-006",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-013",
+        "SDK-ADOPTION-ANDROID-014"
+      ],
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ],
+      "published_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+          "kind": "author-reaffirmation",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T22:13:39Z",
+          "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+          "scope_note": "Edge acknowledgement preserves immediate legacy boolean and normalized future cutoff. Browser acceptance semantics unchanged.",
+          "gap": null,
+          "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ]
+    },
+    {
+      "authority": "source-observed browser POC baseline; no public decision-setting comment identified",
+      "id": "D009",
+      "provenance": [],
+      "revision": 1,
+      "semantics": {
+        "rule": "Telemetry identity and independent controls"
+      },
+      "statement": "Experiment exclusion does not suppress ordinary evaluation telemetry. Retained experiment allocations still log exposures. In enabled browser modes, telemetry uses the requested/resolved subject even during pending or failed refresh and when a customer hook changes context before tracking; the separate telemetry opt-out policy remains independent.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": null,
+        "kind": "source-observation",
+        "author": null,
+        "recorded_at": null,
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Imported local browser baseline; PR link is context, not public acceptance of this complete rule.",
+        "gap": "No decision-setting PR comment for the complete current rule was identified in the imported evidence.",
+        "local_evidence": "evidence/poc-receipts.json"
+      },
+      "validation_history_ids": [
+        "V022",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-JAVA-006",
+        "SDK-ADOPTION-JAVA-007",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-011",
+        "SDK-ADOPTION-ANDROID-012",
+        "SDK-ADOPTION-JAVA-008",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D010",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858139",
+          "stage": "requested",
+          "summary": "Reviewer asks to align exposure logging with exclusion by treating missing doLog as true."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344233354",
+          "stage": "alternative_accepted",
+          "summary": "Author cites required UFC schema and producer guarantee; makes TS field required, deferring missing-field default changes.",
+          "version": "826386e7b38df50007d56ff1d7ce046ef0fb97c2"
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344394223",
+          "stage": "reviewer_agreed",
+          "summary": "Reviewer confirms required schema and existing fixture completeness; reads agree on valid input.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Required doLog field versus permissive defaults"
+      },
+      "statement": "Valid UFC input requires an explicit boolean doLog. The PR does not adopt a new missing-field default; malformed-input compatibility remains a separate decision.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4329000462",
+        "go-5700-4342541096"
+      ],
+      "go_reconciliation": "Explicit boolean remains the valid UFC contract; this branch does not decide malformed doLog defaults.",
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344233354",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T03:22:24Z",
+        "source_sha": "826386e7b38df50007d56ff1d7ce046ef0fb97c2",
+        "scope_note": "Required boolean for valid UFC; no new malformed-input default.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V008",
+        "V038",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-003",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-JAVA-005",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ]
+    },
+    {
+      "authority": "Browser author setting, reaffirmed for Go and shared fixture documentation in the linked Go author reply; fleet adoption remains proposed.",
+      "id": "D011",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858163",
+          "stage": "requested",
+          "summary": "Explain future timestamp separately for each mode to avoid implying immediate exclusion in future mode."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+          "stage": "accepted",
+          "summary": "Author clarifies Immediate now versus activation-before-cutoff eligibility.",
+          "version": "d956b19e23638df514e5e5c59f1d07cafa1c5619"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+          "stage": "go-documentation-reaffirmation",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:40:26Z",
+            "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+            "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+            "gap": null
+          },
+          "record": "evidence/d011/published-reply.json"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+            "kind": "author-reaffirmation",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T20:04:13Z",
+            "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+            "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+            "gap": null,
+            "last_public_setting": {
+              "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+              "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+              "kind": "author-decision",
+              "author": "leoromanovsky",
+              "recorded_at": "2026-10-22T03:40:26Z",
+              "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+              "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+              "gap": null
+            }
+          },
+          "scope": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        },
+        {
+          "source": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "stage": "RFC-decision-reconciled-in-activation-review",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "record": "evidence/activation-review-20261022/decision-reconciliation.json",
+          "scope": "Activation producer first-write and holdout continuity obligations; current evaluator decision-setting PR link is unchanged."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Future cutoff meaning"
+      },
+      "statement": "Immediate excludes exposure allocations now for any valid timestamp, even a future one. FutureExperimentsOnly retains allocations activated strictly before the supplied cutoff and excludes equal/later/missing activation; it does not schedule a change, freeze assignment, or test prior enrollment. Continue ordinary allocation order.",
+      "central_status": "browser-observed-go-documentation-reaffirmed-fleet-proposed",
+      "scope": "Browser observation and Go/shared-fixture documentation clarification; fleet adoption not approved",
+      "go_feedback": [
+        "go-5700-4342540684",
+        "go-5700-4342541315"
+      ],
+      "go_reconciliation": "Clarify actual opt-out time versus a future-dated cutoff; preserve strict-before boundary and same-key refresh obligation.",
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
+        "kind": "author-reaffirmation",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:37Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+          "kind": "author-reaffirmation",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T20:04:13Z",
+          "source_sha": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+          "scope_note": "Go and shared fixture documentation clarify the existing strict-before cutoff rule: supply the actual opt-out time; later cutoffs can retain later-started experiments. No semantic change or fleet adoption.",
+          "gap": null,
+          "last_public_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:40:26Z",
+            "source_sha": "d956b19e23638df514e5e5c59f1d07cafa1c5619",
+            "scope_note": "Clarified immediate/future meaning; no scheduled preference change.",
+            "gap": null
+          }
+        }
+      },
+      "validation_history_ids": [
+        "V009",
+        "V014",
+        "V021",
+        "V024",
+        "V028",
+        "V036",
+        "V037",
+        "V042",
+        "V044",
+        "V045",
+        "V054",
+        "V055",
+        "V057",
+        "V058",
+        "V059",
+        "V060",
+        "V061",
+        "V062",
+        "V063",
+        "V064",
+        "V065",
+        "V066",
+        "A139381-001",
+        "A139381-002",
+        "A139381-003",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-004",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006",
+        "RUBY-6521-007",
+        "RUBY-6521-008"
+      ],
+      "documentation_guidance": {
+        "record": "evidence/d011/README.md",
+        "semantic_revision_changed": false,
+        "published_sources": {
+          "go": "535d4a35ef18e1c202b293b5ca55d79259f90492",
+          "fixtures": "8aba25473785f502de660618ca864fba2ed1e0cc"
+        }
+      },
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge documentation adopts existing immediate-now and strict-before future cutoff semantics.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ],
+      "activation_producer_obligations": {
+        "profile": "activation-producer-v1",
+        "record": "activation-feedback.md",
+        "authority": {
+          "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "comment_url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "author_reply_id": "AAACBEn6wPY",
+          "author_reply_date": "2026-10-19T21:57:09.020Z",
+          "paragraph_indices": [
+            8039,
+            8467,
+            8856,
+            8970,
+            10706,
+            10744,
+            10998,
+            11034
+          ],
+          "evidence_file": "evidence/activation-review-20261022/rfc-snapshot.json"
+        },
+        "model": "lean/ActivationReview.lean",
+        "new_rule": false,
+        "public_reaffirmation_reply": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354605103",
+        "gap": "No fleet adoption or per-target rollout completion is implied; the RFC-backed scope is reaffirmed in the linked reply.",
+        "published_native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+        "publication_evidence": "evidence/activation-review-20261022/publication.json"
+      },
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/dd-trace-rb",
+          "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+          "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+          "dependency_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 1,
+          "scope_note": "Disabled, immediate, and future modes use the pinned native implementation.",
+          "recorded_at": "2026-10-23T15:41:26.261159+00:00",
+          "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
+          "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        }
+      ]
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D012",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858149",
+          "stage": "risk_identified",
+          "summary": "Reviewer describes 200-without-ack fail-closed behavior and no retry until next context change in browser."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344255535",
+          "stage": "acknowledged",
+          "summary": "Author acknowledges risk and mentions possible capability header without selecting it."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858173",
+          "stage": "requested",
+          "summary": "Reviewer recommends release after edge #140422, winner/fallback #139368/#139379 and activation #139381 deploy across sites; requests merged fixture #52 pin."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
+          "stage": "acknowledged",
+          "summary": "Author acknowledges prerequisites; no rollout evidence supplied in this reply."
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+            "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
+            "kind": "acknowledged-dependency",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T03:31:57Z",
+            "source_sha": null,
+            "scope_note": "Acknowledged dependency only; no rollout choice or deployment evidence.",
+            "gap": null
+          },
+          "scope": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        },
+        {
+          "source": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "stage": "RFC-decision-reconciled-in-activation-review",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "record": "evidence/activation-review-20261022/decision-reconciliation.json",
+          "scope": "Activation producer first-write and holdout continuity obligations; current evaluator decision-setting PR link is unchanged."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "Backend deployment and fixture prerequisites"
+      },
+      "statement": "Precompute opt-out requires acknowledgement-capable edge; ordinary fallback requires compiler changes; future mode requires activation metadata on both delivery paths. SDK merge is not deployment evidence or proof the dependencies are live.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [
+        "go-5666-4329000682",
+        "go-5700-4342541667",
+        "go-5666-5590084362",
+        "go-5700-5604838787"
+      ],
+      "go_reconciliation": "Fixtures #52 merged at 0781ce2c55f9da7f9290035c768bbc46570556c0. Compiler classification/fallback preservation, configuration rebuilding and activation remain customer-enablement obligations; edge can remain an independent Git branch.",
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+        "kind": "author-reaffirmation",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:49Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json",
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+          "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344278157",
+          "kind": "acknowledged-dependency",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-22T03:31:57Z",
+          "source_sha": null,
+          "scope_note": "Acknowledged dependency only; no rollout choice or deployment evidence.",
+          "gap": null
+        }
+      },
+      "validation_history_ids": [
+        "V023",
+        "V054",
+        "V055",
+        "V057",
+        "V058",
+        "V059",
+        "V060",
+        "V062",
+        "V063",
+        "V064",
+        "V065",
+        "V066",
+        "A139381-001",
+        "A139381-002",
+        "A139381-003"
+      ],
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Compiler and rebuild dependencies constrain customer enablement, not Git stacking or merge order. No deployment or merge approval.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ],
+      "activation_producer_obligations": {
+        "profile": "activation-producer-v1",
+        "record": "activation-feedback.md",
+        "authority": {
+          "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+          "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+          "comment_url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+          "author_reply_id": "AAACBEn6wPY",
+          "author_reply_date": "2026-10-19T21:57:09.020Z",
+          "paragraph_indices": [
+            8039,
+            8467,
+            8856,
+            8970,
+            10706,
+            10744,
+            10998,
+            11034
+          ],
+          "evidence_file": "evidence/activation-review-20261022/rfc-snapshot.json"
+        },
+        "model": "lean/ActivationReview.lean",
+        "new_rule": false,
+        "public_reaffirmation_reply": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4354604887",
+        "gap": "No fleet adoption or per-target rollout completion is implied; the RFC-backed scope is reaffirmed in the linked reply.",
+        "published_native_head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+        "publication_evidence": "evidence/activation-review-20261022/publication.json"
+      }
+    },
+    {
+      "authority": "observed JS PR outcome; fleet adoption remains proposed",
+      "id": "D013",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4343858189",
+          "stage": "risk_identified",
+          "summary": "Reviewer reports #420 uses new Date(value) while #423 uses explicit parser; merge resolution chooses behavior for both packages."
+        },
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344314467",
+          "stage": "planned",
+          "summary": "Author says #420 will be restacked on #423."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "rule": "One shared JS parser across overlapping feature branches"
+      },
+      "statement": "Shared flagging-core owns timestamp policy used by browser and Node. Restacking Node PR #420 must preserve the chosen parser, while package-specific public mode names may differ.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344314467",
+        "kind": "author-intent",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T03:39:47Z",
+        "source_sha": null,
+        "scope_note": "Plan to restack Node #420; not evidence that restack happened.",
+        "gap": null
+      },
+      "validation_history_ids": [
+        "V008",
+        "SDK-REFRESH-BROWSER-001"
+      ]
+    },
+    {
+      "authority": "user requested local mobile synchronization with final browser behavior",
+      "id": "D014",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/openfeature-js-client/blob/38d611cf4c73b9687b97f7da0f8224d2fefab966/packages/browser/src/transport/fetchConfiguration.ts#L118",
+          "stage": "source-observed",
+          "summary": "Browser transport behavior selected by user as local mobile synchronization target."
+        }
+      ],
+      "revision": 1,
+      "semantics": {
+        "options": "enabled-and-valid-attribute",
+        "request": "unless-enabled-and-invalid"
+      },
+      "statement": "Only effective opt-out adds evaluation_options. An absent attribute sends an ordinary request in every mode. Enabled malformed input sends no request. Disabled ignores the attribute.",
+      "central_status": "proposed-fleet-reuse",
+      "scope": "browser observation / bounded POC; fleet adoption not approved",
+      "go_feedback": [],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+        "thread_url": null,
+        "kind": "source-observation",
+        "author": null,
+        "recorded_at": null,
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "scope_note": "Imported local browser baseline; PR link is context, not public acceptance of this complete rule.",
+        "gap": "No decision-setting PR comment for the complete current rule was identified in the imported evidence.",
+        "local_evidence": "evidence/poc-receipts.json"
+      },
+      "validation_history_ids": [
+        "V014",
+        "V015",
+        "V016",
+        "V021",
+        "V024",
+        "V028",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010"
+      ]
+    },
+    {
+      "id": "D015",
+      "revision": 1,
+      "statement": "When resolved configuration disables the provider, return NoopProvider before validating experimentation mode. Enabled providers reject unsupported modes.",
+      "central_status": "accepted-go-implemented-native-validated",
+      "scope": "Go construction order accepted and implemented; audit other SDK constructors before reuse",
+      "authority": "Leo authorized completing Aaron feedback; author accepted Go D015 in the linked reply after native validation.",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+          "stage": "requested"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+          "stage": "accepted-go-implemented",
+          "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+          "prior_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+            "kind": "reviewer-proposal",
+            "author": "aarsilv",
+            "recorded_at": "2026-10-21T22:16:52Z",
+            "source_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+            "scope_note": "Constructor ordering is proposed, not accepted by Leo.",
+            "gap": null
+          }
+        }
+      ],
+      "model": "lean/Review.lean:construct",
+      "native_obligations": [
+        "Kill switch, offline, unrecognized source and legacy disablement",
+        "Environment and explicit enum invalid values"
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T20:34:57Z",
+        "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+        "scope_note": "Go disabled-source precedence adopted; enabled providers still reject invalid modes. Fleet adoption not approved.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342541816",
+          "kind": "reviewer-proposal",
+          "author": "aarsilv",
+          "recorded_at": "2026-10-21T22:16:52Z",
+          "source_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+          "scope_note": "Constructor ordering is proposed, not accepted by Leo.",
+          "gap": null
+        }
+      },
+      "validation_history_ids": [
+        "V010",
+        "V021",
+        "V024",
+        "V028",
+        "V040",
+        "V044",
+        "SDK-REFRESH-GO-001"
+      ]
+    },
+    {
+      "id": "D016",
+      "revision": 1,
+      "statement": "For a ready evaluator with a valid targeting key and an enabled opt-out mode, malformed subject input returns INVALID_CONTEXT/default before flag lookup, including missing flags. Disabled opt-out ignores the attribute.",
+      "central_status": "accepted-go-proposed-fleet-reuse",
+      "scope": "Go evaluation after existing readiness/targeting-key guards; not universal error precedence",
+      "authority": "Leo strict-input decision plus merged fixture and current source",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+          "stage": "accepted"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4342542328",
+          "stage": "documentation-request"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250",
+          "stage": "documented-go-reaffirmation",
+          "prior_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+            "kind": "author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-20T19:46:08Z",
+            "source_sha": null,
+            "scope_note": "Strict Go input policy; finer lookup precedence is source/fixture-backed. Comment position SHA is not a claimed implementation SHA.",
+            "gap": null
+          }
+        }
+      ],
+      "model": "lean/Review.lean:resolveReady",
+      "native_obligations": [
+        "unknown flag with invalid attribute",
+        "provider not ready / missing targeting key remain earlier checks"
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250",
+        "kind": "author-reaffirmation",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T20:39:41Z",
+        "source_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+        "scope_note": "Go invalid-context precedence before lookup, after existing readiness and targeting-key guards; unchanged r1 rule.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4329524575",
+          "kind": "author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-20T19:46:08Z",
+          "source_sha": null,
+          "scope_note": "Strict Go input policy; finer lookup precedence is source/fixture-backed. Comment position SHA is not a claimed implementation SHA.",
+          "gap": null
+        }
+      },
+      "validation_history_ids": [
+        "V011",
+        "V021",
+        "V024",
+        "V028",
+        "V040",
+        "V044",
+        "SDK-REFRESH-GO-001",
+        "LIBDATADOG-2698-003",
+        "LIBDATADOG-2698-004",
+        "LIBDATADOG-2698-006",
+        "RUBY-6521-003",
+        "RUBY-6521-004",
+        "RUBY-6521-005",
+        "RUBY-6521-006"
+      ]
+    },
+    {
+      "id": "D017",
+      "revision": 2,
+      "statement": "Inactive effective opt-out skips allocation-exclusion operations and preserves evaluation behavior. Disabled mode and an absent cutoff are inactive; invalid enabled context remains an error. Validate logical skipped work separately from full-evaluation runtime cost.",
+      "central_status": "accepted-go-implemented-native-validated-performance-observed",
+      "scope": "Go call-site guard accepted; inactive-path-v1 is a proposed reusable profile for rules-based SDK owners. No fleet approval or numeric performance threshold.",
+      "authority": "Leo accepted the call-site guard in chat and published the Go-scoped D017 r2 decision in the linked author reply.",
+      "provenance": [
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+          "stage": "partial-implementation"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+          "stage": "follow-up"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+          "stage": "accepted-locally",
+          "record": "evidence/d017/local-acceptance.json"
+        },
+        {
+          "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168",
+          "stage": "published-go-r2-setting",
+          "record": "evidence/d017/published-replies.json",
+          "prior_local_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-22T19:26:16.351222Z",
+            "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+            "scope_note": "Leo accepted the call-site guard in chat. The reviewer request is provenance; it is not itself an author setting.",
+            "gap": "No public comment yet records the r2 acceptance.",
+            "last_public_setting": {
+              "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+              "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+              "kind": "partial-author-decision",
+              "author": "leoromanovsky",
+              "recorded_at": "2026-10-21T19:44:40Z",
+              "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+              "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
+              "gap": null
+            }
+          }
+        }
+      ],
+      "model": {
+        "file": "lean/InactivePath.lean",
+        "namespace": "InactivePath",
+        "oracle": "lean/InactiveOracle.lean",
+        "profile": "inactive-path-v1",
+        "english": "inactive-path.md",
+        "limits": "Proofs cover the abstract guard, result preservation and exclusion-check trace; no native SDK refinement or timing proof."
+      },
+      "native_obligations": [
+        "Short-circuit before allocation-exclusion work when effective policy is inactive; preserve invalid-context and D004 errors.",
+        "Observe the production exclusion boundary; do not derive a fake count from the input policy.",
+        "Retain full native regressions for values, errors, targeting order, telemetry, and activation policy.",
+        "Measure uninstrumented whole evaluations on pinned compiler/architecture and baseline/candidate SHAs.",
+        "Cover disabled, enabled-with-absent-cutoff and active modes; register relevant performance CI benchmarks. Go PR #5666 has an author-scoped exception skipping additional CI registration; see implementation.ci_registration_followup. Existing registration remains unchanged.",
+        "Record statistical results separately from gate status and return counterexamples centrally."
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352857168",
+        "kind": "author-decision",
+        "author": "leoromanovsky",
+        "recorded_at": "2026-10-22T19:53:37Z",
+        "source_sha": "627db08193d8019d33282024d8340327997205ec",
+        "scope_note": "Go adoption of D017 r2: inactive effective policy performs zero exclusion checks. Native/model evidence is separate from mixed local timing and pending parent-relative CI assessment. Other SDK adoption remains proposed.",
+        "gap": null,
+        "last_public_setting": {
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+          "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+          "kind": "partial-author-decision",
+          "author": "leoromanovsky",
+          "recorded_at": "2026-10-21T19:44:40Z",
+          "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+          "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
+          "gap": null
+        }
+      },
+      "validation_history_ids": [
+        "V012",
+        "V013",
+        "V029",
+        "V030",
+        "V031",
+        "V032",
+        "V033",
+        "V034",
+        "V035",
+        "V039",
+        "V042",
+        "V043",
+        "V044",
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-JAVA-002",
+        "SDK-ADOPTION-JAVA-003",
+        "LIBDATADOG-2698-005",
+        "LIBDATADOG-2698-006"
+      ],
+      "revision_history": [
+        {
+          "id": "D017",
+          "revision": 1,
+          "statement": "Inactive effective opt-out must retain a measured baseline evaluation path. Measure full evaluations and register the enabled paths in repository performance CI.",
+          "central_status": "accepted-go-intent-native-validation-pending",
+          "scope": "Go hot path; no numeric fleet performance threshold is established",
+          "authority": "author accepted initial optimization; reviewer reports incomplete whole-evaluation fix",
+          "provenance": [
+            {
+              "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+              "stage": "partial-implementation"
+            },
+            {
+              "source": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4342540461",
+              "stage": "follow-up"
+            }
+          ],
+          "model": null,
+          "native_obligations": [
+            "call-site guard",
+            "exact compiler inlining and whole-evaluation benchmarks",
+            "disabled and enabled-with-absent-attribute cases",
+            "CI benchmark registration"
+          ],
+          "latest_setting": {
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+            "thread_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4341206416",
+            "kind": "partial-author-decision",
+            "author": "leoromanovsky",
+            "recorded_at": "2026-10-21T19:44:40Z",
+            "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+            "scope_note": "Accepted inactive-path optimization; full-evaluation/CI follow-up remains open.",
+            "gap": null
+          },
+          "validation_history_ids": [
+            "V012",
+            "V013"
+          ]
+        }
+      ],
+      "adoption_record": "evidence/d017/local-acceptance.json",
+      "implementation": {
+        "repository": "DataDog/dd-trace-go",
+        "source_sha": "627db08193d8019d33282024d8340327997205ec",
+        "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5700",
+        "evidence": "evidence/d017/native-receipt.json",
+        "timing_status": "mixed-local-measurements-no-regression-free-claim",
+        "ci_registration_followup": {
+          "status": "skipped-by-author-for-this-pr",
+          "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+          "source_thread": null,
+          "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+          "evidence": "evidence/aaron-completion/fixture-main-and-ci-scope.json",
+          "note": "Additional Go benchmark CI registration only; no change to D017 r2 semantic rule or other SDK obligations",
+          "source_gap": "Decision set in local conversation; PR body records it, no public decision-setting review thread",
+          "previous_setting": {
+            "status": "deferred-to-base-pr",
+            "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+            "source_thread": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353116496",
+            "source_sha": "e282fff2c1e7972c2211d999e5486beacc5a8d5e",
+            "evidence": "evidence/d017/ci-registration-deferral.json",
+            "note": "D017 r2 semantics and native obligations unchanged; CI registration obligation remains open in the base."
+          }
+        }
+      },
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "decision_revision": 2,
+          "scope_note": "Inactive effective policy skips native exclusion helper; no runtime speedup claim.",
+          "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+          "evidence": "evidence/libdatadog-adoption-20261023/local-adoption.json",
+          "authorization_scope": "Current user request to apply the same contract completion process to this PR. No fleet approval."
+        }
+      ]
+    },
+    {
+      "id": "D018",
+      "revision": 1,
+      "statement": "The compiler must set doLog=true when an allocation uses shard buckets to vary the selected variation or whether it matches. A completed experiment that still randomizes and an ordinary percentage split remain opt-out eligible. Deterministic completed winners may use doLog=false. Preserve existing active-experiment, canary, bandit and generated-holdout logging requirements; evaluators continue using doLog with the existing mode/cutoff rule.",
+      "central_status": "author-selected-backend-published-central-proposal",
+      "scope": "dd-source compiler producer contract. This extends doLog exposure logging to ordinary randomized allocations; no new SDK wire field or fleet/deployment approval.",
+      "authority": "Explicit author clarification in the current Codex chat; earlier Keep selection was withdrawn.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+          "stage": "reviewer-counterexample-and-policy-request"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343813859",
+          "stage": "reviewer-proposal-for-separate-randomization-bit",
+          "disposition": "intent accepted; compiler uses existing doLog field instead"
+        },
+        {
+          "source": "evidence/backend-review-20261022/local-decision.json",
+          "stage": "author-decision"
+        },
+        {
+          "stage": "prior-local-setting-published-without-semantic-change",
+          "setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:28:39.093354+00:00",
+            "source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+            "scope_note": "Backend populates doLog from randomization; source SHA is the reviewed baseline, not the unpublished implementation.",
+            "gap": "No public comment yet records this clarification; exact local statement and withdrawn earlier selection are saved in local-decision.json."
+          }
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+          "stage": "authorized-author-reaffirmation",
+          "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "edge-local-reaffirmation",
+          "scope": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+            "thread_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+            "kind": "author-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:49:16Z",
+            "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+            "scope_note": "Author reaffirms backend-owned randomization classification through existing doLog; D018 r1 unchanged. Native publication and model validation remain separately linked.",
+            "gap": null
+          },
+          "scope": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/139368",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+        "kind": "author-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T21:49:16Z",
+        "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+        "scope_note": "Author reaffirms backend-owned randomization classification through existing doLog; D018 r1 unchanged. Native publication and model validation remain separately linked.",
+        "gap": null
+      },
+      "model": {
+        "file": "lean/BackendReview.lean",
+        "namespace": "BackendReview",
+        "mapping": "compiledDoLog(existingExposure, randomized); compiledPolicy delegates to D011 policy",
+        "limits": "Boolean abstraction establishes producer/evaluator composition, not correctness of native shard classification."
+      },
+      "native_obligations": [
+        "Classify compiled first-match shard outcomes, including fallthrough and partial enrollment.",
+        "Keep deterministic targeting, full-population single winners, unreachable variants and zero-width ranges from introducing false randomization.",
+        "Preserve holdout metadata, assignment results, active experiment logging, and JSON/protobuf agreement.",
+        "Validate actual compiler paths and independent raw bucket enumeration.",
+        "Integrate with fallback-preserving child #139379 before rollout; deploy compiler and rebuild stored UFCs before SDK enablement.",
+        "Revalidate future-mode activation coverage for newly logging ordinary allocations; unknown activation keeps the existing conservative exclusion rule."
+      ],
+      "implementation_owners": [
+        "dd-source UFC compiler and repository",
+        "cache-worker publication/rebuild",
+        "edge and SDK evaluators as existing doLog consumers"
+      ],
+      "validation_history_ids": [
+        "V046",
+        "V047",
+        "V048",
+        "V049",
+        "V050",
+        "V051",
+        "V052",
+        "V053",
+        "V054",
+        "V055",
+        "V057",
+        "V058",
+        "F139379-003",
+        "F139379-004",
+        "F139379-006"
+      ],
+      "implementation": {
+        "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+        "status": "published-main-merged-native-validated",
+        "evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+        "publication_evidence": "evidence/backend-review-20261022/main-merge-publication.json",
+        "main_parent_sha": "304c4133fb6d4d04a2036b98251a0bef80fb7321",
+        "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+        "initial_implementation": {
+          "source_sha": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+          "baseline_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "patch_sha256": "80551383a43fa3f3b17e47f73c1b7a6ff64ea6873eee981f58b9e00dce96fd27",
+          "evidence": "evidence/backend-review-20261022/native-validation.json",
+          "publication_evidence": "evidence/backend-review-20261022/native-publication.json"
+        },
+        "source_tree_sha": "bc32a2ba6a9b205ad25e2deea65321445757f18b"
+      },
+      "local_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": null,
+          "kind": "local-decision",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+          "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+          "scope_note": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+          "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+        }
+      ],
+      "published_adoptions": [
+        {
+          "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+          "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+          "kind": "author-reaffirmation",
+          "author": "leo-romanovsky_ddog",
+          "recorded_at": "2026-10-22T22:13:32Z",
+          "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+          "scope_note": "Edge evaluator retains doLog-only exclusion; backend remains responsible for marking randomized allocations.",
+          "gap": null,
+          "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ]
+    },
+    {
+      "id": "D019",
+      "revision": 1,
+      "statement": "An invalid regex makes its containing flag fail with PARSE_ERROR in the rules-based evaluator; precompute omits the invalid flag. Other valid flags remain usable. Do not silently treat the invalid condition as false and select a later allocation. This configuration-validity rule applies independently of experimentation opt-out.",
+      "central_status": "author-selected-edge-local-implementation-central-proposal",
+      "scope": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+      "authority": "Explicit local instruction from Leo Romanovsky.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814088",
+          "stage": "reviewer-proposal"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "author-local-decision"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+            "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+            "scope_note": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+            "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+            "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+          },
+          "scope": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+        "kind": "author-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:34Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Author-selected Go/JSON Rust/archived Rust behavior in dd-source #140422, consistent with the canonical invalid-regex fixture. Exact regex grammar parity, validation timing across all SDKs, and fleet rollout are not approved by this record.",
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
+      },
+      "model": null,
+      "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
+      "counterexamples": [
+        {
+          "input": "Flag A has MATCHES \"*@corp\\.com\" followed by a catch-all; flag B is valid; opt-out disabled.",
+          "selected": "A is invalid/omitted; B still evaluates.",
+          "rejected_alternative": "A silently selects catch-all."
+        },
+        {
+          "input": "[\\w-.]+@corp\\.com versus a{1001}",
+          "selected": "Grammar remains implementation-dependent pending convergence; reviewer-reported Go/Rust disagreement is retained.",
+          "limits": "Not rerun as a fresh grammar differential in this record."
+        }
+      ],
+      "implementation_owners": [
+        "dd-source Go UFC evaluator",
+        "edge Rust JSON and archived evaluator",
+        "FFE authoring validators and configuration owners",
+        "shared fixture owners"
+      ],
+      "native_obligations": [
+        "Exercise invalid-regex isolation with opt-out disabled and valid sibling flags.",
+        "Retain canonical PARSE_ERROR rather than weakening the fixture to condition-local fallthrough.",
+        "Track save-time validation and production-pattern audit separately; this acceptance does not establish deployment safety.",
+        "Retain parser-grammar counterexamples without assuming Go and Rust accept identical patterns."
+      ],
+      "validation_history_ids": [
+        "V054",
+        "V055",
+        "V057",
+        "V058"
+      ]
+    },
+    {
+      "id": "D020",
+      "revision": 1,
+      "statement": "The precompute request boundary ignores unknown option names. Null evaluation_options, null or unknown named mode, and null legacy boolean count as unset. Recognized options still apply alongside unknown fields or modes; legacy true retains immediate mode. Wrong value types, duplicate evaluation_options, conflicting legacy true with a known enabled mode, and invalid subject timestamps for a known enabled mode remain request errors. Acknowledge only the applied recognized policy.",
+      "central_status": "author-selected-edge-local-implementation-central-proposal",
+      "scope": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+      "authority": "Explicit local instruction from Leo Romanovsky.",
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814538",
+          "stage": "reviewer-proposal"
+        },
+        {
+          "source": "evidence/edge-review-20261022/local-decisions.json",
+          "stage": "author-local-decision"
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+          "stage": "published-edge-author-decision",
+          "revision": 1,
+          "previous_setting": {
+            "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+            "thread_url": null,
+            "kind": "local-decision",
+            "author": "leo-romanovsky_ddog",
+            "recorded_at": "2026-10-22T21:55:47.008112+00:00",
+            "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+            "scope_note": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+            "gap": "Decision set in the current Codex conversation; no public decision-setting reply has been posted.",
+            "local_evidence": "evidence/edge-review-20261022/local-decisions.json"
+          },
+          "scope": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+          "record": "evidence/edge-review-20261022/published-replies.json"
+        }
+      ],
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/140422",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+        "kind": "author-decision",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T22:13:42Z",
+        "source_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+        "scope_note": "Author-selected edge HTTP request compatibility in dd-source #140422. Does not change SDK constructor/environment validation, malformed subject policy, or require clients to accept a missing acknowledgement for a requested policy.",
+        "gap": null,
+        "publication_evidence": "evidence/edge-review-20261022/published-replies.json"
+      },
+      "model": null,
+      "modeling_note": "Not modeled in Lean. Existing proofs/corpus do not prove these regex or request-deserialization rules.",
+      "counterexamples": [
+        {
+          "input": "evaluation_options={\"future_option\":true} with no recognized mode",
+          "selected": "Ordinary response; no opt-out acknowledgement.",
+          "rejected_alternative": "HTTP 400 for every flag."
+        },
+        {
+          "input": "legacy true plus unknown named mode",
+          "selected": "Immediate acknowledgement and exclusion.",
+          "rejected_alternative": "Drop the recognized legacy policy."
+        },
+        {
+          "input": "named immediate plus invalid timestamp",
+          "selected": "HTTP 400 before origin.",
+          "rejected_alternative": "Silently disable valid recognized opt-out option."
+        }
+      ],
+      "implementation_owners": [
+        "edge request parser and precompute serializers",
+        "browser/mobile acknowledgement consumers"
+      ],
+      "native_obligations": [
+        "Ordinary old SDK requests preserve assignments and omit opt-out acknowledgement.",
+        "Unknown/null options preserve ordinary delivery without validating ignored context.",
+        "Recognized options survive unknown options; wrong types and mode conflicts still fail before origin/streaming.",
+        "Use literal wire acknowledgements for JSON/archive and buffered/streaming paths; preserve nanosecond instant equality.",
+        "Retain client-side acknowledgement validation when a requested option is unsupported."
+      ],
+      "validation_history_ids": [
+        "V054",
+        "V055",
+        "V056",
+        "V057",
+        "V058"
+      ]
+    },
+    {
+      "id": "D021",
+      "revision": 1,
+      "statement": "For server UFC delivery, a flag whose authored allocations contain a SEMVER_* condition is omitted from the compatibility payload, even when optimization prunes every SemVer rule. With server SemVer rollout disabled it is omitted at build time. An override replaces the waterfall and bypasses this requirement. Capable-client payloads retain the flag when rollout is enabled; unrelated flags are preserved. Decoded configurations without build metadata are still scanned for surviving SEMVER_* conditions.",
+      "central_status": "author-selected-dd-source-implementation-central-proposal",
+      "scope": "dd-source compiler and cache-worker compatibility payload. No new tracer versions, wire metadata, SDK semantics, or fleet acceptance.",
+      "authority": "Leo requested addressing feedback and pushing, then explicitly confirmed that posting the replies is part of pushing. The published author reply reaffirms Aaron's authored-SemVer delivery policy for dd-source.",
+      "latest_setting": {
+        "pr_url": "https://github.com/ddoghq/dd-source/pull/139379",
+        "thread_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325",
+        "kind": "author-reaffirmation-of-reviewer-policy",
+        "author": "leo-romanovsky_ddog",
+        "recorded_at": "2026-10-22T23:04:50Z",
+        "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+        "scope_note": "Published author reply reaffirms authored SemVer delivery after optimization, the override exception, and the signed native fix. The shared contract remains a draft; no fleet approval.",
+        "gap": null
+      },
+      "provenance": [
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4342416262",
+          "stage": "superseded-bot-alternative",
+          "summary": "Preserve historical experiment assignments for older SDKs after retaining SemVer fallbacks."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+          "stage": "reviewer-policy-clarification",
+          "summary": "Authored SemVer targeting governs delivery before and after optimization; override bypasses it."
+        },
+        {
+          "source": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4354447325",
+          "stage": "published-author-reaffirmation",
+          "summary": "Confirms the implemented authored-SemVer policy and links the signed native fix, exact shared decision, model, corpus, negative control, and local validation."
+        }
+      ],
+      "model": {
+        "files": [
+          "lean/SemverDelivery.lean",
+          "lean/SemverOracle.lean"
+        ],
+        "profile": "authored-semver-delivery-v1",
+        "corpus": "corpus/semver-delivery.json"
+      },
+      "modeling_note": "Finite two-allocation compiler-input profile, including ordinary/completed/active first allocation, override and rollout. Model does not prove native optimizer correctness, arbitrary malformed decoded payloads, RC predicates, deployment or SDK isolation.",
+      "counterexamples": [
+        {
+          "input": "Ordinary full-population allocation followed by SEMVER_GTE; rollout enabled; no override",
+          "old_result": "Optimizer prunes SemVer rule and old filter sends flag to older SDKs.",
+          "selected": "Capable payload includes flag; compatibility omits it."
+        },
+        {
+          "input": "Same authored allocations with override",
+          "selected": "Both payloads include the override."
+        }
+      ],
+      "implementation_owners": [
+        "dd-source UFC compiler",
+        "feature-flagging-cache-worker compatibility serialization",
+        "Remote Config tracer targeting"
+      ],
+      "native_obligations": [
+        "Run BuildFlagsConfiguration followed by FilterSemverFlags on all 24 pinned cases.",
+        "Check JSON/protobuf compatibility output, source non-mutation, unrelated flags and eligible capable-client assignment.",
+        "Retain decoded-rule scan, nil handling and existing operator coverage.",
+        "Run compiler, remote-config and cache-worker suites; restore the old filter as a negative control."
+      ],
+      "validation_history_ids": [
+        "F139379-001",
+        "F139379-002",
+        "F139379-003",
+        "F139379-004",
+        "F139379-005",
+        "F139379-006",
+        "F139379-007"
+      ],
+      "implementation": {
+        "repository": "ddoghq/dd-source",
+        "source_sha": "50775244ad95c65017b7890a81fde9806e330b80",
+        "commit_url": "https://github.com/ddoghq/dd-source/commit/50775244ad95c65017b7890a81fde9806e330b80",
+        "evidence_file": "evidence/fallback-review-20261022/publication.json"
+      }
+    }
+  ],
+  "previous_revision": "sdk-adoption-20261023-v1",
+  "revision_note": "Append the unknown response-mode source assessment and verified review disposition. Preserve all semantic revisions, authority, and prior evidence.",
+  "validation_history_file": "validation-history.json"
+}

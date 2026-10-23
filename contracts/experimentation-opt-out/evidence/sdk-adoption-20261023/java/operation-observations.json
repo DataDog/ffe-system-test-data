@@ -1,0 +1,659 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "adapter": "ByteBuddy advice records actual excludes calls and results; expected assertions run afterward",
+  "cases_sha256": "4cf1ee4ad0a47ad7cba92f80f04a7641e7a3bfc2055787813abfc85b0eb140c2",
+  "implementations": {
+    "standalone": [
+      {
+        "id": "inactive-path/disabled/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/retain",
+        "exclusionChecks": 1,
+        "excluded": [
+          false
+        ],
+        "helperResults": [
+          false
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/exclude",
+        "exclusionChecks": 1,
+        "excluded": [
+          true
+        ],
+        "helperResults": [
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/mixed",
+        "exclusionChecks": 3,
+        "excluded": [
+          true,
+          false,
+          true
+        ],
+        "helperResults": [
+          true,
+          false,
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/retain",
+        "exclusionChecks": 1,
+        "excluded": [
+          false
+        ],
+        "helperResults": [
+          false
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/exclude",
+        "exclusionChecks": 1,
+        "excluded": [
+          true
+        ],
+        "helperResults": [
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/mixed",
+        "exclusionChecks": 3,
+        "excluded": [
+          true,
+          false,
+          true
+        ],
+        "helperResults": [
+          true,
+          false,
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      }
+    ],
+    "legacy": [
+      {
+        "id": "inactive-path/disabled/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/valid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/disabled/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/retain",
+        "exclusionChecks": 1,
+        "excluded": [
+          false
+        ],
+        "helperResults": [
+          false
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/exclude",
+        "exclusionChecks": 1,
+        "excluded": [
+          true
+        ],
+        "helperResults": [
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/valid/mixed",
+        "exclusionChecks": 3,
+        "excluded": [
+          true,
+          false,
+          true
+        ],
+        "helperResults": [
+          true,
+          false,
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/immediate/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/retain",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/exclude",
+        "exclusionChecks": 0,
+        "excluded": [
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/absent/mixed",
+        "exclusionChecks": 0,
+        "excluded": [
+          false,
+          false,
+          false
+        ],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/retain",
+        "exclusionChecks": 1,
+        "excluded": [
+          false
+        ],
+        "helperResults": [
+          false
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/exclude",
+        "exclusionChecks": 1,
+        "excluded": [
+          true
+        ],
+        "helperResults": [
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/valid/mixed",
+        "exclusionChecks": 3,
+        "excluded": [
+          true,
+          false,
+          true
+        ],
+        "helperResults": [
+          true,
+          false,
+          true
+        ],
+        "error": "NONE"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/empty",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/retain",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/exclude",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      },
+      {
+        "id": "inactive-path/future_experiments_only/invalid/mixed",
+        "exclusionChecks": 0,
+        "excluded": [],
+        "helperResults": [],
+        "error": "INVALID_CONTEXT"
+      }
+    ]
+  }
+}

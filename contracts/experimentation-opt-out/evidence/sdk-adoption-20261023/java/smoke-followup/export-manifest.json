@@ -1,0 +1,65 @@
+{
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "baseline": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "scope": "test-only smoke follow-up; prior a4 export unchanged",
+  "files": {
+    "README.md": {
+      "sha256": "1e1620fc8ead046e0865578a7c3c5c7cd310be97143d0512720ff27db02eb0d5",
+      "bytes": 2978
+    },
+    "baseline-junit.xml": {
+      "sha256": "b9e22d52504aeabbdb4d610bdb95599478c63141f24669c11b6dd5ad30aaa70a",
+      "bytes": 4954
+    },
+    "candidate-jdk11.xml": {
+      "sha256": "002a1fd867acbe5123eae50fadd569fc64c3029cea0c6902b519ca9582dfb4cd",
+      "bytes": 77000
+    },
+    "candidate-jdk25-final.xml": {
+      "sha256": "528cb27387572594418b6d14aa7d6cf49170327789db6a60bc0062b6670d9aa4",
+      "bytes": 77000
+    },
+    "candidate.groovy": {
+      "sha256": "f7b25b52ce91c614d7e67ecf49eb95f683594a99478c803d2283f2eb08723c5f",
+      "bytes": 11081
+    },
+    "ci-visibility-a4d3dfb.json": {
+      "sha256": "30739b8a01b454fc1277801b4a872e96f9afc3a43b98d10f8d3ad3b01d1050ce",
+      "bytes": 51456
+    },
+    "diagnosis.json": {
+      "sha256": "dc825b9dfaffb8960f64355a0d67589eaf45134633b0a72b22c90b8f00930fdb",
+      "bytes": 1832
+    },
+    "native-receipt.json": {
+      "sha256": "9b6d11ea65312dd6e33412867de51d2401cc3594af223f5e25a837187a1b26bb",
+      "bytes": 3353
+    },
+    "negative-control.groovy": {
+      "sha256": "2e0595349569b38612e0dff9d4d45a9b6ddaef0013134ff3c8be108d9f8c4f3f",
+      "bytes": 11070
+    },
+    "negative-control.xml": {
+      "sha256": "2d4a66f68b69a59d7447d8e5298e4ddb45e728b7768d0612606a78e427fc45b3",
+      "bytes": 2851
+    },
+    "raw-artifacts.json": {
+      "sha256": "8534ff30fb03d9533863596a1cc533b8c4c0e3f720b840696808f16b900fa645",
+      "bytes": 3181
+    },
+    "signed-followup.patch": {
+      "sha256": "7b026cdf5619e44dae3ec2d09d3599f1a33c6b5aa5c1aa883e3a104286fe094e",
+      "bytes": 6990
+    },
+    "signed-head-jdk25.xml": {
+      "sha256": "2a2a0e8e5f7688f31e6958b102b32366ac95b075c8582f2575e978388a9ceefa",
+      "bytes": 853
+    },
+    "source-binding.json": {
+      "sha256": "0e963f70ff4793a66ea01490877055820e85feec4b63c7caac6b3a901afda0b0",
+      "bytes": 540
+    }
+  },
+  "payload_file_count": 14,
+  "payload_bytes": 255139
+}

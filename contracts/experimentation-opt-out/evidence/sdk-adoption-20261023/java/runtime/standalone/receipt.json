@@ -1,0 +1,29 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "harness_commit": "abe62eb21f53adba0d8ac038fe0539f8f05fb124",
+  "variant": "standalone",
+  "exit_code": 0,
+  "artifacts": {
+    "dd-java-agent-1.68.0-SNAPSHOT.jar": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+    "dd-trace-api-1.68.0-SNAPSHOT.jar": "6cf3d1f558a0092662f1cfe660cc6aef84f822c40027a3e3ee341abdc95fe196",
+    "dd-openfeature-1.68.0-SNAPSHOT.jar": "0dcd67850cae837c44d6cad89da8922b75e7d6e6bd0035621ff33f5c72b698f5"
+  },
+  "adapter_sha256": "75753577089c6d77242f90b1670ddd7a80829ef90d126e93d8dce2f63a2f8d6b",
+  "policy_cases_sha256": "289a5d2dca4a7e5dd1e0428b4c56e9c1660668375aab67b71c91b27b9391f4e2",
+  "tests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "configuration_source": "agentless",
+  "direct_intake_image": "sha256:3e9e5fd991f2276bd9b6b86ebd9c6d6c99997884e7516e71e47a6aa9bb61fa24",
+  "direct_intake_adapter_sha256": "e6afbcbdfb46b692dc7ee32bcd5685aa360c779394c98b47d16424beff973590",
+  "capture_agent_image": "sha256:78fa84f341634069668b0908d678704d82a953e3e50ddf00f5234622c027785c",
+  "image_id": "sha256:7c312d5a43153b48482e6af5d5fa9ed10a1e42375ccef59abe72df63a8bc9dd7",
+  "embedded_provider_sha256": "0dcd67850cae837c44d6cad89da8922b75e7d6e6bd0035621ff33f5c72b698f5",
+  "embedded_provider_matches": true,
+  "installed_agent_sha256": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+  "installed_agent_matches": true,
+  "harness_patch_sha256": "3ccbe17ccd1e978d6b80ffe144a702796d7566de8b71c93260c110d48c6531c7"
+}

@@ -1,0 +1,90 @@
+{
+  "purpose": "Compact Android evidence export for central decision store; preserve full logs and full XML locally.",
+  "repository_commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "files": [
+    {
+      "path": "exact-9c18ed-native-receipt.json",
+      "sha256": "37a39310d11eb26f4aced8e4cf0bc9a5641f950865bcc977865488763bfe4d95",
+      "bytes": 3500
+    },
+    {
+      "path": "exact-9c18ed-source-hashes.json",
+      "sha256": "591068e22c12d8a364e08739247ef2945158bc74e98e3f1ac4865a252b07e674",
+      "bytes": 7055
+    },
+    {
+      "path": "exact-9c18ed-suite-counts.json",
+      "sha256": "9d9216371feecd3176e2602a4b7865fa6aef67f4621f581c4bdc1817d5165c8e",
+      "bytes": 281
+    },
+    {
+      "path": "exact-9c18ed-profile187-comparison.json",
+      "sha256": "9003373400d1c1ed8738483d4c9678fbecbdbc9f0ff85ad7cb43159e95797de2",
+      "bytes": 628
+    },
+    {
+      "path": "profile-observations.jsonl",
+      "sha256": "151e3c9d82aa29502fb705f9d73fc65ce96f085e2364a885f891ad5f4756c3d5",
+      "bytes": 16210
+    },
+    {
+      "path": "profile187-negative-receipt.json",
+      "sha256": "8f162bc3b74367fa4d35c091a93a02d0641a524a7fdc6f83f93557eb845fa18f",
+      "bytes": 4325
+    },
+    {
+      "path": "profile-negative-observations.jsonl",
+      "sha256": "e34c9cccc68cc336e19a45028a422752da23969378980cc950d735b6c6fcfa90",
+      "bytes": 16190
+    },
+    {
+      "path": "callback-timeout-negative-receipt.json",
+      "sha256": "b88e4fc87df22977ac3af1b5d7a592fb30d246bbc87a5f7e60f191ee664bfb83",
+      "bytes": 769
+    },
+    {
+      "path": "callback-timeout-negative.xml",
+      "sha256": "70fd790252eb42280845f92cf925528c2f957d69507929ddcf980ee763d8dfdc",
+      "bytes": 97715
+    },
+    {
+      "path": "callback-timeout-restored.xml",
+      "sha256": "fd27fa1735581deaaf092195d720a7c6b98c8fcc5af28a087e5694d42b9df65c",
+      "bytes": 2922
+    },
+    {
+      "path": "own-pass-receipt.json",
+      "sha256": "b291d96294d9561f9d8f2cfe417c48afb2424614d5bf96db7921958a0442cc53",
+      "bytes": 2014
+    },
+    {
+      "path": "profile-probes/MobileProfileProbeTest.kt",
+      "sha256": "04430d5f56f3fbf79adc9ca65129e945539f940ca12abcdf8ba997f60845e404",
+      "bytes": 8090
+    },
+    {
+      "path": "profile-probes.init.gradle",
+      "sha256": "205d6b6d9536b66104d4d03aad9dc8bd04327d64582e876d2c4772a3685b31ea",
+      "bytes": 456
+    },
+    {
+      "path": "judge-profile.py",
+      "sha256": "4c5178102e52bc321c801da7d731270b9b3473e682598e9a2c57757f243a901c",
+      "bytes": 1927
+    },
+    {
+      "path": "probes/OptOutInvalidCallbackProbeTest.kt",
+      "sha256": "4828ef499d67267efb063daa4b0ee5c23f0867e6248dacdcdcc0270d1557fe1f",
+      "bytes": 4213
+    },
+    {
+      "path": "probes.init.gradle",
+      "sha256": "3526375072b37b89754dd925785e5eeb8f1ee509b7a4f936a27f59df5363289b",
+      "bytes": 294
+    }
+  ],
+  "excluded": "Build outputs, full suite XML, compiler logs, dependency caches, source patches, draft replies. Source is available at the signed commit after parent publication.",
+  "total_bytes": 166589,
+  "publication_note": "Export staged before publication; see publication.json and published-replies.json for verified publication."
+}

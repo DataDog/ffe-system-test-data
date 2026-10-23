@@ -1,0 +1,21 @@
+{
+  "source_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "submitted": 9,
+  "delivered": 2,
+  "callback_threads": [
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1"
+  ],
+  "dropped": [
+    "com.datadog.android.internal.thread.NamedRunnable@48b2236",
+    "com.datadog.android.internal.thread.NamedRunnable@f6e3537",
+    "com.datadog.android.internal.thread.NamedRunnable@5ad9aa4",
+    "com.datadog.android.internal.thread.NamedRunnable@ee1000d",
+    "com.datadog.android.internal.thread.NamedRunnable@adf2bc2",
+    "com.datadog.android.internal.thread.NamedRunnable@a66edd3",
+    "com.datadog.android.internal.thread.NamedRunnable@e7bbd10"
+  ],
+  "alive_callback_workers_after_stop": [
+    "datadog-flags-callbacks-thread-1"
+  ]
+}

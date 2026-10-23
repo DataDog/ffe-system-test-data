@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-23T02:34:41.363892+00:00",
+  "threads": [
+    {
+      "root_comment_id": 4342792807,
+      "reply_id": 4355545626,
+      "url": "https://github.com/DataDog/dd-trace-java/pull/12950#discussion_r4355545626",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:33:55Z",
+      "thread_id": "PRRT_kwDOBVFpxM6u-76S",
+      "resolved": true,
+      "reason": "Published Java-local compatibility fix with production-parser regressions and detected negative control"
+    }
+  ]
+}

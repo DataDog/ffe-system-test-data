@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-10-23T14:41:22.705113+00:00",
+  "finished_at": "2026-10-23T14:44:17.827782+00:00",
+  "exit_code": 0,
+  "sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "command": [
+    "cargo",
+    "run",
+    "--locked",
+    "--bin",
+    "release",
+    "--features",
+    "otel-thread-ctx,data-pipeline-external-observations",
+    "--",
+    "--out",
+    "/home/bits/.ffe-ai/evidence/ruby-runtime-20261023/native-vendor/x86_64-linux-gnu"
+  ],
+  "default_features_preserved": true,
+  "source_status": ""
+}

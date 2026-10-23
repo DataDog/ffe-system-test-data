@@ -1,0 +1,104 @@
+{
+  "recorded_at": "2026-10-22T22:13:53.733694+00:00",
+  "implementation_sha": "939db39e166fdd40cf7744399477bfe9053964b0",
+  "contract_sha": "06a49f93344481ca13da1535185a8b7d76472118",
+  "published_contract_files_verified": {
+    "manifest.json": "7fd3a024c471c1d4bd87aeb28183f4874ec06924",
+    "decision-history.md": "8d0068a32f919e3d0c85637157a8087f1e88a6b2",
+    "edge-feedback.md": "d6b03c401d47c60d7c61f3af1519fb918ec82f62",
+    "decisions.json": "0bbe9005c351480b3ad909cc5e3e8769294e7819",
+    "evidence/edge-review-20261022/native-validation.json": "82b2b1fc9b07b23a1c7a7338cb05c396c2555a78"
+  },
+  "replies": [
+    {
+      "root_comment_id": 4343813395,
+      "comment_id": 4354082200,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082200",
+      "created_at": "2026-10-22T22:13:30Z",
+      "body": "Fixed in [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0): moved the import above the test module. Both `test.wasm.clippy.test` and `ffe-edge-assignments.clippy.test` pass locally, and the Fastly handler suite passes with 244 tests and the same 9 ignored tests. The new CI run is separate from these local results.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343813859,
+      "comment_id": 4354082423,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082423",
+      "created_at": "2026-10-22T22:13:32Z",
+      "body": "Agreed that opt-out must cover randomized allocations. The chosen representation is the existing `doLog` field, as recorded in the [compiler decision](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956): the compiler sets `doLog=true` for ordinary percentage splits, completed experiments that still randomize, and partial enrollment. This also enables exposures for those allocations. Evaluators keep the current `doLog` predicate.\n\n[D018](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d018) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) records that decision and the separate producer validation. [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0) documents the enablement dependency: deploy the compiler classification and fallback-preservation changes and rebuild stored UFCs before clients enable opt-out. Future mode additionally needs activation coverage/backfill for all randomized allocation kinds; unknown activation still excludes conservatively.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814088,
+      "comment_id": 4354082717,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354082717",
+      "created_at": "2026-10-22T22:13:34Z",
+      "body": "Keeping the modern SDK behavior: an invalid regex fails the containing flag with `PARSE_ERROR`, while valid sibling flags remain usable; edge precompute omits that flag. This applies even when opt-out is disabled. [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0) adds a direct Go regression for that disabled-mode isolation, and the merged canonical fixtures pass through Go, Rust JSON and Rust archive evaluation.\n\nRecorded as [D019](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/edge-feedback.md#d019-invalid-regex-rejects-its-flag) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55), preserving [this review's evidence](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814088). Save-time validation, scanning production patterns, and regex grammar convergence remain separate operational follow-ups; they are not completed by this PR. D019 has native evidence, not a new Lean proof.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814352,
+      "comment_id": 4354083029,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083029",
+      "created_at": "2026-10-22T22:13:37Z",
+      "body": "Clarified in [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0). Immediate mode applies for any valid supplied timestamp. Future mode uses the supplied cutoff as-is: an activation strictly before it remains eligible, including an activation after the request time when the cutoff is future-dated.\n\nThis preserves [D011](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d011) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) and the [earlier author clarification](https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366); it is a documentation correction, with no change to the cutoff predicate.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814459,
+      "comment_id": 4354083320,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083320",
+      "created_at": "2026-10-22T22:13:39Z",
+      "body": "Fixed in [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0). Acknowledgement tests now use literal expected JSON across JSON/archive evaluation and buffered/streaming delivery. They cover the legacy immediate boolean and future mode with its UTC cutoff, including offsets, `.5` \u2192 `.500`, `.1234` \u2192 `.123400`, zero fractions and nanoseconds. The README documents 0/3/6/9 fractional digits and comparison as a nanosecond-precision instant.\n\nDeleting the serialized cutoff now fails the test. [D008](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d008) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) links the [native checks and negative controls](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/edge-feedback.md#validation-and-propagation); [this acknowledgement thread](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814459) records the edge wire-format adoption, separately from the broader client acknowledgement proposal.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814538,
+      "comment_id": 4354083691,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354083691",
+      "created_at": "2026-10-22T22:13:42Z",
+      "body": "Implemented in [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0). Omitted/null options and unknown names or named modes preserve ordinary delivery without an opt-out acknowledgement. Known options still work alongside unknown fields; legacy `true` remains immediate even beside a null or unknown named mode. Wrong types, duplicate options, conflicting recognized enabled modes, and invalid timestamps for a recognized enabled mode still fail.\n\nThe decision in [this compatibility thread](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343814538) is recorded as [D020](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/edge-feedback.md#d020-tolerate-unsupported-request-options) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55). The real request-path matrix covers absent/valid/invalid subject timestamps and JSON/archive responses. Restoring the strict parser fails the null compatibility test. Clients requesting a policy still need its acknowledgement; this HTTP tolerance does not change SDK constructor validation. This is native validation, not a new Lean proof.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814731,
+      "comment_id": 4354084073,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084073",
+      "created_at": "2026-10-22T22:13:44Z",
+      "body": "Keeping this as an open performance follow-up. This update does not add a syntax cache or claim a decode speedup. The repeated-pattern evidence is useful; a cache change should retain invalid-pattern isolation and include representative warm/cold decode measurements, including lookup and locking costs.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343814957,
+      "comment_id": 4354084359,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084359",
+      "created_at": "2026-10-22T22:13:47Z",
+      "body": "Keeping parser convergence as a separate follow-up. [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0) leaves the native Go and Chrono parsers unchanged, so the differences listed here still exist.\n\n[D005](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d005), [D006](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d006) and [D007](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d007) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) retain the shared-profile question and the scoped [browser acceptance](https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4348403258). That acceptance does not select all of Chrono's permissive forms or leap-second normalization for Go. We still need a shared fixture profile before treating a parser adapter as the cross-SDK contract.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343815097,
+      "comment_id": 4354084692,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084692",
+      "created_at": "2026-10-22T22:13:49Z",
+      "body": "Agreed on the customer-enablement prerequisites in [this thread](https://github.com/ddoghq/dd-source/pull/140422#discussion_r4343815097). [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0) documents that this PR can land independently: omitted/disabled opt-out requests do not activate exclusion. Before clients send opt-out, the compiler must classify randomization through `doLog`, retain fallback allocations, and rebuild each environment's stored UFCs. Deploying the evaluator alone cannot recover a pruned fallback or correct an old randomized `doLog=false` allocation.\n\nFuture mode additionally requires activation coverage/backfill, including existing ordinary splits, canaries and bandits. Unknown activation remains conservatively excluded. [D012](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d012) and [D018](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/decision-history.md#d018) in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) keep merge, customer enablement and deployment evidence separate; these deployment prerequisites have not been verified here. Regex behavior is a separate rollout consideration recorded in D019.",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    },
+    {
+      "root_comment_id": 4343815224,
+      "comment_id": 4354084943,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422#discussion_r4354084943",
+      "created_at": "2026-10-22T22:13:51Z",
+      "body": "Repinned in [939db39e16](https://github.com/ddoghq/dd-source/commit/939db39e166fdd40cf7744399477bfe9053964b0) to merged [fixture #52](https://github.com/DataDog/ffe-system-test-data/pull/52) at [0781ce2c55](https://github.com/DataDog/ffe-system-test-data/commit/0781ce2c55f9da7f9290035c768bbc46570556c0), with the new archive checksum and the main-only pinning comment restored.\n\nGo now asserts specified `serialId` and `doLog` expectations in both baseline and capability cases, distinguishing serial zero, explicit null and omission. Removing serial IDs or forcing `doLog=false` fails those assertions. The final uncached Go, Rust and Fastly suites pass with the merged inventory: 363 baseline, 28 immediate and 44 future-mode fixture rows. Rust covers JSON and archive evaluation. The [native checks and negative controls](https://github.com/DataDog/ffe-system-test-data/blob/06a49f93344481ca13da1535185a8b7d76472118/contracts/experimentation-opt-out/edge-feedback.md#validation-and-propagation) are recorded in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55).",
+      "author": "leo-romanovsky_ddog",
+      "readback_verified": true
+    }
+  ]
+}

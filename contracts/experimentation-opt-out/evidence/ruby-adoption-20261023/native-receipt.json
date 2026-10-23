@@ -1,0 +1,145 @@
+{
+  "recorded_at": "2026-10-23T15:26:34.906564+00:00",
+  "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "native_source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "platform": "macOS/arm64",
+  "ruby": "3.4.7",
+  "tests": [
+    {
+      "suite": "OpenFeature latest",
+      "passed": 1043,
+      "failed": 0,
+      "pending": 0,
+      "policy_cases": 90,
+      "native_provider_boundary_examples": 21
+    },
+    {
+      "suite": "OpenFeature minimum",
+      "passed": 1039,
+      "failed": 0,
+      "pending": 0,
+      "policy_cases": 90,
+      "native_provider_boundary_examples": 21
+    },
+    {
+      "suite": "Core native feature flags",
+      "passed": 44,
+      "failed": 0,
+      "pending": 0
+    }
+  ],
+  "commands": {
+    "repository": "DataDog/dd-trace-rb",
+    "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+    "clean_before_and_after": true,
+    "commands": [
+      {
+        "command": [
+          "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+          "exec",
+          "rake",
+          "test:open_feature"
+        ],
+        "environment_overrides": {},
+        "start": "2026-10-23T15:20:34.912203+00:00",
+        "exit_code": 0,
+        "log": "native-exact-head.log",
+        "log_sha256": "fd0de97a65970c9f36e3c35ebeef3dc431f5c2b78937ab5ca84f401d8c90014f"
+      },
+      {
+        "command": [
+          "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/bundle",
+          "exec",
+          "rake",
+          "test:core_with_libdatadog_api"
+        ],
+        "environment_overrides": {
+          "SPEC": "spec/datadog/core/feature_flags_spec.rb"
+        },
+        "start": "2026-10-23T15:20:45.892962+00:00",
+        "exit_code": 0,
+        "log": "core-exact-head.log",
+        "log_sha256": "81bbfb47ad8ccfd658b39a5efe42654649f9db55c3fd1c902882631fa52fd645"
+      }
+    ]
+  },
+  "loaded_artifact_proof": "loaded-native-final-head.json",
+  "routine_checks": {
+    "scoped_rubocop": "12 files;0 offenses",
+    "standard": "exit0 under repository exclusions",
+    "full_steep": "No type error detected",
+    "changelog": "lint, render, Vale pass",
+    "config_map": "regenerated;no tracked change"
+  },
+  "infrastructure_attempts": [
+    {
+      "log": "native-exact-head-sandbox-failure.log",
+      "classification": "loopback EPERM;1 transport failure;superseded by unchanged-source permitted rerun"
+    },
+    {
+      "log": "candidate-rubocop.log",
+      "classification": "cache-directory sandbox restriction;superseded by permitted workspace cache"
+    }
+  ],
+  "negative_controls": {
+    "invalid_bytes_guard_removed": {
+      "examples": 21,
+      "failures": 6
+    },
+    "nul_name_guard_removed": {
+      "examples": 21,
+      "failures": 2
+    },
+    "source_restored": true
+  },
+  "logs_sha256": {
+    "native-exact-head.log": "fd0de97a65970c9f36e3c35ebeef3dc431f5c2b78937ab5ca84f401d8c90014f",
+    "core-exact-head.log": "81bbfb47ad8ccfd658b39a5efe42654649f9db55c3fd1c902882631fa52fd645",
+    "candidate-style.log": "b6f4f19fff192e43f706a5fd1889b8e3eefd08a42ae5c7589471807c79962e71",
+    "candidate-typecheck.log": "515014dcf194cf2fcb41620505ae34246ba3c8b840b6e2ef0d25ee709c3d6b1b",
+    "vale-exact-head.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "invalid-encoding-negative-control.log": "3fcb66e1c652924a00e168e9d06f31340c18b8fc965734da2c72d71d5ef8ea61",
+    "nul-attribute-alias-negative-control.log": "0206928b3b50cd389e3e5830ed3cf28f7dee176f8dc51e82600b1200846cf3ca",
+    "tooling-summary.json": "ce44568618850b0035c1858962b683de89c079d29365ae7fd9ef8c534e7de5a7",
+    "loaded-native-final-head.json": "825396d98699a72dfa82bc40b5031254dbf5250fafeb54a27fcd6e2c53f468a1",
+    "ci-fix-style.log": "d04914d43683fdfa6b875788db1f1e75b0071ce1b6c350a868e5ca13d46ee527"
+  },
+  "limits": "Native and production-provider tests on macOS and Linux. No HTTP intake, hosted CI or release claim from this receipt.",
+  "linux_matrix": [
+    {
+      "ruby": "3.1.7",
+      "openfeature_latest": "0.5.1",
+      "openfeature_minimum": "0.5.1",
+      "examples": [
+        1039,
+        1039
+      ],
+      "failures": 0,
+      "pending": 0,
+      "receipt": "runtime/native-ruby31-receipt.json"
+    },
+    {
+      "ruby": "4.0.1",
+      "openfeature_latest": "0.6.5",
+      "openfeature_minimum": "0.5.1",
+      "examples": [
+        1043,
+        1039
+      ],
+      "failures": 0,
+      "pending": 0,
+      "receipt": "runtime/native-ruby40-receipt.json"
+    }
+  ],
+  "routine_checks_source_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+  "final_head_routine_checks": {
+    "scoped_rubocop": "1 file;0 offenses",
+    "log": "ci-fix-style.log"
+  },
+  "linux_matrix_final_head_verification": "passed",
+  "linux_matrix_evidence": {
+    "file": "runtime/runtime-summary.json",
+    "sha256": "e6207ef208beb00c3266492290096744bea5167d3cc33b83d93b6282384ca577",
+    "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a"
+  }
+}

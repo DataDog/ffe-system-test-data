@@ -1,0 +1,11 @@
+allprojects {
+  afterEvaluate {
+    if (path == ':dd-openfeature' || path == ':products:feature-flagging:feature-flagging-api') {
+      def owner = path == ':dd-openfeature' ? 'standalone' : 'legacy'
+      sourceSets.test.java.srcDir("/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/operation-probes/${owner}")
+      tasks.withType(Test).configureEach {
+        systemProperty 'optout.operations', '/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/inactive-path.jsonl'
+      }
+    }
+  }
+}

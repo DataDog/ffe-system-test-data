@@ -1,0 +1,15 @@
+{
+  "verdict": "no-actionable-findings",
+  "reviewer": "independent Codex code-reviewer subagent",
+  "scope": "4 changed Go source/test files and 90-row native adapter",
+  "base_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+  "file_sha256": {
+    "types.go": "8bcd10fb87e33a8ed28dee6254345da4b01185d85b2891d253098116dd2541b9",
+    "evaluator.go": "9cbaa1f9ba108f81da35d6c7fb9bf373645bc83dd1d92354c5d4c672ef3f3bda",
+    "doc.go": "d582c3dd303ac291a7e5bd8b4f909c3a2b40c1df28ff68313178d1c8e7837389",
+    "experimentation_opt_out_future_test.go": "08bca2e5bf2a4a229a99363e95a8abf043567752dde87e516c43569da5b9cb11"
+  },
+  "adapter_sha256": "715d420bd3e7704700afadac79e3159238030c42e40bd071f1b0ddb0e09c8108",
+  "profile_sha256": "f3f4b3d5f0010d80b18491e29323f8e083bf666835399b7d722ef7e67d33f830",
+  "notes": "Reviewer traced production paths and independently checked all90 profile rows and adapter mappings. Initial adapter mode-name finding fixed; final variant assertion prevents default-only false positives. Native checks were run by the implementing agent, not duplicated by reviewer."
+}

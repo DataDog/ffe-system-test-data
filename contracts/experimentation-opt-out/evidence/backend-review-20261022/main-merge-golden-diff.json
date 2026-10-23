@@ -1,0 +1,42 @@
+{
+  "old_sha256": "51b5c64de0e4525aa83d57e9c85714235faa928de6fba1084dd12ab6d48aed08",
+  "new_sha256": "2c4315a3026f11037bc8867fc5248ad224dbf16026cb84cc57eb2ff574b58553",
+  "changes": [
+    [
+      "/flags/multi-step-rollout/allocations/0/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/multi-step-rollout/allocations/1/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/multi-variant-control/allocations/0/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/single-variant-control/allocations/0/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/single-variant-control/allocations/1/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/uneven-split/allocations/0/doLog",
+      false,
+      true
+    ],
+    [
+      "/flags/uneven-split/allocations/1/doLog",
+      false,
+      true
+    ]
+  ],
+  "assignment_data_unchanged": true
+}

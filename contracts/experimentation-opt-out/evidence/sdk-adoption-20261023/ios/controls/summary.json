@@ -1,0 +1,151 @@
+{
+  "final_sdk_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "native_execution_boundary": "Controls ran against the merged candidate before the signed commit. final source-equivalence.json verifies identical production source hashes. No claim of controls rerun at final SHA.",
+  "native": [
+    {
+      "name": "requested-identity",
+      "file": "DatadogFlags/Sources/Client/FlagsClient.swift",
+      "test": "testEnabledOptOutErrorTelemetryUsesRequestedContextAndIndependentSuppression",
+      "original_sha256": "f1b6651d99e36d14c51a89cbfb4c35f6efffd1bf8da27804e4dd998ce07d181d",
+      "mutant_sha256": "85d1eb702589523e310d8d194f9beccd5164f9dcd80c47d2022291131d5aafd1",
+      "restored_sha256": "f1b6651d99e36d14c51a89cbfb4c35f6efffd1bf8da27804e4dd998ce07d181d",
+      "restored": true,
+      "started_at": "2026-10-23T01:52:35.139334+00:00",
+      "finished_at": "2026-10-23T01:52:53.965135+00:00",
+      "exit_code": 65,
+      "summary": "Executed 1 test, with 6 failures (0 unexpected) in 0.252 (0.253) seconds",
+      "expected_failure_detected": true
+    },
+    {
+      "name": "absent-attribute-isolation",
+      "file": "DatadogFlags/Sources/Client/FlagsRepository.swift",
+      "test": "testEnabledOptOutWithholdsPreviousSubjectWithoutAttributeWhileRefreshIsPending",
+      "original_sha256": "8fc83f1c785bdcf0b7d5b81c2910590a292f03399e0f6434b9e80682f48fcf46",
+      "mutant_sha256": "3133f3f4de0268996f918242e752ba3a89f82523cbaefb0d5857fd2a9375f257",
+      "restored_sha256": "8fc83f1c785bdcf0b7d5b81c2910590a292f03399e0f6434b9e80682f48fcf46",
+      "restored": true,
+      "started_at": "2026-10-23T01:52:53.968124+00:00",
+      "finished_at": "2026-10-23T01:53:04.710260+00:00",
+      "exit_code": 65,
+      "summary": "Executed 1 test, with 2 failures (0 unexpected) in 0.196 (0.197) seconds",
+      "expected_failure_detected": true
+    }
+  ],
+  "serialization": {
+    "base_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+    "central_pin": "0520866bedb8c059df9c493cfe27ad294390c603",
+    "selected_profile_sha256": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+    "selected_cases_sha256": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528",
+    "case_count": 187,
+    "mismatches": [
+      {
+        "id": "request/disabled/absent",
+        "expected": {
+          "error": "NONE",
+          "options": false,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/disabled/valid",
+        "expected": {
+          "error": "NONE",
+          "options": false,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/disabled/invalid",
+        "expected": {
+          "error": "NONE",
+          "options": false,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/immediate/absent",
+        "expected": {
+          "error": "NONE",
+          "options": false,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/immediate/valid",
+        "expected": {
+          "error": "NONE",
+          "options": true,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/future_experiments_only/absent",
+        "expected": {
+          "error": "NONE",
+          "options": false,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      },
+      {
+        "id": "request/future_experiments_only/valid",
+        "expected": {
+          "error": "NONE",
+          "options": true,
+          "send": true
+        },
+        "observed": {
+          "error": "UNCLASSIFIED_ERROR",
+          "options": false,
+          "send": false
+        }
+      }
+    ],
+    "source_sha256": {
+      "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85",
+      "DatadogFlags/Sources/Models/AnyValue.swift": "33992648dc8fa98ec257394936e7943757f77ee67ff3f86bc5469f32f4fcd002",
+      "DatadogFlags/Sources/Models/FlagsError.swift": "b9a5c2c605482a6a2bd5c9fe88df2240b7de59817ebe494c6443544d2164c801",
+      "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d",
+      "DatadogFlags/Sources/Models/FlagAssignment.swift": "28ed5a73ed2958bae5f88f9538d590de357346983fde360e9ddba2fce876e865",
+      "DatadogFlags/Sources/Models/FlagValue.swift": "356ed8d3d060e8a81d2b5c69520138cf1aa5afd397e9d80ff38f4626d4b0450c",
+      "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift": "afb05df25a18235ad66a1c1a198f2a8c2aad8ee7ff5ceab347e3367ef34739b7",
+      "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift": "2142b79b665e931a891b4658ab0f83375fa18d64058bba91e1f2bdfa1bd00899"
+    },
+    "adapter_sha256": {
+      "run.py": "d00659685831dcd15e2acf52617fa4af0ba3b88faddd04df1af6283ad1ea2853",
+      "main.swift": "613a6caaac3b503cad35f03f82f5a4c7f18c7775d7f7aa9a7f1ad6b3c2020c6f",
+      "Boundaries.swift": "ece3b36b08fea54bd0c3ea723faa2e4c9f363665c0498d8373c72e86875d0bb0"
+    }
+  },
+  "serialization_boundary": "Adapter injects serialization failure; seven expected request observations disagree with unchanged expectations. Production source is unchanged.",
+  "raw_artifacts": "Local-only native logs/xcresult and raw adapter outputs."
+}

@@ -1,0 +1,8 @@
+{
+  "url": "https://github.com/DataDog/dd-trace-java/pull/12921",
+  "state": "closed",
+  "draft": true,
+  "head_sha": "c4bfecd1555b533cbb95818c887b05886ad8c01d",
+  "superseded_by": "https://github.com/DataDog/dd-trace-java/pull/12950",
+  "reason": "User requested one current experimentation-opt-out PR per language. Preserve older Boolean prototype as closed historical context."
+}

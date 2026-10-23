@@ -1,0 +1,89 @@
+{
+  "verified_at": "2026-10-22T20:45:36.653013+00:00",
+  "heads": {
+    "base": "1ceb5e2b977d151352874b6c772abfd84466143b",
+    "child": "3b8cb0b8786907b836e8fa449b4a1a2045cffeb3"
+  },
+  "threads": {
+    "4342541816": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-Wpr",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353245279",
+      "reply_id": 4353245279,
+      "reply_body_sha256": "0a9fa92a3b23945c86d0800c47ee21c595ed2ffd9c5f7ccc05bbb6d1d1e501f7",
+      "resolved": true
+    },
+    "4342541964": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-Wq2",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353287602",
+      "reply_id": 4353287602,
+      "reply_body_sha256": "f19584f9fc2db9855bac26102b479b273bd561c41cce56bdd8f71fd18d1f790a",
+      "resolved": true
+    },
+    "4342542113": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-WsV",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353288473",
+      "reply_id": 4353288473,
+      "reply_body_sha256": "2eee1ef3b7ed49e02f3b7287bdfe644717f041aa9a22ec52005a57e8e93561d6",
+      "resolved": true
+    },
+    "4342542328": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-WuT",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289250",
+      "reply_id": 4353289250,
+      "reply_body_sha256": "85a28f38c01377e6ec5085df0227b2e9d0420f92a3a7c41f167bc1ecfcaa6676",
+      "resolved": true
+    },
+    "4342542473": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-Wvs",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353289930",
+      "reply_id": 4353289930,
+      "reply_body_sha256": "0491bb262d72fa1b5fa2bab446f16e81b7d517aa705fffcb3dd28887fde1e611",
+      "resolved": true
+    },
+    "4342542617": {
+      "pr": 5666,
+      "thread_id": "PRRT_kwDOBAi6ic6u-WxF",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5666#discussion_r4353290762",
+      "reply_id": 4353290762,
+      "reply_body_sha256": "269ab157ab0c7b004403934100e3ccdd2e8dd7f09516d96e2a711f0fd2f54245",
+      "resolved": true
+    },
+    "4342540303": {
+      "pr": 5700,
+      "thread_id": "PRRT_kwDOBAi6ic6u-WbH",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353291451",
+      "reply_id": 4353291451,
+      "reply_body_sha256": "ddd13b510c26cae4546fe519720f8383ea358c28fc3814e5c83b670c7a5ed9d1",
+      "resolved": true
+    },
+    "4342541315": {
+      "pr": 5700,
+      "thread_id": "PRRT_kwDOBAi6ic6u-WlI",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353292336",
+      "reply_id": 4353292336,
+      "reply_body_sha256": "a1be660600ce1ebe857dd5a83de50a767eb045499611e91871b5f0ed09987af1",
+      "resolved": true
+    },
+    "4342541471": {
+      "pr": 5700,
+      "thread_id": "PRRT_kwDOBAi6ic6u-Wmn",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353296394",
+      "reply_id": 4353296394,
+      "reply_body_sha256": "6bc942bdfeee7e245213f3a83d94c8545ebf290b28172b9a3757494f35550ab9",
+      "resolved": true
+    },
+    "4342541667": {
+      "pr": 5700,
+      "thread_id": "PRRT_kwDOBAi6ic6u-Wod",
+      "reply_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4353297082",
+      "reply_id": 4353297082,
+      "reply_body_sha256": "026aa38b76e3aef0c6b1dc17f8524e8297172e030fc8a30f2d622b072cc6eb9e",
+      "resolved": true
+    }
+  }
+}

@@ -1,0 +1,344 @@
+BUNDLE_GEMFILE=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/gemfiles/ruby_3.4_openfeature_latest.gemfile bundle check || bundle install && bundle exec rake spec:open_feature
+The Gemfile's dependencies are satisfied
+(cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+/usr/bin/install -c -m 0755 libdatadog_api.3.4_arm64-darwin24.bundle ../../../../lib
+cp tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7/libdatadog_api.3.4_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/libdatadog_api.3.4_arm64-darwin24.bundle
+FFE fixtures cached at /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/tmp/ffe-system-test-data/0c467473aa8dc1f1cbfc0ef9a60d5c1c7a8826e6
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec --pattern spec/datadog/open_feature/\*\*/\*_spec.rb
+Run options: include {focus: true}
+
+All examples were filtered out; ignoring {focus: true}
+
+Randomized with seed 50420
+..........................................................................................................................................................................................................W, [2026-10-23T10:50:54.105095 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.............................................W, [2026-10-23T10:50:54.121406 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.121833 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.122241 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..W, [2026-10-23T10:50:54.123295 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.....................................................W, [2026-10-23T10:50:54.139306 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.140200 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.141023 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.141685 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.142479 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.143137 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.148309 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.149334 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.150838 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..W, [2026-10-23T10:50:54.152312 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.153331 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.154537 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.155716 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.156461 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.157571 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.158735 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.159780 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.160786 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.161581 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.162504 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.163281 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.164161 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+.W, [2026-10-23T10:50:54.164984 #47970]  WARN -- datadog: [datadog] DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED is deprecated; use DD_FEATURE_FLAGS_ENABLED and DD_FEATURE_FLAGS_CONFIGURATION_SOURCE instead
+..................................................W, [2026-10-23T10:50:54.393650 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.396090 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.397451 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.399114 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.400511 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.401916 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.403256 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.405979 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.407412 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.409426 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.411058 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.413396 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.414817 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.416209 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.417842 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.419384 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.421457 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.426101 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.428143 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.430433 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.432447 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.434490 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.436371 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.438423 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.440317 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.442015 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.443605 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.445040 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.446390 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.448082 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.449603 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.451969 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.453448 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.455073 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.456631 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.458058 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.459089 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.460627 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.462000 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.462989 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.463998 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.465586 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.466607 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.467981 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.469354 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.470747 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.471756 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.473602 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.475168 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.476779 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.480499 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.483146 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.485318 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.487186 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.489421 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.491116 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.492838 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.494195 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.495495 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.W, [2026-10-23T10:50:54.497167 #47970]  WARN -- : OTEL_METRICS_EXEMPLAR_FILTER  is not part of the provided exemplar filters. Exemplar is off.
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+Spec leaked 1 threads in "Datadog::OpenFeature::Agentless::Transport when the connection closes before responding does not retry inside the transport".
+Ensure all threads are terminated when test finishes.
+For help fixing this issue, see "Ensuring tests don't leak resources" in docs/DevelopmentGuide.md.
+
+1: #<Thread:0x000000012553a338 /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:331 sleep_forever> (Thread)
+Thread Creation Site:
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:139:in 'Thread.new'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:139:in 'block (3 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in 'block in RSpec::Core::Example#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in 'block in RSpec::Core::Example#with_around_and_singleton_context_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in 'block in RSpec::Core::Example#with_around_example_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in 'block in RSpec::Core::Hooks::HookCollections#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:626:in 'block in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:132:in 'block (3 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:25:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/webmock-3.26.4/lib/webmock/rspec.rb:39:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-wait-0.0.10/lib/rspec/wait.rb:47:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:629:in 'RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in 'RSpec::Core::Hooks::HookCollections#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in 'RSpec::Core::Example#with_around_example_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in 'RSpec::Core::Example#with_around_and_singleton_context_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:259:in 'RSpec::Core::Example#run'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/support/forkable_example.rb:32:in 'ForkableExample#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:653:in 'block in RSpec::Core::ExampleGroup.run_examples'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in 'RSpec::Core::ExampleGroup.run_examples'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:614:in 'RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'block in RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'block (3 levels) in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'block (2 levels) in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2097:in 'RSpec::Core::Configuration#with_suite_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:116:in 'block in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/reporter.rb:74:in 'RSpec::Core::Reporter#report'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:115:in 'RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:89:in 'RSpec::Core::Runner#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:71:in 'RSpec::Core::Runner.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:45:in 'RSpec::Core::Runner.invoke'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec:4:in '<main>'
+Thread Backtrace:
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib/rspec/support/reentrant_mutex.rb:36:in 'Thread::Mutex#lock'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib/rspec/support/reentrant_mutex.rb:36:in 'RSpec::Support::ReentrantMutex#enter'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib/rspec/support/reentrant_mutex.rb:24:in 'RSpec::Support::ReentrantMutex#synchronize'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:178:in 'block in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'Hash#fetch'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:343:in 'block in RSpec::ExampleGroups::DatadogOpenFeatureAgentlessTransport::WhenTheConnectionClosesBeforeResponding#let'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:141:in 'block (5 levels) in <top (required)>'
+	<internal:kernel>:168:in 'Kernel#loop'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:140:in 'block (4 levels) in <top (required)>'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:332:in 'block in DatadogThreadDebugger#initialize'
+
+F
+Spec leaked 1 threads in "Datadog::OpenFeature::Agentless::Transport with a gzip header on an HTTP 304 response preserves the status without decoding the response body".
+Ensure all threads are terminated when test finishes.
+For help fixing this issue, see "Ensuring tests don't leak resources" in docs/DevelopmentGuide.md.
+
+1: #<Thread:0x000000012553a338 /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:331 sleep> (Thread)
+Thread Creation Site:
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:139:in 'Thread.new'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:139:in 'block (3 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:263:in 'block in RSpec::Core::Example#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in 'block in RSpec::Core::Example#with_around_and_singleton_context_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in 'block in RSpec::Core::Example#with_around_example_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in 'block in RSpec::Core::Hooks::HookCollections#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:626:in 'block in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:132:in 'block (3 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:25:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/webmock-3.26.4/lib/webmock/rspec.rb:39:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-wait-0.0.10/lib/rspec/wait.rb:47:in 'block (2 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'BasicObject#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:457:in 'RSpec::Core::Example#instance_exec'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:390:in 'RSpec::Core::Hooks::AroundHook#execute_with'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:628:in 'block (2 levels) in RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:352:in 'RSpec::Core::Example::Procsy#call'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:629:in 'RSpec::Core::Hooks::HookCollections#run_around_example_hooks_for'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/hooks.rb:486:in 'RSpec::Core::Hooks::HookCollections#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:468:in 'RSpec::Core::Example#with_around_example_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:511:in 'RSpec::Core::Example#with_around_and_singleton_context_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example.rb:259:in 'RSpec::Core::Example#run'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/support/forkable_example.rb:32:in 'ForkableExample#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:653:in 'block in RSpec::Core::ExampleGroup.run_examples'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:649:in 'RSpec::Core::ExampleGroup.run_examples'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:614:in 'RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'block in RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/example_group.rb:615:in 'RSpec::Core::ExampleGroup.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'block (3 levels) in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'Array#map'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:121:in 'block (2 levels) in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/configuration.rb:2097:in 'RSpec::Core::Configuration#with_suite_hooks'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:116:in 'block in RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/reporter.rb:74:in 'RSpec::Core::Reporter#report'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:115:in 'RSpec::Core::Runner#run_specs'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:89:in 'RSpec::Core::Runner#run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:71:in 'RSpec::Core::Runner.run'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/runner.rb:45:in 'RSpec::Core::Runner.invoke'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec:4:in '<main>'
+Thread Backtrace:
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'TCPServer#initialize'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'IO.new'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'block (3 levels) in <top (required)>'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:343:in 'block (2 levels) in RSpec::ExampleGroups::DatadogOpenFeatureAgentlessTransport::WhenTheConnectionClosesBeforeResponding#let'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'block (3 levels) in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'Hash#fetch'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'block (2 levels) in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib/rspec/support/reentrant_mutex.rb:25:in 'RSpec::Support::ReentrantMutex#synchronize'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:178:in 'block in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'Hash#fetch'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:343:in 'block in RSpec::ExampleGroups::DatadogOpenFeatureAgentlessTransport::WhenTheConnectionClosesBeforeResponding#let'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:141:in 'block (5 levels) in <top (required)>'
+	<internal:kernel>:168:in 'Kernel#loop'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:140:in 'block (4 levels) in <top (required)>'
+	/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:332:in 'block in DatadogThreadDebugger#initialize'
+
+.#<Thread:0x000000012553a338 /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:331 run> terminated with exception (report_on_exception is true):
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'TCPServer#initialize': Operation not permitted - bind(2) for "127.0.0.1" port 0 (Errno::EPERM)
+	from /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'IO.new'
+	from /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'block (3 levels) in <top (required)>'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:343:in 'block (2 levels) in RSpec::ExampleGroups::DatadogOpenFeatureAgentlessTransport::WhenTheConnectionClosesBeforeResponding#let'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'block (3 levels) in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'Hash#fetch'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:179:in 'block (2 levels) in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib/rspec/support/reentrant_mutex.rb:25:in 'RSpec::Support::ReentrantMutex#synchronize'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:178:in 'block in RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'Hash#fetch'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:177:in 'RSpec::Core::MemoizedHelpers::ThreadsafeMemoized#fetch_or_store'
+	from /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib/rspec/core/memoized_helpers.rb:343:in 'block in RSpec::ExampleGroups::DatadogOpenFeatureAgentlessTransport::WhenTheConnectionClosesBeforeResponding#let'
+	from /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:141:in 'block (5 levels) in <top (required)>'
+	from <internal:kernel>:168:in 'Kernel#loop'
+	from /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/agentless/transport_spec.rb:140:in 'block (4 levels) in <top (required)>'
+	from /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/spec_helper.rb:332:in 'block in DatadogThreadDebugger#initialize'
+......................................................................................................
+
+Failures:
+
+  1) Datadog::OpenFeature::Agentless::Transport when the connection closes before responding does not retry inside the transport
+     Failure/Error: let(:server) { TCPServer.new("127.0.0.1", 0) }
+
+     Errno::EPERM:
+       Operation not permitted - bind(2) for "127.0.0.1" port 0
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'TCPServer#initialize'
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'IO.new'
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'block (3 levels) in <top (required)>'
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:155:in 'block (3 levels) in <top (required)>'
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:132:in 'block (3 levels) in <top (required)>'
+     # ./spec/datadog/open_feature/agentless/transport_spec.rb:25:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+     # ------------------
+     # --- Caused by: ---
+     # Errno::EPERM:
+     #   Operation not permitted - bind(2) for "127.0.0.1" port 0
+     #   ./spec/datadog/open_feature/agentless/transport_spec.rb:122:in 'TCPServer#initialize'
+
+Finished in 3.41 seconds (files took 1.16 seconds to load)
+1043 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/datadog/open_feature/agentless/transport_spec.rb:137 # Datadog::OpenFeature::Agentless::Transport when the connection closes before responding does not retry inside the transport
+
+Randomized with seed 50420
+
+Stopped processing SimpleCov as a previous error not related to SimpleCov has been detected
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec --pattern spec/datadog/open_feature/\*\*/\*_spec.rb failed
+rake aborted!
+Command failed with status (1): [BUNDLE_GEMFILE=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/gemfiles/ruby_3.4_openfeature_latest.gemfile bundle check || bundle install && bundle exec rake spec:open_feature]
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/Rakefile:89:in 'block (5 levels) in <top (required)>'
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/Rakefile:89:in 'block (4 levels) in <top (required)>'
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/Rakefile:79:in 'Hash#each_key'
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/Rakefile:79:in 'block (3 levels) in <top (required)>'
+/Users/leo.romanovsky/.rbenv/versions/3.4.7/bin/bundle:25:in 'Kernel#load'
+/Users/leo.romanovsky/.rbenv/versions/3.4.7/bin/bundle:25:in '<main>'
+Tasks: TOP => test:open_feature
+(See full trace by running task with --trace)

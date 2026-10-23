@@ -1,0 +1,66 @@
+{
+  "repository": "ddoghq/dd-source",
+  "pr": 139379,
+  "items": [
+    {
+      "source_id": 4342416262,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4342416262",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "created_at": "2026-10-21T21:59:55Z",
+      "original_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "inspected_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "thread_state": "unresolved, current",
+      "disposition": "superseded-by-reviewer-policy",
+      "decision_ids": [
+        "D021"
+      ],
+      "next_action": "Do not preserve old SDK assignment for authored SemVer flags; keep original finding as prior alternative."
+    },
+    {
+      "source_id": 4343813531,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:14Z",
+      "original_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "inspected_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "thread_state": "unresolved, current",
+      "disposition": "implemented-and-locally-validated",
+      "decision_ids": [
+        "D021"
+      ],
+      "next_action": "Publish signed implementation/shared proof and reply only when authorized; retain thread for reviewer confirmation.",
+      "evidence_file": "native-validation.json"
+    },
+    {
+      "source_id": 4343814842,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343814842",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:30Z",
+      "original_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "inspected_source_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "thread_state": "unresolved, current",
+      "disposition": "implemented-and-locally-validated",
+      "decision_ids": [],
+      "next_action": "Publish signed implementation/shared proof and reply only when authorized; retain thread for reviewer confirmation.",
+      "evidence_file": "native-validation.json"
+    }
+  ],
+  "prior_decisions": {
+    "D018": "Retain published compiler-owned randomization classification from parent; no semantic revision."
+  },
+  "publication": "Local only; no replies or thread resolution.",
+  "parent_open_obligations": [
+    {
+      "url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4354101407",
+      "reviewer_priority": "P1",
+      "author": "dd-agentic-review-platform-14301c[bot]",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "disposition": "unresolved-parent-rollout-concern",
+      "decision_ids": [
+        "D018",
+        "D012"
+      ],
+      "next_action": "Parent owner to assess runtime rollout controls and intake capacity. Preserve accepted randomization policy; this child patch does not close rollout approval."
+    }
+  ]
+}

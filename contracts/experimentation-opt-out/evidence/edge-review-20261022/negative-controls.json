@@ -1,0 +1,209 @@
+{
+  "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+  "recorded_at": "2026-10-22T22:01:02.538106+00:00",
+  "controls": [
+    {
+      "name": "missing-cutoff",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/apps/edge-assignments:test",
+        "--test_arg=acknowledgement_normalizes_cutoff_without_losing_precision"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": false,
+      "markers": [
+        "acknowledgement_normalizes_cutoff_without_losing_precision",
+        "assertion"
+      ],
+      "executed_at": "2026-10-22T21:56:42.652636+00:00",
+      "full_log_sha256": "c0f7fd539560a652e217304f23ddc2b4b7d25e6246ecab2bd0ed0a89787507f9",
+      "log_excerpt": [],
+      "assessment": "Initial detector required the word assertion; captured WASM output instead had assert_failed in the named test stack. Repeated with --nocapture for direct expected/actual evidence."
+    },
+    {
+      "name": "old-strict-options",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/apps/edge-assignments:test",
+        "--test_arg=options"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": false,
+      "markers": [
+        "omitted_unknown_and_null_options_preserve_ordinary_responses",
+        "FAILED"
+      ],
+      "executed_at": "2026-10-22T21:56:52.609434+00:00",
+      "full_log_sha256": "a224cdaf7b8733dce85b8e7674fcb2620b5e31089c6fd804134487d2b66592a4",
+      "log_excerpt": [],
+      "assessment": "Broad options filter stopped at the wrong-shape options test before the desired null compatibility case. Not counted as proof of null compatibility; replaced by precise v2 filter."
+    },
+    {
+      "name": "missing-serial-id",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/libs/flagging/ufc:go_default_test",
+        "--test_filter=TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": true,
+      "markers": [
+        "TestEvaluationSDKSystemTestData",
+        "FAIL"
+      ],
+      "executed_at": "2026-10-22T21:57:12.001678+00:00",
+      "full_log_sha256": "f00ef875fe1d8d55f6d1fa913cf5290dbf5c81278a8528f67a7a371f23927586",
+      "log_excerpt": [
+        "        \t            \texpected: (*int32)(0x2f85e0f92000)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/00_serial-id-basic-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/00_serial-id-basic-flag (0.00s)",
+        "        \t            \texpected: (*int32)(0x2f85e0e370e8)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/01_serial-id-zero-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/01_serial-id-zero-flag (0.00s)",
+        "        \t            \texpected: (*int32)(0x2f85e0e37288)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/03_serial-id-targeting-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/03_serial-id-targeting-flag (0.00s)",
+        "        \t            \texpected: (*int32)(0x2f85e0f92048)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/04_serial-id-targeting-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/04_serial-id-targeting-flag (0.00s)",
+        "        \t            \texpected: (*int32)(0x2f85e0f92158)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/05_serial-id-basic-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/05_serial-id-basic-flag (0.00s)",
+        "        \t            \texpected: (*int32)(0x2f85e0f92268)",
+        "        \t            \tactual  : (*int32)(nil)",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/06_serial-id-basic-flag",
+        "        \tMessages:   \tselected split serialId",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/06_serial-id-basic-flag (0.00s)"
+      ],
+      "assessment": "Expected regression detected at the selected assertion; temporary mutation restored."
+    },
+    {
+      "name": "lost-dolog",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/libs/flagging/ufc:go_default_test",
+        "--test_filter=TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": true,
+      "markers": [
+        "TestEvaluationSDKSystemTestData",
+        "FAIL"
+      ],
+      "executed_at": "2026-10-22T21:57:22.965081+00:00",
+      "full_log_sha256": "e653b878a2c431a3c185bc055eaf83c936b214d89d0888929eeb9359438cc828",
+      "log_excerpt": [
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/00_serial-id-basic-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/00_serial-id-basic-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/01_serial-id-zero-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/01_serial-id-zero-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/02_serial-id-missing-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/02_serial-id-missing-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/03_serial-id-targeting-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/03_serial-id-targeting-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/04_serial-id-targeting-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/04_serial-id-targeting-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/05_serial-id-basic-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/05_serial-id-basic-flag (0.00s)",
+        "        \t            \texpected: true",
+        "        \t            \tactual  : false",
+        "        \tTest:       \tTestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/06_serial-id-basic-flag",
+        "        \tMessages:   \tselected allocation doLog",
+        "\u0016--- FAIL: TestEvaluationSDKSystemTestData/test-case-serial-id-metadata.json/06_serial-id-basic-flag (0.00s)"
+      ],
+      "assessment": "Expected regression detected at the selected assertion; temporary mutation restored."
+    },
+    {
+      "name": "missing-cutoff-v2",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/apps/edge-assignments:test",
+        "--test_arg=acknowledgement_normalizes_cutoff_without_losing_precision",
+        "--test_arg=--nocapture"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": true,
+      "markers": [
+        "acknowledgement_normalizes_cutoff_without_losing_precision",
+        "assert"
+      ],
+      "executed_at": "2026-10-22T21:58:16.143059+00:00",
+      "full_log_sha256": "353ee9cd8b7edb8e9a516a351412cc4b76481ee900add479067c102f7e6bdc2a",
+      "log_excerpt": [
+        "==================== Test output for //domains/ffe/apps/edge-assignments:test:",
+        "stdout :: \\nrunning 1 test",
+        "stdout :: test handlers::precompute_assignments::tests::experimentation::acknowledgement_normalizes_cutoff_without_losing_precision ... ",
+        "stderr :: \\nthread 'main' (1) panicked at domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs:433:17:\\nassertion `left == right` failed: 2026-10-01T08:00:00-04:00, rkyv=false, streaming=false\\n  left: Object {\"experimentation_opt_out_mode\": String(\"future_experiments_only\")}\\n right: Object {\"experimentation_opt_out_mode\": String(\"future_experiments_only\"), \"dd_experimentation_opt_out_at\": String(\"2026-10-01T12:00:00Z\")}",
+        "stderr :: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+      ],
+      "assessment": "Expected regression detected at the selected assertion; temporary mutation restored."
+    },
+    {
+      "name": "old-strict-options-v2",
+      "command": [
+        "bzl",
+        "test",
+        "--test_output=errors",
+        "//domains/ffe/apps/edge-assignments:test",
+        "--test_arg=omitted_unknown_and_null_options_preserve_ordinary_responses",
+        "--test_arg=--nocapture"
+      ],
+      "exit_code": 3,
+      "expected_assertion_failure": true,
+      "markers": [
+        "omitted_unknown_and_null_options_preserve_ordinary_responses",
+        "invalid type: null"
+      ],
+      "executed_at": "2026-10-22T21:58:24.036601+00:00",
+      "full_log_sha256": "9c0929dcb7d02f66bfb79570cf3868bac354d4975e37f324c37b9d9591e8cda9",
+      "log_excerpt": [
+        "==================== Test output for //domains/ffe/apps/edge-assignments:test:",
+        "stdout :: \\nrunning 1 test",
+        "stdout :: test handlers::precompute_assignments::tests::experimentation::omitted_unknown_and_null_options_preserve_ordinary_responses ... ",
+        "stderr :: \\nthread 'main' (1) panicked at domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs:337:50:\\ncalled `Result::unwrap()` on an `Err` value: RequestJsonDecode { detail: \"invalid type: null, expected struct RequestEvaluationOptions at line 1 column 104\" }",
+        "stderr :: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+      ],
+      "assessment": "Expected regression detected at the selected assertion; temporary mutation restored."
+    }
+  ],
+  "mutation_restoration_verified": true,
+  "limits": "Controls used the same production changes and corresponding acknowledgement/compatibility/metadata tests as the final patch. The direct Go regex-isolation test was added separately and is covered by the final positive suite; no regex mutation or production scan is claimed. Full original local logs are represented by hashes and diagnostic excerpts, not a universal equivalence proof."
+}

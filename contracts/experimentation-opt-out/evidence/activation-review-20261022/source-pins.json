@@ -1,0 +1,28 @@
+{
+  "native_head": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+  "native_base": "2747ede8a372d0a1ac8adc952e38b08f54b5aab2",
+  "merge_base": "2747ede8a372d0a1ac8adc952e38b08f54b5aab2",
+  "validator_parent_head": "6d822c74e6deb3665e130a677fb7d558b7883ba7",
+  "validator_parent_is_ancestor": true,
+  "central_base": "7853a11426a50691e748e64907e93d4682d91215",
+  "baseline_manifest_sha256": "3cedc5157b1116e70277c97ac81472fd1965a14f936b7b7946d5573fef35e08b",
+  "baseline_test_sha256": "3ff15e1c328f10dfc7d1e0bb79692a8cb77ef8fdc2468021cffde46501351c81",
+  "rfc_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+  "baseline_test_patch_sha256": "69595dfd393090e6538a49eb77fb5ce4d41564131d33788b94fe45e3b73ef47d",
+  "native_patch_sha256": "aee18df72ecc9db047d564cf871befa8044509348b4ab703337c02903be531af",
+  "native_source_files_sha256": {
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service.go": "942d0d9d722f4153179f7721c74fcd61a868c495d123ba19317b86bb8b26452d",
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service_test.go": "1808e559196e33c9735a3c23f7725f4d0e2aa8a033f7e0a3c3b34108291a30bc",
+    "domains/ffe/libs/flagging/core/service/allocation_service.go": "9bd8f32a72adf7c4b6894c499087269ca65d7112cc58ec83093cc1a14bb62f36",
+    "domains/ffe/libs/flagging/core/service/allocation_experiment_end_approval.go": "3024de459b2a25bb7220604f888c1f2944f65bc9088175867e21c570d6f326fe",
+    "domains/ffe/libs/flagging/core/repository/allocation_repository.go": "b7b6702bba6d427f392539a3967a195a715aea7f88860aeeb56a7975bb20907c",
+    "domains/ffe/libs/flagging/core/model/allocation.go": "ce8e3d0bb60ef97669f22449761f7e22d1c16ace0763854c7e09af593ef71cb1",
+    "domains/ffe/libs/flagging/ufc/holdout.go": "0f0abb3d2d5022173a152e4caa6f2ce2914d92a8352e2ff2654169627d5ee30c",
+    "domains/ffe/libs/flagging/ufc/holdout_test.go": "39a2e59366e92b3823dc0c8013e474d71cf69b64c408d18044327dea51a30d4e",
+    "domains/ffe/apps/apis/ffe-service/internal/crossdc/flag_replication.go": "8de6b03d65622b442d7a01c84bda533fb517f082ad55ed2164787cd69f081985",
+    "domains/ffe/libs/flagging/ufc/randomization_activation_test.go": "53a12e361b55f51ca5896f5b1eb5ffeedea59779421c0fbcff1731ea0bc020fa",
+    "domains/ffe/libs/flagging/core/repository/ufc_repository.go": "dfb7838a105c07a49292e3c596438547a59687a0d35b94cfbc42f7f77616bb3d"
+  },
+  "native_patch_status": "uncommitted and unpublished",
+  "central_patch_status": "uncommitted and unpublished"
+}

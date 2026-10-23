@@ -1,0 +1,803 @@
+{
+  "source_workspace": "/home/bits/dd/ffe-contract-poc",
+  "imported_on": "2026-10-22",
+  "execution_note": "Historical local POC evidence; none of these native probes was rerun for this import. Receipts do not record exact execution times.",
+  "receipts": [
+    {
+      "source_path": "reports/browser-receipt.json",
+      "source_sha256": "29182cbec0706059468825e307c62987fe3c53a40c196efc2899981577a72167",
+      "receipt": {
+        "adapter_sha256": "e027b5bc80f9c6ba82e3a650b95e590bbc87f664b655422bde153407cd3b8f01",
+        "bundle_sha256": "8da1672dde98bd53ccd0d838cbae4cf5edb78310f0663ef4b5f5cd8e995c505d",
+        "case_count": 313,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [],
+        "missing": [],
+        "observations_sha256": "fd72bc07c415a202a6443ee07302a187dc59cba42af7644a220b27b5e55b0df8",
+        "observed_count": 313,
+        "passed": true,
+        "scope": "actual pinned parser, rules evaluator, request transport and acknowledgement helper; resolver error remap uses an injected core result",
+        "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+        "target": "browser"
+      }
+    },
+    {
+      "source_path": "reports/ios-receipt.json",
+      "source_sha256": "058308d881a007d5aa686dfe31e6930b39b3d812b284b97d9ddea8f40469a328",
+      "receipt": {
+        "adapter_sha256": "d7932f4cf3208e4380a91b82fc4abc641e71d5cf0b1cd0d7b2437961f18f1337",
+        "bundle_sha256": "f6b7f33ee5ebfbc7b11f217732111a64001b45318b26bb4a80e0964eca6aacdf",
+        "case_count": 187,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [],
+        "missing": [],
+        "observations_sha256": "fc339a987aeea7485603404bcb6736758fb365a01251e60c9942d31067f1350a",
+        "observed_count": 187,
+        "passed": true,
+        "patch_sha256": "813141f637aa2200f15dcce5797fd34fa1f5f6abd0a5f005650c6da1effda34a",
+        "scope": "modified production parser, request serialization and response handling; Linux Foundation/JVM with SDK boundary shims, not mobile OS runtime",
+        "source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+        "target": "ios"
+      }
+    },
+    {
+      "source_path": "reports/android-receipt.json",
+      "source_sha256": "c6bb7704e9308f4784083d9599c9dc93a19c3eb34a49b5b7bdcbed33f7bf7b26",
+      "receipt": {
+        "adapter_sha256": "a599e8d0895421e6b27b30bde7025449a70bbcca4779efa8964fd15ab83d22ec",
+        "bundle_sha256": "525254724402b8e22d7cd414ce4de7420ae18a3587038aac759d30da94f62637",
+        "case_count": 187,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [],
+        "missing": [],
+        "observations_sha256": "35f8c50273201743aa0f5e02f54e9fc149a603e05a54eb2c0050d3336d392eb5",
+        "observed_count": 187,
+        "passed": true,
+        "patch_sha256": "ebd1f4d1634bf297e39b26f0b9ad77bcd82ddecb77a7c7fcab4381b8e26eae63",
+        "scope": "modified production parser, request serialization and response handling; Linux Foundation/JVM with SDK boundary shims, not mobile OS runtime",
+        "source_sha": "f335b48a3d030c8b967c3c4fd1830069ccc9ffad",
+        "target": "android"
+      }
+    },
+    {
+      "source_path": "reports/go_subject-receipt.json",
+      "source_sha256": "10c2179b4102f66e62bc487c26c4e688bf6b1738a5b5f23d90574236aa8b50bc",
+      "receipt": {
+        "adapter_sha256": "168eb3b8f2d2ac2661fa43dc1fff9c9e6dd78f34e0cce11e5f6bae8b1c174455",
+        "bundle_sha256": "78b040a5cc5c20171ac1220d42921185aa96c64b490eae0dcfbc6d2ff2ce67c4",
+        "case_count": 43,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/comma",
+            "input": "2026-01-01T00:00:00,123Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 123000000,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-both",
+            "input": "2026-01-01t00:00:00z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-t",
+            "input": "2026-01-01t00:00:00Z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-z",
+            "input": "2026-01-01T00:00:00z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/offset-hour24",
+            "input": "2026-01-01T00:00:00+24:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767139200
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/offset-minute60",
+            "input": "2026-01-01T00:00:00+01:60",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767218400
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/one-digit-hour",
+            "input": "2026-01-01T0:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-overflow",
+            "input": "9999-12-31T23:59:59-01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 253402304399
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-underflow",
+            "input": "0000-01-01T00:00:00+01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": -62167222800
+            }
+          }
+        ],
+        "missing": [],
+        "observations_sha256": "531247d3436390ba27e21f6dd18007ba9538cbf7a81e598f52ef9956a49053c9",
+        "observed_count": 43,
+        "passed": false,
+        "scope": "unchanged native source extraction",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "target": "go_subject"
+      }
+    },
+    {
+      "source_path": "reports/go_activation-receipt.json",
+      "source_sha256": "c8a037a9bf4ff144051b5312768ec6a7cabb08b7c07b12c1e8d9a01e0a109f80",
+      "receipt": {
+        "adapter_sha256": "168eb3b8f2d2ac2661fa43dc1fff9c9e6dd78f34e0cce11e5f6bae8b1c174455",
+        "bundle_sha256": "1d8cd70b4d2461a25d4daa6795573cd89ee0575fda102b28dd832034e6bce331",
+        "case_count": 43,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/comma",
+            "input": "2026-01-01T00:00:00,123Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 123000000,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-both",
+            "input": "2026-01-01t00:00:00z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-t",
+            "input": "2026-01-01t00:00:00Z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            },
+            "id": "timestamp/lower-z",
+            "input": "2026-01-01T00:00:00z",
+            "observed": {
+              "accepted": false
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/offset-hour24",
+            "input": "2026-01-01T00:00:00+24:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767139200
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/offset-minute60",
+            "input": "2026-01-01T00:00:00+01:60",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767218400
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/one-digit-hour",
+            "input": "2026-01-01T0:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-overflow",
+            "input": "9999-12-31T23:59:59-01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 253402304399
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-underflow",
+            "input": "0000-01-01T00:00:00+01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": -62167222800
+            }
+          }
+        ],
+        "missing": [],
+        "observations_sha256": "531247d3436390ba27e21f6dd18007ba9538cbf7a81e598f52ef9956a49053c9",
+        "observed_count": 43,
+        "passed": false,
+        "scope": "native library route; full configuration decoder excluded",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "target": "go_activation"
+      }
+    },
+    {
+      "source_path": "reports/rust_subject-receipt.json",
+      "source_sha256": "d62e48ca5fefca6e02d24aa9532bd25d8bf8c5b1f6af80006ad3b4fcbc4ab5ec",
+      "receipt": {
+        "adapter_sha256": "168eb3b8f2d2ac2661fa43dc1fff9c9e6dd78f34e0cce11e5f6bae8b1c174455",
+        "bundle_sha256": "075bf871e794dd34baada1d7b91a5f1ab0536e2b8263a352d4f26d8569abe287",
+        "case_count": 43,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/leap-second",
+            "input": "2016-12-31T23:59:60Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 1000000000,
+              "seconds": 1483228799
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/space",
+            "input": "2026-01-01 00:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/unicode-minus",
+            "input": "2026-01-01T00:00:00−05:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767243600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-overflow",
+            "input": "9999-12-31T23:59:59-01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 253402304399
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-underflow",
+            "input": "0000-01-01T00:00:00+01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": -62167222800
+            }
+          }
+        ],
+        "missing": [],
+        "observations_sha256": "28faf151dcf8e87bb554fe3a17b5d1d5ea1a9795f7a91f41c2a1842e53dfe183",
+        "observed_count": 43,
+        "passed": false,
+        "scope": "unchanged native source extraction",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "target": "rust_subject"
+      }
+    },
+    {
+      "source_path": "reports/rust_activation-receipt.json",
+      "source_sha256": "47778cc9bab17f406a1695139d492aa302f412836e45a6a5a89c56509408fee2",
+      "receipt": {
+        "adapter_sha256": "168eb3b8f2d2ac2661fa43dc1fff9c9e6dd78f34e0cce11e5f6bae8b1c174455",
+        "bundle_sha256": "dcb47df06191dbcafc1ba7a49d68b01fa59009d876c6e554c133a316fcd700e2",
+        "case_count": 43,
+        "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+        "extra": [],
+        "mismatches": [
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/leading-space",
+            "input": " 2026-01-01T00:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/leap-second",
+            "input": "2016-12-31T23:59:60Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 1000000000,
+              "seconds": 1483228799
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/named-zone",
+            "input": "2026-01-01T00:00:00 UTC",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/offset-compact",
+            "input": "2026-01-01T00:00:00+0000",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/one-digit-hour",
+            "input": "2026-01-01T0:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/space",
+            "input": "2026-01-01 00:00:00Z",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/trailing-newline",
+            "input": "2026-01-01T00:00:00Z\n",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/trailing-space",
+            "input": "2026-01-01T00:00:00Z ",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767225600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/unicode-minus",
+            "input": "2026-01-01T00:00:00−05:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 1767243600
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-overflow",
+            "input": "9999-12-31T23:59:59-01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": 253402304399
+            }
+          },
+          {
+            "classification": "unresolved-contract-conflict",
+            "decision_ids": [
+              "D005",
+              "D006",
+              "D007"
+            ],
+            "expected": {
+              "accepted": false
+            },
+            "id": "timestamp/utc-year-underflow",
+            "input": "0000-01-01T00:00:00+01:00",
+            "observed": {
+              "accepted": true,
+              "nanos": 0,
+              "seconds": -62167222800
+            }
+          }
+        ],
+        "missing": [],
+        "observations_sha256": "81762566ce44fc2ea60601292c5c80e337e3ed5cf308b7452f9d0e74ea4944d4",
+        "observed_count": 43,
+        "passed": false,
+        "scope": "native library route; full configuration decoder excluded",
+        "source_sha": "7a1f3c52639d6bdd74dd4609fba716c50127e2e2",
+        "target": "rust_activation"
+      }
+    }
+  ],
+  "context": {
+    "source_path": "notes.md",
+    "source_sha256": "008f65cf588c58d3062c5b82518f9485d0ed715124aa86d2559742955b1033bd",
+    "excerpt_start": "## Revision v2: reviewer feedback changes central truth first",
+    "text": "\n\nThe independent judge traced acknowledgement handling beyond the policy helpers. Both mobile fetch paths admitted explicitly filtered assignments when the effective request policy was absent; the final browser helper rejects that combination. This is a source-backed omission in the first model, not a reason to weaken mobile acceptance expectations. V1 artifacts remain under `revisions/v1` and per-implementation snapshots.\n\nThe judge initially suspected Android rejects an ordinary response when a configured mode has no subject cutoff. Following the real caller disproved that: `EvaluationsManager` passes `request.takeIf { it.optedOut }`, so the mapper receives null and accepts an ordinary response. The retained independent probe includes that caller transformation. The supported discrepancy is acceptance of filtered responses with no effective opt-out; do not repeat the earlier unsupported claim.\n\nD008 revision 2 now describes effective-policy acknowledgement explicitly. The coordinator extended Lean before reissuing work: six additional theorems, 135 acknowledgement combinations and six additional independent oracle controls. The current 313-case corpus contains 43 timestamp, 90 policy, 36 error-remap, 9 request and 135 acknowledgement inputs. Mobile bundles contain 187 applicable cases each. A v1 success receipt cannot satisfy v2; a specific negative control verifies this with the real archived v1 bundle.\n\nCurrent independently issued manifest SHA-256: `8369a921a3d0e9d534587ab7c437a4fb2ada29068cb66507abb1a839835b0aa2`. Semantic contract SHA-256: `dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685`. Actual source, adapter and patch hashes are retained alongside native observations. The browser passed all 313 cases before mobile agents received the revised frozen input.\n\nThe v2 domain is typed acknowledgement metadata: missing/false/true boolean; missing/immediate/future mode; missing/equal/equivalent/different/invalid cutoff. Unknown mode strings and incorrect metadata types are not universally specified here. Effective policy `none` includes disabled mode and enabled mode without a cutoff. Mobile adapters must execute the response admission call site, not only a helper that may be skipped.\n\nThe judge also preserved 889 independent date probes spanning Gregorian centuries, year zero, UTC limits, offsets, fraction tails and invalid characters. Browser, executable Lean, Swift and JVM agreed on these finite cases. This evidence supplements the immutable acceptance corpus; it does not silently change it.\n\n## Open scope decisions\n\nD009 currently specifies requested/resolved telemetry identity for enabled **browser** modes. Source review found iOS uses an empty context for some pending/invalid evaluations while Android retains requested identity. Extending D009 to mobile is an unresolved central scope decision, documented by the judge; this POC does not silently impose it. Complete asynchronous mobile context-isolation, cache races and telemetry execution remain separate native-platform obligations. Go/Rust grammar conflicts also remain open and block fleet promotion.\n\nNo actual central main merge or fleet approval has occurred. The `contracts/main.json` baseline is pinned separately from the proposal; `demo.py` compares it against the original expected main digest. All “approved” positive gate controls use explicitly simulated approval.\n\n## Final source/review binding\n\nThe judge identified one further evidence gap: reviewing a saved patch is insufficient if subsequent execution compiles different live source. The runner now verifies the pinned SDK base, exact `git diff HEAD --binary` bytes against the saved patch, and absence of untracked source before and after native execution. It also requires the final independent judge's contract-manifest hash and both exact patch hashes. A missing review, changed diff, changed contract, open review blocker or omitted target prevents local demo completion. Twenty-two gate controls cover these failures and the earlier cases.\n\nFinal read-only GitHub refresh confirmed browser `38d611c`, iOS `4057c07`, and Android `f335b48` remain the same PR heads used for this run. The two mobile PRs remain open. Raw refresh results are retained at `evidence/github/final-heads.json`. No upstream files, comments, PR descriptions or branches were changed.\n\nThe final fresh `python3 demo.py` invocation exited 0 with empty stderr after the independent final verdict was written. `reports/demo-result.json` records `local_demo_passed=true`, `local_conformance_passed=true`, `independent_review_passed=true`, and `native_execution=\"fresh native probes\"`. The local result includes 313 browser cases and 187 cases for each mobile implementation. `fleet_promotable=false` remains deliberate: Go subject/activation have nine disagreements each, Rust subject five and Rust activation eleven, with no central fleet approval. Exact source/patch bindings are retained in `reports/executed-source-pins.json`. Detailed independent review is `reports/judge-final.md`; no blocking finding remains within its bounded domain.\n"
+  },
+  "independent_review": {
+    "source_path": "reports/judge-final.json",
+    "source_sha256": "d665914ba118cd551a9517958d78b7682ae9835e4486cbe0bbc93b0734156c11",
+    "report": {
+      "verdict": "pass_with_limitations",
+      "manifest_sha256": "8369a921a3d0e9d534587ab7c437a4fb2ada29068cb66507abb1a839835b0aa2",
+      "reviewed_patches": {
+        "ios": "813141f637aa2200f15dcce5797fd34fa1f5f6abd0a5f005650c6da1effda34a",
+        "android": "ebd1f4d1634bf297e39b26f0b9ad77bcd82ddecb77a7c7fcab4381b8e26eae63"
+      },
+      "blockers": [],
+      "limitations": [
+        "Bounded local synchronization only: 187 timestamp, request-policy and typed acknowledgement cases per mobile SDK; no full browser/mobile equivalence claim.",
+        "Thirty Lean theorems prove model properties; no Swift or Kotlin source-refinement proof was produced.",
+        "Native execution used Linux Foundation and JVM with documented external SDK boundary shims, not iOS or Android device runtimes or full repository suites.",
+        "Complete asynchronous context/cache/recovery behavior and telemetry integration remain unproved; D009 telemetry identity is an open central scope question.",
+        "Added Android request-factory JUnit methods were not executed through Gradle; the nine shared request cases execute the actual factory.",
+        "Backend conformance disagreements, central fleet approval and deployment prerequisites remain outside this local acceptance verdict.",
+        "Local evidence and review files rely on trusted orchestration; they are not authenticated external CI attestations.",
+        "No existing tests were deleted and no net maintenance reduction or CI speedup was demonstrated."
+      ],
+      "evidence": [
+        "reports/judge-final.md",
+        "reports/judge-phase1.md",
+        "evidence/judge/ios-v2/evidence.json",
+        "evidence/judge/ios-v2-negative/evidence.json",
+        "evidence/judge/ios-xctest-rerun.json",
+        "implementations/android/judge-v2/comparison.json",
+        "implementations/android/judge-v2/build.json",
+        "implementations/android/judge-v2/junit.log",
+        "evidence/judge/android-v2-observations.jsonl",
+        "evidence/judge/extended_dates.py",
+        "evidence/judge/extended-dates/result.json",
+        "evidence/judge/ack_probe.py",
+        "evidence/judge/ack-initial/result.json",
+        "tests/test_control.py"
+      ]
+    }
+  }
+}

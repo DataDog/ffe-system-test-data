@@ -1,0 +1,22 @@
+ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]
+Successfully installed openfeature-sdk-0.5.1
+1 gem installed
+{
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "openfeature_sdk": "0.5.1",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    "BOOLEAN: actual public details and two subjects",
+    "BOOLEAN: public error details and empty metadata",
+    "STRING: actual public details and two subjects",
+    "STRING: public error details and empty metadata",
+    "INTEGER: actual public details and two subjects",
+    "INTEGER: public error details and empty metadata",
+    "NUMERIC: actual public details and two subjects",
+    "NUMERIC: public error details and empty metadata",
+    "JSON: actual public details and two subjects",
+    "JSON: public error details and empty metadata"
+  ],
+  "boundary": "Real OpenFeature client with a deterministic test provider and controller shell. No Datadog native evaluator or HTTP intake."
+}

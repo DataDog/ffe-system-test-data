@@ -1,0 +1,245 @@
+{
+  "retrieved_at": "2026-10-23T03:48:08.270950+00:00",
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "run": {
+    "id": 39893949056,
+    "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+    "status": "in_progress",
+    "conclusion": null,
+    "run_attempt": 2,
+    "updated_at": "2026-10-23T03:47:08Z",
+    "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056"
+  },
+  "retry_log": {
+    "sha256": "2114cafbac207b67074e5ecd3efb90a508213e62d019818e0fb391c66ed5bf38",
+    "bytes": 1455417,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-retry/retry-job.log",
+    "errors": []
+  },
+  "raw_artifacts": {
+    "followup-run.json": {
+      "sha256": "878c95caa9daa4c680a2c4b310d0e3e08e7330144189486e77dd3a8c641f4a5e",
+      "bytes": 13737,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-retry/followup-run.json"
+    },
+    "followup-jobs.json": {
+      "sha256": "dda820ab31d90e096f4227bae38286eb87d85a045bf61e2576621772ee707061",
+      "bytes": 3999717,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-retry/followup-jobs.json"
+    },
+    "initial_snapshot": {
+      "sha256": "f486e87636666b531cdf419a38becfed2469bf6054144761475402a03d1b8dc0",
+      "bytes": 3906,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-retry/snapshot.json"
+    },
+    "smoke_statuses": {
+      "sha256": "0092ff76126dadd247bd01a7e6ceabd2be1b31a4e8bd06dbf01ee0e24e99dc69",
+      "bytes": 1339069,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-retry/statuses.json"
+    }
+  },
+  "smoke_statuses": [
+    {
+      "context": "dd-gitlab/test_smoke: [21, 7/8]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/805169784856005634?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168956023&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:39:40Z",
+      "updated_at": "2026-10-23T03:39:40Z",
+      "description": null
+    },
+    {
+      "context": "dd-gitlab/test_smoke: [25, 7/8]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/805169784856005634?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168956031&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:39:10Z",
+      "updated_at": "2026-10-23T03:39:10Z",
+      "description": null
+    },
+    {
+      "context": "dd-gitlab/test_smoke: [11, 7/8]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/805169784856005634?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168956007&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:38:36Z",
+      "updated_at": "2026-10-23T03:38:36Z",
+      "description": null
+    },
+    {
+      "context": "dd-gitlab/test_smoke: [tip, 7/8]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/805169784856005634?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168956039&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:38:22Z",
+      "updated_at": "2026-10-23T03:38:22Z",
+      "description": null
+    },
+    {
+      "context": "dd-gitlab/test_smoke: [17, 7/8]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/805169784856005634?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168956015&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:38:04Z",
+      "updated_at": "2026-10-23T03:38:04Z",
+      "description": null
+    }
+  ],
+  "smoke_retrieved_at": "2026-10-23T03:46:26.375486+00:00",
+  "payara_jobs": [
+    {
+      "id": 120228559787,
+      "name": "main / Build end-to-end (spring-boot-payara)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-23T03:44:59Z",
+      "completed_at": "2026-10-23T03:46:58Z",
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120228559787",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229140690,
+      "name": "main / End-to-end #6 / spring-boot-payara 6",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229140690",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229141997,
+      "name": "main / End-to-end #7 / spring-boot-payara 7",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229141997",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229142287,
+      "name": "main / End-to-end #9 / spring-boot-payara 9",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:05Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229142287",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229142549,
+      "name": "main / End-to-end #8 / spring-boot-payara 8",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:05Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229142549",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229142558,
+      "name": "main / End-to-end #4 / spring-boot-payara 4",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:05Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229142558",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229142764,
+      "name": "main / End-to-end #1 / spring-boot-payara 1",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:05Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229142764",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229142818,
+      "name": "main / End-to-end #2 / spring-boot-payara 2",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229142818",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229143193,
+      "name": "main / End-to-end #3 / spring-boot-payara 3",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229143193",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229143407,
+      "name": "main / End-to-end #5 / spring-boot-payara 5",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229143407",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229145417,
+      "name": "main / End-to-end #12 / spring-boot-payara 12",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229145417",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229145807,
+      "name": "main / End-to-end #13 / spring-boot-payara 13",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229145807",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229146495,
+      "name": "main / End-to-end #11 / spring-boot-payara 11",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229146495",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    },
+    {
+      "id": 120229146771,
+      "name": "main / End-to-end #10 / spring-boot-payara 10",
+      "status": "in_progress",
+      "conclusion": null,
+      "started_at": "2026-10-23T03:47:06Z",
+      "completed_at": null,
+      "html_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120229146771",
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "run_attempt": 2
+    }
+  ],
+  "dependent_job_counts": {
+    "in_progress/None": 195
+  },
+  "overall_check_jobs": [],
+  "scope": "One parent-authorized job retry; no additional retries or source changes. Original 429 receipt preserved. Dependent end-to-end tests are pending."
+}

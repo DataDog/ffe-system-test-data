@@ -1,0 +1,34 @@
+{
+  "snapshot": "../java-review-snapshot.json",
+  "read_after_frozen_own_pass": true,
+  "source_sha": "660b5b96114cc29f2edc8c806b9a621621ba552e",
+  "items": [
+    {
+      "thread_id": "PRRT_kwDOBVFpxM6u-76S",
+      "comment_id": 4342792807,
+      "url": "https://github.com/DataDog/dd-trace-java/pull/12950#discussion_r4342792807",
+      "author": "chatgpt-codex-connector[bot]",
+      "date": "2026-10-21T22:53:24Z",
+      "reviewer_priority": "P2",
+      "state": "unresolved",
+      "disposition": "accepted-sdk-local-compatibility-fix",
+      "decision_ids": [
+        "D010"
+      ],
+      "finding": "Current excludes helpers classify nullable doLog as experimental, while Java exposure emission requires Boolean.TRUE.",
+      "requested_change": "Use !Boolean.TRUE.equals(allocation.doLog) in both exclusion helpers.",
+      "authority_boundary": "Coordinator explicitly accepted omitted/null Java compatibility after the independent audit and full review read. D010 valid-boolean domain remains unchanged.",
+      "recommended_scope": "Preserve existing Java exposure classification for absent/null doLog without changing fleet UFC grammar or parser policy.",
+      "native_obligations": [
+        "Standalone production parser plus actual evaluator: omitted/null doLog remains eligible with valid cutoff in both modes.",
+        "Legacy production parser plus actual evaluator: omitted/null doLog remains eligible with valid cutoff in both modes.",
+        "Explicit true excludes under applicable policy and false remains eligible.",
+        "Malformed doLog parser differences remain explicitly scoped."
+      ],
+      "next_action": "Coordinator publishes the full Lean-style reply after source and evidence publication.",
+      "shared_impact": "no_shared_impact",
+      "implemented_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "validation": "Both native adapters cover omitted/null/false doLog in both enabled modes. Restoring the old predicate fails two native tests per path. Runtime policy runs include omitted/null cases."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+   Compiling libdd-ffe v2.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe)
+   Compiling libdd-ffe-test-suite v46.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe-test-suite)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.77s
+     Running tests/canonical_fixtures.rs (target/debug/deps/canonical_fixtures-d4e45ecd4ea3e13b)
+
+running 1 test
+canonical fixtures: 363 baseline, 28 immediate, 44 future
+test evaluates_canonical_json_fixtures ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+

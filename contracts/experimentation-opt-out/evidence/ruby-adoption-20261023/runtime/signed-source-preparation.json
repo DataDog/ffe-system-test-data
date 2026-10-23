@@ -1,0 +1,8 @@
+{
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "ruby_tree": "c75d6b58b416d78baf54c74fb858aa8560605b9b",
+  "ruby_archive_sha256": "f69f676096cf2758f8239bda574a4cd53f5265f42a1a8465357eb59b4222208f",
+  "source_file_count": 5148,
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "harness_status": " M utils/_context/_scenarios/endtoend.py\n M utils/_context/containers.py\n M utils/build/build.sh\n M utils/build/docker/overwrite_waf_rules.Dockerfile\n M utils/build/docker/ruby/rails72.Dockerfile\n M utils/build/docker/ruby/rails72/Gemfile\n M utils/proxy/ports.py\n"
+}

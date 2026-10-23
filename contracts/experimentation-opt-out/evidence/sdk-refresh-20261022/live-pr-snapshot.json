@@ -1,0 +1,284 @@
+{
+  "collected_at": "2026-10-23T01:31:20.603Z",
+  "browser": {
+    "url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+    "number": 423,
+    "state": "closed",
+    "merged": true,
+    "mergeable": false,
+    "draft": false,
+    "body": "## Motivation\n\nApplications need per-subject experimentation opt-out while retaining ordinary feature delivery. Both modes use the customer-owned `dd_experimentation_opt_out_at` timestamp.\n\n## Changes\n\n```typescript\nconst provider = new DatadogProvider({\n  clientToken: '<CLIENT_TOKEN>',\n  env: 'production',\n  experimentationOptOutMode: ExperimentationOptOutMode.FutureExperimentsOnly,\n})\nawait OpenFeature.setProviderAndWait(provider, {\n  targetingKey: user.id,\n  ...(user.experimentationOptOutAt && {\n    dd_experimentation_opt_out_at: user.experimentationOptOutAt,\n  }),\n})\nconst enabled = OpenFeature.getClient().getBooleanValue('new-route-planner', false)\n```\n\n| Mode | Behavior with a timestamp |\n| --- | --- |\n| `Disabled`, the default | Ignore the attribute. |\n| `Immediate` | Skip all experiment allocations. |\n| `FutureExperimentsOnly` | Keep allocations activated before the cutoff; skip equal, later, or unknown activation. |\n\n- Apply the same policy to online and portable providers, local JSON/protobuf evaluation, and Precompute fetches.\n- Omitted timestamps preserve ordinary evaluation. Invalid enabled input returns `INVALID_CONTEXT`. Future timestamps do not schedule exclusion.\n- Require Precompute acknowledgement; future mode also checks the exact cutoff. Preserve nanosecond precision and bind caches to the context and policy.\n- Keep ordinary allocation order and evaluation telemetry unchanged. No new telemetry events.\n\nFuture mode uses allocation activation, not previous subject enrollment. Earlier allocations keep normal exposure logging. It does not freeze assignment values.\n\n[RFC](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit). This PR does not change the Node public API; [#420](https://github.com/DataDog/openfeature-js-client/pull/420) consumes the shared core implementation for Node.\n\n### Release dependencies\n\nComplete the deployment checks on every customer site before publishing core and browser together with exact dependency pins. A merged dependency is not deployment confirmation.\n\n- [ ] Confirm [RC validation #139367](https://github.com/ddoghq/dd-source/pull/139367) and [database migration #12479](https://github.com/ddoghq/k8s-resources/pull/12479) are deployed before activation publication. Both are merged; deployment has not been verified here.\n- [ ] Deploy [winner classification #139368](https://github.com/ddoghq/dd-source/pull/139368), so ordinary winners remain eligible after experiment exclusion.\n- [ ] Deploy [fallback preservation #139379](https://github.com/ddoghq/dd-source/pull/139379) after winner classification, so excluded experiments retain ordinary fallback allocations.\n- [ ] Deploy [activation publication #139381](https://github.com/ddoghq/dd-source/pull/139381) after its schema/storage prerequisites. Confirm activation coverage and the legacy/unknown-activation policy for allocation types enabled in `FutureExperimentsOnly`.\n- [ ] Deploy [edge opt-out #140422](https://github.com/ddoghq/dd-source/pull/140422) and verify acknowledgements for both modes, including the future-mode cutoff.\n- [ ] Merge [shared fixture PR #52](https://github.com/DataDog/ffe-system-test-data/pull/52), replace the temporary fixture pin with its merged commit, and rerun the core and Node fixture suites.\n- [ ] Publish the coordinated core/browser releases only after these checks are complete.\n\n### Shared fixture follow-up\n\nThis PR landed with temporary fixture revision `1c831fed02a428a1b0a4ac412da9b773e22df257`. #52 is still open; its latest candidate is `b28876200152f00c7d5eb04616f721afa5955c1d`, which includes merged [fixture PR #53](https://github.com/DataDog/ffe-system-test-data/pull/53). Refresh to that candidate while #52 is pending, then repin to its merged commit before release.\n\n#53 adds twelve serial-ID/logging cases. Core and Node runners should assert optional `result.serialId` and `result.doLog`, preserving zero, explicit null, and omitted expectations, and run repeated cases against the same configuration/provider.\n\nImplementation and tests were prepared with AI assistance.\n\n## Test instructions\n\nShared fixtures cover immediate and future exclusion, activation boundaries, and ordinary fallback. Browser tests cover acknowledgements, timestamp precision, context changes, cache restart, and stale responses. Regression tests cover requested-subject telemetry and rejection of filtered snapshots when opt-out is disabled.\n\n| Tested commit | Validation | Result |\n| --- | --- | --- |\n| `DataDog/openfeature-js-client@5e9709b84588b3e93f7847517840c375d05f0bd0` | Packed-package Chromium integration: online/portable delivery, local rules, cache restart, successful opted-out evaluations, and retained experiment exposures | 39 passed, 0 failed, 0 skipped. Local HTTP fixtures; not live Fastly. |\n\n## Checklist\n\n- [x] Updated Documentation\n- [x] Tested locally\n- [ ] Tested on staging\n- [x] Added unit tests for this change.\n- [x] Added e2e/integration tests for this change.\n\n",
+    "title": "feat(browser): add experimentation opt-out modes",
+    "base": "main",
+    "base_sha": "b9eb83ca4e83baa48495cd0aab05daedee5771cf",
+    "head": "leoromanovsky/browser-experimentation-opt-out-immediate",
+    "head_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+    "head_repo_id": 1009732339,
+    "head_repo_full_name": "DataDog/openfeature-js-client",
+    "merge_commit_sha": "58bc213b51eb539d58ee4a5c7719ccf500f09b66",
+    "user": {
+      "login": "leoromanovsky",
+      "name": "leoromanovsky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+      "id": 57361
+    },
+    "requested_reviewers": [
+      {
+        "login": "danyal002",
+        "name": "danyal002",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/50880807?v=4",
+        "id": 50880807
+      },
+      {
+        "login": "hhan2024",
+        "name": "hhan2024",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/190518164?v=4",
+        "id": 190518164
+      }
+    ],
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-21T16:08:12Z",
+    "updated_at": "2026-10-22T15:52:05Z",
+    "closed_at": "2026-10-22T12:47:45Z",
+    "merged_at": "2026-10-22T12:47:45Z",
+    "commits": 11,
+    "changed_files": 40,
+    "additions": 2345,
+    "deletions": 230,
+    "display_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+    "display_title": "feat(browser): add experimentation opt-out modes"
+  },
+  "go": {
+    "url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+    "number": 5666,
+    "state": "closed",
+    "merged": true,
+    "mergeable": false,
+    "draft": false,
+    "body": "### Motivation\n\nApplications need to stop a subject's experiment participation without disabling ordinary feature delivery. Evaluation telemetry remains a separate control.\n\n### What does this PR do?\n\n- Add `DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=disabled|immediate|future_experiments_only`. The default is `disabled`.\n- Resolve the mode at provider construction. Explicit `ProviderConfig.ExperimentationOptOutMode` overrides SDK configuration. Enabled providers reject unsupported values; disabled providers return NoopProvider before validating the mode.\n- Read the optional `dd_experimentation_opt_out_at` RFC3339 timestamp on each evaluation. Invalid input returns `INVALID_CONTEXT` and the application default, including for ordinary flags. The error explains how to correct the timestamp or omit the attribute. Parsing follows allocation `startAt` and `endAt`.\n- In immediate mode, skip allocations with `doLog=true` or omitted before targeting and randomization. In future-only mode, retain experiments activated before the supplied cutoff; skip equal, later, or unknown activation. Ordinary allocations remain eligible.\n- Preserve eligible assignments. Store no preference history and emit no withdrawal events.\n- Run the shared immediate and future capability fixtures through the existing reader. The fixture pin now follows merged `main` at [8c4d241](https://github.com/DataDog/ffe-system-test-data/commit/8c4d2410aa643aa6b97c8547ae5fe358c46b7f6f).\n\nImmediate mode also excludes holdouts and winner rollouts with `doLog=true`. Ordinary delivery requires a matching `doLog=false` allocation. Immediate withdrawal can affect experiment analysis.\n\n[Future-mode PR #5700](https://github.com/DataDog/dd-trace-go/pull/5700) is now folded into this PR. Future mode compares allocation activation, not prior subject enrollment. Malformed activation returns PARSE_ERROR only in future mode with a valid cutoff; other modes and absent cutoffs ignore it. Until the producer supplies activation metadata, future mode skips exposure-logging allocations for opted-out subjects. This prevents unknown activation from qualifying as older, but can also exclude existing experiments until their metadata is available. Producer readiness remains a separate enablement prerequisite. Per author scope decision, additional benchmark CI registration is skipped for this PR; existing registration is unchanged. This is not a performance acceptance claim.\n\nThe setting is registered in the [central configuration registry](https://feature-parity.us1.prod.dog/#/configurations?viewType=configurations&configKey=3392).\n\nSet the environment variable before SDK initialization:\n\n```sh\nexport DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate\n```\n\n```go\nimport (\n    \"time\"\n\n    ddflags \"github.com/DataDog/dd-trace-go/v2/openfeature\"\n    of \"github.com/open-feature/go-sdk/openfeature\"\n)\n\n// At startup, after the Datadog tracer starts:\nprovider, err := ddflags.NewDatadogProvider(ddflags.ProviderConfig{})\nif err != nil {\n    return err\n}\nif err := of.SetNamedProviderAndWait(\"my-app\", provider); err != nil {\n    return err\n}\nclient := of.NewClient(\"my-app\")\n\n// In each request handler, OptOutAt is a customer-owned *time.Time.\nattributes := map[string]any{}\nif user.OptOutAt != nil {\n    attributes[\"dd_experimentation_opt_out_at\"] =\n        user.OptOutAt.UTC().Format(time.RFC3339Nano)\n}\nenabled, err := client.BooleanValue(\n    ctx, \"new-feature\", false,\n    of.NewEvaluationContext(user.ID, attributes),\n)\n```\n\nIn immediate mode, a valid timestamp takes effect immediately, even when it is in the future. Omit the attribute to allow experimentation again.\nProgrammatic overrides use `ddflags.ExperimentationOptOutDisabled`, `ddflags.ExperimentationOptOutImmediate`, or `ddflags.ExperimentationOptOutFutureExperimentsOnly`.\n\n## Validation\n\n| Tested commit | Validation | Result |\n| --- | --- | --- |\n| [54b5ad7](https://github.com/DataDog/dd-trace-go/commit/54b5ad7fe9818966d32eeceabb6c048005f077f6) | Updated fixture main: local OpenFeature package tests and shared fixture validator. | Passed: 1,678 test cases; 367 shared cases across 47 files validate. This does not establish support for every optional fixture metadata field. |\n| [1ceb5e2](https://github.com/DataDog/dd-trace-go/commit/1ceb5e2b977d151352874b6c772abfd84466143b) | Local OpenFeature package and race tests, internal configuration tests, and CI-selection checks after merging main. | Passed. Fresh remote CI and system tests remain separate. |\n| [d93b707](https://github.com/DataDog/dd-trace-go/commit/d93b70746785718b6f43bf9ffee13d01e332f50e) | System tests: unset, disabled, and immediate modes; Remote Configuration, fallbacks, malformed timestamps, withdrawal, and exposure deduplication; Linux/arm64 | 3 passed; 0 failed or skipped. Evaluation-event intake was not verified. |\n\n### Reviewer's Checklist\n\n- [ ] Changed code has unit tests for its functionality at or near 100% coverage.\n- [ ] [System-Tests](https://github.com/DataDog/system-tests/) covering this feature have been added and enabled with the va.b.c-dev version tag.\n- [ ] There is a benchmark for any new code, or changes to existing code.\n- [ ] If this interacts with the agent in a new way, a system test has been added.\n- [ ] New code is free of linting errors. You can check this by running `make lint` locally.\n- [ ] New code doesn't break existing tests. You can check this by running `make test` locally.\n- [ ] Add an appropriate team label so this PR gets put in the right place for the release notes.\n- [ ] All generated files are up to date. You can check this by running `make generate` locally.\n- [ ] Non-trivial go.mod changes, e.g. adding new modules, are reviewed by @DataDog/dd-trace-go-guild. Make sure all nested modules are up to date by running `make fix-modules` locally.\n",
+    "title": "feat(openfeature): add experimentation opt-out modes",
+    "base": "main",
+    "base_sha": "f35835218b0dba1277222b6ebafd818e6e896115",
+    "head": "leoromanovsky/experimentation-opt-out-immediate",
+    "head_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+    "head_repo_id": 67680905,
+    "head_repo_full_name": "DataDog/dd-trace-go",
+    "merge_commit_sha": "dfe39a4c2fde0d56427c3f85c3009385ea26465f",
+    "user": {
+      "login": "leoromanovsky",
+      "name": "leoromanovsky",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+      "id": 57361
+    },
+    "requested_reviewers": [
+      {
+        "login": "lloeki",
+        "name": "lloeki",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/75445?v=4",
+        "id": 75445
+      }
+    ],
+    "requested_team_reviewers": [
+      {
+        "slug": "apm-ecosystems-performance",
+        "name": "apm-ecosystems-performance"
+      }
+    ],
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-19T23:18:36Z",
+    "updated_at": "2026-10-22T22:31:53Z",
+    "closed_at": "2026-10-22T22:31:49Z",
+    "merged_at": "2026-10-22T22:31:49Z",
+    "commits": 26,
+    "changed_files": 20,
+    "additions": 1382,
+    "deletions": 28,
+    "display_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+    "display_title": "feat(openfeature): add experimentation opt-out modes"
+  },
+  "targets": [
+    {
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+      "number": 3338,
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "draft": false,
+      "body": "### What and why?\n\nAdd per-subject experimentation opt-out while retaining ordinary feature delivery. Both modes use the customer-owned `dd_experimentation_opt_out_at` timestamp.\n\n### How?\n\n```swift\nlet client = FlagsClient.create(experimentationOptOutMode: .futureExperimentsOnly)\nclient.setEvaluationContext(FlagsEvaluationContext(\n    targetingKey: \"subject-123\",\n    attributes: [\"dd_experimentation_opt_out_at\": .string(\"2026-10-21T12:00:00Z\")]\n))\nlet enabled = client.getBooleanValue(key: \"new-route-planner\", defaultValue: false)\n```\n\n| Mode | Behavior with a timestamp |\n| --- | --- |\n| `.disabled`, the default | Ignore the attribute. |\n| `.immediate` | Exclude from all experiment allocations. |\n| `.futureExperimentsOnly` | Keep allocations activated before the cutoff; exclude equal, later, or unknown activation. |\n\nOmit the attribute for eligible subjects. Invalid values return defaults and `invalidContext` without a request. A future timestamp does not schedule exclusion.\n\n- Require a response acknowledgement for the selected policy. Future mode also checks the exact cutoff, with nanosecond precision. Reject filtered responses when no opt-out applies.\n- Validate proleptic Gregorian dates, including year zero. Require written and normalized UTC years within `0000`–`9999`. Truncate fractions beyond nanoseconds.\n- Bind cached assignments to the context and policy. Reject superseded responses. Evaluation telemetry remains independent.\n- Preserve the original factory and disabled behavior. Configuration remains fixed for each client name.\n\nFuture mode uses allocation activation, not prior subject enrollment. Earlier allocations keep normal exposure logging. It does not freeze targeting or assignment values.\n\n[RFC](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit). Requires [edge #140422](https://github.com/ddoghq/dd-source/pull/140422), the separate winner/fallback compiler changes, and delivered activation metadata before future-mode enablement. [Swift provider #44](https://github.com/DataDog/dd-openfeature-provider-swift/pull/44) forwards the mode. No backend deployment is included.\n\nTests cover input validation, forwarding, acknowledgements, cutoff precision, cache restart, context changes, and stale responses. Regression tests cover non-blocking snapshot encoding, reset/write ordering, Gregorian boundaries, UTC overflow, and acknowledgements for unfiltered requests.\n\n[Usage documentation](https://github.com/DataDog/dd-sdk-ios/blob/feature/experimentation-opt-out-immediate/docs/flags-experimentation-opt-out.md).\n\n| Tested commit | Validation | Result |\n| --- | --- | --- |\n| `DataDog/dd-sdk-ios@176aafac647ae8484aef561e07a087c77bebca3c` | iOS 26.5 simulator integration: public client and URLSession against loopback Precompute; immediate/future delivery, successful opted-out evaluation events, retained exposures, and shutdown flush | 3 passed, 0 failed, 0 skipped. Local transport fixtures, not live Fastly. |\n\n### Review checklist\n- [x] Feature or bugfix MUST have appropriate tests (unit, integration)\n- [ ] Make sure each commit and the PR mention the Issue number or JIRA reference — omitted at the author's request.\n- [x] Add CHANGELOG entry for user facing changes\n- [ ] Add Objective-C interface for public APIs - see our [guidelines](https://datadoghq.atlassian.net/wiki/spaces/RUMP/pages/3157787243/RFC+-+Modular+Objective-C+Interface#Recommended-solution) (internal). Flags currently has no Objective-C facade.\n- [x] Run `make api-surface` when adding new APIs\n\n",
+      "title": "Add experimentation opt-out modes for Flags clients",
+      "base": "develop",
+      "base_sha": "176506095d3c3540e9d44909cb327156c4642aa1",
+      "head": "feature/experimentation-opt-out-immediate",
+      "head_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "head_repo_id": 226864362,
+      "head_repo_full_name": "DataDog/dd-sdk-ios",
+      "merge_commit_sha": null,
+      "user": {
+        "login": "leoromanovsky",
+        "name": "leoromanovsky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+        "id": 57361
+      },
+      "requested_reviewers": null,
+      "requested_team_reviewers": [
+        {
+          "slug": "rum-mobile",
+          "name": "rum-mobile"
+        },
+        {
+          "slug": "documentation",
+          "name": "documentation"
+        },
+        {
+          "slug": "rum-mobile-ios",
+          "name": "rum-mobile-ios"
+        }
+      ],
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-21T16:14:25Z",
+      "updated_at": "2026-10-22T14:55:22Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 4,
+      "changed_files": 20,
+      "additions": 1239,
+      "deletions": 58,
+      "display_url": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+      "display_title": "Add experimentation opt-out modes for Flags clients"
+    },
+    {
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
+      "number": 4024,
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "draft": false,
+      "body": "### What does this PR do?\n\nAdds immediate and future-experiments-only opt-out to `FlagsClient.Builder`. The OpenFeature adapter uses the same configuration.\n\n```kotlin\n// Initialize Datadog and enable Flags first.\nval provider = FlagsClient.Builder()\n    .experimentationOptOutMode(ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY)\n    .build()\n    .asOpenFeatureProvider()\n\nOpenFeatureAPI.setEvaluationContext(\n    ImmutableContext(\n        targetingKey = \"subject-id\",\n        attributes = mapOf(\n            \"dd_experimentation_opt_out_at\" to Value.String(\"2026-10-21T12:00:00Z\")\n        )\n    )\n)\nOpenFeatureAPI.setProviderAndWait(provider)\nval enabled = OpenFeatureAPI.getClient().getBooleanValue(\"new-feature\", false)\n```\n\n| Mode | Behavior with a timestamp |\n| --- | --- |\n| `DISABLED`, the default | Ignore the attribute. |\n| `IMMEDIATE` | Exclude from all experiment allocations. |\n| `FUTURE_EXPERIMENTS_ONLY` | Keep allocations activated before the cutoff; exclude equal, later, or unknown activation. |\n\nOmit the timestamp for eligible subjects. Invalid input returns `INVALID_CONTEXT` without a request. A future timestamp does not schedule exclusion.\n\nThe client requires a response acknowledgement. Future mode checks the exact cutoff with nanosecond precision. Unfiltered requests reject responses marked as experimentation-filtered. Caches and request generations prevent older policy or context state from replacing current assignments.\n\nTimestamps use proleptic Gregorian dates, including year zero, with written and normalized UTC years within `0000`–`9999`. Fractions beyond nanoseconds are truncated. Requests without an effective opt-out use disabled policy options.\n\n### Motivation\n\nApplications need to exclude subjects from experimentation while continuing ordinary feature delivery. Evaluation telemetry remains a separate control. Future mode uses allocation activation, not prior subject enrollment. Earlier allocations keep normal exposure logging.\n\n### Additional Notes\n\n- [RFC](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit). Precompute requires [edge #140422](https://github.com/ddoghq/dd-source/pull/140422) and the separate compiler changes. Activation metadata must reach delivered configurations before future-mode enablement.\n- Tests cover native/OpenFeature input, mode forwarding, acknowledgement rejection, timestamp precision, cache restart, context changes, and late responses. Regressions cover listener deadlock, ordered callbacks, one-wait lookups, requested-subject error telemetry, Gregorian boundaries, UTC overflow, and effective request policy.\n- No backend deployment is included. No Jira key was supplied.\n\n| Tested commit | Validation | Result |\n| --- | --- | --- |\n| `DataDog/dd-sdk-android@7b7ab717785ee7b7cbe4a56ca6d3c7714401ffad` | JVM native integration: both modes, acknowledgement precision, caches, and telemetry; stub core, fixture HTTP, unmock Android classes | 81 passed, 0 failed, 0 skipped; includes 27 future-mode cases. No emulator or live-edge validation. |\n\n### Review checklist (to be filled by reviewers)\n\n- [ ] Feature or bugfix MUST have appropriate tests (unit, integration, e2e)\n- [ ] Make sure you discussed the feature or bugfix with the maintaining team in an Issue\n- [ ] Make sure each commit and the PR mention the Issue number (cf the [CONTRIBUTING](../CONTRIBUTING.md) doc)\n\n",
+      "title": "Add experimentation opt-out modes",
+      "base": "develop",
+      "base_sha": "42fc7144114ab86c149b94b8411edafb6da80a7c",
+      "head": "leoromanovsky/experimentation-opt-out-immediate",
+      "head_sha": "7b7ab717785ee7b7cbe4a56ca6d3c7714401ffad",
+      "head_repo_id": 219536756,
+      "head_repo_full_name": "DataDog/dd-sdk-android",
+      "merge_commit_sha": null,
+      "user": {
+        "login": "leoromanovsky",
+        "name": "leoromanovsky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+        "id": 57361
+      },
+      "requested_reviewers": [
+        {
+          "login": "aleksandr-gringauz",
+          "name": "aleksandr-gringauz",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/200633589?v=4",
+          "id": 200633589
+        }
+      ],
+      "requested_team_reviewers": [
+        {
+          "slug": "rum-mobile",
+          "name": "rum-mobile"
+        },
+        {
+          "slug": "documentation",
+          "name": "documentation"
+        },
+        {
+          "slug": "rum-mobile-android",
+          "name": "rum-mobile-android"
+        }
+      ],
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-21T16:16:50Z",
+      "updated_at": "2026-10-22T15:44:05Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 6,
+      "changed_files": 33,
+      "additions": 2142,
+      "deletions": 225,
+      "display_url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
+      "display_title": "Add experimentation opt-out modes"
+    },
+    {
+      "url": "https://github.com/DataDog/dd-trace-java/pull/12950",
+      "number": 12950,
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "draft": false,
+      "body": "# What Does This Do\n\nAdds per-subject experimentation opt-out to the standalone and legacy OpenFeature providers.\nSet `DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE` before constructing the provider:\n\n| Mode | Behavior |\n| --- | --- |\n| `disabled` (default) | Ignore the subject's opt-out attribute |\n| `immediate` | Skip exposure-logging allocations, then continue ordinary delivery |\n| `future_experiments_only` | Continue allocations activated before the subject's opt-out time; skip newer or unknown activation |\n\n```java\nimport com.datadog.openfeature.Provider;\nimport dev.openfeature.sdk.MutableContext;\nimport dev.openfeature.sdk.OpenFeatureAPI;\n\nOpenFeatureAPI api = OpenFeatureAPI.getInstance();\napi.setProviderAndWait(new Provider());\nboolean enabled = api.getClient().getBooleanValue(\"new-checkout\", false,\n    new MutableContext(\"subject-123\")\n        .add(\"dd_experimentation_opt_out_at\", \"2026-10-19T12:00:00Z\"));\n```\n\nOmit the attribute for eligible subjects. Explicit `Provider.Options.experimentationOptOutMode(...)` overrides configuration.\nThe provider resolves the mode at construction.\n\n- Both enabled modes reject invalid subject timestamps with `INVALID_CONTEXT` and a fixed diagnostic.\n- Future mode compares `randomizationActivatedAt` with the stored subject timestamp. Equality excludes. Comparisons preserve nanoseconds and timezone offsets.\n- Malformed activation rejects only the affected flag with `PARSE_ERROR`, in every mode. Missing activation remains unknown.\n- Evaluation telemetry and exposure deduplication remain independent. No consent history or new event type is added.\n\n# Motivation\n\nCustomers need to exclude subjects from experimentation while continuing ordinary feature delivery.\nBoth modes use one context attribute and one provider option.\n\n# Additional Notes\n\nDesign: [Customer-controlled telemetry and experimentation opt-out RFC](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit).\n\nBoth providers execute 362 baseline, 26 immediate, and 42 future-mode shared expectations.\nTests also cover configuration precedence, malformed input, flag isolation, precision, fallback, and immediate-mode telemetry independence.\nThe fixture submodule pins [ffe-system-test-data#52](https://github.com/DataDog/ffe-system-test-data/pull/52); merge that dependency before landing.\n\nFuture mode requires stable backend activation timestamps and retained ordinary fallbacks.\nIt does not establish prior enrollment. Older allocations can assign a subject for the first time.\nUpgrade the legacy Java agent with the provider; an older agent without activation metadata treats activation as unknown.\nExisting omitted-`doLog` classification remains unchanged.\n\n## Validation\n\n| Tested commit | Validation | Result |\n| --- | --- | --- |\n| `DataDog/dd-trace-java@660b5b96114cc29f2edc8c806b9a621621ba552e` | System tests: legacy provider, Remote Configuration, both opt-out modes, timestamp boundaries, fallback, transitions, and EVP exposure delivery/deduplication; Linux/arm64 | 4 passed; evaluation-event intake not checked |\n| `DataDog/dd-trace-java@660b5b96114cc29f2edc8c806b9a621621ba552e` | System tests: standalone provider, mock CDN, both opt-out modes, timestamp boundaries, fallback, transitions, and exposure-cache decisions; Linux/arm64 | 4 passed; event intake not checked. Remote Configuration still requires the standalone agent bridge. |\n\n# Contributor Checklist\n\n- Format the title according to [the contribution guidelines](https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md#title-format)\n- Assign the `type:` and (`comp:` or `inst:`) labels in addition to [any other useful labels](https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md#labels)\n- Avoid using `close`, `fix`, or [any linking keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue-using-a-keyword) when referencing an issue. Use `solves` instead, and assign the PR [milestone](https://github.com/DataDog/dd-trace-java/milestones) to the issue.\n- Update the [CODEOWNERS](https://github.com/DataDog/dd-trace-java/blob/master/.github/CODEOWNERS) file on source file addition, migration, or deletion\n- Update [public documentation](https://docs.datadoghq.com/tracing/trace_collection/library_config/java/) with any new configuration flags or behaviors\n- Once approved, [use merge queue](https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md#merge-queue) to merge the PR\n",
+      "title": "Support per-subject experimentation opt-out",
+      "base": "master",
+      "base_sha": "fe25fd4f49376c1dd9c44f6872ca49434f9a4ae0",
+      "head": "leoromanovsky/experimentation-opt-out-immediate",
+      "head_sha": "660b5b96114cc29f2edc8c806b9a621621ba552e",
+      "head_repo_id": 89221572,
+      "head_repo_full_name": "DataDog/dd-trace-java",
+      "merge_commit_sha": "0d3fb491b130f1ca8f86bcb01f24c2da7101d764",
+      "user": {
+        "login": "leoromanovsky",
+        "name": "leoromanovsky",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+        "id": 57361
+      },
+      "requested_reviewers": [
+        {
+          "login": "bric3",
+          "name": "bric3",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/803621?v=4",
+          "id": 803621
+        },
+        {
+          "login": "danyal002",
+          "name": "danyal002",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/50880807?v=4",
+          "id": 50880807
+        },
+        {
+          "login": "hhan2024",
+          "name": "hhan2024",
+          "email": null,
+          "avatar_url": "https://avatars.githubusercontent.com/u/190518164?v=4",
+          "id": 190518164
+        }
+      ],
+      "requested_team_reviewers": [
+        {
+          "slug": "feature-flagging-and-experimentation-sdk",
+          "name": "feature-flagging-and-experimentation-sdk"
+        }
+      ],
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-20T03:13:50Z",
+      "updated_at": "2026-10-21T23:01:06Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 10,
+      "changed_files": 30,
+      "additions": 1561,
+      "deletions": 37,
+      "display_url": "https://github.com/DataDog/dd-trace-java/pull/12950",
+      "display_title": "Support per-subject experimentation opt-out"
+    }
+  ]
+}

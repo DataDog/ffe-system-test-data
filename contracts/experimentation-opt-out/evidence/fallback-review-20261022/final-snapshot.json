@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-10-22T22:43:01.986925+00:00",
+  "pull_requests": [
+    {
+      "repository": "ddoghq/dd-source",
+      "number": 139379,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "title": "feat(ffe): preserve ordinary fallbacks for experimentation opt-out",
+      "body": "## Motivation and Context\n\nImplements ordinary fallback delivery from [RFC: Classifying allocations for per-subject experimentation opt-out](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit), **What exclusion means during evaluation**.\n\nThe agreed behavior skips experimental allocations before randomization and continues ordinary rules. The compiler currently removes those later rules after a full-population experiment.\n\n### PR stack order\n\n**Position:** Stack A, second PR. Solid arrows show Git parent \u2192 child. The dashed arrow shows a deployment prerequisite, not a Git parent.\n\n```mermaid\nflowchart LR\n    subgraph A[\"Stack A: immediate opt-out compiler support\"]\n        W[\"#139368: winner logging\"] --> F[\"#139379: retain fallbacks (this PR)\"]\n    end\n    subgraph B[\"Stack B: stable activation metadata\"]\n        V[\"#139367: RC validation\"] --> P[\"#139381: persist and publish\"]\n    end\n    M[\"k8s-resources #12479: nullable storage\"] -.-> P\n```\n\n| Stack goal | Review and merge order | Why stacked |\n| --- | --- | --- |\n| **A: preserve ordinary delivery during immediate opt-out.** | [#139368](https://github.com/ddoghq/dd-source/pull/139368) \u2192 [#139379](https://github.com/ddoghq/dd-source/pull/139379) | Correct winner classification first. The fallback optimizer then uses that classification to retain skippable experiments' fallbacks. |\n| **B: provide stable activation times for future-experiments-only mode.** | [#139367](https://github.com/ddoghq/dd-source/pull/139367) \u2192 [#139381](https://github.com/ddoghq/dd-source/pull/139381) | Separate schema acceptance from emission, so validators can deploy before producers. |\n\nBoth stacks start from `main` and can progress independently. [Migration #12479](https://github.com/ddoghq/k8s-resources/pull/12479) targets `k8s-resources/master`. Deploy it and RC validation before #139381; merging alone is insufficient.\n\n## Description\n\nRetain later allocations and their variants until an ordinary full-population allocation makes them unreachable. Preserve evaluation reasons and assignments for subjects who remain eligible.\n\nCompleted ordinary winners still terminate the waterfall. Active experiments, including 100% enrollment and single-arm experiments, retain their fallback. This change adds no SDK configuration or telemetry.\n\nFor a full-population experiment, the compiled configuration must support both paths:\n\n```mermaid\nflowchart TD\n    E[\"Active experiment: doLog = true\"] -->|\"Eligible subject\"| R[\"Existing randomized assignment\"]\n    E -->|\"Opted-out subject: skip\"| F[\"Retained ordinary fallback\"]\n    F -->|\"Matches\"| O[\"Ordinary assignment\"]\n    F -->|\"No match\"| N[\"Continue remaining rules; existing no-assignment behavior\"]\n```\n\nThis PR preserves the rules. It does not add the evaluator's opt-out check.\n\n### Later stacks: preview\n\nThese are planned follow-up groups, not additional published PRs in this series.\n\n| Order | Goal | Scope |\n| --- | --- | --- |\n| **C: complete activation coverage** | Establish usable activation metadata for supported allocation types. | Remaining lifecycle writers, canary/bandit coverage where supported, holdout timing, and missing-metadata behavior. |\n| **D: shared fixtures and evaluators** | Apply the same cutoff rule locally and at the edge. | Timestamp fixtures first; Go/Rust evaluators, JSON/archive compatibility, Precompute transport, and cache handling. |\n| **E: SDK delivery** | Let customers select future-experiments-only behavior consistently. | Extend existing opt-out integrations, pass the customer cutoff, and test request acknowledgement and cached-state compatibility. |\n\nThe existing immediate-mode SDK work does not wait for C\u2013E. Future-mode enablement requires completed producer/consumer support and end-to-end validation; these five PRs do not enable it.\n\n## How has this been tested?\n\nThe full UFC suite and `ffe-service` build pass. Differential cases compare 12,288 eligible-subject assignments and check ordinary fallback delivery after skipping experiments. JSON and protobuf retain the same allocation order. The holdout compiler-to-analysis regression passes, including its negative control for missing post-ship holdout exposures.\n\nThese tests do not exercise a deployed edge service or an SDK opt-out request.\n\n## What is expected of reviewers?\n\nReview the optimizer's reachability rule and evaluation-reason compatibility. Retained fallbacks increase configuration size when a logging allocation previously removed them.\n\n\n<!-- ffe-review-routing:status:v1:start -->\n\n## Reviewer selection\n\n\ud83e\udd16 **Automatically generated \u00b7 runs asynchronously.** The FFE reviewer-routing workflow maintains this section; it does not replace human review.\n\n\u2705 **Complete \u2014 reviewer coverage verified.**\n\n**What happened:** The workflow matched this PR to the published registry, selected 3 reviewers for its initiative and any additional review areas, and checked their pending requests or submitted reviews on the evaluated head. Existing reviewers and teams were preserved. Coverage is not approval.\n\n### Decision\n\n**Initiative:** project / ufc-compliance\n\n**Why this match:** The change preserves ordinary fallback delivery when exposure-logging experiment allocations are skipped for experimentation/privacy opt-out, while keeping non-opted-in subject assignments and evaluation reasons compatible.\n\n**Why these owners:** The matched initiative has fewer than two approved, non-author candidates. The approved global pool supplies the remaining review owners; proposed memberships were not activated.\n\n**Additional review: infra** \u2014 The optimizer and reason assignment change shared UFC generation behavior by retaining fallbacks after logging allocations and pruning only after ordinary full-population allocations. Coverage: @tyler-potter\\_ddog. Evidence: domains/ffe/libs/flagging/ufc/optimizer.go, domains/ffe/libs/flagging/ufc/compiler.go\n\n- @sameeran-kunche_ddog \u2014 **final owner** (final-review-owners): Global review owner filling the remaining slot and responsible for obtaining review. Review requested.\n- @greg-huels_ddog \u2014 **final owner** (final-review-owners): Global review owner filling the remaining slot and responsible for obtaining review. Review requested.\n- @tyler-potter_ddog \u2014 **specialist** (infra): Specialist pod member covering an additional review area. Covers: infra. Review requested.\n\nThe PR author is excluded from reviewer selection.\n\n### Debug or fix a problem\n\n[Workflow run](https://app.datadoghq.com/workflow/514c43cc-c4b4-4eca-932a-f78f429a9898?instance=ca190be8-4b7a-44e9-acc2-f481b3387848) \u00b7 [Bits Code session](https://app.datadoghq.com/code/f32aed40-bd1a-4a44-a206-7aa39e059ad0)\n\n- **Wrong project or pod?** Clarify this PR\u2019s purpose, or correct the [reviewer registry](https://docs.google.com/spreadsheets/d/1Okqxei67vgpsqjokABa_IU7edwh27Mu-RNz6jwnUE6U/edit) and [publish the change](https://github.com/ddoghq/claude-marketplace/blob/leo/ffe-review-pods/ffe-internal/skills/route-pr-reviewers/workflow/production/README.md#publish-the-sheet). Sheet edits take effect after publication.\n- **Need another reviewer now?** Request them in GitHub. This workflow only adds requests and keeps existing reviewers.\n- **Stuck beyond five minutes or failed?** Inspect the run\u2019s failed step and available Bits session. After fixing the cause, rerun the workflow with this PR URL and `dry_run=false`. Unchanged completed runs are skipped. If the receipt says `needs_reconciliation` or a write outcome is uncertain, ask the workflow owner to reconcile GitHub and the receipt before retrying; do not delete the lock blindly.\n- **Report a problem:** Comment on the [reviewer-routing skill PR](https://github.com/ddoghq/claude-marketplace/pull/5067) with this PR URL, the workflow run link, and the expected initiative or reviewer correction.\n\n<details>\n\n<summary>Evidence and run details</summary>\n\nChanged paths: `domains/ffe/libs/flagging/ufc/optimizer.go`, `domains/ffe/libs/flagging/ufc/compiler.go`, `domains/ffe/libs/flagging/ufc/opt_out_fallback_test.go`\n\nEvaluated head: `1a71c67a6f1de54e0ee9754bcf36da54100f553f`\n\nRegistry revision: `revision:54491247-28c5-4ac2-a03b-579fcf68b1c0`\n\nLoaded skill: `3f59fe8e29584b48a3cf48382805c351f0e3d21b`\n\n</details>\n\n<!-- ffe-review-routing:status:v1:end -->\n",
+      "state": "open",
+      "draft": false,
+      "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+      "base_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "head_ref": "leo/opt-out-preserve-fallbacks",
+      "base_ref": "leo/opt-out-winner-logging",
+      "review_decision": "APPROVED",
+      "threads": [
+        {
+          "id": "PRRT_kwDORrsQN86u-EPV",
+          "isResolved": false,
+          "isOutdated": false,
+          "path": "domains/ffe/libs/flagging/ufc/optimizer.go",
+          "line": 127,
+          "comment_ids": [
+            4342416262,
+            4343813531
+          ]
+        },
+        {
+          "id": "PRRT_kwDORrsQN86vBSCI",
+          "isResolved": false,
+          "isOutdated": false,
+          "path": "domains/ffe/libs/flagging/ufc/optimizer.go",
+          "line": 110,
+          "comment_ids": [
+            4343814842
+          ]
+        }
+      ],
+      "inline_comments": [
+        {
+          "id": 4342416262,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4342416262",
+          "body": "**<sub><sub>![P2](https://img.shields.io/badge/P2-F5C518?style=flat)</sub></sub>  Preserve older-SDK delivery when retaining SemVer fallbacks**\n\n<!-- datadog-code-review reviewer-id=bad90057-5c12-4101-ad47-d91c9dff0f90 -->\n<!-- autotest-finding-meta source=static_analysis prod_data_type=none production_evidence_effect=none finding_id=1f384228-3b0f-4d49-8cfa-cf4f2af41bf7 reported_by=control -->\nWhen server SemVer delivery is enabled and a full-population experiment precedes an ordinary SEMVER_* targeting allocation, this change retains that fallback. FilterSemverFlags then removes the entire flag from the compatibility payload published by sendUpsertToRC. Previously, optimization removed the unreachable rule and older SDKs received the experiment. Eligible subjects now receive caller defaults even without opting out. Compatibility generation must preserve those existing assignments while retaining fallbacks for capable clients.\n\nWas this helpful? React \ud83d\udc4d or \ud83d\udc4e\n<sub>\ud83e\udd16 Datadog Autotest \u00b7 <a href=\"https://datadoghq.atlassian.net/wiki/spaces/CCSD/pages/6641352713/AutoTest+overview\">What is Autotest / Bits Code Review?</a> \u00b7 &#64;datadog review to ask questions \u00b7 Any feedback? Reach out in <a href=\"https://dd.enterprise.slack.com/archives/C0AV2RLHEM6\">#autotest</a></sub> <sub>\u00b7 <a href=\"https://app.datadoghq.com/code/a77c4583-6a6e-4057-a357-1e08c8df0496?referrer=autotest-pr-comment\">Open Bits AI session</a></sub>\n\n<!-- arp:mitigation:v1 {\"id\":\"arp_m_v1_5c1bd9d022cf37dadf7a1f5368474910f2b560ba4facb219c1469224ab91ac8e\"} -->",
+          "created_at": "2026-10-21T21:59:55Z",
+          "updated_at": "2026-10-21T21:59:55Z",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "original_commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "path": "domains/ffe/libs/flagging/ufc/optimizer.go",
+          "line": 127,
+          "original_line": 127,
+          "pull_request_review_id": 5606766209,
+          "diff_hunk": "@@ -124,7 +124,7 @@ func eliminateDeadBranches(flag *coreFlag) {\n \t\t\tcontinue // dead allocation \u2014 no split can match\n \t\t}\n \t\tallocs = append(allocs, alloc)\n-\t\tif coversFullPopulation(alloc) {\n+\t\tif !alloc.LogExposureEvent && coversFullPopulation(alloc) {",
+          "author": "dd-agentic-review-platform-14301c[bot]"
+        },
+        {
+          "id": 4343813531,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343813531",
+          "body": "\ud83e\udd16 **Comment from Claude working with Aaron Silverman:**\n\n**[P2]** Removing this flag from the compatibility payload matches the SemVer policy we want. Please make the policy hold when the optimizer prunes the SEMVER rule too.\n\nThe policy we want: a flag whose authored allocations contain a `SEMVER_*` condition goes only to the tracer versions in `semverSafeUFCTargets`, whether or not opt-out applies. A flag with an override serves one variant and skips this check (`ufc/compiler.go:206-247`). Those versions isolate a `SEMVER_*` condition to its flag (`remote-config/direct_client.go:35-49`). Every other tracer gets the payload that `FilterSemverFlags` builds. With the org rollout off, server builds already apply the policy to the allocations before optimization (`ufc/compiler.go:247-259`). `FilterSemverFlags` checks the optimized allocations instead (`ufc/semver_filter.go:45-58`). So a SEMVER rule after an ordinary full-population allocation, such as a completed winner or a 100% rollout, is pruned, and the flag still reaches the other tracers. The pruned rule can never match, so this is about one consistent rule, not about a tracer parsing an unsupported condition. Before this PR, the same gap applied after any full-population allocation. Now it applies only after one with `doLog=false` (`ufc/optimizer.go:127`).\n\n<details>\n<summary><b>Evidence</b> \u2014 compiled through <code>BuildFlagsConfiguration</code></summary>\n\n- The test below compiles an ordinary full-population allocation, then a `SEMVER_GTE` rule, with server SemVer enabled. At `1a71c67a` it fails: the flag stays in the compatibility payload.\n- With the one-line fix, it passes. `//domains/ffe/libs/flagging/ufc:go_default_test` (805 tests), `//domains/ffe/libs/flagging/remote-config:go_default_test` (108) and `//domains/ffe/apps/apis/feature-flagging-cache-worker:go_default_test` (84) pass.\n\n</details>\n\n<details>\n<summary><b>Suggested patch</b> \u2014 reuse the targeting recorded before optimization</summary>\n\n```diff\n--- a/domains/ffe/libs/flagging/ufc/semver_filter.go\n+++ b/domains/ffe/libs/flagging/ufc/semver_filter.go\n@@ -43,7 +43,8 @@ func FilterSemverFlags(config *FlagsConfiguration) (*FlagsConfiguration, []strin\n \n \tvar semverFlagKeys []string\n \tfor flagKey, flag := range config.core.Flags {\n-\t\tcontainsSemver := false\n+\t\t// Optimization can prune a SEMVER rule; the flag still requires SemVer delivery.\n+\t\tcontainsSemver := flag != nil && flag.semverTargeting\n \t\tif flag != nil {\n \t\touter:\n \t\t\tfor _, allocation := range flag.Allocations {\n--- a/domains/ffe/libs/flagging/ufc/semver_filter_test.go\n+++ b/domains/ffe/libs/flagging/ufc/semver_filter_test.go\n@@ -1,10 +1,12 @@\n package ufc\n \n import (\n+\t\"context\"\n \t\"strings\"\n \t\"testing\"\n \t\"time\"\n \n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/common\"\n \t\"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/model\"\n \t\"github.com/stretchr/testify/assert\"\n \t\"github.com/stretchr/testify/require\"\n@@ -98,3 +100,35 @@ func filterSemverTestFlag(operator UFCConditionOperator) *coreFlag {\n \t\t}},\n \t}\n }\n+\n+// A SEMVER rule after an ordinary full-population allocation is pruned by the\n+// optimizer. The flag still has SemVer targeting, so only the SemVer payload carries it.\n+func TestFilterSemverFlagsUsesTargetingBeforeOptimization(t *testing.T) {\n+\tenv := &model.Environment{ID: \"env-id\", Name: \"staging\"}\n+\tff := baseFeatureFlag()\n+\tff.CurrentEnvironment.Allocations = []model.Allocation{\n+\t\t{Key: \"ordinary-rollout\", OrderPosition: 0, VariantWeights: []model.VariantWeight{{Value: 1, Variant: &ff.Variants[0]}}},\n+\t\t{\n+\t\t\tKey: \"semver-rule\", OrderPosition: 1,\n+\t\t\tVariantWeights: []model.VariantWeight{{Value: 1, Variant: &ff.Variants[1]}},\n+\t\t\tTargetingRules: []model.TargetingRule{{Conditions: []model.Condition{{\n+\t\t\t\tOperator:  common.Ptr(model.ConditionOperatorSemverGTE),\n+\t\t\t\tAttribute: common.Ptr(\"app_version\"),\n+\t\t\t\tValue:     []string{\"2.0.0\"},\n+\t\t\t}}}},\n+\t\t},\n+\t}\n+\tserverChannel := model.DistributionChannelServer\n+\tctx := common.WithServerSDKSemverEnabled(context.Background())\n+\tconfig := BuildFlagsConfiguration(ctx, env, []*model.FeatureFlag{ff}, &serverChannel, time.Now(), nil, nil)\n+\tcompiled := config.core.Flags[ff.Key]\n+\trequire.NotNil(t, compiled)\n+\tfor _, allocation := range compiled.Allocations {\n+\t\trequire.NotEqual(t, \"semver-rule\", allocation.Key, \"the optimizer prunes the unreachable SEMVER rule\")\n+\t}\n+\n+\tcompatibilityConfig, semverFlagKeys := FilterSemverFlags(&config)\n+\n+\tassert.Equal(t, []string{ff.Key}, semverFlagKeys)\n+\tassert.NotContains(t, compatibilityConfig.core.Flags, ff.Key)\n+}\n```\n\n</details>\n",
+          "created_at": "2026-10-22T01:56:14Z",
+          "updated_at": "2026-10-22T01:56:14Z",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "original_commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "path": "domains/ffe/libs/flagging/ufc/optimizer.go",
+          "line": 127,
+          "original_line": 127,
+          "in_reply_to_id": 4342416262,
+          "pull_request_review_id": 5608387021,
+          "diff_hunk": "@@ -124,7 +124,7 @@ func eliminateDeadBranches(flag *coreFlag) {\n \t\t\tcontinue // dead allocation \u2014 no split can match\n \t\t}\n \t\tallocs = append(allocs, alloc)\n-\t\tif coversFullPopulation(alloc) {\n+\t\tif !alloc.LogExposureEvent && coversFullPopulation(alloc) {",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 4343814842,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#discussion_r4343814842",
+          "body": "\ud83e\udd16 **Comment from Claude working with Aaron Silverman:**\n\n**[P3]** Update the stale reference at line 195 too.\n\nThe `dropUnreferencedVariants` comment says: \"After truncateAtFullPopulationAllocation has pruned unreachable allocations\". No function has that name. `eliminateDeadBranches` does the pruning, and after this PR it stops only at an ordinary full-population allocation.\n\n<details>\n<summary><b>Suggested text</b></summary>\n\n```go\n// dropUnreferencedVariants removes entries from flag.Variations that are not\n// referenced by any split in any allocation. After eliminateDeadBranches has\n// pruned unreachable allocations, their variants would otherwise remain in\n// the payload for no reason.\n```\n\n</details>\n",
+          "created_at": "2026-10-22T01:56:30Z",
+          "updated_at": "2026-10-22T01:56:30Z",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "original_commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "path": "domains/ffe/libs/flagging/ufc/optimizer.go",
+          "line": 110,
+          "original_line": 110,
+          "pull_request_review_id": 5608389110,
+          "diff_hunk": "@@ -107,9 +107,9 @@ func clampTimeWindows(flag *coreFlag, before, after time.Time) {\n //   - Splits containing any shard with zero ranges are dropped: such a shard\n //     matches nothing and all shards must match for the split to match.\n //   - Allocations whose splits are all dead are dropped entirely.\n-//   - Allocations after the first full-population one are dropped: a\n-//     full-population allocation matches every subject, so anything after it\n-//     is unreachable.\n+//   - Allocations after the first ordinary full-population allocation are dropped.",
+          "author": "aaron-silverman_ddog"
+        }
+      ],
+      "conversation_comments": [],
+      "reviews": [
+        {
+          "id": 5606766209,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#pullrequestreview-5606766209",
+          "body": "### \ud83e\udd16 Agentic Review Platform\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `1a71c67a6f`\n\n<details>\n<summary>\u2139\ufe0f What's This?</summary>\n\nAgentic Review Platform orchestrates specialized review agents across your changes, combining their signals to catch production-risk issues before they ship. [Learn more here](https://datadoghq.atlassian.net/wiki/spaces/AIDEVX/pages/6654230856/Agentic+Review+Platform).\n\nReach out to us in [#ai-devx-flow](https://dd.enterprise.slack.com/archives/C0AUXEUEGE4).\n\n</details>\n\n<!-- arp:review:v1 -->",
+          "submitted_at": "2026-10-21T21:59:55Z",
+          "state": "COMMENTED",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "author": "dd-agentic-review-platform-14301c[bot]"
+        },
+        {
+          "id": 5608387021,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#pullrequestreview-5608387021",
+          "body": "",
+          "submitted_at": "2026-10-22T01:56:14Z",
+          "state": "COMMENTED",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 5608389110,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#pullrequestreview-5608389110",
+          "body": "",
+          "submitted_at": "2026-10-22T01:56:30Z",
+          "state": "COMMENTED",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 5614544906,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139379#pullrequestreview-5614544906",
+          "body": "",
+          "submitted_at": "2026-10-22T12:59:08Z",
+          "state": "APPROVED",
+          "commit_id": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "author": "greg-huels_ddog"
+        }
+      ],
+      "check_runs": [
+        {
+          "name": "Datadog PR Gates / No new code quality violations",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "details_url": "https://app.datadoghq.com/ci/pr-gates",
+          "started_at": "2026-10-21T02:29:32Z",
+          "completed_at": "2026-10-21T02:29:28Z"
+        },
+        {
+          "name": "Datadog PR Gates / No new code vulnerabilities",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "details_url": "https://app.datadoghq.com/ci/pr-gates",
+          "started_at": "2026-10-21T02:29:29Z",
+          "completed_at": "2026-10-21T02:29:28Z"
+        },
+        {
+          "name": "Datadog PR Gates / No new license violations",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "details_url": "https://app.datadoghq.com/ci/pr-gates",
+          "started_at": "2026-10-21T02:27:43Z",
+          "completed_at": "2026-10-21T02:27:41Z"
+        },
+        {
+          "name": "Datadog PR Gates / No new library vulnerabilities",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "details_url": "https://app.datadoghq.com/ci/pr-gates",
+          "started_at": "2026-10-21T02:27:42Z",
+          "completed_at": "2026-10-21T02:27:41Z"
+        },
+        {
+          "name": "label",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+          "details_url": "https://github.com/ddoghq/dd-source/actions/runs/39532832303/job/119002520206",
+          "started_at": "2026-10-21T02:24:29Z",
+          "completed_at": "2026-10-21T02:24:40Z"
+        }
+      ],
+      "commit_statuses": [
+        {
+          "context": "DDCI Status",
+          "state": "success",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?utm_content=ddci_status_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:34:39Z",
+          "updated_at": "2026-10-21T02:34:39Z"
+        },
+        {
+          "context": "dd-gitlab/static-build-success",
+          "state": "success",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?owner=ddoghq&repository=dd-source&taskExecutionId=2159565655&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:34:30Z",
+          "updated_at": "2026-10-21T02:34:30Z"
+        },
+        {
+          "context": "dd-gitlab/static-build-success",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?owner=ddoghq&repository=dd-source&taskExecutionId=2159565655&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:34:26Z",
+          "updated_at": "2026-10-21T02:34:26Z"
+        },
+        {
+          "context": "dd-gitlab/dynamic-build-create",
+          "state": "success",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?owner=ddoghq&repository=dd-source&taskExecutionId=2159565619&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:25:31Z",
+          "updated_at": "2026-10-21T02:25:31Z"
+        },
+        {
+          "context": "dd-gitlab/dynamic-build-create",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?owner=ddoghq&repository=dd-source&taskExecutionId=2159565619&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:24:40Z",
+          "updated_at": "2026-10-21T02:24:40Z"
+        },
+        {
+          "context": "DDCI Status",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139379/request/13798501020269459622?utm_content=ddci_status_check&utm_source=github_pr_page",
+          "created_at": "2026-10-21T02:24:27Z",
+          "updated_at": "2026-10-21T02:24:27Z"
+        }
+      ]
+    },
+    {
+      "repository": "ddoghq/dd-source",
+      "number": 139368,
+      "url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "title": "fix(ffe): stop deterministic winner exposures while preserving holdouts",
+      "body": "## Motivation and Context\n\nOpted-out subjects should retain deterministic completed winners while skipping allocations that randomize. A retained experiment link keeps winners at `doLog=true`; clearing that field based only on experiment completion also lets completed 50/50 experiments bypass opt-out.\n\nThe [author clarification](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956) and [D018 producer contract](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) require the backend to represent randomization through the existing `doLog` field. This refines the [original allocation-classification RFC](https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit).\n\n## Description\n\nCompleted standard experiments (`ROLLOUT_COMPLETE` or `CODE_REMOVED`) stop ordinary winner exposures only when delivery is deterministic. The compiler sets `doLog=true` whenever shard selection changes the variation or match/fallthrough outcome, including ordinary percentage splits and partial enrollment. This deliberately enables exposures for ordinary randomized allocations.\n\n```mermaid\nflowchart LR\n    C[\"Compiled allocation\"] --> R[\"Randomizes variation or enrollment\"]\n    C --> W[\"Deterministic completed winner\"]\n    C --> H[\"Existing active experiment or holdout logging\"]\n    R --> T[\"doLog = true\"]\n    H --> T\n    W --> F[\"doLog = false; eligible for delivery\"]\n```\n\nExisting active-experiment, canary, bandit, and generated-holdout logging requirements are preserved, along with the experiment link, serial IDs, and assignments. Missing lifecycle state retains logging. Lifecycle state is read in one organization-scoped snapshot query using an array parameter. The synthetic holdout runner accepts either logging value for concluded winners while retaining winner and active-experiment checks.\n\nThis PR is the Git parent of [#139379](https://github.com/ddoghq/dd-source/pull/139379), which must inherit this change before fallback validation. [Activation metadata #139381](https://github.com/ddoghq/dd-source/pull/139381) and [edge opt-out #140422](https://github.com/ddoghq/dd-source/pull/140422) have separate rollout work. Deploy the compiler and rebuild stored UFCs before enabling consumers; newly logging allocations without activation metadata retain conservative future-mode exclusion.\n\n## How has this been tested?\n\nAfter merging main at [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b), 918 compiler tests, 283 database repository tests, and 275 holdout-runner/primary-analysis tests pass locally. Main's golden snapshot required seven intentional `doLog` updates; all assignment data remains unchanged. The classifier matches independent raw-bucket enumeration for 500 generated cases. Restoring the old `doLog` output fails the completed 50/50, ordinary 50/50, and partial-enrollment regressions; restoring the fix passes both Go suites uncached.\n\n[Draft contract #55](https://github.com/DataDog/ffe-system-test-data/pull/55) retains the source pins, negative controls, and native receipts. Seven new Lean composition theorems bring its audit to 53, with 313 existing semantic cases and 36 operational cases passing. These prove the model's composition; native classifier correctness is covered separately by the compiler tests. Handler lifecycle tests and the combined edge flow were not rerun in this update; local validation is not deployed proof.\n\n## What is expected of reviewers?\n\nReview the randomization classification, preservation of deterministic winner delivery and holdout exposures, and organization-scoped snapshot query. Confirm D018's exposure-logging consequence for ordinary randomized allocations and retain the separate rollout gates.\n\n\n<!-- ffe-review-routing:status:v1:start -->\n\n## Reviewer selection\n\n\ud83e\udd16 **Automatically generated \u00b7 runs asynchronously.** The FFE reviewer-routing workflow maintains this section; it does not replace human review.\n\n\u2705 **Complete \u2014 reviewer coverage verified.**\n\n**What happened:** The workflow matched this PR to the published registry, selected 3 reviewers for its initiative and any additional review areas, and checked their pending requests or submitted reviews on the evaluated head. Existing reviewers and teams were preserved. Coverage is not approval.\n\n### Decision\n\n**Initiative:** project / ufc-compliance\n\n**Why this match:** The change refines privacy/opt-out exposure logging semantics by using doLog to distinguish randomized allocations from deterministic completed experiment winners while preserving holdout logging behavior.\n\n**Why these owners:** The matched initiative has fewer than two approved, non-author candidates. The approved global pool supplies the remaining review owners; proposed memberships were not activated.\n\n**Additional review: infra** \u2014 The UFC compiler and repository snapshot behavior now load experiment rollout state and derive doLog from partition randomization, changing shared UFC generation/serving invariants. Coverage: @tyler-potter\\_ddog. Evidence: domains/ffe/libs/flagging/core/repository/ufc\\_repository.go, domains/ffe/libs/flagging/ufc/ufc.go, domains/ffe/libs/flagging/ufc/partition\\_coverage.go\n\n- @sameeran-kunche_ddog \u2014 **final owner** (final-review-owners): Global review owner filling the remaining slot and responsible for obtaining review. Review requested.\n- @greg-huels_ddog \u2014 **final owner** (final-review-owners): Global review owner filling the remaining slot and responsible for obtaining review. Review requested.\n- @tyler-potter_ddog \u2014 **specialist** (infra): Specialist pod member covering an additional review area. Covers: infra. Review requested.\n\nThe PR author is excluded from reviewer selection.\n\n### Debug or fix a problem\n\n[Workflow run](https://app.datadoghq.com/workflow/514c43cc-c4b4-4eca-932a-f78f429a9898?instance=96578c84-ca54-4996-a680-a2b39dd8247f) \u00b7 [Bits Code session](https://app.datadoghq.com/code/b781dcc9-c1fa-47eb-8ab6-3749e50c2353)\n\n- **Wrong project or pod?** Clarify this PR\u2019s purpose, or correct the [reviewer registry](https://docs.google.com/spreadsheets/d/1Okqxei67vgpsqjokABa_IU7edwh27Mu-RNz6jwnUE6U/edit) and [publish the change](https://github.com/ddoghq/claude-marketplace/blob/leo/ffe-review-pods/ffe-internal/skills/route-pr-reviewers/workflow/production/README.md#publish-the-sheet). Sheet edits take effect after publication.\n- **Need another reviewer now?** Request them in GitHub. This workflow only adds requests and keeps existing reviewers.\n- **Stuck beyond five minutes or failed?** Inspect the run\u2019s failed step and available Bits session. After fixing the cause, rerun the workflow with this PR URL and `dry_run=false`. Unchanged completed runs are skipped. If the receipt says `needs_reconciliation` or a write outcome is uncertain, ask the workflow owner to reconcile GitHub and the receipt before retrying; do not delete the lock blindly.\n- **Report a problem:** Comment on the [reviewer-routing skill PR](https://github.com/ddoghq/claude-marketplace/pull/5067) with this PR URL, the workflow run link, and the expected initiative or reviewer correction.\n\n<details>\n\n<summary>Evidence and run details</summary>\n\nChanged paths: `domains/ffe/libs/flagging/ufc/ufc.go`, `domains/ffe/libs/flagging/ufc/partition_coverage.go`, `domains/ffe/libs/flagging/core/repository/ufc_repository.go`, `domains/ffe/libs/flagging/core/model/allocation.go`, `domains/ffe/tools/synthetic_data/core/holdout_runner.py`\n\nEvaluated head: `0ae33d8f112685502bb8f16d8c96efbecb70219b`\n\nRegistry revision: `revision:54491247-28c5-4ac2-a03b-579fcf68b1c0`\n\nLoaded skill: `3f59fe8e29584b48a3cf48382805c351f0e3d21b`\n\n</details>\n\n<!-- ffe-review-routing:status:v1:end -->\n",
+      "state": "open",
+      "draft": false,
+      "head_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "base_sha": "304c4133fb6d4d04a2036b98251a0bef80fb7321",
+      "head_ref": "leo/opt-out-winner-logging",
+      "base_ref": "main",
+      "review_decision": "REVIEW_REQUIRED",
+      "threads": [
+        {
+          "id": "PRRT_kwDORrsQN86vBR43",
+          "isResolved": false,
+          "isOutdated": false,
+          "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+          "line": 195,
+          "comment_ids": [
+            4343813763,
+            4353896956
+          ]
+        },
+        {
+          "id": "PRRT_kwDORrsQN86vBR8w",
+          "isResolved": false,
+          "isOutdated": false,
+          "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
+          "line": 44,
+          "comment_ids": [
+            4343814230,
+            4353897263
+          ]
+        },
+        {
+          "id": "PRRT_kwDORrsQN86vBR_7",
+          "isResolved": true,
+          "isOutdated": true,
+          "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
+          "line": null,
+          "comment_ids": [
+            4343814608,
+            4353897591
+          ]
+        },
+        {
+          "id": "PRRT_kwDORrsQN86vZl76",
+          "isResolved": false,
+          "isOutdated": false,
+          "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+          "line": 266,
+          "comment_ids": [
+            4354101407
+          ]
+        }
+      ],
+      "inline_comments": [
+        {
+          "id": 4343813763,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+          "body": "\ud83e\udd16 **Comment from Claude working with Aaron Silverman:**\n\n**[P1]** A concluded standard experiment that still splits traffic now compiles with `doLog=false`, so it randomizes opted-out subjects. Please base opt-out eligibility on randomization, not on `doLog` alone.\n\nWe want a concluded experiment to behave like a randomized allocation that was never an experiment, and we want opted-out subjects to skip both, because both randomize. The exclusion in #140422 checks only `doLog`, so it skips neither. The RFC reuses `doLog` alone, so this needs a product decision.\n\nThis line derives `doLog` for standard experiments from experiment state alone. That adds a new way to reach the state above: the deprecated PATCH `experiment_action: CONCLUDED` sets `ROLLOUT_COMPLETE` without rolling out the winner (`experiment_service.go:653`, called from `experiment_handler.go:2584`). The allocation keeps its split and now compiles with `doLog=false`. I put the evaluator-side change in my comment on #140422 at `experimentation.rs:62`.\n\n<details>\n<summary><b>Evidence</b> \u2014 1. a completed standard experiment that still splits compiles with <code>doLog=false</code></summary>\n\nI added a `TestWinnerExposureLifecycle` row at `3e99ba2a`: a standard experiment with `completed: true` and weights 50/50. The compiled allocation has `doLog=false`, and the split stays.\n\n</details>\n\n<details>\n<summary><b>Evidence</b> \u2014 2. callers still send the deprecated field</summary>\n\n`ffe.experimentation.experiment.patch_lifecycle_deprecated{field:experiment_action}`, summed over the 30 days to 2026-10-21: us1 95, eu1 28, us5 17, us3 13. The handler counts each request before later checks can reject it (`experiment_handler.go:2259-2264`), and the metric records neither the action nor the outcome. So these are requests that set the field, not successful concludes.\n\n</details>\n\n<details>\n<summary><b>Evidence</b> \u2014 3. opted-out subjects are randomized</summary>\n\nA probe on the #140422 evaluators, in immediate mode, with a `doLog=false` allocation that splits 50/50 between two variations before a fallback: 200 opted-out subjects got `a` 106 and `b` 94, and none reached the fallback. The JSON and archived evaluators agree on every subject.\n\n</details>\n",
+          "created_at": "2026-10-22T01:56:16Z",
+          "updated_at": "2026-10-22T01:56:17Z",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+          "line": 195,
+          "original_line": 179,
+          "pull_request_review_id": 5608387349,
+          "diff_hunk": "@@ -176,7 +176,7 @@ func BuildAllocationConfiguration(\n \t\tlog.Int(\"rules_count\", len(rules)),\n \t)\n \n-\tlogExposureEvent := allocation.IsStandardExperimentAllocation() || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()\n+\tlogExposureEvent := (allocation.IsStandardExperimentAllocation() && !allocation.ExperimentRolloutComplete) || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 4343814230,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343814230",
+          "body": "\ud83e\udd16 **Comment from Claude working with Aaron Silverman:**\n\n**[P2]** Update the synthetic-data holdout runner. It still requires `doLog=true` on a concluded winner.\n\n`_stage_is_ready` returns false when the ordinary allocation reports `doLog=false`, also after conclusion (`tools/synthetic_data/core/holdout_runner.py:346`). This PR compiles a concluded standard winner with `doLog=false` (`ufc.go:179`), as this test asserts. So a stage never becomes ready while its evaluations include a concluded ordinary allocation with `doLog=false`. `holdout_primary.py:138` calls the same check with every experiment concluded.\n\n<details>\n<summary><b>Evidence</b> \u2014 probe test, before and after</summary>\n\n- The test below fails at `3e99ba2a`: `_stage_is_ready` returns `False` for concluded winners served with `doLog=false`.\n- With the fix, it passes. `tests/test_holdout_runner.py`, `tests/test_holdout_primary.py` and the probe pass: 254 tests.\n- The fix also accepts `doLog=true` after conclusion, so the runner works against a compiler with or without this PR.\n\n</details>\n\n<details>\n<summary><b>Suggested patch</b> \u2014 accept a non-logging winner after conclusion</summary>\n\n```diff\n--- a/domains/ffe/tools/synthetic_data/core/holdout_runner.py\n+++ b/domains/ffe/tools/synthetic_data/core/holdout_runner.py\n@@ -343,7 +343,8 @@\n                     if result[\"variant\"] != control or result[\"reason\"] != \"DEFAULT\":\n                         return False\n                 elif allocation == ordinary:\n-                    if not metadata[\"doLog\"]:\n+                    # A concluded experiment serves its winner without exposure logging.\n+                    if key not in concluded and not metadata[\"doLog\"]:\n                         return False\n                     if key in concluded and result[\"variant\"] != (config[\"ship\"] or control):\n                         return False\n```\n\nAdd to `tests/test_holdout_runner.py`:\n\n```python\ndef _ordinary(key, variant, do_log):\n    return {\n        \"variant\": variant,\n        \"reason\": \"TARGETING_MATCH\",\n        \"metadata\": {\"doLog\": do_log, \"allocationKey\": f\"{key}-allocation\", \"__dd_split_serial_id\": 7},\n    }\n\ndef test_concluded_ordinary_winner_without_exposure_logging_is_ready():\n    runner = _runner()\n    concluded = {key: [_ordinary(key, runner.experiments[key][\"ship\"] or runner.experiments[key][\"variants\"][0][\"id\"], False)]\n                 for key in runner.experiments}\n    assert RealisticHoldoutRunner._stage_is_ready(runner, concluded, set(), set(runner.experiments))\n```\n\n</details>\n",
+          "created_at": "2026-10-22T01:56:23Z",
+          "updated_at": "2026-10-22T01:56:23Z",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
+          "line": 44,
+          "original_line": 44,
+          "pull_request_review_id": 5608388127,
+          "diff_hunk": "@@ -0,0 +1,74 @@\n+package lifecycle\n+\n+import (\n+\t\"encoding/json\"\n+\t\"os\"\n+\t\"path/filepath\"\n+\t\"time\"\n+\n+\t\"github.com/DataDog/dd-source/domains/ffe/apps/apis/ffe-service/internal/experiment/tests/harness\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/experimentation/orchestration\"\n+\tflaggingModel \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/model\"\n+\tflaggingRepository \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/repository\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/flagging/ufc\"\n+)\n+\n+func (s *Suite) TestConcludeStopsWinnerExposuresWithoutRemovingExperimentLink() {\n+\tsetup, err := s.CreateLinkedExperimentInState(harness.TestOrgID, false, false, false, false)\n+\ts.Require().NoError(err)\n+\tlifecycle := s.NewExperimentLifecycleService(s.AllocationService)\n+\t_, err = lifecycle.StartExperiment(s.Ctx, orchestration.StartExperimentInput{\n+\t\tExperimentID: setup.ExperimentID, OrgID: harness.TestOrgID, UserID: harness.TestUserUUID,\n+\t})\n+\ts.Require().NoError(err)\n+\trepo := flaggingRepository.NewUfcRepository()\n+\ts.Require().NoError(repo.Start(s.Ctx))\n+\tcompile := func(phase string, completed bool) {\n+\t\tflags, env, vacs, holdouts, err := repo.GetFlagsWithRelations(s.Ctx, harness.TestOrgID,\n+\t\t\t[]flaggingModel.EnvironmentLookup{flaggingModel.LookupByUUID(setup.EnvironmentID)}, nil, nil)\n+\t\ts.Require().NoError(err)\n+\t\ts.Require().Len(flags, 1)\n+\t\ts.Empty(holdouts, \"completion must load without any holdout\")\n+\t\tallocations := flags[0].CurrentEnvironment.Allocations\n+\t\ts.Require().Len(allocations, 1)\n+\t\ts.Require().NotNil(allocations[0].ExperimentID)\n+\t\ts.Equal(setup.ExperimentID, *allocations[0].ExperimentID)\n+\t\ts.True(allocations[0].RequiresExperimentsWritePermission(), \"completion does not remove edit authorization\")\n+\t\tcompiled := ufc.BuildFlagsConfiguration(s.Ctx, env, flags, nil, time.Now(), vacs, holdouts).ToJSON()\n+\t\tflag := compiled.Flags[flags[0].Key]\n+\t\ts.Require().NotNil(flag)\n+\t\tfound := false\n+\t\tfor _, allocation := range flag.Allocations {\n+\t\t\tif allocation.Key == allocations[0].Key {\n+\t\t\t\tfound = true\n+\t\t\t\ts.Equal(!completed, allocation.DoLog, \"only active experiments log exposures\")",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 4343814608,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343814608",
+          "body": "\ud83e\udd16 **Comment from Claude working with Aaron Silverman:**\n\n**[P3]** Bind the IDs as one array, as `loadApplicableHoldouts` in this file does.\n\n`id IN ?` binds one parameter per experiment ID. The holdout query below uses `a.id = ANY(?::uuid[])` with `pq.Array`.\n\n<details>\n<summary><b>Suggested patch</b> \u2014 the database-backed <code>TestRolloutState*</code> tests pass</summary>\n\n```diff\n--- a/domains/ffe/libs/flagging/core/repository/ufc_repository.go\n+++ b/domains/ffe/libs/flagging/core/repository/ufc_repository.go\n@@ -505,7 +505,7 @@ func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.Feature\n \t\treturn nil\n \t}\n \tvar experiments []experimentModel.Experiment\n-\tif err := tx.Select(\"id\", \"state\").Where(\"org_id = ? AND id IN ?\", orgID, experimentIDs).Find(&experiments).Error; err != nil {\n+\tif err := tx.Select(\"id\", \"state\").Where(\"org_id = ? AND id = ANY(?::uuid[])\", orgID, pq.Array(experimentIDs)).Find(&experiments).Error; err != nil {\n \t\treturn pkgerrors.Wrap(err, \"error loading experiment rollout state\")\n \t}\n \tfor _, experiment := range experiments {\n```\n\n</details>\n",
+          "created_at": "2026-10-22T01:56:28Z",
+          "updated_at": "2026-10-22T01:56:28Z",
+          "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
+          "line": null,
+          "original_line": 508,
+          "pull_request_review_id": 5608388763,
+          "diff_hunk": "@@ -475,6 +478,44 @@ func (r *ufcRepository) GetFlagsWithRelations(ctx context.Context, orgID int64,\n \treturn featureFlags, activeEnvironment, vacs, applicableHoldouts, nil\n }\n \n+// loadExperimentRolloutState reads lifecycle state in the allocation snapshot.\n+// Missing or deleted experiments retain logging. Only a known completed standard\n+// experiment becomes ordinary winner delivery. Generated holdouts log separately.\n+func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.FeatureFlag) error {\n+\tallocationsByExperiment := make(map[string][]*model.Allocation)\n+\tvar experimentIDs []string\n+\tfor _, flag := range flags {\n+\t\tif flag.CurrentEnvironment == nil {\n+\t\t\tcontinue\n+\t\t}\n+\t\tfor i := range flag.CurrentEnvironment.Allocations {\n+\t\t\tallocation := &flag.CurrentEnvironment.Allocations[i]\n+\t\t\tallocation.ExperimentRolloutComplete = false\n+\t\t\tif !allocation.IsStandardExperimentAllocation() {\n+\t\t\t\tcontinue\n+\t\t\t}\n+\t\t\tid := *allocation.ExperimentID\n+\t\t\tif _, exists := allocationsByExperiment[id]; !exists {\n+\t\t\t\texperimentIDs = append(experimentIDs, id)\n+\t\t\t}\n+\t\t\tallocationsByExperiment[id] = append(allocationsByExperiment[id], allocation)\n+\t\t}\n+\t}\n+\tif len(experimentIDs) == 0 {\n+\t\treturn nil\n+\t}\n+\tvar experiments []experimentModel.Experiment\n+\tif err := tx.Select(\"id\", \"state\").Where(\"org_id = ? AND id IN ?\", orgID, experimentIDs).Find(&experiments).Error; err != nil {",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 4353896956,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+          "body": "\ud83e\udd16 **Comment from Codex working with Leo:**\n\n**Decision [D018, revision 1](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018): the backend must represent randomization through the existing `doLog` field.**\n\nThanks, Aaron \u2014 agreed that a completed experiment can still randomize. We\u2019re keeping allocations that randomize subject to opt-out, including ordinary percentage splits and partial enrollment. The backend owns that classification; evaluators retain the existing `doLog` predicate and future-mode cutoff rule. This records Leo\u2019s clarification in [this decision thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763); the earlier withdrawn selection remains in [provenance](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/local-decision.json).\n\n**Implemented in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1); validated after merging main at [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b).** The compiler sets `doLog=true` when shard selection changes the variation or match/fallthrough outcome. Deterministic completed winners remain `false`, while existing active-experiment, canary, bandit, and holdout logging requirements are preserved.\n\n**Shared proofs:** [draft FFE test-data PR #55](https://github.com/DataDog/ffe-system-test-data/pull/55) contains the [D018 decision](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018), its Lean proofs, and the linked validation history.\n\n<details>\n<summary><b>Behavior</b> \u2014 the distinction we are preserving</summary>\n\n| Allocation | Compiler output | Immediate mode with a valid subject cutoff |\n| --- | --- | --- |\n| Completed experiment still splitting 50/50 | `doLog=true` | Skip the allocation. |\n| Ordinary percentage split | `doLog=true` | Skip the allocation. |\n| Single variant with partial percentage enrollment | `doLog=true` | Skip the allocation. |\n| Deterministic completed ordinary winner | `doLog=false` | Remains eligible for delivery. |\n| Existing active-experiment, canary, bandit, or generated-holdout logging | Preserve the existing logging requirement. | Skip when `doLog=true`. |\n\nThis deliberately enables exposure logging for ordinary randomized allocations. Targeting rules and time windows do not themselves make an allocation random; changing between match and fallthrough does. First-match order, unreachable variants, empty ranges, and same-variant coverage are handled by the native classifier.\n\nFuture mode keeps its strictly-before cutoff rule: earlier activation remains eligible, while unknown activation is conservatively excluded. Deployment still requires the fallback-preserving child, regenerated UFCs, and activation coverage for newly logging allocations.\n\n</details>\n\n<details>\n<summary><b>Native validation</b> \u2014 local checks at <a href=\"https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b\">0ae33d8f11</a></summary>\n\n- **918 compiler tests, 283 database repository tests, and 275 runner/primary-analysis tests pass.** The [merged-source receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/main-merge-native-validation.json) records the commands, source hashes, and exact execution scope. The repository run preceded only the compiler-test snapshot/comment correction; its library source was unchanged.\n- The classifier matches **500 independent raw-bucket enumeration cases**, alongside targeted cases for partial enrollment, first-match ordering, unreachable variants, and same-variant coverage.\n- Before main integration, restoring the old `doLog` output failed the completed 50/50, ordinary 50/50, and partial-enrollment regressions. The [negative-control receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json) retains its original source and patch pins; restoring the fix passed both Go suites uncached.\n- Main introduced a golden snapshot with seven old `doLog=false` expectations. That initial failure is preserved in [V052](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#v052). Updating only those seven logging bits leaves **every assignment field unchanged**; the subsequent compiler run passes, recorded in [V053](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#v053).\n\nThese are local native checks. The model proof does not establish correctness of the Go partition classifier. Child-stack integration, CI, and deployed behavior remain separate evidence.\n\n</details>\n\n<details>\n<summary><b>Sneak preview</b> \u2014 turning review decisions into reusable, checked contracts</summary>\n\nThe shared decisions and proofs are published in **[draft FFE test-data PR #55](https://github.com/DataDog/ffe-system-test-data/pull/55)** at [99854cf878](https://github.com/DataDog/ffe-system-test-data/commit/99854cf87802e03d2cc2c5ed324dfabcaafc5f34):\n\n1. **[A versioned English decision \u2014 D018, revision 1](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018)**, linked to where it was set.\n2. **[An executable Lean model and checked proofs](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/lean/BackendReview.lean#L6-L41)** of the producer/evaluator composition.\n3. **[The existing semantic corpus](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/corpus/browser-proposal.jsonl)** and **[operational corpus](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/corpus/inactive-path.jsonl)**, preserving the broader opt-out contract. These are not new D018 producer-classification cases; the classifier has separate native enumeration and regression tests.\n4. **[A linked history of evidence](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#historical-linked-checks)**, preserving passing and failing checks separately from the decision\u2019s authority.\n\nFor example, [this theorem](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/lean/BackendReview.lean#L26-L28) is checked in the published model:\n\n```lean\ntheorem immediate_excludes_randomized_allocations (existingExposure : Bool) :\n    (compiledPolicy .immediate .valid .missing existingExposure true).exclude = true := by\n  cases existingExposure <;> rfl\n```\n\nIn plain English: within this model, an allocation classified as randomized is excluded in immediate mode with a valid subject cutoff, even without an existing exposure-logging requirement. The modeled compiler combines the two requirements as `existingExposure || randomized`; it does not infer randomization from native shard data.\n\nThe [model validation](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/model-validation.json) passes **53 theorem audits**, including seven new D018 theorems, plus **313 existing semantic cases and 36 operational cases**. A separate theorem distinguishes the old non-logging split from the corrected producer contract.\n\nThe useful result is a reviewable rule with a source-pinned evidence trail. The Lean proof establishes properties of the model; the [native receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/main-merge-native-validation.json) establishes the bounded compiler checks above. The central PR remains a draft, and fleet adoption remains a separate decision.\n\n</details>\n",
+          "created_at": "2026-10-22T21:49:16Z",
+          "updated_at": "2026-10-22T22:14:00Z",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+          "line": 195,
+          "original_line": 179,
+          "in_reply_to_id": 4343813763,
+          "pull_request_review_id": 5621295860,
+          "diff_hunk": "@@ -176,7 +176,7 @@ func BuildAllocationConfiguration(\n \t\tlog.Int(\"rules_count\", len(rules)),\n \t)\n \n-\tlogExposureEvent := allocation.IsStandardExperimentAllocation() || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()\n+\tlogExposureEvent := (allocation.IsStandardExperimentAllocation() && !allocation.ExperimentRolloutComplete) || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 4353897263,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263",
+          "body": "Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1). The holdout runner now accepts either `doLog` value for a concluded ordinary winner, still checks the selected winner, and continues requiring logging for active ordinary experiments. Regression cases cover both logging values and reject the wrong winner.\n\nThe holdout-runner and primary-analysis suites pass all 255 tests. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json), retained in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55) alongside the [D018](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/backend-feedback.md#d018-randomization-is-represented-by-dolog) producer contract. This is local runner validation; it does not claim a deployed lifecycle run.\n\nAfter integrating main in [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b), the expanded runner/primary-analysis suites pass all 275 tests. The concluded-winner and active-experiment logging checks remain intact.",
+          "created_at": "2026-10-22T21:49:18Z",
+          "updated_at": "2026-10-22T22:04:42Z",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
+          "line": 44,
+          "original_line": 44,
+          "in_reply_to_id": 4343814230,
+          "pull_request_review_id": 5621296186,
+          "diff_hunk": "@@ -0,0 +1,74 @@\n+package lifecycle\n+\n+import (\n+\t\"encoding/json\"\n+\t\"os\"\n+\t\"path/filepath\"\n+\t\"time\"\n+\n+\t\"github.com/DataDog/dd-source/domains/ffe/apps/apis/ffe-service/internal/experiment/tests/harness\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/experimentation/orchestration\"\n+\tflaggingModel \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/model\"\n+\tflaggingRepository \"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/repository\"\n+\t\"github.com/DataDog/dd-source/domains/ffe/libs/flagging/ufc\"\n+)\n+\n+func (s *Suite) TestConcludeStopsWinnerExposuresWithoutRemovingExperimentLink() {\n+\tsetup, err := s.CreateLinkedExperimentInState(harness.TestOrgID, false, false, false, false)\n+\ts.Require().NoError(err)\n+\tlifecycle := s.NewExperimentLifecycleService(s.AllocationService)\n+\t_, err = lifecycle.StartExperiment(s.Ctx, orchestration.StartExperimentInput{\n+\t\tExperimentID: setup.ExperimentID, OrgID: harness.TestOrgID, UserID: harness.TestUserUUID,\n+\t})\n+\ts.Require().NoError(err)\n+\trepo := flaggingRepository.NewUfcRepository()\n+\ts.Require().NoError(repo.Start(s.Ctx))\n+\tcompile := func(phase string, completed bool) {\n+\t\tflags, env, vacs, holdouts, err := repo.GetFlagsWithRelations(s.Ctx, harness.TestOrgID,\n+\t\t\t[]flaggingModel.EnvironmentLookup{flaggingModel.LookupByUUID(setup.EnvironmentID)}, nil, nil)\n+\t\ts.Require().NoError(err)\n+\t\ts.Require().Len(flags, 1)\n+\t\ts.Empty(holdouts, \"completion must load without any holdout\")\n+\t\tallocations := flags[0].CurrentEnvironment.Allocations\n+\t\ts.Require().Len(allocations, 1)\n+\t\ts.Require().NotNil(allocations[0].ExperimentID)\n+\t\ts.Equal(setup.ExperimentID, *allocations[0].ExperimentID)\n+\t\ts.True(allocations[0].RequiresExperimentsWritePermission(), \"completion does not remove edit authorization\")\n+\t\tcompiled := ufc.BuildFlagsConfiguration(s.Ctx, env, flags, nil, time.Now(), vacs, holdouts).ToJSON()\n+\t\tflag := compiled.Flags[flags[0].Key]\n+\t\ts.Require().NotNil(flag)\n+\t\tfound := false\n+\t\tfor _, allocation := range flag.Allocations {\n+\t\t\tif allocation.Key == allocations[0].Key {\n+\t\t\t\tfound = true\n+\t\t\t\ts.Equal(!completed, allocation.DoLog, \"only active experiments log exposures\")",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 4353897591,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591",
+          "body": "Fixed in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1): the organization-scoped bulk snapshot query uses `id = ANY(?::uuid[])` with `pq.Array(experimentIDs)`, matching the existing holdout-query pattern.\n\nAll 269 database repository tests pass with the change. [Native receipt](https://github.com/DataDog/ffe-system-test-data/blob/656696f84fb83fea87798a0d4151af0f7e2fc16d/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json) is published in [central draft #55](https://github.com/DataDog/ffe-system-test-data/pull/55); this query-binding fix is native evidence, outside the Lean model proof.\n\nAfter integrating main in [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b), all 283 database repository tests pass. The rollout-state loader and main's bandit-ordering helper are both preserved.",
+          "created_at": "2026-10-22T21:49:20Z",
+          "updated_at": "2026-10-22T22:04:43Z",
+          "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
+          "line": null,
+          "original_line": 508,
+          "in_reply_to_id": 4343814608,
+          "pull_request_review_id": 5621296540,
+          "diff_hunk": "@@ -475,6 +478,44 @@ func (r *ufcRepository) GetFlagsWithRelations(ctx context.Context, orgID int64,\n \treturn featureFlags, activeEnvironment, vacs, applicableHoldouts, nil\n }\n \n+// loadExperimentRolloutState reads lifecycle state in the allocation snapshot.\n+// Missing or deleted experiments retain logging. Only a known completed standard\n+// experiment becomes ordinary winner delivery. Generated holdouts log separately.\n+func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.FeatureFlag) error {\n+\tallocationsByExperiment := make(map[string][]*model.Allocation)\n+\tvar experimentIDs []string\n+\tfor _, flag := range flags {\n+\t\tif flag.CurrentEnvironment == nil {\n+\t\t\tcontinue\n+\t\t}\n+\t\tfor i := range flag.CurrentEnvironment.Allocations {\n+\t\t\tallocation := &flag.CurrentEnvironment.Allocations[i]\n+\t\t\tallocation.ExperimentRolloutComplete = false\n+\t\t\tif !allocation.IsStandardExperimentAllocation() {\n+\t\t\t\tcontinue\n+\t\t\t}\n+\t\t\tid := *allocation.ExperimentID\n+\t\t\tif _, exists := allocationsByExperiment[id]; !exists {\n+\t\t\t\texperimentIDs = append(experimentIDs, id)\n+\t\t\t}\n+\t\t\tallocationsByExperiment[id] = append(allocationsByExperiment[id], allocation)\n+\t\t}\n+\t}\n+\tif len(experimentIDs) == 0 {\n+\t\treturn nil\n+\t}\n+\tvar experiments []experimentModel.Experiment\n+\tif err := tx.Select(\"id\", \"state\").Where(\"org_id = ? AND id IN ?\", orgID, experimentIDs).Find(&experiments).Error; err != nil {",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 4354101407,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4354101407",
+          "body": "<sub><sub>![P1](https://img.shields.io/badge/P1-orange?style=flat)</sub></sub> **Exposure-event logging is forced on fleet-wide for all randomized allocations with no kill switch**\n\nThis unconditionally ORs `splitsRandomize(result.Splits)` into `LogExposureEvent` for every compiled allocation, including plain percentage splits and every progressive-rollout step produced by `BuildSyntheticAllocationConfigurations` (whose exposure sharder makes partial enrollment randomize). Today none of those allocation types log exposures \u2014 only experiment, canary, and bandit allocations do. Once UFCs are rebuilt, SDKs across every org will start emitting exposure events for all percentage rollouts in a single step, which can significantly increase load on exposure intake and the downstream pipeline, and the only way back is a code revert plus another fleet-wide UFC rebuild.\n\nThis is a behavior change with fleet-wide blast radius and no runtime kill switch, so it isn't safely expressible as a minimal line-level code suggestion \u2014 it needs a design change. Recommend gating the `splitsRandomize` OR-in behind a runtime flag that can be enabled per org or by percentage (defaulting to the current/old behavior), with the compiler reading that flag so it can be disabled without a redeploy. Keep the `ExperimentRolloutComplete` change (already in this diff, a few lines above) separate, since it is a distinct, narrower fix that lets completed deterministic winners stop logging. Before widely enabling the new flag, confirm exposure intake has capacity for the added volume.\n\nReact with \ud83d\udc4d / \ud83d\udc4e or respond to this suggestion!\n\n<sub>\ud83d\udd0e Flagged by resilience</sub>\n\n<!-- arp:mitigation:v1 {\"id\":\"arp_m_v1_f4278bf5942bfa81a6ecb4b81558fb472824c4ee6bfac77e8150ecc65aa335b8\"} -->",
+          "created_at": "2026-10-22T22:15:52Z",
+          "updated_at": "2026-10-22T22:15:52Z",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "original_commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+          "line": 266,
+          "original_line": 266,
+          "pull_request_review_id": 5621533846,
+          "diff_hunk": "@@ -260,6 +260,11 @@ func buildAllocationConfiguration(\n \tsplitsSpan.SetTag(\"splits.count\", len(result.Splits))\n \tsplitsSpan.Finish()\n \n+\t// doLog is also the opt-out signal. Lifecycle completion alone does not\n+\t// make delivery deterministic: a concluded experiment can still split\n+\t// traffic, and an ordinary rollout can randomly select its participants.\n+\tresult.LogExposureEvent = result.LogExposureEvent || splitsRandomize(result.Splits)",
+          "author": "dd-agentic-review-platform-14301c[bot]"
+        }
+      ],
+      "conversation_comments": [],
+      "reviews": [
+        {
+          "id": 5608387349,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5608387349",
+          "body": "",
+          "submitted_at": "2026-10-22T01:56:16Z",
+          "state": "COMMENTED",
+          "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 5608388127,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5608388127",
+          "body": "",
+          "submitted_at": "2026-10-22T01:56:22Z",
+          "state": "COMMENTED",
+          "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 5608388763,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5608388763",
+          "body": "",
+          "submitted_at": "2026-10-22T01:56:27Z",
+          "state": "COMMENTED",
+          "commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+          "author": "aaron-silverman_ddog"
+        },
+        {
+          "id": 5621295860,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5621295860",
+          "body": "",
+          "submitted_at": "2026-10-22T21:49:16Z",
+          "state": "COMMENTED",
+          "commit_id": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 5621296186,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5621296186",
+          "body": "",
+          "submitted_at": "2026-10-22T21:49:18Z",
+          "state": "COMMENTED",
+          "commit_id": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 5621296540,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5621296540",
+          "body": "",
+          "submitted_at": "2026-10-22T21:49:20Z",
+          "state": "COMMENTED",
+          "commit_id": "d0a2de5b58dba158941d2c2f81016276a45ea2c1",
+          "author": "leo-romanovsky_ddog"
+        },
+        {
+          "id": 5621533846,
+          "html_url": "https://github.com/ddoghq/dd-source/pull/139368#pullrequestreview-5621533846",
+          "body": "### \ud83e\udd16 Agentic Review Platform\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `0ae33d8f11`\n\n<details>\n<summary>\u2139\ufe0f What's This?</summary>\n\nAgentic Review Platform orchestrates specialized review agents across your changes, combining their signals to catch production-risk issues before they ship. [Learn more here](https://datadoghq.atlassian.net/wiki/spaces/AIDEVX/pages/6654230856/Agentic+Review+Platform).\n\nReach out to us in [#ai-devx-flow](https://dd.enterprise.slack.com/archives/C0AUXEUEGE4).\n\n</details>\n\n<!-- arp:review:v1 -->",
+          "submitted_at": "2026-10-22T22:15:52Z",
+          "state": "COMMENTED",
+          "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "author": "dd-agentic-review-platform-14301c[bot]"
+        }
+      ],
+      "check_runs": [
+        {
+          "name": "go.mod check",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "details_url": "https://datadoghq.com",
+          "started_at": "2026-10-22T22:24:49Z",
+          "completed_at": "2026-10-22T22:24:49Z"
+        },
+        {
+          "name": "devflow/mergegate",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "details_url": "https://atlas.ddbuild.io/namespaces/default/workflows/evaluate-mergegate-ddoghq-dd-source-139368-EVENT_KIND_PR_SYNC/01a165a4-c8cf-7a04-9369-f03e4de6b07d",
+          "started_at": "2026-10-22T22:04:35Z",
+          "completed_at": null
+        },
+        {
+          "name": "label",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+          "details_url": "https://github.com/ddoghq/dd-source/actions/runs/39862193877/job/120115406504",
+          "started_at": "2026-10-22T22:04:27Z",
+          "completed_at": "2026-10-22T22:04:33Z"
+        }
+      ],
+      "commit_statuses": [
+        {
+          "context": "dd-gitlab/static-build-success",
+          "state": "success",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139368/request/3796067046669341903?owner=ddoghq&repository=dd-source&taskExecutionId=2168466733&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-22T22:16:33Z",
+          "updated_at": "2026-10-22T22:16:33Z"
+        },
+        {
+          "context": "dd-gitlab/static-build-success",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139368/request/3796067046669341903?owner=ddoghq&repository=dd-source&taskExecutionId=2168466733&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-22T22:16:29Z",
+          "updated_at": "2026-10-22T22:16:29Z"
+        },
+        {
+          "context": "dd-gitlab/dynamic-build-create",
+          "state": "success",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139368/request/3796067046669341903?owner=ddoghq&repository=dd-source&taskExecutionId=2168466660&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-22T22:05:07Z",
+          "updated_at": "2026-10-22T22:05:07Z"
+        },
+        {
+          "context": "dd-gitlab/dynamic-build-create",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139368/request/3796067046669341903?owner=ddoghq&repository=dd-source&taskExecutionId=2168466660&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+          "created_at": "2026-10-22T22:04:37Z",
+          "updated_at": "2026-10-22T22:04:37Z"
+        },
+        {
+          "context": "DDCI Status",
+          "state": "pending",
+          "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/ddoghq/dd-source/pull/139368/request/3796067046669341903?utm_content=ddci_status_check&utm_source=github_pr_page",
+          "created_at": "2026-10-22T22:04:23Z",
+          "updated_at": "2026-10-22T22:04:23Z"
+        }
+      ]
+    }
+  ],
+  "completed_at": "2026-10-22T22:43:18.727835+00:00",
+  "consistency_limit": "Heads and bases rechecked after collection; GitHub discussions, thread state and checks are nontransactional reads over this window. Refresh before acting on review state."
+}

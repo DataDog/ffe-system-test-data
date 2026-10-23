@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "review_read_after_own_pass": true,
+  "original_audited_head": "176aafac647ae8484aef561e07a087c77bebca3c",
+  "review_read_completed_at": "2026-10-23T01:36:08.826546+00:00",
+  "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "central_pin": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "thread_count": 15,
+  "publication_boundary": "This ledger records prepared dispositions. Parent publication/readback records establish posted replies and resolutions.",
+  "entries": [
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZK1",
+      "comment_id": 4343863206,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863206",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P2",
+      "disposition": "implemented",
+      "classification": "Coverage/documentation gap",
+      "decision_ids": [
+        "D001",
+        "D002"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZK-",
+      "comment_id": 4343863216,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863216",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "reviewer_priority": null,
+      "disposition": "implemented",
+      "classification": "Deployment/failure-mode acknowledgement",
+      "decision_ids": [
+        "D008",
+        "D012"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible after parent publication/readback; deployment gate remains in4343863248"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLI",
+      "comment_id": 4343863236,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863236",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P3",
+      "disposition": "implemented",
+      "classification": "Documentation clarification",
+      "decision_ids": [
+        "D011"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLR",
+      "comment_id": 4343863248,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863248",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": null,
+      "disposition": "implementation-incomplete",
+      "classification": "Customer-enablement prerequisite",
+      "decision_ids": [
+        "D012"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "leave open: external gate not verified"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLY",
+      "comment_id": 4343863262,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863262",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": null,
+      "disposition": "implemented",
+      "classification": "Base-integration obligation",
+      "decision_ids": [
+        "D001",
+        "D008"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLe",
+      "comment_id": 4343863269,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863269",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:01Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": null,
+      "disposition": "implementation-incomplete",
+      "classification": "Native validation and CI gap",
+      "decision_ids": [],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "leave open: external gate not verified"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLi",
+      "comment_id": 4343863276,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863276",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P3",
+      "disposition": "superseded",
+      "classification": "Partly fixed parser defect; rejected grammar expansion",
+      "decision_ids": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "leave open for reviewer acknowledgement of deliberately declined broader parser grammar"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLo",
+      "comment_id": 4343863282,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863282",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P2",
+      "disposition": "implemented",
+      "classification": "Persisted cache retention defect",
+      "decision_ids": [
+        "D001",
+        "D002"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLt",
+      "comment_id": 4343863287,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863287",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P2",
+      "disposition": "implemented",
+      "classification": "Requested telemetry identity defect",
+      "decision_ids": [
+        "D009"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLz",
+      "comment_id": 4343863296,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863296",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P3",
+      "disposition": "implemented",
+      "classification": "Unreleased persistence compatibility cleanup",
+      "decision_ids": [
+        "D008"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZL6",
+      "comment_id": 4343863304,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863304",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P3",
+      "disposition": "implemented",
+      "classification": "Named-client diagnostic improvement",
+      "decision_ids": [],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZL9",
+      "comment_id": 4343863318,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863318",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P2",
+      "disposition": "implemented",
+      "classification": "Atomic snapshot and native cost obligation",
+      "decision_ids": [
+        "D001",
+        "D009",
+        "D017"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZMD",
+      "comment_id": 4343863326,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863326",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P3",
+      "disposition": "implemented",
+      "classification": "Release-note/API documentation",
+      "decision_ids": [],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZMH",
+      "comment_id": 4343863330,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863330",
+      "author": "aarsilv",
+      "created_at": "2026-10-22T02:06:02Z",
+      "original_source_sha": "4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P2",
+      "disposition": "implemented",
+      "classification": "Public API consolidation with deliberate forwarding compatibility",
+      "decision_ids": [],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vPriq",
+      "comment_id": 4349878544,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4349878544",
+      "author": "chatgpt-codex-connector[bot]",
+      "created_at": "2026-10-22T14:55:00Z",
+      "original_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "current_source_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "reviewer_priority": "P1",
+      "disposition": "declined",
+      "classification": "Instruction-only protocol objection",
+      "decision_ids": [
+        "D008",
+        "D014"
+      ],
+      "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "resolution_recommendation": "eligible only after parent publishes and verifies final commit/reply"
+    }
+  ]
+}

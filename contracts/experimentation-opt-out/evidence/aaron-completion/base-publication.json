@@ -1,0 +1,87 @@
+{
+  "pr": 5666,
+  "before": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+  "after": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+  "files": {
+    "openfeature/doc.go": "5dd6c87be3358ad01ecf329209d8db3ed45c49ace7a08471da9c3a9469a54132",
+    "openfeature/experimentation_opt_out.go": "982f423f246fbb49b05ddbc6441a68d01bfef8e6df7e4ace7751d88cc255d649",
+    "openfeature/experimentation_opt_out_test.go": "1bd2c63e8bf31a4d626f98b2d7024b3a8b51587e3d8f87cf4bc2ab126ee11232",
+    "openfeature/flageval_logging.go": "52abda91e14c29b197c4b60e7e35b98a3e15ab50e17486df397d52f9dbb0549a",
+    "openfeature/flatten.go": "60713ad8bc7859d0a542c91b6fbf85b89921f8a5f1cf515066141bbda3ea357e",
+    "openfeature/provider.go": "9e23a4b74151ff6cf5e62dd13e6c549d595ba225af2f889b68b8ba60349b515d",
+    "openfeature/nil_stringer_attribute_test.go": "37042d1a749372b68c01996774bf8f8d0d64bae41ed516bcce9fa0532bbc3f73"
+  },
+  "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+  "commits": [
+    {
+      "sha": "faa552d23f491b3f31f5556832d838a8d715034f",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a6c0a015ecb25a63e22210c7b86bb79568afa7e2",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "9244ccef66dfb902123d64dbdff2f0ea3099bee6",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "ffd4f884b85cfb6f31fcf190935fd9200c894633",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "a4e92653db47b87bfaead0292cc0331d6c59908e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "2bb089483ed8fb350a86ca4aa94a4e8f7a448486",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "15087a5c9ec9c526485a2284cdb6840566592435",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "5d02af7aa2dbbcd848550b882e88d12e780a125b",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "fdf75eb241a73f44ee79087a7b5ad22a4e023701",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "6a40da5554fc6830776ae8fd472f96aae32981ad",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "56677281e5e2758b2f9d4ac46bbf513dbcfd4695",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "de3998517f6e18864727360a5f676d33be5a5e29",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+      "verified": true,
+      "reason": "valid"
+    },
+    {
+      "sha": "829f614e3e1567f1fa997a300a4abd8c955517dc",
+      "verified": true,
+      "reason": "valid"
+    }
+  ]
+}

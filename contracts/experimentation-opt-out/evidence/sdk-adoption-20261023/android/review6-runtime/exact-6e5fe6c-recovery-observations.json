@@ -1,0 +1,68 @@
+{
+  "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "cases": [
+    {
+      "failure": "creation-security",
+      "submitted_callbacks": 1,
+      "delivered_callbacks": 1,
+      "worker_start_attempts": 2,
+      "attempts_on_main_looper": [
+        false,
+        true
+      ],
+      "callback_threads": [
+        "datadog-flags-callbacks-thread-1"
+      ],
+      "delivered_after_sdk_stop": [
+        true
+      ],
+      "callback_errors": [
+        "FlagsInvalidContextException"
+      ],
+      "all_created_workers_shutdown": true,
+      "all_created_workers_terminated": true
+    },
+    {
+      "failure": "submission-security",
+      "submitted_callbacks": 1,
+      "delivered_callbacks": 1,
+      "worker_start_attempts": 2,
+      "attempts_on_main_looper": [
+        false,
+        true
+      ],
+      "callback_threads": [
+        "datadog-flags-callbacks-thread-1"
+      ],
+      "delivered_after_sdk_stop": [
+        true
+      ],
+      "callback_errors": [
+        "FlagsInvalidContextException"
+      ],
+      "all_created_workers_shutdown": true,
+      "all_created_workers_terminated": true
+    },
+    {
+      "failure": "submission-rejection",
+      "submitted_callbacks": 1,
+      "delivered_callbacks": 1,
+      "worker_start_attempts": 2,
+      "attempts_on_main_looper": [
+        false,
+        true
+      ],
+      "callback_threads": [
+        "datadog-flags-callbacks-thread-1"
+      ],
+      "delivered_after_sdk_stop": [
+        true
+      ],
+      "callback_errors": [
+        "FlagsInvalidContextException"
+      ],
+      "all_created_workers_shutdown": true,
+      "all_created_workers_terminated": true
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "recorded_at": "2026-10-23T01:31:21.264878+00:00",
+  "kind": "fresh-source-inspection",
+  "sources": {
+    "browser": {
+      "head": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+      "files": [
+        {
+          "path": "packages/core/src/evaluation/experimentation-opt-out.ts",
+          "sha256": "bef09b2c903c6bbe1b59939b553720b8330ce710323d9493b120b550cc0553d7"
+        },
+        {
+          "path": "packages/core/src/configuration/prepared-activation.ts",
+          "sha256": "954067ee19086871813153e55041f58f6174f538f9dac4ded0007261dbc229b6"
+        },
+        {
+          "path": "packages/core/src/evaluation/evaluateForSubject.ts",
+          "sha256": "b14411aea36ebfd9981bf2fe7b288c0f924a64b13f0d604d31d71d1fb583d515"
+        },
+        {
+          "path": "packages/core/src/evaluation/evaluateProtobufConfiguration.ts",
+          "sha256": "62a9562264957e516158dea86226ec8c23e2a00a4c2fb60f47f44be2b70abef4"
+        }
+      ]
+    },
+    "go": {
+      "head": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+      "files": [
+        {
+          "path": "openfeature/experimentation_opt_out.go",
+          "sha256": "9f6eac3929dd2aaa5e9a7bc4d6b8ebf8c818d0ab0c103b6e6fc3a5b5f47109d9"
+        },
+        {
+          "path": "openfeature/provider.go",
+          "sha256": "f7136d4a053f6c4789852b6adc09033a7e5f606d764f18ed69310b931f80b1d3"
+        },
+        {
+          "path": "openfeature/evaluator.go",
+          "sha256": "de450b59d54d7f8cdf43c1bbeda3cb66d8ef394e05ff2fc194e15a5750abe519"
+        },
+        {
+          "path": "openfeature/types.go",
+          "sha256": "8bcd10fb87e33a8ed28dee6254345da4b01185d85b2891d253098116dd2541b9"
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "decisions": [
+        "D002",
+        "D016"
+      ],
+      "result": "Both enabled modes reject malformed subject timestamps. Disabled ignores the attribute; missing is distinct. Go checks readiness before cutoff validation."
+    },
+    {
+      "decisions": [
+        "D003",
+        "D004"
+      ],
+      "result": "Both prepare activation into valid/missing/invalid states and gate flag-wide activation errors on effective future policy. Unreachable malformed allocations remain relevant."
+    },
+    {
+      "decisions": [
+        "D011"
+      ],
+      "result": "Both skip doLog-eligible allocations before targeting. Future compares strict activation-before-cutoff; no history, wall-clock schedule or assignment freeze."
+    },
+    {
+      "decisions": [
+        "D015",
+        "D017"
+      ],
+      "result": "Go returns NoopProvider before mode validation and guards excludes at the allocation loop. These remain scoped Go decisions; browser still calls its no-op exclusion helper."
+    },
+    {
+      "decisions": [
+        "D005",
+        "D006",
+        "D007"
+      ],
+      "result": "Browser uses the recorded normalized parser. Go intentionally uses time.RFC3339Nano/time.Time JSON parsing. Lowercase and parser extensions remain a recorded conflict, not a new common grammar."
+    },
+    {
+      "decisions": [
+        "D008",
+        "D014"
+      ],
+      "result": "Browser validates acknowledgements against effective policy. Absent cutoff omits options; unfiltered requests reject explicit filtering."
+    }
+  ],
+  "limits": "Source inspection at merged PR heads. No fresh Go native test, runtime, deployment, or whole-source refinement claim."
+}

@@ -1,0 +1,216 @@
+{
+  "schema": "ruby-hosted-ci-triage-v1",
+  "recorded_at": "2026-10-23T15:26:32.444288+00:00",
+  "repository": "DataDog/dd-trace-rb",
+  "pull_request": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+  "historical_failure": {
+    "source_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+    "workflow_merge_sha": "88f5a562360f079270d8e06a04d5dc8f9a6239e0",
+    "workflow_url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257",
+    "attempt": 1,
+    "failed_test_jobs": 10,
+    "failed_examples": 140,
+    "jobs": [
+      {
+        "name": "Ruby 3.4 / build & test (standard) [0]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483827529",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "2e8145ce7b795e1d400bae7927ab6061ca672bf08bc31d97b62faa89af175441"
+      },
+      {
+        "name": "Ruby 3.4 / build & test (standard) [4]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483827621",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "5f2548343a5a242eb7ef704d193f10aa9c63d4252cff7ce713c7ea72276cd917"
+      },
+      {
+        "name": "Ruby 3.1 / build & test (standard) [3]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483872346",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "8660f33e77365c69497a96abe9f5e0d979cbede88a6ad578d05f1f7a4772b50c"
+      },
+      {
+        "name": "Ruby 3.1 / build & test (standard) [6]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483872358",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "fead02a47bbff9e65cff2525866f375149dd0e6653a2fa0a9487f1e718da9ff7"
+      },
+      {
+        "name": "Ruby 3.3 / build & test (standard) [6]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483892329",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "91e596a17649e65d5daa027c3eb436ce9a656d51e9c68060c96f6b8ea1fc9dc2"
+      },
+      {
+        "name": "Ruby 3.3 / build & test (standard) [0]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483892529",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "a290169d4ee05005fba21aa54fc27c4ad1dab13a0ed18a9b476efe6ea5dfa1e5"
+      },
+      {
+        "name": "Ruby 4.0 / build & test (standard) [6]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483911583",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "16b10d2d380ca41b03d4d2df775a730494397378f14d5628c46dd847750bf9ad"
+      },
+      {
+        "name": "Ruby 4.0 / build & test (standard) [4]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483911805",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "c334acd9e8d93d64153507d2ac7602b6e21b7814844c9ae14730b42b854b0359"
+      },
+      {
+        "name": "Ruby 3.2 / build & test (standard) [1]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483912200",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "8f5c823e30c2da8a682aca6eb0cc1c6be3f811f18a9edecd547bd37fb6103b07"
+      },
+      {
+        "name": "Ruby 3.2 / build & test (standard) [2]",
+        "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973946257/job/120483912344",
+        "failed_examples": 14,
+        "classification": "changed-test setup regression",
+        "capability_probes": {
+          "ddog_ffe_get_assignment_with_options": false,
+          "ddog_ffe_get_assignment_with_opt_out_mode": false
+        },
+        "raw_log_sha256": "22c687df4def4a29d9cf1bd7e28bd58a390c03be4a2f6978a5e89ae06809cec4"
+      }
+    ],
+    "aggregator": {
+      "url": "https://github.com/DataDog/dd-trace-rb/actions/runs/39973945796/job/120483552336",
+      "name": "all-jobs-are-green",
+      "classification": "dependent failure",
+      "evidence": "Run Ensure CI Success reports failed Ruby build-and-test checks and exits with Some CI checks or statuses failed.",
+      "raw_log_sha256": "7699bf71f219b113a62589da07686330bfe85942307c29d92a3ed9603f18ceb9"
+    },
+    "root_cause": "The outer Provider spec before hook evaluates provider through .with(provider). The new native-boundary provider let constructs an enabled provider before the nested capability guard. The released native library lacks both opt-out APIs, so construction raises before the intended skip.",
+    "errors": [
+      "Immediate experimentation opt-out requires a libdatadog build with evaluation options",
+      "Future experimentation opt-out requires a libdatadog build with opt-out modes"
+    ],
+    "source_locations": [
+      "spec/datadog/open_feature/provider_spec.rb:151",
+      "spec/datadog/open_feature/provider_spec.rb:351",
+      "lib/datadog/open_feature/provider.rb:460",
+      "lib/datadog/open_feature/provider.rb:465"
+    ],
+    "classification": "Changed test setup, deterministic on the released native dependency. No timestamp evaluation occurs in these failures. No separate unrelated or infrastructure cause was found in these eleven failed checks.",
+    "attribution_basis": "Complete raw GitHub logs for all ten test jobs and the aggregator, 140 retained failing test events, exact-source inspection, and capability probe output. Datadog automatic classification is inference, not the authority for this result.",
+    "automatic_summary_correction": "One Datadog job summary said seven failures. Its raw RSpec summary shows fourteen; this receipt uses the raw count."
+  },
+  "correction": {
+    "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+    "commit_url": "https://github.com/DataDog/dd-trace-rb/commit/6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+    "changed_file": "spec/datadog/open_feature/provider_spec.rb",
+    "change": "Move the existing native capability guard inside the provider let, before construction.",
+    "production_changed": false,
+    "native_assertions_changed": false,
+    "diff_sha256": "4c55013df404b703983db1d00b1a35a5005854faf301c07cd69b36a8575a8632",
+    "independent_review": {
+      "reviewer_role": "java_audit validation owner, separate from implementation owner",
+      "result": "pass",
+      "basis": "The lazy provider let now checks capability before the outer setup hook can construct an enabled provider. The production capability checks and all native-boundary assertions are unchanged."
+    }
+  },
+  "released_native_validation": {
+    "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+    "clean_worktree_before_and_after": true,
+    "environment": {
+      "os": "macOS",
+      "architecture": "arm64",
+      "ruby": "3.4.7",
+      "bundler": "4.0.19"
+    },
+    "command": "SPEC=spec/datadog/open_feature/provider_spec.rb ../released-tooling/bin/bundle exec rake test:open_feature",
+    "working_directory": "Isolated released-native-source checkout at the tested source SHA",
+    "tooling": "Separate task-local Ruby wrapper repairs missing host libraries, routes child Ruby processes consistently, and unsets LIBDATADOG_VENDOR_OVERRIDE. It does not change SDK source.",
+    "exit_code": 0,
+    "lanes": [
+      {
+        "appraisal": "ruby_3.4_openfeature_latest",
+        "openfeature_sdk": "0.6.5",
+        "total_examples": 98,
+        "passed": 77,
+        "failed": 0,
+        "pending": 21
+      },
+      {
+        "appraisal": "ruby_3.4_openfeature_min",
+        "openfeature_sdk": "0.5.1",
+        "total_examples": 98,
+        "passed": 77,
+        "failed": 0,
+        "pending": 21
+      }
+    ],
+    "totals": {
+      "total_examples": 196,
+      "passed": 154,
+      "failed": 0,
+      "pending": 42
+    },
+    "pending_reason": "All 21 native opt-out string-boundary examples per appraisal require native opt-out mode support. The corrected guard skips them before provider construction.",
+    "dependency": {
+      "gem": "libdatadog",
+      "gem_version": "46.0.0.1.1",
+      "native_release": "46.0.0",
+      "native_library_sha256": "6f0e9cfa77be360552aa4fcfb7be45d64dd77d8b409d6c75289b9eae220e64cd",
+      "vendor_override": null,
+      "supports_evaluation_options": false,
+      "supports_opt_out_modes": false
+    },
+    "identity_proof": "A separate Ruby process loaded Datadog and enumerated macOS dyld images. The loaded native library came from the released gem vendor tree and matched this hash. Both capability methods were absent.",
+    "compiled_extension_sha256": "0b84198a2dffe2b15cab3f23c583df2c4edf5ab9d653b130fffe3cd8bf19ccf4",
+    "test_log_sha256": "1be2a854474fde27caea16285b000b2080852aaf2f223f9a7858577df18995d7",
+    "loaded_image_receipt_sha256": "fbb25f88ffc2d84d2e843ad883bc81b7b2d35082705a0f56ab71848bb6701060",
+    "scope": "Focused Provider compatibility validation. Expected skips do not validate opt-out behavior; that requires the pinned native build and its separate receipts."
+  },
+  "hosted_fix_validation": "Not assessed by this receipt. No hosted jobs were retried or triggered during this triage.",
+  "mutations": "Only isolated validation tooling, an isolated checkout, build output, and evidence files. No source changes, PR changes, or publication by this reviewer."
+}

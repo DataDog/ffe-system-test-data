@@ -1,0 +1,43 @@
+{
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "run_id": 39893949056,
+  "job_id": 120220871697,
+  "job_name": "main / Build end-to-end (spring-boot-payara)",
+  "job_url": "https://github.com/DataDog/dd-trace-java/actions/runs/39893949056/job/120220871697",
+  "status": "completed",
+  "conclusion": "failure",
+  "started_at": "2026-10-23T03:17:56Z",
+  "completed_at": "2026-10-23T03:20:00Z",
+  "workflow_attempt": 1,
+  "build_attempts": 3,
+  "system_tests_sha": "7fe8af9491d06c52295f4e9c559e734b4ccc0a1a",
+  "failed_step": "Build weblog",
+  "failed_docker_stage": "build 5/11",
+  "failed_command": "mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline",
+  "dependency": "org.springframework.boot:spring-boot-starter-parent:pom:2.6.0",
+  "repository": "https://repo.maven.apache.org/maven2",
+  "http_status": 429,
+  "http_reason": "Too Many Requests",
+  "classification": "external_dependency_rate_limit",
+  "classification_basis": "Actual Maven failure in each of three build attempts. Failure occurs before Java agent installation and before application build/test execution.",
+  "task_regression_demonstrated": false,
+  "action_taken": "read-only inspection; no source changes or CI retries",
+  "limitation": "The hosted job remains failed. This read does not prove a later retry will pass. No claim about a simultaneous master run.",
+  "raw_artifacts": {
+    "job.json": {
+      "sha256": "b00adabda560d7f68b2ca3ccee21a6e35811fa99259c6ede39684bccfae9444c",
+      "bytes": 3328,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-ci/job.json"
+    },
+    "run.json": {
+      "sha256": "bbd0b68fe5cd52dfea5c50058378d0e00b9debe9bf158529fcf1b72a3758343d",
+      "bytes": 13653,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-ci/run.json"
+    },
+    "job.log": {
+      "sha256": "e9f6b24f02d0c0230f6d642c610b543d4b46054a862469436a5caccded967ad0",
+      "bytes": 64000,
+      "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/payara-ci/job.log"
+    }
+  }
+}

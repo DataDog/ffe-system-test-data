@@ -1,0 +1,44 @@
+{
+  "flags": {
+    "debug": {
+      "tests": 650,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "release": {
+      "tests": 650,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "openfeature": {
+    "debug": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "release": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "reliability": {
+    "debug": {
+      "tests": 148,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "release": {
+      "tests": 148,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}

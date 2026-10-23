@@ -1,0 +1,128 @@
+{
+  "source_root": "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/android-audit",
+  "purpose": "Compact autonomous callback recovery and asynchronous README evidence. Earlier Android evidence remains immutable.",
+  "repository_commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "baseline_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "files": [
+    {
+      "path": "exact-6e5fe6c-receipt.json",
+      "sha256": "9c6d79d5722e425760db7a73cca572fd47058fe7d6734394cebd8a84af2ea752",
+      "bytes": 3613
+    },
+    {
+      "path": "exact-6e5fe6c-source-hashes.json",
+      "sha256": "35c0878694f15930f36d3c581d9b11adbab3e9d502f628a10c4e6033ffe1b3ed",
+      "bytes": 779
+    },
+    {
+      "path": "exact-6e5fe6c-suite-counts.json",
+      "sha256": "07b9d106f721c09a746c607e7747c093582cb70605937b651aef11407f21ce45",
+      "bytes": 676
+    },
+    {
+      "path": "exact-6e5fe6c-profile187-comparison.json",
+      "sha256": "bd63697f0715823d1f3d8207630ca5cce8adf0afeb73b966aca99022488ee783",
+      "bytes": 628
+    },
+    {
+      "path": "exact-6e5fe6c-profile-observations.jsonl",
+      "sha256": "151e3c9d82aa29502fb705f9d73fc65ce96f085e2364a885f891ad5f4756c3d5",
+      "bytes": 16210
+    },
+    {
+      "path": "profile-probes-review6/MobileProfileProbeTest.kt",
+      "sha256": "f1a17214fc7b63ddfa85ba0865f44c3c55e83d2aa9305cfec5568ce1a84aa0e5",
+      "bytes": 8106
+    },
+    {
+      "path": "profile-probes-review6.init.gradle",
+      "sha256": "928d544c3d6d123719a6d16fce14ce076502ccd0186918e2f5cdc98fefa4e7f0",
+      "bytes": 464
+    },
+    {
+      "path": "judge-profile-review6.py",
+      "sha256": "a1528a4c8ca0b7c256c4c958b2debf5e389f60e9d2a34b7de5702c07024f03f6",
+      "bytes": 1962
+    },
+    {
+      "path": "review6-audit.md",
+      "sha256": "faca4dcb408066338e948b14e00c9970b2b6cda1a2f4dbc4f40584a91370efce",
+      "bytes": 2998
+    },
+    {
+      "path": "review6-control-hashes.json",
+      "sha256": "4dd234b166a4c21ca132cd8edb4a0d21403f5eb5f78060110d6e4e8e1f559539",
+      "bytes": 311
+    },
+    {
+      "path": "review6-negative-control-receipt.json",
+      "sha256": "3d7be59d68c0b518ed8f9fdfce83f5a9a6fc23aac56250409286829e0023259a",
+      "bytes": 1235
+    },
+    {
+      "path": "review6-signed-commit.json",
+      "sha256": "189c8ba6206b5a6a136990b6f1fff10bec508888449962a7380618bb00dd9eb3",
+      "bytes": 409
+    },
+    {
+      "path": "review6-foundation-worktree.json",
+      "sha256": "8e470276899230ad8caa980819feb916bd650aef98e04ab54c31593d0d37caa6",
+      "bytes": 339
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-receipt.json",
+      "sha256": "e88c8066e83a47d58f38715dee02398a86a49289df37b31db7a67e69909b3144",
+      "bytes": 5209
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-recovery-observations.json",
+      "sha256": "f3d5eac5915b241105e92d791f1ffb625ca86b939a1517461d60ef416cda15b2",
+      "bytes": 1653
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-callback-observations.json",
+      "sha256": "7058a9a5594eaf2151a5077d4ef55ea4a2d14684fdca3f5d70a6bf827d8d63c5",
+      "bytes": 594
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-optout-observations.json",
+      "sha256": "de45172d84dfec1c53507ffaeba731651a0a9f0d2b97d60d0a4f2b65234bdc03",
+      "bytes": 7387
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-instrumentation.log",
+      "sha256": "d5a12a2b04cd16972ba1a0e8e692bb819c92fd6dcbf1ec0d0f3fd4a2d5e7973c",
+      "bytes": 2425
+    },
+    {
+      "path": "review6-runtime/exact-6e5fe6c-device-properties.json",
+      "sha256": "4a97417b13133ca3e04348739b7263b20356cfc56e1836b474fc8f218544faf5",
+      "bytes": 108
+    },
+    {
+      "path": "review6-runtime/test-src/CallbackRecoveryRuntimeProbeTest.kt",
+      "sha256": "df211fd4b786197a821b371cd0dc62a79fccc5459d2dc64f79c3d5429d860709",
+      "bytes": 6227
+    },
+    {
+      "path": "review6-runtime/test-src/CallbackRuntimeProbeTest.kt",
+      "sha256": "abe38c0b1853fd43b5b78ced8ceecc68abced0751b52ab22e13872d05fe666bb",
+      "bytes": 4221
+    },
+    {
+      "path": "review6-runtime/test-src/OptOutRuntimeProbeTest.kt",
+      "sha256": "f5eec6c800c45d1b065a9e3767e78acb87625b860f008c2e2e1bd8bbbb9b0a6a",
+      "bytes": 9901
+    },
+    {
+      "path": "review6-runtime/probe.init.gradle",
+      "sha256": "4f5a93c2004c309a6f11124103e51d8d5a5358516b8e3924667bc5d696757df0",
+      "bytes": 419
+    }
+  ],
+  "excluded": [
+    "Bulky Gradle logs, full test XML, emulator disk images and APKs remain in the local evidence/build directories."
+  ],
+  "total_bytes": 75874
+}

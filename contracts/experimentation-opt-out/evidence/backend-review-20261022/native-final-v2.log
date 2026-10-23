@@ -1,0 +1,32 @@
+[ddtool] session for "https://vault.us1.ddbuild.io" valid until Friday, 23-Oct-26 02:06:12 UTC
+INFO: Invocation ID: 40f4e0bc-5818-4094-8bb0-23c82e47b6d7
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: 2 targets (0 packages loaded, 0 targets configured)
+Analyzing: 2 targets (0 packages loaded, 0 targets configured)
+
+Analyzing: 2 targets (0 packages loaded, 21483 targets configured)
+[8,345 / 8,827] [Prepa] GoCompilePkg domains/ffe/libs/flagging/ufc/go_default_test.internal.a
+INFO: Analyzed 2 targets (0 packages loaded, 21483 targets configured).
+[8,844 / 8,846] Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 0s linux-sandbox ... (2 actions running)
+[8,844 / 8,846] 1 / 2 tests; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 7s linux-sandbox ... (2 actions running)
+[8,845 / 8,846] 1 / 2 tests; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 9s linux-sandbox
+[8,845 / 8,846] 1 / 2 tests; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 18s linux-sandbox
+[8,845 / 8,846] 1 / 2 tests; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 48s linux-sandbox
+[8,845 / 8,846] 2 / 2 tests; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 60s linux-sandbox
+INFO: Found 2 test targets...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+Target //domains/ffe/libs/flagging/core/repository:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/core/repository/go_default_test_/go_default_test
+INFO: Elapsed time: 61.769s, Critical Path: 60.15s
+INFO: 10 processes: 741 action cache hit, 7 disk cache hit, 1 internal, 2 linux-sandbox.
+INFO: Build completed successfully, 10 total actions
+INFO: 
+//domains/ffe/libs/flagging/core/repository:go_default_test              PASSED in 60.1s
+//domains/ffe/libs/flagging/ufc:go_default_test                          PASSED in 6.9s
+
+Executed 2 out of 2 tests: 2 tests pass.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

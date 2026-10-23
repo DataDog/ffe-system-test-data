@@ -1,0 +1,10 @@
+{
+  "utils/build/docker/ruby/rails72.Dockerfile": {
+    "before_sha256": "4d7f14e22b9817970285df33760c368227ac3f4cb2236bda7fedc6837ddf3b05",
+    "after_sha256": "43633f9a9861650fd68bd201381cea22e7ccd76cb3a12bc977d329440f3c8207"
+  },
+  "utils/build/docker/ruby/rails72/Gemfile": {
+    "before_sha256": "f6803e56128a2e8e050e4cf87e528b8baa566f096fb79b63bc0b874885130d02",
+    "after_sha256": "07b1c6e1aab43e73161c8fdca6b975d504a8bd7f81e1766c0a519dc46307f10d"
+  }
+}

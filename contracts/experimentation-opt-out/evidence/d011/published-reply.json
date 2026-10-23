@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-10-22T20:05:02.768624+00:00",
+  "comment": {
+    "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352957366",
+    "pull_request_review_id": 5620150744,
+    "id": 4352957366,
+    "node_id": "PRRC_kwDOBAi6ic8AAAABA3Tbtg",
+    "diff_hunk": "@@ -156,6 +156,30 @@\n // No withdrawal event is emitted. Evaluation telemetry remains enabled unless separately\n // suppressed with the evaluation telemetry opt-out parameter.\n //\n+// To continue older experiments, set the environment value to \"future_experiments_only\"\n+// or configure ExperimentationOptOutFutureExperimentsOnly. Use the same subject attribute.\n+//\n+//\tprovider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{\n+//\t    ExperimentationOptOutMode: ddopenfeature.ExperimentationOptOutFutureExperimentsOnly,\n+//\t})\n+//\n+// This mode skips exposure-logging allocations activated at or after the supplied\n+// cutoff. Allocations without randomizationActivatedAt are also skipped. Older\n+// allocations continue normal evaluation and exposure logging. Ordinary feature\n+// allocations remain eligible. A malformed randomizationActivatedAt rejects the\n+// affected flag for every subject, even when opt-out is disabled. Evaluation returns\n+// the application's default with PARSE_ERROR, as with malformed startAt or endAt.\n+// Other valid flags remain available. The comparison uses instants, including timezone\n+// offsets and fractional seconds, not configuration refresh time or allocation schedules.\n+//\n+// The cutoff is not an enrollment record: an older experiment can still assign a\n+// subject for the first time. Configuration edits do not freeze targeting or values.\n+// Holdouts use the same activation cutoff. A future cutoff does not schedule exclusion;",
+    "path": "openfeature/doc.go",
+    "commit_id": "627db08193d8019d33282024d8340327997205ec",
+    "original_commit_id": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+    "user": {
+      "login": "leoromanovsky",
+      "id": 57361,
+      "node_id": "MDQ6VXNlcjU3MzYx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/leoromanovsky",
+      "html_url": "https://github.com/leoromanovsky",
+      "followers_url": "https://api.github.com/users/leoromanovsky/followers",
+      "following_url": "https://api.github.com/users/leoromanovsky/following{/other_user}",
+      "gists_url": "https://api.github.com/users/leoromanovsky/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/leoromanovsky/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/leoromanovsky/subscriptions",
+      "organizations_url": "https://api.github.com/users/leoromanovsky/orgs",
+      "repos_url": "https://api.github.com/users/leoromanovsky/repos",
+      "events_url": "https://api.github.com/users/leoromanovsky/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/leoromanovsky/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "**Agreed. Clarified in Go [535d4a3](https://github.com/DataDog/dd-trace-go/commit/535d4a35ef18e1c202b293b5ca55d79259f90492) and the shared fixture README [8aba254](https://github.com/DataDog/ffe-system-test-data/commit/8aba25473785f502de660618ca864fba2ed1e0cc).**\n\n> Supply the time the subject opted out. A later cutoff keeps experiments activated before that later time eligible, including experiments started after the subject opted out. Targeting and schedules still apply.\n\nThis reaffirms [D011](https://github.com/DataDog/ffe-system-test-data/blob/0705b517d71e213fc402f456b6ea9a8dbff55b01/contracts/experimentation-opt-out/decision-history.md#d011), originally clarified in [the browser discussion](https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522). Future timestamps remain valid inputs; the wording explains their consequence.\n\n<details>\n<summary><b>Existing evidence</b> \u2014 the supplied cutoff changes eligibility</summary>\n\nFor the targeted allocation activated October 20, the [existing fixture pair](https://github.com/DataDog/ffe-system-test-data/blob/8aba25473785f502de660618ca864fba2ed1e0cc/evaluation-cases/test-case-experimentation-opt-out-future.json#L57) shows:\n\n| Supplied cutoff | Result |\n| --- | --- |\n| October 19 | Skip that allocation; select the older allocation (`1 / SPLIT`). |\n| October 21 | Keep that allocation eligible (`3 / TARGETING_MATCH`). |\n\nBoth cases pass through the existing Go fixture runner. The pair and its flag configuration are identical across Go's pinned fixtures and the shared fixture branch. Shared fixture validation passes 363 cases.\n\nThe [Lean boundary proofs](https://github.com/DataDog/ffe-system-test-data/blob/0705b517d71e213fc402f456b6ea9a8dbff55b01/contracts/experimentation-opt-out/lean/Proofs.lean#L28) in [the shared proof draft](https://github.com/DataDog/ffe-system-test-data/pull/55) retain the strict-before/equality rule. Those are abstract boundary proofs; the native fixture pair checks the concrete selection. This change updates documentation only.\n\n</details>",
+    "created_at": "2026-10-22T20:04:13Z",
+    "updated_at": "2026-10-22T20:04:13Z",
+    "html_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366",
+    "pull_request_url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352957366"
+      },
+      "html": {
+        "href": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4352957366"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/5700"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/DataDog/dd-trace-go/pulls/comments/4352957366/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": null,
+    "original_line": 177,
+    "side": "RIGHT",
+    "in_reply_to_id": 4342540684,
+    "author_association": "MEMBER",
+    "original_position": 40,
+    "position": 1,
+    "subject_type": "line"
+  },
+  "resolution": {
+    "id": "PRRT_kwDOBAi6ic6u-WfB",
+    "isResolved": true
+  }
+}

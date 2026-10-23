@@ -1,0 +1,292 @@
+diff --git a/domains/ffe/libs/flagging/core/repository/ufc_repository.go b/domains/ffe/libs/flagging/core/repository/ufc_repository.go
+index c233f4d4b3c21..268267817dc03 100644
+--- a/domains/ffe/libs/flagging/core/repository/ufc_repository.go
++++ b/domains/ffe/libs/flagging/core/repository/ufc_repository.go
+@@ -479,8 +479,9 @@ func (r *ufcRepository) GetFlagsWithRelations(ctx context.Context, orgID int64,
+ }
+ 
+ // loadExperimentRolloutState reads lifecycle state in the allocation snapshot.
+-// Missing or deleted experiments retain logging. Only a known completed standard
+-// experiment becomes ordinary winner delivery. Generated holdouts log separately.
++// Missing or deleted experiments retain logging. A known completed standard
++// experiment can stop logging only when compilation also finds deterministic
++// delivery. Generated holdouts log separately.
+ func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.FeatureFlag) error {
+ 	allocationsByExperiment := make(map[string][]*model.Allocation)
+ 	var experimentIDs []string
+@@ -505,7 +506,7 @@ func loadExperimentRolloutState(tx *gorm.DB, orgID int64, flags []*model.Feature
+ 		return nil
+ 	}
+ 	var experiments []experimentModel.Experiment
+-	if err := tx.Select("id", "state").Where("org_id = ? AND id IN ?", orgID, experimentIDs).Find(&experiments).Error; err != nil {
++	if err := tx.Select("id", "state").Where("org_id = ? AND id = ANY(?::uuid[])", orgID, pq.Array(experimentIDs)).Find(&experiments).Error; err != nil {
+ 		return pkgerrors.Wrap(err, "error loading experiment rollout state")
+ 	}
+ 	for _, experiment := range experiments {
+diff --git a/domains/ffe/libs/flagging/ufc/partition_coverage.go b/domains/ffe/libs/flagging/ufc/partition_coverage.go
+index b831a32195362..88b9539c41f56 100644
+--- a/domains/ffe/libs/flagging/ufc/partition_coverage.go
++++ b/domains/ffe/libs/flagging/ufc/partition_coverage.go
+@@ -93,6 +93,56 @@ func splitsCoverAllPartitions(splits []coreSplit) bool {
+ 	return coversRecursive(regions, dimensions)
+ }
+ 
++// splitsRandomize reports whether changing a subject's buckets can change the
++// selected variation or whether the allocation matches. Targeting rules and
++// time windows are deterministic gates, so they are not part of this check.
++// Preserve first-match order: a later split hidden by an earlier one does not
++// introduce randomization, nor do multiple splits that always serve one variant.
++func splitsRandomize(splits []coreSplit) bool {
++	regions, dimensions := splitsToRegions(splits)
++	variations := make([]string, len(splits))
++	for i, split := range splits {
++		variations[i] = split.VariationKey
++	}
++	_, constant := constantPartitionAssignment(regions, variations, dimensions)
++	return !constant
++}
++
++type partitionAssignment struct {
++	matched      bool
++	variationKey string
++}
++
++func constantPartitionAssignment(regions []partitionRegion, variations []string, dimensions []partitionDimension) (partitionAssignment, bool) {
++	if len(dimensions) == 0 {
++		if len(regions) == 0 {
++			return partitionAssignment{}, true
++		}
++		return partitionAssignment{matched: true, variationKey: variations[0]}, true
++	}
++	dimension, rest := dimensions[0], dimensions[1:]
++	breakpoints := elementaryIntervals(regions, dimension)
++	var first partitionAssignment
++	for i := 0; i < len(breakpoints)-1; i++ {
++		lo, hi := breakpoints[i], breakpoints[i+1]
++		var sub []partitionRegion
++		var subVariations []string
++		for j, region := range regions {
++			rs, constrained := region[dimension]
++			if !constrained || containsInterval(rs, lo, hi) {
++				sub = append(sub, projectOut(region, dimension))
++				subVariations = append(subVariations, variations[j])
++			}
++		}
++		assignment, constant := constantPartitionAssignment(sub, subVariations, rest)
++		if !constant || (i > 0 && assignment != first) {
++			return partitionAssignment{}, false
++		}
++		first = assignment
++	}
++	return first, true
++}
++
+ // splitsToRegions converts raw Splits into partitionRegions suitable for
+ // the recursive coverage check, and reports the universe of partition
+ // dimensions they reference.
+diff --git a/domains/ffe/libs/flagging/ufc/partition_coverage_test.go b/domains/ffe/libs/flagging/ufc/partition_coverage_test.go
+index 47e5bfc1c2bd9..54b1a7535b3cd 100644
+--- a/domains/ffe/libs/flagging/ufc/partition_coverage_test.go
++++ b/domains/ffe/libs/flagging/ufc/partition_coverage_test.go
+@@ -304,3 +304,71 @@ func TestSplitsCoverAllPartitions_Property(t *testing.T) {
+ 		}
+ 	}
+ }
++
++func TestSplitsRandomize(t *testing.T) {
++	half := mkShard1("s", 0, 2, 4)
++	otherHalf := mkShard1("s", 2, 4, 4)
++	for _, tc := range []struct {
++		name   string
++		splits []coreSplit
++		want   bool
++	}{
++		{"no assignment", nil, false},
++		{"deterministic winner", []coreSplit{{VariationKey: "a"}}, false},
++		{"percentage enrollment", []coreSplit{{VariationKey: "a", Shards: []coreShard{half}}}, true},
++		{"two variants", []coreSplit{{VariationKey: "a", Shards: []coreShard{half}}, {VariationKey: "b", Shards: []coreShard{otherHalf}}}, true},
++		{"same variant covers all buckets", []coreSplit{{VariationKey: "a", Shards: []coreShard{half}}, {VariationKey: "a", Shards: []coreShard{otherHalf}}}, false},
++		{"unreachable different variant", []coreSplit{{VariationKey: "a"}, {VariationKey: "b", Shards: []coreShard{half}}}, false},
++		{"empty variant range", []coreSplit{{VariationKey: "b", Shards: []coreShard{mkShard1("s", 0, 0, 4)}}, {VariationKey: "a"}}, false},
++		{"contradictory same-dimension shards", []coreSplit{{VariationKey: "b", Shards: []coreShard{half, otherHalf}}, {VariationKey: "a"}}, false},
++		{"independent enrollment and variation", []coreSplit{{VariationKey: "a", Shards: []coreShard{half, mkShard1("t", 0, 2, 4)}}, {VariationKey: "b", Shards: []coreShard{otherHalf}}}, true},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			assert.Equal(t, tc.want, splitsRandomize(tc.splits))
++		})
++	}
++}
++
++// Enumerate raw buckets independently of the region normalization and interval
++// recursion used by the compiler, including overlaps and first-match shadowing.
++func TestSplitsRandomizeMatchesBucketEnumeration(t *testing.T) {
++	rng := rand.New(rand.NewSource(0xD0106))
++	for iteration := 0; iteration < 500; iteration++ {
++		var splits []coreSplit
++		for i, n := 0, rng.Intn(6); i < n; i++ {
++			split := coreSplit{VariationKey: fmt.Sprintf("v%d", rng.Intn(2))}
++			for j, n := 0, rng.Intn(5); j < n; j++ {
++				start := int64(rng.Intn(5))
++				end := start + int64(rng.Intn(5-int(start)))
++				split.Shards = append(split.Shards, mkShard1([]string{"x", "y"}[rng.Intn(2)], start, end, 4))
++			}
++			splits = append(splits, split)
++		}
++		outcomes := map[string]bool{}
++		for x := int64(0); x < 4; x++ {
++			for y := int64(0); y < 4; y++ {
++				outcome := "fallthrough"
++				for _, split := range splits {
++					matches := true
++					for _, shard := range split.Shards {
++						bucket := x
++						if shard.Salt == "y" {
++							bucket = y
++						}
++						inRange := false
++						for _, r := range shard.Ranges {
++							inRange = inRange || (r.Start <= bucket && bucket < r.End)
++						}
++						matches = matches && inRange
++					}
++					if matches {
++						outcome = split.VariationKey
++						break
++					}
++				}
++				outcomes[outcome] = true
++			}
++		}
++		assert.Equal(t, len(outcomes) > 1, splitsRandomize(splits), "iteration %d: %+v", iteration, splits)
++	}
++}
+diff --git a/domains/ffe/libs/flagging/ufc/ufc.go b/domains/ffe/libs/flagging/ufc/ufc.go
+index 33eea9505cd42..ad3f120f5ae69 100644
+--- a/domains/ffe/libs/flagging/ufc/ufc.go
++++ b/domains/ffe/libs/flagging/ufc/ufc.go
+@@ -242,6 +242,11 @@ func BuildAllocationConfiguration(
+ 	splitsSpan.SetTag("splits.count", len(result.Splits))
+ 	splitsSpan.Finish()
+ 
++	// doLog is also the opt-out signal. Lifecycle completion alone does not
++	// make delivery deterministic: a concluded experiment can still split
++	// traffic, and an ordinary rollout can randomly select its participants.
++	result.LogExposureEvent = result.LogExposureEvent || splitsRandomize(result.Splits)
++
+ 	return result, nil
+ }
+ 
+diff --git a/domains/ffe/libs/flagging/ufc/ufc_test.go b/domains/ffe/libs/flagging/ufc/ufc_test.go
+index 2ad1676c925d5..7a794e6059ee6 100644
+--- a/domains/ffe/libs/flagging/ufc/ufc_test.go
++++ b/domains/ffe/libs/flagging/ufc/ufc_test.go
+@@ -332,10 +332,10 @@ func TestBuildAllocationConfiguration_LogExposureEventByAllocationKind(t *testin
+ 		bandit   *string
+ 		expected bool
+ 	}{
+-		{name: "ordinary feature gate", allocTyp: model.AllocationTypeFeatureGate, expected: false},
++		{name: "ordinary randomized feature gate", allocTyp: model.AllocationTypeFeatureGate, expected: true},
+ 		{name: "standard experiment", allocTyp: model.AllocationTypeFeatureGate, experim: &experimentID, expected: true},
+ 		{name: "canary experiment", allocTyp: model.AllocationTypeCanary, experim: &experimentID, expected: true},
+-		{name: "canary without experiment", allocTyp: model.AllocationTypeCanary, expected: false},
++		{name: "randomized canary without experiment", allocTyp: model.AllocationTypeCanary, expected: true},
+ 		{name: "bandit", allocTyp: model.AllocationTypeFeatureGate, bandit: &banditID, expected: true},
+ 	}
+ 
+diff --git a/domains/ffe/libs/flagging/ufc/winner_holdout_test.go b/domains/ffe/libs/flagging/ufc/winner_holdout_test.go
+index 006c1649e4b4d..fe107bbb0e982 100644
+--- a/domains/ffe/libs/flagging/ufc/winner_holdout_test.go
++++ b/domains/ffe/libs/flagging/ufc/winner_holdout_test.go
+@@ -28,7 +28,9 @@ func TestWinnerExposureLifecycle(t *testing.T) {
+ 		{"active single control", false, 0, "standard", true},
+ 		{"completed treatment winner", true, 100, "standard", false},
+ 		{"completed control winner", true, 0, "standard", false},
++		{"completed experiment still randomizing", true, 50, "standard", true},
+ 		{"ordinary rollout", false, 100, "ordinary", false},
++		{"ordinary randomized split", false, 50, "ordinary", true},
+ 		{"canary unchanged", true, 100, "canary", true},
+ 		{"bandit unchanged", true, 100, "bandit", true},
+ 	} {
+@@ -65,6 +67,22 @@ func TestWinnerExposureLifecycle(t *testing.T) {
+ 	}
+ }
+ 
++func TestOrdinaryRolloutLoggingFollowsCompiledRandomization(t *testing.T) {
++	for _, exposure := range []float64{0, 0.5, 1} {
++		t.Run(fmt.Sprintf("exposure_%g", exposure), func(t *testing.T) {
++			fixture := newWinnerHoldoutFixture(false)
++			fixture.conclude("treatment")
++			allocation := &fixture.flag.CurrentEnvironment.Allocations[0]
++			allocation.ExperimentID = nil
++			compiled, err := BuildAllocationConfiguration(t.Context(), fixture.flag.Key, allocation,
++				allocation.VariantWeights, nil, nil, nil,
++				[]SharderFunc{NewExposureSharder(fixture.flag.Key, exposure, DefaultTotalShards)}, nil)
++			require.NoError(t, err)
++			assert.Equal(t, exposure > 0 && exposure < 1, compiled.LogExposureEvent)
++		})
++	}
++}
++
+ func TestWinnerExposureChangePreservesHoldout(t *testing.T) {
+ 	for _, winner := range []string{"control", "treatment"} {
+ 		t.Run(winner, func(t *testing.T) {
+diff --git a/domains/ffe/tools/synthetic_data/core/holdout_runner.py b/domains/ffe/tools/synthetic_data/core/holdout_runner.py
+index 79baf2885d211..fa07c7b7651ce 100644
+--- a/domains/ffe/tools/synthetic_data/core/holdout_runner.py
++++ b/domains/ffe/tools/synthetic_data/core/holdout_runner.py
+@@ -343,7 +343,8 @@ class RealisticHoldoutRunner(RealisticRunner):
+                     if result["variant"] != control or result["reason"] != "DEFAULT":
+                         return False
+                 elif allocation == ordinary:
+-                    if not metadata["doLog"]:
++                    # A concluded experiment can serve its winner without exposure logging.
++                    if key not in concluded and not metadata["doLog"]:
+                         return False
+                     if key in concluded and result["variant"] != (config["ship"] or control):
+                         return False
+diff --git a/domains/ffe/tools/synthetic_data/tests/test_holdout_runner.py b/domains/ffe/tools/synthetic_data/tests/test_holdout_runner.py
+index 15000312f6102..a1f4cf16584b2 100644
+--- a/domains/ffe/tools/synthetic_data/tests/test_holdout_runner.py
++++ b/domains/ffe/tools/synthetic_data/tests/test_holdout_runner.py
+@@ -1545,6 +1545,41 @@ def test_uncovered_shipped_targeting_can_still_serve_control_without_logging():
+     assert RealisticHoldoutRunner._stage_is_ready(runner, results, {"checkout"}, {"search"})
+ 
+ 
++@pytest.mark.parametrize("do_log", [False, True])
++def test_concluded_ordinary_winners_are_ready_with_either_compiler_logging_behavior(do_log):
++    runner = _runner()
++    results = {
++        key: [
++            {
++                "variant": config["ship"] or config["variants"][0]["id"],
++                "reason": "TARGETING_MATCH",
++                "metadata": {
++                    "doLog": do_log,
++                    "allocationKey": runner.flag_infos[key]["allocation_key"],
++                    "__dd_split_serial_id": 7,
++                },
++            }
++        ]
++        for key, config in runner.experiments.items()
++    }
++    assert runner._stage_is_ready(results, set(), set(runner.experiments))
++
++    results["checkout"][0]["variant"] = "control"
++    assert not runner._stage_is_ready(results, set(), set(runner.experiments))
++
++
++def test_active_ordinary_experiment_still_requires_exposure_logging():
++    runner = _runner()
++    result = {
++        "variant": "treatment",
++        "reason": "TARGETING_MATCH",
++        "metadata": {"doLog": False, "allocationKey": "checkout-allocation", "__dd_split_serial_id": 7},
++    }
++    assert not runner._stage_is_ready({"checkout": [result]}, {"checkout"}, set())
++    result["metadata"]["doLog"] = True
++    assert runner._stage_is_ready({"checkout": [result]}, {"checkout"}, set())
++
++
+ def test_existing_child_resources_stop_cleanup_without_deletion():
+     runner = _runner()
+     runner.client.holdouts.list.return_value = []

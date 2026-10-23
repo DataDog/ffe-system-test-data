@@ -1,0 +1,382 @@
+{
+  "repository": "DataDog/dd-sdk-android",
+  "pr": 4024,
+  "head_sha": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "state": "open",
+  "draft": false,
+  "review_decision": "REVIEW_REQUIRED",
+  "read_started_at": "2026-10-23T03:28:09.866348+00:00",
+  "read_completed_at": "2026-10-23T03:28:16.623936+00:00",
+  "raw_snapshot_sha256": "7b47b896c76de313660d19f33cb7c786ab7b2b6eb6dfb374d95844494425a137",
+  "pagination": "All REST and GraphQL pages; read_feedback.py checked stable head and base.",
+  "latest_commit_statuses": [
+    {
+      "context": "dd-gitlab/analysis:android-lint",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961040&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:27:55Z",
+      "updated_at": "2026-10-23T03:27:55Z"
+    },
+    {
+      "context": "dd-gitlab/test:tools",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961044&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:25:00Z",
+      "updated_at": "2026-10-23T03:25:00Z"
+    },
+    {
+      "context": "dd-gitlab/analysis:ktlint",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961034&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:23:56Z",
+      "updated_at": "2026-10-23T03:23:56Z"
+    },
+    {
+      "context": "dd-gitlab/test:build-logic",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961046&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:23:41Z",
+      "updated_at": "2026-10-23T03:23:41Z"
+    },
+    {
+      "context": "dd-gitlab/test:debug",
+      "state": "pending",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961041&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:19:46Z",
+      "updated_at": "2026-10-23T03:19:46Z"
+    },
+    {
+      "context": "dd-gitlab/analysis:detekt",
+      "state": "pending",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961037&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:19:46Z",
+      "updated_at": "2026-10-23T03:19:46Z"
+    },
+    {
+      "context": "dd-gitlab/analysis:generated-files-check",
+      "state": "pending",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961032&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:19:46Z",
+      "updated_at": "2026-10-23T03:19:46Z"
+    },
+    {
+      "context": "dd-gitlab/test:kover",
+      "state": "pending",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?owner=DataDog&repository=dd-sdk-android&taskExecutionId=2168961049&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:19:46Z",
+      "updated_at": "2026-10-23T03:19:46Z"
+    },
+    {
+      "context": "DDCI Status",
+      "state": "pending",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/13546795118665042724?utm_content=ddci_status_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:19:34Z",
+      "updated_at": "2026-10-23T03:19:34Z"
+    }
+  ],
+  "check_runs": [
+    {
+      "name": "CodeQL",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "347884bca81089127717ac3b272c4c0fff6dd13e",
+      "details_url": "https://github.com/DataDog/dd-sdk-android/runs/120223712401",
+      "started_at": "2026-10-23T03:27:46Z",
+      "completed_at": "2026-10-23T03:27:49Z"
+    },
+    {
+      "name": "devflow/mergegate",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "347884bca81089127717ac3b272c4c0fff6dd13e",
+      "details_url": "https://atlas.ddbuild.io/namespaces/default/workflows/evaluate-mergegate-DataDog-dd-sdk-android-4024-EVENT_KIND_PR_SYNC/01a166c5-63d5-7d7c-8f5c-24b9bd6c356b",
+      "started_at": "2026-10-23T03:19:41Z",
+      "completed_at": null
+    },
+    {
+      "name": "Analyze (java)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "347884bca81089127717ac3b272c4c0fff6dd13e",
+      "details_url": "https://github.com/DataDog/dd-sdk-android/actions/runs/39894402701/job/120221364001",
+      "started_at": "2026-10-23T03:19:39Z",
+      "completed_at": null
+    },
+    {
+      "name": "Analyze (java)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "347884bca81089127717ac3b272c4c0fff6dd13e",
+      "details_url": "https://github.com/DataDog/dd-sdk-android/actions/runs/39894397248/job/120221345634",
+      "started_at": "2026-10-23T03:19:35Z",
+      "completed_at": "2026-10-23T03:27:58Z"
+    }
+  ],
+  "threads": [
+    {
+      "id": "PRRT_kwDODRXddM6u7Mj4",
+      "root_comment_id": 4341191570,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4341191570",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt",
+      "verified_reply_ids": [
+        4355477580
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6u7QyT",
+      "root_comment_id": 4341220101,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4341220101",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationEffects.kt",
+      "verified_reply_ids": [
+        4355477903,
+        4355705216
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6u7QyX",
+      "root_comment_id": 4341220109,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4341220109",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt",
+      "verified_reply_ids": [
+        4355478274
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYrW",
+      "root_comment_id": 4343859813,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859813",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/ExperimentationOptOut.kt",
+      "verified_reply_ids": [
+        4355478660
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYre",
+      "root_comment_id": 4343859827,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859827",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt",
+      "verified_reply_ids": [
+        4355479404
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYro",
+      "root_comment_id": 4343859844,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859844",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt",
+      "verified_reply_ids": [
+        4355479927
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYrv",
+      "root_comment_id": 4343859855,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859855",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/README.md",
+      "verified_reply_ids": [
+        4355480216
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYr8",
+      "root_comment_id": 4343859875,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859875",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/model/ErrorCode.kt",
+      "verified_reply_ids": [
+        4355480587
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsA",
+      "root_comment_id": 4343859881,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859881",
+      "resolved": false,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/README.md",
+      "verified_reply_ids": [
+        4355480961
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsJ",
+      "root_comment_id": 4343859894,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859894",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProvider.kt",
+      "verified_reply_ids": [
+        4355481345
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsY",
+      "root_comment_id": 4343859913,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859913",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt",
+      "verified_reply_ids": [
+        4355481685
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYse",
+      "root_comment_id": 4343859923,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859923",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsClient.kt",
+      "verified_reply_ids": [
+        4355481986
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsl",
+      "root_comment_id": 4343859934,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859934",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactory.kt",
+      "verified_reply_ids": [
+        4355482328
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsn",
+      "root_comment_id": 4343859939,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859939",
+      "resolved": true,
+      "outdated": false,
+      "path": "detekt_custom_unsafe_calls.yml",
+      "verified_reply_ids": [
+        4355482821,
+        4355546560
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vBYsv",
+      "root_comment_id": 4343859950,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4343859950",
+      "resolved": false,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/ExperimentationOptOut.kt",
+      "verified_reply_ids": [
+        4355483208
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vPwXv",
+      "root_comment_id": 4349910077,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4349910077",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt",
+      "verified_reply_ids": [
+        4355483621
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vc0LQ",
+      "root_comment_id": 4355492717,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355492717",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt",
+      "verified_reply_ids": [
+        4355703775
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vc0LU",
+      "root_comment_id": 4355492722,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355492722",
+      "resolved": true,
+      "outdated": true,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsClient.kt",
+      "verified_reply_ids": [
+        4355704162
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vc0LY",
+      "root_comment_id": 4355492726,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355492726",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt",
+      "verified_reply_ids": [
+        4355704498
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vc0Ld",
+      "root_comment_id": 4355492733,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355492733",
+      "resolved": true,
+      "outdated": true,
+      "path": "detekt_custom_safe_calls_third_party.yml",
+      "verified_reply_ids": [
+        4355704870
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vdR3b",
+      "root_comment_id": 4355693358,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355693358",
+      "resolved": true,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagsFeature.kt",
+      "verified_reply_ids": [
+        4355778546
+      ]
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vdh3E",
+      "root_comment_id": 4355800957,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355800957",
+      "resolved": false,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcher.kt",
+      "verified_reply_ids": []
+    },
+    {
+      "id": "PRRT_kwDODRXddM6vdh3I",
+      "root_comment_id": 4355800964,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355800964",
+      "resolved": false,
+      "outdated": false,
+      "path": "features/dd-sdk-android-flags/README.md",
+      "verified_reply_ids": []
+    }
+  ],
+  "counts": {
+    "threads": 23,
+    "resolved_threads": 19,
+    "threads_with_verified_reply": 21,
+    "latest_statuses": {
+      "success": 4,
+      "pending": 5
+    },
+    "check_runs": {
+      "success": 2,
+      "in_progress": 2
+    }
+  },
+  "limits": "This is a point-in-time state read. A passing job does not establish its selected test count, review approval, release or deployment."
+}

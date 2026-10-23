@@ -1,0 +1,107 @@
+{
+  "base_sha": "d93b70746785718b6f43bf9ffee13d01e332f50e",
+  "go_version": "go version go1.26.0 linux/amd64",
+  "fixture_sha": "52e43dc2693e5af14fd60210f9471d0dc08ce73f",
+  "validation": [
+    {
+      "kind": "focused",
+      "command": "go test ./openfeature -run 'Test(ExperimentationOptOut|NilStringerAttribute|StringerAttributes)' -count=1 -json",
+      "top_level_pass": 14,
+      "test_entries_pass": 100,
+      "log": "/tmp/base-aaron-focused.jsonl"
+    },
+    {
+      "kind": "package",
+      "command": "go test ./openfeature -count=1 -json",
+      "top_level_pass": 275,
+      "test_entries_pass": 1296,
+      "log": "/tmp/base-aaron-package.jsonl"
+    },
+    {
+      "kind": "race",
+      "command": "go test -race ./openfeature -count=1 -json",
+      "top_level_pass": 275,
+      "test_entries_pass": 1296,
+      "log": "/tmp/base-aaron-race.jsonl"
+    },
+    {
+      "kind": "vet",
+      "command": "go vet ./openfeature",
+      "exit_code": 0,
+      "log": "/tmp/base-aaron-vet.log"
+    }
+  ],
+  "files": {
+    "openfeature/doc.go": "5dd6c87be3358ad01ecf329209d8db3ed45c49ace7a08471da9c3a9469a54132",
+    "openfeature/experimentation_opt_out.go": "982f423f246fbb49b05ddbc6441a68d01bfef8e6df7e4ace7751d88cc255d649",
+    "openfeature/experimentation_opt_out_test.go": "1bd2c63e8bf31a4d626f98b2d7024b3a8b51587e3d8f87cf4bc2ab126ee11232",
+    "openfeature/flageval_logging.go": "52abda91e14c29b197c4b60e7e35b98a3e15ab50e17486df397d52f9dbb0549a",
+    "openfeature/flatten.go": "60713ad8bc7859d0a542c91b6fbf85b89921f8a5f1cf515066141bbda3ea357e",
+    "openfeature/provider.go": "9e23a4b74151ff6cf5e62dd13e6c549d595ba225af2f889b68b8ba60349b515d",
+    "openfeature/nil_stringer_attribute_test.go": "37042d1a749372b68c01996774bf8f8d0d64bae41ed516bcce9fa0532bbc3f73"
+  },
+  "negative_controls": [
+    {
+      "name": "disabled-precedence",
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/base-aaron-controls/disabled-precedence.json",
+        "./openfeature",
+        "-run",
+        "^TestExperimentationOptOutDisabledProviderWinsOverInvalidMode$",
+        "-count=1",
+        "-json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "nil-exposure",
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/base-aaron-controls/nil-exposure.json",
+        "./openfeature",
+        "-run",
+        "^TestStringerAttributesFlattening/exposure$",
+        "-count=1",
+        "-json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "nil-logging",
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/base-aaron-controls/nil-logging.json",
+        "./openfeature",
+        "-run",
+        "^TestStringerAttributesFlattening/evaluation_logging$",
+        "-count=1",
+        "-json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "normalization",
+      "command": [
+        "go",
+        "test",
+        "-overlay",
+        "/tmp/base-aaron-controls/normalization.json",
+        "./openfeature",
+        "-run",
+        "^TestExperimentationOptOutTimestampMatchesAllocationStartAt$",
+        "-count=1",
+        "-json"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "limits": "Native local Go package evidence only; no fresh Lean proof, fleet timestamp grammar, CI, staging or production claim.",
+  "published_sha": "829f614e3e1567f1fa997a300a4abd8c955517dc"
+}

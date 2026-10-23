@@ -1,0 +1,42 @@
+{
+  "old_sha256": "2c4315a3026f11037bc8867fc5248ad224dbf16026cb84cc57eb2ff574b58553",
+  "new_sha256": "7d72d099a89636ebbf81ca53309617f9058447c1312209e6376598434e77178e",
+  "all_existing_allocations_unchanged": true,
+  "all_other_fields_unchanged": true,
+  "changes": [
+    {
+      "flag": "single-variant-control",
+      "added_allocations": [
+        {
+          "key": "allocation-default-f1083c536a7d",
+          "rules": [],
+          "splits": [
+            {
+              "shards": [],
+              "variationKey": "control",
+              "reason": "DEFAULT"
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    {
+      "flag": "uneven-split",
+      "added_allocations": [
+        {
+          "key": "allocation-default-06777af52070",
+          "rules": [],
+          "splits": [
+            {
+              "shards": [],
+              "variationKey": "control",
+              "reason": "DEFAULT"
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    }
+  ]
+}

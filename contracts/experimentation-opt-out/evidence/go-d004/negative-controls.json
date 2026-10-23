@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "source_sha": "febcc185d27d8edbe4acf16ce2dee91d5aff730c",
+    "test_source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+    "production_overlay": [
+      "types.go",
+      "evaluator.go"
+    ],
+    "expected": "regression tests fail before the fix"
+  },
+  "invalid_as_missing": {
+    "source_sha": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+    "file": "openfeature/evaluator.go",
+    "replace": "exclusion.mode == ExperimentationOptOutFutureExperimentsOnly && flag.invalidActivation",
+    "with": "exclusion.mode == ExperimentationOptOutFutureExperimentsOnly && flag.invalidActivation && false",
+    "expected": "regression tests fail when invalid activation is silently treated as missing"
+  }
+}

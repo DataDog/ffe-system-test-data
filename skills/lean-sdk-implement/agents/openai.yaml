@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean SDK implementation"
+  short_description: "Implement pinned Lean contracts in native SDKs"
+  default_prompt: "Use $lean-sdk-implement to complete the requested Lean to SDK workflow with pinned evidence."

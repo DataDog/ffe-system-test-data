@@ -1,0 +1,68 @@
+[
+  {
+    "control": "D004-scope",
+    "exit_code": 1,
+    "modules": {
+      "dd-openfeature": {
+        "tests": 94,
+        "failures": 13,
+        "errors": 0,
+        "skipped": 0
+      },
+      "products/feature-flagging/feature-flagging-api": {
+        "tests": 94,
+        "failures": 13,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "original_hashes": {
+      "dd-openfeature/src/main/java/com/datadog/openfeature/internal/evaluation/FlagEvaluator.java": "3822722f863082d17d3a4795a33730711e5563f4f0a180fde44cc2b3d0c71530",
+      "products/feature-flagging/feature-flagging-api/src/main/java/datadog/trace/api/openfeature/DDEvaluator.java": "79f4ce57f24ced894577139abd4965edbae44276c73f33d84eea0ec969af1898"
+    }
+  },
+  {
+    "control": "doLog-compatibility",
+    "exit_code": 1,
+    "modules": {
+      "dd-openfeature": {
+        "tests": 94,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      },
+      "products/feature-flagging/feature-flagging-api": {
+        "tests": 94,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "original_hashes": {
+      "dd-openfeature/src/main/java/com/datadog/openfeature/internal/evaluation/ExperimentationOptOut.java": "d91ae16cafeed26129422a778cce090ae507a9f2a6141c0032b61d220a687825",
+      "products/feature-flagging/feature-flagging-api/src/main/java/datadog/trace/api/openfeature/ExperimentationOptOut.java": "5270e5d977886da6481be9d6015f70f24ce8429bc7a92cba6b892c595476853b"
+    }
+  },
+  {
+    "control": "D017-call-site",
+    "exit_code": 1,
+    "modules": {
+      "dd-openfeature": {
+        "tests": 36,
+        "failures": 15,
+        "errors": 0,
+        "skipped": 0
+      },
+      "products/feature-flagging/feature-flagging-api": {
+        "tests": 36,
+        "failures": 15,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "original_hashes": {
+      "dd-openfeature/src/main/java/com/datadog/openfeature/internal/evaluation/FlagEvaluator.java": "3822722f863082d17d3a4795a33730711e5563f4f0a180fde44cc2b3d0c71530",
+      "products/feature-flagging/feature-flagging-api/src/main/java/datadog/trace/api/openfeature/DDEvaluator.java": "79f4ce57f24ced894577139abd4965edbae44276c73f33d84eea0ec969af1898"
+    }
+  }
+]

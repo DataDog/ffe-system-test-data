@@ -1,0 +1,112 @@
+{
+  "base_commit": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "reviewed_profile_manifest_sha256": "4d6d2d021b7ca4bb2363f302162272213abdb9cc0aca2e86e3e29ce9067f65e2",
+  "profile_id": "inactive-path-v1",
+  "toolchain": "go version go1.26.0 linux/amd64",
+  "checks": {
+    "package": {
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "-json",
+        "./openfeature"
+      ],
+      "cwd": "/home/bits/dd/dd-trace-go-5700-d004",
+      "exit_code": 0,
+      "top_level_tests": 278,
+      "test_events_passed": 1631,
+      "log_sha256": "af3da58e7097d3c14a7f6fe76d29906a36b8a447918f054caf235e0b16ec872a"
+    },
+    "race": {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "-json",
+        "./openfeature"
+      ],
+      "cwd": "/home/bits/dd/dd-trace-go-5700-d004",
+      "exit_code": 0,
+      "top_level_tests": 278,
+      "test_events_passed": 1631,
+      "log_sha256": "903919dd730e049e3512d40160ef47075f231c7a7c7dd4151e219c37e77a797a"
+    }
+  },
+  "benchmarks": {
+    "baseline": {
+      "command": [
+        "go",
+        "test",
+        "-c",
+        "-overlay",
+        "/tmp/d017-go-evidence/baseline_uninstrumented_overlay.json",
+        "./openfeature",
+        "-o",
+        "/tmp/d017-go-evidence/baseline.test"
+      ],
+      "binary_sha256": "c576e1231b19c2c217a5ba9bccb30bba99fc721b66e4eabd91e7684855287750",
+      "smoke_command": [
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBooleanEvaluationExclusion$",
+        "-test.benchtime=1x",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ]
+    },
+    "candidate": {
+      "command": [
+        "go",
+        "test",
+        "-c",
+        "./openfeature",
+        "-o",
+        "/tmp/d017-go-evidence/candidate.test"
+      ],
+      "binary_sha256": "1f780286989b8360591948695ed871e11b0946c037d080767a217d4f65e7e758",
+      "smoke_command": [
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^BenchmarkBooleanEvaluationExclusion$",
+        "-test.benchtime=1x",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ]
+    },
+    "benchmark_source_sha256": "16056f60655f6fb22416f02d87edf9b9a9644e0e2e0feb1d3882b6599f4a052e",
+    "smoke_test_cases_per_binary": 24,
+    "instrumentation": "none: baseline overlay restores only evaluator.go from pinned pre-guard commit; both binaries use identical new benchmark source",
+    "timing_claim": "none; smoke runs execute each case once",
+    "baseline_evaluator_sha256": "9cbaa1f9ba108f81da35d6c7fb9bf373645bc83dd1d92354c5d4c672ef3f3bda",
+    "candidate_evaluator_sha256": "c3d5c50402aa6a3033961f37f514a7de635c0dfd7d43d7ee58308255d6a93cca",
+    "source_snapshot": "Final benchmark source includes b.Cleanup(provider.Shutdown); baseline overlay contains only original c5fec evaluator.go; other code and benchmark inputs identical."
+  },
+  "infrastructure": {
+    "initial_sandbox_result": "Go build cache read-only; no tests executed",
+    "retry": "same full/race commands outside restricted sandbox passed"
+  },
+  "compiler_observation": {
+    "tool": "GNU objdump (GNU Binutils for Ubuntu) 2.38",
+    "commands": {
+      "baseline": [
+        "objdump",
+        "-d",
+        "--disassemble=github.com/DataDog/dd-trace-go/v2/openfeature.evaluateFlag",
+        "/tmp/d017-go-evidence/baseline.test"
+      ],
+      "candidate": [
+        "objdump",
+        "-d",
+        "--disassemble=github.com/DataDog/dd-trace-go/v2/openfeature.evaluateFlag",
+        "/tmp/d017-go-evidence/candidate.test"
+      ]
+    },
+    "logs_sha256": {
+      "baseline": "1b2cff51b6776a26e030dfe4a9835d6e78c189c17e875e76a59c1cf57f81244b",
+      "candidate": "6d9a10769a3f0265b9984433978532494f542705c644dc7e5f2586ce04c7dd29"
+    },
+    "observation": "In candidate evaluateFlag, effective mode test at0xe6a38e and zero-path jump0xe6a3a0 bypass excludes call0xe6a3c3. Baseline has unconditional helper call0xe6a3ea. Addresses apply only to these pinned binaries. This confirms the call-site guard in uninstrumented Go1.26 linux/amd64 code; it does not establish a wall-clock threshold."
+  }
+}

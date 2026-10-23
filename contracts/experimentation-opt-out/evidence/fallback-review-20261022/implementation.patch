@@ -1,0 +1,713 @@
+diff --git a/domains/ffe/libs/flagging/ufc/BUILD.bazel b/domains/ffe/libs/flagging/ufc/BUILD.bazel
+index 324d2b05e527f..0690fa2ef2ff2 100644
+--- a/domains/ffe/libs/flagging/ufc/BUILD.bazel
++++ b/domains/ffe/libs/flagging/ufc/BUILD.bazel
+@@ -77,7 +77,10 @@ dd_go_test(
+         "@ffe_system_test_data//:all",
+     ],
+     embed = [":go_default_library"],
+-    embedsrcs = ["testdata/native_bucketing_golden.json"],
++    embedsrcs = [
++        "testdata/native_bucketing_golden.json",
++        "testdata/semver_delivery.json",
++    ],
+     env = {
+         "FFE_FLAGS_SCHEMA_RLOCATIONPATH": "$(rlocationpath //domains/remote-config/shared/libs/config-validator:ffe_flags_root_schema)",
+     },
+diff --git a/domains/ffe/libs/flagging/ufc/bandit_features_test.go b/domains/ffe/libs/flagging/ufc/bandit_features_test.go
+index d6107bd302ecd..28f64e6f75f08 100644
+--- a/domains/ffe/libs/flagging/ufc/bandit_features_test.go
++++ b/domains/ffe/libs/flagging/ufc/bandit_features_test.go
+@@ -50,7 +50,12 @@ func TestBanditSplitsCarryThePolicyID(t *testing.T) {
+ 
+ 	compiled := built.ToJSON().Flags["checkout"]
+ 	require.NotNil(t, compiled)
+-	require.Len(t, compiled.Allocations, 1)
++	require.Len(t, compiled.Allocations, 2)
++	assert.True(t, compiled.Allocations[0].DoLog)
++	assert.False(t, compiled.Allocations[1].DoLog, "opted-out subjects retain an ordinary fallback")
++	require.Len(t, compiled.Allocations[1].Splits, 1)
++	assert.Equal(t, "a", compiled.Allocations[1].Splits[0].VariationKey)
++	assert.Empty(t, compiled.Allocations[1].Splits[0].Features, "ordinary fallback must not carry bandit policy")
+ 	require.Len(t, compiled.Allocations[0].Splits, 2)
+ 	for _, split := range compiled.Allocations[0].Splits {
+ 		assert.Equal(t, []Feature{
+diff --git a/domains/ffe/libs/flagging/ufc/bucketing_golden_test.go b/domains/ffe/libs/flagging/ufc/bucketing_golden_test.go
+index 3470af0608fe4..3f1f3f96fd63a 100644
+--- a/domains/ffe/libs/flagging/ufc/bucketing_golden_test.go
++++ b/domains/ffe/libs/flagging/ufc/bucketing_golden_test.go
+@@ -17,8 +17,9 @@ import (
+ )
+ 
+ // nativeBucketingGolden preserves the bucketing configuration captured before EPPO bucketing
+-// existed. Exposure flags reflect the current compiler logging policy; changes to them must
+-// leave all assignment data unchanged. The full compiled output is checked byte-for-byte.
++// existed. Exposure flags and retained ordinary fallbacks reflect the current opt-out
++// policy; existing allocation assignment data must stay unchanged. The full compiled
++// output is checked byte-for-byte.
+ //
+ //go:embed testdata/native_bucketing_golden.json
+ var nativeBucketingGolden []byte
+diff --git a/domains/ffe/libs/flagging/ufc/optimizer.go b/domains/ffe/libs/flagging/ufc/optimizer.go
+index 2f8d63a9443f1..fde793219385d 100644
+--- a/domains/ffe/libs/flagging/ufc/optimizer.go
++++ b/domains/ffe/libs/flagging/ufc/optimizer.go
+@@ -192,8 +192,8 @@ func coversFullPopulation(alloc coreAllocation) bool {
+ }
+ 
+ // dropUnreferencedVariants removes entries from flag.Variations that are not
+-// referenced by any split in any allocation. After truncateAtFullPopulationAllocation
+-// has pruned unreachable allocations, their variants would otherwise remain in
++// referenced by any split in any allocation. After eliminateDeadBranches has
++// pruned unreachable allocations, their variants would otherwise remain in
+ // the payload for no reason.
+ func dropUnreferencedVariants(flag *coreFlag) {
+ 	referenced := make(map[string]struct{})
+diff --git a/domains/ffe/libs/flagging/ufc/optimizer_test.go b/domains/ffe/libs/flagging/ufc/optimizer_test.go
+index 689dc19bf18ed..7b44c44341ef3 100644
+--- a/domains/ffe/libs/flagging/ufc/optimizer_test.go
++++ b/domains/ffe/libs/flagging/ufc/optimizer_test.go
+@@ -607,11 +607,11 @@ func TestOptimizeFlag_RealWorld(t *testing.T) {
+ 		assert.NotContains(t, flag.Variations, "control")
+ 	})
+ 
+-	t.Run("50/50 two-variant allocation — splits tile full range, default truncated", func(t *testing.T) {
++	t.Run("50/50 two-variant allocation — default retained for opted-out subjects", func(t *testing.T) {
+ 		// A regular allocation with 50/50 weight. Each variant gets a half-range
+ 		// shard from NewVariantSharder on the same salt; together the two shards
+-		// tile [0, totalShards), so the allocation is population-spanning and
+-		// the default allocation appended by buildFlag must be truncated.
++		// tile [0, totalShards). The randomized allocation can be excluded, so
++		// the default allocation appended by buildFlag must remain available.
+ 		controlVar := &model.Variant{Key: "control", Value: "control"}
+ 		treatmentVar := &model.Variant{Key: "treatment", Value: "treatment"}
+ 		ff := baseFlag(
+@@ -628,9 +628,14 @@ func TestOptimizeFlag_RealWorld(t *testing.T) {
+ 		flag, ok := buildUfc(ff)
+ 		require.True(t, ok)
+ 
+-		// Only the rollout allocation survives — default is truncated.
+-		require.Len(t, flag.Allocations, 1)
++		// Excluding the randomized allocation leaves ordinary default delivery.
++		require.Len(t, flag.Allocations, 2)
+ 		assert.Equal(t, "fifty-fifty", flag.Allocations[0].Key)
++		assert.True(t, flag.Allocations[0].DoLog)
++		assert.False(t, flag.Allocations[1].DoLog)
++		require.Len(t, flag.Allocations[1].Splits, 1)
++		assert.Equal(t, "control", flag.Allocations[1].Splits[0].VariationKey)
++		assert.Empty(t, flag.Allocations[1].Splits[0].Shards)
+ 
+ 		// Both variants still referenced — neither dropped.
+ 		assert.Contains(t, flag.Variations, "control")
+diff --git a/domains/ffe/libs/flagging/ufc/semver_filter.go b/domains/ffe/libs/flagging/ufc/semver_filter.go
+index da7a1a36a7d5a..a7c5d2b1c3cbb 100644
+--- a/domains/ffe/libs/flagging/ufc/semver_filter.go
++++ b/domains/ffe/libs/flagging/ufc/semver_filter.go
+@@ -27,9 +27,10 @@ func (flag *FlagConfiguration) HasSemverTargeting() bool {
+ 	return false
+ }
+ 
+-// FilterSemverFlags returns a copy of config without flags containing SEMVER_*
+-// conditions. Removing the whole flag lets unsupported SDKs return the caller's
+-// default for that flag while preserving every unrelated flag. The source
++// FilterSemverFlags returns a copy of config without flags requiring SemVer
++// delivery, even if optimization pruned their SEMVER_* conditions. Removing the
++// whole flag lets unsupported SDKs return the caller's default for that flag
++// while preserving every unrelated flag. The source
+ // configuration is not mutated.
+ func FilterSemverFlags(config *FlagsConfiguration) (*FlagsConfiguration, []string) {
+ 	if config == nil {
+@@ -43,7 +44,8 @@ func FilterSemverFlags(config *FlagsConfiguration) (*FlagsConfiguration, []strin
+ 
+ 	var semverFlagKeys []string
+ 	for flagKey, flag := range config.core.Flags {
+-		containsSemver := false
++		// Optimization may remove the condition without removing its delivery requirement.
++		containsSemver := flag != nil && flag.semverTargeting
+ 		if flag != nil {
+ 		outer:
+ 			for _, allocation := range flag.Allocations {
+diff --git a/domains/ffe/libs/flagging/ufc/semver_filter_test.go b/domains/ffe/libs/flagging/ufc/semver_filter_test.go
+index e78d16eaf1329..a95115fdc2511 100644
+--- a/domains/ffe/libs/flagging/ufc/semver_filter_test.go
++++ b/domains/ffe/libs/flagging/ufc/semver_filter_test.go
+@@ -1,15 +1,121 @@
+ package ufc
+ 
+ import (
++	"context"
++	_ "embed"
++	"encoding/json"
+ 	"strings"
+ 	"testing"
+ 	"time"
+ 
++	"github.com/DataDog/dd-source/domains/ffe/libs/common"
+ 	"github.com/DataDog/dd-source/domains/ffe/libs/flagging/core/model"
+ 	"github.com/stretchr/testify/assert"
+ 	"github.com/stretchr/testify/require"
+ )
+ 
++//go:embed testdata/semver_delivery.json
++var semverDeliveryCases []byte
++
++// Authored targeting determines compatibility even when its rule is unreachable.
++// Overrides bypass the authored waterfall, including its SemVer requirement.
++func TestFilterSemverFlagsUsesAuthoredTargeting(t *testing.T) {
++	var cases []struct {
++		ID   string `json:"id"`
++		Args struct {
++			FirstAllocation string `json:"firstAllocation"`
++			AuthoredSemver  bool   `json:"authoredSemver"`
++			Override        bool   `json:"override"`
++			RolloutEnabled  bool   `json:"rolloutEnabled"`
++		} `json:"args"`
++		Expected struct {
++			PrimaryContains       bool `json:"primaryContains"`
++			CompatibilityContains bool `json:"compatibilityContains"`
++			SemverRetained        bool `json:"semverRetained"`
++		} `json:"expected"`
++	}
++	require.NoError(t, json.Unmarshal(semverDeliveryCases, &cases))
++	require.Len(t, cases, 24)
++	for _, tc := range cases {
++		t.Run(tc.ID, func(t *testing.T) {
++			ff := baseFeatureFlag()
++			first := model.Allocation{Key: "first", Type: model.AllocationTypeFeatureGate, OrderPosition: 0,
++				VariantWeights: []model.VariantWeight{{Value: 1, Variant: &ff.Variants[0]}}}
++			switch tc.Args.FirstAllocation {
++			case "ordinary":
++			case "completed", "active":
++				first.ExperimentID = common.Ptr("experiment-id")
++				first.ExperimentRolloutComplete = tc.Args.FirstAllocation == "completed"
++			default:
++				t.Fatalf("unknown first allocation: %s", tc.Args.FirstAllocation)
++			}
++			fallback := model.Allocation{Key: "fallback", OrderPosition: 1,
++				VariantWeights: []model.VariantWeight{{Value: 1, Variant: &ff.Variants[1]}}}
++			if tc.Args.AuthoredSemver {
++				fallback.TargetingRules = []model.TargetingRule{{Conditions: []model.Condition{{
++					Operator:  common.Ptr(model.ConditionOperatorSemverGTE),
++					Attribute: common.Ptr("app_version"), Value: []string{"2.0.0"},
++				}}}}
++			}
++			ff.CurrentEnvironment.Allocations = []model.Allocation{first, fallback}
++			if tc.Args.Override {
++				ff.CurrentEnvironment.OverrideVariant = &ff.Variants[1]
++			}
++			ordinary := baseFeatureFlag()
++			ordinary.Key = "unrelated"
++			ctx := context.Background()
++			if tc.Args.RolloutEnabled {
++				ctx = common.WithServerSDKSemverEnabled(ctx)
++			}
++			env := &model.Environment{ID: "env-id", Name: "staging"}
++			channel := model.DistributionChannelServer
++			now := time.Date(2026, 10, 20, 12, 0, 0, 0, time.UTC)
++			config := BuildFlagsConfiguration(ctx, env, []*model.FeatureFlag{ff, ordinary}, &channel, now, nil, nil)
++			before, err := json.Marshal(config.ToJSON())
++			require.NoError(t, err)
++			compatibility, keys := FilterSemverFlags(&config)
++			_, primaryContains := config.core.Flags[ff.Key]
++			_, compatibilityContains := compatibility.core.Flags[ff.Key]
++			assert.Equal(t, tc.Expected.PrimaryContains, primaryContains)
++			assert.Equal(t, tc.Expected.CompatibilityContains, compatibilityContains)
++			assert.Contains(t, compatibility.core.Flags, ordinary.Key)
++			if primaryContains && !tc.Expected.CompatibilityContains {
++				assert.Equal(t, []string{ff.Key}, keys)
++			} else {
++				assert.Empty(t, keys)
++			}
++			retained := false
++			if flag := config.core.Flags[ff.Key]; flag != nil {
++				for _, allocation := range flag.Allocations {
++					for _, rule := range allocation.Rules {
++						for _, condition := range rule.Conditions {
++							retained = retained || strings.HasPrefix(string(condition.Operator), "SEMVER_")
++						}
++					}
++				}
++				assignment, err := GetAssignment(winnerFixtureEvaluator(t, config), ff.Key, "eligible", nil, nil, now)
++				require.NoError(t, err)
++				require.NotNil(t, assignment)
++				wantVariant := ff.Variants[0].Key
++				if tc.Args.Override {
++					wantVariant = ff.Variants[1].Key
++				}
++				assert.Equal(t, wantVariant, assignment.VariationKey)
++			}
++			assert.Equal(t, tc.Expected.SemverRetained, retained)
++			after, err := json.Marshal(config.ToJSON())
++			require.NoError(t, err)
++			assert.Equal(t, before, after, "filtering must not mutate the capable-client payload")
++			_, jsonContains := compatibility.ToJSON().Flags[ff.Key]
++			assert.Equal(t, tc.Expected.CompatibilityContains, jsonContains)
++			protobuf, err := compatibility.ToProto()
++			require.NoError(t, err)
++			_, protoContains := protobuf.Flags[ff.Key]
++			assert.Equal(t, tc.Expected.CompatibilityContains, protoContains)
++		})
++	}
++}
++
+ func TestFilterSemverFlags(t *testing.T) {
+ 	config := &FlagsConfiguration{core: coreFlagsConfiguration{
+ 		CreatedAt:       time.Date(2026, time.August, 19, 0, 0, 0, 0, time.UTC),
+diff --git a/domains/ffe/libs/flagging/ufc/testdata/native_bucketing_golden.json b/domains/ffe/libs/flagging/ufc/testdata/native_bucketing_golden.json
+index 5bdf5d1512d60..ad41cd9ae9a51 100644
+--- a/domains/ffe/libs/flagging/ufc/testdata/native_bucketing_golden.json
++++ b/domains/ffe/libs/flagging/ufc/testdata/native_bucketing_golden.json
+@@ -585,6 +585,18 @@
+             }
+           ],
+           "doLog": true
++        },
++        {
++          "key": "allocation-default-f1083c536a7d",
++          "rules": [],
++          "splits": [
++            {
++              "shards": [],
++              "variationKey": "control",
++              "reason": "DEFAULT"
++            }
++          ],
++          "doLog": false
+         }
+       ]
+     },
+@@ -733,6 +745,18 @@
+             }
+           ],
+           "doLog": true
++        },
++        {
++          "key": "allocation-default-06777af52070",
++          "rules": [],
++          "splits": [
++            {
++              "shards": [],
++              "variationKey": "control",
++              "reason": "DEFAULT"
++            }
++          ],
++          "doLog": false
+         }
+       ]
+     }
+diff --git a/domains/ffe/libs/flagging/ufc/testdata/semver_delivery.json b/domains/ffe/libs/flagging/ufc/testdata/semver_delivery.json
+new file mode 100644
+index 0000000000000..83c6b97dd1168
+--- /dev/null
++++ b/domains/ffe/libs/flagging/ufc/testdata/semver_delivery.json
+@@ -0,0 +1,410 @@
++[
++  {
++    "id": "semver-delivery/ordinary/authored-false/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-false/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-false/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-false/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-true/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": false,
++      "compatibilityContains": false,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-true/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": false,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-true/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/ordinary/authored-true/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "ordinary",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-false/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-false/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-false/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-false/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-true/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": false,
++      "compatibilityContains": false,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-true/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": false,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-true/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/completed/authored-true/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "completed",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-false/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-false/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": false,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-false/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-false/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": false,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-true/override-false/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": false,
++      "compatibilityContains": false,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-true/override-false/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": true,
++      "override": false,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": false,
++      "semverRetained": true
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-true/override-true/rollout-false",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": false
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  },
++  {
++    "id": "semver-delivery/active/authored-true/override-true/rollout-true",
++    "decision_ids": [
++      "D021"
++    ],
++    "args": {
++      "firstAllocation": "active",
++      "authoredSemver": true,
++      "override": true,
++      "rolloutEnabled": true
++    },
++    "expected": {
++      "primaryContains": true,
++      "compatibilityContains": true,
++      "semverRetained": false
++    }
++  }
++]

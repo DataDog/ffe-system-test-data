@@ -1,0 +1,70 @@
+[
+  {
+    "name": "equal-allowed",
+    "command": [
+      "go",
+      "test",
+      "-overlay",
+      "/tmp/aaron-refresh-controls/equal-allowed/overlay.json",
+      "./openfeature",
+      "-run",
+      "^TestExperimentationOptOutFutureConfigurationRefresh$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 1,
+    "expected_failure": "TestExperimentationOptOutFutureConfigurationRefresh/equal",
+    "log": "/tmp/aaron-refresh-controls/equal-allowed/output.jsonl"
+  },
+  {
+    "name": "unknown-allowed",
+    "command": [
+      "go",
+      "test",
+      "-overlay",
+      "/tmp/aaron-refresh-controls/unknown-allowed/overlay.json",
+      "./openfeature",
+      "-run",
+      "^TestExperimentationOptOutFutureConfigurationRefresh$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 1,
+    "expected_failure": "TestExperimentationOptOutFutureConfigurationRefresh/unknown",
+    "log": "/tmp/aaron-refresh-controls/unknown-allowed/output.jsonl"
+  },
+  {
+    "name": "missing-family",
+    "command": [
+      "go",
+      "test",
+      "-overlay",
+      "/tmp/aaron-refresh-controls/missing-family/overlay.json",
+      "./openfeature",
+      "-run",
+      "^TestEvaluateFlag_JSONFixtures$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 1,
+    "expected_failure": "require at least 16",
+    "log": "/tmp/aaron-refresh-controls/missing-family/output.jsonl"
+  },
+  {
+    "name": "missing-capability-case",
+    "command": [
+      "go",
+      "test",
+      "-overlay",
+      "/tmp/aaron-refresh-controls/missing-capability-case/overlay.json",
+      "./openfeature",
+      "-run",
+      "^TestEvaluateFlag_JSONFixtures$",
+      "-count=1",
+      "-json"
+    ],
+    "exit_code": 1,
+    "expected_failure": "require at least 16",
+    "log": "/tmp/aaron-refresh-controls/missing-capability-case/output.jsonl"
+  }
+]

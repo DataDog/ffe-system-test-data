@@ -1,0 +1,50 @@
+{
+  "review_root": 4355693358,
+  "repository_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "base_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "recorded_at_utc": "2026-10-23T03:21:38.353069+00:00",
+  "clean_before_and_after": true,
+  "source_hashes": "exact-347884b-source-hashes.json",
+  "validation": {
+    "CI": "true",
+    "USE_TEST_VISIBILITY": "0",
+    "max_workers": 2,
+    "rerun_tasks": true,
+    "jdk": "Android Studio JBR",
+    "suites": {
+      "Debug": {
+        "suites": 38,
+        "tests": 663,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "Release": {
+        "suites": 38,
+        "tests": 663,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "total_executions": 1326,
+    "detekt": "passed",
+    "ktlint": "passed",
+    "duration": "1m 19s",
+    "log": "exact-347884b-flags-validation.log",
+    "log_sha256": "ad82127d1851a7f1f14907e2228c5dded4594e30018b8c694a9d72e2168d1491"
+  },
+  "negative_control": "review5-negative-control-receipt.json",
+  "source_equivalence": "exact-347884b-scope-equivalence.json",
+  "previous_cda_export_immutable": {
+    "manifest": "review4-export-manifest.json",
+    "files_verified": 21,
+    "all_hashes_unchanged": true
+  },
+  "proof_boundary": [
+    "The current-head run covers Flags debug/release unit suites and static checks only.",
+    "The latch regression tests contention, winner identity, required warnings and logging outside the lock. It does not deterministically replay the old between-lock race.",
+    "The disabled-warning mutation fails both enabled-mode cases.",
+    "The cda7955 profile/runtime/provider/reliability results remain original-commit evidence. Scope equivalence is established by the exact two-file Git diff, not by rerunning those checks."
+  ]
+}

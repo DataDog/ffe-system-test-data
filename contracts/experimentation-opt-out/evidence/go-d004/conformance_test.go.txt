@@ -1,0 +1,87 @@
+package openfeature
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+
+	of "github.com/open-feature/go-sdk/openfeature"
+)
+
+// This temporary adapter executes the production decoder and provider. Expected
+// values are loaded unchanged from the pinned central policy corpus.
+func TestLeanD004PolicyConformance(t *testing.T) {
+	var rows []struct {
+		ID   string `json:"id"`
+		Args struct {
+			Mode, Attribute, Activation string
+			DoLog                       bool
+		}
+		Expected struct {
+			Error   string
+			Exclude bool
+		}
+	}
+	data, err := os.ReadFile(os.Getenv("LEAN_D004_CASES"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(data, &rows); err != nil {
+		t.Fatal(err)
+	}
+	if len(rows) != 90 {
+		t.Fatalf("expected 90 pinned policy rows, got %d", len(rows))
+	}
+	for _, row := range rows {
+		t.Run(row.ID, func(t *testing.T) {
+			modes := map[string]ExperimentationOptOutMode{"disabled": ExperimentationOptOutDisabled, "immediate": ExperimentationOptOutImmediate, "future_experiments_only": ExperimentationOptOutFutureExperimentsOnly}
+			mode, ok := modes[row.Args.Mode]
+			if !ok {
+				t.Fatal("unknown mode")
+			}
+			activation := map[string]string{"missing": "", "invalid": `,"randomizationActivatedAt":"invalid"`, "before": `,"randomizationActivatedAt":"2026-10-01T12:00:00Z"`, "equal": `,"randomizationActivatedAt":"2026-10-19T12:00:00Z"`, "after": `,"randomizationActivatedAt":"2026-11-01T12:00:00Z"`}
+			raw, ok := activation[row.Args.Activation]
+			if !ok {
+				t.Fatal("unknown activation")
+			}
+			configData := fmt.Sprintf(`{"format":"SERVER","flags":{"test":{"key":"test","enabled":true,"variationType":"BOOLEAN","variations":{"on":{"key":"on","value":true},"off":{"key":"off","value":false}},"allocations":[{"key":"tested","doLog":%t,"splits":[{"variationKey":"on","shards":[]}]%s},{"key":"ordinary","doLog":false,"splits":[{"variationKey":"off","shards":[]}]}]}}}`, row.Args.DoLog, raw)
+			var config universalFlagsConfiguration
+			if err := json.Unmarshal([]byte(configData), &config); err != nil {
+				t.Fatal(err)
+			}
+			provider := newDatadogProvider(ProviderConfig{ExperimentationOptOutMode: mode})
+			t.Cleanup(provider.Shutdown)
+			provider.configuration = &config
+			attrs := of.FlattenedContext{of.TargetingKey: "lean-subject"}
+			switch row.Args.Attribute {
+			case "valid":
+				attrs[experimentationOptOutAtAttribute] = "2026-10-19T12:00:00Z"
+			case "invalid":
+				attrs[experimentationOptOutAtAttribute] = false
+			case "absent":
+			default:
+				t.Fatal("unknown attribute")
+			}
+			result := provider.BooleanEvaluation(context.Background(), "test", false, attrs)
+			gotError := string(result.ResolutionDetail().ErrorCode)
+			if gotError == "" {
+				gotError = "NONE"
+			}
+			wantValue := row.Expected.Error == "NONE" && !row.Expected.Exclude
+			if gotError != row.Expected.Error || result.Value != wantValue {
+				t.Fatalf("error=%s value=%t; want error=%s value=%t", gotError, result.Value, row.Expected.Error, wantValue)
+			}
+			if row.Expected.Error == "NONE" {
+				wantVariant := "on"
+				if row.Expected.Exclude {
+					wantVariant = "off"
+				}
+				if result.Variant != wantVariant {
+					t.Fatalf("variant=%s; want %s (must select the allocation, not just return the default)", result.Variant, wantVariant)
+				}
+			}
+		})
+	}
+}

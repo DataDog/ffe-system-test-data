@@ -1,0 +1,734 @@
+{
+  "schema_version": 1,
+  "repository": "DataDog/dd-sdk-ios",
+  "pull_request": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+  "head_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "base_sha": "5b351983abaa54c0b5fba8d94d29d1378fd69fd7",
+  "retrieved_at": "2026-10-23T03:36:24Z",
+  "query_window": {
+    "from": "2026-10-22T03:34:56Z",
+    "to": "2026-10-23T03:36:24Z"
+  },
+  "pipeline_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/pipelines/146948453",
+  "method": "Read-only Datadog CI Visibility: one complete final-outcome page per platform; aggregate attempt, failure, and TIA queries.",
+  "platforms": [
+    {
+      "platform": "iOS",
+      "job_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/jobs/2168876892",
+      "os": {
+        "architecture": "arm64",
+        "family": "ios",
+        "platform": "iOS simulator",
+        "version": "Version 26.0.1 (Build 23A8464)"
+      },
+      "unique_test_names": 237,
+      "passed": 188,
+      "skipped_by_tia": 49,
+      "failed": 0,
+      "other": 0,
+      "passed_attempts": 188,
+      "early_flake_detection_retries": 0,
+      "query_request_id": "pddv1ChZjYWJvNVFPWVNLeU9WVUNzNGVvS29BIiwKHAvuDo9WCVPOoJwxYL6thV9olWr39BAgJvXyk3ASDIIDpdS6y-D4gAqdrw"
+    },
+    {
+      "platform": "tvOS",
+      "job_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/jobs/2168876893",
+      "os": {
+        "architecture": "arm64",
+        "family": "ios",
+        "platform": "tvOS simulator",
+        "version": "Version 26.0 (Build 23J352)"
+      },
+      "unique_test_names": 237,
+      "passed": 188,
+      "skipped_by_tia": 49,
+      "failed": 0,
+      "other": 0,
+      "passed_attempts": 251,
+      "early_flake_detection_retries": 63,
+      "query_request_id": "pddv1ChZ4cWx1Z3JrTlNQUy1ZUnNvMnlmbEpnIiwKHCc9YjRm-ovOzDjtcKHEdl6wiZW63ESUOHr3mgwSDHehd1aFFMGUzwrAxQ"
+    },
+    {
+      "platform": "watchOS",
+      "job_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/jobs/2168876894",
+      "os": {
+        "architecture": "arm64",
+        "family": "ios",
+        "platform": "watchOS simulator",
+        "version": "Version 26.0 (Build 23R353)"
+      },
+      "unique_test_names": 237,
+      "passed": 188,
+      "skipped_by_tia": 49,
+      "failed": 0,
+      "other": 0,
+      "passed_attempts": 188,
+      "early_flake_detection_retries": 0,
+      "query_request_id": "pddv1ChZaWWhITGdrb1RxbXBMQ29DU2JOdVBnIiwKHKIrff3VQdu-AtipheILC_SOVFAby0XPK4kGiFISDG9GctpT-TaBNAp3_Q"
+    },
+    {
+      "platform": "visionOS",
+      "job_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/jobs/2168876895",
+      "os": {
+        "architecture": "arm64",
+        "family": "unknown",
+        "platform": "visionOS simulator",
+        "version": "Version 26.0 (Build 23M336)"
+      },
+      "unique_test_names": 237,
+      "passed": 181,
+      "skipped_by_tia": 56,
+      "failed": 0,
+      "other": 0,
+      "passed_attempts": 181,
+      "early_flake_detection_retries": 0,
+      "query_request_id": "pddv1ChZFbEs5SDA0ZFMwbW5pUGNyYzF4QlpBIiwKHC2n7KvqBc6rAS_DRM4aYYaAklnpPuU1rushDawSDIhvacQSzShFq3vN_A"
+    },
+    {
+      "platform": "macOS",
+      "job_url": "https://gitlab.ddbuild.io/DataDog/dd-sdk-ios/-/jobs/2168876896",
+      "os": {
+        "architecture": "arm64",
+        "family": "macos",
+        "platform": "macOS",
+        "version": "Version 15.7.9 (Build 24G830)"
+      },
+      "unique_test_names": 237,
+      "passed": 188,
+      "skipped_by_tia": 49,
+      "failed": 0,
+      "other": 0,
+      "passed_attempts": 251,
+      "early_flake_detection_retries": 63,
+      "query_request_id": "pddv1ChYtbUZpLUJqSlJmbW5oNlN3N0ZCdDR3Ii4KHuUFhSPhSRvdq7QWw_Fu9hX8SahLddhFi07b33J8eRIMa0p6A8eFoid4ZqSZ"
+    }
+  ],
+  "platform_order": [
+    "iOS",
+    "tvOS",
+    "watchOS",
+    "visionOS",
+    "macOS"
+  ],
+  "new_test_matrix": [
+    {
+      "name": "testOptOutTimestampNormalizesProlepticGregorianDates",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift#L17",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testOptOutTimestampRejectsInvalidGregorianDatesAndUTCOverflow",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift#L35",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testFutureOptOutRequiresTypedModeAndExactCutoffAcknowledgement",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift#L50",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testOptedOutRequestRequiresBooleanAcknowledgement",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift#L81",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testExperimentationOptOutUsesEvaluationOptions",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagAssignmentsRequestTests.swift#L16",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testConfigurationForwardsExperimentationModeAndPreservesNamedClient",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsClientTests.swift#L352",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testEnabledOptOutWithholdsPreviousSubjectWithoutAttributeWhileRefreshIsPending",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L17",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testEnabledOptOutErrorTelemetryUsesRequestedContextAndIndependentSuppression",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L47",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testInvalidContextKeepsLastGoodSnapshotForOfflineRestart",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L94",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testConcurrentContextUpdatesKeepAssignmentAndTelemetryIdentityTogether",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L138",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testLegacySnapshotHasNoOptOutPolicyAndUnreleasedBooleanIsIgnored",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L181",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testEnabledPendingSubjectDoesNotInheritPreviousSubjectsTelemetryOptOut",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L216",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testImmediateOptOutContextValidationAndForwarding",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L240",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testFutureOptOutRequiresExactAcknowledgement",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L295",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testFutureOptOutCacheSeparatesModeAndCutoffAcrossRestart",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L337",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testFutureOptOutCutoffChangeRejectsLateResponse",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L382",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testImmediateOptOutRejectsLegacyCacheAndLateResponses",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L414",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testImmediateOptOutRejectsUnacknowledgedAssignmentsAndRestoresMatchingCache",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L454",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    },
+    {
+      "name": "testImmediateOptOutOlderTimeoutDoesNotReplaceNewerReconcilingState",
+      "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L494",
+      "new_vs_base": true,
+      "results": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ]
+    }
+  ],
+  "review_thread": {
+    "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863269",
+    "named_test_matrix": [
+      {
+        "name": "testExperimentationOptOutUsesEvaluationOptions",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testOptedOutRequestRequiresBooleanAcknowledgement",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testFutureOptOutRequiresTypedModeAndExactCutoffAcknowledgement",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testObsoleteRequestCannotPublishStateOrNotify",
+        "results": [
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head"
+        ]
+      },
+      {
+        "name": "testContextChangeInCompletionDoesNotEmitOldReadyNotification",
+        "results": [
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head",
+          "absent_at_head"
+        ]
+      }
+    ],
+    "current_related_test_matrix": [
+      {
+        "name": "testDeferredNotificationUpdatesStateBeforeDeliveryAndAllowsReentrantAccess",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsStateManagerTests.swift#L48",
+        "results": [
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia"
+        ]
+      },
+      {
+        "name": "testDeferredNotificationDoesNotDeliverSupersededStateEvenAfterReturningToSameState",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsStateManagerTests.swift#L65",
+        "results": [
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia"
+        ]
+      },
+      {
+        "name": "testReentrantTransitionDoesNotDeliverSupersededStateToRemainingListeners",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsStateManagerTests.swift#L78",
+        "results": [
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia",
+          "skip_by_tia"
+        ]
+      },
+      {
+        "name": "testOverlappingContextUpdates_whenSuccessPublicationIsDelayed_preservesNewerState",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L2523",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testInitializationSuccessDeliversCompletionBeforeReadyListeners",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L1965",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testOverlappingContextUpdates_whenSuccessesArriveInEitherOrder_preservesNewerFlags",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L2676",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      },
+      {
+        "name": "testOverlappingContextUpdates_whenSupersededSuccessArrives_doesNotEndNewerReconciliation",
+        "source_url": "https://github.com/DataDog/dd-sdk-ios/blob/386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f/DatadogFlags/Tests/Client/FlagsRepositoryTests.swift#L2781",
+        "results": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    ],
+    "interpretation": "The three original request/ack test names pass on all five platforms. The two original state-manager test names are absent after the develop merge. Current deferred/reentrant state-manager tests were skipped by TIA. The repository-level delayed-publication regression passes on all five platforms and checks that a completion cannot publish an obsolete ready notification after a newer context or reset.",
+    "removed_internal_api_limit": "The old obsolete-request test also checked that a before-notify closure was not invoked when a predicate rejected a state update. That internal API no longer exists. Current develop intentionally completes each superseded request once, while rejecting its assignment/state publication. The executed repository tests pin this behavior. Do not claim execution or identical internal API semantics for the removed methods.",
+    "historical_source_url": "https://github.com/DataDog/dd-sdk-ios/blob/4057c07ffcedb0bc8d7fe38f5cc54c538040ee5d/DatadogFlags/Tests/Client/FlagsStateManagerTests.swift#L48",
+    "coverage_assessment": "No scoped opt-out defect was found. Executed repository coverage verifies stale publication and notification isolation. Direct state-manager test execution remains a TIA gap."
+  },
+  "invariants": {
+    "complete_platform_pages": true,
+    "all_event_shas_match": true,
+    "unique_final_outcomes_per_platform": 237,
+    "new_tests_added_vs_base": 19,
+    "new_test_platform_outcomes": 95,
+    "new_test_platform_passes": 95,
+    "new_test_platform_skips": 0,
+    "failed_test_attempts": 0
+  },
+  "aggregation_evidence": {
+    "attempts": {
+      "name": "attempts",
+      "query": "@git.commit.sha:386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f @test.module:DatadogFlagsTests @test.name:*",
+      "result": {
+        "data": {
+          "buckets": [
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (macOS)",
+                "@test.status": "pass"
+              },
+              "computes": {
+                "c0": 251,
+                "c1": 188
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (macOS)",
+                "@test.status": "skip"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (tvOS)",
+                "@test.status": "pass"
+              },
+              "computes": {
+                "c0": 251,
+                "c1": 188
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (tvOS)",
+                "@test.status": "skip"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (iOS)",
+                "@test.status": "pass"
+              },
+              "computes": {
+                "c0": 188,
+                "c1": 188
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (iOS)",
+                "@test.status": "skip"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (visionOS)",
+                "@test.status": "pass"
+              },
+              "computes": {
+                "c0": 181,
+                "c1": 181
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (visionOS)",
+                "@test.status": "skip"
+              },
+              "computes": {
+                "c0": 56,
+                "c1": 56
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (watchOS)",
+                "@test.status": "pass"
+              },
+              "computes": {
+                "c0": 188,
+                "c1": 188
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (watchOS)",
+                "@test.status": "skip"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            }
+          ]
+        },
+        "meta": {
+          "elapsed": 598,
+          "page": {
+            "after": "eyJhZnRlciI6eyJAY2kuam9iLm5hbWUiOlsiVW5pdCBUZXN0cyAobWFjT1MpIiwiVW5pdCBUZXN0cyAobWFjT1MpIiwiVW5pdCBUZXN0cyAodHZPUykiLCJVbml0IFRlc3RzICh0dk9TKSIsIlVuaXQgVGVzdHMgKGlPUykiLCJVbml0IFRlc3RzIChpT1MpIiwiVW5pdCBUZXN0cyAodmlzaW9uT1MpIiwiVW5pdCBUZXN0cyAodmlzaW9uT1MpIiwiVW5pdCBUZXN0cyAod2F0Y2hPUykiLCJVbml0IFRlc3RzICh3YXRjaE9TKSJdfX0"
+          },
+          "requestId": "pddv1ChZrVmdKWGxablFoU3F4SDE0c1BicXN3IisKG1DIBovWKpW08h89WEFguAOuasrSMgJUZpJkfRIMdmKDwkWGNZ9V3pgV",
+          "status": "done"
+        }
+      }
+    },
+    "skip_reason": {
+      "name": "skip_reason",
+      "query": "@git.commit.sha:386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f @test.module:DatadogFlagsTests @test.name:* @test.status:skip",
+      "result": {
+        "data": {
+          "buckets": [
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (visionOS)",
+                "@test.skipped_by_itr": "true"
+              },
+              "computes": {
+                "c0": 56,
+                "c1": 56
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (iOS)",
+                "@test.skipped_by_itr": "true"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (macOS)",
+                "@test.skipped_by_itr": "true"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (tvOS)",
+                "@test.skipped_by_itr": "true"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            },
+            {
+              "by": {
+                "@ci.job.name": "Unit Tests (watchOS)",
+                "@test.skipped_by_itr": "true"
+              },
+              "computes": {
+                "c0": 49,
+                "c1": 49
+              }
+            }
+          ]
+        },
+        "meta": {
+          "elapsed": 591,
+          "requestId": "pddv1ChZxQV9TazNtNFRKaUtleUZnenlPZE9RIisKG9jyzRcC3anw7f5JMlnds0HVyrISplawpIRFvRIMwBlpD09BE4Jg1JkZ",
+          "status": "done"
+        }
+      }
+    },
+    "failure_and_retries": [
+      {
+        "name": "failed_attempts",
+        "query": "@git.commit.sha:386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f @test.module:DatadogFlagsTests @test.name:* @test.status:fail",
+        "result": {
+          "data": {
+            "buckets": []
+          },
+          "meta": {
+            "elapsed": 463,
+            "requestId": "pddv1ChZlR3MtQzRjalFVMllsTW4wYW5WWjR3IisKGxqP2d6Ol1rusD9SUKjaWKPqtfSC2taNbp_yrBIMBPukciAWmYp2UV6L",
+            "status": "done"
+          }
+        }
+      },
+      {
+        "name": "early_flake_detection_retries",
+        "query": "@git.commit.sha:386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f @test.module:DatadogFlagsTests @test.name:* @test.retry_reason:early_flake_detection",
+        "result": {
+          "data": {
+            "buckets": [
+              {
+                "by": {
+                  "@ci.job.name": "Unit Tests (macOS)",
+                  "@test.status": "pass"
+                },
+                "computes": {
+                  "c0": 63
+                }
+              },
+              {
+                "by": {
+                  "@ci.job.name": "Unit Tests (tvOS)",
+                  "@test.status": "pass"
+                },
+                "computes": {
+                  "c0": 63
+                }
+              }
+            ]
+          },
+          "meta": {
+            "elapsed": 619,
+            "requestId": "pddv1ChZaSEprZXZDcVNYUzdRTTVreXU0emlnIiwKHDTiV2tMykqttKH0VQR50GFES10KdaeNW3pm4M4SDFR6Mmd1AgDOS9D7zQ",
+            "status": "done"
+          }
+        }
+      }
+    ]
+  },
+  "local_detail_file": "hosted-flags-386f8c5-final-events.json",
+  "limits": [
+    "Hosted Flags runs used Test Impact Analysis. The skipped tests did not execute in these jobs.",
+    "Final outcomes count each test once. macOS and tvOS each add 63 successful early-flake-detection retries.",
+    "CI Visibility reports execution outcomes. This does not prove device runtime behavior, a deployed backend, or Swift provider release readiness.",
+    "The two removed state-manager test names have no exact-head execution outcome. Related current tests are identified separately.",
+    "No CI job was rerun, and no source, PR body, review reply, or thread state was changed.",
+    "The replaced state-manager predicate/before-notify API is not part of the current implementation. Current superseded-request completion semantics differ from that internal hook."
+  ]
+}

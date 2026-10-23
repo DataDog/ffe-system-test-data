@@ -1,0 +1,416 @@
+[
+  {
+    "id": "policy/future_experiments_only/absent/missing/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182905,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-0"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/missing/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723182928,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-1"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/invalid/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182961,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-2"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/invalid/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723182966,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-3"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/before/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182970,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-4"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/before/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723182973,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-5"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/equal/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182976,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-6"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/equal/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723182978,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-7"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/after/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182981,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-8"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/absent/after/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723182984,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-9"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/missing/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182988,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-10"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/missing/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723182991,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-11"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/invalid/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "PARSE_ERROR",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/invalid/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "PARSE_ERROR",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/before/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723183007,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-14"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/before/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723183010,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-15"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/equal/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723183013,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-16"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/equal/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723183015,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-17"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/after/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723183018,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-18"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/valid/after/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723183021,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-19"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/missing/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/missing/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/invalid/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/invalid/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/before/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/before/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/equal/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/equal/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/after/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/future_experiments_only/invalid/after/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  }
+]

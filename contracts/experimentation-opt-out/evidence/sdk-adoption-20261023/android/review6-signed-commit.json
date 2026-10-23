@@ -1,0 +1,9 @@
+{
+  "commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "parent": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "signed": true,
+  "signature_verification": "Good \"git\" signature for leo.romanovsky@datadoghq.com with ED25519 key SHA256:OARkNwfvap+5aDU6m+alCIv0E+miVmtHAsf665i8dv0\n",
+  "worktree_clean": true,
+  "frozen_source_hashes_verified": true,
+  "created_at": "2026-10-23T03:40:28.893052+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "repository": "DataDog/dd-trace-java",
+  "commit": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "previous_job_id": 120220871697,
+  "run_id": 39893949056,
+  "action": "Rerun only the Payara build job after workflow completion",
+  "reason": "All three initial Maven download attempts returned HTTP 429 before agent installation.",
+  "recorded_at": "2026-10-23T03:44:54.652394+00:00",
+  "exit_code": 0,
+  "response": "{}",
+  "stderr": "",
+  "scope": "One explicit retry of the failed job; no source changes and no complete workflow rerun."
+}

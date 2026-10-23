@@ -1,0 +1,31 @@
+{
+  "repository": "DataDog/dd-trace-rb",
+  "pr_url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+  "source_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "native_dependency": {
+    "repository": "DataDog/libdatadog",
+    "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+    "branch": "leoromanovsky/experimentation-opt-out-immediate",
+    "selection": "temporary LIBDATADOG_VENDOR_OVERRIDE",
+    "merge_gate": "Replace with released native dependency."
+  },
+  "decisions": {
+    "D002r1": "Disabled ignores cutoff. Reject present invalid bytes/types before C conversion. Embedded NUL names cannot alias the exact key.",
+    "D004r2": "Malformed activation fails only effective future mode; all allocations remain subject to native flag-wide validation.",
+    "D005r2": "Inherits native surrounding-whitespace rejection; remaining syntax uses Chrono. Internal Unicode whitespace accepted by Chrono stays accepted.",
+    "D010r1": "Policy adapter uses explicit boolean doLog. Native omitted-doLog compatibility is unchanged.",
+    "D011r1": "Immediate excludes experiments now. Future retains allocations activated strictly before cutoff.",
+    "D016r1": "Ready evaluator rejects malformed enabled input before missing-flag lookup.",
+    "D017r2": "Inherited native call-site guard. No Ruby timing or call-count claim."
+  },
+  "semantic_revision_changed": false,
+  "fixture_expectations_changed": false,
+  "profile": "libdatadog-policy-v1, all90 rows through Ruby production NativeEvaluator",
+  "additional_wrapper_checks": 21,
+  "limits": [
+    "No complete browser parser equivalence.",
+    "No precomputed-mobile acknowledgement or cache contract.",
+    "Native dependency remains unpublished.",
+    "Local unit tests do not establish HTTP delivery."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "compression": "gzip, deterministic mtime=0; decompression preserves original bytes",
+  "files": [
+    {
+      "file": "native-default-allocation-http.log.gz",
+      "sha256": "38149a147679112a9bcf434f839061b454f2a44cca9c37b397951f48b90cab53",
+      "uncompressed_sha256": "9ebf11f83c289d390b5dc43673bfc7d99c9f18232b71ff8d37b5fa5e30ff74a9",
+      "uncompressed_bytes": 376952
+    },
+    {
+      "file": "native-default-allocation-http.xml.gz",
+      "sha256": "f874bd292c8f120f72fc46f82e6e33c281b1bb9a8d366a2c8b44c08b83c59497",
+      "uncompressed_sha256": "65bd7a43e509cc1a98d2a269a156ceaafa6bfff3d2dfaa25bad18f13e3c155e4",
+      "uncompressed_bytes": 420014
+    },
+    {
+      "file": "native-default-crossdc.log.gz",
+      "sha256": "1b9c47e2abaef3ab8170049fba873c7221c77ba489166dbd29e680004357999f",
+      "uncompressed_sha256": "678e416b326d927f493dd01e3bc902942c7fb4e060407442a1b19fdf239251d1",
+      "uncompressed_bytes": 123609
+    },
+    {
+      "file": "native-default-crossdc.xml.gz",
+      "sha256": "61c668d9a522cdfe9968ee2d8c8fdd57bccaf529299cb903705aa3e849dd2d1a",
+      "uncompressed_sha256": "0c820455549769770fd209b9312e40a868fa12ad782550578bc2aa92b6c60925",
+      "uncompressed_bytes": 137483
+    },
+    {
+      "file": "native-default-lifecycle.log.gz",
+      "sha256": "1278697b8c20ea95367d17be314dfc24a39f0628e7959264d59a19b97f128d84",
+      "uncompressed_sha256": "28bf858df144942b4e675054197043a65ec8123b61a5c2a5e16aa1c158443329",
+      "uncompressed_bytes": 308996
+    },
+    {
+      "file": "native-default-lifecycle.xml.gz",
+      "sha256": "eb36f59168f1672d699f882f3126fd2e26a7ee44cd334329e9d597d0f62e69dd",
+      "uncompressed_sha256": "c10db68338dcfeaa63e496fc86a850319c40ba9ec34a577e3a9e96aa27d50ed6",
+      "uncompressed_bytes": 342046
+    },
+    {
+      "file": "native-default-service.log.gz",
+      "sha256": "fa617cfa3f7e0fc319fc5631a34c747f662e1ac7a7d6c47e165477b6d8a21c5e",
+      "uncompressed_sha256": "aa4858d6166c1451a827671589b8899d18d82a7aa09d3192c8c021b9319d113a",
+      "uncompressed_bytes": 469389
+    },
+    {
+      "file": "native-default-service.xml.gz",
+      "sha256": "75005cfb811ef9d8fe4ce9ad7e35f7f5f82edf6ec194778aadbf297a52693959",
+      "uncompressed_sha256": "915f1d622d70b62ff3b7d7263db203fd3c01139979d6846d03eff61c95147fb7",
+      "uncompressed_bytes": 469922
+    },
+    {
+      "file": "native-default-suites.log.gz",
+      "sha256": "e8c5227f8510ad604e3248edc372bc1a3fe6660ad28f1e4c1b068f893cacb8d3",
+      "uncompressed_sha256": "3cc2e040fb31847cddbcdf6df2e2d577f3a819c08e44c4318e8f72240cfb45ce",
+      "uncompressed_bytes": 771788
+    },
+    {
+      "file": "native-default-ufc.log.gz",
+      "sha256": "0116337d394b6f6c2c80204f416067bd8b670dcd0ab5bac0839a23c20af9fe22",
+      "uncompressed_sha256": "65f2376339fb10bfc96f59958e96c84a9fa6e4c75a3a325a65608078bd02120e",
+      "uncompressed_bytes": 381413
+    },
+    {
+      "file": "native-default-ufc.xml.gz",
+      "sha256": "c24f805c504a4865551f05515563d5f72f3250e3ea16d6ecdf265d640bceb1d3",
+      "uncompressed_sha256": "4853778bd41f512b91259c4ce210e8cded59f639a61ae327e88e00092f63afc1",
+      "uncompressed_bytes": 524686
+    },
+    {
+      "file": "native-timeout-retry.log.gz",
+      "sha256": "efa51a8176479c6980fcd3962c1f89e564e11c9d23012e41f39ddef1994770d9",
+      "uncompressed_sha256": "232f854dd9c0d3c28a19353bd140a08a6917c9604fceec339c8a33644d6db749",
+      "uncompressed_bytes": 3581
+    },
+    {
+      "file": "native-retry-service.xml.gz",
+      "sha256": "1c016a1525bc66a7567317ef97466f61818d41ccce6d2633669c236e4d263ec3",
+      "uncompressed_sha256": "c1310526e9b418db68b1d05b50fb4f7bc00e4f4d105dd73f11c5b500df7a5be6",
+      "uncompressed_bytes": 1055473
+    },
+    {
+      "file": "native-retry-service.log.gz",
+      "sha256": "86615de7faee30336717a2577214632ec0069e566af52dbeae1551701e0856cd",
+      "uncompressed_sha256": "f38ba2279e81f2e07b76cf2e3b21947f0e5feab8b231825bc1cf806399b21fda",
+      "uncompressed_bytes": 788294
+    },
+    {
+      "file": "native-retry-lifecycle.xml.gz",
+      "sha256": "1ca5421c14b5f271994ade2b6d29ffc2c4e7832891f23c729a56920af6baa8a7",
+      "uncompressed_sha256": "bda3722b07f41ffad5b34b38df07821dba93c75923a134d4bcc2ceb6215bcef9",
+      "uncompressed_bytes": 266342
+    },
+    {
+      "file": "native-retry-lifecycle.log.gz",
+      "sha256": "391519987e1077270a598d51813d277a30b5ab9e43f5c9830d49e2ece1a68ba2",
+      "uncompressed_sha256": "47eb20673fc22e932dbe1943b918c5e0b06ad5ef0e30aaeeb3c828c56213a663",
+      "uncompressed_bytes": 231269
+    }
+  ],
+  "raw_evidence_scope": "Raw log/patch hashes refer to privately retained originals. Public files are explicitly labeled count or provenance summaries.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "ef314f17be4e0d07c7973f67b33c332a387cde2621490b874a46239f7b104af8"
+}

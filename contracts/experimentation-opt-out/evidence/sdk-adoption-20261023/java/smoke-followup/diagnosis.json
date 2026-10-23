@@ -1,0 +1,43 @@
+{
+  "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "merged_master": "3718fdc518506e5700df8b7d448639971cd3470c",
+  "source_equivalence": {
+    "dd-smoke-tests/openfeature/src/test/groovy/datadog/smoketest/springboot/OpenFeatureProviderSmokeTest.groovy": {
+      "equal": true,
+      "sha256": "aea6d3d63963fb5a3afceb6cf8cb715b3094755abba1c83656bd7470d11da64d"
+    },
+    "products/feature-flagging/feature-flagging-lib/src/main/java/com/datadog/featureflag/LRUExposureCache.java": {
+      "equal": true,
+      "sha256": "b5b5c9a26b389264a8078ea10d9a9c743b2fd95cd59aee23917cd1ab21c9e8c3"
+    },
+    "products/feature-flagging/feature-flagging-lib/src/main/java/com/datadog/featureflag/ExposureCache.java": {
+      "equal": true,
+      "sha256": "bf8edef8758d6b558dd18f5e8d0cdad1d5b658c56300680ce43e273f04ccde0a"
+    },
+    "products/feature-flagging/feature-flagging-api/src/main/java/datadog/trace/api/openfeature/ExposureDeduplicationCache.java": {
+      "equal": true,
+      "sha256": "37445af8b106258eaf6b6bac498b9363e428941a39b1e86ecf9feb4e45fa5fcf"
+    }
+  },
+  "baseline": {
+    "tests": 3,
+    "failed": 1,
+    "actual_exposures": 232,
+    "old_expected_exposures": 231,
+    "extra": [
+      {
+        "flag": "integer-flag",
+        "allocation": "50/50 split",
+        "variant": "one",
+        "targetingKey": "5",
+        "count": 1
+      }
+    ],
+    "missing": []
+  },
+  "cause": "Fixture expansion exercises A -> B -> A for integer-flag and subject 5. Production keeps the last assignment per flag and subject. The smoke oracle used a lifetime Set, so it incorrectly removed the returning A exposure.",
+  "classification": "test_oracle_defect",
+  "production_change_required": false,
+  "fixture_before": "0c467473aa8dc1f1cbfc0ef9a60d5c1c7a8826e6",
+  "fixture_after": "8c4d2410aa643aa6b97c8547ae5fe358c46b7f6f"
+}

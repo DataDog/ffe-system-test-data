@@ -1,0 +1,85 @@
+{
+  "purpose": "Supplement the immutable 9c18ede export with final CI=true checks and native Android runtime evidence.",
+  "repository_commit": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "runtime_tested_commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "files": [
+    {
+      "path": "exact-f15ab92-ci-receipt.json",
+      "sha256": "4bdcc8d7e58e7081ae2f9c0d153e06fd1ab79f2af9559c289e2aaa084faa5c40",
+      "bytes": 4687
+    },
+    {
+      "path": "exact-f15ab92-source-hashes.json",
+      "sha256": "79c934de1b753ea9ed41b8699b955901efe7b2eee3ec570fa63aa415d7249c0d",
+      "bytes": 7353
+    },
+    {
+      "path": "exact-f15ab92-ci-suite-counts.json",
+      "sha256": "151d6e7d245d307645ecaf9c43c4e0c400dd19d7d6fc89d25d90d1e83487361d",
+      "bytes": 676
+    },
+    {
+      "path": "exact-f15ab92-profile187-comparison.json",
+      "sha256": "fae12fbe4e4ec429f169530e8e3bd4480712b3466ea8a9f50f913bc2efce6b8f",
+      "bytes": 628
+    },
+    {
+      "path": "exact-f15ab92-profile-observations.jsonl",
+      "sha256": "151e3c9d82aa29502fb705f9d73fc65ce96f085e2364a885f891ad5f4756c3d5",
+      "bytes": 16210
+    },
+    {
+      "path": "profile-probes-ci/MobileProfileProbeTest.kt",
+      "sha256": "a9096b63323d0173b967967298cb9045d8474dfa2424dc11fd6b124bb13cdb46",
+      "bytes": 8106
+    },
+    {
+      "path": "profile-probes-ci.init.gradle",
+      "sha256": "a4f4f37eb1756bc1fb7670456a251e5a66eae2b14781c09692b3330729266462",
+      "bytes": 459
+    },
+    {
+      "path": "judge-profile-ci.py",
+      "sha256": "af45f9e5cf72f4fe4057fa7a4db0dbc0fa43841f44e2d178beedeac36c312120",
+      "bytes": 1962
+    },
+    {
+      "path": "profile-cases.jsonl",
+      "sha256": "0f3c264c021cb4462ceeb2a76393dfad0699fe2438395485ecef4730d8fa3371",
+      "bytes": 31586
+    },
+    {
+      "path": "runtime/receipt.json",
+      "sha256": "e126d187ce74af07cd0f8812c955cdd5d1c88f351e7ed66b86d4ee4892f9e468",
+      "bytes": 4862
+    },
+    {
+      "path": "runtime/observations.json",
+      "sha256": "032813d7a4ea26db15b8e0ab8b8acfcc333bc85df216f274df9d13edf85b8322",
+      "bytes": 7387
+    },
+    {
+      "path": "runtime/test-src/OptOutRuntimeProbeTest.kt",
+      "sha256": "d68defd42222b08ecd6d6dd2557385d76894445412d3ec793a6a3399e6beb25f",
+      "bytes": 9901
+    },
+    {
+      "path": "runtime/probe.init.gradle",
+      "sha256": "0560901801d245ae714b11888bee8637453102aeddbb52de434d4af9b964c9d2",
+      "bytes": 411
+    },
+    {
+      "path": "runtime/instrumentation-cleartext.log",
+      "sha256": "9d942e0ab09379cfcd9082e7b2a3cdf976910d4266f0dd31c1cd45164da8f45c",
+      "bytes": 847
+    },
+    {
+      "path": "runtime/instrumentation.log",
+      "sha256": "75d73c4b24431395db5f1d96d99572791d576ea776dc7d8f6eda28f49dfc6b2d",
+      "bytes": 3934
+    }
+  ],
+  "excluded": "Emulator images, APKs, build outputs, full compiler logs, full XML. Original evidence remains unchanged.",
+  "total_bytes": 99009
+}

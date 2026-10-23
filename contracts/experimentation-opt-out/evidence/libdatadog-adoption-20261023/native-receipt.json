@@ -1,0 +1,106 @@
+{
+  "recorded_at": "2026-10-23T12:56:20.773290+00:00",
+  "repository": "DataDog/libdatadog",
+  "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "source_clean": true,
+  "architecture": "macOS arm64",
+  "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "native_tests": {
+    "passed": 108,
+    "failed": 0,
+    "skipped": 0
+  },
+  "policy_profile": {
+    "passed": 90,
+    "failed": 0,
+    "skipped": 0
+  },
+  "canonical_fixtures": {
+    "baseline": 363,
+    "immediate": 28,
+    "future": 44
+  },
+  "packaged_ffi_example": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "c_contract": {
+    "passed": 252,
+    "failed": 0,
+    "evaluations": 504,
+    "unsupported_cases": [
+      {
+        "id": "policy/disabled/invalid/before/1/invalid-type-null",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/disabled/invalid/before/1/invalid-type-array",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/disabled/invalid/before/1/invalid-type-object",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/immediate/invalid/before/1/invalid-type-null",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/immediate/invalid/before/1/invalid-type-array",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/immediate/invalid/before/1/invalid-type-object",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/future_experiments_only/invalid/before/1/invalid-type-null",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/future_experiments_only/invalid/before/1/invalid-type-array",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      },
+      {
+        "id": "policy/future_experiments_only/invalid/before/1/invalid-type-object",
+        "reason": "C AttributeValue has no null, array, or object variant; wrapper conversion is a separate obligation."
+      }
+    ]
+  },
+  "negative_controls": {
+    "original_D004_mismatch": "detected",
+    "inactive_exclusion_call": "detected",
+    "whitespace_mismatch": "detected and fixed; original250/252 retained"
+  },
+  "routine_checks": {
+    "format": "passed",
+    "clippy": "passed",
+    "doc_tests": "passed"
+  },
+  "artifact_sha256": {
+    "release/lib/libdatadog_profiling.dylib": "7a09b43e8d1693ae22ae65fa1afebfec08407901c4ca53e2091aafc4acb79818",
+    "release/include/datadog/ffe.h": "521f3432625d0fa8ceeb4cb0104e95e11b77ff94b73c4a081cd40b468b82e4f3"
+  },
+  "evidence_sha256": {
+    "tests-exact-head.log": "536a6dbcba6c23445acafcc41080af2c584aa551a34995c82841c4c8f73741ef",
+    "canonical-exact-head.log": "ab08e49967ef08507e6baee5bca4caa2a62313e68805de023ab86a23370d3506",
+    "clippy-final.log": "d1f5c42f05a6e0b2355a685682efe6229110cc5faf0b6fe1e67eb42d8d6fb3f4",
+    "doctests-final.log": "3f94408f4569ec391ec686daa5ba5034f9d792d02c7136ea29f4684a49ec3056",
+    "ffi-exact-head.log": "2ab84e316af1e984a35f6f3a0a613ccc0596dc6009d21e241bc97df501a2c8d1",
+    "c-observations-exact-head.jsonl": "12d93de3c430e731f43c8934c871efa8c8682981aee3ac1372938c2eab86c07e",
+    "c-summary-exact-head.log": "105b67391e81195323a3f77d675bec9528d3407e871eb2255f12054d207228a3",
+    "c-linked-libraries.txt": "3df8250346f9bcbec9b357454dda872810ccbe45ae99c3e156976983a96fd221",
+    "baseline-counterexample.log": "7be97d9a5e42dd2a32e518bf98648a186e7ca76dd59d9f0fa502ae6d8e53b7ed",
+    "inactive-negative-control.log": "ec3d4529b2f3993bb968cb91e1f49836a851225c0cbd7914388fc9ca54c3ad35",
+    "c-summary-candidate.log": "31d45d526158c0102d6d481ddb6c96b071973c5414f53162a9bfd0fad62686a5",
+    "lean-baseline-verification.json": "2273eea2c5376a5ffd13fd08252ca469823389dd40b68aa2131a3cdf202f2d3f",
+    "independent-review.md": "10242eedc6d2dbbd00fbe3d6353d13fce76cff7c8f8733c8a64e3b7d6e6463cf"
+  },
+  "limits": [
+    "C test observes exposure eligibility, not telemetry intake.",
+    "No Ruby/PHP/Python wrapper runtime or deployment proof.",
+    "No full browser timestamp grammar claim.",
+    "No timing or speedup claim."
+  ]
+}

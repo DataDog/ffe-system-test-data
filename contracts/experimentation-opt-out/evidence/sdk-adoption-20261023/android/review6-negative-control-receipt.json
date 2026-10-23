@@ -1,0 +1,38 @@
+{
+  "base_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "control_hashes": "review6-control-hashes.json",
+  "mutation": "Restore former onSubmissionFailed: clear draining with no autonomous retry.",
+  "tests": 3,
+  "expected_failures": 3,
+  "source_restored": true,
+  "cases": [
+    {
+      "name": "M retry sole callback W execute() {worker creation denied}()",
+      "failures": [
+        {
+          "type": "java.util.NoSuchElementException",
+          "message": "java.util.NoSuchElementException: ArrayDeque is empty."
+        }
+      ]
+    },
+    {
+      "name": "[1] false",
+      "failures": [
+        {
+          "type": "java.lang.AssertionError",
+          "message": "java.lang.AssertionError: \nExpected size: 1 but was: 0 in:\n[]"
+        }
+      ]
+    },
+    {
+      "name": "[2] true",
+      "failures": [
+        {
+          "type": "java.lang.AssertionError",
+          "message": "java.lang.AssertionError: \nExpected size: 1 but was: 0 in:\n[]"
+        }
+      ]
+    }
+  ],
+  "boundary": "Native-language JVM regression. Failure injection covers one sole callback with worker creation denial, submission denial, and rejected submission. It does not simulate an operating-system thread creation failure."
+}

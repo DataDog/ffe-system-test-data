@@ -1,0 +1,12 @@
+diff --git a/openfeature/evaluator.go b/openfeature/evaluator.go
+index 9779c764f..64efa59dc 100644
+--- a/openfeature/evaluator.go
++++ b/openfeature/evaluator.go
+@@ -74 +73,0 @@ func evaluateFlag(flag *flag, defaultValue any, context map[string]any, now time
+-		// Match the existing exposure-logging default when doLog is omitted.
+diff --git a/openfeature/experimentation_opt_out.go b/openfeature/experimentation_opt_out.go
+index 313e0bb5c..165e9a347 100644
+--- a/openfeature/experimentation_opt_out.go
++++ b/openfeature/experimentation_opt_out.go
+@@ -88,0 +89 @@ func (exclusion experimentationExclusion) excludes(a *allocation) bool {
++	// A nil doLog logs exposures, matching evaluateFlag's metadata default.

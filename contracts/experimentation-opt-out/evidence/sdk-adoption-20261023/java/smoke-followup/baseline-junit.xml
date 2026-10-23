@@ -1,0 +1,25 @@
+<testsuite name="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2026-10-23T03:00:49.947Z" hostname="leo-romanovsky" time="17.537">
+  <properties />
+  <testcase name="test first remote config poll asks agent for feature flags" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="0.124" />
+  <testcase name="test open feature evaluation enriches the request span" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="1.346" />
+  <testcase name="test open feature exposures" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="11.577">
+    <failure message="org.spockframework.runtime.SpockTimeoutError: Condition not satisfied after 10.00 seconds and 101 attempts" type="org.spockframework.runtime.SpockTimeoutError">Condition not satisfied after 10.00 seconds and 101 attempts
+	at spock.util.concurrent.PollingConditions.within(PollingConditions.java:205)
+	at spock.util.concurrent.PollingConditions.eventually(PollingConditions.java:157)
+	at datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures(OpenFeatureProviderSmokeTest.groovy:133)
+Caused by: Condition not satisfied:
+
+events.size() == expectedExposures.size()
+|      |      |  |                 |
+|      232    |  |                 231
+|             |  [[flag:boolean-false-assignment, allocation:disable-feature, variant:false-variation, targetingKey:alice], [flag:boolean-false-assignment, allocation:enable-feature, variant:true-variation, targetingKey:bob], [flag:boolean-one-of-matches, allocation:1-for-one-of, variant:1, targetingKey:alice], [flag:boolean-one-of-matches, allocation:2-for-matches, variant:2, targetingKey:derek], [flag:boolean-one-of-matches, allocation:4-for-not-matches, variant:4, targetingKey:george], [flag:boolean-one-of-matches, allocation:4-for-not-matches, variant:4, targetingKey:haley], [flag:boolean-one-of-matches, allocation:3-for-not-one-of, variant:3, targetingKey:ivy], [flag:boolean-one-of-matches, allocation:3-for-not-one-of, variant:3, targetingKey:kim], [flag:boolean-one-of-matches, allocation:3-for-not-one-of, variant:3, targetingKey:lucas], [flag:boolean-one-of-matches, allocation:5-for-matches-null, variant:5, targetingKey:nicole], [flag:comparator-operator-test, allocation:small-size, variant:small, targetingKey:alice], [flag:comparator-operator-test, allocation:medum-size, variant:medium, targetingKey:bob], [flag:comparator-operator-test, allocation:large-size, variant:large, targetingKey:david], [flag:empty-string-variation, allocation:minimal-content, variant:empty-content, targetingKey:empty_user], [flag:empty-string-variation, allocation:full-content, variant:detailed-content, targetingKey:full_user], [flag:integer-flag, allocation:50/50 split, variant:one, targetingKey:5], [flag:integer-flag, allocation:targeted allocation, variant:three, targetingKey:5], [flag:special-characters, allocation:allocation-test, variant:ua, targetingKey:ben], [flag:kill-switch, allocation:on-for-NA, variant:on, targetingKey:alice], [flag:numeric_flag, allocation:rollout, variant:pi, targetingKey:alice], [flag:start-and-end-date-test, allocation:current-versions, variant:current, targetingKey:subject], [flag:new-user-onboarding, allocation:experiment, variant:red, targetingKey:19], [flag:integer-flag, allocation:50/50 split, variant:two, targetingKey:1], [flag:falsy-value-assignments, allocation:free-tier-limit, variant:zero-limit, targetingKey:zero_user], [flag:falsy-value-assignments, allocation:premium-tier-limit, variant:premium-limit, targetingKey:premium_user], [flag:empty_string_flag, allocation:allocation-empty, variant:empty_string, targetingKey:alice], [flag:empty_string_flag, allocation:allocation-test, variant:non_empty, targetingKey:bob], [flag:integer-flag, allocation:targeted allocation, variant:three, targetingKey:alice], [flag:integer-flag, allocation:targeted allocation, variant:three, targetingKey:bob], [flag:integer-flag, allocation:50/50 split, variant:two, targetingKey:charlie], [flag:integer-flag, allocation:targeted allocation, variant:three, targetingKey:debra], [flag:integer-flag, allocation:50/50 split, variant:two, targetingKey:2], [flag:integer-flag, allocation:50/50 split, variant:two, targetingKey:3], [flag:integer-fla
+[Truncated. Full original is bound in raw-artifacts.json.]
+g_with_only_multiple_closing_parentheses], timestamp:1792724457291, variant:[key:string_with_only_multiple_closing_parentheses]]]
+
+	at datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)
+	at datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)
+	at spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)
+	... 2 more
+</failure>
+  </testcase>
+  </testsuite>

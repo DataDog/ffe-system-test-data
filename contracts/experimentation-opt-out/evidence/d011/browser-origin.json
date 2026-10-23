@@ -1,0 +1,70 @@
+{
+  "url": "https://api.github.com/repos/DataDog/openfeature-js-client/pulls/comments/4344317522",
+  "pull_request_review_id": 5608988426,
+  "id": 4344317522,
+  "node_id": "PRRC_kwDOPC9K888AAAABAvEGUg",
+  "diff_hunk": "@@ -124,6 +124,67 @@ console.log(result.value) // Flag value\n console.log(result.reason) // Evaluation reason\n ```\n \n+### Experimentation opt-out\n+\n+Select an opt-out mode when you construct the provider. Your application owns and stores the subject's preference timestamp.\n+\n+```typescript\n+import { DatadogProvider, ExperimentationOptOutMode } from '@datadog/openfeature-browser'\n+import { OpenFeature } from '@openfeature/web-sdk'\n+\n+const provider = new DatadogProvider({\n+  clientToken: '<CLIENT_TOKEN>',\n+  env: 'production',\n+  experimentationOptOutMode: ExperimentationOptOutMode.Immediate,\n+})\n+\n+await OpenFeature.setProviderAndWait(provider, {\n+  targetingKey: user.id,\n+  ...(user.experimentationOptOutAt && {\n+    dd_experimentation_opt_out_at: user.experimentationOptOutAt,\n+  }),\n+})\n+const enabled = OpenFeature.getClient().getBooleanValue('new-route-planner', false)\n+```\n+\n+| Mode                    | Behavior when the subject timestamp is present                                                            |\n+| ----------------------- | --------------------------------------------------------------------------------------------------------- |\n+| `Disabled` (default)    | Ignore the attribute.                                                                                     |\n+| `Immediate`             | Skip every allocation that logs experiment exposures.                                                     |\n+| `FutureExperimentsOnly` | Keep only exposure allocations activated strictly before the timestamp. Skip missing activation metadata. |\n+\n+Use `ExperimentationOptOutMode.FutureExperimentsOnly` in the example to select the second policy.\n+Omit the attribute for eligible subjects. Supply an RFC3339 timestamp, such as `2026-10-19T12:00:00Z`, for opted-out subjects.\n+An invalid enabled timestamp returns the application default with `INVALID_CONTEXT` and does not send an assignment request.\n+Future timestamps apply immediately; they do not schedule exclusion. Comparisons retain nanosecond precision.",
+  "path": "packages/browser/README.md",
+  "commit_id": "232caeb9824fde1b08c4e9228b85322bb75a7859",
+  "original_commit_id": "5e9709b84588b3e93f7847517840c375d05f0bd0",
+  "user": {
+    "login": "leoromanovsky",
+    "id": 57361,
+    "node_id": "MDQ6VXNlcjU3MzYx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/57361?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/leoromanovsky",
+    "html_url": "https://github.com/leoromanovsky",
+    "followers_url": "https://api.github.com/users/leoromanovsky/followers",
+    "following_url": "https://api.github.com/users/leoromanovsky/following{/other_user}",
+    "gists_url": "https://api.github.com/users/leoromanovsky/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/leoromanovsky/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/leoromanovsky/subscriptions",
+    "organizations_url": "https://api.github.com/users/leoromanovsky/orgs",
+    "repos_url": "https://api.github.com/users/leoromanovsky/repos",
+    "events_url": "https://api.github.com/users/leoromanovsky/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/leoromanovsky/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "body": "Clarified each mode in [d956b19](https://github.com/DataDog/openfeature-js-client/commit/d956b19e23638df514e5e5c59f1d07cafa1c5619): `Immediate` excludes now even with a future timestamp; `FutureExperimentsOnly` keeps eligibility for allocations activated before the supplied cutoff.",
+  "created_at": "2026-10-22T03:40:26Z",
+  "updated_at": "2026-10-22T03:40:27Z",
+  "html_url": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522",
+  "pull_request_url": "https://api.github.com/repos/DataDog/openfeature-js-client/pulls/423",
+  "_links": {
+    "self": {
+      "href": "https://api.github.com/repos/DataDog/openfeature-js-client/pulls/comments/4344317522"
+    },
+    "html": {
+      "href": "https://github.com/DataDog/openfeature-js-client/pull/423#discussion_r4344317522"
+    },
+    "pull_request": {
+      "href": "https://api.github.com/repos/DataDog/openfeature-js-client/pulls/423"
+    }
+  },
+  "reactions": {
+    "url": "https://api.github.com/repos/DataDog/openfeature-js-client/pulls/comments/4344317522/reactions",
+    "total_count": 0,
+    "+1": 0,
+    "-1": 0,
+    "laugh": 0,
+    "hooray": 0,
+    "confused": 0,
+    "heart": 0,
+    "rocket": 0,
+    "eyes": 0
+  },
+  "start_line": null,
+  "original_start_line": null,
+  "start_side": null,
+  "line": null,
+  "original_line": 159,
+  "side": "RIGHT",
+  "in_reply_to_id": 4343858163,
+  "author_association": "MEMBER",
+  "original_position": 36,
+  "position": 1,
+  "subject_type": "line"
+}

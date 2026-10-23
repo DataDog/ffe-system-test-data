@@ -1,0 +1,16 @@
+{"Time":"2026-10-22T20:09:47.445940811Z","Action":"start","Package":"github.com/DataDog/dd-trace-go/v2/openfeature"}
+{"Time":"2026-10-22T20:09:47.455458309Z","Action":"run","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures"}
+{"Time":"2026-10-22T20:09:47.455488689Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures","Output":"=== RUN   TestExperimentationOptOutFutureExposures\n"}
+{"Time":"2026-10-22T20:09:47.455599979Z","Action":"run","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog"}
+{"Time":"2026-10-22T20:09:47.455608166Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog","Output":"=== RUN   TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog\n"}
+{"Time":"2026-10-22T20:09:47.458017752Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog","Output":"--- PASS: TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog (0.00s)\n"}
+{"Time":"2026-10-22T20:09:47.458039449Z","Action":"pass","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/older_experiment_with_default_doLog","Elapsed":0}
+{"Time":"2026-10-22T20:09:47.458716645Z","Action":"run","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/ordinary_allocation"}
+{"Time":"2026-10-22T20:09:47.458735149Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/ordinary_allocation","Output":"=== RUN   TestExperimentationOptOutFutureExposures/ordinary_allocation\n"}
+{"Time":"2026-10-22T20:09:47.461267757Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/ordinary_allocation","Output":"--- PASS: TestExperimentationOptOutFutureExposures/ordinary_allocation (0.00s)\n"}
+{"Time":"2026-10-22T20:09:47.461281527Z","Action":"pass","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures/ordinary_allocation","Elapsed":0}
+{"Time":"2026-10-22T20:09:47.461289549Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures","Output":"--- PASS: TestExperimentationOptOutFutureExposures (0.01s)\n"}
+{"Time":"2026-10-22T20:09:47.461296046Z","Action":"pass","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Test":"TestExperimentationOptOutFutureExposures","Elapsed":0.01}
+{"Time":"2026-10-22T20:09:47.461381719Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Output":"PASS\n"}
+{"Time":"2026-10-22T20:09:47.462805194Z","Action":"output","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Output":"ok  \tgithub.com/DataDog/dd-trace-go/v2/openfeature\t0.017s\n"}
+{"Time":"2026-10-22T20:09:47.462828493Z","Action":"pass","Package":"github.com/DataDog/dd-trace-go/v2/openfeature","Elapsed":0.017}

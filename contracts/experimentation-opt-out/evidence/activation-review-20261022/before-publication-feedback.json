@@ -1,0 +1,22 @@
+{
+  "retrieved_at": "2026-10-22T23:14:23.993631+00:00",
+  "pull_requests": [
+    {
+      "repository": "ddoghq/dd-source",
+      "number": 139381,
+      "url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "head_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+      "base_sha": "2747ede8a372d0a1ac8adc952e38b08f54b5aab2",
+      "head_ref": "leo/opt-out-allocation-activation",
+      "base_ref": "main",
+      "state": "open",
+      "draft": false,
+      "review_decision": "APPROVED",
+      "thread_count": 8,
+      "inline_comment_count": 18
+    }
+  ],
+  "scope": "Full private PR conversations were inspected; reusable dispositions are in feedback-ledger.json.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "1cb3962779619c35d312a807847945a6deee918c6ccc3181231edbd45925cc17"
+}

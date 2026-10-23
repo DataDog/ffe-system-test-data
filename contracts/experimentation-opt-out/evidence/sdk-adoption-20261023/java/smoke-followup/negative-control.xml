@@ -1,0 +1,19 @@
+<testsuite name="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2026-10-23T03:12:00.239Z" hostname="leo-romanovsky" time="5.992">
+  <properties />
+  <testcase name="test first remote config poll asks agent for feature flags" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="0.128" />
+  <testcase name="test open feature evaluation enriches the request span" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="1.355" />
+  <testcase name="test exposures retain allocation changes and suppress repeats" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="0.22">
+    <failure message="org.spockframework.runtime.SpockComparisonFailure: Condition not satisfied:&#10;&#10;expectedExposures == [standard, vip, standard]&#10;|                 |   |         |    |&#10;|                 |   |         |    [flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200]&#10;|                 |   |         [flag:serial-id-targeting-flag, allocation:vip-allocation, variant:vip, targetingKey:exposure-cache-smoke-test, serialId:201]&#10;|                 |   [flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200]&#10;|                 false&#10;[[flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200], [flag:serial-id-targeting-flag, allocation:vip-allocation, variant:vip, targetingKey:exposure-cache-smoke-test, serialId:201]]&#10;" type="org.spockframework.runtime.SpockComparisonFailure">Condition not satisfied:
+
+expectedExposures == [standard, vip, standard]
+|                 |   |         |    |
+|                 |   |         |    [flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200]
+|                 |   |         [flag:serial-id-targeting-flag, allocation:vip-allocation, variant:vip, targetingKey:exposure-cache-smoke-test, serialId:201]
+|                 |   [flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200]
+|                 false
+[[flag:serial-id-targeting-flag, allocation:default-allocation, variant:standard, targetingKey:exposure-cache-smoke-test, serialId:200], [flag:serial-id-targeting-flag, allocation:vip-allocation, variant:vip, targetingKey:exposure-cache-smoke-test, serialId:201]]
+
+	at datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test exposures retain allocation changes and suppress repeats(OpenFeatureProviderSmokeTest.groovy:135)
+</failure>
+  </testcase>
+  </testsuite>

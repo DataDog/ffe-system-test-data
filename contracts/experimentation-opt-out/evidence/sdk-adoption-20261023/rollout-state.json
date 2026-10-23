@@ -1,0 +1,50 @@
+{
+  "recorded_at": "2026-10-23T04:09:29.490195+00:00",
+  "contract_status": "draft proposal",
+  "semantic_authority": "Existing decisions and semantic revisions are unchanged. Native validation does not establish fleet approval.",
+  "targets": {
+    "ios": {
+      "head_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "pr_url": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+      "native_validation": "Native suites and runtime evidence are saved with exact sources.",
+      "current_checks": "No failed check reported; pending checks and review approval remain.",
+      "review_threads": 15,
+      "resolved_threads": 14,
+      "all_threads_have_verified_replies": true,
+      "detail": "ios/final-review-state.json"
+    },
+    "android": {
+      "head_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+      "pr_url": "https://github.com/DataDog/dd-sdk-android/pull/4024",
+      "native_validation": "Native suites and runtime evidence are saved with exact sources.",
+      "current_checks": "No failed check reported; pending checks and review approval remain.",
+      "review_threads": 24,
+      "resolved_threads": 22,
+      "all_threads_have_verified_replies": true,
+      "detail": "android/final-review-state.json"
+    },
+    "java": {
+      "head_sha": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+      "pr_url": "https://github.com/DataDog/dd-trace-java/pull/12950",
+      "native_validation": "Native suites and runtime evidence are saved with exact sources.",
+      "current_checks": "No failed check reported; pending checks and review approval remain.",
+      "review_threads": 1,
+      "resolved_threads": 1,
+      "all_threads_have_verified_replies": true,
+      "detail": "java/final-review-state.json"
+    }
+  },
+  "release_gates": [
+    "Backend edge, classification, fallback and activation PRs remain unmerged.",
+    "Swift wrapper PR44 is a separate downstream gate.",
+    "Hosted CI and human review must complete before merge.",
+    "Android Foundation documentation validation is unavailable because FactoryKit is missing.",
+    "Standalone Java Remote Configuration lacks a compatible bridge in the inherited baseline; the supported HTTP path passed."
+  ],
+  "sdk_merges_performed": false,
+  "releases_performed": false,
+  "deployments_performed": false,
+  "review_threads": 40,
+  "resolved_threads": 37,
+  "open_threads": 3
+}

@@ -1,0 +1,231 @@
+{
+  "recorded_at": "2026-10-22T22:12:53.266052+00:00",
+  "target": "DataDog/ffe-system-test-data",
+  "pr": 55,
+  "phase": "after",
+  "account": "leoromanovsky",
+  "committer_email": "leo.romanovsky@datadoghq.com",
+  "configured_key_fingerprint": "SHA256:OARkNwfvap+5aDU6m+alCIv0E+miVmtHAsf665i8dv0",
+  "committer_identity_evidence": [
+    "ec72cdbd67df374ed5df0472831c15a415449013",
+    "3e1d010e072d0762f1f086ea04caccee487948ba",
+    "acc963954b8cd8422b50ab6124d9ccfc05cd3434",
+    "843f3baeb1bce55ca391b0caa9ef41dc747b44b3",
+    "8e13ad6d4cad04e7bea6b921d0be9b98ba90beb5",
+    "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+    "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+    "f4ba2a0de5f807bc618411db2640552d428c479c",
+    "0705b517d71e213fc402f456b6ea9a8dbff55b01",
+    "531e69f0b943e76d6f34144dbc1303a136febadf",
+    "ec4af07fdae4c0349d5d39fe4135016eee12529c",
+    "4c113a1032b5c347e0eac7de50cf223ca63d7f6f",
+    "277d414757270ae1e2e5ecf8f00030977d470193",
+    "1651131dc3472f0922608d0de2b618be670231ac",
+    "7119c9c71d8e76a48b898a6b9d91aed8a3795901",
+    "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+    "6166f952008d24e61312e744e298c8d5fcbad671",
+    "99854cf87802e03d2cc2c5ed324dfabcaafc5f34",
+    "06a49f93344481ca13da1535185a8b7d76472118"
+  ],
+  "head": "06a49f93344481ca13da1535185a8b7d76472118",
+  "base": "89a0f339b83f0cb6fabed77cc1164d97c9d24356",
+  "branch": "leoromanovsky/lean-opt-out-decisions",
+  "draft": true,
+  "local_head": "06a49f93344481ca13da1535185a8b7d76472118",
+  "entire_pr_commit_count": 19,
+  "outgoing": [],
+  "commits": [
+    {
+      "sha": "ec72cdbd67df374ed5df0472831c15a415449013",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "3e1d010e072d0762f1f086ea04caccee487948ba",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "acc963954b8cd8422b50ab6124d9ccfc05cd3434",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "843f3baeb1bce55ca391b0caa9ef41dc747b44b3",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "8e13ad6d4cad04e7bea6b921d0be9b98ba90beb5",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:02:32Z"
+      }
+    },
+    {
+      "sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T18:07:15Z"
+      }
+    },
+    {
+      "sha": "f4ba2a0de5f807bc618411db2640552d428c479c",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T19:52:50Z"
+      }
+    },
+    {
+      "sha": "0705b517d71e213fc402f456b6ea9a8dbff55b01",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T19:55:59Z"
+      }
+    },
+    {
+      "sha": "531e69f0b943e76d6f34144dbc1303a136febadf",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:07:08Z"
+      }
+    },
+    {
+      "sha": "ec4af07fdae4c0349d5d39fe4135016eee12529c",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:16:27Z"
+      }
+    },
+    {
+      "sha": "4c113a1032b5c347e0eac7de50cf223ca63d7f6f",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:22:50Z"
+      }
+    },
+    {
+      "sha": "277d414757270ae1e2e5ecf8f00030977d470193",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:37:53Z"
+      }
+    },
+    {
+      "sha": "1651131dc3472f0922608d0de2b618be670231ac",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:47:55Z"
+      }
+    },
+    {
+      "sha": "7119c9c71d8e76a48b898a6b9d91aed8a3795901",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T20:53:55Z"
+      }
+    },
+    {
+      "sha": "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T21:48:18Z"
+      }
+    },
+    {
+      "sha": "6166f952008d24e61312e744e298c8d5fcbad671",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T21:52:09Z"
+      }
+    },
+    {
+      "sha": "99854cf87802e03d2cc2c5ed324dfabcaafc5f34",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T22:07:09Z"
+      }
+    },
+    {
+      "sha": "06a49f93344481ca13da1535185a8b7d76472118",
+      "committer_email": "leo.romanovsky@datadoghq.com",
+      "committer_account": "leoromanovsky",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "verified_at": "2026-10-22T22:12:24Z"
+      }
+    }
+  ],
+  "manifest_sha256": "17d4280f831f27c4571cdd93ca749192efcd4e5e3f6c93c8bbfd4fea09cce5b6",
+  "limits": "Publication and link integrity for the initial edge contract revision, before this separate backlink update. Native and model receipts retain their original source pins."
+}

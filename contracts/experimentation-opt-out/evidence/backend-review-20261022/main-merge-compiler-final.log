@@ -1,0 +1,50 @@
+[ddtool] session for "<url-redacted> valid until Friday, 23-Oct-26 02:06:12 UTC
+INFO: Invocation ID: a76bc536-517b-4937-89ee-e36137a52aad
+WARNING: The highest API version Bazel support 2.2 is deprecated by the server. Please upgrade to server's recommended version: 2.3 to 2.12.
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (0 packages loaded, 0 targets configured)
+
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (42 packages loaded, 2486 targets configured)
+
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:crypto in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:rust_wrapper in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc:ssl in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-sys-0.46.0//:aws_lc_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:crypto in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:rust_wrapper in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@//third_party/com_github__aws__aws-lc/aws-lc-fips:ssl in 'deps' of @@crates_vendor_do_not_use_directly__aws-lc-fips-sys-0.14.2//:aws_lc_fips_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_zstd_linux-x86_64//:libzstd in 'deps' of @@crates_vendor_do_not_use_directly__zstd-sys-2.0.16-zstd.1.5.7//:zstd_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_lz4_linux-x86_64//:liblz4 in 'deps' of @@crates_vendor_do_not_use_directly__lz4-sys-1.11.1-lz4-1.10.0//:lz4_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+DEBUG: /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/external/rules_rust+/rust/private/rust.bzl:103:18: 
+WARNING: Target @@+extbuild+extbuild_zstd_linux-x86_64//:libzstd in 'deps' of @@crates_vendor_do_not_use_directly__zstd-sys-2.0.16-zstd.1.5.7//:zstd_sys is a C++ library. Only Rust targets are allowed in 'deps'. Please use 'link_deps' for manual FFI linkage. Support for C++ libraries in 'deps' is deprecated and will be removed in a future release.
+Analyzing: target //domains/ffe/libs/flagging/ufc:go_default_test (42 packages loaded, 7935 targets configured)
+[1 / 1] no actions running
+INFO: Analyzed target //domains/ffe/libs/flagging/ufc:go_default_test (42 packages loaded, 7935 targets configured).
+[4,992 / 8,036] checking cached actions
+[8,027 / 8,036] [Prepa] GoCompilePkg domains/ffe/libs/flagging/ufc/go_default_test.internal.a
+[8,031 / 8,036] [Prepa] GoCompilePkgExternal domains/ffe/libs/flagging/ufc/go_default_test_test.external.a
+[8,035 / 8,036] GoLink domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test; 0s disk-cache, remote-cache, linux-sandbox
+[8,036 / 8,037] [Prepa] Testing //domains/ffe/libs/flagging/ufc:go_default_test
+[8,036 / 8,037] Testing //domains/ffe/libs/flagging/ufc:go_default_test; 1s linux-sandbox
+[8,036 / 8,037] 1 / 1 tests; Testing //domains/ffe/libs/flagging/ufc:go_default_test; 10s linux-sandbox
+INFO: Found 1 test target...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+INFO: Elapsed time: 28.259s, Critical Path: 19.72s
+INFO: 8 processes: 8021 action cache hit, 1 internal, 7 linux-sandbox.
+INFO: Build completed successfully, 8 total actions
+INFO: 
+//domains/ffe/libs/flagging/ufc:go_default_test                          PASSED in 10.8s
+
+Executed 1 out of 1 test: 1 test passes.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

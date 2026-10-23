@@ -1,0 +1,139 @@
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make
+cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7
+compiling ../../../../ext/libdatadog_api/feature_flags.c
+In file included from ../../../../ext/libdatadog_api/feature_flags.c:1:
+In file included from ../../../../ext/libdatadog_api/feature_flags.h:3:
+In file included from /Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby.h:38:
+In file included from /Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby/ruby.h:28:
+In file included from /Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby/internal/arithmetic.h:24:
+In file included from /Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby/internal/arithmetic/char.h:29:
+/Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby/internal/core/rstring.h:398:24: warning: default initialization of an object of type 'struct RString' with const member leaves the object uninitialized [-Wdefault-const-init-field-unsafe]
+  398 |         struct RString retval;
+      |                        ^
+/Users/leo.romanovsky/.rbenv/versions/3.4.7/include/ruby-3.4.0/ruby/internal/core/rbasic.h:86:17: note: member 'klass' declared 'const' here
+   86 |     const VALUE klass;
+      |                 ^
+1 warning generated.
+linking shared-object libdatadog_api.3.4_arm64-darwin24.bundle
+ld: warning: search path '/opt/homebrew/Cellar/gmp/6.3.0/lib' not found
+(cd tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7 && /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/make install sitearchdir=../../../../lib sitelibdir=../../../../lib target_prefix=)
+cd -
+/usr/bin/install -c -m 0755 libdatadog_api.3.4_arm64-darwin24.bundle ../../../../lib
+cp tmp/arm64-darwin24/libdatadog_api.3.4_arm64-darwin24/3.4.7/libdatadog_api.3.4_arm64-darwin24.bundle tmp/arm64-darwin24/stage/lib/libdatadog_api.3.4_arm64-darwin24.bundle
+FFE fixtures cached at /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/tmp/ffe-system-test-data/0c467473aa8dc1f1cbfc0ef9a60d5c1c7a8826e6
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/provider_spec.rb
+Run options: include {full_description: /native\ opt\-out\ string\ boundaries/}
+
+Randomized with seed 18742
+
+Datadog::OpenFeature::Provider
+  native opt-out string boundaries
+    in disabled mode
+      rejects invalid native timestamp bytes "\xFF" only when enabled
+      rejects invalid native timestamp bytes "\xFF" only when enabled
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      preserves valid native timestamp bytes "2026- 10-01T00:00:00Z"
+      does not alias an attribute containing NUL to the opt-out key
+    in immediate mode
+      rejects invalid native timestamp bytes "\xFF" only when enabled (FAILED - 1)
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      rejects invalid native timestamp bytes "\xFF" only when enabled (FAILED - 2)
+      rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled (FAILED - 3)
+      preserves valid native timestamp bytes "2026- 10-01T00:00:00Z"
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      does not alias an attribute containing NUL to the opt-out key
+    in future_experiments_only mode
+      rejects invalid native timestamp bytes "\xFF" only when enabled (FAILED - 4)
+      rejects invalid native timestamp bytes "\xFF" only when enabled (FAILED - 5)
+      does not alias an attribute containing NUL to the opt-out key
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      preserves valid native timestamp bytes "2026-10-01T00:00:00Z"
+      rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled (FAILED - 6)
+      preserves valid native timestamp bytes "2026- 10-01T00:00:00Z"
+
+Failures:
+
+  1) Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "\xFF" only when enabled
+     Failure/Error: expect(result.value).to eq(mode == :disabled ? "experiment" : "default")
+
+       expected: #<Encoding:UTF-8> "default"
+            got: #<Encoding:ASCII-8BIT> "experiment"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:386:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+  2) Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "\xFF" only when enabled
+     Failure/Error: expect(result.value).to eq(mode == :disabled ? "experiment" : "default")
+
+       expected: #<Encoding:UTF-8> "default"
+            got: #<Encoding:ASCII-8BIT> "experiment"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:386:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+  3) Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled
+     Failure/Error: expect(result.error_code).to eq(mode == :disabled ? nil : "INVALID_CONTEXT")
+
+       expected: "INVALID_CONTEXT"
+            got: "GENERAL"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:387:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+  4) Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "\xFF" only when enabled
+     Failure/Error: expect(result.value).to eq(mode == :disabled ? "experiment" : "default")
+
+       expected: #<Encoding:UTF-8> "default"
+            got: #<Encoding:ASCII-8BIT> "experiment"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:386:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+  5) Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "\xFF" only when enabled
+     Failure/Error: expect(result.value).to eq(mode == :disabled ? "experiment" : "default")
+
+       expected: #<Encoding:UTF-8> "default"
+            got: #<Encoding:ASCII-8BIT> "experiment"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:386:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+  6) Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled
+     Failure/Error: expect(result.error_code).to eq(mode == :disabled ? nil : "INVALID_CONTEXT")
+
+       expected: "INVALID_CONTEXT"
+            got: "GENERAL"
+
+       (compared using ==)
+     # ./spec/datadog/open_feature/provider_spec.rb:387:in 'block (6 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:316:in 'block (2 levels) in <top (required)>'
+     # ./spec/spec_helper.rb:210:in 'block (2 levels) in <top (required)>'
+
+Finished in 0.04508 seconds (files took 0.73244 seconds to load)
+21 examples, 6 failures
+
+Failed examples:
+
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:2:2]' # Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "\xFF" only when enabled
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:2:1]' # Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "\xFF" only when enabled
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:2:3]' # Datadog::OpenFeature::Provider native opt-out string boundaries in immediate mode rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:3:1]' # Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "\xFF" only when enabled
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:3:2]' # Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "\xFF" only when enabled
+rspec './spec/datadog/open_feature/provider_spec.rb[3:3:3:3]' # Datadog::OpenFeature::Provider native opt-out string boundaries in future_experiments_only mode rejects invalid native timestamp bytes "2026-10-01T00:00:00Z" only when enabled
+
+Randomized with seed 18742
+
+Stopped processing SimpleCov as a previous error not related to SimpleCov has been detected
+/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/ruby/tooling/bin/ruby -I/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/lib:/Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-support-3.13.7/lib /Users/leo.romanovsky/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rspec-core-3.13.6/exe/rspec /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/ruby/spec/datadog/open_feature/provider_spec.rb failed

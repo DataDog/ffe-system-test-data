@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T02:32:32.868892+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "commit": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "tree": "0ab5b1f6d13c9f4b37d67912faf39b5a6365abad",
+  "status": "clean",
+  "central_contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "contract_manifest_sha256": "078465ba0a37f193e65c3641197ac859c375c9d114d0d131ccc330d0c28dfa31",
+  "environment": {
+    "CI": "true",
+    "USE_TEST_VISIBILITY": "0",
+    "jdk": "Android Studio bundled JBR",
+    "max_workers": 2
+  },
+  "ci_configuration": {
+    "source": "build-logic/src/main/kotlin/com/datadog/gradle/config/KotlinConfig.kt:53-59",
+    "behavior": "CI=true enables allWarningsAsErrors when evaluateWarningsAsErrors is enabled.",
+    "source_sha256": "1cf94775735481ab6515795b04b726292a308f92dd9aafc067ca4c13cb45a316"
+  },
+  "native_suites": {
+    "flags": {
+      "debug": {
+        "tests": 650,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 650,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "openfeature": {
+      "debug": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "reliability": {
+      "debug": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "total_variant_test_executions": 1760,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "execution": "Debug and release variants of Flags, OpenFeature, and reliability suites; all 329 tasks executed with --rerun-tasks.",
+  "checks": {
+    "flags_detekt": "passed",
+    "openfeature_detekt": "passed",
+    "git_diff_check": "passed"
+  },
+  "profile": {
+    "cases": 187,
+    "passed": 187,
+    "mismatches": 0,
+    "comparison": "exact-f15ab92-profile187-comparison.json",
+    "observations": "exact-f15ab92-profile-observations.jsonl",
+    "adapter": "profile-probes-ci/MobileProfileProbeTest.kt",
+    "caching": "Test caching and up-to-date reuse disabled by external init script.",
+    "scope": "Actual production parser, request factory and response mapper; source-linked composition, mocked logger/context; no live HTTP or lifecycle execution.",
+    "adapter_history": {
+      "first_CI_compile": "External adapter Companion.javaClass triggered a warning under -Werror. No production failure.",
+      "correction": "Created separate CI adapter with Companion::class.java, preserving the original exported adapter and receipts.",
+      "corrected_CI_compile": "passed"
+    }
+  },
+  "source_hashes": "exact-f15ab92-source-hashes.json",
+  "production_equivalence": {
+    "runtime_tested_commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+    "only_change": "ExperimentationCallbackTest listener override parameter renamed state to newState.",
+    "production_source_unchanged": true
+  },
+  "original_checks": {
+    "commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+    "receipt": "exact-9c18ed-native-receipt.json",
+    "root_checkGeneratedFiles": "passed at original commit; no generated or production change in follow-up",
+    "affected_ktlintCheck": "passed at original commit; not rerun here"
+  },
+  "runtime_evidence": {
+    "receipt": "runtime/receipt.json",
+    "observations": "runtime/observations.json",
+    "tested_commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+    "scope": "API 36 arm64 emulator, actual SDK core/storage/local HTTP intake, supplied assignments and explicit lifecycle flush."
+  },
+  "logs_retained_locally": [
+    {
+      "path": "exact-f15ab92-ci-tests-detekt.log",
+      "sha256": "1a86410e4a625062bab7abfc43a8755679b245f3ce7e98265fc9991493050447"
+    },
+    {
+      "path": "exact-f15ab92-ci-profile187.log",
+      "sha256": "2b2b3b4d55064c97c2dcbe75af341b02b95807504ffe659b438fd79859b3c536"
+    },
+    {
+      "path": "exact-f15ab92-ci-profile187-corrected.log",
+      "sha256": "2fc76cba72c46a6f1ba627e6dadd4708b464f6b4d65558da35e8c9ee6d3100d5"
+    }
+  ],
+  "limits": [
+    "1,760 variant executions cover 880 logical test cases in both debug and release; they are JVM execution, not device proof.",
+    "The pinned187 profile invokes production parser/request/mapper components with mocked logger/context.",
+    "Runtime proof is separately bound to the production-identical prior commit. It does not prove live edge/site rollout.",
+    "Hosted CI is separate and owned by parent."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "suppressed": false,
+  "exposures": [
+    {
+      "allocation": {
+        "key": "experiment"
+      },
+      "flag": {
+        "key": "retained"
+      },
+      "subject": {
+        "attributes": {
+          "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z",
+          "targetingKey": "optout-runtime-subject",
+          "dd_evaluation_telemetry_opt_out": false
+        },
+        "id": "optout-runtime-subject"
+      },
+      "timestamp": 1792723194029,
+      "variant": {
+        "key": "experiment"
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "allocation": {
+        "key": "experiment"
+      },
+      "context": {
+        "evaluation": {
+          "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z",
+          "dd_evaluation_telemetry_opt_out": false
+        }
+      },
+      "evaluation_count": 3,
+      "first_evaluation": 1792723194016,
+      "flag": {
+        "key": "retained"
+      },
+      "last_evaluation": 1792723194060,
+      "targeting_key": "optout-runtime-subject",
+      "timestamp": 1792723200070,
+      "variant": {
+        "key": "experiment"
+      }
+    },
+    {
+      "allocation": {
+        "key": "ordinary"
+      },
+      "evaluation_count": 1,
+      "first_evaluation": 1792723194063,
+      "flag": {
+        "key": "control"
+      },
+      "last_evaluation": 1792723194063,
+      "targeting_key": "optout-runtime-subject",
+      "timestamp": 1792723200070,
+      "variant": {
+        "key": "ordinary"
+      }
+    }
+  ]
+}

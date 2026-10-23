@@ -1,0 +1,30 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.29s
+   Doc-tests libdd_ffe
+
+running 10 tests
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::as_str (line 117) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::as_integer (line 167) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::is_string (line 103) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::as_float (line 199) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::is_float (line 185) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::is_integer (line 153) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::to_string (line 135) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::variation_type (line 278) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::as_boolean (line 231) ... ok
+test libdd-ffe/src/rules_based/ufc/assignment.rs - rules_based::ufc::assignment::AssignmentValue::is_boolean (line 217) ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+all doctests ran in 0.48s; merged doctests compilation took 0.28s
+   Doc-tests libdd_ffe_ffi
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests libdd_ffe_test_suite
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

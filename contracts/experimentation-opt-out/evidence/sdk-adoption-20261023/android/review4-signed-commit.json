@@ -1,0 +1,14 @@
+{
+  "sha": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "base": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "files": {
+    "detekt_custom_safe_calls_third_party.yml": "f577eb172846e6b814ab069d66a1a10e70ec5bc17166d828fc5f4097c8765ba2",
+    "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsClient.kt": "47707e90f06943642fe34f216945eeaa2a409e5698d36a25018063ae68fdfd3c",
+    "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt": "4b5e042073b196ea2d4a92457e9ab27ad695c4f54f1cf4cb315e476e28783de6",
+    "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcher.kt": "67396caa8eecb8a1ea77739ffb44d64f46f63efb9e59eb7f6fdfa8fc753903c8",
+    "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/EvaluationCallbackDispatchTest.kt": "131d10d285ab7379860319013f6d2cdfa721a853307808c5f81e6d414851bbcc",
+    "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt": "01f9b1d85c8be17830b88bf3a4e30f202a1a0e68a76055ca265d60233fb7bea6",
+    "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcherTest.kt": "cd4cd20e3f36ba6ee7014b271150350bc3b339c86859097289592f4449757df8"
+  },
+  "signature_verified": true
+}

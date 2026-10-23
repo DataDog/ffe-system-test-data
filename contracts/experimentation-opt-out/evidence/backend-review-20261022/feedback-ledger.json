@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "scope": "Bottom PR #139368 only; complete four-PR snapshot retained for later stack work.",
+  "items": [
+    {
+      "id": "backend-139368-4343813763",
+      "url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:16Z",
+      "reviewer_priority": "P1",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "thread": {
+        "id": "PRRT_kwDORrsQN86vBR43",
+        "isResolved": false,
+        "isOutdated": false,
+        "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+        "line": 195,
+        "comment_ids": [
+          4343813763,
+          4353896956
+        ]
+      },
+      "decision_ids": [
+        "D018"
+      ],
+      "disposition": "implemented-published-replied",
+      "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json",
+      "presentation_update": {
+        "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+        "evidence": "evidence/backend-review-20261022/formatted-reply.json",
+        "semantics_changed": false
+      }
+    },
+    {
+      "id": "backend-139368-4343814230",
+      "url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343814230",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:23Z",
+      "reviewer_priority": "P2",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "thread": {
+        "id": "PRRT_kwDORrsQN86vBR8w",
+        "isResolved": false,
+        "isOutdated": false,
+        "path": "domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle/experiment_opt_out_test.go",
+        "line": 44,
+        "comment_ids": [
+          4343814230,
+          4353897263
+        ]
+      },
+      "decision_ids": [],
+      "disposition": "implemented-published-replied",
+      "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897263",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
+    },
+    {
+      "id": "backend-139368-4343814608",
+      "url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343814608",
+      "author": "aaron-silverman_ddog",
+      "created_at": "2026-10-22T01:56:28Z",
+      "reviewer_priority": "P3",
+      "source_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "original_source_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+      "thread": {
+        "id": "PRRT_kwDORrsQN86vBR_7",
+        "isResolved": false,
+        "isOutdated": true,
+        "path": "domains/ffe/libs/flagging/core/repository/ufc_repository.go",
+        "line": null,
+        "comment_ids": [
+          4343814608,
+          4353897591
+        ]
+      },
+      "decision_ids": [],
+      "disposition": "implemented-published-replied",
+      "evidence_level": "fresh native regression; published implementation has matching patch hash and GitHub-valid signatures",
+      "next_action": "Await reviewer follow-up and current CI; thread deliberately left open for reviewer confirmation.",
+      "reply_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353897591",
+      "post_merge_evidence": "evidence/backend-review-20261022/main-merge-native-validation.json"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "mutation": "Remove Immediate boolean acknowledgement gate",
+  "original_sha256": "6048aa83e2203e729b80f7ee29d4e58b746bd64119ba7ba57220b2eea8b7582b",
+  "command": [
+    "./gradlew",
+    "--no-daemon",
+    "--max-workers=2",
+    "-Dorg.gradle.java.installations.paths=/Applications/Android Studio.app/Contents/jbr/Contents/Home",
+    "-I",
+    "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/android-audit/profile-probes.init.gradle",
+    ":features:dd-sdk-android-flags:testDebugUnitTest",
+    "--tests",
+    "*MobileProfileProbeTest"
+  ],
+  "mutant_sha256": "61f3b1d82592a0e5b468bc40554b9184b99dad23915a4caf302dacd079bd6335",
+  "runner_exit_code": 0,
+  "mismatches": [
+    {
+      "id": "ack/immediate/missing/missing/missing",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/missing/equal",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/missing/equivalent",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/missing/different",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/missing/invalid",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/immediate/missing",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/immediate/equal",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/immediate/equivalent",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/immediate/different",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/missing/immediate/invalid",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/missing/missing",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/missing/equal",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/missing/equivalent",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/missing/different",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/missing/invalid",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/immediate/missing",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/immediate/equal",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/immediate/equivalent",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/immediate/different",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    },
+    {
+      "id": "ack/immediate/false/immediate/invalid",
+      "expected": {
+        "accepted": false
+      },
+      "observed": {
+        "accepted": true
+      }
+    }
+  ],
+  "detected": true,
+  "restored_sha256": "6048aa83e2203e729b80f7ee29d4e58b746bd64119ba7ba57220b2eea8b7582b"
+}

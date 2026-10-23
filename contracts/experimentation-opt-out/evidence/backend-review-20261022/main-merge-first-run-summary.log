@@ -1,0 +1,23 @@
+PASS: TestWinnerExposureChangePreservesHoldout (0.05s)
+=== NAME  
+FAIL
+================================================================================
+[8,762 / 8,763] 1 / 2 tests, 1 failed; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 11s linux-sandbox
+[8,762 / 8,763] 1 / 2 tests, 1 failed; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 22s linux-sandbox
+[8,762 / 8,763] 1 / 2 tests, 1 failed; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 52s linux-sandbox
+[8,762 / 8,763] 2 / 2 tests, 1 failed; Testing //domains/ffe/libs/flagging/core/repository:go_default_test; 66s linux-sandbox
+INFO: Found 2 test targets...
+Target //domains/ffe/libs/flagging/ufc:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/ufc/go_default_test_/go_default_test
+Target //domains/ffe/libs/flagging/core/repository:go_default_test up-to-date:
+  bazel-bin/domains/ffe/libs/flagging/core/repository/go_default_test_/go_default_test
+INFO: Elapsed time: 205.037s, Critical Path: 84.19s
+INFO: 2224 processes: 6612 action cache hit, 7 disk cache hit, 2091 remote cache hit, 99 internal, 27 linux-sandbox.
+INFO: Build completed, 1 test FAILED, 2224 total actions
+INFO: 
+//domains/ffe/libs/flagging/core/repository:go_default_test              PASSED in 66.3s
+//domains/ffe/libs/flagging/ufc:go_default_test                          FAILED in 12.0s
+  /home/bits/.cache/bazel/_bazel_bits/a93bb46dd38d46549c9c6602eec2cdcc/execroot/_main/bazel-out/x86_64-unknown-linux-fastbuild/testlogs/domains/ffe/libs/flagging/ufc/go_default_test/test.log
+
+Executed 2 out of 2 tests: 1 test passes and 1 fails locally.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.

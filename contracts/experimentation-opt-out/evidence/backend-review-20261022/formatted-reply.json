@@ -1,0 +1,80 @@
+{
+  "recorded_at": "2026-10-22T22:15:59.367735+00:00",
+  "kind": "presentation-only-comment-edit",
+  "format_reference_url": "https://github.com/DataDog/dd-trace-go/pull/5700#discussion_r4351454041",
+  "decision_revisions_unchanged": {
+    "D018": 1
+  },
+  "scope": "Adopt the selected attribution, bold decision/implementation/shared-proofs opening, and collapsible Behavior, Native validation and Sneak preview sections. No rule, implementation, proof or test expectation changed.",
+  "prior_readback": "main-merge-replies.json",
+  "readback": {
+    "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956",
+    "pull_request_review_id": 5621295860,
+    "id": 4353896956,
+    "node_id": "PRRC_kwDORrsQN88AAAABA4Mx_A",
+    "diff_hunk": "@@ -176,7 +176,7 @@ func BuildAllocationConfiguration(\n \t\tlog.Int(\"rules_count\", len(rules)),\n \t)\n \n-\tlogExposureEvent := allocation.IsStandardExperimentAllocation() || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()\n+\tlogExposureEvent := (allocation.IsStandardExperimentAllocation() && !allocation.ExperimentRolloutComplete) || allocation.IsCanaryExperiment() || allocation.IsBanditAllocation()",
+    "path": "domains/ffe/libs/flagging/ufc/ufc.go",
+    "commit_id": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+    "original_commit_id": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+    "user": {
+      "login": "leo-romanovsky_ddog",
+      "id": 234807440,
+      "node_id": "U_kgDODf7gkA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/234807440?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/leo-romanovsky_ddog",
+      "html_url": "https://github.com/leo-romanovsky_ddog",
+      "followers_url": "https://api.github.com/users/leo-romanovsky_ddog/followers",
+      "following_url": "https://api.github.com/users/leo-romanovsky_ddog/following{/other_user}",
+      "gists_url": "https://api.github.com/users/leo-romanovsky_ddog/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/leo-romanovsky_ddog/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/leo-romanovsky_ddog/subscriptions",
+      "organizations_url": "https://api.github.com/users/leo-romanovsky_ddog/orgs",
+      "repos_url": "https://api.github.com/users/leo-romanovsky_ddog/repos",
+      "events_url": "https://api.github.com/users/leo-romanovsky_ddog/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/leo-romanovsky_ddog/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "\ud83e\udd16 **Comment from Codex working with Leo:**\n\n**Decision [D018, revision 1](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018): the backend must represent randomization through the existing `doLog` field.**\n\nThanks, Aaron \u2014 agreed that a completed experiment can still randomize. We\u2019re keeping allocations that randomize subject to opt-out, including ordinary percentage splits and partial enrollment. The backend owns that classification; evaluators retain the existing `doLog` predicate and future-mode cutoff rule. This records Leo\u2019s clarification in [this decision thread](https://github.com/ddoghq/dd-source/pull/139368#discussion_r4343813763); the earlier withdrawn selection remains in [provenance](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/local-decision.json).\n\n**Implemented in [d0a2de5b58](https://github.com/ddoghq/dd-source/commit/d0a2de5b58dba158941d2c2f81016276a45ea2c1); validated after merging main at [0ae33d8f11](https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b).** The compiler sets `doLog=true` when shard selection changes the variation or match/fallthrough outcome. Deterministic completed winners remain `false`, while existing active-experiment, canary, bandit, and holdout logging requirements are preserved.\n\n**Shared proofs:** [draft FFE test-data PR #55](https://github.com/DataDog/ffe-system-test-data/pull/55) contains the [D018 decision](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018), its Lean proofs, and the linked validation history.\n\n<details>\n<summary><b>Behavior</b> \u2014 the distinction we are preserving</summary>\n\n| Allocation | Compiler output | Immediate mode with a valid subject cutoff |\n| --- | --- | --- |\n| Completed experiment still splitting 50/50 | `doLog=true` | Skip the allocation. |\n| Ordinary percentage split | `doLog=true` | Skip the allocation. |\n| Single variant with partial percentage enrollment | `doLog=true` | Skip the allocation. |\n| Deterministic completed ordinary winner | `doLog=false` | Remains eligible for delivery. |\n| Existing active-experiment, canary, bandit, or generated-holdout logging | Preserve the existing logging requirement. | Skip when `doLog=true`. |\n\nThis deliberately enables exposure logging for ordinary randomized allocations. Targeting rules and time windows do not themselves make an allocation random; changing between match and fallthrough does. First-match order, unreachable variants, empty ranges, and same-variant coverage are handled by the native classifier.\n\nFuture mode keeps its strictly-before cutoff rule: earlier activation remains eligible, while unknown activation is conservatively excluded. Deployment still requires the fallback-preserving child, regenerated UFCs, and activation coverage for newly logging allocations.\n\n</details>\n\n<details>\n<summary><b>Native validation</b> \u2014 local checks at <a href=\"https://github.com/ddoghq/dd-source/commit/0ae33d8f112685502bb8f16d8c96efbecb70219b\">0ae33d8f11</a></summary>\n\n- **918 compiler tests, 283 database repository tests, and 275 runner/primary-analysis tests pass.** The [merged-source receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/main-merge-native-validation.json) records the commands, source hashes, and exact execution scope. The repository run preceded only the compiler-test snapshot/comment correction; its library source was unchanged.\n- The classifier matches **500 independent raw-bucket enumeration cases**, alongside targeted cases for partial enrollment, first-match ordering, unreachable variants, and same-variant coverage.\n- Before main integration, restoring the old `doLog` output failed the completed 50/50, ordinary 50/50, and partial-enrollment regressions. The [negative-control receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/native-validation.json) retains its original source and patch pins; restoring the fix passed both Go suites uncached.\n- Main introduced a golden snapshot with seven old `doLog=false` expectations. That initial failure is preserved in [V052](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#v052). Updating only those seven logging bits leaves **every assignment field unchanged**; the subsequent compiler run passes, recorded in [V053](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#v053).\n\nThese are local native checks. The model proof does not establish correctness of the Go partition classifier. Child-stack integration, CI, and deployed behavior remain separate evidence.\n\n</details>\n\n<details>\n<summary><b>Sneak preview</b> \u2014 turning review decisions into reusable, checked contracts</summary>\n\nThe shared decisions and proofs are published in **[draft FFE test-data PR #55](https://github.com/DataDog/ffe-system-test-data/pull/55)** at [99854cf878](https://github.com/DataDog/ffe-system-test-data/commit/99854cf87802e03d2cc2c5ed324dfabcaafc5f34):\n\n1. **[A versioned English decision \u2014 D018, revision 1](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#d018)**, linked to where it was set.\n2. **[An executable Lean model and checked proofs](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/lean/BackendReview.lean#L6-L41)** of the producer/evaluator composition.\n3. **[The existing semantic corpus](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/corpus/browser-proposal.jsonl)** and **[operational corpus](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/corpus/inactive-path.jsonl)**, preserving the broader opt-out contract. These are not new D018 producer-classification cases; the classifier has separate native enumeration and regression tests.\n4. **[A linked history of evidence](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/decision-history.md#historical-linked-checks)**, preserving passing and failing checks separately from the decision\u2019s authority.\n\nFor example, [this theorem](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/lean/BackendReview.lean#L26-L28) is checked in the published model:\n\n```lean\ntheorem immediate_excludes_randomized_allocations (existingExposure : Bool) :\n    (compiledPolicy .immediate .valid .missing existingExposure true).exclude = true := by\n  cases existingExposure <;> rfl\n```\n\nIn plain English: within this model, an allocation classified as randomized is excluded in immediate mode with a valid subject cutoff, even without an existing exposure-logging requirement. The modeled compiler combines the two requirements as `existingExposure || randomized`; it does not infer randomization from native shard data.\n\nThe [model validation](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/model-validation.json) passes **53 theorem audits**, including seven new D018 theorems, plus **313 existing semantic cases and 36 operational cases**. A separate theorem distinguishes the old non-logging split from the corrected producer contract.\n\nThe useful result is a reviewable rule with a source-pinned evidence trail. The Lean proof establishes properties of the model; the [native receipt](https://github.com/DataDog/ffe-system-test-data/blob/99854cf87802e03d2cc2c5ed324dfabcaafc5f34/contracts/experimentation-opt-out/evidence/backend-review-20261022/main-merge-native-validation.json) establishes the bounded compiler checks above. The central PR remains a draft, and fleet adoption remains a separate decision.\n\n</details>\n",
+    "created_at": "2026-10-22T21:49:16Z",
+    "updated_at": "2026-10-22T22:14:00Z",
+    "html_url": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956",
+    "pull_request_url": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956"
+      },
+      "html": {
+        "href": "https://github.com/ddoghq/dd-source/pull/139368#discussion_r4353896956"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/ddoghq/dd-source/pulls/139368"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/ddoghq/dd-source/pulls/comments/4353896956/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": 195,
+    "original_line": 179,
+    "side": "RIGHT",
+    "in_reply_to_id": 4343813763,
+    "author_association": "MEMBER",
+    "original_position": 5,
+    "position": 5,
+    "subject_type": "line"
+  }
+}

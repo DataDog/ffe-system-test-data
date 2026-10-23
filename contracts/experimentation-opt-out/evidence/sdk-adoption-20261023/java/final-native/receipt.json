@@ -1,0 +1,23 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "modules": {
+    "dd-openfeature": {
+      "tests": 1251,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "products/feature-flagging/feature-flagging-api": {
+      "tests": 838,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "products/feature-flagging/feature-flagging-lib": {
+      "tests": 365,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}

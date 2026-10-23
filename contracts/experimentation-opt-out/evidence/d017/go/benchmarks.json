@@ -1,0 +1,4137 @@
+{
+  "started_at": "2026-10-22T19:41:47Z",
+  "finished_at": "2026-10-22T19:43:56Z",
+  "baseline_commit": "c5fec6a009ffa29bf53f5377a21856c7c4aa5f56",
+  "candidate": "same source plus reviewed guard and identical benchmark source",
+  "cpu_affinity": 0,
+  "machine": "x86_64",
+  "toolchain": "go1.26.0 linux/amd64",
+  "rounds": 10,
+  "order": "alternating AB/BA",
+  "benchtime": "150ms",
+  "uninstrumented": true,
+  "commands": [
+    {
+      "round": 0,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 0,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 1,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 1,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 2,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 2,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 3,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 3,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 4,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 4,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 5,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 5,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 6,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 6,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 7,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 7,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 8,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 8,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 9,
+      "side": "candidate",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/candidate.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    },
+    {
+      "round": 9,
+      "side": "baseline",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/tmp/d017-go-evidence/baseline.test",
+        "-test.run=^$",
+        "-test.bench=^(BenchmarkBooleanEvaluationExclusion|BenchmarkBooleanEvaluation|BenchmarkEvaluationWithVaryingContextSize|BenchmarkEvaluationWithVaryingFlagCounts|BenchmarkConcurrentEvaluations)$",
+        "-test.benchtime=150ms",
+        "-test.cpu=1",
+        "-test.benchmem"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "results": {
+    "BenchmarkBooleanEvaluation": {
+      "baseline_median_ns": 928.45,
+      "candidate_median_ns": 935.3,
+      "median_change_percent": 0.7377887877645373,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 920.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 951.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 919.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 925.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 917.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 947.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 931.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 954.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 927.2,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 934.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 942.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 952.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 935.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 943.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 913.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 935.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 946.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 920.7,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/disabled/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 940.95,
+      "candidate_median_ns": 937.55,
+      "median_change_percent": -0.36133694670280603,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 942.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 946.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 946.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 956.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 960.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 927.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 934.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 925.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 928.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 939.5,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 931.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 936.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 980.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 985.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 918.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 994.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1010.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 932.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 939.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.8,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/disabled/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 932.5,
+      "candidate_median_ns": 926.4,
+      "median_change_percent": -0.6541554959785589,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 951.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 954.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 935.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1012.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1054.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 927.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 920.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 928.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.4,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 922.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 923.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1002.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 918.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 925.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1012.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 938.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 917.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 942.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 927.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/disabled/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 1550.0,
+      "candidate_median_ns": 1525.0,
+      "median_change_percent": -1.6129032258064502,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1528.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1558.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1543.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1621.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1783.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1556.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1528.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1544.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1564.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1544.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1542.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1509.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1523.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1502.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1510.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1534.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1527.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1530.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1530.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1503.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/disabled/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 1586.5,
+      "candidate_median_ns": 1572.0,
+      "median_change_percent": -0.9139615505830423,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1570.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1598.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1577.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1945.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1581.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1571.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1575.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1592.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1638.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1652.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1580.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1559.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1588.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1606.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1552.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1869.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1570.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1558.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1574.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1562.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_absent/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 947.0,
+      "candidate_median_ns": 949.3,
+      "median_change_percent": 0.24287222808869746,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 933.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 957.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 947.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 970.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 932.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 960.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 944.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 968.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 946.6,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 954.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 939.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 971.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 949.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 933.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1004.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 942.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 949.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 998.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 935.3,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_absent/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 944.2,
+      "candidate_median_ns": 955.9,
+      "median_change_percent": 1.2391442490997662,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 937.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 956.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 944.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1045.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 945.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 955.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 932.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 939.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 943.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 933.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 955.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 935.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 991.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 956.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 926.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 960.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 975.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 946.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 981.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 936.4,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_absent/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 1559.0,
+      "candidate_median_ns": 1580.5,
+      "median_change_percent": 1.3790891597177612,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1542.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1572.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1548.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1584.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1556.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1579.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1544.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1562.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1586.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1545.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1554.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1527.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1593.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1637.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1551.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1722.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1589.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1587.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1574.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1533.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_absent/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 1608.0,
+      "candidate_median_ns": 1597.5,
+      "median_change_percent": -0.6529850746268662,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1596.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1602.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1614.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1677.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1590.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1661.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1617.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1594.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1578.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1636.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1603.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1571.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1688.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1651.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1599.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1623.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1587.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1583.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1596.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1590.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_active/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 648.65,
+      "candidate_median_ns": 655.0,
+      "median_change_percent": 0.9789562938410601,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 637.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 673.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 637.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 658.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 650.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 650.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 641.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 646.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 673.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.0,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 643.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 700.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 654.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 646.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 659.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 669.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 655.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 673.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 645.2,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_active/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 663.25,
+      "candidate_median_ns": 661.25,
+      "median_change_percent": -0.30154542027892584,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 640.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 660.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 662.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 707.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 670.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 659.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 688.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 663.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 674.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 649.0,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 649.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 690.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 658.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 648.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 663.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 655.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 684.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 682.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 681.5,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_active/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 792.8,
+      "candidate_median_ns": 799.2,
+      "median_change_percent": 0.8072653884964698,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 794.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 798.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 790.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 803.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 815.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 791.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 791.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 790.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 802.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 791.2,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 796.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 833.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 792.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 851.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 797.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 796.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 807.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 798.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 924.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 799.8,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_active/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 796.75,
+      "candidate_median_ns": 809.65,
+      "median_change_percent": 1.6190775023533055,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 785.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 800.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 787.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 800.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 824.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 807.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 793.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 791.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 815.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 787.7,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 792.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 873.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 804.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 812.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 794.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 819.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 812.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 802.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 823.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 806.4,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_retained/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 1034.0,
+      "candidate_median_ns": 1034.5,
+      "median_change_percent": 0.04835589941973861,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1034.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1018.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1014.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1024.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1051.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1034.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1015.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1058.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1047.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1043.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1015.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1035.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1062.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1034.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1081.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1023.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1028.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1022.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1074.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1119.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_retained/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 1030.5,
+      "candidate_median_ns": 1028.0,
+      "median_change_percent": -0.24260067928190132,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1018.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1031.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1026.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1041.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1047.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1030.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1055.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1019.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1060.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1013.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1031.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1024.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1021.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1039.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1017.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1022.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1037.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1025.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1054.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1036.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_retained/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 1711.0,
+      "candidate_median_ns": 1742.0,
+      "median_change_percent": 1.8118059614260718,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1710.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1711.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1698.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1715.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1702.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1732.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1724.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1711.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1720.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1690.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1721.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1795.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1747.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1756.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1741.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1717.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1743.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1740.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1882.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1723.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/future_retained/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 1736.5,
+      "candidate_median_ns": 1788.5,
+      "median_change_percent": 2.9945292254534905,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1718.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1749.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1707.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1780.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1716.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1803.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1723.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1724.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1834.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1773.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1783.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1862.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1794.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1869.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 2025.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1752.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1756.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1733.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1799.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1750.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_absent/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 952.5,
+      "candidate_median_ns": 946.55,
+      "median_change_percent": -0.6246719160104997,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 947.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 955.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1066.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 980.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 969.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 944.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 949.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 947.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 962.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 952.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 941.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 976.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 936.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 931.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 981.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 955.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 941.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 951.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.1,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_absent/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 944.7,
+      "candidate_median_ns": 948.8499999999999,
+      "median_change_percent": 0.43929289721602593,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 946.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 958.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 938.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 949.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 942.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 966.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 933.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 936.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 964.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.2,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 944.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1011.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 974.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 931.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 974.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 945.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 977.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 945.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 951.8,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_absent/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 1569.0,
+      "candidate_median_ns": 1550.5,
+      "median_change_percent": -1.179094964945826,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1554.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1562.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1576.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1650.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1674.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1608.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1544.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1552.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1604.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1554.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1553.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1548.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1572.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1543.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1534.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1582.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1544.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1587.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1558.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1540.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_absent/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 1603.5,
+      "candidate_median_ns": 1602.5,
+      "median_change_percent": -0.0623635796694777,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 1583.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1593.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1591.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1750.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1600.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1628.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1576.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1607.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1651.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1647.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 1584.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1576.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1624.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1628.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1588.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1624.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1569.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1626.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1617.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1588.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_active/allocations=1/extra_fields=0": {
+      "baseline_median_ns": 642.8499999999999,
+      "candidate_median_ns": 644.2,
+      "median_change_percent": 0.21000233335928264,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 631.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 675.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 640.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 641.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 663.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 668.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 638.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 645.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 644.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 636.3,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 631.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 638.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 665.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 644.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 651.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 676.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 636.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 657.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 636.0,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_active/allocations=1/extra_fields=20": {
+      "baseline_median_ns": 641.25,
+      "candidate_median_ns": 648.45,
+      "median_change_percent": 1.1228070175438587,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 633.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 656.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 636.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 636.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 635.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 648.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 638.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 654.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 643.7,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 646.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 642.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 644.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 660.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 650.9,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 671.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 657.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 635.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 654.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 634.4,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_active/allocations=16/extra_fields=0": {
+      "baseline_median_ns": 727.35,
+      "candidate_median_ns": 727.65,
+      "median_change_percent": 0.0412456176531073,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 701.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 735.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 699.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 731.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 718.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 723.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 732.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 739.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 734.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 713.6,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 737.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 731.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 707.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 762.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 723.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 765.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 735.4,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 723.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 722.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 708.1,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkBooleanEvaluationExclusion/immediate_active/allocations=16/extra_fields=20": {
+      "baseline_median_ns": 722.1,
+      "candidate_median_ns": 723.7,
+      "median_change_percent": 0.2215759590084465,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 699.8,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 744.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 730.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 714.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 717.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 709.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 726.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 710.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 746.7,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 740.3,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 710.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 760.5,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 751.6,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 723.1,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 737.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 733.2,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 724.3,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 714.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 723.0,
+            "bytes": 360,
+            "allocs": 4
+          },
+          {
+            "ns": 710.1,
+            "bytes": 360,
+            "allocs": 4
+          }
+        ]
+      }
+    },
+    "BenchmarkConcurrentEvaluations": {
+      "baseline_median_ns": 899.7,
+      "candidate_median_ns": 897.25,
+      "median_change_percent": -0.2723129932199697,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 903.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 911.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 900.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 891.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1016.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 898.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 886.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 882.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 930.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 885.7,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 900.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 891.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 915.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1295.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 880.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 893.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 893.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 878.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingContextSize/10fields": {
+      "baseline_median_ns": 902.0,
+      "candidate_median_ns": 925.15,
+      "median_change_percent": 2.566518847006649,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 898.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 917.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 894.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 892.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 926.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 895.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 890.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 905.5,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 899.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 936.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 915.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 934.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1151.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 901.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 890.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 958.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 939.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingContextSize/1field": {
+      "baseline_median_ns": 917.45,
+      "candidate_median_ns": 927.85,
+      "median_change_percent": 1.1335767616763803,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 923.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 918.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 919.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 914.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 949.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 943.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 916.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.2,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 928.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 942.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 927.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 930.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 952.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 921.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 909.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 952.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 924.6,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingContextSize/20fields": {
+      "baseline_median_ns": 897.2,
+      "candidate_median_ns": 905.7,
+      "median_change_percent": 0.9473918858671437,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 880.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 895.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 909.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 907.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 950.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 895.8,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 897.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 926.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 905.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 995.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1309.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 893.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 882.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 893.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 907.6,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingContextSize/5fields": {
+      "baseline_median_ns": 899.9,
+      "candidate_median_ns": 917.6,
+      "median_change_percent": 1.966885209467728,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 890.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 925.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 901.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 892.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 909.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 922.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 890.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 910.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 929.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 914.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1036.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 922.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 904.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 887.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 921.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 920.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 912.7,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingFlagCounts/100flags": {
+      "baseline_median_ns": 886.45,
+      "candidate_median_ns": 899.2,
+      "median_change_percent": 1.43832139432567,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 873.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 888.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 878.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 889.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 928.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 924.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 902.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 880.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 872.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 884.5,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 882.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 912.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 909.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1319.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 884.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 924.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 872.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 888.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 900.8,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingFlagCounts/10flags": {
+      "baseline_median_ns": 900.05,
+      "candidate_median_ns": 905.5,
+      "median_change_percent": 0.6055219154491365,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 888.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 924.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 888.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 915.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 926.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 903.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 891.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1016.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 891.2,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 886.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 912.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 913.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 968.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1224.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 898.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 898.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 955.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 887.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.0,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingFlagCounts/50flags": {
+      "baseline_median_ns": 903.1,
+      "candidate_median_ns": 900.15,
+      "median_change_percent": -0.3266526409035575,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 953.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 892.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 919.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 898.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 923.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 906.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 904.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 887.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 902.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 884.9,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 886.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 909.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 901.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 938.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1278.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 884.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 911.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 899.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 888.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 898.1,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    },
+    "BenchmarkEvaluationWithVaryingFlagCounts/5flags": {
+      "baseline_median_ns": 909.3,
+      "candidate_median_ns": 913.8,
+      "median_change_percent": 0.4948861761794765,
+      "samples": {
+        "baseline": [
+          {
+            "ns": 909.9,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 895.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 923.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 908.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 965.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 921.7,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 914.3,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.8,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 899.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 899.8,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ],
+        "candidate": [
+          {
+            "ns": 913.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 937.6,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 914.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 999.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 1290.0,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 896.4,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 899.1,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 897.2,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 925.5,
+            "bytes": 376,
+            "allocs": 5
+          },
+          {
+            "ns": 910.6,
+            "bytes": 376,
+            "allocs": 5
+          }
+        ]
+      }
+    }
+  },
+  "raw_sha256": {
+    "00-baseline.txt": "8d64ad27c150f6ca34aacbbda622cc94af48d2e0019be2d55bbba7766c21299f",
+    "00-candidate.txt": "8ef8bfe4dc37ebe4ee2b3c4b6235c01d9e3deecb1ad1c5734af96e0f4bb0c6ca",
+    "01-baseline.txt": "f41c55b0ec44ae5a3f99731a4b659712f9dae505eaaa5521cd838cac0621da03",
+    "01-candidate.txt": "8900fb6c3346c27344c746afd294cd5f96a82b63b471ea1722c2c05353b32787",
+    "02-baseline.txt": "da56aaadedf408f5966cac859a96e6e96c789b012e8c2566c04f071683b1a365",
+    "02-candidate.txt": "690e5efb01e10e5b9a488bfb4a7f44c54cf2ad90c98d9316a2ca642a69a6395f",
+    "03-baseline.txt": "4daf00136524ab14fd3c896c845f2f8561fc8d70d521e8b465938cf5e6555b9f",
+    "03-candidate.txt": "b461513b9d105f0011e8d07c6e9e252c5319b43de6ad39740cf994af666a573f",
+    "04-baseline.txt": "4ea3ae8fc17d6108ae6d915ab3167ebb5971c1971259a1ca77863fc273496b14",
+    "04-candidate.txt": "9b36e0898cad097de2935b0e994d5f1bf7ec35331ab63564ffc582b9f852430d",
+    "05-baseline.txt": "f09e555400e37e8a6d2ebe419eee43b7203f686e0f81b5a820be298aad1fd938",
+    "05-candidate.txt": "a3f0f90d2899dc3104279ce1dd60aef2bd16ee8b357c2f31e3517959b73bb3a3",
+    "06-baseline.txt": "3740641b7d8f5bfb9b35b19395bcfe886a3fba73b2b305f9d2a0abf629aa8c56",
+    "06-candidate.txt": "91945e8087399c58e6ccea41deda10b463e9092eef1dcf1046cfaca239ff5594",
+    "07-baseline.txt": "0dada70c8e4922cbf4fc847cafb718f390404dda496e3897a1f74beb76c43b1c",
+    "07-candidate.txt": "4a86eabcf96a9ee6793624b5702139f95f1be525595a8e117dca679135c1129f",
+    "08-baseline.txt": "7d566406100ff66ee4c40ed1ac790f3c0c58c983618bd3913f5eef41b917c7f1",
+    "08-candidate.txt": "9d8afda1333833c2cc181c8ce72cea5ef591fdb35725bf38583aa034879958f8",
+    "09-baseline.txt": "31b75cbb824110ba2b37b1bed5ca015ff1062e5f4310340cc57e09017dfb0766",
+    "09-candidate.txt": "49e5202c5ca6488c01dcf1b3519147acadece361caba60e650008c3196ed1803"
+  },
+  "limits": "Exploratory local medians on a shared host, no hypothesis test or universal threshold; comparison is against pre-guard child c5fec, not the PR parent. Does not establish absence of the six parent-relative CI regressions. New benchmark CI comparisons need a baseline in main.",
+  "candidate_commit": "627db08193d8019d33282024d8340327997205ec",
+  "execution_note": "All 20 benchmark commands completed successfully and the receipt was written. The final console-only summary hit a Python name-shadowing error; that display expression is fixed in the saved runner. Raw outputs, 34-case inventory and all 10 samples per side were checked independently.",
+  "allocation_changes": []
+}

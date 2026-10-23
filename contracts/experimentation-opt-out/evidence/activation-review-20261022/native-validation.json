@@ -1,0 +1,150 @@
+{
+  "recorded_at": "2026-10-22T23:02:03.710563+00:00",
+  "source_repository": "ddoghq/dd-source",
+  "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+  "patch_status": "local, uncommitted, unpublished",
+  "patch_sha256": "aee18df72ecc9db047d564cf871befa8044509348b4ab703337c02903be531af",
+  "source_files_sha256": {
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service.go": "942d0d9d722f4153179f7721c74fcd61a868c495d123ba19317b86bb8b26452d",
+    "domains/ffe/libs/flagging/core/service/allocation_exposure_schedule_service_test.go": "1808e559196e33c9735a3c23f7725f4d0e2aa8a033f7e0a3c3b34108291a30bc",
+    "domains/ffe/libs/flagging/core/service/allocation_service.go": "9bd8f32a72adf7c4b6894c499087269ca65d7112cc58ec83093cc1a14bb62f36",
+    "domains/ffe/libs/flagging/core/service/allocation_experiment_end_approval.go": "3024de459b2a25bb7220604f888c1f2944f65bc9088175867e21c570d6f326fe",
+    "domains/ffe/libs/flagging/core/repository/allocation_repository.go": "b7b6702bba6d427f392539a3967a195a715aea7f88860aeeb56a7975bb20907c",
+    "domains/ffe/libs/flagging/core/model/allocation.go": "ce8e3d0bb60ef97669f22449761f7e22d1c16ace0763854c7e09af593ef71cb1",
+    "domains/ffe/libs/flagging/ufc/holdout.go": "0f0abb3d2d5022173a152e4caa6f2ce2914d92a8352e2ff2654169627d5ee30c",
+    "domains/ffe/libs/flagging/ufc/holdout_test.go": "39a2e59366e92b3823dc0c8013e474d71cf69b64c408d18044327dea51a30d4e",
+    "domains/ffe/apps/apis/ffe-service/internal/crossdc/flag_replication.go": "8de6b03d65622b442d7a01c84bda533fb517f082ad55ed2164787cd69f081985",
+    "domains/ffe/libs/flagging/ufc/randomization_activation_test.go": "53a12e361b55f51ca5896f5b1eb5ffeedea59779421c0fbcff1731ea0bc020fa",
+    "domains/ffe/libs/flagging/core/repository/ufc_repository.go": "dfb7838a105c07a49292e3c596438547a59687a0d35b94cfbc42f7f77616bb3d"
+  },
+  "decision_revisions": {
+    "D011": 1,
+    "D012": 1
+  },
+  "suites": [
+    {
+      "target": "//domains/ffe/libs/flagging/core/service:go_default_test",
+      "counts": {
+        "tests": 1110,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "native-retry-service.xml.gz",
+      "log": "native-retry-service.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle:go_default_test",
+      "counts": {
+        "tests": 176,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "native-retry-lifecycle.xml.gz",
+      "log": "native-retry-lifecycle.log.gz"
+    },
+    {
+      "target": "//domains/ffe/libs/flagging/ufc:go_default_test",
+      "counts": {
+        "tests": 842,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "native-default-ufc.xml.gz",
+      "log": "native-default-ufc.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/crossdc:go_default_test",
+      "counts": {
+        "tests": 58,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "native-default-crossdc.xml.gz",
+      "log": "native-default-crossdc.log.gz"
+    },
+    {
+      "target": "//domains/ffe/apps/apis/ffe-service/internal/allocation:go_default_test",
+      "counts": {
+        "tests": 192,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "native-default-allocation-http.xml.gz",
+      "log": "native-default-allocation-http.log.gz"
+    }
+  ],
+  "new_sync_regression_leaf_cases": [
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/draft_is_not_activated",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/first_start",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/ordinary_rollout",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/preserve_first_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/replication_does_not_invent_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/replication_preserves_sender_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/rollback",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/create/unstarted_schedule",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/draft_is_not_activated",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/first_start",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/ordinary_rollout",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/preserve_first_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/replication_does_not_invent_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/replication_preserves_sender_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/rollback",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/running_legacy_experiment_stays_unknown",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/replace/unstarted_schedule",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/draft_is_not_activated",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/first_start",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/ordinary_rollout",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/preserve_first_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/replication_does_not_invent_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/replication_preserves_sender_activation",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/rollback",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/running_legacy_experiment_stays_unknown",
+    "TestServiceSuite/TestSyncStartRecordsRandomizationActivation/update/unstarted_schedule"
+  ],
+  "commands": [
+    "bzl test //domains/ffe/libs/flagging/core/service:go_default_test //domains/ffe/libs/flagging/ufc:go_default_test //domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle:go_default_test //domains/ffe/apps/apis/ffe-service/internal/crossdc:go_default_test //domains/ffe/apps/apis/ffe-service/internal/allocation:go_default_test --test_output=errors",
+    "bzl test //domains/ffe/libs/flagging/core/service:go_default_test //domains/ffe/apps/apis/ffe-service/internal/experiment/tests/lifecycle:go_default_test --test_timeout=1200 --test_arg=-test.timeout=15m --test_output=errors"
+  ],
+  "attempts": [
+    {
+      "kind": "original-source-negative-control",
+      "result": "2 first-start leaf failures, 16 controls pass",
+      "xml": "sync-baseline-test.xml",
+      "patch": "baseline-test.patch"
+    },
+    {
+      "kind": "first-fix-test-assertion",
+      "result": "3 location-representation assertion failures; corrected to Time.Equal",
+      "xml": "sync-first-fixed-test.xml"
+    },
+    {
+      "kind": "five-suite-default-limit",
+      "result": "3 pass, service/lifecycle timeout before completion",
+      "log": "native-default-suites.log.gz"
+    },
+    {
+      "kind": "two-suite-longer-limit",
+      "result": "2 pass",
+      "log": "native-timeout-retry.log.gz"
+    }
+  ],
+  "environment": {
+    "executor": "local repository-supported tests with a migrated Docker database"
+  },
+  "limits": [
+    "JUnit counts include parent cases; the new regression has 26 leaf cases.",
+    "New regression drives the database service directly; existing HTTP/lifecycle/cross-DC tests are surrounding regression coverage, not a new exact HTTP sync-start reproduction.",
+    "Lean proofs/oracles are separate from native tests and do not establish native refinement.",
+    "No combined producer/future evaluator or deployed end-to-end run.",
+    "No CI, per-target migration or validator rollout completion claim.",
+    "No commit, push, external reply or review-thread resolution performed."
+  ],
+  "raw_evidence_scope": "Raw log/patch hashes refer to privately retained originals. Public files are explicitly labeled count or provenance summaries.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "1979cfb80addd3296f994f08157e72da27bc06c87f649744f7fd7b6b3087df9d"
+}

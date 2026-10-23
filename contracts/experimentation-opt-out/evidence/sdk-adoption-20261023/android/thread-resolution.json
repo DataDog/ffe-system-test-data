@@ -1,0 +1,181 @@
+{
+  "checked_at": "2026-10-23T02:21:21.004233+00:00",
+  "threads": [
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7Mj4",
+      "root_comment_id": 4341191570,
+      "reply_id": 4355477580,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355477580",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:23Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7QyT",
+      "root_comment_id": 4341220101,
+      "reply_id": 4355477903,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355477903",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:28Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7QyX",
+      "root_comment_id": 4341220109,
+      "reply_id": 4355478274,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355478274",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:32Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYrW",
+      "root_comment_id": 4343859813,
+      "reply_id": 4355478660,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355478660",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:37Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYre",
+      "root_comment_id": 4343859827,
+      "reply_id": 4355479404,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355479404",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:45Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYro",
+      "root_comment_id": 4343859844,
+      "reply_id": 4355479927,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355479927",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:52Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYrv",
+      "root_comment_id": 4343859855,
+      "reply_id": 4355480216,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480216",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:56Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYr8",
+      "root_comment_id": 4343859875,
+      "reply_id": 4355480587,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480587",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:02Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsA",
+      "root_comment_id": 4343859881,
+      "reply_id": 4355480961,
+      "resolve": false,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480961",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:07Z",
+      "resolved": false,
+      "reason": "Backend deployment gate"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsJ",
+      "root_comment_id": 4343859894,
+      "reply_id": 4355481345,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481345",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:12Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsY",
+      "root_comment_id": 4343859913,
+      "reply_id": 4355481685,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481685",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:17Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYse",
+      "root_comment_id": 4343859923,
+      "reply_id": 4355481986,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481986",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:21Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsl",
+      "root_comment_id": 4343859934,
+      "reply_id": 4355482328,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355482328",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:26Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsn",
+      "root_comment_id": 4343859939,
+      "reply_id": 4355482821,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355482821",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:32Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsv",
+      "root_comment_id": 4343859950,
+      "reply_id": 4355483208,
+      "resolve": false,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355483208",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:36Z",
+      "resolved": false,
+      "reason": "Broader timestamp grammar request declined; reviewer acknowledgement remains open"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vPwXv",
+      "root_comment_id": 4349910077,
+      "reply_id": 4355483621,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355483621",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:42Z",
+      "resolved": true,
+      "reason": "Published implementation and exact native evidence address the requested change"
+    }
+  ]
+}

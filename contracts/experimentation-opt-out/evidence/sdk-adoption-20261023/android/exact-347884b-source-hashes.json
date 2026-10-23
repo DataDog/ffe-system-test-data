@@ -1,0 +1,14 @@
+{
+  "base_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "files": [
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagsFeature.kt",
+      "sha256": "f0036cd682a24f94f754cf413192b96c9e17cc3064724edcde5930b080e26d81"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagsFeatureTest.kt",
+      "sha256": "10e11eae7f2ed730ddc1c0c36f9c4cbef2c7d7e833352d49f0a676f6698e0213"
+    }
+  ],
+  "repository_commit": "347884bca81089127717ac3b272c4c0fff6dd13e"
+}

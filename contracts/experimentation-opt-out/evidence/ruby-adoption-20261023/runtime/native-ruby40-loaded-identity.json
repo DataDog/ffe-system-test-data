@@ -1,0 +1,47 @@
+{
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "ruby_platform": "x86_64-linux",
+  "datadog_version": "2.47.0.dev",
+  "datadog_path": "/app",
+  "libdatadog_gem_version": "46.0.0.1.1",
+  "libdatadog_gem_path": "/evidence/bundle40/ruby/4.0.0/gems/libdatadog-46.0.0.1.1-x86_64-linux",
+  "libdatadog_vendor_override": "/evidence/native-vendor",
+  "openfeature_version": null,
+  "source_hashes": {
+    "lib/datadog/open_feature/provider.rb": "9ce08754968fbf2b24350c704fb2275738e1da7d2959556d4817710f82504340",
+    "lib/datadog/open_feature/native_evaluator.rb": "d006548da1f2cd59c127186c41712c017423d02dbf8d241f7131289c494582a8",
+    "lib/datadog/open_feature/evaluation_engine.rb": "7b4eb48a3929cec9201a9aba4e515e24d301482367e203948b2ea2a26c030fa6",
+    "lib/datadog/open_feature/ext.rb": "96cf087676f4206c6b044a8406344cf0ee345fbc4ab81e8f0a385b020c7ffdef",
+    "lib/datadog/open_feature/resolution_details.rb": "60c40e034e83f5a6a4167114bbed27917e40ffb7f9cbcb4a48d2f433483203a7",
+    "lib/datadog/core/feature_flags.rb": "d1c8ebf6dfc38018530995d1c9cfbbd48bd06fe6620f8263c1ea94060465a319",
+    "lib/datadog/core/configuration/settings.rb": "27e2ab76d568076570a6d0583695833c1e62d0bf6a9dc6049ca8460a393a751c"
+  },
+  "extensions": {
+    "/app/lib/libdatadog_api.4.0_x86_64-linux.so": "bb737fae23838382859828ebaf11280b846a0fd014dc17f7be6c8a56524bcf67",
+    "/app/tmp/x86_64-linux/libdatadog_api.4.0_x86_64-linux/4.0.1/libdatadog_api.4.0_x86_64-linux.so": "bb737fae23838382859828ebaf11280b846a0fd014dc17f7be6c8a56524bcf67",
+    "/app/tmp/x86_64-linux/stage/lib/libdatadog_api.4.0_x86_64-linux.so": "bb737fae23838382859828ebaf11280b846a0fd014dc17f7be6c8a56524bcf67"
+  },
+  "native_process_maps": [
+    {
+      "pid": "1",
+      "command": "/usr/local/bin/ruby ",
+      "maps": [
+        "7047fe60d000-7047ff0a9000 r--p 00000000 00:34 35914543                   /evidence/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "7047ff0a9000-704800cac000 r-xp 00a9b000 00:34 35914543                   /evidence/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "704800cac000-704800e85000 r--p 0269d000 00:34 35914543                   /evidence/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "704800e85000-704800e8c000 rw-p 02875000 00:34 35914543                   /evidence/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so",
+        "704800eb8000-704800ebd000 r--p 00000000 00:34 36176264                   /app/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "704800ebd000-704800eca000 r-xp 00005000 00:34 36176264                   /app/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "704800eca000-704800ece000 r--p 00012000 00:34 36176264                   /app/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "704800ece000-704800ecf000 r--p 00016000 00:34 36176264                   /app/lib/libdatadog_api.4.0_x86_64-linux.so",
+        "704800ecf000-704800ed0000 rw-p 00017000 00:34 36176264                   /app/lib/libdatadog_api.4.0_x86_64-linux.so"
+      ],
+      "mapped_files": {
+        "/evidence/native-vendor/x86_64-linux-gnu/lib/libdatadog_profiling.so": "d57541423e435cbb6c76b35954e16cd738525a667b031fad7ad69dd098cb4921",
+        "/app/lib/libdatadog_api.4.0_x86_64-linux.so": "bb737fae23838382859828ebaf11280b846a0fd014dc17f7be6c8a56524bcf67"
+      }
+    }
+  ],
+  "ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "boundary": "Separate post-test process loads the same compiled extension from the native matrix worktree. OpenFeature test results are in the matrix receipt."
+}

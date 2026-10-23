@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-23T01:56:13.571504+00:00",
+  "classification": "native-compatibility / no_shared_impact",
+  "decision": "D010 revision 1 remains unchanged: valid UFC input requires explicit Boolean doLog.",
+  "target": "DataDog/dd-trace-java#12950",
+  "review": "https://github.com/DataDog/dd-trace-java/pull/12950#discussion_r4342792807",
+  "local_resolution": "Both Java exclusion helpers use Boolean.TRUE.equals(doLog), matching their existing exposure predicate. Omitted/null doLog therefore keeps the pre-existing non-exposure ordinary allocation behavior.",
+  "limits": "This is Java-local malformed-input compatibility. It does not introduce a shared missing-field default or replace separate strict required-boolean ingestion work.",
+  "validation": "Exact a4d3dfb native suites:2454 passed. Omitted/null regressions pass in both providers; restoring the old predicate causes two failures per provider. Both runtime paths pass5 tests each; all90 policy cases per path pass.",
+  "authorization": "Current user requested independent implementation pass followed by review remediation across the three existing SDK PRs.",
+  "source_sha": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "reply": "https://github.com/DataDog/dd-trace-java/pull/12950#discussion_r4355545626"
+}

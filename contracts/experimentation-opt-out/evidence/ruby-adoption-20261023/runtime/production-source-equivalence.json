@@ -1,0 +1,9 @@
+{
+  "previous_ruby_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+  "final_ruby_sha": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "changed_files": [
+    "spec/datadog/open_feature/provider_spec.rb"
+  ],
+  "lib_ext_and_packaged_gem_sources_unchanged": true,
+  "boundary": "Source equivalence only. Final-head native and runtime checks are rerun separately."
+}

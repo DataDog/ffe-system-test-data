@@ -1,0 +1,159 @@
+{
+  "case_indices": [
+    6,
+    7
+  ],
+  "fixture_cases": [
+    {
+      "description": "skip newer targeted allocation and continue older randomization",
+      "flag": "integer-flag",
+      "variationType": "INTEGER",
+      "defaultValue": 0,
+      "targetingKey": "5",
+      "attributes": {
+        "country": "US",
+        "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z"
+      },
+      "result": {
+        "value": 3,
+        "reason": "TARGETING_MATCH"
+      },
+      "capabilities": {
+        "experimentationOptOutFutureExperimentsOnly": {
+          "value": 1,
+          "reason": "SPLIT"
+        }
+      }
+    },
+    {
+      "description": "targeted allocation remains eligible before cutoff",
+      "flag": "integer-flag",
+      "variationType": "INTEGER",
+      "defaultValue": 0,
+      "targetingKey": "5",
+      "attributes": {
+        "country": "US",
+        "dd_experimentation_opt_out_at": "2026-10-21T12:00:00Z"
+      },
+      "result": {
+        "value": 3,
+        "reason": "TARGETING_MATCH"
+      },
+      "capabilities": {
+        "experimentationOptOutFutureExperimentsOnly": {
+          "value": 3,
+          "reason": "TARGETING_MATCH"
+        }
+      }
+    }
+  ],
+  "flag": {
+    "key": "integer-flag",
+    "enabled": true,
+    "variationType": "INTEGER",
+    "variations": {
+      "one": {
+        "key": "one",
+        "value": 1
+      },
+      "two": {
+        "key": "two",
+        "value": 2
+      },
+      "three": {
+        "key": "three",
+        "value": 3
+      }
+    },
+    "allocations": [
+      {
+        "key": "targeted allocation",
+        "rules": [
+          {
+            "conditions": [
+              {
+                "attribute": "country",
+                "operator": "ONE_OF",
+                "value": [
+                  "US",
+                  "Canada",
+                  "Mexico"
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "attribute": "email",
+                "operator": "MATCHES",
+                "value": ".*@example.com"
+              }
+            ]
+          }
+        ],
+        "splits": [
+          {
+            "variationKey": "three",
+            "shards": [
+              {
+                "salt": "full-range-salt",
+                "totalShards": 10000,
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 10000
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "doLog": true,
+        "randomizationActivatedAt": "2026-10-20T12:00:00Z"
+      },
+      {
+        "key": "50/50 split",
+        "rules": [],
+        "splits": [
+          {
+            "variationKey": "one",
+            "shards": [
+              {
+                "salt": "split-numeric-flag-some-allocation",
+                "totalShards": 10000,
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 5000
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "variationKey": "two",
+            "shards": [
+              {
+                "salt": "split-numeric-flag-some-allocation",
+                "totalShards": 10000,
+                "ranges": [
+                  {
+                    "start": 5000,
+                    "end": 10000
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "doLog": true,
+        "randomizationActivatedAt": "2026-10-01T12:00:00Z"
+      }
+    ]
+  },
+  "go_fixture_pin": "1c831fed02a428a1b0a4ac412da9b773e22df257",
+  "fixture_branch_tested_head": "92d737360cec4b0b3ea7c4177a5a4510addf3dce",
+  "pair_and_flag_equal_across_pins": true,
+  "scope": "This unchanged pair demonstrates strict activation-before-cutoff eligibility. It does not by itself prove scheduling or enrollment behavior."
+}

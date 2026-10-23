@@ -1,0 +1,422 @@
+[
+  {
+    "id": "policy/immediate/absent/missing/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193864,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-0"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/missing/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723193880,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-1"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/invalid/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193886,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-2"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/invalid/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723193889,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-3"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/before/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193913,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-4"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/before/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723193917,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-5"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/equal/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193920,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-6"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/equal/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723193923,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-7"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/after/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193927,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-8"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/absent/after/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_exposure_cache_hit": false,
+        "__dd_do_log": true,
+        "__dd_eval_timestamp_ms": 1792723193930,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-9"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/missing/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193933,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-10"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/missing/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193935,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-11"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/invalid/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193938,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-12"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/invalid/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193941,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-13"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/before/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193944,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-14"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/before/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193947,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-15"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/equal/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193949,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-16"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/equal/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193952,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-17"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/after/0",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193955,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "experiment",
+        "flagKey": "policy-18"
+      },
+      "value": "experiment"
+    }
+  },
+  {
+    "id": "policy/immediate/valid/after/1",
+    "result": {
+      "reason": "STATIC",
+      "errorCode": null,
+      "flagMetadata": {
+        "__dd_eval_timestamp_ms": 1792723193958,
+        "observe_full_evaluation_data": true,
+        "variationType": "STRING",
+        "allocationKey": "ordinary",
+        "flagKey": "policy-19"
+      },
+      "value": "ordinary"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/missing/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/missing/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/invalid/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/invalid/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/before/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/before/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/equal/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/equal/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/after/0",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  },
+  {
+    "id": "policy/immediate/invalid/after/1",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "INVALID_CONTEXT",
+      "flagMetadata": {
+        "observe_full_evaluation_data": true
+      },
+      "value": "default"
+    }
+  }
+]

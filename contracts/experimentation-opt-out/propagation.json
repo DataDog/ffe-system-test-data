@@ -1,0 +1,162 @@
+{
+  "status": "plan-only",
+  "required_before_fleet_adoption": [
+    "central approval of exact revision",
+    "resolve C001 and approve wider D004 scope; C002/C003 selected and implemented for Go only",
+    "per-owner native evidence bound to model/corpus/source hashes"
+  ],
+  "targets": [
+    {
+      "owner": "dd-trace-go",
+      "prs": [
+        5666,
+        5700
+      ],
+      "decisions": [
+        "D002",
+        "D004",
+        "D006",
+        "D010",
+        "D011",
+        "D012",
+        "D015",
+        "D016",
+        "D017"
+      ],
+      "next": "D004 and D017 implemented with scoped native evidence; D017 local timings mixed, new CI results separate. Continue remaining Go comments; wider operational fan-out remains proposed."
+    },
+    {
+      "owner": "openfeature-js-client shared flagging-core",
+      "prs": [
+        423,
+        420
+      ],
+      "decisions": [
+        "D004",
+        "D005",
+        "D006",
+        "D007",
+        "D013"
+      ],
+      "next": "Use merged browser profile as scoped evidence; refresh Node adoption independently."
+    },
+    {
+      "owner": "dd-sdk-ios",
+      "prs": [
+        3338
+      ],
+      "decisions": [
+        "D005",
+        "D006",
+        "D007",
+        "D008",
+        "D014"
+      ],
+      "next": "Consume same revision after central choice; earlier laptop POC receipts are historical evidence."
+    },
+    {
+      "owner": "dd-sdk-android",
+      "prs": [
+        4024
+      ],
+      "decisions": [
+        "D005",
+        "D006",
+        "D007",
+        "D008",
+        "D014"
+      ],
+      "next": "Consume same revision after central choice; native platform validation remains separate."
+    },
+    {
+      "owner": "libdatadog/edge shared Rust implementation and wrappers",
+      "decisions": [
+        "D004",
+        "D005",
+        "D006",
+        "D007",
+        "D012"
+      ],
+      "next": "Retain distinct subject/activation parser counterexamples; audit core before wrapper fan-out."
+    },
+    {
+      "owner": "dd-source configuration producer",
+      "decisions": [
+        "D010",
+        "D011",
+        "D012",
+        "D018",
+        "D021"
+      ],
+      "next": "Published #139379 integrates the winner-classification parent, fixes authored SemVer compatibility, and validates retained defaults. Resolve the parent rollout-control review separately, then deploy the compiler and rebuild stored UFCs before opt-out enablement; activation and other rollout gates remain open.",
+      "prs": [
+        139368,
+        139379,
+        139381,
+        140422
+      ],
+      "dependency_order": [
+        "compiler classification #139368",
+        "fallback retention #139379 inherits current parent",
+        "activation coverage #139381 and edge #140422 are independent Git branches with rollout prerequisites",
+        "rebuild stored configurations before consumer enablement"
+      ]
+    },
+    {
+      "owner": "other server SDKs and system-tests",
+      "decisions": [
+        "D002",
+        "D004",
+        "D005",
+        "D006",
+        "D007",
+        "D010",
+        "D011",
+        "D012",
+        "D015",
+        "D016"
+      ],
+      "next": "Discover actual implementation/dependency owners; no universal parity claim from this Go review."
+    },
+    {
+      "owner": "dd-source edge HTTP and Go/Rust evaluator adapters",
+      "prs": [
+        140422
+      ],
+      "decisions": [
+        "D008",
+        "D011",
+        "D012",
+        "D018",
+        "D019",
+        "D020"
+      ],
+      "next": "Validate and publish the local edge feedback changes only when authorized. Keep compiler/UFC rebuild and activation requirements as enablement gates. Coordinate invalid-regex authoring/audit and grammar parity separately.",
+      "dependency_order": [
+        "merged fixture #52 pin",
+        "native edge/Go/Rust tests and compatibility negative controls",
+        "independent PR review/CI",
+        "compiler and fallback publication plus UFC rebuild before opt-out enablement",
+        "activation coverage/backfill before future-mode enablement"
+      ]
+    }
+  ],
+  "operational_profiles": [
+    {
+      "id": "inactive-path-v1",
+      "decision": "D017",
+      "revision": 2,
+      "accepted_scope": "Go call-site guard",
+      "proposed_scope": "Rules-based shared evaluators; precomputed-only clients require explicit applicability assessment.",
+      "native_receipt_required": [
+        "actual exclusion-boundary observation",
+        "semantic regressions",
+        "uninstrumented whole-evaluation benchmark results",
+        "source/compiler/architecture/baseline pins"
+      ],
+      "status": "go-native-conformance-validated-timing-observed-other-owners-proposed",
+      "go_source_sha": "627db08193d8019d33282024d8340327997205ec",
+      "go_receipt": "evidence/d017/native-receipt.json"
+    }
+  ]
+}

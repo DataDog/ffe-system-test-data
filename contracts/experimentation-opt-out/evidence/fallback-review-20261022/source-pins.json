@@ -1,0 +1,10 @@
+{
+  "retrieved_at": "2026-10-22T22:37:29.557543+00:00",
+  "head_sha": "1a71c67a6f1de54e0ee9754bcf36da54100f553f",
+  "recorded_pr_base_sha": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+  "live_parent_head_sha": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+  "merge_base": "3e99ba2aee24479054e1018c7ac80bd06adb7478",
+  "central_base_sha": "7853a11426a50691e748e64907e93d4682d91215",
+  "local_merge": "clean, --no-commit; parent content integrated in dedicated worktree",
+  "publication_authorized": false
+}

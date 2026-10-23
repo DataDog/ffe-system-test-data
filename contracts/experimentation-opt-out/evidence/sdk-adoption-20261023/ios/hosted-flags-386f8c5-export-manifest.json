@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "repository": "DataDog/dd-sdk-ios",
+  "head_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "read_at": "2026-10-23T03:36:24Z",
+  "files": [
+    {
+      "file": "hosted-flags-386f8c5-ci-visibility.json",
+      "sha256": "d849071792678b1aba34f55bbbcca1171653f31fd767e12c909d859296142086",
+      "bytes": 24755,
+      "suggested_destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/hosted-flags-386f8c5-ci-visibility.json"
+    },
+    {
+      "file": "HOSTED-FLAGS-386f8c5.md",
+      "sha256": "1e0d085173945404702e374ad748b6a35173affde787bfd5ddecf93342360a8d",
+      "bytes": 4062,
+      "suggested_destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/HOSTED-FLAGS-386f8c5.md"
+    }
+  ],
+  "local_only": [
+    {
+      "file": "hosted-flags-386f8c5-final-events.json",
+      "sha256": "61cf998fb416045a551de75ab368f0857709978473aecc97fbdea6bd07c20c32",
+      "bytes": 404661
+    }
+  ]
+}

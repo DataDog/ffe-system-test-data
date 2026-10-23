@@ -1,0 +1,68 @@
+{
+  "ack/future/false/future/equivalent": {
+    "accepted": true
+  },
+  "ack/future/true/future/different": {
+    "accepted": false
+  },
+  "ack/immediate/true/missing/missing": {
+    "accepted": true
+  },
+  "ack/none/missing/future/equal": {
+    "accepted": false
+  },
+  "ack/none/missing/missing/missing": {
+    "accepted": true
+  },
+  "ack/none/true/missing/missing": {
+    "accepted": false
+  },
+  "pending/immediate/absent/INVALID_CONTEXT": {
+    "error": "PROVIDER_NOT_READY"
+  },
+  "pending/immediate/invalid/INVALID_CONTEXT": {
+    "error": "INVALID_CONTEXT"
+  },
+  "pending/immediate/valid/PARSE_ERROR": {
+    "error": "PARSE_ERROR"
+  },
+  "policy/future_experiments_only/valid/before/1": {
+    "error": "NONE",
+    "exclude": false
+  },
+  "policy/future_experiments_only/valid/equal/1": {
+    "error": "NONE",
+    "exclude": true
+  },
+  "policy/immediate/absent/invalid/1": {
+    "error": "NONE",
+    "exclude": false
+  },
+  "timestamp/epoch": {
+    "accepted": true,
+    "nanos": 0,
+    "seconds": 0
+  },
+  "timestamp/gregorian-cutover": {
+    "accepted": true,
+    "nanos": 0,
+    "seconds": -12219724800
+  },
+  "timestamp/julian-leap": {
+    "accepted": false
+  },
+  "timestamp/leap-second": {
+    "accepted": false
+  },
+  "timestamp/pre-epoch-nanos": {
+    "accepted": true,
+    "nanos": 999999999,
+    "seconds": -1
+  },
+  "timestamp/utc-year-overflow": {
+    "accepted": false
+  },
+  "timestamp/utc-year-underflow": {
+    "accepted": false
+  }
+}

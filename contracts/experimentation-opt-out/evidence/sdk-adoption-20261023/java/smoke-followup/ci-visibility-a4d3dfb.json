@@ -1,0 +1,911 @@
+{
+  "from": "2026-10-22T02:57:22Z",
+  "to": "2026-10-23T02:57:22Z",
+  "queries": {
+    "jobs": "@ci.job.id:(2168880405 OR 2168880414 OR 2168880422 OR 2168880430 OR 2168880439)",
+    "tests": "@test.status:fail @git.commit.sha:a4d3dfb21cec0658417d4f3842dc8c8465a27371"
+  },
+  "jobs": {
+    "events": [
+      {
+        "ci": {
+          "job": {
+            "id": "2168880430",
+            "name": "test_smoke: [25, 7/8]",
+            "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880430"
+          },
+          "pipeline": {
+            "fingerprint": "F_ymEWEZDGrg",
+            "fingerprint_v2": "bF9x8gyimV3P",
+            "id": "146948744",
+            "name": "DataDog/apm-reliability/dd-trace-java"
+          },
+          "status": "error"
+        },
+        "error": {
+          "classification": "new_code_regression",
+          "dd_domain": "code",
+          "dd_is_retriable": true,
+          "dd_message": "4 failed tests in OpenFeatureProviderSmokeTest due to SpockTimeoutError: Condition not satisfied at OpenFeatureProviderSmokeTest.groovy:136.",
+          "dd_retry_score": 0.65,
+          "dd_subdomain": "test",
+          "domain": "code",
+          "is_retriable": true,
+          "message": "4 failed tests in OpenFeatureProviderSmokeTest due to SpockTimeoutError: Condition not satisfied at OpenFeatureProviderSmokeTest.groovy:136.",
+          "provider_domain": "unknown",
+          "provider_message": "Job failed",
+          "retry_score": 0.65,
+          "subdomain": "test",
+          "type": "script_failure"
+        },
+        "errorClassification": {
+          "classification_basis": "inference",
+          "domain": "branch_new_code_failure",
+          "input": {
+            "alt_flaky_jobs_score": 0.25,
+            "flaky_jobs_score": 0.009,
+            "job_failure_rate_baseline": 0.0143,
+            "job_failure_rate_recent": 0.0102
+          },
+          "reason": "recent_failure_rate_lt_0_55_flaky_score_lt_0_05",
+          "reason_confidence": 0,
+          "type": "permanent",
+          "type_confidence": 0
+        },
+        "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+        "id": "AwAAAaFmo6DQv54WZAAAABhBYUZtbzZEUUFBQWxibUJUTGxDTXExSlAAAAAkMDFhMTY2YTUtZTZkOC00YmYxLThjMmYtMTAyYWQyZjBlYzEyAAARxg",
+        "level": "job"
+      },
+      {
+        "ci": {
+          "job": {
+            "id": "2168880422",
+            "name": "test_smoke: [21, 7/8]",
+            "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880422"
+          },
+          "pipeline": {
+            "fingerprint": "F_ymEWEZDGrg",
+            "fingerprint_v2": "bF9x8gyimV3P",
+            "id": "146948744",
+            "name": "DataDog/apm-reliability/dd-trace-java"
+          },
+          "status": "error"
+        },
+        "error": {
+          "classification": "new_code_regression",
+          "dd_domain": "code",
+          "dd_is_retriable": true,
+          "dd_message": "4 failed tests due to Spock timeout and condition not satisfied errors in OpenFeatureProviderSmokeTest.groovy.",
+          "dd_retry_score": 0.6,
+          "dd_subdomain": "test",
+          "domain": "code",
+          "is_retriable": true,
+          "message": "4 failed tests due to Spock timeout and condition not satisfied errors in OpenFeatureProviderSmokeTest.groovy.",
+          "provider_domain": "unknown",
+          "provider_message": "Job failed",
+          "retry_score": 0.6,
+          "subdomain": "test",
+          "type": "script_failure"
+        },
+        "errorClassification": {
+          "classification_basis": "inference",
+          "domain": "branch_new_code_failure",
+          "input": {
+            "alt_flaky_jobs_score": 0.25,
+            "flaky_jobs_score": 0.011,
+            "job_failure_rate_baseline": 0.0143,
+            "job_failure_rate_recent": 0.0102
+          },
+          "reason": "recent_failure_rate_lt_0_55_flaky_score_lt_0_05",
+          "reason_confidence": 0,
+          "type": "permanent",
+          "type_confidence": 0
+        },
+        "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+        "id": "AwAAAaFmo5kAHmhPqwAAABhBYUZtbzVrQUFBRDFlZ0RXQVROX3NsSlAAAAAkMDFhMTY2YTUtZTZkOC00YmYxLThjMmYtMTAyYWQyZjBlYzEyAAARxw",
+        "level": "job"
+      },
+      {
+        "ci": {
+          "job": {
+            "id": "2168880405",
+            "name": "test_smoke: [11, 7/8]",
+            "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880405"
+          },
+          "pipeline": {
+            "fingerprint": "F_ymEWEZDGrg",
+            "fingerprint_v2": "bF9x8gyimV3P",
+            "id": "146948744",
+            "name": "DataDog/apm-reliability/dd-trace-java"
+          },
+          "status": "error"
+        },
+        "error": {
+          "classification": "new_code_regression",
+          "dd_domain": "code",
+          "dd_is_retriable": true,
+          "dd_message": "4 tests failed due to timeout exceptions from 'open feature exposures' tests in OpenFeatureProviderSmokeTest.groovy:136.",
+          "dd_retry_score": 0.75,
+          "dd_subdomain": "test",
+          "domain": "code",
+          "is_retriable": true,
+          "message": "4 tests failed due to timeout exceptions from 'open feature exposures' tests in OpenFeatureProviderSmokeTest.groovy:136.",
+          "provider_domain": "unknown",
+          "provider_message": "Job failed",
+          "retry_score": 0.75,
+          "subdomain": "test",
+          "type": "script_failure"
+        },
+        "errorClassification": {
+          "classification_basis": "inference",
+          "domain": "branch_new_code_failure",
+          "input": {
+            "alt_flaky_jobs_score": 0.2509,
+            "flaky_jobs_score": 0.0011,
+            "job_failure_rate_baseline": 0.0143,
+            "job_failure_rate_recent": 0.0102
+          },
+          "reason": "recent_failure_rate_lt_0_55_flaky_score_lt_0_05",
+          "reason_confidence": 0,
+          "type": "permanent",
+          "type_confidence": 0
+        },
+        "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+        "id": "AwAAAaFmo24IMEC28gAAABhBYUZtbzI0SUFBRFcxdl9ON0RVdDZGSlAAAAAkMDFhMTY2YTUtZTZkOC00YmYxLThjMmYtMTAyYWQyZjBlYzEyAAARzQ",
+        "level": "job"
+      },
+      {
+        "ci": {
+          "job": {
+            "id": "2168880439",
+            "name": "test_smoke: [tip, 7/8]",
+            "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880439"
+          },
+          "pipeline": {
+            "fingerprint": "F_ymEWEZDGrg",
+            "fingerprint_v2": "bF9x8gyimV3P",
+            "id": "146948744",
+            "name": "DataDog/apm-reliability/dd-trace-java"
+          },
+          "status": "error"
+        },
+        "error": {
+          "classification": "new_code_regression",
+          "dd_domain": "code",
+          "dd_is_retriable": true,
+          "dd_message": "4 failed tests due to timeout in OpenFeatureProviderSmokeTest.groovy:136.",
+          "dd_retry_score": 0.7,
+          "dd_subdomain": "test",
+          "domain": "code",
+          "is_retriable": true,
+          "message": "4 failed tests due to timeout in OpenFeatureProviderSmokeTest.groovy:136.",
+          "provider_domain": "unknown",
+          "provider_message": "Job failed",
+          "retry_score": 0.7,
+          "subdomain": "test",
+          "type": "script_failure"
+        },
+        "errorClassification": {
+          "classification_basis": "inference",
+          "domain": "branch_new_code_failure",
+          "input": {
+            "alt_flaky_jobs_score": 0.2509,
+            "flaky_jobs_score": 0.0012,
+            "job_failure_rate_baseline": 0.0245,
+            "job_failure_rate_recent": 0.0202
+          },
+          "reason": "recent_failure_rate_lt_0_55_flaky_score_lt_0_05",
+          "reason_confidence": 0,
+          "type": "permanent",
+          "type_confidence": 0
+        },
+        "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+        "id": "AwAAAaFmoGyAYqzAmAAAABhBYUZtb0d5QUFBQXpHOERyS1c4X00xSlAAAAAkZjFhMTY2YTItNjA4MC00NmZlLTljOWQtZWU2M2IxMTAyOTUwAAASAQ",
+        "level": "job"
+      },
+      {
+        "ci": {
+          "job": {
+            "id": "2168880414",
+            "name": "test_smoke: [17, 7/8]",
+            "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880414"
+          },
+          "pipeline": {
+            "fingerprint": "F_ymEWEZDGrg",
+            "fingerprint_v2": "bF9x8gyimV3P",
+            "id": "146948744",
+            "name": "DataDog/apm-reliability/dd-trace-java"
+          },
+          "status": "error"
+        },
+        "error": {
+          "classification": "new_code_regression",
+          "dd_domain": "code",
+          "dd_is_retriable": true,
+          "dd_message": "4 failed tests due to timeout exceptions at OpenFeatureProviderSmokeTest.groovy:133.",
+          "dd_retry_score": 0.65,
+          "dd_subdomain": "test",
+          "domain": "code",
+          "is_retriable": true,
+          "message": "4 failed tests due to timeout exceptions at OpenFeatureProviderSmokeTest.groovy:133.",
+          "provider_domain": "unknown",
+          "provider_message": "Job failed",
+          "retry_score": 0.65,
+          "subdomain": "test",
+          "type": "script_failure"
+        },
+        "errorClassification": {
+          "classification_basis": "inference",
+          "domain": "branch_new_code_failure",
+          "input": {
+            "alt_flaky_jobs_score": 0.2509,
+            "flaky_jobs_score": 0.0012,
+            "job_failure_rate_baseline": 0.0282,
+            "job_failure_rate_recent": 0.0102
+          },
+          "reason": "recent_failure_rate_lt_0_55_flaky_score_lt_0_05",
+          "reason_confidence": 0,
+          "type": "permanent",
+          "type_confidence": 0
+        },
+        "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+        "id": "AwAAAaFmn--AXTsqWQAAABhBYUZtbi0tQUFBRFJ1WEhvSGJXc1AxSlAAAAAkZjFhMTY2YTItNjA4MC00NmZlLTljOWQtZWU2M2IxMTAyOTUwAAASGg",
+        "level": "job"
+      }
+    ],
+    "kind": "jobs",
+    "meta": {
+      "elapsed": 213,
+      "requestId": "pddv1ChY5alNiNnJkU1JCV2dUbG9HczlRaURBIi4KHhSY0BeGl4idG9TtveppGyyZJcVa0A9_Jw3EIIHC2RIMhwF1obxLauO42Ejz",
+      "status": "done"
+    }
+  },
+  "test_events": [
+    {
+      "id": "AwAAAaFmoXom4XQWgQAAABhBYUZtb1hvbUFBRDhwOHhWY3NDLXZMOUIAAAAkZjFhMTY2YTItMTI0Yi00YzE1LTgxOGYtYTVjMjAwZWQ0YjFjAAAgxA",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880286",
+          "name": "test_inst: [8, 1/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880286"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test blocking on multipart file upload files content",
+        "suite": "datadog.trace.instrumentation.play25.server.PlayServerAppSecTest",
+        "configuration": {
+          "job_name": "test_inst",
+          "jvm": "8",
+          "split": "1/104"
+        },
+        "final_status": "skip",
+        "known_flaky": true
+      },
+      "error_message_tail": ", http.client_ip=127.0.0.1, http.hostname=localhost, http.method=POST, http.query.string=ignore=pair, http.status_code=413, http.url=http://localhost:43809/body-multipart?ignore=pair?ignore=pair, http.useragent=okhttp/3.12.15, language=jvm, network.client.ip=127.0.0.1, pathway.hash=2146401561080480438, peer.ipv4=127.0.0.1, peer.port=41070, process_id=7544, runtime-id=cacb2f64-2adc-447e-a844-c2db361e8c7f, span.kind=server, thread.id=280, thread.name=netty-event-loop-5}, duration_ns=31309034, forceKeep=false, links=[]]\n\n\tat datadog.trace.instrumentation.play25.server.PlayServerAppSecTest.assertBlockedByBodyParser(PlayServerAppSecTest.groovy:121)\n\tat datadog.trace.instrumentation.play25.server.PlayServerAppSecTest.test blocking on multipart file upload #variant(PlayServerAppSecTest.groovy:98)"
+    },
+    {
+      "id": "AwAAAaFmoQUWDTFyGQAAABhBYUZtb1FVV0FBQTdDN1VPSzZLUy1aTmYAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5JQ",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880422",
+          "name": "test_smoke: [21, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880422"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "21",
+          "split": "31/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723191976, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoQNEMQS64wAAABhBYUZtb1FORUFBQ1l1TnFoWXAyeU1mbFgAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Jg",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880422",
+          "name": "test_smoke: [21, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880422"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "21",
+          "split": "31/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723220194, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoP639sMVYwAAABhBYUZtb1A2M0FBRGZDV1c5NXIyUmlzN0UAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Jw",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880422",
+          "name": "test_smoke: [21, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880422"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "21",
+          "split": "31/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723244471, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoP50Np-hUQAAABhBYUZtb1A1MEFBQy1zVmlVSXdhc01tckkAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5KA",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880422",
+          "name": "test_smoke: [21, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880422"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "21",
+          "split": "31/104"
+        },
+        "final_status": "fail"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723268303, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoL5GkQZxYAAAABhBYUZtb0w1R0FBRERiY0JwTWEyajRQT3oAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5KQ",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880430",
+          "name": "test_smoke: [25, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880430"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "25",
+          "split": "39/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723172905, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoLjN2rfaoQAAABhBYUZtb0xqTkFBQVhwWlVSZXJOWmhDdnEAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Kg",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880430",
+          "name": "test_smoke: [25, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880430"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "25",
+          "split": "39/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723199014, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoLalk3v6TgAAABhBYUZtb0xhbEFBRGtJREpZSjlTRnNabUIAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Kw",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880430",
+          "name": "test_smoke: [25, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880430"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "25",
+          "split": "39/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723222822, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoLZ0T0C4GwAAABhBYUZtb0xaMEFBQnpEWEY0cFNjUThScFcAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5LA",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880430",
+          "name": "test_smoke: [25, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880430"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "25",
+          "split": "39/104"
+        },
+        "final_status": "fail"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723246957, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoHaqfK7XjAAAABhBYUZtb0hhcUFBQmtLdU1NVnljYTMxU28AAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5LQ",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880405",
+          "name": "test_smoke: [11, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880405"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "11",
+          "split": "15/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723157065, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoHRMUwNPXQAAABhBYUZtb0hSTUFBQ1UxX2c5R1htQ2tWWTAAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Lg",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880405",
+          "name": "test_smoke: [11, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880405"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "11",
+          "split": "15/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723189141, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoHEV4TdHJAAAABhBYUZtb0hFVkFBRDlVUTBRbDNzTUg5N2IAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5Lw",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880405",
+          "name": "test_smoke: [11, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880405"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "11",
+          "split": "15/104"
+        },
+        "final_status": "fail"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723243744, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmoG584TdHrAAAABhBYUZtb0c1OEFBQ2s4dXhyMnB5cnZoa1IAAAAkZjFhMTY2YTEtMjdmMy00YjczLWE5OWYtODA5ZThiYTI1N2M5AAK5MA",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880405",
+          "name": "test_smoke: [11, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880405"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "11",
+          "split": "15/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723216561, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmnkcVcm7jMQAAABhBYUZtbmtjVkFBRG4yUWdwb2ZRWHNfd3IAAAAkZjFhMTY2OWUtNjhjOC00NTgwLTkzNWEtZWQxOTAxMzI4OTc3AAAl6w",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880439",
+          "name": "test_smoke: [tip, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880439"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "tip",
+          "split": "103/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723010036, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmnkKtCurVdwAAABhBYUZtbmtLdEFBQkNJaG90X2JUWWpid2MAAAAkZjFhMTY2OWUtNjhjOC00NTgwLTkzNWEtZWQxOTAxMzI4OTc3AAAl7A",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880439",
+          "name": "test_smoke: [tip, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880439"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "tip",
+          "split": "103/104"
+        },
+        "final_status": "fail"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723075850, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmnkKO1sHLSwAAABhBYUZtbmtLT0FBQm9PNjEwbFhzaUdRWGcAAAAkZjFhMTY2OWUtNjhkZS00MTJkLWI5NmYtZTY1NzM2MTA1OGExAAB5HQ",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880439",
+          "name": "test_smoke: [tip, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880439"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "tip",
+          "split": "103/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723033253, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmnkIntUbPygAAABhBYUZtbmtJbkFBQUYxTVg2X1hKOVBqcEQAAAAkZjFhMTY2OWUtNjhjOC00NTgwLTkzNWEtZWQxOTAxMzI4OTc3AAAl7Q",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880439",
+          "name": "test_smoke: [tip, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880439"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "tip",
+          "split": "103/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723054593, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmngiwkq5ZKgAAABhBYUZtbmdpd0FBQktRaVA4X0xjaG41WXMAAAAkZjFhMTY2OWUtNjhkZS00MTJkLWI5NmYtZTY1NzM2MTA1OGExAAB5Hg",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880414",
+          "name": "test_smoke: [17, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880414"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "17",
+          "split": "23/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792722992944, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmngdFZOvfXwAAABhBYUZtbmdkRkFBRDRocHZsUERoYnI0S3MAAAAkZjFhMTY2OWUtNjhkZS00MTJkLWI5NmYtZTY1NzM2MTA1OGExAAB5IA",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880414",
+          "name": "test_smoke: [17, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880414"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "17",
+          "split": "23/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723014829, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmngdFyJY26gAAABhBYUZtbmdkRkFBQXFocHExaU82TUtMNFkAAAAkZjFhMTY2OWUtNjhkZS00MTJkLWI5NmYtZTY1NzM2MTA1OGExAAB5Hw",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880414",
+          "name": "test_smoke: [17, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880414"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "17",
+          "split": "23/104"
+        },
+        "final_status": "fail"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723056380, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmngWPN-s44AAAABhBYUZtbmdXUEFBQ05aU2gyY2tnaTVWeFcAAAAkZjFhMTY2OWUtNjhkZS00MTJkLWI5NmYtZTY1NzM2MTA1OGExAAB5IQ",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880414",
+          "name": "test_smoke: [17, 7/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880414"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "test open feature exposures",
+        "suite": "datadog.smoketest.springboot.OpenFeatureProviderSmokeTest",
+        "configuration": {
+          "job_name": "test_smoke",
+          "jvm": "17",
+          "split": "23/104"
+        },
+        "final_status": "skip"
+      },
+      "error_message_tail": "nly_one_closing_parenthese]], [allocation:[key:allocation-test-string_with_only_multiple_closing_parentheses], flag:[key:string_flag_with_special_characters], subject:[attributes:[string_with_only_multiple_closing_parentheses:true, targetingKey:string_with_only_multiple_closing_parentheses], id:string_with_only_multiple_closing_parentheses], timestamp:1792723035785, variant:[key:string_with_only_multiple_closing_parentheses]]]\n\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy:136)\n\tat datadog.smoketest.springboot.OpenFeatureProviderSmokeTest.test open feature exposures_closure14(OpenFeatureProviderSmokeTest.groovy)\n\tat spock.util.concurrent.PollingConditions.within(PollingConditions.java:185)\n\t... 2 more"
+    },
+    {
+      "id": "AwAAAaFmnC65Bq9sNgAAABhBYUZtbkM2NUFBQ2Z6OTN0c3k5ZUwyU2MAAAAkZjFhMTY2OWMtOTBkOC00NDY1LWE5ZTYtMzViNjhhMmUwOWJlAAAAZw",
+      "level": "test",
+      "ci": {
+        "job": {
+          "id": "2168880319",
+          "name": "test_inst: [25, 2/8]",
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/jobs/2168880319"
+        },
+        "pipeline": {
+          "id": "146948744",
+          "name": "DataDog/apm-reliability/dd-trace-java",
+          "number": 133759,
+          "url": "https://gitlab.ddbuild.io/DataDog/apm-reliability/dd-trace-java/-/pipelines/146948744"
+        }
+      },
+      "head": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "test": {
+        "name": "withContext keeps a root started inside its caller open after early finish",
+        "suite": "KotlinCoroutineInstrumentationTest",
+        "configuration": {
+          "job_name": "test_inst",
+          "jvm": "25",
+          "split": "34/104"
+        },
+        "final_status": "skip",
+        "known_flaky": true
+      },
+      "error_message_tail": "tines.CoreKotlinCoroutineTests.activateAndUse(CoreKotlinCoroutineTests.kt:623)\nAdvisory findings (not enforced):\n  [CLOSE_WRONG_THREAD] scope#0 trace=656 src=MANUAL opened at datadog.trace.instrumentation.kotlin.coroutines.CoreKotlinCoroutineTests.activateAndUse(CoreKotlinCoroutineTests.kt:623)\nExcluded findings (not enforced):\n  (none)\n\n\tat datadog.trace.agent.test.scopediag.ScopeDiagnostics.assertNoViolations(ScopeDiagnostics.java:143)\n\tat datadog.trace.agent.test.InstrumentationSpecification.reportScopeDiagnosticsForPhase(InstrumentationSpecification.groovy:610)\n\tat datadog.trace.agent.test.InstrumentationSpecification.reportScopeDiagnostics(InstrumentationSpecification.groovy:593)\n\tat datadog.trace.agent.test.InstrumentationSpecification.cleanup(InstrumentationSpecification.groovy:531)"
+    }
+  ],
+  "test_query_meta": {
+    "elapsed": 818,
+    "requestId": "pddv1ChYwYXl5TlR5TlJFS3RmSG11RXB5Ykp3IisKG4tPWEGaJp3VCkn6krh86qQ8gzeuex4s7cUn4xIMa-YWaZYcDxDLuYcs",
+    "status": "done"
+  },
+  "note": "Smoke test error bodies are truncated by the source. Each failed job has four attempts of the same test, not four distinct test names. Backend regression labels are inference."
+}

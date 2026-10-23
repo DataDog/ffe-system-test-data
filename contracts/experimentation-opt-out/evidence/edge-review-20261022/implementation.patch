@@ -1,0 +1,415 @@
+diff --git a/domains/ffe/apps/edge-assignments/README.md b/domains/ffe/apps/edge-assignments/README.md
+index 7ef4795320dc2..575d947744c91 100644
+--- a/domains/ffe/apps/edge-assignments/README.md
++++ b/domains/ffe/apps/edge-assignments/README.md
+@@ -92,13 +92,25 @@ Request fields inside `data.attributes`:
+ | `immediate` | Skip `doLog=true` allocations when the subject timestamp is present. |
+ | `future_experiments_only` | Skip `doLog=true` allocations with unknown `randomizationActivatedAt` or activation at/after the subject timestamp. |
+ 
+-- Timestamp: RFC3339. Missing means no opt-out. A future timestamp applies immediately; it does not schedule exclusion.
+-- Validation: invalid enabled timestamps, unknown modes, and unknown option names return HTTP 400 before origin access or streaming.
++- Timestamp: RFC3339. Missing means no opt-out. In `immediate` mode, any valid timestamp excludes `doLog=true` allocations now. In `future_experiments_only` mode, the supplied timestamp is the cutoff: a future value keeps allocations activated before it eligible, including experiments started after the request.
++- Validation: invalid enabled timestamps, wrong option value types, and `experimentation_opt_out: true` with an enabled named mode return HTTP 400 before origin access or streaming. Unknown option names are ignored. Null `evaluation_options`, a null or unknown mode, and a null legacy boolean count as not set. Recognized options still apply alongside unknown options.
+ - Evaluation: exclude before targeting and sharding; continue later allocations. `doLog=false` allocations and evaluation telemetry settings remain unchanged.
+ - Legacy input: `evaluation_options.experimentation_opt_out=true` selects immediate exclusion without a timestamp. Validate any supplied timestamp; reject combination with an enabled named mode.
+-- Response acknowledgement at `data.attributes.evaluation_options`: `{"experimentation_opt_out":true}` for immediate mode; named mode plus UTC `dd_experimentation_opt_out_at` for future mode. Omitted when no preference applies.
++- Response acknowledgement at `data.attributes.evaluation_options`: `{"experimentation_opt_out":true}` for immediate mode; named mode plus UTC `dd_experimentation_opt_out_at` for future mode. Omitted when no preference applies. The cutoff is re-serialized with 0, 3, 6, or 9 fractional digits; SDKs must compare the represented instant at nanosecond precision, not the original string. For example, `.5Z` becomes `.500Z`. A response does not acknowledge unknown options.
+ - Delivery: JSON/archive, buffered/streaming, and clear/obfuscated responses use the same policy. SDKs must check acknowledgements and separate cached assignments by policy.
+ 
++### Opt-out enablement dependencies
++
++Requests that omit opt-out retain ordinary evaluation. The edge implementation can
++merge independently of the compiler changes. Before customers send opt-out,
++deploy the compiler changes that mark randomized allocations with `doLog=true`
++and preserve later fallbacks, then rebuild the affected environments' stored UFCs.
++Otherwise exclusion can leave no ordinary fallback, or an old `doLog=false`
++allocation can still randomize an opted-out subject. Before enabling future mode,
++populate and backfill activation metadata; unknown activation is excluded.
++These are enablement prerequisites, not evidence that deployment or rebuilding
++has occurred. The regex-validation contract applies independently of opt-out.
++
+ ## Opt-in flag-key obfuscation
+ 
+ The handler hashes flag keys only when both conditions hold:
+diff --git a/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments.rs b/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments.rs
+index 59b63051b0fd7..73d01373199d0 100644
+--- a/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments.rs
++++ b/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments.rs
+@@ -38,6 +38,7 @@ mod metrics;
+ use counting_writer::CountingWriter;
+ use metrics::{FailurePhase, RequestMetrics, UfcRouteReason};
+ 
++use ffe_evaluation::experimentation::{ExperimentationOptOut, ExperimentationOptOutMode};
+ use ffe_evaluation::rkyv as rkyv_evaluation;
+ use ffe_evaluation::rules_based::{
+     Attributes, Configuration, SdkMetadata, Str,
+@@ -937,8 +938,10 @@ impl<'de> Deserialize<'de> for PrecomputeAssignmentsAttributes {
+                             if evaluation_options.is_some() {
+                                 return Err(A::Error::duplicate_field("evaluation_options"));
+                             }
+-                            evaluation_options =
+-                                Some(map.next_value::<RequestEvaluationOptions>()?);
++                            evaluation_options = Some(
++                                map.next_value::<Option<RequestEvaluationOptions>>()?
++                                    .unwrap_or_default(),
++                            );
+                         }
+                         "env" => {
+                             if env.is_some() {
+@@ -988,20 +991,23 @@ struct Environment {
+     pub dd_env: String,
+ }
+ 
++// Ignore options introduced by newer clients; null values mean no option.
+ #[derive(Default, Deserialize)]
+-#[serde(deny_unknown_fields)]
+ struct RequestEvaluationOptions {
+     // Compatibility with clients that validate the timestamp before sending.
+-    #[serde(default)]
+-    experimentation_opt_out: bool,
+-    #[serde(default)]
+-    experimentation_opt_out_mode: ExperimentationOptOutMode,
++    experimentation_opt_out: Option<bool>,
++    experimentation_opt_out_mode: Option<String>,
+ }
+ 
+ impl RequestEvaluationOptions {
+     fn resolve(self, attributes: &Attributes) -> Result<ExperimentationOptOut, &'static str> {
+-        if self.experimentation_opt_out {
+-            if self.experimentation_opt_out_mode != ExperimentationOptOutMode::Disabled {
++        let mode = match self.experimentation_opt_out_mode.as_deref() {
++            Some("immediate") => ExperimentationOptOutMode::Immediate,
++            Some("future_experiments_only") => ExperimentationOptOutMode::FutureExperimentsOnly,
++            _ => ExperimentationOptOutMode::Disabled,
++        };
++        if self.experimentation_opt_out.unwrap_or_default() {
++            if mode != ExperimentationOptOutMode::Disabled {
+                 return Err(
+                     "use experimentation_opt_out or experimentation_opt_out_mode, not both",
+                 );
+@@ -1010,7 +1016,7 @@ impl RequestEvaluationOptions {
+             ExperimentationOptOut::resolve(ExperimentationOptOutMode::Immediate, attributes)?;
+             return Ok(ExperimentationOptOut::Immediate);
+         }
+-        ExperimentationOptOut::resolve(self.experimentation_opt_out_mode, attributes)
++        ExperimentationOptOut::resolve(mode, attributes)
+     }
+ }
+ 
+@@ -4633,4 +4639,3 @@ mod tests {
+         }
+     }
+ }
+-use ffe_evaluation::experimentation::{ExperimentationOptOut, ExperimentationOptOutMode};
+diff --git a/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs b/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs
+index 98b0caf71c542..052f1e9cb2f28 100644
+--- a/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs
++++ b/domains/ffe/apps/edge-assignments/src/handlers/precompute_assignments/tests/experimentation.rs
+@@ -140,7 +140,15 @@ fn preferences_apply_before_targeting_in_all_delivery_paths() {
+                 if policy != ExperimentationOptOut::Disabled {
+                     assert_eq!(
+                         attributes["evaluation_options"],
+-                        serde_json::to_value(policy).unwrap()
++                        match policy {
++                            ExperimentationOptOut::Immediate =>
++                                json!({"experimentation_opt_out": true}),
++                            ExperimentationOptOut::FutureExperimentsOnly(_) => json!({
++                                "experimentation_opt_out_mode": "future_experiments_only",
++                                "dd_experimentation_opt_out_at": "2026-10-01T12:00:00Z"
++                            }),
++                            ExperimentationOptOut::Disabled => unreachable!(),
++                        }
+                     );
+                 } else {
+                     assert!(attributes.get("evaluation_options").is_none());
+@@ -196,10 +204,6 @@ fn consent_and_opt_out_acknowledgement_survive_all_response_encodings() {
+                             BasisPoints::ZERO
+                         });
+                         let prepared = handler.prepare().unwrap();
+-                        let policy = match &prepared {
+-                            PreparedAssignments::Json { opt_out, .. }
+-                            | PreparedAssignments::Rkyv { opt_out, .. } => *opt_out,
+-                        };
+                         let response = if streaming {
+                             let mut writer = Vec::new();
+                             handler.write_stream(prepared, &mut writer, |_| Ok(()));
+@@ -215,7 +219,14 @@ fn consent_and_opt_out_acknowledgement_survive_all_response_encodings() {
+                         assert_eq!(attributes["obfuscated"], json!(obfuscated));
+                         assert_eq!(
+                             attributes["evaluation_options"],
+-                            serde_json::to_value(policy).unwrap()
++                            if mode == "immediate" {
++                                json!({"experimentation_opt_out": true})
++                            } else {
++                                json!({
++                                    "experimentation_opt_out_mode": "future_experiments_only",
++                                    "dd_experimentation_opt_out_at": "2026-10-01T12:00:00Z"
++                                })
++                            }
+                         );
+                         let flags = attributes["flags"].as_object().unwrap();
+                         assert_eq!(flags.len(), 1);
+@@ -261,16 +272,173 @@ fn malformed_preferences_fail_before_origin_or_streaming() {
+ }
+ 
+ #[test]
+-fn unknown_or_conflicting_options_are_rejected() {
++fn mistyped_or_conflicting_options_are_rejected() {
+     for options in [
+-        json!({"experimentation_opt_out_mode": "future"}),
+-        json!({"experimentation_opt_out_mode": null}),
++        json!(true),
++        json!([]),
+         json!({"experimentation_opt_out": "true"}),
++        json!({"experimentation_opt_out_mode": 1}),
++        json!({"experimentation_opt_out_mode": []}),
++        json!({"experimentation_opt_out": true, "experimentation_opt_out_mode": "immediate"}),
+         json!({"experimentation_opt_out": true, "experimentation_opt_out_mode": "future_experiments_only"}),
+-        json!({"experimentation_opt_out_mod": "immediate"}),
+     ] {
+         assert!(
+             serde_json::from_value::<PrecomputeAssignmentsRequest>(body(options, None)).is_err()
+         );
+     }
+ }
++
++#[test]
++fn omitted_unknown_and_null_options_preserve_ordinary_responses() {
++    for options in [
++        None,
++        Some(Value::Null),
++        Some(json!({})),
++        Some(json!({"experimentation_opt_out_mode": "future"})),
++        Some(json!({"experimentation_opt_out_mode": null})),
++        Some(json!({"experimentation_opt_out": null})),
++        Some(json!({"experimentation_opt_out_mod": "immediate"})),
++        Some(json!({"future_option": {"nested": true}})),
++    ] {
++        // Disabled effective policy must also ignore a malformed preference.
++        for preference in [
++            None,
++            Some(json!("2026-10-01T12:00:00Z")),
++            Some(json!("invalid")),
++        ] {
++            for rkyv in [false, true] {
++                let config = configuration(Value::Null);
++                let backend = if rkyv {
++                    mock_cached_rkyv_response(&config, &[])
++                } else {
++                    mock_cached_json_response(&config, &[])
++                };
++                let mut request_body =
++                    body(options.clone().unwrap_or(Value::Null), preference.clone());
++                if options.is_none() {
++                    request_body["data"]["attributes"]
++                        .as_object_mut()
++                        .unwrap()
++                        .remove("evaluation_options");
++                }
++                let req = Request::post("https://test-host/precompute-assignments")
++                    .with_header("dd-client-token", "test-token")
++                    .with_body_json(&request_body)
++                    .unwrap();
++                let mut handler = make_handler(
++                    req,
++                    &backend,
++                    Ok(if rkyv {
++                        BasisPoints::FULL
++                    } else {
++                        BasisPoints::ZERO
++                    }),
++                );
++                let prepared = handler.prepare().unwrap();
++                let mut response = handler.respond_for_test(Ok(prepared));
++                assert_eq!(response.get_status(), StatusCode::OK);
++                let response: Value = serde_json::from_slice(&response.take_body_bytes()).unwrap();
++                let attributes = &response["data"]["attributes"];
++                assert_eq!(attributes["flags"]["test"]["variationValue"], "experiment");
++                assert_eq!(attributes["flags"]["test"]["doLog"], true);
++                assert!(attributes.get("evaluation_options").is_none());
++                assert_eq!(backend.call_count(), 1);
++            }
++        }
++    }
++}
++
++#[test]
++fn recognized_options_survive_unknown_and_null_options() {
++    for options in [
++        json!({"experimentation_opt_out": true, "future_option": true}),
++        json!({"experimentation_opt_out": true, "experimentation_opt_out_mode": "future"}),
++        json!({"experimentation_opt_out": true, "experimentation_opt_out_mode": null}),
++        json!({"experimentation_opt_out": null, "experimentation_opt_out_mode": "immediate", "future_option": {"nested": true}}),
++    ] {
++        let request: PrecomputeAssignmentsRequest =
++            serde_json::from_value(body(options.clone(), Some(json!("2026-10-01T12:00:00Z"))))
++                .unwrap();
++        assert_eq!(
++            request.data.attributes.opt_out,
++            ExperimentationOptOut::Immediate,
++            "{options}"
++        );
++        assert!(
++            serde_json::from_value::<PrecomputeAssignmentsRequest>(body(
++                options,
++                Some(json!("invalid"))
++            ))
++            .is_err()
++        );
++    }
++    let duplicate = r#"{"data":{"type":"precompute-assignments","attributes":{"env":{"dd_env":"prod"},"subject":{"targeting_key":"subject","targeting_attributes":{}},"evaluation_options":null,"evaluation_options":{}}}}"#;
++    assert!(serde_json::from_str::<PrecomputeAssignmentsRequest>(duplicate).is_err());
++}
++
++#[test]
++fn acknowledgement_normalizes_cutoff_without_losing_precision() {
++    for (cutoff, expected) in [
++        ("2026-10-01T08:00:00-04:00", "2026-10-01T12:00:00Z"),
++        ("2026-10-01T12:00:00.5Z", "2026-10-01T12:00:00.500Z"),
++        ("2026-10-01T12:00:00.1234Z", "2026-10-01T12:00:00.123400Z"),
++        ("2026-10-01T12:00:00.000Z", "2026-10-01T12:00:00Z"),
++        ("2026-10-01T12:00:00.5+01:00", "2026-10-01T11:00:00.500Z"),
++        (
++            "2026-10-01T12:00:00.123456789Z",
++            "2026-10-01T12:00:00.123456789Z",
++        ),
++    ] {
++        for rkyv in [false, true] {
++            for streaming in [false, true] {
++                let config = configuration(json!("2026-01-01T00:00:00Z"));
++                let backend = if rkyv {
++                    mock_cached_rkyv_response(&config, &[])
++                } else {
++                    mock_cached_json_response(&config, &[])
++                };
++                let req = Request::post("https://test-host/precompute-assignments")
++                    .with_header("dd-client-token", "test-token")
++                    .with_body_json(&body(
++                        json!({"experimentation_opt_out_mode": "future_experiments_only"}),
++                        Some(json!(cutoff)),
++                    ))
++                    .unwrap();
++                let mut handler = make_handler(
++                    req,
++                    &backend,
++                    Ok(if rkyv {
++                        BasisPoints::FULL
++                    } else {
++                        BasisPoints::ZERO
++                    }),
++                );
++                handler.stream_rollout = Ok(if streaming {
++                    BasisPoints::FULL
++                } else {
++                    BasisPoints::ZERO
++                });
++                let prepared = handler.prepare().unwrap();
++                let bytes = if streaming {
++                    let mut writer = Vec::new();
++                    handler.write_stream(prepared, &mut writer, |_| Ok(()));
++                    assert!(handler.metrics.io_error.is_none());
++                    writer
++                } else {
++                    let mut response = handler.respond_for_test(Ok(prepared));
++                    assert_eq!(response.get_status(), StatusCode::OK);
++                    response.take_body_bytes()
++                };
++                let response: Value = serde_json::from_slice(&bytes).unwrap();
++                assert_eq!(
++                    response["data"]["attributes"]["evaluation_options"],
++                    json!({
++                        "experimentation_opt_out_mode": "future_experiments_only",
++                        "dd_experimentation_opt_out_at": expected,
++                    }),
++                    "{cutoff}, rkyv={rkyv}, streaming={streaming}"
++                );
++            }
++        }
++    }
++}
+diff --git a/domains/ffe/etc/bazel/ffe_system_test_data.bzl b/domains/ffe/etc/bazel/ffe_system_test_data.bzl
+index cac1e0fe644b6..6bbcca41df9c9 100644
+--- a/domains/ffe/etc/bazel/ffe_system_test_data.bzl
++++ b/domains/ffe/etc/bazel/ffe_system_test_data.bzl
+@@ -2,10 +2,11 @@
+ 
+ load("//rules/bazel/repositories:invoke_with_always.bzl", "http_archive")
+ 
+-# Candidate fixture revision for cross-evaluator validation. Replace with the
+-# merged upstream revision before landing this change.
+-FFE_SYSTEM_TEST_DATA_COMMIT = "1c831fed02a428a1b0a4ac412da9b773e22df257"
+-FFE_SYSTEM_TEST_DATA_SHA256 = "1a7020aef1d0f2202250510854fbf39659b0c7a34524236d71ff3085dce27cb0"
++# Keep this pinned to a commit reachable from DataDog/ffe-system-test-data main.
++# Do not pin unmerged PR branch commits; merge fixture changes upstream first,
++# then bump this commit and sha256 here.
++FFE_SYSTEM_TEST_DATA_COMMIT = "0781ce2c55f9da7f9290035c768bbc46570556c0"
++FFE_SYSTEM_TEST_DATA_SHA256 = "0e3c15540111b26e5f7d21f534868d2c0a3364e3b821393b713211f353582223"
+ 
+ def ffe_system_test_data():
+     http_archive(
+diff --git a/domains/ffe/libs/flagging/ufc/evaluator_test.go b/domains/ffe/libs/flagging/ufc/evaluator_test.go
+index d26b375811955..1d48bb797c0f5 100644
+--- a/domains/ffe/libs/flagging/ufc/evaluator_test.go
++++ b/domains/ffe/libs/flagging/ufc/evaluator_test.go
+@@ -1,6 +1,7 @@
+ package ufc
+ 
+ import (
++	"encoding/json"
+ 	"fmt"
+ 	"os"
+ 	"path/filepath"
+@@ -29,10 +30,37 @@ type evaluatorFixtureResult struct {
+ 	Value     any                 `json:"value"`
+ 	Reason    *openfeature.Reason `json:"reason"`
+ 	ErrorCode string              `json:"errorCode"`
++	SerialID  json.RawMessage     `json:"serialId"`
++	DoLog     *bool               `json:"doLog"`
++}
++
++func assertFixtureMetadata(t *testing.T, expected evaluatorFixtureResult, assignment *Assignment) {
++	t.Helper()
++	if len(expected.SerialID) > 0 {
++		require.NotNil(t, assignment, "serialId expectation requires an assignment")
++		var serialID *int32
++		require.NoError(t, json.Unmarshal(expected.SerialID, &serialID))
++		require.Equal(t, serialID, assignment.SerialID, "selected split serialId")
++	}
++	if expected.DoLog != nil {
++		require.NotNil(t, assignment, "doLog expectation requires an assignment")
++		require.Equal(t, *expected.DoLog, assignment.DoLog, "selected allocation doLog")
++	}
+ }
+ 
+ var errorReason = openfeature.Reason("ERROR")
+ 
++func TestInvalidRegexFailsOnlyContainingFlagWithoutOptOut(t *testing.T) {
++	config := loadSystemTestEvaluationConfiguration(t)
++	now := time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC)
++	assignment, err := GetAssignment(config, "invalid-regex-flag", "harish", Attributes{"email": "harish@datadoghq.com"}, nil, now)
++	require.ErrorIs(t, err, ErrUnexpectedConfiguration)
++	require.Nil(t, assignment, "invalid regex must not select the later catch-all")
++	assignment, err = GetAssignment(config, "integer-flag", "harish", Attributes{}, nil, now)
++	require.NoError(t, err)
++	require.NotNil(t, assignment, "valid sibling flags remain available")
++}
++
+ func TestOptOutPreservesOlderAssignmentsAndExposures(t *testing.T) {
+ 	config := loadSystemTestEvaluationConfiguration(t)
+ 	now := time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC)
+@@ -80,6 +108,7 @@ func TestEvaluationSDKOptOutCapabilities(t *testing.T) {
+ 					}
+ 					assignment, err := GetAssignmentWithOptions(config, tc.Flag, subject, tc.Attributes, &tc.VariationType,
+ 						time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC), EvaluationOptions{ExperimentationOptOutMode: mode})
++					assertFixtureMetadata(t, expected, assignment)
+ 					actualValue := tc.DefaultValue
+ 					if expected.ErrorCode == "INVALID_CONTEXT" {
+ 						require.ErrorIs(t, err, ErrInvalidContext)
+@@ -149,6 +178,7 @@ func TestEvaluationSDKSystemTestData(t *testing.T) {
+ 
+ 						expectedType := testCase.VariationType
+ 						assignment, err := GetAssignment(config, testCase.Flag, targetingKey, testCase.Attributes, &expectedType, now)
++						assertFixtureMetadata(t, testCase.Result, assignment)
+ 						if err == nil && assignment != nil {
+ 							if testCase.Result.Reason != nil && *testCase.Result.Reason != errorReason {
+ 								require.Equal(t, *testCase.Result.Reason, assignment.Reason)

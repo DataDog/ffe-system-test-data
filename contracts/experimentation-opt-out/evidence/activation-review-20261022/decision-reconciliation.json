@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-22T22:43:35.338310+00:00",
+  "source_sha": "0e38ea7ac4c7a568fda98e3cf90cca900032fdc9",
+  "governing_rfc": {
+    "url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit",
+    "document_revision": "AHj4eMTmgkW_YxjzstZlzkT244Vy1bQHv1OipQ5WcidcjvrwiPbYSWtHmNnQUJliDhRB2G3rx16cEmmPfeH72BmzZZWpVWlMmodU0hTuVg",
+    "comment_url": "https://docs.google.com/document/d/153tRlj46l-XfBGCA2X_NvxW4vwYObaH8zm2moP_AqMk/edit?disco=AAACJEiBKfM",
+    "author_reply_id": "AAACBEn6wPY",
+    "author_reply_date": "2026-10-19T21:57:09.020Z",
+    "paragraph_indices": [
+      8039,
+      8467,
+      8856,
+      8970,
+      10706,
+      10744,
+      10998,
+      11034
+    ],
+    "evidence_file": "evidence/activation-review-20261022/rfc-snapshot.json"
+  },
+  "holdout_disposition": "Keep run activation metadata. Existing holdouts activated before cutoff retain normal evaluation and exposures in future-only mode.",
+  "earlier_answer": "2026-10-16 immediate withdrawal answer predates the two-mode revision; retained in RFC comment history.",
+  "reviewer_alternative": "https://github.com/ddoghq/dd-source/pull/139381#discussion_r4343815683",
+  "supersedes_author_rule": false,
+  "new_user_policy_choice": false,
+  "publication_authorized": true,
+  "scope": "Existing RFC reconciled with D011. No new fleet policy or deployment authorization.",
+  "evidence_format": "public summary; full private original retained locally",
+  "private_original_sha256": "bff95a019cd5f98f902c60fa6f4b3496434a61458b499bad651cd4d064a79b2e"
+}

@@ -1,0 +1,13 @@
+{
+  "production_source_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "artifacts": [
+    {
+      "path": "instrumented/integration/build/outputs/apk/debug/integration-debug.apk",
+      "sha256": "4e4247602e36add1a3ce16a46540c54bf733a63c882008b854467473012085b1"
+    },
+    {
+      "path": "instrumented/integration/build/outputs/apk/androidTest/debug/integration-debug-androidTest.apk",
+      "sha256": "ae327d5f7358126eda438893d1e6e59e5c63ec8c5b4426b0b361ec543c389081"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "mutation": "callbackExecutor.executeSafe(\"Deliver evaluation context callback\" -> executorService.executeSafe(\"Deliver evaluation context callback\"",
+  "original_sha256": "53550da0ede56fec72a90edd42ccf7b9ea0cba744e8529fe26d396d974005da5",
+  "command": [
+    "./gradlew",
+    "--no-daemon",
+    "--max-workers=2",
+    "-Dorg.gradle.java.installations.paths=/Applications/Android Studio.app/Contents/jbr/Contents/Home",
+    ":features:dd-sdk-android-flags:testDebugUnitTest",
+    "--tests",
+    "*EvaluationsManagerTest.*deliver timeout while fetch is blocked*"
+  ],
+  "mutant_sha256": "745244cb9192c1039724f83ee7c6f99dab4e63e96b87a1b8f8e990151bb692c2",
+  "exit_code": 1,
+  "restored_sha256": "53550da0ede56fec72a90edd42ccf7b9ea0cba744e8529fe26d396d974005da5"
+}

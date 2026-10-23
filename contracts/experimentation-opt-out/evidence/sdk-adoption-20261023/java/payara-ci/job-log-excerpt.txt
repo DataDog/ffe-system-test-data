@@ -1,0 +1,24 @@
+33: 2026-10-23T03:17:59.4559091Z Uses: DataDog/system-tests/.github/workflows/system-tests.yml@refs/heads/main (7fe8af9491d06c52295f4e9c559e734b4ccc0a1a)
+151: 2026-10-23T03:18:01.6322125Z 7fe8af9491d06c52295f4e9c559e734b4ccc0a1a
+222: 2026-10-23T03:18:05.8685743Z ##[group]Run SYSTEM_TEST_BUILD_ATTEMPTS=3 ./build.sh java -i weblog -w spring-boot-payara -s --github-token-file "$RUNNER_TEMP/github_token.txt"
+238: 2026-10-23T03:18:05.9945728Z Running command: docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --load --progress=plain --platform linux/amd64 --secret id=github_token,src=/home/runner/work/_temp/github_token.txt -f utils/build/docker/java/spring-boot-payara.Dockerfile --label system-tests-library=java --label system-tests-weblog-variant=spring-boot-payara -t system_tests/weblog .
+352: 2026-10-23T03:18:15.8001427Z #13 [build  4/11] COPY ./utils/build/docker/java/spring-boot/pom.xml .
+355: 2026-10-23T03:18:15.8002493Z #14 [build  5/11] RUN mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline
+358: 2026-10-23T03:18:17.3561055Z #14 1.705 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.6.0/spring-boot-starter-parent-2.6.0.pom
+362: 2026-10-23T03:18:48.2389438Z #14 32.59 [FATAL] Non-resolvable parent POM for com.example:myproject:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at wrong local POM @ line 10, column 13
+375: 2026-10-23T03:18:48.3077494Z #14 ERROR: process "/bin/sh -c mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline" did not complete successfully: exit code: 1
+401: 2026-10-23T03:18:48.3160849Z ❌ Attempt 1 failed with exit code 1
+402: 2026-10-23T03:18:48.3161965Z == Run build script (attempt 2 on 3) with timeout 600s ==
+454: 2026-10-23T03:18:49.0328918Z #12 [build  5/11] RUN mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline
+457: 2026-10-23T03:18:50.5868100Z #12 1.678 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.6.0/spring-boot-starter-parent-2.6.0.pom
+461: 2026-10-23T03:19:21.3636730Z #12 32.45 [FATAL] Non-resolvable parent POM for com.example:myproject:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at wrong local POM @ line 10, column 13
+474: 2026-10-23T03:19:21.4247912Z #12 ERROR: process "/bin/sh -c mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline" did not complete successfully: exit code: 1
+500: 2026-10-23T03:19:21.4285719Z ❌ Attempt 2 failed with exit code 1
+501: 2026-10-23T03:19:21.4286331Z == Run build script (attempt 3 on 3) with timeout 600s ==
+553: 2026-10-23T03:19:22.0960917Z #12 [build  5/11] RUN mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline
+556: 2026-10-23T03:19:23.6178678Z #12 1.636 [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.6.0/spring-boot-starter-parent-2.6.0.pom
+560: 2026-10-23T03:19:54.3584284Z #12 32.37 [FATAL] Non-resolvable parent POM for com.example:myproject:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:2.6.0 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at wrong local POM @ line 10, column 13
+573: 2026-10-23T03:19:54.4187831Z #12 ERROR: process "/bin/sh -c mkdir /maven && mvn -Dmaven.repo.local=/maven -Ppayara -B dependency:go-offline" did not complete successfully: exit code: 1
+599: 2026-10-23T03:19:54.4277758Z ❌ Attempt 3 failed with exit code 1
+600: 2026-10-23T03:19:54.4278598Z Build step failed after 3 attempts
+601: 2026-10-23T03:19:54.4313528Z ##[error]Process completed with exit code 1.

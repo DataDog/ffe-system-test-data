@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "repository": "DataDog/dd-trace-rb",
+  "pullRequest": 6521,
+  "url": "https://github.com/DataDog/dd-trace-rb/pull/6521",
+  "sourceSHA": "6c4e268d18e68523f0e5e6546a86d6754c350e3a",
+  "observedAt": "2026-10-23T15:36:19.315400+00:00",
+  "prState": "OPEN",
+  "isDraft": true,
+  "scope": "One read-only current-head snapshot. No CI reruns, PR changes, or source edits.",
+  "result": "CI is still running with no failing checks in this snapshot. This is not a final CI success claim.",
+  "counts": {
+    "total": 585,
+    "success": 448,
+    "failure": 0,
+    "skipped": 4,
+    "inProgress": 9,
+    "pending": 124
+  },
+  "rawStateCounts": {
+    "SUCCESS": 448,
+    "IN_PROGRESS": 9,
+    "SKIPPED": 4,
+    "PENDING": 124
+  },
+  "workflowCounts": {
+    "Build gem": {
+      "SUCCESS": 5,
+      "SKIPPED": 1
+    },
+    "Check Pull Request CI Status": {
+      "IN_PROGRESS": 1
+    },
+    "CodeQL": {
+      "SUCCESS": 2
+    },
+    "Comment typing stats on PR": {
+      "SUCCESS": 1
+    },
+    "Integration Apps": {
+      "SUCCESS": 9
+    },
+    "Lock Dependencies": {
+      "SKIPPED": 2,
+      "SUCCESS": 1
+    },
+    "PR Body": {
+      "SKIPPED": 1
+    },
+    "Pull Request Labeler": {
+      "SUCCESS": 1
+    },
+    "Static Analysis": {
+      "SUCCESS": 15
+    },
+    "System Tests": {
+      "SUCCESS": 275,
+      "IN_PROGRESS": 6
+    },
+    "Team freeze guard": {
+      "SUCCESS": 1
+    },
+    "Test Nix": {
+      "SUCCESS": 4
+    },
+    "Test YJIT": {
+      "SUCCESS": 8
+    },
+    "Test for memory leaks": {
+      "SUCCESS": 1,
+      "IN_PROGRESS": 1
+    },
+    "Test macOS": {
+      "SUCCESS": 7
+    },
+    "Unit Tests": {
+      "SUCCESS": 84
+    },
+    "external status": {
+      "SUCCESS": 34,
+      "IN_PROGRESS": 1,
+      "PENDING": 124
+    }
+  },
+  "standardSliceResult": {
+    "total": 63,
+    "states": {
+      "SUCCESS": 63
+    },
+    "workflow": "Unit Tests"
+  },
+  "failedChecks": [],
+  "pendingScope": "System Tests, memory-leak validation, mergegate, CI aggregation, and GitLab external jobs remain active or pending.",
+  "sources": [
+    {
+      "file": "final-head-pr-snapshot.json",
+      "sha256": "96a3335307bfed4e99499530eb1aa24b2523a5bf4368b121da0691bcc6edcd0a",
+      "command": "gh pr view 6521 --repo DataDog/dd-trace-rb --json headRefOid,isDraft,state,url"
+    },
+    {
+      "file": "final-head-checks-snapshot.json",
+      "sha256": "2450635d33304580e66eb0894e3158c31ebf677012901d653252b034583febdb",
+      "command": "gh pr checks 6521 --repo DataDog/dd-trace-rb --json name,state,link,workflow"
+    }
+  ]
+}

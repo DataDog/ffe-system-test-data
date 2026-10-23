@@ -1,0 +1,20 @@
+{
+  "harness_sha": "d4c4308b3600a48885564f687c37800b4eeb5c19",
+  "ruby_sha": "ce7658cbeace9cc60c4f22729d923badabcd4aef",
+  "native_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "result": "application boot failure before test execution",
+  "executed_tests": 0,
+  "root_cause_lines": [
+    "[17] ! Unable to start worker",
+    "[17] cannot make a shareable Proc because the outer variable 'enum' may be reassigned.",
+    "[17] /usr/local/bundle/gems/net-imap-0.5.9/lib/net/imap/config/attr_type_coercion.rb:32:in 'Ractor.make_shareable'",
+    "    /usr/local/bundle/gems/net-imap-0.5.9/lib/net/imap/config/attr_type_coercion.rb:32:in 'Net::IMAP::Config::AttrTypeCoercion.safe'",
+    "    /usr/local/bundle/gems/net-imap-0.5.9/lib/net/imap/config/attr_type_coercion.rb:53:in 'block in <module:AttrTypeCoercion>'",
+    "    /usr/local/bundle/gems/net-imap-0.5.9/lib/net/imap/config.rb:267:in '<class:Config>'"
+  ],
+  "old_net_imap": "0.5.9",
+  "corrected_net_imap": "0.6.2",
+  "old_lock_sha256": "7100a829884457a2cb9af09fb388c043243845e3a48cb321557c108d47b10afa",
+  "old_image_id": "sha256:657ac2c73bfc7cbc120491369b880577fe01439e16b3202153d52e2706a0eca8",
+  "full_logs_preserved": true
+}
