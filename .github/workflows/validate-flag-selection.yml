@@ -1,0 +1,30 @@
+name: Flag selection validation
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/validate-flag-selection.yml
+      - ci/validate-flag-selection.py
+      - flag-selection/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: flag-selection-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate flag selection vectors
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out fixtures
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate flag selection vectors
+        run: python3 ci/validate-flag-selection.py

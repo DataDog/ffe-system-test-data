@@ -21,7 +21,8 @@ export async function sourcePath(relative, base = root) {
 }
 export function packageWire(binary) {
   if (!binary.length) throw new Error('Empty protobuf artifact');
-  const configuration = configurationFromRulesBinary(binary);
+  // Use the browser byte container so preserved unknown fields compare by content.
+  const configuration = configurationFromRulesBinary(new Uint8Array(binary));
   const validate = value => {
     if (!value || value.configurationError || value.rulesError || !value.rules?.response || !Object.keys(value.rules.response.flags ?? {}).length) throw new Error('SDK parser did not produce a nonempty rules configuration');
   };
@@ -33,7 +34,7 @@ export function packageWire(binary) {
   if (configurationToString(decoded) !== wire) throw new Error('Wire serialization is not stable');
   // The public serializer may canonicalize protobuf map order; preserve the same semantic payload.
   const embedded = Buffer.from(JSON.parse(wire).rules.response, 'base64');
-  if (!isDeepStrictEqual(configurationFromRulesBinary(embedded).rules.response, configuration.rules.response)) throw new Error('Wire payload differs from raw protobuf');
+  if (!isDeepStrictEqual(configurationFromRulesBinary(new Uint8Array(embedded)).rules.response, configuration.rules.response)) throw new Error('Wire payload differs from raw protobuf');
   return wire;
 }
 async function filesUnder(directory, ignoreDependencies = false) {

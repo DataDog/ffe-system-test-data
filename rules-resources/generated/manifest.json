@@ -60,12 +60,12 @@
   },
   "generatorInputs": {
     "tools/ufc/converter-lock.json": "2a9f9c881f817228ca43cb94a9232aba9f6f5f569a715a52de5b3c895437cd4e",
-    "tools/ufc/generate.mjs": "51c4072ae872d4eef0bdd1b3a3ceabc437f4f08e28152f1ffc563f402e5c4bca",
+    "tools/ufc/generate.mjs": "461a6d928b9803eeadc13e289f124ca5db2924140e32ea9c6ceb0e0b69f43e2e",
     "tools/ufc/package-lock.json": "503a5cbe78ac55bbfe96aa544d57696885175248d105ab6f47f01598961b618c",
     "tools/ufc/package.json": "c75341d53e2362a05b316e978f96a4cded0bc5ea7f65ac0e221f22246b6ea1f8",
     "tools/ufc/parity.mjs": "d0b75d7520fce3774118ba902167e9ce39fa8418fa9c4b1174a5b61f706c0cf5",
     "tools/ufc/README.md": "1f347700cd4992be267d4bf583153914101378743886e878a241c985a4aafd6b",
-    "tools/ufc/rules-resources.test.mjs": "b705feba0aea95c1fbaa43fb9873a9e38cea487ca08f46c4989d17d7dc3e0c3a",
+    "tools/ufc/rules-resources.test.mjs": "42981f9da37e61c46e89e45483d54ca5c79320212375074179086ea7c0421cc1",
     "tools/ufc/validate-rules-resources.mjs": "a18d518d8eff240dd30ba18bda7c3e69a93c192fe2f5f234b245ee1d99e72978",
     "tools/ufc/validate-rules-schema.py": "f068c522f875c3a83a52bc89dd73d775646ec9bc8d34e71ba7fa1cb881f3854d",
     "schemas/precomputed-assignment.schema.json": "31a1718e9c6d3e0221728ce30c50f20039420aef8f1ce9bfc540ac7e3ef5ea2d",
@@ -76,7 +76,9 @@
     "evaluation-cases/test-case-disabled-flag.json": "55641ba8b7f844f5980a070b41e77d3f71c74ed7afb6f5d7cd7a451303a3b2e9",
     "evaluation-cases/test-case-empty-flag.json": "9c7128e8d783ffcf557dad0c440109334b4b8f0983c52ef97a68f2391a5a2158",
     "evaluation-cases/test-case-empty-string-variation.json": "99e6efa47cb3fee91e49d4ea5bdb46586dcd8bc725883acf5a58b5b662f43ccc",
-    "evaluation-cases/test-case-experimentation-opt-out.json": "d0eead2d94911b1aad22ec1e95adc814baed0b42a344e9bb897a880478158a68",
+    "evaluation-cases/test-case-experimentation-opt-out-do-log.json": "e8a0f6e00b60c79e27128defa6ae7ce995b865c44cd943a9691faa6e3464c5f3",
+    "evaluation-cases/test-case-experimentation-opt-out-future.json": "a81f839a7aabe280eabc7b5f8b58af289610fd709ec2df3a110bfb05246b649f",
+    "evaluation-cases/test-case-experimentation-opt-out.json": "9147639cb9c6deffaa428c9cdce5baf2397e1a00912726eb932a6ae958494880",
     "evaluation-cases/test-case-falsy-value-assignments.json": "19433503ea63bf34b65903e6fe30e5644647ea296c64d699d89ffbeaab26f312",
     "evaluation-cases/test-case-flag-with-empty-string.json": "c2bff6bec92732291626da7136ab643cb238b29158990517cf461e00ee241d6b",
     "evaluation-cases/test-case-integer-flag.json": "21c80fd9c03d7bc56ee304c7cae7db9d795a5257cda5bc9d9b171eae6b557d2f",
@@ -103,6 +105,9 @@
     "evaluation-cases/test-case-semver-precedence-flag.json": "6617d577f205895e153bdedc228a06301e9a24b0d289b0c20cb046580d997f9b",
     "evaluation-cases/test-case-semver-validation-flag.json": "b00d7b9415465b48a108fc5575e6230666159a484c9aa6621417e6b9d179a711",
     "evaluation-cases/test-case-semver-version-parts.json": "83166987a554e4a20786e04aae5dc2409bfd59eecba41fb521c6453e9258a4c6",
+    "evaluation-cases/test-case-serial-id-metadata.json": "27a64eed01ae43d07ae2e94d16fa6833b83d29c51b6cdfc6c2aa6028909e5fad",
+    "evaluation-cases/test-case-span-enrichment-inputs.json": "0f31a963f1d7511fb3eb6cdd5e59320339e80b6b7d964696bbaec7bf44c9a9f8",
+    "evaluation-cases/test-case-split-features.json": "175268da2dba726cf2fd014eeca50b66b0ff6050e4df8d7f59267710c88763cc",
     "evaluation-cases/test-case-start-and-end-date-flag.json": "f6295d36eb2b20b14d3da3ce374626d864a5cee1ca14fd1e0d4e53ffe14d9751",
     "evaluation-cases/test-case-unknown-fields-tolerance.json": "e6014a1a5554824f50a812d4c67dc44c006d0da015497815f22e1c91b71da079",
     "evaluation-cases/test-case-unknown-operator-isolation.json": "91bd0671bdf6a99dd5410163cb0168b6fb1eb94e891c028da0782a549bca67f4",
@@ -112,15 +117,16 @@
     "evaluation-cases/test-no-allocations-flag.json": "8b3f37f206f4d2814a5485f3f5bcf306104dabb2d9afa7b4a51dfcedd49beadf",
     "evaluation-cases/test-special-characters.json": "7be5c91a3b3807a0ff2196d4272f998e99f14dc98d9ff79a9c3da7af10d57b50",
     "evaluation-cases/test-string-with-special-characters.json": "16edd7a3721081e4f6c49c61bfed5ff2e6e527fb70488f4bf2cea21c7c87ea30",
-    "ufc-config.json": "e482ee458787641d6aa4df4804306bfc3d658db703aa1a50a84217ad168c75d7"
+    "ufc-config.json": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79"
   },
   "serializer": "@datadog/flagging-core@3.0.1",
   "resources": [
     {
       "id": "canonical-evaluator",
       "source": "ufc-config.json",
-      "sourceSha256": "e482ee458787641d6aa4df4804306bfc3d658db703aa1a50a84217ad168c75d7",
+      "sourceSha256": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79",
       "convertedFlagKeys": [
+        "basic-flag",
         "boolean-false-assignment",
         "boolean-one-of-matches",
         "comparator-operator-test",
@@ -128,6 +134,7 @@
         "empty-targeting-key-flag",
         "empty_flag",
         "empty_string_flag",
+        "experiment-flag",
         "falsy-value-assignments",
         "integer-flag",
         "invalid-regex-flag",
@@ -135,8 +142,11 @@
         "kill-switch",
         "microsecond-date-test",
         "missing-split-shards-flag",
+        "multi-serial-flag-1",
+        "multi-serial-flag-2",
         "negative-shard-range-start-flag",
         "new-user-onboarding",
+        "no-log-flag",
         "no_allocations_flag",
         "null-operator-test",
         "null-shard-range-flag",
@@ -150,7 +160,13 @@
         "semver-precedence-test",
         "semver-valid-comparand-hyphenated-prerelease-test",
         "semver-version-parts-input-test",
+        "serial-id-basic-flag",
+        "serial-id-missing-flag",
+        "serial-id-targeting-flag",
+        "serial-id-zero-flag",
         "special-characters",
+        "split-features-destinations",
+        "split-features-selected-allocation",
         "start-and-end-date-test",
         "string_flag_with_special_characters",
         "unknown-fields-tolerance-flag",
@@ -173,14 +189,15 @@
         "semver-version-parts-four-part-comparand-test",
         "semver-version-parts-one-part-comparand-test",
         "semver-version-parts-two-part-comparand-test",
+        "split-features-first-valid-key",
         "variant-type-mismatch-flag"
       ],
       "artifacts": {
         "configuration-wire.json": {
-          "sha256": "1370d085d035de569654118d10e65165b92db67bebf359f860d7d9d0ad438905"
+          "sha256": "0cf561fff82f5e1081df0626efe3856578e062d6ae8d6538e053c2ffef588758"
         },
         "ufc.pb": {
-          "sha256": "5035f4baaa01855b93ab975c2d03619370fb3dffd1ade58f77d72364e58033c9"
+          "sha256": "97d0f2126a280f7a8704bd3b97b4c25dd3df033d74446d2412f5b5e91738941d"
         }
       }
     }

@@ -100,3 +100,13 @@ test('parity evaluates the explicit source without requiring a root UFC file', a
   assert.notDeepEqual(originalResults(changed), originalResults(baseline));
   assert.deepEqual(otherResults(changed), otherResults(baseline));
 }));
+
+test('wire packaging preserves unknown protobuf fields across byte containers', async () => {
+  const binary = await fs.readFile(path.join(root, 'rules-resources/generated/canonical-evaluator/ufc.pb'));
+  // Append unknown field 99 with varint value 1; it must survive the public wire API.
+  const extended = Buffer.concat([binary, Buffer.from([0x98, 0x06, 0x01])]);
+  const wire = packageWire(extended);
+  const embedded = Buffer.from(JSON.parse(wire).rules.response, 'base64');
+  assert.ok(embedded.includes(Buffer.from([0x98, 0x06, 0x01])));
+  assert.equal(packageWire(new Uint8Array(extended)), wire);
+});

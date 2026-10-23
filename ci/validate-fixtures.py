@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import NoReturn
 
@@ -12,6 +13,7 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = REPOSITORY_ROOT / "ufc-config.json"
 EVALUATION_CASES_DIRECTORY = REPOSITORY_ROOT / "evaluation-cases"
 VALID_VARIATION_TYPES = frozenset({"BOOLEAN", "INTEGER", "JSON", "NUMERIC", "STRING"})
+FEATURE_DESTINATIONS = frozenset({"HOOK", "EXPOSURE", "EVALUATION"})
 REQUIRED_CASE_FIELDS = frozenset(
     {
         "attributes",
@@ -162,6 +164,12 @@ def _validate_result(
         _fail(path, f"{location}.reason must be a non-empty string")
     if "errorCode" in result and not isinstance(result["errorCode"], str):
         _fail(path, f"{location}.errorCode must be a string")
+    if "serialId" in result and result["serialId"] is not None and type(result["serialId"]) is not int:
+        _fail(path, f"{location}.serialId must be an integer or null")
+    if "doLog" in result and not isinstance(result["doLog"], bool):
+        _fail(path, f"{location}.doLog must be a boolean")
+    if "features" in result:
+        _validate_features(path, f"{location}.features", result["features"])
 
     pre_lookup_error = allow_invalid_context and result.get("errorCode") == "INVALID_CONTEXT"
     if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND" and not pre_lookup_error:
@@ -169,6 +177,21 @@ def _validate_result(
             path,
             f"{location} references unknown flag {flag!r} without a FLAG_NOT_FOUND expectation",
         )
+
+
+def _validate_features(path: Path, location: str, features: object) -> None:
+    if not isinstance(features, dict) or set(features) != FEATURE_DESTINATIONS:
+        _fail(path, f"{location} must contain exactly HOOK, EXPOSURE, and EVALUATION maps")
+    for destination, values in features.items():
+        if not isinstance(values, dict):
+            _fail(path, f"{location}.{destination} must be an object")
+        for key, value in values.items():
+            if not isinstance(key, str) or not key:
+                _fail(path, f"{location}.{destination} keys must be non-empty strings")
+            if not isinstance(value, (str, bool, int, float)) or (
+                isinstance(value, float) and not math.isfinite(value)
+            ):
+                _fail(path, f"{location}.{destination}.{key} must be a string, boolean, or finite number")
 
 
 def main() -> None:
