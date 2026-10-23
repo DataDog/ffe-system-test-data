@@ -1,7 +1,9 @@
-"""Regression checks for optional selected split/allocation expectations."""
+"""Regression checks for rules-based evaluation fixture validation."""
 
 import importlib.util
+import json
 from pathlib import Path
+import tempfile
 import unittest
 
 
@@ -88,6 +90,115 @@ class MetadataExpectationValidationTest(unittest.TestCase):
             validator._validate_evaluation_case(
                 validator.EVALUATION_CASES_DIRECTORY / "test-case-metadata.json", 0, case, {"flag": {}},
             )
+
+
+class EvaluationSuiteValidationTest(unittest.TestCase):
+    platforms = frozenset({"php", "python"})
+
+    @staticmethod
+    def config(flag: str) -> dict[str, object]:
+        return {
+            "createdAt": "2026-01-01T00:00:00Z",
+            "format": "SERVER",
+            "environment": {"name": "test"},
+            "flags": {
+                flag: {
+                    "key": flag,
+                    "variations": {"on": {"key": "on", "value": True}},
+                    "allocations": [],
+                }
+            },
+        }
+
+    @staticmethod
+    def case(flag: str) -> dict[str, object]:
+        return {
+            "flag": flag,
+            "variationType": "BOOLEAN",
+            "defaultValue": False,
+            "targetingKey": "subject",
+            "attributes": {},
+            "result": {"value": True, "reason": "STATIC"},
+        }
+
+    def test_legacy_and_directory_core_cannot_both_exist(self) -> None:
+        suite_path = validator.EVALUATION_SUITES_DIRECTORY / "core"
+        with self.assertRaisesRegex(validator.FixtureValidationError, "cannot exist in both"):
+            validator._validate_suite_id(suite_path, legacy_core_exists=True)
+
+    def test_self_contained_suite_uses_its_adjacent_config(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            suite = Path(temporary_directory) / "example"
+            cases = suite / "cases"
+            cases.mkdir(parents=True)
+            config_path = suite / "ufc-config.json"
+            config_path.write_text(json.dumps(self.config("suite-flag")), encoding="utf-8")
+            (cases / "test-suite.json").write_text(
+                json.dumps([self.case("suite-flag")]), encoding="utf-8",
+            )
+
+            self.assertEqual(
+                (1, 1),
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True),
+            )
+
+            (cases / "test-suite.json").write_text(
+                json.dumps([self.case("root-only-flag")]), encoding="utf-8",
+            )
+            with self.assertRaisesRegex(validator.FixtureValidationError, "unknown flag 'root-only-flag'"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+
+    def test_self_contained_suite_rejects_missing_or_extra_entries(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            suite = Path(temporary_directory) / "example"
+            suite.mkdir()
+            config_path = suite / "ufc-config.json"
+            config_path.write_text(json.dumps(self.config("suite-flag")), encoding="utf-8")
+            cases = suite / "cases"
+
+            with self.assertRaisesRegex(validator.FixtureValidationError, "must be a directory"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+
+            cases.mkdir()
+            (cases / "test-suite.json").write_text(
+                json.dumps([self.case("suite-flag")]), encoding="utf-8",
+            )
+            (suite / "unexpected.json").write_text("{}", encoding="utf-8")
+            with self.assertRaisesRegex(validator.FixtureValidationError, "unexpected suite entry"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+
+
+class EvaluationPlatformValidationTest(unittest.TestCase):
+    platforms = frozenset({"php", "python"})
+    path = validator.EVALUATION_CASES_DIRECTORY / "test-case-filter.json"
+
+    def validate(self, value: dict[str, object]) -> None:
+        validator._validate_platform_filter(self.path, "case 0", value, self.platforms)
+
+    def test_canonical_platforms_cover_annotated_sdks(self) -> None:
+        self.assertIn("php", validator.CANONICAL_PLATFORMS)
+        self.assertIn("python", validator.CANONICAL_PLATFORMS)
+
+    def test_skip_and_include_accept_canonical_platforms(self) -> None:
+        self.validate({"_skip": [{"platform": "php", "reason": "Known gap."}]})
+        self.validate({"_include": [{"platform": "python"}]})
+
+    def test_skip_and_include_are_mutually_exclusive(self) -> None:
+        with self.assertRaisesRegex(validator.FixtureValidationError, "mutually exclusive"):
+            self.validate({"_skip": [{"platform": "php"}], "_include": [{"platform": "python"}]})
+
+    def test_filters_reject_invalid_shapes_and_platforms(self) -> None:
+        invalid = (
+            ({"_skip": []}, "non-empty array"),
+            ({"_skip": [{"platform": "unknown"}]}, "canonical platform"),
+            ({"_skip": [{"platform": "php"}, {"platform": "php"}]}, "repeats platform"),
+            ({"_skip": [{"platform": "php", "reason": ""}]}, "non-empty string"),
+            ({"_skip": [{"platform": "php", "ticket": "ABC-1"}]}, "unexpected fields"),
+        )
+        for value, message in invalid:
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(validator.FixtureValidationError, message):
+                    self.validate(value)
 
 
 if __name__ == "__main__":

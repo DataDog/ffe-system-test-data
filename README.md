@@ -80,7 +80,7 @@ ffe-system-test-data/
 ├── ufc-config.json          # Shared rules-based configuration, including malformed test inputs
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
-├── evaluation-suites/       # Self-contained, explicitly activated feature suites
+├── evaluation-suites/       # Optional self-contained, explicitly activated feature suites
 │   └── dependent-flags/
 │       ├── ufc-config.json  # UFC containing only dependent-flag fixtures
 │       └── cases/           # Evaluation cases for this feature
@@ -121,22 +121,47 @@ results in a downstream copy.
 
 ### Implement the rules-based runner
 
-1. Load `ufc-config.json` through the consumer's real configuration parser and
-   initialize its evaluator. Preserve the malformed inputs used by isolation tests.
-2. Discover every `evaluation-cases/*.json` file and parse its array. Keep case
+1. Choose one canonical platform identifier from `ci/validate-fixtures.py`.
+2. Select suites without loading configuration. `core` is selected by default;
+   feature suites are explicitly enabled by the consuming repository.
+3. Discover the selected suite's case files and parse each array. Keep case
+   order within each file, including repeated evaluations. Fail if a selected
+   fixture directory is missing or empty.
+4. Apply `_skip`/`_include` to each case for the runner's canonical platform
+   before test parametrization, setup, evaluation, telemetry expectations,
+   counts, or any other side effect. An excluded case must not execute and must
+   not influence drain markers or expected event counts.
+5. If no applicable cases remain in a suite, report it as fully excluded and do
+   not parse, send, or install that suite's UFC configuration.
+6. For a suite with applicable cases, load its adjacent `ufc-config.json`
+   through the consumer's real configuration parser and initialize its evaluator.
+   Preserve malformed inputs used by isolation tests.
+7. Run every remaining baseline case with default provider options, using
+   `flag`, `variationType`, `defaultValue`, `targetingKey`, and `attributes` as
+   supplied. Assert the expected value and reason, and any specified error code.
+   Consumers exposing selected metadata must also check supplied `serialId` and
+   `doLog` expectations against the actual selection.
+8. For each capability the consumer implements, map its name to the native
+   option and rerun every applicable case carrying that capability. Assert its
+   expected result instead of the baseline result. Run capabilities separately.
+9. Report the fixture SHA and executed and excluded case counts, including
+   counts per supported capability. Fail if a supported capability discovers no
+   applicable cases. Excluding every capability case must not look like
+   successful capability support.
+
+The legacy `core` suite uses root `ufc-config.json` and `evaluation-cases/`.
+Feature suites use `evaluation-suites/<suite>/ufc-config.json` and the adjacent
+`cases/` directory. Never parse the configuration of an unselected suite.
+
+For backward-compatible core-only consumers, the equivalent minimum flow is:
+
+1. Discover every `evaluation-cases/*.json` file and parse its array. Keep case
    order within each file, including repeated evaluations. Fail if the fixture
    directory is missing or empty.
-3. Run every baseline case with default provider options, using `flag`,
-   `variationType`, `defaultValue`, `targetingKey`, and `attributes` as supplied.
-   Assert the expected value and reason, and any specified error code. Consumers
-   exposing selected metadata must also check the supplied `serialId` and `doLog`
-   expectations against the actual selection.
-4. For each capability the consumer implements, map its name to the native
-   option and rerun every case carrying that capability. Assert its expected
-   result instead of the baseline result. Run capabilities separately.
-5. Report the fixture SHA and executed case counts, including counts per
-   supported capability. Fail if a supported capability discovers no cases.
-   Skipping every capability case must not look like successful capability support.
+2. Apply the case filters. If none remain, report `core` as fully excluded and
+   stop without loading configuration.
+3. Load root `ufc-config.json`, then run the applicable cases using the remaining
+   steps above.
 
 The adapter may translate API names and native result containers. It must
 preserve the meaning and precision of the inputs and expected results, including
@@ -199,6 +224,8 @@ Each evaluation case uses a universal schema with the following fields:
 | `result.doLog` | boolean | Optional expected selected allocation's logging decision |
 | `result.features` | object | Optional exact feature maps for `HOOK`, `EXPOSURE`, and `EVALUATION`; empty maps assert no features, omission leaves routing unspecified |
 | `capabilities` | object | Optional expected results when a named capability is enabled; uses the same result format |
+| `_skip` | array | Optional platforms that exclude this case |
+| `_include` | array | Optional exclusive list of platforms that include this case |
 
 Example:
 
@@ -214,6 +241,19 @@ Example:
   }
 ]
 ```
+
+`_skip` and `_include` are mutually exclusive non-empty arrays of objects shaped
+as `{"platform": "python", "reason": "optional explanation"}`. Each object
+has exactly one required canonical `platform` and an optional non-empty
+`reason`; a platform may appear only once. With neither field, the case applies
+to every platform. `_skip` excludes listed platforms. `_include` includes only
+listed platforms. The canonical platform list and fixture validation are in
+[`ci/validate-fixtures.py`](ci/validate-fixtures.py).
+
+The root configuration and cases form the legacy `core` suite. New feature
+suites may be self-contained under `evaluation-suites/<suite>/`, with their own
+`ufc-config.json` and `cases/` directory. Consumers explicitly opt into suites
+and must not load the configuration for a suite they have not enabled.
 
 ### Optional capabilities
 

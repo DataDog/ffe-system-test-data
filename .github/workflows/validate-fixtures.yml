@@ -7,6 +7,7 @@ on:
       - ci/validate-fixtures.py
       - ci/test_validate_fixtures.py
       - evaluation-cases/**
+      - evaluation-suites/**
       - ufc-config.json
 
 permissions:
