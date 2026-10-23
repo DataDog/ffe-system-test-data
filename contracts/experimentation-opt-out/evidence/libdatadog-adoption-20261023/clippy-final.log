@@ -1,0 +1,4 @@
+    Checking libdd-ffe v2.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe)
+    Checking libdd-ffe-ffi v1.0.2 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe-ffi)
+    Checking libdd-ffe-test-suite v46.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe-test-suite)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.09s

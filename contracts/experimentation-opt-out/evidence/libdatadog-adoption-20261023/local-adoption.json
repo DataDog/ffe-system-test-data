@@ -1,0 +1,42 @@
+{
+  "implementation": "DataDog/libdatadog",
+  "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+  "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "authorization": "User requested the same Lean decision, implementation, validation and feedback process for PR #2698. No fleet grammar decision is inferred.",
+  "decisions": {
+    "D002r1": "Disabled ignores cutoff; absent differs from malformed.",
+    "D003r1": "Prepare activation once, retain flag-wide invalid state and optional parsed timestamps.",
+    "D004r2": "Flag-wide invalid activation fails only effective future mode, including unreachable and ordinary allocations.",
+    "D005r2": "Only the surrounding-whitespace clause is adopted for cutoff and activation. Remaining syntax uses Chrono; startAt/endAt are unchanged.",
+    "D010r1": "The 90-case profile uses explicit booleans. Existing omitted-doLog compatibility remains unchanged.",
+    "D011r1": "Immediate exclusion applies now; future retains strictly older activation.",
+    "D016r1": "Malformed enabled cutoff precedes missing flag lookup.",
+    "D017r2": "Inactive policy skips the real exclusion helper; native instrumentation is not a timing claim."
+  },
+  "counterexamples": [
+    {
+      "input": "disabled mode, absent cutoff, malformed activation",
+      "original": "PARSE_ERROR",
+      "required": "normal evaluation",
+      "evidence": "baseline-counterexample.log"
+    },
+    {
+      "input": "immediate/future cutoff with a leading space",
+      "original": "C API OK",
+      "required": "INVALID_CONTEXT",
+      "evidence": "c-summary-candidate.log",
+      "original_result": {
+        "passed": 250,
+        "failed": 2,
+        "evaluations": 504
+      }
+    }
+  ],
+  "non_applicable": [
+    "precomputed acknowledgement and context lifecycle rules",
+    "NoopProvider construction",
+    "telemetry delivery and downstream wrapper conversion",
+    "full browser timestamp grammar"
+  ],
+  "publication": "No merge, release, deployment, or downstream SDK adoption."
+}

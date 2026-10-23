@@ -2340,6 +2340,137 @@
       "check": "The published reply links the existing decision, exact source behavior, native evidence and finite proof boundary. The reply was read back and the thread was resolved. Android has 26 verified replies across 24 threads.",
       "evidence_file": "evidence/sdk-adoption-20261023/android/review7-published-reply.json",
       "limits": "Resolution records the scoped proposal disposition. It does not establish unknown-response safety, acceptance of the proposal, new native validation, or merge approval."
+    },
+    {
+      "id": "LIBDATADOG-2698-001",
+      "decision_revisions": {
+        "D004": 2
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": "6b5bc0b7cf2f9abdc64b12177fb059feeb3b187d",
+      "patch": "See historical boundary and evidence limits.",
+      "evidence_kind": "native-validation",
+      "outcome": "expected-failure-detected",
+      "check": "Existing production code rejects disabled/absent/invalid activation; the unchanged 90-case adapter detects the mismatch.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/baseline-counterexample.log",
+      "limits": "Native source restored from the merged baseline, with the new policy test overlaid; no clean-head execution claim."
+    },
+    {
+      "id": "LIBDATADOG-2698-002",
+      "decision_revisions": {
+        "D005": 2
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": null,
+      "patch": "See historical boundary and evidence limits.",
+      "evidence_kind": "native-validation",
+      "outcome": "counterexample-detected",
+      "check": "Packaged C candidate passes250 of252 cases; immediate/future leading-space cutoffs incorrectly return OK.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/c-summary-candidate.log",
+      "limits": "Candidate source before the narrow whitespace correction. These failures remain historical; no browser grammar adoption is inferred."
+    },
+    {
+      "id": "LIBDATADOG-2698-003",
+      "decision_revisions": {
+        "D002": 1,
+        "D003": 1,
+        "D004": 2,
+        "D005": 2,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": null,
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "108 native tests, all90 policy cases,363 baseline/28 immediate/44 future canonical evaluations pass.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/native-receipt.json",
+      "limits": "D005 applies only to surrounding whitespace. Existing Chrono syntax and malformed doLog compatibility remain explicit."
+    },
+    {
+      "id": "LIBDATADOG-2698-004",
+      "decision_revisions": {
+        "D002": 1,
+        "D004": 2,
+        "D005": 2,
+        "D010": 1,
+        "D011": 1,
+        "D016": 1
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": null,
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "Packaged macOS/arm64 C API:252 cases and504 enum/boolean/default-entrypoint evaluations pass; one FFE example passes.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/native-receipt.json",
+      "limits": "Nine null/array/object attribute inputs have no C representation. No wrapper runtime, telemetry intake, or deployed backend proof."
+    },
+    {
+      "id": "LIBDATADOG-2698-005",
+      "decision_revisions": {
+        "D017": 2
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": null,
+      "patch": "See historical boundary and evidence limits.",
+      "evidence_kind": "native-validation",
+      "outcome": "expected-failure-detected",
+      "check": "Restoring unconditional exclusion calls fails the production-boundary counter test; source restored.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/inactive-negative-control.log",
+      "limits": "Candidate instrumentation observes calls, not timing. Original source hash bound by the reviewed final implementation; no speedup claim."
+    },
+    {
+      "id": "LIBDATADOG-2698-006",
+      "decision_revisions": {
+        "D002": 1,
+        "D003": 1,
+        "D004": 2,
+        "D005": 2,
+        "D011": 1,
+        "D016": 1,
+        "D017": 2
+      },
+      "recorded_at": "2026-10-23T12:59:11.313264+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "target": "libdatadog native rules evaluator and C boundary",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": null,
+      "evidence_kind": "independent-source-review",
+      "outcome": "pass",
+      "check": "Independent source review finds no open correctness finding at the signed implementation.",
+      "expectation_profile": "libdatadog-policy-v1; unchanged90-case policy subset; narrow D005 whitespace checks and D017 native call checks are separate.",
+      "evidence_file": "evidence/libdatadog-adoption-20261023/independent-review.md",
+      "limits": "Review is not runtime execution, merge approval, release, or wrapper adoption."
     }
   ]
 }

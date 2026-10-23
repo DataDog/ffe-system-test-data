@@ -1,0 +1,126 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+     Running `target/debug/ffi_test --filter ffe --keep-artifacts`
+Project root: /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog
+
+Building FFI libraries...
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.20s
+     Running `target/release/release --out release`
+cargo:rerun-if-env-changed=DESTDIR
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.25s
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.18s
+CMAKE_TOOLCHAIN_FILE_aarch64-apple-darwin = None
+CMAKE_TOOLCHAIN_FILE_aarch64_apple_darwin = None
+HOST_CMAKE_TOOLCHAIN_FILE = None
+CMAKE_TOOLCHAIN_FILE = None
+CMAKE_GENERATOR_aarch64-apple-darwin = None
+CMAKE_GENERATOR_aarch64_apple_darwin = None
+HOST_CMAKE_GENERATOR = None
+CMAKE_GENERATOR = None
+CMAKE_PREFIX_PATH_aarch64-apple-darwin = None
+CMAKE_PREFIX_PATH_aarch64_apple_darwin = None
+HOST_CMAKE_PREFIX_PATH = None
+CMAKE_PREFIX_PATH = None
+CMAKE_aarch64-apple-darwin = None
+CMAKE_aarch64_apple_darwin = None
+HOST_CMAKE = None
+CMAKE = None
+running: cd "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build" && CMAKE_PREFIX_PATH="" LC_ALL="C" "cmake" "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-crashtracker" "-B" "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build" "-DCMAKE_OSX_ARCHITECTURES=arm64" "-DDatadog_ROOT=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/release" "-DCMAKE_INSTALL_PREFIX=release" "-DCMAKE_C_FLAGS= -ffunction-sections -fdata-sections -fPIC --target=arm64-apple-macosx -mmacosx-version-min=27.0 -w" "-DCMAKE_C_COMPILER=/usr/bin/cc" "-DCMAKE_CXX_FLAGS= -ffunction-sections -fdata-sections -fPIC --target=arm64-apple-macosx -mmacosx-version-min=27.0 -w" "-DCMAKE_CXX_COMPILER=/usr/bin/c++" "-DCMAKE_ASM_FLAGS= -ffunction-sections -fdata-sections -fPIC --target=arm64-apple-macosx -mmacosx-version-min=27.0 -w" "-DCMAKE_ASM_COMPILER=/usr/bin/cc" "-DCMAKE_BUILD_TYPE=MinSizeRel"
+brew-shim: find real Homebrew: executable file "brew" not found in PATH
+-- Configuring done (0.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build
+running: cd "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build" && LC_ALL="C" "cmake" "--build" "/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build" "--target" "install" "--config" "MinSizeRel"
+[ 50%] Building C object CMakeFiles/libdatadog-crashtracking-receiver.dir/libdatadog-crashtracking-receiver.c.o
+[100%] Linking C executable libdatadog-crashtracking-receiver
+[100%] Built target libdatadog-crashtracking-receiver
+Install the project...
+-- Install configuration: "MinSizeRel"
+-- Installing: /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out/build/release/bin/libdatadog-crashtracking-receiver
+cargo:root=/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/target/release/build/builder-f09ceb107c2ebfcb/out
+Built in 2.8s
+
+Building FFI examples...
+brew-shim: find real Homebrew: executable file "brew" not found in PATH
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/examples/ffi/build
+[  3%] Building CXX object CMakeFiles/exporter.dir/exporter.cpp.o
+[  6%] Linking CXX executable exporter
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[  6%] Built target exporter
+[ 10%] Building C object CMakeFiles/exporter_manager.dir/exporter_manager.c.o
+[ 13%] Linking C executable exporter_manager
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 13%] Built target exporter_manager
+[ 16%] Building CXX object CMakeFiles/crashinfo.dir/crashinfo.cpp.o
+[ 20%] Linking CXX executable crashinfo
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 20%] Built target crashinfo
+[ 23%] Building CXX object CMakeFiles/profile_intern.dir/profile_intern.cpp.o
+[ 26%] Linking CXX executable profile_intern
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 26%] Built target profile_intern
+[ 30%] Building C object CMakeFiles/profiles.dir/profiles.c.o
+[ 33%] Linking C executable profiles
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 33%] Built target profiles
+[ 36%] Building C object CMakeFiles/custom_profile_types.dir/custom_profile_types.c.o
+[ 40%] Linking C executable custom_profile_types
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 40%] Built target custom_profile_types
+[ 43%] Building C object CMakeFiles/telemetry.dir/telemetry.c.o
+[ 46%] Linking C executable telemetry
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 46%] Built target telemetry
+[ 50%] Building C object CMakeFiles/telemetry_metrics.dir/telemetry_metrics.c.o
+[ 53%] Linking C executable telemetry_metrics
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 53%] Built target telemetry_metrics
+[ 56%] Building C object CMakeFiles/crashtracking.dir/crashtracking.c.o
+[ 60%] Linking C executable crashtracking
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 60%] Built target crashtracking
+[ 63%] Building C object CMakeFiles/crashtracking_unhandled_exception.dir/crashtracking_unhandled_exception.c.o
+[ 66%] Linking C executable crashtracking_unhandled_exception
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 66%] Built target crashtracking_unhandled_exception
+[ 70%] Building C object CMakeFiles/trace_exporter.dir/trace_exporter.c.o
+[ 73%] Linking C executable trace_exporter
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 73%] Built target trace_exporter
+[ 76%] Building CXX object CMakeFiles/array_queue.dir/array_queue.cpp.o
+[ 80%] Linking CXX executable array_queue
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 80%] Built target array_queue
+[ 83%] Building C object CMakeFiles/library_config.dir/library_config.c.o
+[ 86%] Linking C executable library_config
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 86%] Built target library_config
+[ 90%] Building C object CMakeFiles/ddsketch.dir/ddsketch.c.o
+[ 93%] Linking C executable ddsketch
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[ 93%] Built target ddsketch
+[ 96%] Building C object CMakeFiles/ffe.dir/ffe.c.o
+[100%] Linking C executable ffe
+ld: warning: ignoring duplicate libraries: '-lSystem', '-liconv'
+[100%] Built target ffe
+Built in 3.7s
+
+Running FFI examples...
+Work directory: /var/folders/tn/d0h6_nz528308p1dk980bzhh0000gp/T/ffi-test-18945-1792760143
+
+PASS ffe [311ms]
+
+Generated 81 artifacts
+
+Artifacts kept at: /var/folders/tn/d0h6_nz528308p1dk980bzhh0000gp/T/ffi-test-18945-1792760143
+
+Summary
+  Passed:   1
+  Failed:   0
+  Expected: 0
+  Skipped:  0
+  Total:    1
+
+All tests passed!

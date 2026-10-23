@@ -1,0 +1,6 @@
+{
+  "url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4359747409",
+  "id": 4359747409,
+  "body": "🤖 **Comment from Codex working with Leo:**\n\nThe existing `catch_panic!` macros are private to other FFI crates and use their error types. **Implemented in [ead1d3db](https://github.com/DataDog/libdatadog/commit/ead1d3db2aa16e494f23e47b946ff12a7a1be53a):** `catch_assignment_panic` contains the unwind and returns an owned `ResolutionDetails` handle with a redacted `GENERAL` error.\n\nThe native regression injects a panic, checks the error and empty metadata, and frees the result. At this commit, 108 native tests and 252 packaged C contract cases pass. This is a native FFI obligation; it does not change a shared Lean decision.",
+  "body_matches": true
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "sha": "3eb48e6999b3792267b5179c9e1f4132298b958d",
+    "verified": true,
+    "reason": "valid"
+  },
+  {
+    "sha": "6b5bc0b7cf2f9abdc64b12177fb059feeb3b187d",
+    "verified": true,
+    "reason": "valid"
+  },
+  {
+    "sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+    "verified": true,
+    "reason": "valid"
+  }
+]

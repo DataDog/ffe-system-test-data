@@ -206,3 +206,5 @@ No performance benchmarks, system-tests at the new SHA or deployment checks were
 
 The reusable workflow lives in [lean-sdk-feedback](../../skills/lean-sdk-feedback/SKILL.md)
 and [lean-sdk-decisions](../../skills/lean-sdk-decisions/SKILL.md).
+
+[libdatadog adoption and native evidence](libdatadog-adoption.md).

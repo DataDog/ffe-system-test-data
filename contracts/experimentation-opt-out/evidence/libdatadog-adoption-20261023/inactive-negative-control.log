@@ -1,0 +1,26 @@
+   Compiling num-traits v0.2.19
+   Compiling libdd-common v8.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-common)
+   Compiling chrono v0.4.38
+   Compiling libdd-capabilities-impl v7.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-capabilities-impl)
+   Compiling libdd-remote-config v7.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-remote-config)
+   Compiling libdd-ffe v2.0.0 (/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/libdatadog/libdd-ffe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.98s
+     Running unittests src/lib.rs (target/debug/deps/libdd_ffe-909ce7eea9ec9397)
+
+running 1 test
+
+thread 'rules_based::eval::eval_assignment::opt_out_tests::inactive_policy_does_not_call_allocation_exclusion' (47140160) panicked at libdd-ffe/src/rules_based/eval/eval_assignment.rs:569:21:
+assertion `left == right` failed
+  left: 1
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test rules_based::eval::eval_assignment::opt_out_tests::inactive_policy_does_not_call_allocation_exclusion ... FAILED
+
+failures:
+
+failures:
+    rules_based::eval::eval_assignment::opt_out_tests::inactive_policy_does_not_call_allocation_exclusion
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 38 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p libdd-ffe --lib`

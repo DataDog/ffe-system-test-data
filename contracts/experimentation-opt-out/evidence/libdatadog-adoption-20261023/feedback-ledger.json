@@ -1,0 +1,42 @@
+{
+  "pr": "https://github.com/DataDog/libdatadog/pull/2698",
+  "original_head": "3eb48e6999b3792267b5179c9e1f4132298b958d",
+  "retrieved_at": "2026-10-23T12:34:56.332613+00:00",
+  "comments": [
+    {
+      "url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4346210581",
+      "author": "yannham",
+      "body": "I think we have helper macros somewhere for that, like `catch_panic`.",
+      "disposition": "target-specific panic-boundary helper and native regression; no shared semantic change",
+      "decision_ids": []
+    }
+  ],
+  "codex": {
+    "reviewed_commit": "020004781291bd9178cd91868f53291bfed550f7",
+    "new_observations": 0,
+    "limit": "The stored Codex review covers an earlier commit, not the current implementation."
+  },
+  "independent_findings": [
+    {
+      "decision": "D004 r2",
+      "input": "disabled mode, absent cutoff, malformed activation",
+      "before": "PARSE_ERROR",
+      "expected": "ordinary evaluation",
+      "classification": "implements_existing"
+    },
+    {
+      "decision": "D017 r2",
+      "input": "disabled mode or absent cutoff",
+      "before": "allocation exclusion helper called",
+      "expected": "no allocation exclusion helper calls",
+      "classification": "target-scoped adoption of existing rule"
+    },
+    {
+      "decision": "D005 r2, surrounding-whitespace clause only",
+      "input": "leading-space timestamp with immediate or future mode",
+      "before": "accepted by Chrono",
+      "expected": "INVALID_CONTEXT",
+      "classification": "bounded libdatadog adoption; remaining Chrono grammar retained"
+    }
+  ]
+}
