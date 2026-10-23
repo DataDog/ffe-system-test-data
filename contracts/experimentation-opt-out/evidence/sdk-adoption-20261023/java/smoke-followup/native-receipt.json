@@ -1,0 +1,98 @@
+{
+  "created_at": "2026-10-23T03:17:46.743300+00:00",
+  "signed_head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "clean": true,
+  "source_sha256": "f7b25b52ce91c614d7e67ecf49eb95f683594a99478c803d2283f2eb08723c5f",
+  "counts": {
+    "baseline/junit.xml": {
+      "tests": "3",
+      "failures": "1",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-23T03:00:49.947Z"
+    },
+    "candidate-jdk11.xml": {
+      "tests": "373",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-23T03:09:55.616Z"
+    },
+    "candidate-jdk25-final.xml": {
+      "tests": "373",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-23T03:12:59.591Z"
+    },
+    "negative-control.xml": {
+      "tests": "3",
+      "failures": "1",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-23T03:12:00.239Z"
+    },
+    "signed-head-jdk25.xml": {
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-23T03:16:08.670Z"
+    }
+  },
+  "environment": "Linux amd64, Gradle 9.8.2",
+  "argv": {
+    "baseline": [
+      "./gradlew",
+      ":dd-smoke-tests:openfeature:test",
+      "--tests",
+      "*OpenFeatureProviderSmokeTest.test open feature exposures",
+      "--max-workers=2",
+      "-PmavenRepositoryProxy=https://maven-central.storage-download.googleapis.com/maven2"
+    ],
+    "candidate_jdk11": [
+      "./gradlew",
+      ":dd-smoke-tests:openfeature:test",
+      ":dd-smoke-tests:openfeature:spotlessCheck",
+      "-PtestJvm=11",
+      "--max-workers=2",
+      "-PmavenRepositoryProxy=https://maven-central.storage-download.googleapis.com/maven2"
+    ],
+    "candidate_jdk25": [
+      "./gradlew",
+      ":dd-smoke-tests:openfeature:test",
+      ":dd-smoke-tests:openfeature:spotlessCheck",
+      "-PtestJvm=25",
+      "--max-workers=2",
+      "-PmavenRepositoryProxy=https://maven-central.storage-download.googleapis.com/maven2"
+    ],
+    "negative_control": [
+      "./gradlew",
+      ":dd-smoke-tests:openfeature:test",
+      "--tests",
+      "*OpenFeatureProviderSmokeTest.test exposures retain allocation changes and suppress repeats",
+      "--max-workers=2",
+      "-PmavenRepositoryProxy=https://maven-central.storage-download.googleapis.com/maven2"
+    ],
+    "signed_head": [
+      "./gradlew",
+      ":dd-smoke-tests:openfeature:test",
+      "--tests",
+      "*OpenFeatureProviderSmokeTest.test open feature exposures",
+      "-PtestJvm=25",
+      "--max-workers=2",
+      "-PmavenRepositoryProxy=https://maven-central.storage-download.googleapis.com/maven2"
+    ]
+  },
+  "pre_format_jdk25": {
+    "tests": 373,
+    "failures": 0,
+    "skipped": 0,
+    "spotless": "failed; formatter applied before final candidate runs",
+    "source_binding": "pre-format source; not the frozen file",
+    "log": "candidate-jdk25.log"
+  },
+  "negative_control": "lifetime set restored in test oracle; focused regression failed with two exposures instead of three; candidate restored afterward",
+  "candidate_binding": "a4d3dfb plus the exact test file later committed in 578ffa77; production source unchanged",
+  "signed_head_scope": "Stepwise runs RC advertisement, span enrichment, allocation-change regression, and fixture exposure intake; no unchanged production/runtime suites repeated"
+}

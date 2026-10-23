@@ -1,0 +1,20 @@
+{
+  "flags": {
+    "tests": 650,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "openfeature": {
+    "tests": 82,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reliability": {
+    "tests": 148,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

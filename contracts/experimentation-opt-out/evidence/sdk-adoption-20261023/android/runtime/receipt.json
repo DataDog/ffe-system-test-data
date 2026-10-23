@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T02:29:35.884199+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "tested_commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+  "final_commit": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "production_equivalence": {
+    "changed_paths": [
+      "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/ExperimentationCallbackTest.kt"
+    ],
+    "production_source_unchanged": true,
+    "source_hashes": "../exact-f15ab92-source-hashes.json"
+  },
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "environment": {
+    "type": "Android emulator",
+    "api_level": 36,
+    "release": "16",
+    "abi": "arm64-v8a",
+    "system_image": "system-images;android-36;google_apis;arm64-v8a",
+    "system_image_revision": 7,
+    "serial": "emulator-5580",
+    "avd": "OptOutProbe36",
+    "cleanup": "Task-created emulator stopped after evidence capture."
+  },
+  "method": "External instrumentation source added to the existing instrumented integration Android app; real Datadog core, Flags client, storage, and local MockWebServer HTTP intake.",
+  "result": {
+    "instrumentation_tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "elapsed_seconds": 20.26,
+    "modes": 2,
+    "assignment_http_requests": 4,
+    "successful_flag_evaluations": 8,
+    "evaluation_intake_events": 4,
+    "evaluation_intake_for_telemetry_off_subjects": 0,
+    "immediate_exposure_intake_events": 0,
+    "future_mode_exposure_intake_events": 2,
+    "future_exposure_subjects": "Both telemetry-on and telemetry-off subjects",
+    "background_callback_completions": 4
+  },
+  "observed_behavior": [
+    "Requests send the configured mode and nanosecond cutoff for each subject.",
+    "Supplied valid acknowledgements install flag values in both modes.",
+    "All eight evaluations return the supplied true value.",
+    "Only telemetry-on subjects produce evaluation intake events.",
+    "Future mode preserves supplied retained allocation exposure events for both telemetry states.",
+    "Immediate mode produces no exposure for supplied non-randomized assignments.",
+    "All context callbacks execute on the dedicated background callback thread."
+  ],
+  "scope_limits": [
+    "The local server supplies assignments and acknowledgement fields. This does not prove live backend allocation logic or edge/site rollout.",
+    "The bridge proxy supplies the typed telemetry control. This probe does not test OpenFeature context conversion.",
+    "The probe drains the production aggregator through its lifecycle onStop callback and explicitly flushes storage. It does not prove periodic or background scheduling.",
+    "One API 36 arm64 emulator ran. Other Android versions, physical devices, restart cache recovery, and race stress are not covered by this probe."
+  ],
+  "harness_setup_history": [
+    {
+      "attempt": "initial",
+      "result": "failed before assignment fetch",
+      "cause": "External harness omitted SDK allowClearTextHttp for its local HTTP endpoint.",
+      "log": "instrumentation.log",
+      "change": "Enabled the same internal cleartext test helper used by existing integration tests; no production edit."
+    },
+    {
+      "attempt": "corrected",
+      "result": "passed",
+      "log": "instrumentation-cleartext.log"
+    }
+  ],
+  "evidence_files": [
+    {
+      "path": "runtime/observations.json",
+      "sha256": "032813d7a4ea26db15b8e0ab8b8acfcc333bc85df216f274df9d13edf85b8322",
+      "bytes": 7387
+    },
+    {
+      "path": "runtime/test-src/OptOutRuntimeProbeTest.kt",
+      "sha256": "d68defd42222b08ecd6d6dd2557385d76894445412d3ec793a6a3399e6beb25f",
+      "bytes": 9901
+    },
+    {
+      "path": "runtime/probe.init.gradle",
+      "sha256": "0560901801d245ae714b11888bee8637453102aeddbb52de434d4af9b964c9d2",
+      "bytes": 411
+    },
+    {
+      "path": "runtime/instrumentation-cleartext.log",
+      "sha256": "9d942e0ab09379cfcd9082e7b2a3cdf976910d4266f0dd31c1cd45164da8f45c",
+      "bytes": 847
+    },
+    {
+      "path": "runtime/build-cleartext.log",
+      "sha256": "a5e14e22c3e1b787775081f10fd2361f926d71e045d3569838ee291d52f5f6bf",
+      "bytes": 49785
+    },
+    {
+      "path": "runtime/device-properties.txt",
+      "sha256": "5cfef7a4cb61a164bfb8758b1441e74d659ab570938a25a95433c3ceffc15946",
+      "bytes": 24171
+    }
+  ],
+  "apk_artifacts": [
+    {
+      "repository_relative_path": "instrumented/integration/build/outputs/apk/debug/integration-debug.apk",
+      "sha256": "6e339d72ebfd68786c23a39cea955ca01c2090a2a53ac517bce36d926182ccd7",
+      "bytes": 10804281
+    },
+    {
+      "repository_relative_path": "instrumented/integration/build/outputs/apk/androidTest/debug/integration-debug-androidTest.apk",
+      "sha256": "4193ed44f26b01d25d844897794134ab1ad6ac629d7a56885df8028aa7afe13b",
+      "bytes": 12628808
+    }
+  ]
+}

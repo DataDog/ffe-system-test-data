@@ -1,0 +1,71 @@
+{
+  "central_pin": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "selected_profile_sha256": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+  "selected_cases_sha256": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528",
+  "frozen_case_lists_equal": true,
+  "base_sha": "6830d11b8cce653dd5415dbacf39d4841688ce1f",
+  "profile": "browser-38d611c-local-mobile-sync",
+  "contract_sha256": "dfc7224c0b407e8bd8735dce46fed45d6537af426b2b5ba9d467eab10b697685",
+  "bundle_file_sha256": "64d797731ed94666c120811862ee7600e7c6209f65a31bd4a238f8449f540353",
+  "manifest_file_sha256": "8369a921a3d0e9d534587ab7c437a4fb2ada29068cb66507abb1a839835b0aa2",
+  "injected_serialization_error": false,
+  "case_count": 187,
+  "timestamp_count": 43,
+  "request_count": 9,
+  "ack_count": 135,
+  "excluded": 0,
+  "mismatches": [],
+  "passed": true,
+  "source_sha256": {
+    "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85",
+    "DatadogFlags/Sources/Models/AnyValue.swift": "33992648dc8fa98ec257394936e7943757f77ee67ff3f86bc5469f32f4fcd002",
+    "DatadogFlags/Sources/Models/FlagsError.swift": "b9a5c2c605482a6a2bd5c9fe88df2240b7de59817ebe494c6443544d2164c801",
+    "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d",
+    "DatadogFlags/Sources/Models/FlagAssignment.swift": "28ed5a73ed2958bae5f88f9538d590de357346983fde360e9ddba2fce876e865",
+    "DatadogFlags/Sources/Models/FlagValue.swift": "356ed8d3d060e8a81d2b5c69520138cf1aa5afd397e9d80ff38f4626d4b0450c",
+    "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift": "afb05df25a18235ad66a1c1a198f2a8c2aad8ee7ff5ceab347e3367ef34739b7",
+    "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift": "2142b79b665e931a891b4658ab0f83375fa18d64058bba91e1f2bdfa1bd00899"
+  },
+  "adapter_sha256": {
+    "run.py": "91e520933a392e193e68d49263e6963b9dcb18881a77573699b33d643aea3eca",
+    "main.swift": "613a6caaac3b503cad35f03f82f5a4c7f18c7775d7f7aa9a7f1ad6b3c2020c6f",
+    "Boundaries.swift": "ece3b36b08fea54bd0c3ea723faa2e4c9f363665c0498d8373c72e86875d0bb0"
+  },
+  "source_preparation": [
+    {
+      "source": "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift",
+      "prepared_sha256": "cc56734d5f523596b3093c4a3ff9d2df484413f429729f7b65b70debddf266de",
+      "transformation": "only replace external module import with Foundation; boundary types shimmed"
+    },
+    {
+      "source": "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift",
+      "prepared_sha256": "cff6f353c680f7f0d762671562946ddbab4f22056f465f282b848844b990dbc9",
+      "transformation": "only replace external module import with Foundation; boundary types shimmed"
+    }
+  ],
+  "scope": "macOS Swift complete production parser/context/request/fetcher/response-decoder source with SDK boundaries shimmed; injected fetch callback; no HTTP, repository lifecycle, iOS runtime, crypto or full SDK tests",
+  "commands": [
+    [
+      "/usr/bin/swiftc",
+      "-module-cache-path",
+      "<IOS_EVIDENCE>/module-cache",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/FlagsEvaluationContext.swift",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/AnyValue.swift",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/FlagsError.swift",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/FlagAssignment.swift",
+      "<IOS_SOURCE>/DatadogFlags/Sources/Models/FlagValue.swift",
+      "<IOS_EVIDENCE>/exact-6830d11-source-probe/FlagAssignmentsRequest.swift",
+      "<IOS_EVIDENCE>/exact-6830d11-source-probe/FlagAssignmentsFetcher.swift",
+      "<IOS_EVIDENCE>/Boundaries.swift",
+      "<IOS_EVIDENCE>/main.swift",
+      "-o",
+      "<IOS_EVIDENCE>/exact-6830d11-source-probe/probe"
+    ],
+    [
+      "<IOS_EVIDENCE>/exact-6830d11-source-probe/probe",
+      "<ORIGINAL_POC>/bundles/ios.json"
+    ]
+  ],
+  "archive_note": "Commands and runner snapshot contain named placeholders for machine paths. Original executed adapter hashes remain unchanged in adapter_sha256. Export file hashes are in the export manifest. This is archived execution evidence, not a new run."
+}

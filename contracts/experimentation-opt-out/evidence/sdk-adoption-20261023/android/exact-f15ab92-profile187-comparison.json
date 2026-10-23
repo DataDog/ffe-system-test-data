@@ -1,0 +1,13 @@
+{
+  "source_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "source_status": "",
+  "profile_pins": {
+    "mobile-precompute-v1.json": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+    "mobile-precompute-v1-cases.json": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528"
+  },
+  "cases": 187,
+  "passed": 187,
+  "mismatches": [],
+  "observations_sha256": "151e3c9d82aa29502fb705f9d73fc65ce96f085e2364a885f891ad5f4756c3d5",
+  "scope": "Actual production parser, request factory and response mapper; source-linked composition, mocked logger/context; no live HTTP or lifecycle execution."
+}

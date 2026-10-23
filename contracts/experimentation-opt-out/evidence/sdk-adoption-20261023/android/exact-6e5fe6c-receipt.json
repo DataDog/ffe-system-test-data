@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T03:47:37.444403+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "commit": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "tree": "3e098b741d7c72184fd9dfeaaca6d3e53a3111bf",
+  "status": "clean",
+  "central_contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "contract_manifest_sha256": "078465ba0a37f193e65c3641197ac859c375c9d114d0d131ccc330d0c28dfa31",
+  "native_suites": {
+    "flags": {
+      "Debug": {
+        "tests": 666,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "Release": {
+        "tests": 666,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "openfeature": {
+      "Debug": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "Release": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "reliability": {
+      "Debug": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "Release": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "logical_test_cases": 896,
+  "variant_test_executions": 1792,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "execution": "CI=true, USE_TEST_VISIBILITY=0, max-workers=2, --rerun-tasks. All343 suite/static tasks executed.",
+  "checks": {
+    "flags_detekt": "passed",
+    "openfeature_detekt": "passed",
+    "root_checkGeneratedFiles": "passed",
+    "flags_ktlintCheck": "passed",
+    "openfeature_ktlintCheck": "passed",
+    "git_diff_check": "passed",
+    "foundation_document_gate": "unavailable: ModuleNotFoundError: factorykit; not a pass"
+  },
+  "profile": {
+    "cases": 187,
+    "passed": 187,
+    "mismatches": 0,
+    "comparison": "exact-6e5fe6c-profile187-comparison.json",
+    "observations": "exact-6e5fe6c-profile-observations.jsonl",
+    "adapter": "profile-probes-review6/MobileProfileProbeTest.kt",
+    "caching": "Test cache and up-to-date reuse disabled.",
+    "scope": "Actual production parser, request factory and response mapper; source-linked composition, mocked logger/context; no live HTTP or lifecycle execution."
+  },
+  "runtime_receipt": "review6-runtime/exact-6e5fe6c-receipt.json",
+  "source_hashes": "exact-6e5fe6c-source-hashes.json",
+  "negative_control": "review6-negative-control-receipt.json",
+  "signed_commit_receipt": "review6-signed-commit.json",
+  "previous_evidence_immutable": [
+    {
+      "manifest": "review4-export-manifest.json",
+      "files_verified": 21,
+      "hashes_unchanged": true
+    },
+    {
+      "manifest": "review5-export-manifest.json",
+      "files_verified": 7,
+      "hashes_unchanged": true
+    }
+  ],
+  "logs": [
+    {
+      "path": "exact-6e5fe6c-native-validation.log",
+      "sha256": "ed08751438162c3ed5a701ab2aba3245763c1d93d940669f5c6a8cc88d24caec"
+    },
+    {
+      "path": "exact-6e5fe6c-profile187.log",
+      "sha256": "8332424668790c2eefc7771345a63befef096998bec52989d9b9a657ef6c6066"
+    },
+    {
+      "path": "exact-6e5fe6c-generated-runtime-build.log",
+      "sha256": "2fcb4214423a4d392e753033941169d83432b73a30e38618e5ef2ce91c28aef5"
+    },
+    {
+      "path": "review6-foundation-worktree.json",
+      "sha256": "8e470276899230ad8caa980819feb916bd650aef98e04ab54c31593d0d37caa6"
+    }
+  ],
+  "boundary": "JVM suites use native-language implementation with mocks/stub core as documented. Real Android behavior is separately established by the runtime receipt. The native retry/lifetime behavior has no Lean proof."
+}

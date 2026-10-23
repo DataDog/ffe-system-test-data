@@ -1,0 +1,5 @@
+{
+  "restored_sha256": "f0036cd682a24f94f754cf413192b96c9e17cc3064724edcde5930b080e26d81",
+  "mutated_sha256": "6111f8aed50016224b2f60345fbea4f84c3cd3bdf331ccc445570a371bd50b31",
+  "mutation": "Skip the existing-client warning for enabled experimentation modes."
+}

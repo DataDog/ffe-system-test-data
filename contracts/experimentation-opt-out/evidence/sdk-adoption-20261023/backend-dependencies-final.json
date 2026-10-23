@@ -1,0 +1,42 @@
+{
+  "recorded_at": "2026-10-23T03:16:26.428345+00:00",
+  "dependencies": [
+    {
+      "number": 140422,
+      "url": "https://github.com/ddoghq/dd-source/pull/140422",
+      "head": "939db39e166fdd40cf7744399477bfe9053964b0",
+      "state": "open",
+      "draft": false,
+      "merged": false,
+      "merged_at": null
+    },
+    {
+      "number": 139368,
+      "url": "https://github.com/ddoghq/dd-source/pull/139368",
+      "head": "0ae33d8f112685502bb8f16d8c96efbecb70219b",
+      "state": "open",
+      "draft": false,
+      "merged": false,
+      "merged_at": null
+    },
+    {
+      "number": 139379,
+      "url": "https://github.com/ddoghq/dd-source/pull/139379",
+      "head": "50775244ad95c65017b7890a81fde9806e330b80",
+      "state": "open",
+      "draft": false,
+      "merged": false,
+      "merged_at": null
+    },
+    {
+      "number": 139381,
+      "url": "https://github.com/ddoghq/dd-source/pull/139381",
+      "head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2",
+      "state": "open",
+      "draft": false,
+      "merged": false,
+      "merged_at": null
+    }
+  ],
+  "scope": "Release and enablement gates; no deployment check or mutation."
+}

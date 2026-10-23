@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/leo.romanovsky/go/src/github.com/DataDog/ffe-contract-poc-laptop-2026-10-22/case-sensitive/ffe-contract-poc/worktrees/android/ci/scripts/foundation_check.py", line 1, in <module>
+    from factorykit.document_checks import foundation_entry
+ModuleNotFoundError: No module named 'factorykit'

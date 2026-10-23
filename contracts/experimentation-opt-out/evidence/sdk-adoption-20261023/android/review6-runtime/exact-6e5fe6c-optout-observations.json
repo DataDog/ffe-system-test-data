@@ -1,0 +1,255 @@
+{
+  "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "api_level": 36,
+  "abis": [
+    "arm64-v8a"
+  ],
+  "boundary": "Real Android core, storage and HTTP over emulator loopback; supplied assignments and forced lifecycle\/storage flush; typed telemetry control through SDK bridge proxy",
+  "results": [
+    {
+      "mode": "IMMEDIATE",
+      "requests": [
+        {
+          "data": {
+            "type": "precompute-assignments-request",
+            "attributes": {
+              "env": {
+                "dd_env": "optout-probe"
+              },
+              "source": {
+                "sdk_name": "dd-sdk-android",
+                "sdk_version": "3.16.0-SNAPSHOT"
+              },
+              "subject": {
+                "targeting_key": "IMMEDIATE-telemetry-on",
+                "targeting_attributes": {
+                  "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+                }
+              },
+              "evaluation_options": {
+                "experimentation_opt_out_mode": "immediate"
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "type": "precompute-assignments-request",
+            "attributes": {
+              "env": {
+                "dd_env": "optout-probe"
+              },
+              "source": {
+                "sdk_name": "dd-sdk-android",
+                "sdk_version": "3.16.0-SNAPSHOT"
+              },
+              "subject": {
+                "targeting_key": "IMMEDIATE-telemetry-off",
+                "targeting_attributes": {
+                  "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+                }
+              },
+              "evaluation_options": {
+                "experimentation_opt_out_mode": "immediate"
+              }
+            }
+          }
+        }
+      ],
+      "evaluations": [
+        {
+          "timestamp": 1792727130678,
+          "flag": {
+            "key": "ordinary"
+          },
+          "first_evaluation": 1792727130678,
+          "last_evaluation": 1792727130678,
+          "evaluation_count": 1,
+          "runtime_default_used": false,
+          "targeting_key": "IMMEDIATE-telemetry-on",
+          "context": {
+            "dd": {
+              "service": "com.datadog.android.sdk.integration"
+            }
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "allocation": {
+            "key": "ordinary-fallback"
+          }
+        },
+        {
+          "timestamp": 1792727130678,
+          "flag": {
+            "key": "selected"
+          },
+          "first_evaluation": 1792727130678,
+          "last_evaluation": 1792727130678,
+          "evaluation_count": 1,
+          "runtime_default_used": false,
+          "targeting_key": "IMMEDIATE-telemetry-on",
+          "context": {
+            "dd": {
+              "service": "com.datadog.android.sdk.integration"
+            }
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "allocation": {
+            "key": "ordinary-fallback"
+          }
+        }
+      ],
+      "exposures": [],
+      "callback_threads": [
+        "datadog-flags-callbacks-thread-1",
+        "datadog-flags-callbacks-thread-1"
+      ],
+      "evaluations_returning_true": 4
+    },
+    {
+      "mode": "FUTURE_EXPERIMENTS_ONLY",
+      "requests": [
+        {
+          "data": {
+            "type": "precompute-assignments-request",
+            "attributes": {
+              "env": {
+                "dd_env": "optout-probe"
+              },
+              "source": {
+                "sdk_name": "dd-sdk-android",
+                "sdk_version": "3.16.0-SNAPSHOT"
+              },
+              "subject": {
+                "targeting_key": "FUTURE_EXPERIMENTS_ONLY-telemetry-on",
+                "targeting_attributes": {
+                  "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+                }
+              },
+              "evaluation_options": {
+                "experimentation_opt_out_mode": "future_experiments_only"
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "type": "precompute-assignments-request",
+            "attributes": {
+              "env": {
+                "dd_env": "optout-probe"
+              },
+              "source": {
+                "sdk_name": "dd-sdk-android",
+                "sdk_version": "3.16.0-SNAPSHOT"
+              },
+              "subject": {
+                "targeting_key": "FUTURE_EXPERIMENTS_ONLY-telemetry-off",
+                "targeting_attributes": {
+                  "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+                }
+              },
+              "evaluation_options": {
+                "experimentation_opt_out_mode": "future_experiments_only"
+              }
+            }
+          }
+        }
+      ],
+      "evaluations": [
+        {
+          "timestamp": 1792727140769,
+          "flag": {
+            "key": "ordinary"
+          },
+          "first_evaluation": 1792727140769,
+          "last_evaluation": 1792727140769,
+          "evaluation_count": 1,
+          "runtime_default_used": false,
+          "targeting_key": "FUTURE_EXPERIMENTS_ONLY-telemetry-on",
+          "context": {
+            "dd": {
+              "service": "com.datadog.android.sdk.integration"
+            }
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "allocation": {
+            "key": "ordinary-fallback"
+          }
+        },
+        {
+          "timestamp": 1792727140769,
+          "flag": {
+            "key": "selected"
+          },
+          "first_evaluation": 1792727140769,
+          "last_evaluation": 1792727140769,
+          "evaluation_count": 1,
+          "runtime_default_used": false,
+          "targeting_key": "FUTURE_EXPERIMENTS_ONLY-telemetry-on",
+          "context": {
+            "dd": {
+              "service": "com.datadog.android.sdk.integration"
+            }
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "allocation": {
+            "key": "retained-before-cutoff"
+          }
+        }
+      ],
+      "exposures": [
+        {
+          "timestamp": 1792727140769,
+          "allocation": {
+            "key": "retained-before-cutoff"
+          },
+          "flag": {
+            "key": "selected"
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "subject": {
+            "id": "FUTURE_EXPERIMENTS_ONLY-telemetry-on",
+            "attributes": {
+              "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+            }
+          },
+          "serial_id": 1
+        },
+        {
+          "timestamp": 1792727140817,
+          "allocation": {
+            "key": "retained-before-cutoff"
+          },
+          "flag": {
+            "key": "selected"
+          },
+          "variant": {
+            "key": "enabled"
+          },
+          "subject": {
+            "id": "FUTURE_EXPERIMENTS_ONLY-telemetry-off",
+            "attributes": {
+              "dd_experimentation_opt_out_at": "2026-10-01T00:00:00.123456789Z"
+            }
+          },
+          "serial_id": 1
+        }
+      ],
+      "callback_threads": [
+        "datadog-flags-callbacks-thread-1",
+        "datadog-flags-callbacks-thread-1"
+      ],
+      "evaluations_returning_true": 4
+    }
+  ]
+}

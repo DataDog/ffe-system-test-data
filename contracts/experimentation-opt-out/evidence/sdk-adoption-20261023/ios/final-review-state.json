@@ -1,0 +1,321 @@
+{
+  "repository": "DataDog/dd-sdk-ios",
+  "pr_url": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+  "head_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "state": "open",
+  "draft": false,
+  "review_decision": "REVIEW_REQUIRED",
+  "snapshot_started_at": "2026-10-23T03:50:53.301221+00:00",
+  "snapshot_completed_at": "2026-10-23T03:50:59.187694+00:00",
+  "snapshot_sha256": "a15fc10e933926bfee16c88e76937b388eb0536017377efa32a0a938c29ab515",
+  "threads": [
+    {
+      "root_comment_id": 4343863206,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863206",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355455353
+      ]
+    },
+    {
+      "root_comment_id": 4343863216,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863216",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355459334
+      ]
+    },
+    {
+      "root_comment_id": 4343863236,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863236",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355459714
+      ]
+    },
+    {
+      "root_comment_id": 4343863248,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863248",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355460251
+      ]
+    },
+    {
+      "root_comment_id": 4343863262,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863262",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355460646
+      ]
+    },
+    {
+      "root_comment_id": 4343863269,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863269",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355461076,
+        4355864773
+      ]
+    },
+    {
+      "root_comment_id": 4343863276,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863276",
+      "resolved": false,
+      "verified_reply_ids": [
+        4355461539
+      ],
+      "open_disposition": "Broader timestamp grammar proposal is outside the accepted browser/mobile scope."
+    },
+    {
+      "root_comment_id": 4343863282,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863282",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355461986
+      ]
+    },
+    {
+      "root_comment_id": 4343863287,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863287",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355462283
+      ]
+    },
+    {
+      "root_comment_id": 4343863296,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863296",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355462644
+      ]
+    },
+    {
+      "root_comment_id": 4343863304,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863304",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355463113
+      ]
+    },
+    {
+      "root_comment_id": 4343863318,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863318",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355463540
+      ]
+    },
+    {
+      "root_comment_id": 4343863326,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863326",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355463934
+      ]
+    },
+    {
+      "root_comment_id": 4343863330,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863330",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355464297
+      ]
+    },
+    {
+      "root_comment_id": 4349878544,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4349878544",
+      "resolved": true,
+      "verified_reply_ids": [
+        4355464679
+      ]
+    }
+  ],
+  "latest_statuses": [
+    {
+      "context": "DDCI Status",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/repository/DataDog/dd-sdk-ios/pull/3338/request/14107547038221319529?utm_content=ddci_status_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:27:33Z",
+      "updated_at": "2026-10-23T03:27:33Z"
+    },
+    {
+      "context": "dd-gitlab/Sync GH Checks",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876908&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:27:28Z",
+      "updated_at": "2026-10-23T03:27:28Z"
+    },
+    {
+      "context": "dd-gitlab/Smoke Tests (iOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876904&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:26:32Z",
+      "updated_at": "2026-10-23T03:26:32Z"
+    },
+    {
+      "context": "dd-gitlab/Smoke Tests (tvOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876905&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T03:17:57Z",
+      "updated_at": "2026-10-23T03:17:57Z"
+    },
+    {
+      "context": "dd-gitlab/SPM Build (Swift 6.2)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876907&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:52:12Z",
+      "updated_at": "2026-10-23T02:52:12Z"
+    },
+    {
+      "context": "dd-gitlab/Smoke Tests (macOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876906&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:48:08Z",
+      "updated_at": "2026-10-23T02:48:08Z"
+    },
+    {
+      "context": "dd-gitlab/UI Tests: [Default]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876897&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:45:02Z",
+      "updated_at": "2026-10-23T02:45:02Z"
+    },
+    {
+      "context": "dd-gitlab/UI Tests: [RUM]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876898&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:45:00Z",
+      "updated_at": "2026-10-23T02:45:00Z"
+    },
+    {
+      "context": "dd-gitlab/SR Snapshot Tests",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876901&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:40:44Z",
+      "updated_at": "2026-10-23T02:40:44Z"
+    },
+    {
+      "context": "dd-gitlab/UI Tests: [NetworkInstrumentation]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876900&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:39:37Z",
+      "updated_at": "2026-10-23T02:39:37Z"
+    },
+    {
+      "context": "dd-gitlab/SR Layer Snapshot Tests",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876902&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:39:33Z",
+      "updated_at": "2026-10-23T02:39:33Z"
+    },
+    {
+      "context": "dd-gitlab/UI Tests: [CrashReporting]",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876899&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:38:23Z",
+      "updated_at": "2026-10-23T02:38:23Z"
+    },
+    {
+      "context": "dd-gitlab/Unit Tests (visionOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876895&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:33:54Z",
+      "updated_at": "2026-10-23T02:33:54Z"
+    },
+    {
+      "context": "dd-gitlab/Unit Tests (iOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876892&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:33:41Z",
+      "updated_at": "2026-10-23T02:33:41Z"
+    },
+    {
+      "context": "dd-gitlab/Unit Tests (tvOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876893&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:26:30Z",
+      "updated_at": "2026-10-23T02:26:30Z"
+    },
+    {
+      "context": "dd-gitlab/Unit Tests (watchOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876894&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:25:36Z",
+      "updated_at": "2026-10-23T02:25:36Z"
+    },
+    {
+      "context": "dd-gitlab/Unit Tests (macOS)",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876896&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:23:15Z",
+      "updated_at": "2026-10-23T02:23:15Z"
+    },
+    {
+      "context": "dd-gitlab/API Surface Verify",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876890&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:16:45Z",
+      "updated_at": "2026-10-23T02:16:45Z"
+    },
+    {
+      "context": "dd-gitlab/SPI Docs Build",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876891&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:15:15Z",
+      "updated_at": "2026-10-23T02:15:15Z"
+    },
+    {
+      "context": "dd-gitlab/Lint",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876889&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:12:53Z",
+      "updated_at": "2026-10-23T02:12:53Z"
+    },
+    {
+      "context": "dd-gitlab/Build Dependencies",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876888&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:12:13Z",
+      "updated_at": "2026-10-23T02:12:13Z"
+    },
+    {
+      "context": "dd-gitlab/ENV check",
+      "state": "success",
+      "target_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529?owner=DataDog&repository=dd-sdk-ios&taskExecutionId=2168876887&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page",
+      "created_at": "2026-10-23T02:12:00Z",
+      "updated_at": "2026-10-23T02:12:00Z"
+    }
+  ],
+  "check_runs": [
+    {
+      "name": "devflow/mergegate",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+      "details_url": "https://atlas.ddbuild.io/namespaces/default/workflows/evaluate-mergegate-DataDog-dd-sdk-ios-3338-EVENT_KIND_REVIEW/01a1668b-d890-7ec7-b233-ef90071d8921",
+      "started_at": "2026-10-23T02:11:26Z",
+      "completed_at": null
+    }
+  ],
+  "counts": {
+    "threads": 15,
+    "resolved": 14,
+    "verified_replies": 16,
+    "statuses": {
+      "success": 22
+    },
+    "check_runs": {
+      "in_progress": 1
+    }
+  },
+  "native_validated": true,
+  "independently_reviewed": true,
+  "signed_fix_published": true,
+  "human_approved": false,
+  "merged": false,
+  "released": false,
+  "deployed": false,
+  "limits": "Current CI snapshot; model agreement, native validation, hosted test selection, approvals and deployment are separate claims."
+}

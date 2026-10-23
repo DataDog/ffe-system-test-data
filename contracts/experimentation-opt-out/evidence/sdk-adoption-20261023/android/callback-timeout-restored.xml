@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-23T01:54:17.641Z" hostname="COMP-K57J95D4JY" time="1.286">
+  <properties/>
+  <testcase name="[1] DISABLED" classname="com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest" time="1.243"/>
+  <testcase name="[2] IMMEDIATE" classname="com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest" time="0.006"/>
+  <testcase name="[3] FUTURE_EXPERIMENTS_ONLY" classname="com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/leo.romanovsky/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.5/20f4e9b9d0ffb953657bfa4b92c0cceb27907d58/byte-buddy-agent-1.14.5.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Exception in thread "pool-5-thread-1" java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.tryAcquireSharedNanos(Unknown Source)
+	at java.base/java.util.concurrent.CountDownLatch.await(Unknown Source)
+	at com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest.M_deliver_timeout_while_fetch_is_blocked_W_updateEvaluationsForContext__$lambda$5(EvaluationsManagerTest.kt:155)
+	at org.mockito.internal.stubbing.StubbedInvocationMatcher.answer(StubbedInvocationMatcher.java:42)
+	at org.mockito.internal.handler.MockHandlerImpl.handle(MockHandlerImpl.java:103)
+	at org.mockito.internal.handler.NullResultGuardian.handle(NullResultGuardian.java:29)
+	at org.mockito.internal.handler.InvocationNotifierHandler.handle(InvocationNotifierHandler.java:34)
+	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:82)
+	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.doIntercept(MockMethodInterceptor.java:56)
+	at org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$DispatcherDefaultingToRealMethod.interceptAbstract(MockMethodInterceptor.java:161)
+	at com.datadog.android.flags.internal.net.PrecomputedAssignmentsReader$MockitoMock$gwiXrpaI.readPrecomputedFlags(Unknown Source)
+	at com.datadog.android.flags.internal.evaluation.EvaluationsManager.fetchEvaluations$lambda$12(EvaluationsManager.kt:188)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+]]></system-err>
+</testsuite>

@@ -1,0 +1,12 @@
+{
+  "baseline": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "followup": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "changed_paths": [
+    "dd-smoke-tests/openfeature/src/test/groovy/datadog/smoketest/springboot/OpenFeatureProviderSmokeTest.groovy"
+  ],
+  "production_files_unchanged": true,
+  "fixture_gitlink_unchanged": true,
+  "working_tree_clean": true,
+  "test_file_sha256": "f7b25b52ce91c614d7e67ecf49eb95f683594a99478c803d2283f2eb08723c5f",
+  "patch_sha256": "7b026cdf5619e44dae3ec2d09d3599f1a33c6b5aa5c1aa883e3a104286fe094e"
+}

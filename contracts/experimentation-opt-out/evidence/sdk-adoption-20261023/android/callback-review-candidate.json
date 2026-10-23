@@ -1,0 +1,516 @@
+{
+  "observed_at": "2026-10-23T02:56:27.565808+00:00",
+  "base_commit": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "reviewed_files": [
+    {
+      "path": "detekt_custom_safe_calls_third_party.yml",
+      "sha256": "f577eb172846e6b814ab069d66a1a10e70ec5bc17166d828fc5f4097c8765ba2"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsClient.kt",
+      "sha256": "47707e90f06943642fe34f216945eeaa2a409e5698d36a25018063ae68fdfd3c"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt",
+      "sha256": "4b5e042073b196ea2d4a92457e9ab27ad695c4f54f1cf4cb315e476e28783de6"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcher.kt",
+      "sha256": "67396caa8eecb8a1ea77739ffb44d64f46f63efb9e59eb7f6fdfa8fc753903c8"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/EvaluationCallbackDispatchTest.kt",
+      "sha256": "131d10d285ab7379860319013f6d2cdfa721a853307808c5f81e6d414851bbcc"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationCallbackDispatcherTest.kt",
+      "sha256": "cd4cd20e3f36ba6ee7014b271150350bc3b339c86859097289592f4449757df8"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt",
+      "sha256": "01f9b1d85c8be17830b88bf3a4e30f202a1a0e68a76055ca265d60233fb7bea6"
+    }
+  ],
+  "findings": [],
+  "status": "review frozen: no actionable scoped defects; 1782 unit/integration executions and corrected static checks verified; native candidate rerun deferred to signed SHA",
+  "method": "Independent read-only diff and call-path inspection; no new test execution or source edit by reviewer",
+  "model_boundary": "Callback scheduling, queue delivery, and worker shutdown are outside Lean contract claims.",
+  "unit_results": [
+    {
+      "module": "features/dd-sdk-android-flags",
+      "variant": "Debug",
+      "tests": 661,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.EvaluationCallbackDispatchTest.xml",
+          "sha256": "6f388231946fc73b5317f896f505c97ef23bf27c0b65d50a7223d14999cae802"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsClientExtTest.xml",
+          "sha256": "fc142ab8e25d10490b2c308741610ce33623c6b5aa5ac2fddc58474936daa8ed"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsClientTest.xml",
+          "sha256": "97d5c33c337f3c217ec7d116f54299bfdb3f82250d87003d47812548c6961c01"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsConfigurationTest.xml",
+          "sha256": "80af18ee74c256b2749e05db376165fe1aa033848fc3879075ab3afc3797483d"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsTest.xml",
+          "sha256": "ad50d22f5f47a77807546e3b673c65f720cded172ae88b77c015b16040d41cb1"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.NoOpFlagsClientTest.xml",
+          "sha256": "0d4b6cd6c2d06d01d70d4f790d344e6ed1873d540b84bf2ba679effb97167ebc"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.DatadogFlagsClientTest.xml",
+          "sha256": "5acbf95ee411fc89af508f4a4e2425cb72b6c5137cea10bcd7be25aee2e8787e"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.DatadogSiteExtensionsTest.xml",
+          "sha256": "5df2ef1983125f430bc62f3dbc1b8b4bba1214881996785a8c8e67d3a687c3ab"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.EvaluationEventsProcessorTest.xml",
+          "sha256": "35d760fc61650e3b0fed2354510372a78ff0762445b9f714b5d42d4218162e06"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.ExposureEventsProcessorTest.xml",
+          "sha256": "f456218a4367ed0e0f21bc273c0d5d96eae6d8e92b75ef07232f8c29726796f0"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.FlagsFeatureTest.xml",
+          "sha256": "c77d5b0a51993045e4f194860f1b0ed21c742b4dc0869f84ed74f8cd234a68fb"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.FlagsStateManagerTest.xml",
+          "sha256": "686596249976ed56edf49b2acf0de136d7fffd3a093261a761c5ffb2b8ff4fbd"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.JsonExtensionsTest.xml",
+          "sha256": "5cffc666b5789dd5ebe2bb2b64cb313d879d5873a0b622010481353bc2a1a427"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.aggregation.EvaluationAggregationStatsTest.xml",
+          "sha256": "1b599dab22fcbde4b2c1ee9e4990608dba002def100ef8535d29bad89d467eca"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.aggregation.EvaluationAggregatorTest.xml",
+          "sha256": "e3249114d01f5be4aa47a93cafb713b9deea5d8d6129fcaac7e36fe150b78553"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationCallbackDispatcherTest.xml",
+          "sha256": "dbd5a969b8ab08c278192590b6403956eead885b1aa369dcbfc135cc5f758efd"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationEffectsTest.xml",
+          "sha256": "874fd932b25ca70bf21d97fc1684839d4ea38911949f1a5672912402b597a98a"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest.xml",
+          "sha256": "27616e731268034bcf9dd7147abcd44ead5cddd5cfa0a703ee20d2e0809b1edc"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.ExperimentationCallbackTest.xml",
+          "sha256": "f51ba2e49fc98bd2a4ae8fd5ffe080fa82815ae264e532411b70590efd1e90dd"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.ExperimentationOptOutTest.xml",
+          "sha256": "68efd7f5e8926acf4f9045ef70b0fdcb25101a954d2d9afb0010216fa11d1cdd"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.model.FlagKeyObfuscationTest.xml",
+          "sha256": "7e120cc48cc252ca681c8b44836dabad1c053de667ebfcc081bdeefe392a5536"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.model.PrecomputedFlagTest.xml",
+          "sha256": "0519624c05ee66e96bfce87a2f99f18fa58a5dd6965b61ba7d00f4b3af7fa4a7"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.EvaluationsRequestFactoryTest.xml",
+          "sha256": "3212679866776a1c50fa7935418a061283370956a58d58b1ba7378aaa9ba15fa"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.ExposuresRequestFactoryTest.xml",
+          "sha256": "ffb45703bad56e69b687a1c6f246b23a9f54c6d59b8b7982c9c57bac1ded21a1"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.PrecomputedAssignmentsDownloaderTest.xml",
+          "sha256": "bdddf630adaac28a46305c4975ae76d14c40013f6be0aaf40d6de941b0a7a26b"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.PrecomputedAssignmentsRequestFactoryTest.xml",
+          "sha256": "a2ab569c62741e707daf96e6e7020c6bab26577ef35a3bc3893ef4600d603103"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.persistence.FlagsStateDeserializerTest.xml",
+          "sha256": "18b07442f03d4e273f4ca643cb79d36999f5641d6e946b6fc98536e114583676"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.persistence.FlagsStateSerializerTest.xml",
+          "sha256": "baea2845a04d82c7fba643ad3045a15fede6ea3c50ff9e72320f42d2e64e5864"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.DefaultFlagsRepositoryObfuscationTest.xml",
+          "sha256": "8a374aa3ec196348dd77c6c5667684ffecdc49e8f2ab37e8f55c324ce5094514"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.DefaultFlagsRepositoryTest.xml",
+          "sha256": "6a3ac3b126871fd1e7f7798bce0ad7b3923b335631385ba33add5dc6d3c09727"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.FirstFlagsInstallationTest.xml",
+          "sha256": "4bd0b1d78bb5ea9f7ee474f91a858ce7230d81855bd78241b976549d56c44a6c"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.FirstFlagsLatchTest.xml",
+          "sha256": "dc4a94964894f70e3a5f06e9ee4856b55a4fe13757e76b41973cdd22144da2db"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.net.PrecomputeMapperOptOutTest.xml",
+          "sha256": "16766529ce01c7fd099914f0df2c5e4ce4271e78e01f86ff4fd9feef2cc47451"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.net.PrecomputeMapperTest.xml",
+          "sha256": "069f38073d84f23753eaa6c6ae9a4b60454a2f23f6f4451fa0c5f44b0d891f15"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.serialization.FlagsJsonTest.xml",
+          "sha256": "cd2a145f4f4cef00308502281436471fe2c84ddb68506c69e5cab6ec4a7a7bc2"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.storage.EvaluationEventRecordWriterTest.xml",
+          "sha256": "a66136ead6efb275086739bb11fd72e07e8b855ad9156e019aedd62b1ba50a8f"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.storage.ExposureEventRecordWriterTest.xml",
+          "sha256": "5ee029bb8fa4695fc4d17d54a4a9dd062472f4489fff37fac2b40e7b6332b9f8"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.model.FlagsClientEventTest.xml",
+          "sha256": "671ce6623f21f78d429c497a2624c2f2c04ce9700307eafe39252bd9d9a8c798"
+        }
+      ]
+    },
+    {
+      "module": "features/dd-sdk-android-flags",
+      "variant": "Release",
+      "tests": 661,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.EvaluationCallbackDispatchTest.xml",
+          "sha256": "3d462ef27bf7d298dd3cc41658bf2808dc894efdd312358a22b9eba6797892ce"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsClientExtTest.xml",
+          "sha256": "c05898484c4b2b301ba17dec7ed48d35a25ded768f813b8740d59a18c9fb02b4"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsClientTest.xml",
+          "sha256": "3f13b49021e3c2b6493ea6a1a5c2357b2f565c32afbb5a66997522dd3b1bee75"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsConfigurationTest.xml",
+          "sha256": "91e7205cc32a7f636ef9ba845daaeb8b185147db8c59b7e4ef97a76585311bd0"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.FlagsTest.xml",
+          "sha256": "64db687f1cc20f350eafde10552efd69956ccdcd3fa92a1370a6a69fb11fb07a"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.NoOpFlagsClientTest.xml",
+          "sha256": "39e55b5577c0883d8840d750443f3d646fa662c26d35c40ff49e81bade5dac2f"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.DatadogFlagsClientTest.xml",
+          "sha256": "245a3d90b742da6fd771a61a44ed8f059c2b2825e06c9293ce8087ec138cf5c5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.DatadogSiteExtensionsTest.xml",
+          "sha256": "53fed796cf6903296b352caf450fea1cec4520b196f25ae4b8215c8844c024ac"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.EvaluationEventsProcessorTest.xml",
+          "sha256": "3e47e55e2a68dca0604ff29b68ed97708269cc96b0f7082a12c7456531e4fef5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.ExposureEventsProcessorTest.xml",
+          "sha256": "72414a1dbfe4034943a869b878392291463f200e0cc99ee39bdb35f182ab161c"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.FlagsFeatureTest.xml",
+          "sha256": "66de49f8ad30406a50e015473b23df5fd69989836d47e98dae2d8cab18a1b935"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.FlagsStateManagerTest.xml",
+          "sha256": "55be476d94bf5ffb300a65cc96060e4b449ca228668c13403f1d4f585fa6f8ae"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.JsonExtensionsTest.xml",
+          "sha256": "396cefdd545ccd42ca3d8c9ff615a5987b7803b0f63ba407265b6ada0dabadb5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.aggregation.EvaluationAggregationStatsTest.xml",
+          "sha256": "191461a6aa5f9b05cf33b4bec4acd49f91e7929325c9a64f773ca4e511685a3e"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.aggregation.EvaluationAggregatorTest.xml",
+          "sha256": "4b834148009c792d5e7207024722bfd93cf93ec7ba4fe4ed6f8e74ac30a3e3ec"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationCallbackDispatcherTest.xml",
+          "sha256": "b55c4dc690f85e6613e591b5925b55f5511558bdd4374f356dafb0b61382fd66"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationEffectsTest.xml",
+          "sha256": "edf5e6a4030ddf4485a1b6ff2fb7e59bf29c065b0ed2ee8cdf251b5b1787e209"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.EvaluationsManagerTest.xml",
+          "sha256": "07fab69e55ff8000a4691483eb77974ba7e4aa4f8e197c2f2c9c13b83b7ee973"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.ExperimentationCallbackTest.xml",
+          "sha256": "c74fbad35f7d025a9702d771e11ceb6241b30b7e95156eae82d210421eab80f9"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.evaluation.ExperimentationOptOutTest.xml",
+          "sha256": "bdc9c276dc3e8b3e640385e08d833184d0e9ed315cc2999faa4fa8b311654590"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.model.FlagKeyObfuscationTest.xml",
+          "sha256": "9f7c26b6da5339767cdf922fd1ac12fc712159989028aebd53ec043e0d80329a"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.model.PrecomputedFlagTest.xml",
+          "sha256": "7fdc312d626b77aa114d11d43cd86255a49e7c17d7460e9e158c481b220bd700"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.EvaluationsRequestFactoryTest.xml",
+          "sha256": "777cd33e04d637762d09498b3f30bb5fa7283cd51698881a7c0d746fb8ca33bd"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.ExposuresRequestFactoryTest.xml",
+          "sha256": "c1a5a58a5b4a88aaff73655d78ec648fc900a0dc442ac715bfd4df6278ea45e9"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.PrecomputedAssignmentsDownloaderTest.xml",
+          "sha256": "cc025fb24c3f20faf1cfbf70b4807e29a8b153b13afbb2261570967a31635ef5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.net.PrecomputedAssignmentsRequestFactoryTest.xml",
+          "sha256": "f1d566ff1185bdfc971466668ae63c2eafb4f5451208b96feb5681277bdac220"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.persistence.FlagsStateDeserializerTest.xml",
+          "sha256": "0338d8d56bcabc86c400b2a9617b6285ab4d28a70c7e732e5a531cb779f5120e"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.persistence.FlagsStateSerializerTest.xml",
+          "sha256": "9da70252841f923f2709555bd14d8be3893a71ff026f773dc3f0fbe657cbae64"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.DefaultFlagsRepositoryObfuscationTest.xml",
+          "sha256": "28c3ea8ed74ae56849dde89dbd08c50f9c4b0c200802b80d8685310d4fcd0791"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.DefaultFlagsRepositoryTest.xml",
+          "sha256": "37b143655d3368b359c86c85110fab403ca99c4b690569c807a8ffde899eeece"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.FirstFlagsInstallationTest.xml",
+          "sha256": "d74259f55bc40eed2b60ed1441e9fb4cbd350719e00c9d87b04f3d64eac4092d"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.FirstFlagsLatchTest.xml",
+          "sha256": "58760c0b1fe38c0938d76713f4b45a8d07e0900a34f8edfaedd09215a64df234"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.net.PrecomputeMapperOptOutTest.xml",
+          "sha256": "639fcf1ca87e5b61ba8425d88c933a5b93fcaf1ab62143f0aac9620caf0a5113"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.repository.net.PrecomputeMapperTest.xml",
+          "sha256": "369194d64fe9fa3ffb8c065b57046c4cd8b4c3f4ce00c2dc7e65ad023f088aa4"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.serialization.FlagsJsonTest.xml",
+          "sha256": "f33eebfdf83bd2c2852dbe6265ef1f4259d9c1165948004bb38276ba6a15534c"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.storage.EvaluationEventRecordWriterTest.xml",
+          "sha256": "285cbb0f8e8e8c28ca3f5e646ca81c67ed82993ba66c52f01d05a0a2c0102bae"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.internal.storage.ExposureEventRecordWriterTest.xml",
+          "sha256": "cc9ac54ef7ea9bcdd4c831b629cb54a423c4f8102939795561cbead998139de8"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.model.FlagsClientEventTest.xml",
+          "sha256": "16b724a6ef99cff56081bd9d6398ab766355d52d2e77b29f04caa639b57bd6c5"
+        }
+      ]
+    },
+    {
+      "module": "features/dd-sdk-android-flags-openfeature",
+      "variant": "Debug",
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.DatadogFlagsProviderTest.xml",
+          "sha256": "13de976236d2d0c62fa6ba98f34b038f854294c3203fcde83cdd9f5e9bbe76a4"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.FlagsClientExtTest.xml",
+          "sha256": "e5bde84da6966702747c558b652a3aaae90ad1025d2472e8fa0f5c454852f120"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.FlagsClientExtTest.xml",
+          "sha256": "b7e56f96fc91e5640b8c17e3d52a012edb9d64a6855808cbbfcfcd38b6bf75d1"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.adapters.ConvertersTest.xml",
+          "sha256": "7a8ac5d2ec131ee3d06c243bdcf61ce794333cdbd1152a228b6946979c4e4cd9"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.adapters.ValueConvertersTest.xml",
+          "sha256": "4125de84738053e7ee455a7457beaccb7acae2037153b7c456e651bed0a46cba"
+        }
+      ]
+    },
+    {
+      "module": "features/dd-sdk-android-flags-openfeature",
+      "variant": "Release",
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.DatadogFlagsProviderTest.xml",
+          "sha256": "ebc808f06086e03f696157fb0552e753b0271f6b8ad6e3453279eece1e2653a0"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.FlagsClientExtTest.xml",
+          "sha256": "5add97d9cf8cb4fc20fbab0071c419cfab5bee34b88a476e2010f0eda29015c5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.FlagsClientExtTest.xml",
+          "sha256": "1b3e408007a5cda19ed580246a60b9239828b3858e638c66a2aff208b7d632fa"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.adapters.ConvertersTest.xml",
+          "sha256": "771ec1e43b8d9db494b507058502aa1306f38f97211e5a8e2a20107638abc022"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.openfeature.internal.adapters.ValueConvertersTest.xml",
+          "sha256": "d9898b5a96fd0cbc0e0f691c0672bb1d8c7cbbfdbd7e87f6d3c7756d6253752d"
+        }
+      ]
+    },
+    {
+      "module": "reliability/single-fit/flags",
+      "variant": "Debug",
+      "tests": 148,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.integration.EvaluationTelemetryTest.xml",
+          "sha256": "aea2c80cf7d294a8536f407298d59889ca275cf16170ecfbc120fe735095e6c5"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.ExperimentationOptOutTest.xml",
+          "sha256": "4e4bb84e80f32f29f39defc022e546862b48f881a317ed1e39e13a0010f1b2ff"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsClientTest.xml",
+          "sha256": "754ffa949fec3be61aa7ef79b71036689bad82642dfe0f3a2de39c2524840e13"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsEvaluationTest.xml",
+          "sha256": "0dc9d9cb3e5765f949ed770c1f333e807bd4ea9b67b7a74554a676459fb755e8"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsObfuscationTest.xml",
+          "sha256": "68b2fe291472601b3a27b10846626d0b0944136fd41ca85c806464f1d799536f"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsRumIntegrationTest.xml",
+          "sha256": "072f6f3cc2e6b4e32802b5b90c7f6ce716c591229b7705d8632354abbdeb2d3e"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FutureExperimentationOptOutTest.xml",
+          "sha256": "3334e29a84f8ffa655c5fb694b95980d59212ec1656762287afdd1bec14f7d10"
+        }
+      ]
+    },
+    {
+      "module": "reliability/single-fit/flags",
+      "variant": "Release",
+      "tests": 148,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_files": [
+        {
+          "name": "TEST-com.datadog.android.flags.integration.EvaluationTelemetryTest.xml",
+          "sha256": "7ae1262b2a544ba260000c4650ef51845060ede85ef4cc4919ce3179848915b2"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.ExperimentationOptOutTest.xml",
+          "sha256": "2de6434673e208db47e34e2526ce0a85113daa6cdda3f555338d3b2885040501"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsClientTest.xml",
+          "sha256": "5c6cfc6320f014bca48c58b1a9b30f828605e8ad6e40d4f548fbadd3e04729c4"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsEvaluationTest.xml",
+          "sha256": "b2045e2c027d34c35dc08c14ca7baa9857b8a8edd4a2306b79b7a85cf2624e45"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsObfuscationTest.xml",
+          "sha256": "9d23620e7fa8af63c1ef4f55778d7e5e82e0a7ece3ccdf41707f6b14451ab47b"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FlagsRumIntegrationTest.xml",
+          "sha256": "d96aeafda6bbfee0c07fe784b29ee5c8524a5a98ab5a9d5ea27d145bcb99cf5a"
+        },
+        {
+          "name": "TEST-com.datadog.android.flags.integration.FutureExperimentationOptOutTest.xml",
+          "sha256": "9ec403f21ab0f59a201fc94014472cbe150c29fc859d56d8ae830441009bf3b2"
+        }
+      ]
+    }
+  ],
+  "test_total": 1782,
+  "static_log": "../android-audit/review4-candidate-static-corrected.log",
+  "static_log_sha256": "6d67afe0a7d7974bd1f5a83270412bb3f6040f1e15647a1fa1ddeade8163337e",
+  "static_result": "BUILD SUCCESSFUL",
+  "execution_ownership": "Android implementation worker ran tests. Independent reviewer inspected XML/log outputs. No duplicate tests were started.",
+  "candidate_manifest_sha256": "7aad3b748c80f352533090b1b28e43080e14103a305b6c19e353ce11b5936b73",
+  "manifest_hashes_match": true,
+  "limits": [
+    "Startup denial or rejected submission retains pending completions for the next dispatch; there is no automatic retry.",
+    "The dispatcher queue is unbounded. A blocked callback delays later serial callbacks and retains their memory.",
+    "Accepted callbacks remain owned by the dispatcher after feature stop and drain outside SDK locks. Calls on a retained stopped client have no new lifecycle guarantee."
+  ],
+  "final_signed_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "exact_commit_source_hashes_match": true,
+  "exact_commit_checked_at": "2026-10-23T02:57:58.541190+00:00",
+  "exact_commit_execution_status": "Implementation worker is rerunning exact-head tests/runtime. This review binds prior candidate source and inspected results by identical file hashes."
+}

@@ -1,0 +1,8 @@
+allprojects {
+    afterEvaluate { p ->
+        if (p.path == ':instrumented:integration') {
+            p.android.sourceSets.getByName('androidTest').java.srcDir('/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/android-audit/review4-runtime/test-src')
+            p.dependencies.add('androidTestImplementation', p.project(':features:dd-sdk-android-flags'))
+        }
+    }
+}

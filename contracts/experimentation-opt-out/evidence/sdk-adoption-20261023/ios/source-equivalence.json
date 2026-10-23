@@ -1,0 +1,28 @@
+{
+  "source_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "prior_source_sha": "6830d11b8cce653dd5415dbacf39d4841688ce1f",
+  "recorded_at": "2026-10-23T02:08:22.621063+00:00",
+  "candidate_diff_sha256": "8a1afe2976eb5b5fb323948ad0167ce9e856a4e830e0797b53c24cd9a7ad93b0",
+  "production_files_sha256": {
+    "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift": "2142b79b665e931a891b4658ab0f83375fa18d64058bba91e1f2bdfa1bd00899",
+    "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift": "afb05df25a18235ad66a1c1a198f2a8c2aad8ee7ff5ceab347e3367ef34739b7",
+    "DatadogFlags/Sources/Client/FlagsClient.swift": "f1b6651d99e36d14c51a89cbfb4c35f6efffd1bf8da27804e4dd998ce07d181d",
+    "DatadogFlags/Sources/Client/FlagsData.swift": "6220ea0e36c37a8df381c01e81c0628f6d4f60126589c09a31a8436cd906113a",
+    "DatadogFlags/Sources/Client/FlagsRepository.swift": "8fc83f1c785bdcf0b7d5b81c2910590a292f03399e0f6434b9e80682f48fcf46",
+    "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d",
+    "DatadogFlags/Sources/Models/FlagDetails.swift": "ba0221bd3f9c95eecff7c004611f6129d4ffff93f6789e7baf475c88d801afe9",
+    "DatadogFlags/Sources/Models/FlagsError.swift": "b9a5c2c605482a6a2bd5c9fe88df2240b7de59817ebe494c6443544d2164c801",
+    "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85"
+  },
+  "source_profile_receipt": "source/profile-receipt.json",
+  "profile_source_hashes_equal": true,
+  "native_mutation_receipt": "controls/summary.json",
+  "native_mutation_source_hashes_equal": true,
+  "followup_changed_files": [
+    "Datadog/IntegrationUnitTests/Flags/FlagsEvaluationIntegrationTests.swift",
+    "DatadogFlags/Tests/Client/FlagsClientTests.swift",
+    "DatadogFlags/Tests/Client/FlagsRepositoryTests.swift"
+  ],
+  "followup_equal_after_ascii_whitespace_removal": true,
+  "boundary": "Production187-case result and native controls retain their original execution receipts; identical source hashes bind them to final commit. No claim of rerunning those controls at final commit. Test whitespace-only diff was inspected separately."
+}

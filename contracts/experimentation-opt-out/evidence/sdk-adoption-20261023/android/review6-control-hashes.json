@@ -1,0 +1,5 @@
+{
+  "mutation": "Restore the original failed-start behavior: clear draining and leave callbacks queued until another execute call.",
+  "restored_sha256": "5d684c011a28b004838db1a815be1aaaa8388ac3c88c72ab12ee95b7268bf271",
+  "mutated_sha256": "f58a6e2f0b60a9c0545ee7a412797612d6d0aef30c8e6fda6c09367ba2530969"
+}

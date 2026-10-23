@@ -1,0 +1,212 @@
+<testsuites><testsuite name="system_tests_suite" errors="0" failures="5" skipped="0" tests="5" time="40.069" timestamp="2026-10-23T02:26:00.054864" hostname="leo-romanovsky"><properties><property name="dd_tags[systest.suite.context.scenario]" value="PARAMETRIC" /><property name="dd_tags[systest.suite.context.library.name]" value="java" /><property name="dd_tags[systest.suite.context.library.version]" value="1.68.0-SNAPSHOT+a4d3dfb21c" /><property name="dd_tags[systest.suite.context.weblog_variant]" value="parametric-java" /><property name="dd_tags[test.parameters]" value="{&quot;scenario&quot;: &quot;PARAMETRIC&quot;, &quot;library&quot;: {&quot;name&quot;: &quot;java&quot;, &quot;version&quot;: &quot;1.68.0-SNAPSHOT+a4d3dfb21c&quot;}, &quot;weblog_variant&quot;: &quot;parametric-java&quot;}" /></properties><testcase name="tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract.test_policy[library_env0-disabled, parametric-java]" time="0.480"><properties><property name="test.codeowners" value="[&quot;@DataDog/apm-reliability-and-performance&quot;]" /><property name="dd_tags[systest.case.outcome]" value="failed" /><property name="dd_tags[test.final_status]" value="fail" /></properties><failure message="AssertionError: ('policy/disabled/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})&#10;assert 'PROVIDER_NOT_READY' == 'NONE'&#10;  - NONE&#10;  + PROVIDER_NOT_READY">self = &lt;tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract object at 0x71fda926fe90&gt;
+test_agent = &lt;utils.docker_fixtures._test_agent.TestAgentAPI object at 0x71fda8a824b0&gt;
+test_library = &lt;utils.docker_fixtures._test_clients._test_client_parametric.ParametricTestClientApi object at 0x71fda84ce600&gt;
+mode = 'disabled'
+
+    @pytest.mark.parametrize(
+        ("library_env", "mode"),
+        [({**BASE_ENV, "DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE": mode}, mode) for mode in MODES],
+    )
+    def test_policy(self, test_agent: TestAgentAPI, test_library: APMLibrary, mode: str) -&gt; None:
+        cases = [case for case in CASES if case["args"]["mode"] == mode]
+        assert len(cases) == 30
+        timestamps = {
+            "missing": None,
+            "invalid": "bad",
+            "before": "2026-10-19T11:59:59.999999999Z",
+            "equal": CUTOFF,
+            "after": "2026-10-19T12:00:00.000000001Z",
+        }
+        flags = {}
+        for index, case in enumerate(cases):
+            args = case["args"]
+            key = f"policy-{index}"
+            flags[key] = _flag(
+                key,
+                [
+                    _allocation("experiment", do_log=args["doLog"], activation=timestamps[args["activation"]]),
+                    _allocation("ordinary", do_log=False),
+                ],
+            )
+        flags["unreachable"] = _flag(
+            "unreachable",
+            [_allocation("ordinary", do_log=False), _allocation("experiment", do_log=True, activation="bad")],
+        )
+        for name in ["omitted", "null"]:
+            allocation = _allocation("experiment", do_log=None)
+            if name == "omitted":
+                del allocation["doLog"]
+            flags[name] = _flag(name, [allocation, _allocation("ordinary", do_log=False)])
+        _install(test_agent, test_library, _config(flags))
+        observations = []
+        for index, case in enumerate(cases):
+            args, expected = case["args"], case["expected"]
+            attrs = (
+                {} if args["attribute"] == "absent" else {ATTRIBUTE: CUTOFF if args["attribute"] == "valid" else "bad"}
+            )
+            result = _evaluate(test_library, f"policy-{index}", attrs)
+&gt;           assert (result.get("errorCode") or "NONE") == expected["error"], (case["id"], result)
+E           AssertionError: ('policy/disabled/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})
+E           assert 'PROVIDER_NOT_READY' == 'NONE'
+E             - NONE
+E             + PROVIDER_NOT_READY
+
+tests/parametric/test_ffe/test_java_optout_contract.py:134: AssertionError</failure></testcase><testcase name="tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract.test_policy[library_env2-future_experiments_only, parametric-java]" time="0.466"><properties><property name="test.codeowners" value="[&quot;@DataDog/apm-reliability-and-performance&quot;]" /><property name="dd_tags[systest.case.outcome]" value="failed" /><property name="dd_tags[test.final_status]" value="fail" /></properties><failure message="AssertionError: ('policy/future_experiments_only/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})&#10;assert 'PROVIDER_NOT_READY' == 'NONE'&#10;  - NONE&#10;  + PROVIDER_NOT_READY">self = &lt;tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract object at 0x79add3d756a0&gt;
+test_agent = &lt;utils.docker_fixtures._test_agent.TestAgentAPI object at 0x79add355e150&gt;
+test_library = &lt;utils.docker_fixtures._test_clients._test_client_parametric.ParametricTestClientApi object at 0x79add355d9a0&gt;
+mode = 'future_experiments_only'
+
+    @pytest.mark.parametrize(
+        ("library_env", "mode"),
+        [({**BASE_ENV, "DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE": mode}, mode) for mode in MODES],
+    )
+    def test_policy(self, test_agent: TestAgentAPI, test_library: APMLibrary, mode: str) -&gt; None:
+        cases = [case for case in CASES if case["args"]["mode"] == mode]
+        assert len(cases) == 30
+        timestamps = {
+            "missing": None,
+            "invalid": "bad",
+            "before": "2026-10-19T11:59:59.999999999Z",
+            "equal": CUTOFF,
+            "after": "2026-10-19T12:00:00.000000001Z",
+        }
+        flags = {}
+        for index, case in enumerate(cases):
+            args = case["args"]
+            key = f"policy-{index}"
+            flags[key] = _flag(
+                key,
+                [
+                    _allocation("experiment", do_log=args["doLog"], activation=timestamps[args["activation"]]),
+                    _allocation("ordinary", do_log=False),
+                ],
+            )
+        flags["unreachable"] = _flag(
+            "unreachable",
+            [_allocation("ordinary", do_log=False), _allocation("experiment", do_log=True, activation="bad")],
+        )
+        for name in ["omitted", "null"]:
+            allocation = _allocation("experiment", do_log=None)
+            if name == "omitted":
+                del allocation["doLog"]
+            flags[name] = _flag(name, [allocation, _allocation("ordinary", do_log=False)])
+        _install(test_agent, test_library, _config(flags))
+        observations = []
+        for index, case in enumerate(cases):
+            args, expected = case["args"], case["expected"]
+            attrs = (
+                {} if args["attribute"] == "absent" else {ATTRIBUTE: CUTOFF if args["attribute"] == "valid" else "bad"}
+            )
+            result = _evaluate(test_library, f"policy-{index}", attrs)
+&gt;           assert (result.get("errorCode") or "NONE") == expected["error"], (case["id"], result)
+E           AssertionError: ('policy/future_experiments_only/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})
+E           assert 'PROVIDER_NOT_READY' == 'NONE'
+E             - NONE
+E             + PROVIDER_NOT_READY
+
+tests/parametric/test_ffe/test_java_optout_contract.py:134: AssertionError</failure></testcase><testcase name="tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract.test_retained_exposure_and_telemetry[False-library_env0, parametric-java]" time="0.486"><properties><property name="test.codeowners" value="[&quot;@DataDog/apm-reliability-and-performance&quot;]" /><property name="dd_tags[systest.case.outcome]" value="failed" /><property name="dd_tags[test.final_status]" value="fail" /></properties><failure message="AssertionError: {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'}&#10;assert 'default' == 'experiment'&#10;  - experiment&#10;  + default">self = &lt;tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract object at 0x79add3de0830&gt;
+test_agent = &lt;utils.docker_fixtures._test_agent.TestAgentAPI object at 0x79add355e150&gt;
+test_library = &lt;utils.docker_fixtures._test_clients._test_client_parametric.ParametricTestClientApi object at 0x79add2e7a720&gt;
+
+    @pytest.mark.parametrize(
+        "library_env", [{**BASE_ENV, "DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE": "future_experiments_only"}]
+    )
+    @pytest.mark.parametrize("suppressed", [False, True])
+    def test_retained_exposure_and_telemetry(
+        self, test_agent: TestAgentAPI, test_library: APMLibrary, *, suppressed: bool
+    ) -&gt; None:
+        retained = _flag(
+            "retained", [_allocation("experiment", do_log=True, activation="2026-10-19T11:59:59.999999999Z")]
+        )
+        control = _flag("control", [_allocation("ordinary", do_log=False)])
+        _install(test_agent, test_library, _config({"retained": retained, "control": control}))
+        for _ in range(3):
+            result = _evaluate(
+                test_library, "retained", {ATTRIBUTE: CUTOFF, "dd_evaluation_telemetry_opt_out": suppressed}
+            )
+&gt;           assert result["value"] == "experiment", result
+E           AssertionError: {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'}
+E           assert 'default' == 'experiment'
+E             - experiment
+E             + default
+
+tests/parametric/test_ffe/test_java_optout_contract.py:169: AssertionError</failure></testcase><testcase name="tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract.test_policy[library_env1-immediate, parametric-java]" time="0.611"><properties><property name="test.codeowners" value="[&quot;@DataDog/apm-reliability-and-performance&quot;]" /><property name="dd_tags[systest.case.outcome]" value="failed" /><property name="dd_tags[test.final_status]" value="fail" /></properties><failure message="AssertionError: ('policy/immediate/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})&#10;assert 'PROVIDER_NOT_READY' == 'NONE'&#10;  - NONE&#10;  + PROVIDER_NOT_READY">self = &lt;tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract object at 0x71fda92a4bc0&gt;
+test_agent = &lt;utils.docker_fixtures._test_agent.TestAgentAPI object at 0x71fda8a824b0&gt;
+test_library = &lt;utils.docker_fixtures._test_clients._test_client_parametric.ParametricTestClientApi object at 0x71fda91f7d70&gt;
+mode = 'immediate'
+
+    @pytest.mark.parametrize(
+        ("library_env", "mode"),
+        [({**BASE_ENV, "DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE": mode}, mode) for mode in MODES],
+    )
+    def test_policy(self, test_agent: TestAgentAPI, test_library: APMLibrary, mode: str) -&gt; None:
+        cases = [case for case in CASES if case["args"]["mode"] == mode]
+        assert len(cases) == 30
+        timestamps = {
+            "missing": None,
+            "invalid": "bad",
+            "before": "2026-10-19T11:59:59.999999999Z",
+            "equal": CUTOFF,
+            "after": "2026-10-19T12:00:00.000000001Z",
+        }
+        flags = {}
+        for index, case in enumerate(cases):
+            args = case["args"]
+            key = f"policy-{index}"
+            flags[key] = _flag(
+                key,
+                [
+                    _allocation("experiment", do_log=args["doLog"], activation=timestamps[args["activation"]]),
+                    _allocation("ordinary", do_log=False),
+                ],
+            )
+        flags["unreachable"] = _flag(
+            "unreachable",
+            [_allocation("ordinary", do_log=False), _allocation("experiment", do_log=True, activation="bad")],
+        )
+        for name in ["omitted", "null"]:
+            allocation = _allocation("experiment", do_log=None)
+            if name == "omitted":
+                del allocation["doLog"]
+            flags[name] = _flag(name, [allocation, _allocation("ordinary", do_log=False)])
+        _install(test_agent, test_library, _config(flags))
+        observations = []
+        for index, case in enumerate(cases):
+            args, expected = case["args"], case["expected"]
+            attrs = (
+                {} if args["attribute"] == "absent" else {ATTRIBUTE: CUTOFF if args["attribute"] == "valid" else "bad"}
+            )
+            result = _evaluate(test_library, f"policy-{index}", attrs)
+&gt;           assert (result.get("errorCode") or "NONE") == expected["error"], (case["id"], result)
+E           AssertionError: ('policy/immediate/absent/missing/0', {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'})
+E           assert 'PROVIDER_NOT_READY' == 'NONE'
+E             - NONE
+E             + PROVIDER_NOT_READY
+
+tests/parametric/test_ffe/test_java_optout_contract.py:134: AssertionError</failure></testcase><testcase name="tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract.test_retained_exposure_and_telemetry[True-library_env0, parametric-java]" time="0.512"><properties><property name="test.codeowners" value="[&quot;@DataDog/apm-reliability-and-performance&quot;]" /><property name="dd_tags[systest.case.outcome]" value="failed" /><property name="dd_tags[test.final_status]" value="fail" /></properties><failure message="AssertionError: {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'}&#10;assert 'default' == 'experiment'&#10;  - experiment&#10;  + default">self = &lt;tests.parametric.test_ffe.test_java_optout_contract.Test_Java_OptOut_Contract object at 0x71fda9304e00&gt;
+test_agent = &lt;utils.docker_fixtures._test_agent.TestAgentAPI object at 0x71fda8a824b0&gt;
+test_library = &lt;utils.docker_fixtures._test_clients._test_client_parametric.ParametricTestClientApi object at 0x71fda8ed3ad0&gt;
+
+    @pytest.mark.parametrize(
+        "library_env", [{**BASE_ENV, "DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE": "future_experiments_only"}]
+    )
+    @pytest.mark.parametrize("suppressed", [False, True])
+    def test_retained_exposure_and_telemetry(
+        self, test_agent: TestAgentAPI, test_library: APMLibrary, *, suppressed: bool
+    ) -&gt; None:
+        retained = _flag(
+            "retained", [_allocation("experiment", do_log=True, activation="2026-10-19T11:59:59.999999999Z")]
+        )
+        control = _flag("control", [_allocation("ordinary", do_log=False)])
+        _install(test_agent, test_library, _config({"retained": retained, "control": control}))
+        for _ in range(3):
+            result = _evaluate(
+                test_library, "retained", {ATTRIBUTE: CUTOFF, "dd_evaluation_telemetry_opt_out": suppressed}
+            )
+&gt;           assert result["value"] == "experiment", result
+E           AssertionError: {'errorCode': 'PROVIDER_NOT_READY', 'flagMetadata': {'observe_full_evaluation_data': False}, 'reason': 'ERROR', 'value': 'default'}
+E           assert 'default' == 'experiment'
+E             - experiment
+E             + default
+
+tests/parametric/test_ffe/test_java_optout_contract.py:169: AssertionError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,43 @@
+{
+  "suppressed": true,
+  "exposures": [
+    {
+      "timestamp": 1792723092128,
+      "allocation": {
+        "key": "experiment"
+      },
+      "flag": {
+        "key": "retained"
+      },
+      "variant": {
+        "key": "experiment"
+      },
+      "subject": {
+        "id": "optout-runtime-subject",
+        "attributes": {
+          "dd_experimentation_opt_out_at": "2026-10-19T12:00:00Z",
+          "targetingKey": "optout-runtime-subject",
+          "dd_evaluation_telemetry_opt_out": true
+        }
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "timestamp": 1792723101907,
+      "flag": {
+        "key": "control"
+      },
+      "first_evaluation": 1792723092168,
+      "last_evaluation": 1792723092168,
+      "evaluation_count": 1,
+      "variant": {
+        "key": "ordinary"
+      },
+      "allocation": {
+        "key": "ordinary"
+      },
+      "targeting_key": "optout-runtime-subject"
+    }
+  ]
+}

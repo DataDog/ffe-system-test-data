@@ -1,0 +1,30 @@
+{
+  "audited_head": "176aafac647ae8484aef561e07a087c77bebca3c",
+  "local_base_ref": "5b351983abaa54c0b5fba8d94d29d1378fd69fd7",
+  "git_status": "",
+  "review_comments_read": false,
+  "production_edits": false,
+  "time_utc": "2026-10-23T01:34:09.105784+00:00",
+  "source_sha256": {
+    "DatadogFlags/Sources/Client/FlagsClient.swift": "4958914e4cd579b5b5dee51afe3e8ea3f9f1c836ad962e73721f02307b1edffb",
+    "DatadogFlags/Sources/Client/FlagsRepository.swift": "579d48ae5f711c60f9f6d6cae239067bf4905216d0f6f8d2c47d4a4056201dd9",
+    "DatadogFlags/Sources/Client/FlagsStateManager.swift": "cc1a69beb9a40b3b058db9abce3237884131a08a5695a96850e0833ba4258c5f",
+    "DatadogFlags/Sources/Client/FlagsDataStore.swift": "7b7aa6797905ea47bf7c2669a51fa3ac734d58761d0f607cb3ff04235b230c86",
+    "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85",
+    "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift": "2494b9073cbd49d6e6a1118086855a59badac89a686a82e2876db6af5f5e248d",
+    "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift": "afb05df25a18235ad66a1c1a198f2a8c2aad8ee7ff5ceab347e3367ef34739b7",
+    "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d",
+    "Datadog/IntegrationUnitTests/Flags/FlagsEvaluationIntegrationTests.swift": "cc2b6fe5bb04eced66c87499ed9c0c26cb8ff7a441c68218b61733a3db346f35"
+  },
+  "positive_source_probe": {
+    "cases": 187,
+    "mismatches": 0,
+    "evidence": "production-source-probe/evidence.json"
+  },
+  "negative_source_probe": {
+    "cases": 187,
+    "mismatches": 7,
+    "evidence": "serialization-negative-control/evidence.json"
+  },
+  "fresh_ios_simulator_tests": false
+}

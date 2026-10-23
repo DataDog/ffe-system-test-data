@@ -1,0 +1,50 @@
+{
+  "remote_root": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence",
+  "logs": [
+    {
+      "relative_path": "final-operation-observations.log",
+      "bytes": 17835,
+      "sha256": "4f484293fe64b4ea2427be8a2a7bd32d6279d3249d7278bc158191d24bf30199"
+    },
+    {
+      "relative_path": "standalone-backend-build.log",
+      "bytes": 1640,
+      "sha256": "a1b4fc02939c47e64b4aade7bd43a2e44cd5e997e8de620ca32876a5d6a01ecf"
+    },
+    {
+      "relative_path": "runtime-legacy/run.log",
+      "bytes": 727,
+      "sha256": "e55818a50fafdfe2b36119505b755bc9c3cd5f6bcb4e85e3c55752beccc480e4"
+    },
+    {
+      "relative_path": "runtime-legacy-initial-success/run.log",
+      "bytes": 727,
+      "sha256": "ffa5f8008323b514fc7f4aaf0ed555975bf40a90ce4873daeadeb43e41646933"
+    },
+    {
+      "relative_path": "runtime-legacy-source-only-agent-patch/run.log",
+      "bytes": 19100,
+      "sha256": "0e6d7236a7d53b758bf54f255fcf908a3b77677f581ab45a543c0712c9390c6a"
+    },
+    {
+      "relative_path": "runtime-legacy-stock-agent/run.log",
+      "bytes": 22230,
+      "sha256": "c4c458cd0597d3d949d84ba79c67a5a77ad67b5fb4794abf6a26cdea5e1a86f2"
+    },
+    {
+      "relative_path": "runtime-standalone/run.log",
+      "bytes": 727,
+      "sha256": "46ead1c6089322457dd40e0846c218ab01810d9f1044335bfc8f44e565230464"
+    },
+    {
+      "relative_path": "runtime-standalone-raw-configuration-envelope/run.log",
+      "bytes": 43074,
+      "sha256": "831e17ae82c5b352826c599cac729113420b6630c0002feeca1f5648093497f0"
+    },
+    {
+      "relative_path": "runtime-standalone-rc-unavailable/run.log",
+      "bytes": 41303,
+      "sha256": "99c4bc5088434a53420d97afff89ef0fd9294cd37ada20aff964213ce7e8c6b4"
+    }
+  ]
+}

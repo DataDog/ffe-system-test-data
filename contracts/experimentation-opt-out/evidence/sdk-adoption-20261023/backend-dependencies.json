@@ -1,0 +1,46 @@
+[
+  {
+    "number": 140422,
+    "html_url": "https://github.com/ddoghq/dd-source/pull/140422",
+    "title": "feat(ffe): support timestamp-based experimentation opt-out at the edge",
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "merged_at": null,
+    "merge_commit_sha": "8ebee12d3dc9460895345d64e4ce29c0b206448c",
+    "head": "939db39e166fdd40cf7744399477bfe9053964b0"
+  },
+  {
+    "number": 139368,
+    "html_url": "https://github.com/ddoghq/dd-source/pull/139368",
+    "title": "fix(ffe): stop deterministic winner exposures while preserving holdouts",
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "merged_at": null,
+    "merge_commit_sha": "37eb7b4b0fc469ba974204f2334e0eb27e4158c2",
+    "head": "0ae33d8f112685502bb8f16d8c96efbecb70219b"
+  },
+  {
+    "number": 139379,
+    "html_url": "https://github.com/ddoghq/dd-source/pull/139379",
+    "title": "feat(ffe): preserve ordinary fallbacks for experimentation opt-out",
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "merged_at": null,
+    "merge_commit_sha": "f36fd788c8f90e6168b4d4f4c186c7b13b61014b",
+    "head": "50775244ad95c65017b7890a81fde9806e330b80"
+  },
+  {
+    "number": 139381,
+    "html_url": "https://github.com/ddoghq/dd-source/pull/139381",
+    "title": "feat(ffe): persist and publish randomization activation time",
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "merged_at": null,
+    "merge_commit_sha": "633ed8acd69a782898d60490ac9c734c4e84d6f4",
+    "head": "4e7164752a0c66f6b501fc6fcc1fd6a9182bd3a2"
+  }
+]

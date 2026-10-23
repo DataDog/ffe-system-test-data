@@ -1,0 +1,155 @@
+{
+  "repository": "DataDog/dd-sdk-ios",
+  "number": 3338,
+  "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338",
+  "expected_head": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "head_before": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "head_after": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "head_matches": true,
+  "started_at": "2026-10-23T03:01:44.429476+00:00",
+  "completed_at": "2026-10-23T03:01:49.414029+00:00",
+  "state": "OPEN",
+  "draft": false,
+  "review_decision": "REVIEW_REQUIRED",
+  "mergeable": "MERGEABLE",
+  "merge_state": "BLOCKED",
+  "body_sha256": "b4c56aa32e7457cf8a540104123e3bede421f36d6bba656f80550cb178916e29",
+  "thread_count": 15,
+  "resolved_count": 13,
+  "new_root_ids": [],
+  "threads_complete": true,
+  "boundary": "Hosted job statuses do not prove individual Flags test selection, test counts, or TIA configuration. Existing local native receipts remain separate.",
+  "mutations": "None. No PR edits, replies, resolutions, or CI retries.",
+  "threads": [
+    {
+      "root_id": 4343863206,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863206"
+    },
+    {
+      "root_id": 4343863216,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863216"
+    },
+    {
+      "root_id": 4343863236,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863236"
+    },
+    {
+      "root_id": 4343863248,
+      "resolved": true,
+      "outdated": false,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863248"
+    },
+    {
+      "root_id": 4343863262,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863262"
+    },
+    {
+      "root_id": 4343863269,
+      "resolved": false,
+      "outdated": false,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863269"
+    },
+    {
+      "root_id": 4343863276,
+      "resolved": false,
+      "outdated": false,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863276"
+    },
+    {
+      "root_id": 4343863282,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863282"
+    },
+    {
+      "root_id": 4343863287,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863287"
+    },
+    {
+      "root_id": 4343863296,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863296"
+    },
+    {
+      "root_id": 4343863304,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863304"
+    },
+    {
+      "root_id": 4343863318,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863318"
+    },
+    {
+      "root_id": 4343863326,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863326"
+    },
+    {
+      "root_id": 4343863330,
+      "resolved": true,
+      "outdated": true,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4343863330"
+    },
+    {
+      "root_id": 4349878544,
+      "resolved": true,
+      "outdated": false,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4349878544"
+    }
+  ],
+  "ci": {
+    "success_count": 18,
+    "successes": [
+      "dd-gitlab/API Surface Verify",
+      "dd-gitlab/Build Dependencies",
+      "dd-gitlab/ENV check",
+      "dd-gitlab/Lint",
+      "dd-gitlab/SPI Docs Build",
+      "dd-gitlab/SPM Build (Swift 6.2)",
+      "dd-gitlab/SR Layer Snapshot Tests",
+      "dd-gitlab/SR Snapshot Tests",
+      "dd-gitlab/Smoke Tests (macOS)",
+      "dd-gitlab/UI Tests: [CrashReporting]",
+      "dd-gitlab/UI Tests: [Default]",
+      "dd-gitlab/UI Tests: [NetworkInstrumentation]",
+      "dd-gitlab/UI Tests: [RUM]",
+      "dd-gitlab/Unit Tests (iOS)",
+      "dd-gitlab/Unit Tests (macOS)",
+      "dd-gitlab/Unit Tests (tvOS)",
+      "dd-gitlab/Unit Tests (visionOS)",
+      "dd-gitlab/Unit Tests (watchOS)"
+    ],
+    "failures": [],
+    "pending": [
+      "devflow/mergegate",
+      "DDCI Status",
+      "dd-gitlab/Smoke Tests (iOS)",
+      "dd-gitlab/Smoke Tests (tvOS)"
+    ],
+    "required": [
+      {
+        "bucket": "pending",
+        "link": "https://atlas.ddbuild.io/namespaces/default/workflows/evaluate-mergegate-DataDog-dd-sdk-ios-3338-EVENT_KIND_REVIEW/01a1668b-d890-7ec7-b233-ef90071d8921",
+        "name": "devflow/mergegate",
+        "state": "IN_PROGRESS"
+      }
+    ],
+    "ddci_url": "https://mosaic.us1.ddbuild.io/change-request/14107547038221319529"
+  },
+  "full_snapshot_summary_sha256": "34c57dbddfde8a8bfe10fd4a5e88f6bf59ec28214c8324d22964f761202c70fe"
+}

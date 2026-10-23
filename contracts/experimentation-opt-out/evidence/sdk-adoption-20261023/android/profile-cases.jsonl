@@ -1,0 +1,187 @@
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/utc", "input": "2026-01-01T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/lower-t", "input": "2026-01-01t00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/lower-z", "input": "2026-01-01T00:00:00z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/lower-both", "input": "2026-01-01t00:00:00z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/nanos", "input": "2026-10-19T12:00:00.123456789Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/ten-digits-zero", "input": "2026-10-19T12:00:00.1234567890Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/ten-digits-nine", "input": "2026-10-19T12:00:00.1234567899Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/twelve-digits", "input": "2026-10-19T12:00:00.123456789999Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/fraction-zero", "input": "2026-01-01T00:00:00.000000000000Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/fraction-one", "input": "2026-01-01T00:00:00.1Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-negative", "input": "2026-10-19T08:00:00.123456789-04:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-positive", "input": "2026-10-19T14:00:00.123456789+02:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-negative-zero", "input": "2026-01-01T00:00:00-00:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-max", "input": "2026-01-01T00:00:00+23:59", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/space", "input": "2026-01-01 00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/comma", "input": "2026-01-01T00:00:00,123Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/leap-second", "input": "2016-12-31T23:59:60Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/unicode-minus", "input": "2026-01-01T00:00:00\u221205:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-compact", "input": "2026-01-01T00:00:00+0000", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/named-zone", "input": "2026-01-01T00:00:00 UTC", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-hour24", "input": "2026-01-01T00:00:00+24:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/offset-minute60", "input": "2026-01-01T00:00:00+01:60", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/one-digit-hour", "input": "2026-01-01T0:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/year-zero", "input": "0000-01-01T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/utc-year-underflow", "input": "0000-01-01T00:00:00+01:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/year-max", "input": "9999-12-31T23:59:59.999999999Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/utc-year-overflow", "input": "9999-12-31T23:59:59-01:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/julian-leap", "input": "1500-02-29T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/gregorian-cutover", "input": "1582-10-10T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/leap-2000", "input": "2000-02-29T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/nonleap-1900", "input": "1900-02-29T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/bad-month", "input": "2026-13-01T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/bad-day", "input": "2026-04-31T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/hour24", "input": "2026-01-01T24:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/empty-fraction", "input": "2026-01-01T00:00:00.Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/leading-space", "input": " 2026-01-01T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/trailing-space", "input": "2026-01-01T00:00:00Z ", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/trailing-newline", "input": "2026-01-01T00:00:00Z\n", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/no-zone", "input": "2026-01-01T00:00:00", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/empty", "input": "", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/null", "input": null, "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/epoch", "input": "1970-01-01T00:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "id": "timestamp/pre-epoch-nanos", "input": "1969-12-31T23:59:59.999999999Z", "kind": "timestamp"}
+{"args": {"attribute": "absent", "mode": "disabled"}, "decision_ids": ["D002", "D014"], "id": "request/disabled/absent", "kind": "request"}
+{"args": {"attribute": "valid", "mode": "disabled"}, "decision_ids": ["D002", "D014"], "id": "request/disabled/valid", "kind": "request"}
+{"args": {"attribute": "invalid", "mode": "disabled"}, "decision_ids": ["D002", "D014"], "id": "request/disabled/invalid", "kind": "request"}
+{"args": {"attribute": "absent", "mode": "immediate"}, "decision_ids": ["D002", "D014"], "id": "request/immediate/absent", "kind": "request"}
+{"args": {"attribute": "valid", "mode": "immediate"}, "decision_ids": ["D002", "D014"], "id": "request/immediate/valid", "kind": "request"}
+{"args": {"attribute": "invalid", "mode": "immediate"}, "decision_ids": ["D002", "D014"], "id": "request/immediate/invalid", "kind": "request"}
+{"args": {"attribute": "absent", "mode": "future_experiments_only"}, "decision_ids": ["D002", "D014"], "id": "request/future_experiments_only/absent", "kind": "request"}
+{"args": {"attribute": "valid", "mode": "future_experiments_only"}, "decision_ids": ["D002", "D014"], "id": "request/future_experiments_only/valid", "kind": "request"}
+{"args": {"attribute": "invalid", "mode": "future_experiments_only"}, "decision_ids": ["D002", "D014"], "id": "request/future_experiments_only/invalid", "kind": "request"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/future/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/missing/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/future/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/false/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "missing", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "immediate", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/future/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "future", "policy": "none"}, "decision_ids": ["D008"], "id": "ack/none/true/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/future/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/missing/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/future/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/false/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "missing", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "immediate", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/future/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "future", "policy": "immediate"}, "decision_ids": ["D008"], "id": "ack/immediate/true/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "missing", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equal", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "equivalent", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "different", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/future/different", "kind": "ack"}
+{"args": {"acknowledged": "missing", "cutoff": "invalid", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/missing/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "missing", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equal", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "equivalent", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "different", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/future/different", "kind": "ack"}
+{"args": {"acknowledged": "false", "cutoff": "invalid", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/false/future/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/missing/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/missing/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/missing/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/missing/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "missing", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/missing/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/immediate/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/immediate/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/immediate/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/immediate/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "immediate", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/immediate/invalid", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "missing", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/future/missing", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equal", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/future/equal", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/future/equivalent", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "different", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/future/different", "kind": "ack"}
+{"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "id": "ack/future/true/future/invalid", "kind": "ack"}

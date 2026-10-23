@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T02:13:13.618614+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "commit": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+  "tree": "ab56c9eddd5b6ea9b62768654c8689acbb56a6ca",
+  "status": "clean",
+  "central_contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "contract_manifest_sha256": "078465ba0a37f193e65c3641197ac859c375c9d114d0d131ccc330d0c28dfa31",
+  "profile_pins": {
+    "mobile-precompute-v1.json": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+    "mobile-precompute-v1-cases.json": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528"
+  },
+  "native_suites": {
+    "flags": {
+      "tests": 650,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "openfeature": {
+      "tests": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reliability": {
+      "tests": 148,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "native_execution": "All 289 Gradle tasks in the suite/detekt invocation executed with --rerun-tasks; test XML copied before filtered profile run.",
+  "profile": {
+    "cases": 187,
+    "passed": 187,
+    "failed": 0,
+    "comparison": "exact-9c18ed-profile187-comparison.json",
+    "observations": "profile-observations.jsonl",
+    "caching": "Test caching and up-to-date reuse disabled by external init script.",
+    "scope": "Actual production parser, request factory and response mapper; source-linked composition, mocked logger/context; no live HTTP or lifecycle execution."
+  },
+  "checks": {
+    "flags_detekt": "passed",
+    "openfeature_detekt": "passed",
+    "root_checkGeneratedFiles": "passed",
+    "flags_ktlintCheck": "passed",
+    "openfeature_ktlintCheck": "passed",
+    "git_diff_check": "passed"
+  },
+  "source_hashes": "exact-9c18ed-source-hashes.json",
+  "test_skill": {
+    "canonical_path": "ai/skills/sdk-tests/SKILL.md",
+    "sha256": "a10a079bffe87234079b3e0d4f600b75479971f68179b8b8bb2c63a5a07ba8b7"
+  },
+  "earlier_controls": {
+    "callback_baseline": "own-pass-receipt.json: 4 expected failures before changes",
+    "timeout": "callback-timeout-negative-receipt.json: 3 failures; restored implementation passed 3 cases",
+    "acknowledgement": "profile187-negative-receipt.json: 20 mismatches; restored implementation passed 187 cases",
+    "scope": "Controls ran on the precommit candidate. Restored production file hashes match this signed tree; original receipts are not relabeled as postcommit execution."
+  },
+  "logs_retained_locally": {
+    "exact-9c18ed-tests-detekt.log": "d06e0983a5f5e64cf94444410bc3152f6d4a8c241d0e7653462219268dfcc2f2",
+    "exact-9c18ed-generated-format.log": "f5adee9215ddbb5e0ef3a4610f536142c38076d33949041de03c79e96edad5f5",
+    "exact-9c18ed-profile187.log": "b7ff55b21f8232cdf6276dfeba384adb4fb13069c7cebc960de44831d3829a75"
+  },
+  "limits": [
+    "Single-fit is JVM execution with StubSDKCore, unmocked Android classes, and captured requests/events. No real HTTP intake.",
+    "Profile composes real production parser/request/mapper functions with mocked SDK logger/context. It does not execute the whole asynchronous client.",
+    "No Android device/emulator, hosted CI, live edge/site deployment, release, merge, or publication proof.",
+    "Backend release gate and parser grammar review disposition remain explicit."
+  ],
+  "publication": "Parent owns publication and link verification; worker performed no push or review mutation."
+}

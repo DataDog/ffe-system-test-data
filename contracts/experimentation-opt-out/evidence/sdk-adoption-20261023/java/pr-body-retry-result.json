@@ -1,0 +1,10 @@
+{
+  "repository": "DataDog/dd-trace-java",
+  "pr": 12950,
+  "head": "578ffa77cbc52e6d5d8950657a05863a449f59ab",
+  "body_verified": true,
+  "state": "open",
+  "draft": false,
+  "url": "https://github.com/DataDog/dd-trace-java/pull/12950",
+  "recorded_at": "2026-10-23T03:52:53.709064+00:00"
+}

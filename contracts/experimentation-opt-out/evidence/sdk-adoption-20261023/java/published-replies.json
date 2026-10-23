@@ -1,0 +1,17 @@
+{
+  "repository": "DataDog/dd-trace-java",
+  "pr": 12950,
+  "implementation_sha": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "contract_sha": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "reply_count": 1,
+  "replies": [
+    {
+      "root_comment_id": 4342792807,
+      "reply_id": 4355545626,
+      "url": "https://github.com/DataDog/dd-trace-java/pull/12950#discussion_r4355545626",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:33:55Z",
+      "thread_id": "PRRT_kwDOBVFpxM6u-76S"
+    }
+  ]
+}

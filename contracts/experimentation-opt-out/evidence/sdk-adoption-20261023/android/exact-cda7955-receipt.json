@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T03:05:40.060678+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "tree": "dd3a1ef7566baf21dff1c75e4ba3a7826a87c0da",
+  "status": "clean",
+  "central_contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "contract_manifest_sha256": "078465ba0a37f193e65c3641197ac859c375c9d114d0d131ccc330d0c28dfa31",
+  "native_suites": {
+    "flags": {
+      "debug": {
+        "tests": 661,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 661,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "openfeature": {
+      "debug": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 82,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "reliability": {
+      "debug": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "release": {
+        "tests": 148,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "logical_test_cases": 891,
+  "variant_test_executions": 1782,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "execution": "CI=true, USE_TEST_VISIBILITY=0, max-workers=2, --rerun-tasks. All329 suite/detekt tasks executed.",
+  "checks": {
+    "flags_detekt": "passed",
+    "openfeature_detekt": "passed",
+    "root_checkGeneratedFiles": "passed",
+    "flags_ktlintCheck": "passed",
+    "openfeature_ktlintCheck": "passed",
+    "git_diff_check": "passed"
+  },
+  "profile": {
+    "cases": 187,
+    "passed": 187,
+    "mismatches": 0,
+    "comparison": "exact-cda7955-profile187-comparison.json",
+    "observations": "exact-cda7955-profile-observations.jsonl",
+    "adapter": "profile-probes-cda/MobileProfileProbeTest.kt",
+    "caching": "Test cache and up-to-date reuse disabled.",
+    "scope": "Actual production parser, request factory and response mapper; source-linked composition, mocked logger/context; no live HTTP or lifecycle execution."
+  },
+  "runtime_receipt": "review4-runtime/exact-cda7955-receipt.json",
+  "source_hashes": "exact-cda7955-source-hashes.json",
+  "baseline_receipt": "review4-baseline-receipt.json",
+  "new_regressions": 11,
+  "test_skill": {
+    "path": "ai/skills/sdk-tests/SKILL.md",
+    "sha256": "a10a079bffe87234079b3e0d4f600b75479971f68179b8b8bb2c63a5a07ba8b7"
+  },
+  "review_roots": [
+    4355492717,
+    4355492722,
+    4355492726,
+    4355492733
+  ],
+  "prior_claim_correction": {
+    "comment_id": 4355477903,
+    "incorrect": "core-owned executor",
+    "correct": "core-created worker whose lifetime is owned by the new dispatcher"
+  },
+  "limits": [
+    "JVM suites and the187-case component profile do not prove device behavior; runtime proof is separate.",
+    "Lean decisions are unchanged and do not prove native scheduling or resource ownership.",
+    "Pending callbacks are unbounded while a customer callback blocks. Startup denial/submission rejection waits for the next dispatch, without automatic retry.",
+    "Hosted CI and final review publication remain parent-owned."
+  ],
+  "logs_retained_locally": {
+    "exact-cda7955-ci-suites.log": "e7b634c28f9ef91f8f6b5740ac3cec11f960dbf365612644002543c9a68bb20a",
+    "exact-cda7955-profile187.log": "b326fb6c54f5b7d44cdd1167894d1dac4ae738cc0c1484ce4ad76f466f8cec24",
+    "exact-cda7955-generated-runtime-build.log": "a7642eea384f64ab9fd6fa165ccd79030104f69d15371262ff4062ae895e67e8"
+  },
+  "previous_receipts": "9c18ede and f15ab92 evidence remains immutable."
+}

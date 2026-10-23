@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-23T03:05:40.017389+00:00",
+  "repository": "DataDog/dd-sdk-android",
+  "tested_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "tree": "dd3a1ef7566baf21dff1c75e4ba3a7826a87c0da",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "environment": {
+    "type": "Android emulator",
+    "api": 36,
+    "release": "16",
+    "abi": "arm64-v8a",
+    "image": "system-images;android-36;google_apis;arm64-v8a",
+    "image_revision": 7,
+    "serial": "emulator-5580",
+    "avd": "OptOutProbe36",
+    "cleanup": "Task-created emulator stopped after evidence capture."
+  },
+  "instrumentation": {
+    "tests": 2,
+    "passed": 2,
+    "failed": 0,
+    "elapsed_seconds": 20.286
+  },
+  "callback_probe": {
+    "submitted": 9,
+    "delivered": 9,
+    "backpressure_drops": 0,
+    "callback_workers_alive_after_stop": 0,
+    "SDK_stop_returned_while_callback_blocked": true,
+    "stop_return_bounded_seconds": 2,
+    "queue_capacity": 1,
+    "mitigation": "IGNORE_NEWEST",
+    "comparison": "f15ab92 baseline:2of9 delivered,7 dropped,1 callback worker alive after stop.",
+    "boundary": "Real core callback dispatch and SDK stop; first customer callback blocked while eight completions queued, SDK stopped before release. Native callbacks only, not the OpenFeature continuation."
+  },
+  "optout_probe": {
+    "modes": 2,
+    "assignment_http_requests": 4,
+    "successful_flag_evaluations": 8,
+    "evaluation_intake_events": 4,
+    "evaluation_intake_for_telemetry_off_subjects": 0,
+    "immediate_exposure_intake_events": 0,
+    "future_exposure_intake_events": 2,
+    "future_exposure_subjects": "Both telemetry-on and telemetry-off",
+    "background_context_callbacks": 4,
+    "boundary": "Real core/storage/local HTTP intake. Assignments and acknowledgements supplied by MockWebServer. Production lifecycle aggregator stop and explicit storage flush. Typed telemetry control supplied through SDK bridge proxy."
+  },
+  "limits": [
+    "No live backend allocation, edge/site deployment, or rollout proof.",
+    "Only API36 arm64 emulator; no physical device or other Android versions.",
+    "No periodic/background upload scheduling or restart cache-recovery proof.",
+    "Blocked customer callbacks retain an unbounded serial pending queue.",
+    "Worker startup denial or rejected submission waits for a later dispatch; no automatic retry. JVM tests cover recovery.",
+    "Calls on retained clients after SDK stop have no new lifecycle guarantee."
+  ],
+  "files": [
+    {
+      "path": "review4-runtime/exact-cda7955-callback-observations.json",
+      "sha256": "456fbbcb0c8cf6b773731de960d250f5dfb70776305d932702e8340a37b14dc0"
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-optout-observations.json",
+      "sha256": "ac6cb4c14c9d838cbb66f209fd116e1f71a941c9b4ef5f2e5d877f5889fb3ace"
+    },
+    {
+      "path": "review4-runtime/exact-cda7955-instrumentation.log",
+      "sha256": "090870fb9d697228b02c84aebfeb919c168eff9a5ad03a5d8204a6dfe3ae8011"
+    },
+    {
+      "path": "review4-runtime/test-src/CallbackRuntimeProbeTest.kt",
+      "sha256": "1514742438c4e432f38f6930390dc296dae068450eda8446c605c05f9c29f63a"
+    },
+    {
+      "path": "review4-runtime/test-src/OptOutRuntimeProbeTest.kt",
+      "sha256": "1d02b4f1b051410c2025d37c0ddf2dca7135219fde702d8a0dd5f266a6e95994"
+    },
+    {
+      "path": "review4-runtime/probe.init.gradle",
+      "sha256": "054ca5d5ce5fd46033002f92fc92765295e0d7d5b5f105821e113b5e87a74571"
+    }
+  ],
+  "apks": [
+    {
+      "path": "instrumented/integration/build/outputs/apk/debug/integration-debug.apk",
+      "sha256": "0188735e3abcb97e7df0f216701a454e8643e3cd01c33a9098910dce5cc2b075",
+      "bytes": 10805342
+    },
+    {
+      "path": "instrumented/integration/build/outputs/apk/androidTest/debug/integration-debug-androidTest.apk",
+      "sha256": "28d22d7430a15401cd3443907bd1d075116d1b3ba785670869bbe504d358b1b2",
+      "bytes": 12844423
+    }
+  ]
+}

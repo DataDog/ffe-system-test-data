@@ -1,0 +1,7 @@
+<testsuite name="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:16:08.670Z" hostname="leo-romanovsky" time="9.363">
+  <properties />
+  <testcase name="test first remote config poll asks agent for feature flags" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="0.174" />
+  <testcase name="test open feature evaluation enriches the request span" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="1.426" />
+  <testcase name="test exposures retain allocation changes and suppress repeats" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="1.052" />
+  <testcase name="test open feature exposures" classname="datadog.smoketest.springboot.OpenFeatureProviderSmokeTest" time="2.42" />
+  </testsuite>

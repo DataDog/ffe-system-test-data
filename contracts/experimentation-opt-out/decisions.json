@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "sdk-refresh-20261022-v1",
+  "revision": "sdk-adoption-20261023-v1",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -139,7 +139,20 @@
         "V021",
         "V024",
         "V028",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-IOS-006",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-011",
+        "SDK-ADOPTION-ANDROID-012"
       ]
     },
     {
@@ -194,7 +207,26 @@
         "V024",
         "V028",
         "SDK-REFRESH-BROWSER-001",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-ANDROID-007",
+        "SDK-ADOPTION-ANDROID-008",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-012"
       ]
     },
     {
@@ -247,7 +279,8 @@
         "V003",
         "V005",
         "SDK-REFRESH-BROWSER-001",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-JAVA-001"
       ]
     },
     {
@@ -349,7 +382,11 @@
         "V044",
         "V045",
         "SDK-REFRESH-BROWSER-001",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-003",
+        "SDK-ADOPTION-JAVA-004"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -419,7 +456,7 @@
         "separator": "T-or-t",
         "zone": "Z-or-z-or-signed-HH:mm"
       },
-      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric ±HH:mm offsets or Z/z, seconds 00–59, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
+      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric \u00b1HH:mm offsets or Z/z, seconds 00\u201359, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -449,7 +486,15 @@
         "V024",
         "V028",
         "V041",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009"
       ]
     },
     {
@@ -510,7 +555,13 @@
         "V024",
         "V028",
         "V041",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-009"
       ]
     },
     {
@@ -542,7 +593,7 @@
         "utc_year": "0000..9999",
         "written_year": "0000..9999"
       },
-      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000–9999; equivalent timezone representations acknowledge the same instant.",
+      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000\u20139999; equivalent timezone representations acknowledge the same instant.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -572,7 +623,13 @@
         "V024",
         "V028",
         "V041",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-009"
       ]
     },
     {
@@ -663,7 +720,19 @@
         "V056",
         "V057",
         "V058",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-IOS-006",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010"
       ],
       "local_adoptions": [
         {
@@ -717,7 +786,24 @@
       },
       "validation_history_ids": [
         "V022",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-003",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-006",
+        "SDK-ADOPTION-JAVA-006",
+        "SDK-ADOPTION-JAVA-007",
+        "SDK-ADOPTION-IOS-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010",
+        "SDK-ADOPTION-ANDROID-011",
+        "SDK-ADOPTION-ANDROID-012",
+        "SDK-ADOPTION-JAVA-008"
       ]
     },
     {
@@ -768,7 +854,12 @@
         "V008",
         "V038",
         "SDK-REFRESH-BROWSER-001",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-003",
+        "SDK-ADOPTION-JAVA-004",
+        "SDK-ADOPTION-JAVA-005"
       ]
     },
     {
@@ -912,7 +1003,12 @@
         "A139381-002",
         "A139381-003",
         "SDK-REFRESH-BROWSER-001",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-BROWSER-001",
+        "SDK-ADOPTION-IOS-002",
+        "SDK-ADOPTION-IOS-004",
+        "SDK-ADOPTION-JAVA-001",
+        "SDK-ADOPTION-JAVA-004"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -1187,7 +1283,15 @@
         "V021",
         "V024",
         "V028",
-        "SDK-REFRESH-BROWSER-001"
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-ADOPTION-IOS-001",
+        "SDK-ADOPTION-IOS-003",
+        "SDK-ADOPTION-ANDROID-001",
+        "SDK-ADOPTION-ANDROID-002",
+        "SDK-ADOPTION-ANDROID-004",
+        "SDK-ADOPTION-ANDROID-005",
+        "SDK-ADOPTION-ANDROID-009",
+        "SDK-ADOPTION-ANDROID-010"
       ]
     },
     {
@@ -1416,7 +1520,9 @@
         "V042",
         "V043",
         "V044",
-        "SDK-REFRESH-GO-001"
+        "SDK-REFRESH-GO-001",
+        "SDK-ADOPTION-JAVA-002",
+        "SDK-ADOPTION-JAVA-003"
       ],
       "revision_history": [
         {
@@ -1881,7 +1987,7 @@
       }
     }
   ],
-  "previous_revision": "activation-and-semver-feedback-v10",
-  "revision_note": "Refresh merged browser and Go source bindings before iOS, Android and Java implementation. Decision wording and scoped authority remain unchanged.",
+  "previous_revision": "sdk-refresh-20261022-v1",
+  "revision_note": "Append scoped SDK adoption, native controls, runtime observations and review replies. Existing semantic revisions and decision-setting authority remain unchanged.",
   "validation_history_file": "validation-history.json"
 }

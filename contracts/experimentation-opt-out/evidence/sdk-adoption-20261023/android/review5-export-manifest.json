@@ -1,0 +1,48 @@
+{
+  "purpose": "Compact named-client warning-race supplement. Earlier Android evidence remains immutable.",
+  "repository_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "baseline_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "contract_commit": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "files": [
+    {
+      "path": "exact-347884b-receipt.json",
+      "sha256": "2ebcbe4904074bd82cac77e8db8aa5d51c963715263235efcf33712760ed93d6",
+      "bytes": 1820
+    },
+    {
+      "path": "exact-347884b-source-hashes.json",
+      "sha256": "46eec763aadc0b9f2ef676c9bb74e70a93d21510f587f6a16cc254c8fe9e3bb0",
+      "bytes": 572
+    },
+    {
+      "path": "exact-347884b-suite-counts.json",
+      "sha256": "ab649d43b39025ebaffb35d473cb9c92bcd3e551d492b6fd9ecc06261748c5ff",
+      "bytes": 219
+    },
+    {
+      "path": "exact-347884b-scope-equivalence.json",
+      "sha256": "9ec9276640a2a746f0d795a84b80c1c5e103e980669288bef2467ee49020ba83",
+      "bytes": 2452
+    },
+    {
+      "path": "review5-audit.md",
+      "sha256": "2b74d4a2294b9aea29a0c538e57a4cb63bf9d4b7ea7e1a8ed9746e3d4a9fd5e6",
+      "bytes": 1551
+    },
+    {
+      "path": "review5-control-hashes.json",
+      "sha256": "6c8a5222dbc2406ece89415b982476e503e7e26859502358e277c6e4b0a6e9e6",
+      "bytes": 265
+    },
+    {
+      "path": "review5-negative-control-receipt.json",
+      "sha256": "a68751278c95139b4ba7463e73b9fd94693c76dd912c2613335112fda242eeda",
+      "bytes": 1242
+    }
+  ],
+  "excluded": [
+    "Full local Gradle logs and test XML remain in the original evidence directory.",
+    "No emulator or 187-profile rerun for this diagnostic-only change."
+  ],
+  "total_bytes": 8121
+}

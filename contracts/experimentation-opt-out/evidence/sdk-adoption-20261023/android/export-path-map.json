@@ -1,0 +1,9 @@
+{
+  "source_manifest": "review6-export-manifest.json",
+  "reason": "The exported .json filename contained a plain-text Python traceback. Keep its bytes and source manifest unchanged, but publish it with a .txt suffix so every JSON artifact remains valid.",
+  "mappings": {
+    "review6-foundation-worktree.json": "review6-foundation-worktree.txt"
+  },
+  "sha256": "8e470276899230ad8caa980819feb916bd650aef98e04ab54c31593d0d37caa6",
+  "source_receipt_references": "Original native receipt paths describe captured source artifacts. This map gives the published path for the misnamed traceback."
+}

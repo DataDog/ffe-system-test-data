@@ -1,0 +1,5 @@
+{
+  "ro.build.version.sdk": "36",
+  "ro.build.version.release": "16",
+  "ro.product.cpu.abi": "arm64-v8a"
+}

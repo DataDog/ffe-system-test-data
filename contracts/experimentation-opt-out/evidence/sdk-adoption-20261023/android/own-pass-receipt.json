@@ -1,0 +1,47 @@
+{
+  "frozen_before_reviews_utc": "2026-10-23T01:36:07.204206+00:00",
+  "source_sha": "7b7ab717785ee7b7cbe4a56ca6d3c7714401ffad",
+  "source_status": "",
+  "review_comments_read": false,
+  "base_ref_sha": "b3ff1387c4c6e1234221b9fc02cd760e8c0cb8b3",
+  "source_evidence": "source inspection plus executed production JVM code with repository mocks/stub transport",
+  "suite_counts": {
+    "flags": {
+      "tests": 480,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "openfeature": {
+      "tests": 78,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reliability": {
+      "tests": 81,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "probe_expected_behavior_failures": [
+    {
+      "test": "[1] IMMEDIATE",
+      "failure": "org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalStateException: customer callback failed"
+    },
+    {
+      "test": "[2] FUTURE_EXPERIMENTS_ONLY",
+      "failure": "org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalStateException: customer callback failed"
+    },
+    {
+      "test": "[1] IMMEDIATE",
+      "failure": "java.lang.AssertionError: \nExpecting actual:\n  com.datadog.android.flags.model.FlagsClientState$Reconciling@5ee8d8e1\nto be an instance of:\n  com.datadog.android.flags.model.FlagsClientState.Error\nbut was instance of:\n  com.datadog.android.flags.model.FlagsClientState.Reconciling"
+    },
+    {
+      "test": "[2] FUTURE_EXPERIMENTS_ONLY",
+      "failure": "java.lang.AssertionError: \nExpecting actual:\n  com.datadog.android.flags.model.FlagsClientState$Reconciling@5ee8d8e1\nto be an instance of:\n  com.datadog.android.flags.model.FlagsClientState.Error\nbut was instance of:\n  com.datadog.android.flags.model.FlagsClientState.Reconciling"
+    }
+  ],
+  "probe_limits": "External test sources only; no production files edited. Initial probe compile error fixed before execution. No live edge or Android device validation."
+}

@@ -1,0 +1,27 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "harness_commit": "abe62eb21f53adba0d8ac038fe0539f8f05fb124",
+  "variant": "legacy",
+  "exit_code": 0,
+  "artifacts": {
+    "dd-java-agent-1.68.0-SNAPSHOT.jar": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+    "dd-trace-api-1.68.0-SNAPSHOT.jar": "6cf3d1f558a0092662f1cfe660cc6aef84f822c40027a3e3ee341abdc95fe196",
+    "dd-openfeature-1.68.0-SNAPSHOT.jar": "b0bf8e137cbbe8a8c63bb7f3fbda9d0cf8517645671d2aac21e2f378e6d00780"
+  },
+  "adapter_sha256": "75753577089c6d77242f90b1670ddd7a80829ef90d126e93d8dce2f63a2f8d6b",
+  "policy_cases_sha256": "289a5d2dca4a7e5dd1e0428b4c56e9c1660668375aab67b71c91b27b9391f4e2",
+  "tests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "configuration_source": "remote_config",
+  "capture_agent_image": "sha256:78fa84f341634069668b0908d678704d82a953e3e50ddf00f5234622c027785c",
+  "image_id": "sha256:9f0b804a049c23d578ecaee039237f244f77ba329affb30349dbe85a4143e475",
+  "embedded_provider_sha256": "b0bf8e137cbbe8a8c63bb7f3fbda9d0cf8517645671d2aac21e2f378e6d00780",
+  "embedded_provider_matches": true,
+  "installed_agent_sha256": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+  "installed_agent_matches": true,
+  "harness_patch_sha256": "0bcd3f233708c6a13176b1e5fe47dd20f3375227f55ada8b2836d80730d9952d"
+}

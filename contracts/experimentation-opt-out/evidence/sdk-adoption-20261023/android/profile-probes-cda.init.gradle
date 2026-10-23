@@ -1,0 +1,11 @@
+allprojects {
+    afterEvaluate { p ->
+        if (p.path == ':features:dd-sdk-android-flags') {
+            p.tasks.withType(Test).configureEach {
+                outputs.upToDateWhen { false }
+                outputs.cacheIf { false }
+            }
+            p.android.sourceSets.getByName('test').java.srcDir('/Users/leo.romanovsky/go/src/github.com/DataDog/.worktrees/opt-out-finish-20261022/evidence/android-audit/profile-probes-cda')
+        }
+    }
+}

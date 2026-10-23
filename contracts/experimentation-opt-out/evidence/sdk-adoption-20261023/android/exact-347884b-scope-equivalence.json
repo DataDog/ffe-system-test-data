@@ -1,0 +1,47 @@
+{
+  "baseline_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "current_commit": "347884bca81089127717ac3b272c4c0fff6dd13e",
+  "changed_files": [
+    "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagsFeature.kt",
+    "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagsFeatureTest.kt"
+  ],
+  "frozen_hashes_match": true,
+  "source_was_clean": true,
+  "source_hashes": [
+    {
+      "path": "features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagsFeature.kt",
+      "sha256": "f0036cd682a24f94f754cf413192b96c9e17cc3064724edcde5930b080e26d81"
+    },
+    {
+      "path": "features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagsFeatureTest.kt",
+      "sha256": "10e11eae7f2ed730ddc1c0c36f9c4cbef2c7d7e833352d49f0a676f6698e0213"
+    }
+  ],
+  "scope": "FlagsFeature named-client registration warning path and its regression test only. Registry creation remains atomic; factory locking, winning client, and winning mode are unchanged. The existing graceful warning or strict-debug exception policy now applies to every existing-client result.",
+  "unchanged_source_obligations": [
+    "experiment opt-out parsing and policy",
+    "request context and acknowledgment validation",
+    "cache generation and persistence",
+    "callback dispatcher and feature-stop drain",
+    "evaluation telemetry and exposure intake",
+    "OpenFeature provider conversion"
+  ],
+  "earlier_evidence": [
+    {
+      "receipt": "exact-cda7955-receipt.json",
+      "tested_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+      "status": "Original execution retained; not rerun at current commit."
+    },
+    {
+      "receipt": "exact-cda7955-profile187-comparison.json",
+      "tested_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+      "status": "Original 187-case result retained; corresponding implementation source unchanged."
+    },
+    {
+      "receipt": "review4-runtime/exact-cda7955-receipt.json",
+      "tested_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+      "status": "Original API36 runtime/intake result retained; corresponding implementation source unchanged."
+    }
+  ],
+  "boundary": "Source comparison supports the limited reuse decision. It does not relabel earlier executions as current-head tests. No current-head emulator, profile, OpenFeature suite or reliability suite execution is claimed."
+}

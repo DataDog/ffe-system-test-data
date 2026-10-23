@@ -1,0 +1,11 @@
+{
+  "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+  "contract_sha": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "manifest_sha256": "078465ba0a37f193e65c3641197ac859c375c9d114d0d131ccc330d0c28dfa31",
+  "executed_at": "2026-10-23T01:37:19.859825+00:00",
+  "passed": 313,
+  "failed": 0,
+  "adapter_sha256": "e027b5bc80f9c6ba82e3a650b95e590bbc87f664b655422bde153407cd3b8f01",
+  "observations_sha256": "b997e4550eb27131e4e6803ad8716a99933cc8de4ddc7364e9c41dd2a94988f4",
+  "scope": "Unmodified production TypeScript adapter with verified source bytes. Pending cases inject a core result. Not browser lifecycle, event intake, runtime integration or source refinement."
+}

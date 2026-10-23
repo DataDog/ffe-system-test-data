@@ -1,0 +1,36 @@
+{
+  "base_commit": "cda7955b6361876526fa2035db23dbf88a9e74e1",
+  "positive_candidate_hashes": "review5-candidate-source-hashes.json",
+  "control_hashes": "review5-control-hashes.json",
+  "mutation": "Skip the existing-client warning when the requested mode is enabled.",
+  "tests": 2,
+  "failures": 2,
+  "expected_failure": true,
+  "cases": [
+    {
+      "name": "[1] IMMEDIATE",
+      "failures": [
+        {
+          "type": "org.opentest4j.AssertionFailedError",
+          "message": "org.opentest4j.AssertionFailedError: \nExpecting value to be true but was false"
+        }
+      ]
+    },
+    {
+      "name": "[2] FUTURE_EXPERIMENTS_ONLY",
+      "failures": [
+        {
+          "type": "org.opentest4j.AssertionFailedError",
+          "message": "org.opentest4j.AssertionFailedError: \nExpecting value to be true but was false"
+        }
+      ]
+    }
+  ],
+  "restored": "Byte-for-byte source restoration verified against the saved SHA-256. Both variants subsequently passed all Flags tests.",
+  "scope": "This control verifies warning-assertion sensitivity. It does not replay the old between-lock race.",
+  "original_artifacts": [
+    "review5-negative.log",
+    "review5-negative.xml",
+    "review5-restored-FlagsFeature.kt"
+  ]
+}

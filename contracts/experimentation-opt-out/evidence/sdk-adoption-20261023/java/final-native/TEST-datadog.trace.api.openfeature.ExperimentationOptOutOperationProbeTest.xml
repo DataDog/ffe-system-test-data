@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" tests="36" skipped="0" failures="0" errors="0" timestamp="2026-10-23T02:45:17.270Z" hostname="leo-romanovsky" time="1.728">
+  <properties/>
+  <testcase name="inactive-path/disabled/absent/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.137"/>
+  <testcase name="inactive-path/disabled/absent/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.005"/>
+  <testcase name="inactive-path/disabled/absent/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.002"/>
+  <testcase name="inactive-path/disabled/absent/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/valid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/valid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/valid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/valid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/invalid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/invalid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/invalid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/disabled/invalid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/absent/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/absent/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/absent/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/absent/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/valid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.012"/>
+  <testcase name="inactive-path/immediate/valid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/valid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/valid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/invalid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/invalid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/invalid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/immediate/invalid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/absent/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/absent/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/absent/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/absent/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.0"/>
+  <testcase name="inactive-path/future_experiments_only/valid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/valid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/valid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/valid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/invalid/empty" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/invalid/retain" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/invalid/exclude" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <testcase name="inactive-path/future_experiments_only/invalid/mixed" classname="datadog.trace.api.openfeature.ExperimentationOptOutOperationProbeTest" time="0.001"/>
+  <system-out><![CDATA[OPTOUT_OBSERVATION {"id":"inactive-path/disabled/absent/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/absent/retain","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/absent/exclude","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/absent/mixed","exclusionChecks":0,"excluded":[false, false, false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/valid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/valid/retain","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/valid/exclude","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/valid/mixed","exclusionChecks":0,"excluded":[false, false, false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/invalid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/invalid/retain","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/invalid/exclude","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/disabled/invalid/mixed","exclusionChecks":0,"excluded":[false, false, false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/absent/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/absent/retain","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/absent/exclude","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/absent/mixed","exclusionChecks":0,"excluded":[false, false, false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/valid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/valid/retain","exclusionChecks":1,"excluded":[false],"helperResults":[false],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/valid/exclude","exclusionChecks":1,"excluded":[true],"helperResults":[true],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/valid/mixed","exclusionChecks":3,"excluded":[true, false, true],"helperResults":[true, false, true],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/invalid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/invalid/retain","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/invalid/exclude","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/immediate/invalid/mixed","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/absent/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/absent/retain","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/absent/exclude","exclusionChecks":0,"excluded":[false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/absent/mixed","exclusionChecks":0,"excluded":[false, false, false],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/valid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/valid/retain","exclusionChecks":1,"excluded":[false],"helperResults":[false],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/valid/exclude","exclusionChecks":1,"excluded":[true],"helperResults":[true],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/valid/mixed","exclusionChecks":3,"excluded":[true, false, true],"helperResults":[true, false, true],"error":"NONE"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/invalid/empty","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/invalid/retain","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/invalid/exclude","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+OPTOUT_OBSERVATION {"id":"inactive-path/future_experiments_only/invalid/mixed","exclusionChecks":0,"excluded":[],"helperResults":[],"error":"INVALID_CONTEXT"}
+]]></system-out>
+  <system-err><![CDATA[SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J(W): Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J(W): Ignoring binding found at [jar:file:/home/bits/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.2.13/e9f3458e7354fe4917081237c01fa4999f4e1b86/logback-classic-1.2.13.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J(W): See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+]]></system-err>
+</testsuite>

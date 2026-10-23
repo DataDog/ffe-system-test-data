@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Execute the pinned central bundle on actual production Swift source; no acceptance overrides."""
+import argparse,datetime,hashlib,json,pathlib,re,subprocess,sys
+HERE=pathlib.Path(__file__).resolve().parent
+ROOT=pathlib.Path('<ORIGINAL_POC>')
+PINS={'bundles/ios.json':'64d797731ed94666c120811862ee7600e7c6209f65a31bd4a238f8449f540353','bundles/manifest.json':'8369a921a3d0e9d534587ab7c437a4fb2ada29068cb66507abb1a839835b0aa2'}
+BASE='176aafac647ae8484aef561e07a087c77bebca3c'
+SWIFTC='/usr/bin/swiftc'
+CENTRAL=pathlib.Path('<CENTRAL_CONTRACT>')
+CENTRAL_PIN='0520866bedb8c059df9c493cfe27ad294390c603'
+PROFILE_SHA='e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f'
+CASES_SHA='16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528'
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def check_pins():
+ for name,expected in PINS.items():
+  if sha(ROOT/name)!=expected: raise ValueError('unreviewed acceptance file: '+name)
+ manifest=json.loads((ROOT/'bundles/manifest.json').read_text())
+ for name,expected in manifest['model_files'].items():
+  if sha(ROOT/name)!=expected: raise ValueError('unreviewed model: '+name)
+ for name,expected in [('contracts/pr-423.json',manifest['contract_file_sha256']),('corpus/proposal.jsonl',manifest['corpus_sha256'])]:
+  if sha(ROOT/name)!=expected: raise ValueError('unreviewed acceptance file: '+name)
+ profile=CENTRAL/'evidence/sdk-refresh-20261022/mobile-precompute-v1.json'
+ cases=CENTRAL/'evidence/sdk-refresh-20261022/mobile-precompute-v1-cases.json'
+ if sha(profile)!=PROFILE_SHA or sha(cases)!=CASES_SHA: raise ValueError('selected profile or corpus moved')
+ if json.loads(cases.read_text())!=json.loads((ROOT/'bundles/ios.json').read_text())['cases']: raise ValueError('frozen adapter corpus differs from selected current profile')
+ return manifest
+
+def output_instant(normalized):
+ """Representation-only conversion after production has accepted and normalized input.
+ Python datetime is proleptic Gregorian; shift by one 400-year cycle for year zero.
+ Invalid production normalization remains an accepted observation and fails comparison.
+ """
+ m=re.fullmatch(r'(\d+)-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(?:\.(\d+))?Z',normalized)
+ if not m: raise ValueError('production output is not canonical UTC')
+ year,month,day,hour,minute,second=map(int,m.groups()[:6])
+ if year>9999: raise ValueError('production output exceeds four-digit UTC year')
+ represented=datetime.datetime(400 if year==0 else year,month,day,hour,minute,second)
+ delta=represented-datetime.datetime(1970,1,1)
+ seconds=delta.days*86400+delta.seconds-(146097*86400 if year==0 else 0)
+ return {'accepted':True,'seconds':seconds,'nanos':int((m.group(7) or '').ljust(9,'0'))}
+
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--source',type=pathlib.Path,default=ROOT/'worktrees/ios');p.add_argument('--output',type=pathlib.Path,default=HERE/'after');p.add_argument('--inject-serialization-error',action='store_true');p.add_argument('--expected-head',default=BASE);a=p.parse_args()
+ manifest=check_pins();source=a.source.resolve();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+ head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=source,text=True).strip()
+ if head!=a.expected_head: raise ValueError('source differs from explicitly pinned expected head')
+ bundle=json.loads((ROOT/'bundles/ios.json').read_text())
+ if bundle['case_count']!=187 or len(bundle['cases'])!=187: raise ValueError('unexpected frozen case count')
+ expected_ids=[row['id'] for row in bundle['cases']]
+ if len(set(expected_ids))!=187: raise ValueError('duplicate frozen case identifiers')
+ relative_paths=['DatadogFlags/Sources/Models/'+name for name in ['FlagsEvaluationContext.swift','AnyValue.swift','FlagsError.swift','FlagAssignmentsResponse.swift','FlagAssignment.swift','FlagValue.swift']]+['DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift','DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift']
+ paths=[source/name for name in relative_paths]
+ compile_paths=[];prepared=[]
+ for path in paths:
+  if 'import DatadogInternal' in path.read_text():
+   destination=out/path.name
+   destination.write_text(path.read_text().replace('import DatadogInternal','import Foundation'))
+   prepared.append({'source':str(path.relative_to(source)),'prepared_sha256':sha(destination),'transformation':'only replace external module import with Foundation; boundary types shimmed'})
+   compile_paths.append(destination)
+  else: compile_paths.append(path)
+ commands=[]
+ def run(command,log):
+  commands.append(command);result=subprocess.run(command,cwd=source,text=True,capture_output=True,timeout=90)
+  (out/log).write_text(result.stdout+result.stderr)
+  if result.returncode: raise RuntimeError(f'{log}: exit {result.returncode}')
+  return result.stdout
+ run([SWIFTC,'-module-cache-path',str(HERE/'module-cache'),*map(str,compile_paths),str(HERE/'Boundaries.swift'),str(HERE/'main.swift'),'-o',str(out/'probe')],'compile.log')
+ probe_command=[str(out/'probe'),str(ROOT/'bundles/ios.json')]
+ if a.inject_serialization_error: probe_command.append('--inject-serialization-error')
+ raw=json.loads(run(probe_command,'native-observations.json'))
+ observed_ids=[row['id'] for row in raw]
+ if len(raw)!=187 or len(set(observed_ids))!=187 or set(observed_ids)!=set(expected_ids):
+  raise ValueError('missing, extra, or duplicate native observations')
+ observations=[]
+ for row in raw:
+  if 'observed' in row: observed=row['observed']
+  elif not row['accepted']: observed={'accepted':False}
+  else:
+   try: observed=output_instant(row['normalized'])
+   except ValueError as error: observed={'accepted':True,'normalization':row['normalized'],'observer_error':str(error)}
+  observations.append({'id':row['id'],'observed':observed})
+ (out/'observations.jsonl').write_text(''.join(json.dumps(row,sort_keys=True)+'\n' for row in observations))
+ expected={r['id']:r['expected'] for r in bundle['cases']}
+ mismatches=[{'id':r['id'],'expected':expected[r['id']],'observed':r['observed']} for r in observations if r['observed']!=expected[r['id']]]
+ evidence={'central_pin':CENTRAL_PIN,'selected_profile_sha256':PROFILE_SHA,'selected_cases_sha256':CASES_SHA,'frozen_case_lists_equal':True,'base_sha':head,'profile':manifest['profile'],'contract_sha256':manifest['contract_sha256'],'bundle_file_sha256':PINS['bundles/ios.json'],'manifest_file_sha256':PINS['bundles/manifest.json'],'injected_serialization_error':a.inject_serialization_error,'case_count':len(observations),'timestamp_count':43,'request_count':9,'ack_count':135,'excluded':0,'mismatches':mismatches,'passed':not mismatches,'source_sha256':{str(path.relative_to(source)):sha(path) for path in paths},'adapter_sha256':{path.name:sha(path) for path in [HERE/'run.py',HERE/'main.swift',HERE/'Boundaries.swift']},'source_preparation':prepared,'scope':'macOS Swift complete production parser/context/request/fetcher/response-decoder source with SDK boundaries shimmed; injected fetch callback; no HTTP, repository lifecycle, iOS runtime, crypto or full SDK tests','commands':commands}
+ (out/'evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
+ print(json.dumps({'cases':len(observations),'mismatches':len(mismatches),'output':str(out)}))
+ return 0 if not mismatches else 1
+if __name__=='__main__':sys.exit(main())

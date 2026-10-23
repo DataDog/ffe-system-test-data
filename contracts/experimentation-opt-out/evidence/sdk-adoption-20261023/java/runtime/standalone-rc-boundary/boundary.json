@@ -1,0 +1,58 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "merged_master_commit": "3718fdc518506e5700df8b7d448639971cd3470c",
+  "classification": "inherited_standalone_remote_config_capability_boundary",
+  "actual_invocation": [
+    "python3",
+    "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/run_runtime.py",
+    "standalone"
+  ],
+  "invocation_expands_to": [
+    "./run.sh",
+    "PARAMETRIC",
+    "tests/parametric/test_ffe/test_java_optout_contract.py"
+  ],
+  "configuration_environment": {
+    "DD_FEATURE_FLAGS_ENABLED": "true",
+    "DD_FEATURE_FLAGS_CONFIGURATION_SOURCE": "remote_config"
+  },
+  "provider_import": "com.datadog.openfeature.Provider",
+  "result": "All five runtime tests failed with PROVIDER_NOT_READY; no opt-out policy decision was reached.",
+  "sources": [
+    {
+      "repository_path": "dd-openfeature/src/main/java/com/datadog/openfeature/internal/bridge/AgentBridges.java",
+      "source_sha256": "f6d0f6422ab98efb6fd7383b5911e6cba14e8298e913897add48f13297061778",
+      "matches_merged_master": true,
+      "source_url": "https://github.com/DataDog/dd-trace-java/blob/a4d3dfb21cec0658417d4f3842dc8c8465a27371/dd-openfeature/src/main/java/com/datadog/openfeature/internal/bridge/AgentBridges.java"
+    },
+    {
+      "repository_path": "dd-openfeature/src/main/java/com/datadog/openfeature/internal/FeatureFlagsRuntime.java",
+      "source_sha256": "55dbff0de2d673876f3f95cb1427e1ebb3c3b953b0c83ae2b23fc4e549a75b65",
+      "matches_merged_master": true,
+      "source_url": "https://github.com/DataDog/dd-trace-java/blob/a4d3dfb21cec0658417d4f3842dc8c8465a27371/dd-openfeature/src/main/java/com/datadog/openfeature/internal/FeatureFlagsRuntime.java"
+    }
+  ],
+  "source_facts": [
+    "AgentBridges.detect() returns AgentBridge.NONE at lines 17-18.",
+    "FeatureFlagsRuntime requests bridge.remoteConfiguration() for remote_config and rejects a null result.",
+    "Both source files are byte-identical to the merged master parent."
+  ],
+  "agent_bridge_search": {
+    "command": [
+      "git",
+      "grep",
+      "-n",
+      "-E",
+      "AgentBridges|com[./]datadog[./]openfeature[./]internal[./]bridge",
+      "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+      "--",
+      "dd-java-agent",
+      "products/feature-flagging"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "successful_supported_path": "../standalone/receipt.json",
+  "scope": "No production bridge change was added. Final standalone system tests use the public agentless HTTP configuration source and local TLS intake."
+}

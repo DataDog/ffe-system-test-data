@@ -1,0 +1,26 @@
+{
+  "sdk_commit": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "harness_commit": "abe62eb21f53adba0d8ac038fe0539f8f05fb124",
+  "variant": "standalone",
+  "exit_code": 1,
+  "artifacts": {
+    "dd-java-agent-1.68.0-SNAPSHOT.jar": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+    "dd-trace-api-1.68.0-SNAPSHOT.jar": "6cf3d1f558a0092662f1cfe660cc6aef84f822c40027a3e3ee341abdc95fe196",
+    "dd-openfeature-1.68.0-SNAPSHOT.jar": "0dcd67850cae837c44d6cad89da8922b75e7d6e6bd0035621ff33f5c72b698f5"
+  },
+  "adapter_sha256": "30cfac16cedb262110a9793f029b3c2075b158880bd359a101a2ea9c44d5464f",
+  "policy_cases_sha256": "289a5d2dca4a7e5dd1e0428b4c56e9c1660668375aab67b71c91b27b9391f4e2",
+  "tests": {
+    "tests": 5,
+    "failures": 5,
+    "errors": 0,
+    "skipped": 0
+  },
+  "capture_agent_image": "sha256:78fa84f341634069668b0908d678704d82a953e3e50ddf00f5234622c027785c",
+  "image_id": "sha256:d7c15220e54a4ce92478b942c03566c2bda5637f4ddab465e7edd096337813c9",
+  "embedded_provider_sha256": "0dcd67850cae837c44d6cad89da8922b75e7d6e6bd0035621ff33f5c72b698f5",
+  "embedded_provider_matches": true,
+  "installed_agent_sha256": "91fb46ee03c0cd168faaeca7331f518b45692177bb43c0e2c139db0496f395d1",
+  "installed_agent_matches": true,
+  "harness_patch_sha256": "0364780a6c204f0675158d0abb7f09d18748112dbb081474164f6f05b66c4c82"
+}

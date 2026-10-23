@@ -1,0 +1,49 @@
+{
+  "production_source_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "control_type": "New regressions executed before remediation against the previous implementation. No deliberate mutation of production.",
+  "worktree_scope": "The new regression probes were uncommitted. Production sources were unchanged at baseline execution.",
+  "jvm_probe_results": [
+    {
+      "test": "M avoid persistence wait W setEvaluationContext() {telemetry request cleanup}()",
+      "failed": true,
+      "failure": "org.mockito.exceptions.verification.WantedButNotInvoked: \nWanted but not invoked:\nmockFlagsRepository.getAssignmentsSnapshot();\n-> at com.datadog.android.flags.internal.DatadogFlagsClientTest.M avoid persistence wait W setEvaluationContext() {telemetry request cleanup}(DatadogFlagsClientTest.kt:291)\n\nHowever, there was exactly 1 interaction with this mock:\nmockFlagsRepository.getEvaluationContext();\n-> at com.datadog.android.flags.internal.DatadogFlagsClient.setEvaluationContext$lambda$4(DatadogFlagsClient.kt:134)\n\n"
+    },
+    {
+      "test": "M retain every callback W setEvaluationContext() {worker queue drops extra tasks}()",
+      "failed": true,
+      "failure": "org.opentest4j.AssertionFailedError: \nexpected: 3\n but was: 1"
+    },
+    {
+      "test": "M create a new worker W setEvaluationContext() {previous delivery drained}()",
+      "failed": true,
+      "failure": "org.mockito.exceptions.verification.TooFewActualInvocations: \nmockCore.createSingleThreadExecutorService(\n    \"flags-callbacks\"\n);\nWanted 2 times:\n-> at com.datadog.android.flags.EvaluationCallbackDispatchTest.M create a new worker W setEvaluationContext() {previous delivery drained}(EvaluationCallbackDispatchTest.kt:103)\nBut was 1 time:\n-> at com.datadog.android.flags.FlagsClient$Companion.createInternal$dd_sdk_android_flags_debug(FlagsClient.kt:513)\n"
+    },
+    {
+      "test": "M shut down callback worker W setEvaluationContext() {delivery pending}()",
+      "failed": true,
+      "failure": "org.mockito.exceptions.verification.WantedButNotInvoked: \nWanted but not invoked:\nmockCallbackWorker.shutdown();\n-> at com.datadog.android.flags.EvaluationCallbackDispatchTest.M shut down callback worker W setEvaluationContext() {delivery pending}(EvaluationCallbackDispatchTest.kt:73)\n\nHowever, there was exactly 1 interaction with this mock:\nmockCallbackWorker.execute(\n    com.datadog.android.flags.internal.evaluation.EvaluationsManager$$Lambda/0x000000080054dde8@68e2de82\n);\n-> at com.datadog.android.core.internal.utils.ConcurrencyExtKt.executeSafe(ConcurrencyExt.kt:54)\n\n"
+    }
+  ],
+  "native_probe": {
+    "method": "Real SDK core on Android API36 arm64 emulator; IGNORE_NEWEST queue capacity1; first callback blocked while eight later completions were submitted.",
+    "submitted": 9,
+    "delivered": 2,
+    "dropped": 7,
+    "callback_workers_alive_after_stop": 1,
+    "test_result": "Expected failure",
+    "observations": "review4-runtime/baseline-observations.json",
+    "harness": "review4-runtime/baseline-CallbackRuntimeProbeTest.kt",
+    "apk_hashes": "review4-runtime/baseline-artifacts.json",
+    "boundary": "Native callbacks only. OpenFeature suspended continuation risk is inferred from its callback-based bridge."
+  },
+  "cleanup_probe_boundary": "Verifies the blocking getter route. It does not measure the repository wait duration.",
+  "initial_harness_attempt": "The first JVM attempt omitted the HTTP factory mock. The corrected baseline run produced all four intended failures. Both logs remain local.",
+  "files": {
+    "review4-baseline-tests.log": "8cab6678bcf0a8feeed2c39f4f9c46e4b51dc04015ba37511f60eeb97b1f9064",
+    "review4-baseline-tests-corrected.log": "4ddddd732a16771f91208c98ed1c9060317593c5302453de5674774b35933432",
+    "review4-runtime/baseline-observations.json": "0d18b519476d68be44b8fd03337794fa67bf232f61316f6bc7249a57387a112b",
+    "review4-runtime/baseline-CallbackRuntimeProbeTest.kt": "f804b4cb4988f674414945762a5a5f81301b1234e3f4a85d8bffdc9649664263",
+    "review4-runtime/baseline-instrumentation.log": "4324f868fb39b5ec310597d2774873d049b18dc942f3cfe9e958e9ded7eeca01",
+    "review4-runtime/baseline-artifacts.json": "0fb50d8e691e201ac29cff4eeffff655477e71bc658e3e38c2e46c1f186a7933"
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "repository": "DataDog/dd-sdk-android",
+  "pr": 4024,
+  "implementation_sha": "9c18edeca8d99f07ef7e21664d01d7d2d069db0b",
+  "contract_sha": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "reply_count": 25,
+  "replies": [
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7Mj4",
+      "root_comment_id": 4341191570,
+      "reply_id": 4355477580,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355477580",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:23Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7QyT",
+      "root_comment_id": 4341220101,
+      "reply_id": 4355477903,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355477903",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:28Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6u7QyX",
+      "root_comment_id": 4341220109,
+      "reply_id": 4355478274,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355478274",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:32Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYrW",
+      "root_comment_id": 4343859813,
+      "reply_id": 4355478660,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355478660",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:37Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYre",
+      "root_comment_id": 4343859827,
+      "reply_id": 4355479404,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355479404",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:45Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYro",
+      "root_comment_id": 4343859844,
+      "reply_id": 4355479927,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355479927",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:52Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYrv",
+      "root_comment_id": 4343859855,
+      "reply_id": 4355480216,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480216",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:19:56Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYr8",
+      "root_comment_id": 4343859875,
+      "reply_id": 4355480587,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480587",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:02Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsA",
+      "root_comment_id": 4343859881,
+      "reply_id": 4355480961,
+      "resolve": false,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355480961",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:07Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsJ",
+      "root_comment_id": 4343859894,
+      "reply_id": 4355481345,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481345",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:12Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsY",
+      "root_comment_id": 4343859913,
+      "reply_id": 4355481685,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481685",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:17Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYse",
+      "root_comment_id": 4343859923,
+      "reply_id": 4355481986,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355481986",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:21Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsl",
+      "root_comment_id": 4343859934,
+      "reply_id": 4355482328,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355482328",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:26Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsn",
+      "root_comment_id": 4343859939,
+      "reply_id": 4355482821,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355482821",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:32Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vBYsv",
+      "root_comment_id": 4343859950,
+      "reply_id": 4355483208,
+      "resolve": false,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355483208",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:36Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODRXddM6vPwXv",
+      "root_comment_id": 4349910077,
+      "reply_id": 4355483621,
+      "resolve": true,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355483621",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:20:42Z"
+    },
+    {
+      "root_comment_id": 4343859939,
+      "reply_id": 4355546560,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355546560",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:34:08Z",
+      "purpose": "Hosted CI compilation follow-up"
+    },
+    {
+      "root_comment_id": 4355492717,
+      "thread_id": "PRRT_kwDODRXddM6vc0LQ",
+      "reply_id": 4355703775,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355703775",
+      "body_verified": true,
+      "created_at": "2026-10-23T03:07:44Z",
+      "implementation_sha": "cda7955b6361876526fa2035db23dbf88a9e74e1"
+    },
+    {
+      "root_comment_id": 4355492722,
+      "thread_id": "PRRT_kwDODRXddM6vc0LU",
+      "reply_id": 4355704162,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355704162",
+      "body_verified": true,
+      "created_at": "2026-10-23T03:07:49Z",
+      "implementation_sha": "cda7955b6361876526fa2035db23dbf88a9e74e1"
+    },
+    {
+      "root_comment_id": 4355492726,
+      "thread_id": "PRRT_kwDODRXddM6vc0LY",
+      "reply_id": 4355704498,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355704498",
+      "body_verified": true,
+      "created_at": "2026-10-23T03:07:53Z",
+      "implementation_sha": "cda7955b6361876526fa2035db23dbf88a9e74e1"
+    },
+    {
+      "root_comment_id": 4355492733,
+      "thread_id": "PRRT_kwDODRXddM6vc0Ld",
+      "reply_id": 4355704870,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355704870",
+      "body_verified": true,
+      "created_at": "2026-10-23T03:07:57Z",
+      "implementation_sha": "cda7955b6361876526fa2035db23dbf88a9e74e1"
+    },
+    {
+      "root_comment_id": 4341220101,
+      "thread_id": "PRRT_kwDODRXddM6u7QyT",
+      "reply_id": 4355705216,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355705216",
+      "body_verified": true,
+      "created_at": "2026-10-23T03:08:00Z",
+      "implementation_sha": "cda7955b6361876526fa2035db23dbf88a9e74e1"
+    },
+    {
+      "root_comment_id": 4355693358,
+      "thread_id": "PRRT_kwDODRXddM6vdR3b",
+      "reply_id": 4355778546,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355778546",
+      "body_verified": true,
+      "resolved": true,
+      "created_at": "2026-10-23T03:23:13Z",
+      "implementation_sha": "347884bca81089127717ac3b272c4c0fff6dd13e"
+    },
+    {
+      "root_comment_id": 4355800957,
+      "thread_id": "PRRT_kwDODRXddM6vdh3E",
+      "reply_id": 4355898304,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355898304",
+      "body_verified": true,
+      "resolved": true,
+      "created_at": "2026-10-23T03:49:39Z",
+      "verified_at": "2026-10-23T03:50:19.567919+00:00"
+    },
+    {
+      "root_comment_id": 4355800964,
+      "thread_id": "PRRT_kwDODRXddM6vdh3I",
+      "reply_id": 4355898786,
+      "url": "https://github.com/DataDog/dd-sdk-android/pull/4024#discussion_r4355898786",
+      "body_verified": true,
+      "resolved": true,
+      "created_at": "2026-10-23T03:49:46Z",
+      "verified_at": "2026-10-23T03:50:20.760937+00:00"
+    }
+  ],
+  "followup_implementation_sha": "f15ab92ed86724dfedac559c45f7a4355f53b594",
+  "latest_implementation_sha": "347884bca81089127717ac3b272c4c0fff6dd13e"
+}

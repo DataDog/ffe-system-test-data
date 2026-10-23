@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-23T02:09:55.757421+00:00",
+  "repository": "DataDog/dd-sdk-ios",
+  "pr": 3338,
+  "source_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "base_sha": "5b351983abaa54c0b5fba8d94d29d1378fd69fd7",
+  "central_pin": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "status": "Signed final SDK source with clean worktree at validation; publication status belongs to parent publication record.",
+  "final_diff_sha256": "fb7089689e349540891c0ee3d50cf5eb61bd7cecfad054fe62956b4b1c817e18",
+  "final_files_sha256": {
+    "CHANGELOG.md": "fd46e96b2fdb0e23210b6d25404681ccc6b7b230b8688d52909c582df0d14a95",
+    "Datadog/IntegrationUnitTests/Flags/FlagsEvaluationIntegrationTests.swift": "7c6a249758fce64b710f6101e7e08cd3bc93649917197981d2a2c29b6a8ab2a6",
+    "DatadogFlags/Sources/Client/FlagAssignmentsFetcher.swift": "2142b79b665e931a891b4658ab0f83375fa18d64058bba91e1f2bdfa1bd00899",
+    "DatadogFlags/Sources/Client/FlagAssignmentsRequest.swift": "afb05df25a18235ad66a1c1a198f2a8c2aad8ee7ff5ceab347e3367ef34739b7",
+    "DatadogFlags/Sources/Client/FlagsClient.swift": "f1b6651d99e36d14c51a89cbfb4c35f6efffd1bf8da27804e4dd998ce07d181d",
+    "DatadogFlags/Sources/Client/FlagsData.swift": "6220ea0e36c37a8df381c01e81c0628f6d4f60126589c09a31a8436cd906113a",
+    "DatadogFlags/Sources/Client/FlagsRepository.swift": "8fc83f1c785bdcf0b7d5b81c2910590a292f03399e0f6434b9e80682f48fcf46",
+    "DatadogFlags/Sources/Models/FlagAssignmentsResponse.swift": "a29041156bdcfbdadf7094a41775d5ce864de3079303551b5e3134e2ce241c5d",
+    "DatadogFlags/Sources/Models/FlagDetails.swift": "ba0221bd3f9c95eecff7c004611f6129d4ffff93f6789e7baf475c88d801afe9",
+    "DatadogFlags/Sources/Models/FlagsError.swift": "b9a5c2c605482a6a2bd5c9fe88df2240b7de59817ebe494c6443544d2164c801",
+    "DatadogFlags/Sources/Models/FlagsEvaluationContext.swift": "62b998df125390dfa16e4ea602a439fffc28d62da8e5b7de41f5e13d51efea85",
+    "DatadogFlags/Tests/Client/FlagAssignmentsFetcherTests.swift": "d681bdd543b9ffb361d6b86b67e294ce6303a26edab42ad35b7fe669100fd13c",
+    "DatadogFlags/Tests/Client/FlagAssignmentsRequestTests.swift": "91b1b96c5d2879a967e6e4fa74c872d02781e6f2397972f4b5aace957f1dc9a3",
+    "DatadogFlags/Tests/Client/FlagsClientMocks.swift": "ac38fee10507548abcc2675b5b4280a61921eb8e565a71bc50e26bd46d348850",
+    "DatadogFlags/Tests/Client/FlagsClientTests.swift": "ff14f0c2967cec0d490fc4d11575920d30cbc2d69f1ca469988450e7727439bd",
+    "DatadogFlags/Tests/Client/FlagsRepositoryTests.swift": "7b2c31759778146a2d43f2fa9e3ce0c407ba103923d7d27e2d13daa5312d4c86",
+    "api-surface-swift": "5f50cc1943640ec0e127c8fbb68b25261a3e605b45c266841e261a3eb9e0c0f3",
+    "docs/flags-experimentation-opt-out.md": "63da0a81a64833fb9519003ed5b4541c44fa53c96656bec8723132beafc8cd4c"
+  },
+  "toolchain": {
+    "platform": "iOS26.5 simulator arm64",
+    "device": "Flags Opt-out iPhone17 Pro",
+    "device_id": "54FC012F-1436-447B-A1A2-B8B86AAE8B4A",
+    "xcode": "27.0 27A266a",
+    "swift": "6.4 swiftlang-6.4.0.34.1",
+    "swiftlint": "0.65.1"
+  },
+  "native_tests": {
+    "flags": {
+      "passed": 237,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "full DatadogFlags scheme; direct xcodebuild without TIA selection",
+      "local_only_log": "exact-386f8c5-native-flags.log"
+    },
+    "integration": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "selected FlagsEvaluationIntegrationTests5 + FlagsEvaluationLocalIntakeTests8",
+      "real_http_intake_counts": [
+        {
+          "mode": "immediate",
+          "telemetry_suppressed": false,
+          "assignment_requests": 2,
+          "exposures": 1,
+          "evaluations": 3
+        },
+        {
+          "mode": "immediate",
+          "telemetry_suppressed": true,
+          "assignment_requests": 2,
+          "exposures": 1,
+          "evaluations": 0
+        },
+        {
+          "mode": "futureExperimentsOnly",
+          "telemetry_suppressed": false,
+          "assignment_requests": 2,
+          "exposures": 2,
+          "evaluations": 4
+        },
+        {
+          "mode": "futureExperimentsOnly",
+          "telemetry_suppressed": true,
+          "assignment_requests": 2,
+          "exposures": 2,
+          "evaluations": 0
+        }
+      ],
+      "boundary": "5 methods use real assignment HTTP plus CoreProxy event capture;8 use real DatadogCore/local HTTP intake. New test covers4 mode/suppression combinations with scripted assignment responses. No deployed backend proof.",
+      "local_only_log": "exact-386f8c5-native-intake.log"
+    }
+  },
+  "source_profile": {
+    "cases": 187,
+    "mismatches": 0,
+    "timestamps": 43,
+    "requests": 9,
+    "acknowledgements": 135,
+    "selected_profile_sha256": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+    "selected_cases_sha256": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528",
+    "executed_at_sha": "6830d11b8cce653dd5415dbacf39d4841688ce1f",
+    "receipt": "source/profile-receipt.json",
+    "final_equivalence": "source-equivalence.json",
+    "boundary": "macOS Swift complete production parser/context/serializer/fetcher/decoder source, SDK boundaries shimmed, injected fetch callback; no native telemetry or lifecycle in this adapter"
+  },
+  "negative_controls": {
+    "native_identity_failures": 6,
+    "native_absent_policy_isolation_failures": 2,
+    "serialization_profile_mismatches": 7,
+    "all_detected": true,
+    "native_restored_byte_for_byte": true,
+    "source_equivalence": "source-equivalence.json",
+    "native_receipt": "controls/summary.json",
+    "serialization_receipt": "controls/summary.json"
+  },
+  "lint": {
+    "source_files": 9,
+    "test_files": 6,
+    "violations": 0,
+    "strict": true,
+    "scope": "all branch-changed Swift files against develop, repository source/test configurations",
+    "tool_receipt": "Tool0.65.1 was downloaded from the official portable release and verified against GitHub release SHA256 c1e429b0599cf1b516f369a2d9ec04eaf0e436f3c12b637df8851fa52ff694d0. Binary and raw receipt retained locally."
+  },
+  "api_surface": {
+    "result": "generated successfully",
+    "scope": "all modules; resulting diff only expected Flags API additions",
+    "diagnostic_note": "SourceKit printed cross-platform NSView diagnostics while parsing; generator exited0 and wrote both API files.",
+    "local_only_log": "api-surface.log"
+  },
+  "history": {
+    "pre_format_sha": "6830d11b8cce653dd5415dbacf39d4841688ce1f",
+    "pre_format_results": "237 Flags,13 selected integration,187 source cases",
+    "initial_merge_run": "24 assertion failures across3 test methods caused by async fetcher fixtures and an invalid unconditional acknowledgement fixture; corrected before final passing run",
+    "exact_6830_integration_first_attempt": "simulator failed to launch Example with SBMainWorkspace Busy before any tests; dedicated simulator reboot and retry passed13",
+    "make_wrapper": "xcbeautify missing; equivalent direct xcodebuild commands used",
+    "first_lint": "5 test-formatting violations; fixed by separate signed follow-up commit"
+  },
+  "gaps": [
+    "Hosted CI and TIA reporting require live post-push checks.",
+    "No visionOS runtime installed; no fresh visionOS execution.",
+    "No current performance benchmark; older reviewer measurements remain historical.",
+    "Backend edge140422/classification139368/fallback139379/activation139381 plus rebuilt configuration remain external enablement gates.",
+    "Swift provider44 remains a separate draft/dependency/release/runtime gate; native forwarding overload retained.",
+    "No deployment or release claim."
+  ],
+  "review_ledger": "feedback-ledger.json",
+  "reply_drafts": "Local-only drafts; not publication evidence.",
+  "open_external_thread_comments": [
+    4343863248,
+    4343863269
+  ],
+  "readiness_review_note": "Parent and worker assessed inherited hasError/stateManager read ordering. No deterministic scoped defect was demonstrated. No speculative readiness refactor was made. Context, assignment, requested context and effective policy remain in one repository snapshot.",
+  "open_review_choice_comments": [
+    4343863276
+  ],
+  "export_boundary": "Compact receipt. Raw simulator logs, xcresult bundles, tool binaries, and complete PR snapshot remain local. Machine paths are replaced with named placeholders."
+}

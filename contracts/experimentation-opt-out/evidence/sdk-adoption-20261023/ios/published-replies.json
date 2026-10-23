@@ -1,0 +1,139 @@
+{
+  "repository": "DataDog/dd-sdk-ios",
+  "pr": 3338,
+  "implementation_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "contract_sha": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "reply_count": 16,
+  "replies": [
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZK1",
+      "root_comment_id": 4343863206,
+      "reply_id": 4355455353,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355455353",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:14:41Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZK-",
+      "root_comment_id": 4343863216,
+      "reply_id": 4355459334,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355459334",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:15:34Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLI",
+      "root_comment_id": 4343863236,
+      "reply_id": 4355459714,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355459714",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:15:39Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLR",
+      "root_comment_id": 4343863248,
+      "reply_id": 4355460251,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355460251",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:15:45Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLY",
+      "root_comment_id": 4343863262,
+      "reply_id": 4355460646,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355460646",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:15:50Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLe",
+      "root_comment_id": 4343863269,
+      "reply_id": 4355461076,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355461076",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:15:56Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLi",
+      "root_comment_id": 4343863276,
+      "reply_id": 4355461539,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355461539",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:00Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLo",
+      "root_comment_id": 4343863282,
+      "reply_id": 4355461986,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355461986",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:05Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLt",
+      "root_comment_id": 4343863287,
+      "reply_id": 4355462283,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355462283",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:10Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZLz",
+      "root_comment_id": 4343863296,
+      "reply_id": 4355462644,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355462644",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:15Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZL6",
+      "root_comment_id": 4343863304,
+      "reply_id": 4355463113,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355463113",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:21Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZL9",
+      "root_comment_id": 4343863318,
+      "reply_id": 4355463540,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355463540",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:26Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZMD",
+      "root_comment_id": 4343863326,
+      "reply_id": 4355463934,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355463934",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:32Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vBZMH",
+      "root_comment_id": 4343863330,
+      "reply_id": 4355464297,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355464297",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:36Z"
+    },
+    {
+      "thread_id": "PRRT_kwDODYWs6s6vPriq",
+      "root_comment_id": 4349878544,
+      "reply_id": 4355464679,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355464679",
+      "body_verified": true,
+      "created_at": "2026-10-23T02:16:41Z"
+    },
+    {
+      "root_comment_id": 4343863269,
+      "thread_id": "PRRT_kwDODYWs6s6vBZLe",
+      "reply_id": 4355864773,
+      "url": "https://github.com/DataDog/dd-sdk-ios/pull/3338#discussion_r4355864773",
+      "body_verified": true,
+      "resolved": true,
+      "created_at": "2026-10-23T03:42:23Z",
+      "verified_at": "2026-10-23T03:42:48.646615+00:00"
+    }
+  ]
+}

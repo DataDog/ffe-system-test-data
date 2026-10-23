@@ -1,0 +1,62 @@
+{
+  "candidate-jdk25-final.log": {
+    "sha256": "d1dce0be392e7bec7bd9f95b4926c22b1a8309c887689733561e7303ce226eea",
+    "bytes": 215746,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/candidate-jdk25-final.log"
+  },
+  "candidate-jdk11.xml": {
+    "sha256": "ae06c23aac4d19a107f7db316fac8e841ff1d7211497d93389628a4acd030dcd",
+    "bytes": 2452795,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/candidate-jdk11.xml"
+  },
+  "signed-head-jdk25.log": {
+    "sha256": "49ba2f25c97012aac00f5178e9ff04a7eea53b6cb2e66444e45f27cbde3fbf8c",
+    "bytes": 215112,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/signed-head-jdk25.log"
+  },
+  "spotless-apply.log": {
+    "sha256": "291e6ea069828e3911dd43ace42709bd5cbd67ff6f7045d13866f5c2e91ff752",
+    "bytes": 7244,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/spotless-apply.log"
+  },
+  "signed-head-jdk25.xml": {
+    "sha256": "c43bdfc759fceb103e5b544d872529cdb87bb3cae08c31065e9ccb55052a7d4d",
+    "bytes": 1762833,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/signed-head-jdk25.xml"
+  },
+  "candidate-jdk25-final.xml": {
+    "sha256": "98808d1fc05f8bdab13dd2f3c98dd7f794e15e8219472759159ad705fc921ebb",
+    "bytes": 2611734,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/candidate-jdk25-final.xml"
+  },
+  "candidate-jdk11.log": {
+    "sha256": "f9cacb729fcd685d9e3a54e618f860967c38f840f8734f13b3da53e55a55942a",
+    "bytes": 215088,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/candidate-jdk11.log"
+  },
+  "candidate-jdk25.log": {
+    "sha256": "bc55bf69384e79885c62adb63293381785b61999581c878b075e5c721860e68c",
+    "bytes": 218565,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/candidate-jdk25.log"
+  },
+  "negative-control.log": {
+    "sha256": "d6fc08dc46b00d1d451765c882331ccc0e8ae3f4f10114438d575d8f4e94fc01",
+    "bytes": 215439,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/negative-control.log"
+  },
+  "negative-control.xml": {
+    "sha256": "d08576daa0e6a5e607fce231cdc40f184711e7a7a310112d0b69fb1d9440a40a",
+    "bytes": 882923,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/negative-control.xml"
+  },
+  "baseline/junit.xml": {
+    "sha256": "b5b5cdb943838fce7687ad869305943690694a1fd8bbdb03e710bec65c2c152f",
+    "bytes": 2112984,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/baseline/junit.xml"
+  },
+  "baseline/gradle.log": {
+    "sha256": "d85950382466ffc193d525502718922302f07ffc596cdf7454cf7052e50bf930",
+    "bytes": 216528,
+    "remote_path": "/home/bits/.ffe-ai/workspaces/opt-out-finish-20261022-java-evidence/smoke-remediation/baseline/gradle.log"
+  }
+}

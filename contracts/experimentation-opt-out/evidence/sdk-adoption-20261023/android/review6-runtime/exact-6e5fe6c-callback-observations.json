@@ -1,0 +1,19 @@
+{
+  "source_sha": "6e5fe6cf6266a5d965a44a7f1958f1bfe1fcf735",
+  "stop_returned_while_callback_blocked": true,
+  "submitted": 9,
+  "delivered": 9,
+  "callback_threads": [
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1",
+    "datadog-flags-callbacks-thread-1"
+  ],
+  "dropped": [],
+  "alive_callback_workers_after_stop": []
+}

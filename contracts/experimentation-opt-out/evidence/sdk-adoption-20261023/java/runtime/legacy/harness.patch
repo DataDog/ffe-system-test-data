@@ -1,0 +1,67 @@
+diff --git a/utils/_context/_scenarios/parametric.py b/utils/_context/_scenarios/parametric.py
+index 146a13062a..cd893ab5e6 100644
+--- a/utils/_context/_scenarios/parametric.py
++++ b/utils/_context/_scenarios/parametric.py
+@@ -64,7 +64,7 @@ class ParametricScenario(DockerFixturesScenario):
+             name,
+             doc=doc,
+             github_workflow="parametric",
+-            agent_image="ghcr.io/datadog/dd-apm-test-agent/ddapm-test-agent:v1.67.0",
++            agent_image="ffe-java-optout-test-agent:a4d3dfb-v2",
+             weblog_categories=[WeblogCategory.parametric],
+         )
+         self._parametric_tests_confs = ParametricScenario.PersistentParametricTestConf(self)
+@@ -97,8 +97,8 @@ class ParametricScenario(DockerFixturesScenario):
+         self._test_client_factory = ParametricTestClientFactory(
+             library=library,
+             dockerfile=f"utils/build/docker/{library}/parametric/Dockerfile",
+-            tag=f"{library}-test-client",
+-            container_name=f"{library}-test-client",
++            tag=f"{library}-optout-contract-{os.environ.get("JAVA_OPTOUT_VARIANT", "legacy")}",
++            container_name=f"{library}-optout-contract-{os.environ.get("JAVA_OPTOUT_VARIANT", "legacy")}",
+             container_volumes=volumes.get(library, {}),
+             container_env=env,
+         )
+diff --git a/utils/build/docker/java/parametric/Dockerfile b/utils/build/docker/java/parametric/Dockerfile
+index d2a58e76c8..eb393cdb64 100644
+--- a/utils/build/docker/java/parametric/Dockerfile
++++ b/utils/build/docker/java/parametric/Dockerfile
+@@ -6,6 +6,8 @@ COPY utils/build/docker/java/parametric/src src
+ COPY utils/build/docker/java/parametric/install_ddtrace.sh .
+ COPY utils/build/docker/java/parametric/pom.xml .
+ COPY binaries /binaries
++COPY binaries/java-optout-trust.p12 /opt/java-optout-trust.p12
++COPY utils/build/docker/java/parametric/maven-settings.xml /root/.m2/settings.xml
+ RUN bash install_ddtrace.sh
+ COPY utils/build/docker/java/parametric/run.sh .
+ RUN mkdir /parametric-tracer-logs
+diff --git a/utils/build/docker/java/parametric/pom.xml b/utils/build/docker/java/parametric/pom.xml
+index 1351080e7c..9746eedd1b 100644
+--- a/utils/build/docker/java/parametric/pom.xml
++++ b/utils/build/docker/java/parametric/pom.xml
+@@ -21,7 +21,7 @@
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         <java.version>21</java.version>
+         <opentracing.version>0.33.0</opentracing.version>
+-        <opentelemetry.version>1.45.0</opentelemetry.version>
++        <opentelemetry.version>1.66.0</opentelemetry.version>
+         <!-- Latest version of public tracer APP to match latest pulled agent -->
+         <dd-trace-api.version>[1.47.0,)</dd-trace-api.version>
+         <dd-openfeature.version>[1.56.0,)</dd-openfeature.version>
+@@ -42,6 +42,7 @@
+     <!--    </repositories>-->
+ 
+     <dependencies>
++        <dependency><groupId>com.fasterxml.jackson.core</groupId><artifactId>jackson-core</artifactId><version>2.20.0</version></dependency>
+         <!-- Web server -->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+@@ -99,7 +100,7 @@
+         <dependency>
+             <groupId>dev.openfeature</groupId>
+             <artifactId>sdk</artifactId>
+-            <version>1.18.2</version>
++            <version>1.23.0</version>
+         </dependency>
+     </dependencies>
+ 

@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-10-23T02:14:44.331773+00:00",
+  "sdk_sha": "386f8c5d59af9c9ffb9cf7dee6aa2e90c95a5c0f",
+  "central_input_pin": "0520866bedb8c059df9c493cfe27ad294390c603",
+  "destination_root": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/",
+  "publication": "not performed; parent owns contract repository and publication",
+  "staging_root": "central-export/",
+  "file_count": 12,
+  "total_bytes": 67058,
+  "files": [
+    {
+      "staged_source": "central-export/final-validation.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/final-validation.json",
+      "bytes": 8353,
+      "sha256": "f471602e9c159da2bf752ab61cf7126399208d3d68c66c203581bf3b51cd9ebe",
+      "original_sources": [
+        {
+          "path": "final-validation.json",
+          "sha256": "3b3974d620cf96da58504b462c322e9226b33d52f965367e5a25f9c8cb8c7415"
+        }
+      ],
+      "transformation": "Preserve results/pins/hash maps; remap exported receipt references; label omitted artifacts local-only; sanitize machine paths."
+    },
+    {
+      "staged_source": "central-export/source-equivalence.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/source-equivalence.json",
+      "bytes": 2195,
+      "sha256": "cd2e53e76680cd8b8d3d8689835a89410596e457f3c269f1399f2eda806a9618",
+      "original_sources": [
+        {
+          "path": "final-source-equivalence.json",
+          "sha256": "b05da7dc86cfc964344868a95a92051d9329e0199663cc1e0615624c783a809c"
+        }
+      ],
+      "transformation": "Remap exported receipt references; sanitize machine paths; retain original source hashes."
+    },
+    {
+      "staged_source": "central-export/source/profile-receipt.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/source/profile-receipt.json",
+      "bytes": 4230,
+      "sha256": "773c4e6184ca70870f6e9943935b9af79e9261a5c76c14886717e9ff971d4e9a",
+      "original_sources": [
+        {
+          "path": "exact-6830d11-source-probe/evidence.json",
+          "sha256": "df73be34bd40b6eb8f71db0219b18b8fc58976aee807e5bc519e122469409366"
+        }
+      ],
+      "transformation": "Sanitize machine paths in commands; preserve counts, observations, input pins, source hashes and executed adapter hashes."
+    },
+    {
+      "staged_source": "central-export/source/observations.jsonl",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/source/observations.jsonl",
+      "bytes": 14931,
+      "sha256": "23654763da6eab140a2b58764a098c6b8f6d97a21606bb8d0252d7e038acd316",
+      "original_sources": [
+        {
+          "path": "exact-6830d11-source-probe/observations.jsonl",
+          "sha256": "23654763da6eab140a2b58764a098c6b8f6d97a21606bb8d0252d7e038acd316"
+        }
+      ],
+      "transformation": "Byte-identical187 observation rows; inputs/expectations remain in the selected central mobile profile."
+    },
+    {
+      "staged_source": "central-export/adapter/main.swift",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/adapter/main.swift",
+      "bytes": 5183,
+      "sha256": "613a6caaac3b503cad35f03f82f5a4c7f18c7775d7f7aa9a7f1ad6b3c2020c6f",
+      "original_sources": [
+        {
+          "path": "main.swift",
+          "sha256": "613a6caaac3b503cad35f03f82f5a4c7f18c7775d7f7aa9a7f1ad6b3c2020c6f"
+        }
+      ],
+      "transformation": "Byte-identical executed Swift adapter/boundary source."
+    },
+    {
+      "staged_source": "central-export/adapter/Boundaries.swift",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/adapter/Boundaries.swift",
+      "bytes": 2559,
+      "sha256": "ece3b36b08fea54bd0c3ea723faa2e4c9f363665c0498d8373c72e86875d0bb0",
+      "original_sources": [
+        {
+          "path": "Boundaries.swift",
+          "sha256": "ece3b36b08fea54bd0c3ea723faa2e4c9f363665c0498d8373c72e86875d0bb0"
+        }
+      ],
+      "transformation": "Byte-identical executed Swift adapter/boundary source."
+    },
+    {
+      "staged_source": "central-export/adapter/runner.executed.py.txt",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/adapter/runner.executed.py.txt",
+      "bytes": 7337,
+      "sha256": "c6746524648c681531c534d0400a036a6f35debdc2303289671f2785a2193a09",
+      "original_sources": [
+        {
+          "path": "run.py",
+          "sha256": "91e520933a392e193e68d49263e6963b9dcb18881a77573699b33d643aea3eca"
+        }
+      ],
+      "transformation": "Archive exact executed Python runner except named machine-path placeholders. Not directly executable without restoring its paths and original pinned POC input layout. Do not describe this sanitized file as a fresh execution."
+    },
+    {
+      "staged_source": "central-export/controls/summary.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/controls/summary.json",
+      "bytes": 5953,
+      "sha256": "024c6c357de8e0db8b0960c575f5ee21e3ad5dac3649868fea7ad7db17232d5d",
+      "original_sources": [
+        {
+          "path": "native-controls.json",
+          "sha256": "8de208b489cc9297e1ee83aa5a4a41f8de13a11630215a28103f3026772f0347"
+        },
+        {
+          "path": "final-source-serialization-control/evidence.json",
+          "sha256": "d32bfe3e1699218c0f5ad6c77909adaef2b41812038b2971a045af91029099a5"
+        }
+      ],
+      "transformation": "Remove machine commands and repeated suite summaries; retain timestamps, mutation/restoration hashes, assertions and all7 serialization mismatches."
+    },
+    {
+      "staged_source": "central-export/audit/own-pass.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/audit/own-pass.json",
+      "bytes": 1763,
+      "sha256": "9cd996bcd60f9c7ed331efe95a4d02e7dab5a47930e422d2fd7c402ceea04122",
+      "original_sources": [
+        {
+          "path": "own-pass-receipt.json",
+          "sha256": "9cd996bcd60f9c7ed331efe95a4d02e7dab5a47930e422d2fd7c402ceea04122"
+        }
+      ],
+      "transformation": "Preserve pre-review ordering, original head, inspected source hashes and executed probe scope; sanitize machine paths."
+    },
+    {
+      "staged_source": "central-export/audit/summary.md",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/audit/summary.md",
+      "bytes": 1013,
+      "sha256": "9f8f8eb0d4c518953a4de4e2a53348020e11ba6125f638cb8bc744495d42c94b",
+      "original_sources": [
+        {
+          "path": "OWN-PASS.md",
+          "sha256": "66c709d69a93b915e2b539575aacba6385160ef606dce0fa18b417a1c5349772"
+        },
+        {
+          "path": "own-pass-receipt.json",
+          "sha256": "9cd996bcd60f9c7ed331efe95a4d02e7dab5a47930e422d2fd7c402ceea04122"
+        }
+      ],
+      "transformation": "Compact own-pass findings and evidence boundaries; no bulk diagnostic output."
+    },
+    {
+      "staged_source": "central-export/feedback-ledger.json",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/feedback-ledger.json",
+      "bytes": 11869,
+      "sha256": "922beeb997dacfcdcca4cd7e3074e43ff85b1ff7e5c4d359853a16ee95ee5b87",
+      "original_sources": [
+        {
+          "path": "feedback-ledger.json",
+          "sha256": "25e9acbc649b70a221d8bc4482f88e0edd24bc545867253a4a0caeeb35a9cd74"
+        }
+      ],
+      "transformation": "Compact all15 stable review IDs, original/current source pins, decisions and final dispositions. Exclude drafts and local operational state; publication/readback remains separate."
+    },
+    {
+      "staged_source": "central-export/README.md",
+      "destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/README.md",
+      "bytes": 1672,
+      "sha256": "b6c3b0949619dee21c0fc3c33c914c2ba3156794f337c659da9ab532ddce7b71",
+      "original_sources": [],
+      "transformation": "New export guide; no new verification or publication claim."
+    }
+  ],
+  "excluded": [
+    "Bulk native logs",
+    "xcresult bundles",
+    "compiled probe binaries and module caches",
+    "downloaded SwiftLint binary/archive",
+    "full PR review snapshot",
+    "reply drafts pending publication/readback",
+    "local paths and raw tool environment"
+  ],
+  "machine_path_scan_passed": true,
+  "manifest_destination": "contracts/experimentation-opt-out/evidence/sdk-adoption-20261023/ios/export-manifest.json",
+  "publication_note": "Export staged before publication; see publication.json and published-replies.json for verified publication."
+}

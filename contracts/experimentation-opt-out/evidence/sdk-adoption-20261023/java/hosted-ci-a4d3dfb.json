@@ -1,0 +1,148 @@
+{
+  "recorded_at": "2026-10-23T02:52:47.573320+00:00",
+  "source_sha": "a4d3dfb21cec0658417d4f3842dc8c8465a27371",
+  "head_matches": true,
+  "state": "OPEN",
+  "draft": false,
+  "review": "REVIEW_REQUIRED",
+  "counts": {
+    "SUCCESS": 583,
+    "SKIPPED": 1,
+    "IN_PROGRESS": 1,
+    "FAILURE": 5,
+    "PENDING": 20
+  },
+  "non_success_checks": [
+    {
+      "name": "main / End-to-end #4 / uds-spring-boot 4",
+      "state": "IN_PROGRESS",
+      "url": "https://github.com/DataDog/dd-trace-java/actions/runs/39888544526/job/120206565149"
+    },
+    {
+      "name": "dd-gitlab/test_smoke: [11, 7/8]",
+      "state": "FAILURE",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880405&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_smoke: [17, 7/8]",
+      "state": "FAILURE",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880414&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_smoke: [21, 7/8]",
+      "state": "FAILURE",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880422&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_smoke: [25, 7/8]",
+      "state": "FAILURE",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880430&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_smoke: [tip, 7/8]",
+      "state": "FAILURE",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880439&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "DDCI Status",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?utm_content=ddci_status_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/default-pipeline",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=datadog&pipelineId=146948744&repository=dd-trace-java&utm_content=gitlab_pipeline_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [11, 1/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880294&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [11, 2/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880295&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [11, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880298&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [11, 6/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880299&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [11, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880301&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [17, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880306&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [17, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880309&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [21, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880314&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [21, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880317&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [25, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880322&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [25, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880325&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [8, 1/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880286&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [8, 2/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880287&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [8, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880290&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [8, 6/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880291&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [8, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880293&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [tip, 5/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880330&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    },
+    {
+      "name": "dd-gitlab/test_inst: [tip, 8/8]",
+      "state": "PENDING",
+      "url": "https://mosaic.us1.ddbuild.io/change-request/9766904790106096472?owner=DataDog&repository=dd-trace-java&taskExecutionId=2168880334&taskId=gitlab&utm_content=gitlab_task_check&utm_source=github_pr_page"
+    }
+  ],
+  "classification_at_snapshot": "Five GitLab smoke jobs fail exposure assertions. Diagnosis in progress; not classified as infrastructure."
+}
