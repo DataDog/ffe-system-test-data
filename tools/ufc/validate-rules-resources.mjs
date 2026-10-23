@@ -52,12 +52,23 @@ export async function validate(base = root) {
     const wire = await fs.readFile(path.join(directory, 'configuration-wire.json'), 'utf8');
     assert.equal(packageWire(binary), wire, 'Wire differs from canonical SDK serialization');
     const source = JSON.parse(await fs.readFile(await sourcePath(resource.source, base)));
-    const included = new Set(Object.keys(configurationFromRulesBinary(binary).rules.response.flags));
+    const convertedFlagKeys = Object.keys(configurationFromRulesBinary(binary).rules.response.flags).sort();
+    const included = new Set(convertedFlagKeys);
+    const omittedFlagKeys = Object.keys(source.flags).filter(key => !included.has(key)).sort();
+    // Consumers use these inventories to skip omissions, so derive them from the payload.
+    assert.deepEqual(resource.convertedFlagKeys, convertedFlagKeys, 'Converted flag inventory differs from binary');
+    assert.deepEqual(resource.omittedFlagKeys, omittedFlagKeys, 'Omitted flag inventory differs from source minus binary');
     const filtered = structuredClone(source);
     for (const key of Object.keys(filtered.flags)) if (!included.has(key)) delete filtered.flags[key];
     for (const key of included) assert.ok(Object.hasOwn(source.flags, key), 'Binary introduced a flag absent from source');
     async function localDiagnostic(name) {
-      try { const bytes = await fs.readFile(path.join(directory, name)); expectedFiles.push(`${resource.id}/${name}`); return JSON.parse(bytes); }
+      try {
+        const bytes = await fs.readFile(path.join(directory, name));
+        const diagnostic = JSON.parse(bytes);
+        assert.ok(diagnostic !== null && typeof diagnostic === 'object' && !Array.isArray(diagnostic), `${name} must contain a JSON object`);
+        expectedFiles.push(`${resource.id}/${name}`);
+        return diagnostic;
+      }
       catch (error) { if (error.code === 'ENOENT') return null; throw error; }
     }
     const localJson = await localDiagnostic('ufc.generated.json');
@@ -73,7 +84,7 @@ export async function validate(base = root) {
         if (flag.status === 'omitted') assert.ok(flag.error, 'Omission requires warning reason');
       }
     }
-    const report = parity(base, binary, wire, filtered);
+    const report = parity(base, binary, wire, filtered, source);
     const localParity = await localDiagnostic('parity.json');
     if (localParity) assert.deepEqual(report, localParity, 'Local evaluation diagnostics changed');
     exercised += report.exercisedCases;

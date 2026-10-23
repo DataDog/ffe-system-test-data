@@ -121,7 +121,7 @@ export async function generate({ converter, converterSha256, converterSource, ch
       await fs.writeFile(path.join(directory, 'configuration-wire.json'), wire);
       const convertedFlagKeys = Object.keys(configurationFromRulesBinary(binary).rules.response.flags).sort();
       const omittedFlagKeys = Object.keys(JSON.parse(sourceBytes).flags).filter(key => !convertedFlagKeys.includes(key)).sort();
-      const proof = parity(base, binary, wire, JSON.parse(await fs.readFile(path.join(directory, 'ufc.generated.json'))));
+      const proof = parity(base, binary, wire, JSON.parse(await fs.readFile(path.join(directory, 'ufc.generated.json'))), JSON.parse(sourceBytes));
       await fs.writeFile(path.join(directory, 'parity.json'), json(proof));
       if (proof.failures.length) console.warn(`${resource.id}: ${proof.failures.length} evaluation cases differ; see parity.json (diagnostic, not a generation filter)`);
       const artifacts = {};

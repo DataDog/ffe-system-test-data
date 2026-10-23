@@ -8,8 +8,7 @@ const { evaluate, evaluateRulesBasedConfiguration } = require('@datadog/flagging
 const { configurationFromRulesBinary, configurationFromString } = require('@datadog/flagging-core/rules-based');
 const types = { BOOLEAN: 'boolean', INTEGER: 'number', NUMERIC: 'number', STRING: 'string', JSON: 'object' };
 const logger = { debug() {}, info() {}, warn() {}, error() {} };
-export function parity(root, binary, wire, generated) {
-  const source = JSON.parse(readFileSync(resolve(root, 'ufc-config.json')));
+export function parity(root, binary, wire, generated, source) {
   const configs = { binary: configurationFromRulesBinary(binary), wire: configurationFromString(wire) };
   const cases = readdirSync(resolve(root, 'evaluation-cases')).filter(x => x.endsWith('.json')).sort().flatMap(file => JSON.parse(readFileSync(resolve(root, 'evaluation-cases', file))).map((value,index) => ({id:`evaluation-cases/${file}#${index}`,value})));
   const included = new Set(Object.keys(generated.flags));
