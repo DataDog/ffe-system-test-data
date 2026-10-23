@@ -62,6 +62,38 @@
     "variationType": "STRING"
   },
   {
+    "description": "A prerequisite evaluated before a later false condition retains its evaluation event but not its exposure because the containing targeting rule is not selected.",
+    "attributes": {
+      "gate": "closed"
+    },
+    "defaultValue": "caller-default",
+    "flag": "dependent-inapplicable-rule-root",
+    "result": {
+      "reason": "STATIC",
+      "value": "inapplicable-rule-fallback"
+    },
+    "targetingKey": "dependent-inapplicable-rule",
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [
+        {
+          "flag": "dependent-inapplicable-rule-root"
+        }
+      ],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-leaf-on",
+          "errorCode": null
+        },
+        {
+          "flag": "dependent-inapplicable-rule-root",
+          "errorCode": null
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
+  },
+  {
     "description": "Two membership conditions against the same prerequisite evaluate successfully.",
     "attributes": {},
     "defaultValue": "caller-default",
