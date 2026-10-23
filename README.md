@@ -83,6 +83,9 @@ ffe-system-test-data/
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
+├── flag-selection/
+│   ├── README.md            # Flag selection semantics and vector format
+│   └── selection-vectors.json # Server and SDK flag selection test vectors
 ├── schemas/                # Precomputed assignment fixture schema
 └── ci/                     # Static validators and downstream comparison runner
 ```
@@ -392,6 +395,20 @@ expected exposure/flagevaluation emission counts.
 | `expectations.evaluationEvents` | array? | Ordered, exclusive matchers for evaluation events |
 
 See [precomputed-assignments/README.md](precomputed-assignments/README.md) for further detail.
+
+### Flag Selection Vectors (`flag-selection/selection-vectors.json`)
+
+Flag selection vectors cover servers that narrow a flag configuration response
+to the flags an SDK selected by tag or key pattern, through the
+`selected_flag_tags` and `selected_flag_key_patterns` query parameters or the
+`flag_selection` body field of `POST /precompute-assignments`. Each case gives
+a selection and either the selected flag keys or the reason the selection is
+ignored. Cases with an optional `sdk` field also give the canonical selection an
+SDK sends, or the reason the SDK drops it. Validate them locally with
+`python3 ci/validate-flag-selection.py`.
+
+See [flag-selection/README.md](flag-selection/README.md) for the semantics and
+how to run the cases against each request form.
 
 ## Automated Validation
 
