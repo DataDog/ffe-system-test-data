@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "activation-and-semver-feedback-v10",
+  "revision": "sdk-refresh-20261022-v1",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -138,7 +138,8 @@
         "V014",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -191,7 +192,9 @@
         "V016",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001"
       ]
     },
     {
@@ -242,7 +245,9 @@
       },
       "validation_history_ids": [
         "V003",
-        "V005"
+        "V005",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001"
       ]
     },
     {
@@ -342,7 +347,9 @@
         "V028",
         "V042",
         "V044",
-        "V045"
+        "V045",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -412,7 +419,7 @@
         "separator": "T-or-t",
         "zone": "Z-or-z-or-signed-HH:mm"
       },
-      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric \u00b1HH:mm offsets or Z/z, seconds 00\u201359, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
+      "statement": "Use a documented full date/time/offset subset with valid calendar fields, numeric ±HH:mm offsets or Z/z, seconds 00–59, no surrounding whitespace, named timezone, compact offset, Unicode minus, or leap second. Customer cutoff, JSON activation, and acknowledgement share one parser. Lowercase and fraction rules are D006.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -441,7 +448,8 @@
         "V021",
         "V024",
         "V028",
-        "V041"
+        "V041",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -501,7 +509,8 @@
         "V021",
         "V024",
         "V028",
-        "V041"
+        "V041",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -533,7 +542,7 @@
         "utc_year": "0000..9999",
         "written_year": "0000..9999"
       },
-      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000\u20139999; equivalent timezone representations acknowledge the same instant.",
+      "statement": "Normalize numeric offsets before comparison and reject cutoffs whose written year or normalized UTC year falls outside 0000–9999; equivalent timezone representations acknowledge the same instant.",
       "central_status": "proposed-fleet-reuse",
       "scope": "browser observation / bounded POC; fleet adoption not approved",
       "go_feedback": [
@@ -562,7 +571,8 @@
         "V021",
         "V024",
         "V028",
-        "V041"
+        "V041",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -652,7 +662,8 @@
         "V055",
         "V056",
         "V057",
-        "V058"
+        "V058",
+        "SDK-REFRESH-BROWSER-001"
       ],
       "local_adoptions": [
         {
@@ -705,7 +716,8 @@
         "local_evidence": "evidence/poc-receipts.json"
       },
       "validation_history_ids": [
-        "V022"
+        "V022",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -754,7 +766,9 @@
       },
       "validation_history_ids": [
         "V008",
-        "V038"
+        "V038",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001"
       ]
     },
     {
@@ -896,7 +910,9 @@
         "V066",
         "A139381-001",
         "A139381-002",
-        "A139381-003"
+        "A139381-003",
+        "SDK-REFRESH-BROWSER-001",
+        "SDK-REFRESH-GO-001"
       ],
       "documentation_guidance": {
         "record": "evidence/d011/README.md",
@@ -1130,7 +1146,8 @@
         "gap": null
       },
       "validation_history_ids": [
-        "V008"
+        "V008",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -1169,7 +1186,8 @@
         "V016",
         "V021",
         "V024",
-        "V028"
+        "V028",
+        "SDK-REFRESH-BROWSER-001"
       ]
     },
     {
@@ -1231,7 +1249,8 @@
         "V024",
         "V028",
         "V040",
-        "V044"
+        "V044",
+        "SDK-REFRESH-GO-001"
       ]
     },
     {
@@ -1296,7 +1315,8 @@
         "V024",
         "V028",
         "V040",
-        "V044"
+        "V044",
+        "SDK-REFRESH-GO-001"
       ]
     },
     {
@@ -1395,7 +1415,8 @@
         "V039",
         "V042",
         "V043",
-        "V044"
+        "V044",
+        "SDK-REFRESH-GO-001"
       ],
       "revision_history": [
         {
@@ -1860,7 +1881,7 @@
       }
     }
   ],
-  "previous_revision": "edge-140422-proposal-v8-regex-and-request-compatibility",
-  "revision_note": "Preserve existing D011/D012 semantic revisions; record RFC-backed producer obligations, distinguish contrary holdout proposal, and add model/native validation evidence. Add scoped reviewer-requested authored SemVer delivery policy and native/Lean validation; preserve prior decisions and receipts.",
+  "previous_revision": "activation-and-semver-feedback-v10",
+  "revision_note": "Refresh merged browser and Go source bindings before iOS, Android and Java implementation. Decision wording and scoped authority remain unchanged.",
   "validation_history_file": "validation-history.json"
 }

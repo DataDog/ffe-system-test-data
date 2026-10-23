@@ -1,0 +1,59 @@
+{
+  "authorization": "Current user requested rescan and central storage, then independent desired implementation review, fixes and all review-thread replies for iOS/Android/Java. No merge, release or draft transition.",
+  "central_source_sha": "d23d0f51a1b96c2e9a98f29a984325e58e6f41ca",
+  "profiles": {
+    "mobile-precompute-v1": {
+      "manifest_sha256": "e7dd38b344dfd74822d567828add9107ac642ce72df5341bef42fc0d3891dc5f",
+      "corpus_sha256": "16ab568b1d642322fbe0a066219c5002684439eac4f8824464e7fbc7b14df528"
+    },
+    "java-policy-v1": {
+      "manifest_sha256": "ad281f827a0e57a0aa4528157d5ab4a967bc0233cbae5d563f7408fe9f4017ff",
+      "corpus_sha256": "289a5d2dca4a7e5dd1e0428b4c56e9c1660668375aab67b71c91b27b9391f4e2"
+    }
+  },
+  "targets": [
+    {
+      "id": "ios",
+      "repository": "DataDog/dd-sdk-ios",
+      "pr": 3338,
+      "base_sha": "176aafac647ae8484aef561e07a087c77bebca3c",
+      "profile": "mobile-precompute-v1",
+      "additional_obligations": [
+        "D001 context isolation",
+        "D009 telemetry identity and independent controls",
+        "cache generation and persistence ordering",
+        "native simulator integration"
+      ]
+    },
+    {
+      "id": "android",
+      "repository": "DataDog/dd-sdk-android",
+      "pr": 4024,
+      "base_sha": "7b7ab717785ee7b7cbe4a56ca6d3c7714401ffad",
+      "profile": "mobile-precompute-v1",
+      "additional_obligations": [
+        "D001 context isolation",
+        "D009 telemetry identity and independent controls",
+        "cache generation and persistence ordering",
+        "native runtime integration"
+      ]
+    },
+    {
+      "id": "java",
+      "repository": "DataDog/dd-trace-java",
+      "pr": 12950,
+      "base_sha": "660b5b96114cc29f2edc8c806b9a621621ba552e",
+      "profile": "java-policy-v1",
+      "additional_obligations": [
+        "D003 prepare once and preserve invalid activation",
+        "D004 flag-local future-only activation failure",
+        "D009 independent controls",
+        "D015 audit constructor compatibility before adoption",
+        "D016 invalid-before-lookup after native readiness guards",
+        "D017 inactive call-site guard in both evaluators",
+        "legacy and standalone runtime evidence"
+      ]
+    }
+  ],
+  "fleet_approved": false
+}

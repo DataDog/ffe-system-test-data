@@ -1,5 +1,9 @@
 # Opt-out decisions from browser, Go and backend review
 
+The [2026-10-22 SDK refresh](sdk-refresh.md) rescans the merged browser and Go
+implementations and pins the iOS, Android and Java adoption work. Earlier snapshots
+below retain their original dates, scope and evidence limits.
+
 This is a **draft central-contract proposal**, based on FFE data main
 [`89a0f33`](https://github.com/DataDog/ffe-system-test-data/commit/89a0f339b83f0cb6fabed77cc1164d97c9d24356).
 The existing evaluation fixtures are unchanged. D004 has separate published Go

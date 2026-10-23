@@ -1653,6 +1653,63 @@
       "expectation_profile": "Existing RFC scope, published proof/native evidence and signed history",
       "evidence_file": "evidence/activation-review-20261022/publication.json",
       "limits": "Shared draft is not fleet approval. CI and target deployment remain separate; full internal raw evidence is not publicly exported."
+    },
+    {
+      "id": "SDK-REFRESH-BROWSER-001",
+      "decision_revisions": {
+        "D001": 2,
+        "D002": 1,
+        "D003": 1,
+        "D004": 2,
+        "D005": 2,
+        "D006": 2,
+        "D007": 1,
+        "D008": 2,
+        "D009": 1,
+        "D010": 1,
+        "D011": 1,
+        "D013": 1,
+        "D014": 1
+      },
+      "recorded_at": "2026-10-23T01:31:21.264878+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+      "evidence_url": "https://github.com/DataDog/openfeature-js-client/pull/423",
+      "target": "browser merged implementation rescan",
+      "source_sha": "38d611cf4c73b9687b97f7da0f8224d2fefab966",
+      "patch": null,
+      "evidence_kind": "fresh-source-inspection-and-live-pr-metadata",
+      "outcome": "source-confirmed-with-scoped-differences",
+      "check": "Rescan merged implementation and decision provenance; source files match pinned Git bytes.",
+      "expectation_profile": "Existing numbered decisions; parser and provider applicability retained.",
+      "evidence_file": "evidence/sdk-refresh-20261022/source-review.json",
+      "limits": "No new native runtime or deployment claim. Parser disagreement remains explicit; existing decision-setting links are preserved."
+    },
+    {
+      "id": "SDK-REFRESH-GO-001",
+      "decision_revisions": {
+        "D002": 1,
+        "D003": 1,
+        "D004": 2,
+        "D010": 1,
+        "D011": 1,
+        "D015": 1,
+        "D016": 1,
+        "D017": 2
+      },
+      "recorded_at": "2026-10-23T01:31:21.264878+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "evidence_url": "https://github.com/DataDog/dd-trace-go/pull/5666",
+      "target": "go merged implementation rescan",
+      "source_sha": "54b5ad7fe9818966d32eeceabb6c048005f077f6",
+      "patch": null,
+      "evidence_kind": "fresh-source-inspection-and-live-pr-metadata",
+      "outcome": "source-confirmed-with-scoped-differences",
+      "check": "Rescan merged implementation and decision provenance; source files match pinned Git bytes.",
+      "expectation_profile": "Existing numbered decisions; parser and provider applicability retained.",
+      "evidence_file": "evidence/sdk-refresh-20261022/source-review.json",
+      "limits": "No new native runtime or deployment claim. Parser disagreement remains explicit; existing decision-setting links are preserved."
     }
   ]
 }
