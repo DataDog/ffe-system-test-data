@@ -65,7 +65,7 @@
     "tools/ufc/package.json": "c75341d53e2362a05b316e978f96a4cded0bc5ea7f65ac0e221f22246b6ea1f8",
     "tools/ufc/parity.mjs": "e458b9468cfa43f1a136c083a3184402907e9b7f554e82e62eb3ab5ef3392de2",
     "tools/ufc/README.md": "1f347700cd4992be267d4bf583153914101378743886e878a241c985a4aafd6b",
-    "tools/ufc/rules-resources.test.mjs": "6f7e9a2dbde24210bfd2f5c62c2e63a4f7540c24b8c6fe6f53be8ca60f8bf724",
+    "tools/ufc/rules-resources.test.mjs": "fed9972eb2e85b5a8a848e49541e98dde23c743f46fc2c23ec1c07937301c6d6",
     "tools/ufc/validate-rules-resources.mjs": "a6546f955233077f6fb13db0a19b21eeba33714a85c1e63eefa15eb921f4f81c",
     "tools/ufc/validate-rules-schema.py": "f068c522f875c3a83a52bc89dd73d775646ec9bc8d34e71ba7fa1cb881f3854d",
     "schemas/precomputed-assignment.schema.json": "31a1718e9c6d3e0221728ce30c50f20039420aef8f1ce9bfc540ac7e3ef5ea2d",

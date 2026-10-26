@@ -147,7 +147,9 @@ test('parity reads SDK metadata and freezes constructor time without changing ex
   const report = parity(directory, binary, wire, source, source);
   assert.ok(observed > 0);
   assert.equal(globalThis.Date, RealDate);
-  const metadataMismatches = report.results.flatMap(row => row.mismatches).filter(row => ['serialId', 'doLog'].includes(row.field));
+  const mismatches = report.results.flatMap(row => row.mismatches);
+  assert.deepEqual(mismatches.filter(row => Object.hasOwn(row, 'error')), []);
+  const metadataMismatches = mismatches.filter(row => ['serialId', 'doLog'].includes(row.field));
   assert.deepEqual(metadataMismatches, []);
   assert.ok(cases.some(row => row.result.serialId === 0));
   assert.ok(cases.some(row => row.result.doLog === false));
