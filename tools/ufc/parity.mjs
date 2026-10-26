@@ -45,7 +45,7 @@ export function parity(root, binary, wire, generated, source) {
           const sdkResult = call();
           // Project observed SDK metadata into the corpus result shape; preserve absence.
           const actual = { ...sdkResult };
-          actual.serialId = sdkResult.flagMetadata?.__dd_split_serial_id;
+          actual.serialId = sdkResult.flagMetadata?.__dd_split_serial_id ?? null;
           actual.doLog = sdkResult.flagMetadata?.doLog;
           for (const [field,expected] of Object.entries(test.result)) if (!isDeepStrictEqual(actual[field],expected)) mismatches.push({encoding,field,expected,actual:actual[field] ?? null});
         } catch(error) { mismatches.push({encoding,error:error.message}); }

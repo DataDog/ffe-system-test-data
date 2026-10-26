@@ -127,6 +127,9 @@ test('parity reads SDK metadata and freezes constructor time without changing ex
   const cases = JSON.parse(await fs.readFile(path.join(root, 'evaluation-cases/test-case-split-features.json'))).filter((_, index) => index !== 1);
   await fs.mkdir(path.join(directory, 'evaluation-cases'));
   await fs.writeFile(path.join(directory, 'evaluation-cases/metadata.json'), JSON.stringify(cases));
+  const serialCases = JSON.parse(await fs.readFile(path.join(root, 'evaluation-cases/test-case-serial-id-metadata.json')));
+  await fs.writeFile(path.join(directory, 'evaluation-cases/serial.json'), JSON.stringify(serialCases));
+  assert.ok(serialCases.some(row => row.result.serialId === null));
   const RealDate = globalThis.Date;
   const fixedTime = RealDate.parse('2026-01-01T00:00:00.000Z');
   let observed = 0;
