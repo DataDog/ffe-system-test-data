@@ -117,3 +117,35 @@ test('wire packaging preserves unknown protobuf fields across byte containers', 
   assert.ok(embedded.includes(Buffer.from([0x98, 0x06, 0x01])));
   assert.equal(packageWire(new Uint8Array(extended)), wire);
 });
+
+
+test('parity reads SDK metadata and freezes constructor time without changing explicit dates', async () => temporary(async directory => {
+  const source = JSON.parse(await fs.readFile(path.join(root, 'ufc-config.json')));
+  const generated = path.join(root, 'rules-resources/generated/canonical-evaluator');
+  const binary = await fs.readFile(path.join(generated, 'ufc.pb'));
+  const wire = await fs.readFile(path.join(generated, 'configuration-wire.json'), 'utf8');
+  const cases = JSON.parse(await fs.readFile(path.join(root, 'evaluation-cases/test-case-split-features.json'))).filter((_, index) => index !== 1);
+  await fs.mkdir(path.join(directory, 'evaluation-cases'));
+  await fs.writeFile(path.join(directory, 'evaluation-cases/metadata.json'), JSON.stringify(cases));
+  const RealDate = globalThis.Date;
+  const fixedTime = RealDate.parse('2026-01-01T00:00:00.000Z');
+  let observed = 0;
+  // Observe the actual SDK evaluation boundary while the parity clock is installed.
+  Object.defineProperty(source, 'flags', { get() {
+    if (globalThis.Date === RealDate) return JSON.parse(readSource).flags;
+    observed++;
+    assert.equal(Date.now(), fixedTime);
+    assert.equal(new Date().getTime(), fixedTime);
+    assert.equal(new Date(0).getTime(), 0);
+    assert.equal(new Date('2025-01-01').getUTCFullYear(), 2025);
+    return JSON.parse(readSource).flags;
+  }});
+  const readSource = await fs.readFile(path.join(root, 'ufc-config.json'), 'utf8');
+  const report = parity(directory, binary, wire, source, source);
+  assert.ok(observed > 0);
+  assert.equal(globalThis.Date, RealDate);
+  const metadataMismatches = report.results.flatMap(row => row.mismatches).filter(row => ['serialId', 'doLog'].includes(row.field));
+  assert.deepEqual(metadataMismatches, []);
+  assert.ok(cases.some(row => row.result.serialId === 0));
+  assert.ok(cases.some(row => row.result.doLog === false));
+}));
