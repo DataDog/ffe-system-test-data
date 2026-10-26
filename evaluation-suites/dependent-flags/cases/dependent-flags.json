@@ -12,7 +12,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "ONE_OF does not match when the prerequisite variant key is absent from the allowed list.",
+    "description": "ONE_OF does not match when the prerequisite variant key is absent from the allowed list. The prerequisite retains its evaluation event but not its exposure because the containing allocation is rejected.",
     "attributes": {},
     "defaultValue": "caller-default",
     "flag": "dependent-one-of-miss-root",
@@ -21,10 +21,30 @@
       "value": "one-of-fallback"
     },
     "targetingKey": "dependent-one-of-miss",
-    "variationType": "STRING"
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [
+        {
+          "allocation": "fallback",
+          "flag": "dependent-one-of-miss-root",
+          "variant": "fallback"
+        }
+      ],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-leaf-on",
+          "errorCode": null
+        },
+        {
+          "flag": "dependent-one-of-miss-root",
+          "errorCode": null
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
   },
   {
-    "description": "NOT_ONE_OF does not match when the prerequisite variant key is present in the excluded list.",
+    "description": "NOT_ONE_OF does not match when the prerequisite variant key is present in the excluded list. The prerequisite retains its evaluation event but not its exposure because the containing allocation is rejected.",
     "attributes": {},
     "defaultValue": "caller-default",
     "flag": "dependent-not-one-of-hit-root",
@@ -33,7 +53,27 @@
       "value": "not-one-of-fallback"
     },
     "targetingKey": "dependent-not-one-of-hit",
-    "variationType": "STRING"
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [
+        {
+          "allocation": "fallback",
+          "flag": "dependent-not-one-of-hit-root",
+          "variant": "fallback"
+        }
+      ],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-leaf-on",
+          "errorCode": null
+        },
+        {
+          "flag": "dependent-not-one-of-hit-root",
+          "errorCode": null
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
   },
   {
     "description": "A depth-two tree evaluates its leaf and intermediate prerequisite before matching the root.",
