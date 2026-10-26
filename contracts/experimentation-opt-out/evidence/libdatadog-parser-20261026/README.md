@@ -11,3 +11,7 @@ The new adapter fails against the original parser (`baseline.log`) and passes wi
 `profile.json` freezes applicability without exclusions. `summary.json` records the base, patch, source hashes, toolchains, and validation limits. `feedback.json` records local user authority and the missing public setting. The model execution used its recorded manifest; subsequent changes add evidence/history only. The final manifest integrity check verifies the complete resulting bundle.
 
 No commit, push, GitHub reply, thread resolution, release, downstream adoption, or fleet approval is claimed for this fix.
+
+## Publication follow-up
+
+The earlier local snapshot above is retained as history. The parser fix is now published as [`975c8e4fe`](https://github.com/DataDog/libdatadog/commit/975c8e4fe8004f2bc84be2c5f93ead909946720c); its [review thread](https://github.com/DataDog/libdatadog/pull/2698#discussion_r4381662212) is resolved. [publication.json](publication.json) records complete PR signature audits, exact published source hashes, and the README-only change since local validation. The shared corpus is pinned at `59ab2bfcb9a2480762bf51451a3316e093247bd4`. Hosted CI, merge and downstream adoption remain separate.

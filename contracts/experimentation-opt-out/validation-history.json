@@ -2734,6 +2734,29 @@
       "expectation_profile": "libdatadog-opt-out-timestamps-v1",
       "evidence_file": "evidence/libdatadog-parser-20261026/independent-review.json",
       "limits": "Mutable working-tree review. Signing, publication, hosted CI and downstream adoption outside review scope."
+    },
+    {
+      "id": "LIBDATADOG-2698-PARSER-005",
+      "decision_revisions": {
+        "D004": 2,
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-26T19:40:48.959260+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4381662212",
+      "target": "libdatadog opt-out timestamp parser",
+      "source_repository_url": "https://github.com/DataDog/libdatadog",
+      "source_sha": "975c8e4fe8004f2bc84be2c5f93ead909946720c",
+      "patch": null,
+      "evidence_kind": "signed-publication-and-feedback-resolution",
+      "outcome": "pass",
+      "check": "Signed source published; all4 native PR commits and all32 then-current shared corpus PR commits are GitHub-verified valid. Parser reply and resolution read back.",
+      "expectation_profile": "libdatadog-opt-out-timestamps-v1",
+      "evidence_file": "evidence/libdatadog-parser-20261026/publication.json",
+      "limits": "Native local tests and bounded Lean proofs remain separate. Hosted CI is pending at publication; no merge, release, downstream adoption, or fleet approval. The contract publication audit here is for the first corpus commit; subsequent ledger publication is verified separately in GitHub and the catalog."
     }
   ]
 }

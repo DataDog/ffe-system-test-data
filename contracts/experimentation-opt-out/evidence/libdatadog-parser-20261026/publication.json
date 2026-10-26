@@ -1,0 +1,331 @@
+{
+  "status": "published-and-review-thread-resolved",
+  "recorded_at": "2026-10-26T19:40:48.959260+00:00",
+  "authorization": "Leo: push; prior instruction to resolve addressed feedback",
+  "native": {
+    "repository": "DataDog/libdatadog",
+    "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+    "before": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+    "head": "975c8e4fe8004f2bc84be2c5f93ead909946720c",
+    "branch": "leoromanovsky/experimentation-opt-out-immediate",
+    "new_commits": [
+      "975c8e4fe8004f2bc84be2c5f93ead909946720c"
+    ],
+    "all_pr_commits": [
+      {
+        "sha": "3eb48e6999b3792267b5179c9e1f4132298b958d",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "6b5bc0b7cf2f9abdc64b12177fb059feeb3b187d",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "975c8e4fe8004f2bc84be2c5f93ead909946720c",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      }
+    ],
+    "draft": false,
+    "published_at": "2026-10-26T19:38:27Z",
+    "all_signatures_valid": true
+  },
+  "contract_corpus_publication": {
+    "repository": "DataDog/ffe-system-test-data",
+    "pr_url": "https://github.com/DataDog/ffe-system-test-data/pull/55",
+    "before": "9f48b7a7d141f5a781e94b536359c06eb2a38234",
+    "head": "59ab2bfcb9a2480762bf51451a3316e093247bd4",
+    "branch": "leoromanovsky/lean-opt-out-decisions",
+    "new_commits": [
+      "59ab2bfcb9a2480762bf51451a3316e093247bd4"
+    ],
+    "all_pr_commits": [
+      {
+        "sha": "ec72cdbd67df374ed5df0472831c15a415449013",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "3e1d010e072d0762f1f086ea04caccee487948ba",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "acc963954b8cd8422b50ab6124d9ccfc05cd3434",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "843f3baeb1bce55ca391b0caa9ef41dc747b44b3",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "8e13ad6d4cad04e7bea6b921d0be9b98ba90beb5",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "7894c5971626d9a8b1b146f0368e03bb149e4c65",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "74d5e5b71c0160a5edc91803665a3f8937e2007c",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "f4ba2a0de5f807bc618411db2640552d428c479c",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "0705b517d71e213fc402f456b6ea9a8dbff55b01",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "531e69f0b943e76d6f34144dbc1303a136febadf",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "ec4af07fdae4c0349d5d39fe4135016eee12529c",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "4c113a1032b5c347e0eac7de50cf223ca63d7f6f",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "277d414757270ae1e2e5ecf8f00030977d470193",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "1651131dc3472f0922608d0de2b618be670231ac",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "7119c9c71d8e76a48b898a6b9d91aed8a3795901",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "656696f84fb83fea87798a0d4151af0f7e2fc16d",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "6166f952008d24e61312e744e298c8d5fcbad671",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "99854cf87802e03d2cc2c5ed324dfabcaafc5f34",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "06a49f93344481ca13da1535185a8b7d76472118",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "1b9484f4c0e1d68e72cb752c4bea7040abc6a693",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "1671f79707ead3f3644a358c70735218795160d6",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "7853a11426a50691e748e64907e93d4682d91215",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "867d0c9f6567c1ce892f3169b4bf19cf0937c587",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "9f23a1722ae24484cc7652a66a09a00d78ae35f3",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "188da74973dda1afe1e3ca17aac2654ad4fa016e",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "d23d0f51a1b96c2e9a98f29a984325e58e6f41ca",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "0520866bedb8c059df9c493cfe27ad294390c603",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "dbe8b6668ad18294a9228b01d2acfb4a6da810bf",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "f8a4176cd8360b12b56a8b6ec6ef215e2cc21077",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "98f1f5a4aab6e92fa0b74787cee94e36cc7c8e80",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "9f48b7a7d141f5a781e94b536359c06eb2a38234",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      },
+      {
+        "sha": "59ab2bfcb9a2480762bf51451a3316e093247bd4",
+        "verified": true,
+        "reason": "valid",
+        "committer": "leoromanovsky",
+        "email": "leo.romanovsky@datadoghq.com"
+      }
+    ],
+    "draft": true,
+    "published_at": "2026-10-26T19:37:57Z",
+    "all_signatures_valid": true,
+    "note": "Initial immediate PR-head read was stale; fresh PR and Git ref agree."
+  },
+  "review_resolution": {
+    "reply_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4381662212",
+    "reply_id": 4381662212,
+    "reply_readback_matches": true,
+    "actor": "leoromanovsky",
+    "head": "975c8e4fe8004f2bc84be2c5f93ead909946720c",
+    "thread": {
+      "id": "PRRT_kwDOGz22u86wZdEN",
+      "isResolved": true,
+      "isOutdated": false,
+      "comments": {
+        "nodes": [
+          {
+            "databaseId": 4380967749,
+            "url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749"
+          },
+          {
+            "databaseId": 4381662212,
+            "url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4381662212"
+          }
+        ]
+      }
+    },
+    "verified_at": "2026-10-26T19:40:14Z",
+    "unresolved_threads": []
+  },
+  "tested_source_receipt": "summary.json",
+  "independent_review_receipt": "independent-review.json",
+  "published_patch": "published-libdatadog.patch",
+  "published_patch_sha256": "b2c92ba2e77795c14ce12043df9beb6eca52ed539d54078e80c1ffc4de98d821",
+  "published_source_sha256": {
+    "Cargo.lock": "061ba520979f3abb49b0c1dfb63fadb7ec2d8c71838ef12b4d776843fc7788fe",
+    "libdd-ffe-test-suite/tests/data/README.md": "8fbc45c1d415e8d919e307a279519771fa14210d50ccb122d0954eff6b75ac9f",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-policy.jsonl": "0d396beb2b627606f795386340d5e9d7443a40c51e84200b60527938969f7175",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl": "f09e4061d624b196cc51d9c3936428621ca7a8b79f7a0ad1cc993f6b57bdf31c",
+    "libdd-ffe-test-suite/tests/experimentation_opt_out.rs": "f1718bd2e4c6e5ab5f4f91b8b518d215f22ef7bb4ab5044ec8addd21aa30264e",
+    "libdd-ffe/README.md": "95a7421bfcb128af8b2b513148d849e8b28f74e5001597e8628b45d47145e8ab",
+    "libdd-ffe/src/rules_based/eval/eval_assignment.rs": "790e90036331f1c6d0377c284443f86d3c59799319d76fb6020655787deef643",
+    "libdd-ffe/src/rules_based/timestamp.rs": "2679e8a6c89b649273314e93204ef2e1c442a48f4665e313ccd9b7a32a3a1395",
+    "libdd-ffe/src/rules_based/ufc/models.rs": "0384b9964972a10f73b7c03e6c079c84e091e4ad70ae6f43228ba7cc46598719"
+  },
+  "validation_carry_forward": "Published production code, adapter, test corpus and Cargo.lock are byte-identical to tested and independently reviewed sources. Only the fixture README gained the published shared-corpus commit permalink.",
+  "limits": "Native local tests and bounded Lean proofs remain separate. Hosted CI is pending at publication; no merge, release, downstream adoption, or fleet approval. The contract publication audit here is for the first corpus commit; subsequent ledger publication is verified separately in GitHub and the catalog."
+}
