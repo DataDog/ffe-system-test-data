@@ -1,0 +1,24 @@
+{
+  "id": "libdatadog-2698-4380967749-local-fix-20261026",
+  "supersedes_status_of": "libdatadog-2698-4380967749",
+  "decision_revisions": {
+    "D005": 2,
+    "D006": 2,
+    "D007": 1
+  },
+  "disposition": "locally-fixed-awaiting-publication",
+  "source_urls": [
+    "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749"
+  ],
+  "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+  "authority": {
+    "actor": "Leo Romanovsky",
+    "kind": "local-conversation",
+    "request": "1. fix it",
+    "scope": "Apply proposed D005/D006/D007 parser to libdatadog PR2698 only",
+    "public_setting_gap": "No public author acceptance or published fix yet; reviewer URL is problem provenance, not authority for fleet policy."
+  },
+  "thread_resolved": false,
+  "evidence": "summary.json",
+  "preserved": "D004 r2 errors, null versus malformed activation, startAt/endAt grammar, earlier partial adoption and historical failures. D006 Go lowercase conflict is unchanged."
+}

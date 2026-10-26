@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "cargo",
+    "nextest",
+    "run",
+    "--locked",
+    "--offline",
+    "-p",
+    "libdd-ffe",
+    "-p",
+    "libdd-ffe-test-suite",
+    "-p",
+    "libdd-ffe-ffi",
+    "--success-output",
+    "never",
+    "--no-fail-fast"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 6.26,
+  "environment": "host execution; sandbox retry for loopback socket permissions",
+  "log": "native-host.log"
+}

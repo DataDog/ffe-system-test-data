@@ -54,6 +54,31 @@
   "timestamp/leap-second": {
     "accepted": false
   },
+  "timestamp/libdatadog-2698/compact-offset": {
+    "accepted": false
+  },
+  "timestamp/libdatadog-2698/internal-spaces": {
+    "accepted": false
+  },
+  "timestamp/libdatadog-2698/lowercase": {
+    "accepted": true,
+    "nanos": 0,
+    "seconds": 1792497600
+  },
+  "timestamp/libdatadog-2698/named-zone": {
+    "accepted": false
+  },
+  "timestamp/libdatadog-2698/short-fields": {
+    "accepted": false
+  },
+  "timestamp/libdatadog-2698/space": {
+    "accepted": false
+  },
+  "timestamp/libdatadog-2698/utc": {
+    "accepted": true,
+    "nanos": 0,
+    "seconds": 1792497600
+  },
   "timestamp/pre-epoch-nanos": {
     "accepted": true,
     "nanos": 999999999,

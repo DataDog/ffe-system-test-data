@@ -1,0 +1,407 @@
+info: experimental features enabled: setup-scripts
+   Compiling futures-io v0.3.31
+   Compiling bitflags v2.6.0
+   Compiling hashbrown v0.16.1
+   Compiling futures-sink v0.3.31
+   Compiling fastrand v2.1.1
+   Compiling syn v2.0.119
+   Compiling signal-hook-registry v1.4.2
+   Compiling zeroize v1.8.1
+   Compiling ring v0.17.14
+   Compiling getrandom v0.2.15
+   Compiling untrusted v0.9.0
+   Compiling regex-syntax v0.8.5
+   Compiling httpdate v1.0.3
+   Compiling rustls v0.23.37
+   Compiling serde_core v1.0.228
+   Compiling subtle v2.6.1
+   Compiling futures-channel v0.3.31
+   Compiling serde v1.0.228
+   Compiling concurrent-queue v2.5.0
+   Compiling rustls-pki-types v1.13.2
+   Compiling parking v2.2.1
+   Compiling openssl-probe v0.1.5
+   Compiling crypto-common v0.1.6
+   Compiling stable_deref_trait v1.2.0
+   Compiling nix v0.29.0
+   Compiling libc v0.2.189
+   Compiling digest v0.10.7
+   Compiling event-listener v5.3.1
+   Compiling getrandom v0.3.2
+   Compiling rustix v1.1.3
+   Compiling toml_write v0.1.1
+   Compiling rustix v0.38.39
+   Compiling linux-raw-sys v0.11.0
+   Compiling serde_json v1.0.132
+   Compiling rustls-native-certs v0.8.1
+   Compiling iana-time-zone v0.1.61
+   Compiling event-listener-strategy v0.5.2
+   Compiling indexmap v2.12.1
+   Compiling winnow v0.7.9
+   Compiling futures-lite v2.4.0
+   Compiling cbindgen v0.29.0
+   Compiling linux-raw-sys v0.4.14
+   Compiling litemap v0.7.3
+   Compiling once_cell v1.21.3
+   Compiling writeable v0.5.5
+   Compiling memchr v2.7.4
+   Compiling sha2 v0.10.8
+   Compiling log v0.4.27
+   Compiling async-lock v3.4.0
+   Compiling async-task v4.7.1
+   Compiling icu_locid_transform_data v1.5.0
+   Compiling async-channel v2.3.1
+   Compiling syn v1.0.109
+   Compiling icu_properties_data v1.5.0
+   Compiling piper v0.2.4
+   Compiling utf16_iter v1.0.5
+   Compiling icu_normalizer_data v1.5.0
+   Compiling utf8_iter v1.0.4
+   Compiling write16 v1.0.0
+   Compiling event-listener v2.5.3
+   Compiling async-executor v1.13.1
+   Compiling blocking v1.6.1
+   Compiling thiserror v1.0.68
+   Compiling function_name-proc-macro v0.3.0
+   Compiling async-channel v1.9.0
+   Compiling percent-encoding v2.3.1
+   Compiling sha1 v0.10.7
+   Compiling regex-automata v0.4.8
+   Compiling form_urlencoded v1.2.1
+   Compiling crossbeam-queue v0.3.11
+   Compiling syn v3.0.6
+   Compiling unicode-width v0.2.1
+   Compiling base64 v0.22.1
+   Compiling mime v0.3.17
+   Compiling path-tree v0.8.3
+   Compiling stringmetrics v2.2.2
+   Compiling function_name v0.3.0
+   Compiling similar v2.6.0
+   Compiling tabwriter v1.4.1
+   Compiling futures-timer v3.0.3
+   Compiling lazy_static v1.5.0
+   Compiling tempfile v3.23.0
+   Compiling synstructure v0.13.1
+   Compiling regex v1.11.1
+   Compiling async-attributes v1.1.2
+   Compiling serde_derive v1.0.228
+   Compiling tokio-macros v2.6.0
+   Compiling futures-macro v0.3.31
+   Compiling thiserror-impl v2.0.17
+   Compiling pin-project-internal v1.1.7
+   Compiling zerovec-derive v0.10.3
+   Compiling displaydoc v0.2.5
+   Compiling strum_macros v0.26.4
+   Compiling zerofrom-derive v0.1.4
+   Compiling yoke-derive v0.7.4
+   Compiling derive_more-impl v2.1.1
+   Compiling icu_provider_macros v1.5.0
+   Compiling polling v3.7.3
+   Compiling thiserror-impl v1.0.68
+   Compiling async-io v2.3.4
+   Compiling async-trait v0.1.92
+   Compiling futures-util v0.3.31
+   Compiling async-signal v0.2.10
+   Compiling rustls-webpki v0.103.16
+   Compiling pin-project v1.1.7
+   Compiling thiserror v2.0.17
+   Compiling async-process v2.3.0
+   Compiling async-global-executor v2.4.1
+   Compiling zerofrom v0.1.4
+   Compiling yoke v0.7.4
+   Compiling zerovec v0.10.4
+   Compiling derive_more v2.1.1
+   Compiling tinystr v0.7.6
+   Compiling icu_collections v1.5.0
+   Compiling futures-executor v0.3.31
+   Compiling toml_datetime v0.6.9
+   Compiling serde_spanned v0.6.8
+   Compiling bytes v1.11.1
+   Compiling chrono v0.4.38
+   Compiling ciborium v0.2.2
+   Compiling serde_regex v1.1.0
+   Compiling bincode v1.3.3
+   Compiling icu_locid v1.5.0
+   Compiling futures v0.3.31
+   Compiling toml_edit v0.22.26
+   Compiling kv-log-macro v1.0.7
+   Compiling env_logger v0.10.2
+   Compiling async-std v1.13.0
+   Compiling http v1.1.0
+   Compiling tokio v1.49.0
+   Compiling faststr v0.2.32
+   Compiling icu_provider v1.5.0
+   Compiling icu_locid_transform v1.5.0
+   Compiling tinytemplate v1.2.1
+   Compiling assert-json-diff v2.0.2
+   Compiling http-body v1.0.1
+   Compiling libdd-capabilities v4.0.1 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-capabilities)
+   Compiling headers-core v0.3.0
+   Compiling headers v0.4.1
+   Compiling http-body-util v0.1.2
+   Compiling criterion v0.5.1
+   Compiling icu_properties v1.5.1
+   Compiling toml v0.8.22
+   Compiling async-object-pool v0.1.5
+   Compiling rustls-platform-verifier v0.6.2
+   Compiling icu_normalizer v1.5.0
+   Compiling idna_adapter v1.2.0
+   Compiling idna v1.0.3
+   Compiling url v2.5.4
+   Compiling tokio-util v0.7.12
+   Compiling tokio-rustls v0.26.0
+   Compiling build_common v46.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/build-common)
+   Compiling h2 v0.4.19
+   Compiling libdd-common-ffi v46.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-common-ffi)
+   Compiling libdd-ffe-ffi v1.0.2 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-ffe-ffi)
+   Compiling hyper v1.11.1
+   Compiling hyper-util v0.1.17
+   Compiling hyper-rustls v0.27.7
+   Compiling httpmock v0.8.0-alpha.1
+   Compiling libdd-common v8.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-common)
+   Compiling libdd-capabilities-impl v7.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-capabilities-impl)
+   Compiling libdd-remote-config v7.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-remote-config)
+   Compiling libdd-ffe v2.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-ffe)
+   Compiling libdd-ffe-test-suite v46.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-ffe-test-suite)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 07s
+────────────
+ Nextest run ID ef05162a-dc8d-480f-9483-f9e50e78f86a with nextest profile: default
+    Starting 110 tests across 5 binaries
+        PASS [   0.014s] libdd-ffe rules_based::eval::eval_rules::tests::is_not_null
+        PASS [   0.017s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::opt_out_timestamp_syntax_is_explicit_and_errors_are_redacted
+        PASS [   0.017s] libdd-ffe rules_based::configuration::tests::observe_full_evaluation_data_defaults_to_false_from_server_response
+        PASS [   0.017s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::future_invalid_context_precedes_flag_lookup
+        PASS [   0.018s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::future_cutoff_preserves_precision_and_exposure_selection
+        PASS [   0.018s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::inactive_policy_does_not_call_allocation_exclusion
+        PASS [   0.019s] libdd-ffe rules_based::configuration::tests::observe_full_evaluation_data_is_exposed_from_server_response
+        PASS [   0.020s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::malformed_activation_is_scoped_to_effective_future_mode
+        PASS [   0.021s] libdd-ffe rules_based::eval::eval_rules::tests::gte
+        PASS [   0.022s] libdd-ffe rules_based::eval::eval_rules::tests::is_null
+        PASS [   0.029s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::opt_out_timestamp_validation_and_disabled_mode
+        PASS [   0.015s] libdd-ffe rules_based::eval::eval_rules::tests::lte
+        PASS [   0.014s] libdd-ffe rules_based::eval::eval_rules::tests::missing_attribute
+        PASS [   0.019s] libdd-ffe rules_based::eval::eval_rules::tests::not_matches_regex
+        PASS [   0.015s] libdd-ffe rules_based::eval::eval_rules::tests::semver_eq
+        PASS [   0.021s] libdd-ffe rules_based::eval::eval_rules::tests::one_of
+        PASS [   0.021s] libdd-ffe rules_based::eval::eval_rules::tests::one_of_bool
+        PASS [   0.022s] libdd-ffe rules_based::eval::eval_rules::tests::not_one_of
+        PASS [   0.024s] libdd-ffe rules_based::eval::eval_rules::tests::matches_regex
+        PASS [   0.043s] libdd-ffe rules_based::eval::eval_rules::tests::gt
+        PASS [   0.015s] libdd-ffe rules_based::eval::eval_rules::tests::semver_lte
+        PASS [   0.046s] libdd-ffe rules_based::eval::eval_assignment::tests::invalid_flag_does_not_poison_valid_neighbor
+        PASS [   0.018s] libdd-ffe rules_based::eval::eval_rules::tests::semver_lt
+        PASS [   0.020s] libdd-ffe rules_based::eval::eval_rules::tests::semver_gte
+        PASS [   0.029s] libdd-ffe rules_based::eval::eval_rules::tests::one_of_int
+        PASS [   0.051s] libdd-ffe rules_based::eval::eval_rules::tests::empty_rule
+        PASS [   0.029s] libdd-ffe rules_based::eval::eval_rules::tests::semver_gt
+        PASS [   0.021s] libdd-ffe rules_based::eval::eval_rules::tests::semver_neq
+        PASS [   0.015s] libdd-ffe rules_based::ufc::models::tests::observe_full_evaluation_data_defaults_to_false_when_absent
+        PASS [   0.019s] libdd-ffe rules_based::eval::eval_rules::tests::semver_supports_indefinite_core_version_parts
+        PASS [   0.020s] libdd-ffe rules_based::eval::eval_rules::tests::semver_prerelease_ordering
+        PASS [   0.015s] libdd-ffe rules_based::ufc::models::tests::observe_full_evaluation_data_falls_back_to_false_when_malformed
+        PASS [   0.025s] libdd-ffe rules_based::eval::eval_rules::tests::semver_malformed_attribute_returns_false
+        PASS [   0.015s] libdd-ffe rules_based::ufc::models::tests::parse_partially_if_unexpected
+        PASS [   0.015s] libdd-ffe telemetry::flagevaluation::privacy::tests::error_codes_accept_only_canonical_openfeature_values
+        PASS [   0.025s] libdd-ffe rules_based::eval::eval_rules::tests::two_condition_rule
+        PASS [   0.027s] libdd-ffe rules_based::eval::eval_rules::tests::single_condition_rule
+        PASS [   0.024s] libdd-ffe telemetry::flagevaluation::privacy::tests::container_caps_and_depth_bound_retained_values
+        PASS [   0.022s] libdd-ffe telemetry::flagevaluation::privacy::tests::invalid_json_omits_only_context_and_has_a_finite_reason
+        PASS [   0.027s] libdd-ffe rules_based::ufc::models::tests::observe_full_evaluation_data_parses_when_present
+        PASS [   0.016s] libdd-ffe telemetry::flagevaluation::privacy::tests::sibling_arrays_share_the_leaf_budget_after_repeated_normalization
+        FAIL [   0.016s] libdd-ffe telemetry::flagevaluation::sender::tests::non_2xx_does_not_panic
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::non_2xx_does_not_panic ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::non_2xx_does_not_panic
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread 'telemetry::flagevaluation::sender::tests::non_2xx_does_not_panic' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+
+  Cancelling due to test failure: 15 tests still running
+        FAIL [   0.021s] libdd-ffe telemetry::flagevaluation::sender::tests::delivery_loss_paths_log_at_warn_level
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::delivery_loss_paths_log_at_warn_level ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::delivery_loss_paths_log_at_warn_level
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread 'telemetry::flagevaluation::sender::tests::delivery_loss_paths_log_at_warn_level' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+
+        FAIL [   0.022s] libdd-ffe telemetry::flagevaluation::sender::tests::omits_invalid_producer_identity_without_dropping_payload
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::omits_invalid_producer_identity_without_dropping_payload ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::omits_invalid_producer_identity_without_dropping_payload
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread 'telemetry::flagevaluation::sender::tests::omits_invalid_producer_identity_without_dropping_payload' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+
+        PASS [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::endpoint_preserves_authority_overrides_path
+        PASS [   0.035s] libdd-ffe telemetry::flagevaluation::privacy::tests::null_false_and_empty_values_survive_snapshot
+        PASS [   0.026s] libdd-ffe telemetry::flagevaluation::sender::tests::endpoint_rejects_agentless
+        PASS [   0.088s] libdd-ffe rules_based::eval::eval_assignment::opt_out_tests::opt_out_skips_before_targeting_and_preserves_ordinary_fallback
+        PASS [   0.089s] libdd-ffe rules_based::eval::eval_rules::tests::lt
+        FAIL [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_valid_producer_identity_headers_independently
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::posts_valid_producer_identity_headers_independently ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::posts_valid_producer_identity_headers_independently
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'telemetry::flagevaluation::sender::tests::posts_valid_producer_identity_headers_independently' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+
+        FAIL [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_to_evp_proxy
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::posts_to_evp_proxy ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::posts_to_evp_proxy
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread 'telemetry::flagevaluation::sender::tests::posts_to_evp_proxy' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+
+        FAIL [   0.020s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_without_optional_producer_identity
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::posts_without_optional_producer_identity ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::posts_without_optional_producer_identity
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'telemetry::flagevaluation::sender::tests::posts_without_optional_producer_identity' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+
+        FAIL [   0.020s] libdd-ffe telemetry::flagevaluation::sender::tests::send_batch_splits_posts_by_encoded_byte_limit
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::send_batch_splits_posts_by_encoded_byte_limit ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::send_batch_splits_posts_by_encoded_byte_limit
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'telemetry::flagevaluation::sender::tests::send_batch_splits_posts_by_encoded_byte_limit' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+
+        PASS [   0.035s] libdd-ffe telemetry::flagevaluation::privacy::tests::root_and_nested_object_widths_report_distinct_reasons
+        FAIL [   0.022s] libdd-ffe telemetry::flagevaluation::sender::tests::splits_large_batches_before_posting
+  stdout ───
+
+    running 1 test
+    test telemetry::flagevaluation::sender::tests::splits_large_batches_before_posting ... FAILED
+
+    failures:
+
+    failures:
+        telemetry::flagevaluation::sender::tests::splits_large_batches_before_posting
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.00s
+
+  stderr ───
+
+    thread 'telemetry::flagevaluation::sender::tests::splits_large_batches_before_posting' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1358:37:
+    Cannot get server address: RecvError(())
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+    thread '<unnamed>' panicked at /home/bits/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpmock-0.8.0-alpha.1/src/api/server.rs:1355:53:
+    Server execution failed: SocketBindError(127.0.0.1:0, Os { code: 1, kind: PermissionDenied, message: "Operation not permitted" })
+
+        PASS [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::timeout_returns_without_waiting_for_http_response
+        PASS [   0.061s] libdd-ffe telemetry::flagevaluation::privacy::tests::rejected_fields_consume_width_and_global_visit_budgets
+────────────
+     Summary [   0.512s] 57/110 tests run: 49 passed, 8 failed, 0 skipped
+        FAIL [   0.021s] libdd-ffe telemetry::flagevaluation::sender::tests::delivery_loss_paths_log_at_warn_level
+        FAIL [   0.016s] libdd-ffe telemetry::flagevaluation::sender::tests::non_2xx_does_not_panic
+        FAIL [   0.022s] libdd-ffe telemetry::flagevaluation::sender::tests::omits_invalid_producer_identity_without_dropping_payload
+        FAIL [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_to_evp_proxy
+        FAIL [   0.023s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_valid_producer_identity_headers_independently
+        FAIL [   0.020s] libdd-ffe telemetry::flagevaluation::sender::tests::posts_without_optional_producer_identity
+        FAIL [   0.020s] libdd-ffe telemetry::flagevaluation::sender::tests::send_batch_splits_posts_by_encoded_byte_limit
+        FAIL [   0.022s] libdd-ffe telemetry::flagevaluation::sender::tests::splits_large_batches_before_posting
+warning: 53/110 tests were not run due to test failure (run with --no-fail-fast to run all tests, or run with --max-fail)
+error: test run failed

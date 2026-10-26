@@ -1,0 +1,422 @@
+diff --git a/libdd-ffe-test-suite/tests/data/README.md b/libdd-ffe-test-suite/tests/data/README.md
+index d9b976369..277ea1199 100644
+--- a/libdd-ffe-test-suite/tests/data/README.md
++++ b/libdd-ffe-test-suite/tests/data/README.md
+@@ -9,3 +9,21 @@ Extracted policy SHA256: `0d396beb2b627606f795386340d5e9d7443a40c51e84200b605279
+ The cases cover D002, D004 revision 2, D010 for valid boolean input, and D011.
+ The adapter uses the production Rust evaluator. It preserves every expected result.
+ Timestamp grammar, provider configuration, transport, and telemetry delivery are outside this profile.
++
++## Timestamp cases
++
++`experimentation-opt-out-timestamps.jsonl` contains all 43 timestamp cases from
++the same shared corpus, plus the seven exact examples in
++[libdatadog #2698's parser review](https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749).
++The additional cases extend that corpus without changing its existing expectations.
++They remain pending publication in the [shared contract PR](https://github.com/DataDog/ffe-system-test-data/pull/55).
++
++Extended shared-corpus SHA256: `4c4628ae30217bd2ead2ef34144f43e0163f9916ff0c8accae0847391dff64a6`.
++Extracted timestamp SHA256: `f09e4061d624b196cc51d9c3936428621ca7a8b79f7a0ad1cc993f6b57bdf31c`.
++
++The 50 cases cover D005 revision 2, D006 revision 2, and D007 revision 1.
++The production evaluator checks both cutoff and activation parsing. Valid inputs
++are compared with the oracle's expected instant and its adjacent representable
++nanoseconds, verifying normalization and strict cutoff selection. Invalid inputs
++retain their mode-specific errors; null is invalid subject input but missing
++activation. No case is excluded. Existing `startAt`/`endAt` syntax is separate.
+diff --git a/libdd-ffe-test-suite/tests/experimentation_opt_out.rs b/libdd-ffe-test-suite/tests/experimentation_opt_out.rs
+index ddf9c0e3a..d6c890ed4 100644
+--- a/libdd-ffe-test-suite/tests/experimentation_opt_out.rs
++++ b/libdd-ffe-test-suite/tests/experimentation_opt_out.rs
+@@ -3,7 +3,7 @@
+ 
+ use std::{collections::HashMap, sync::Arc};
+ 
+-use chrono::Utc;
++use chrono::{DateTime, Datelike, SecondsFormat, TimeDelta, Utc};
+ use libdd_ffe::rules_based::{
+     Assignment, Attribute, Configuration, EvaluationContext, EvaluationError, EvaluationOptions,
+     ExpectedFlagType, ExperimentationOptOutMode, Str, UniversalFlagConfig,
+@@ -281,6 +281,22 @@ fn missing_and_null_activation_have_the_same_conservative_behavior() {
+     }
+ }
+ 
++#[test]
++fn opt_out_grammar_does_not_narrow_allocation_schedules() {
++    for (field, timestamp) in [
++        ("startAt", "2000-01-01 00:00:00Z"),
++        ("endAt", "9999-01-01 00:00:00Z"),
++    ] {
++        let mut wire = flag(Value::Null, false);
++        wire["allocations"][0][field] = json!(timestamp);
++        let config = configuration(wire);
++        for mode in MODES {
++            let assignment = evaluate(&config, "feature", mode, "valid").unwrap();
++            assert_eq!(assignment.allocation_key.as_str(), "candidate", "{field}");
++        }
++    }
++}
++
+ #[test]
+ fn opt_out_timestamps_reject_surrounding_whitespace() {
+     for timestamp in [
+@@ -330,3 +346,132 @@ fn opt_out_timestamps_reject_surrounding_whitespace() {
+         }
+     }
+ }
++
++#[derive(Deserialize)]
++struct TimestampCase {
++    id: String,
++    input: Value,
++    expected: TimestampResult,
++}
++
++#[derive(Deserialize)]
++struct TimestampResult {
++    accepted: bool,
++    seconds: Option<i64>,
++    nanos: Option<u32>,
++}
++
++fn evaluate_timestamp(
++    config: &Configuration,
++    cutoff: &Value,
++    mode: ExperimentationOptOutMode,
++) -> Result<Assignment, EvaluationError> {
++    let subject = EvaluationContext::new(
++        Some("subject".into()),
++        Arc::new(HashMap::from([(
++            "dd_experimentation_opt_out_at".into(),
++            serde_json::from_value(cutoff.clone()).unwrap(),
++        )])),
++    );
++    config.eval_flag_with_options(
++        "feature",
++        &subject,
++        ExpectedFlagType::String,
++        Utc::now(),
++        EvaluationOptions {
++            experimentation_opt_out_mode: mode,
++        },
++    )
++}
++
++fn assert_timestamp_assignment(result: Assignment, retained: bool, id: &str) {
++    assert_eq!(
++        result.allocation_key.as_str(),
++        if retained { "candidate" } else { "fallback" },
++        "{id}"
++    );
++    assert_eq!(result.do_log, retained, "{id}");
++    assert_eq!(result.serial_id, Some(if retained { 7 } else { 8 }), "{id}");
++}
++
++#[test]
++fn lean_timestamp_cases_use_both_production_paths() {
++    // D005/D006/D007: frozen expected instants, never the host parser, are the oracle.
++    let cases: Vec<TimestampCase> = include_str!("data/experimentation-opt-out-timestamps.jsonl")
++        .lines()
++        .map(|line| serde_json::from_str(line).unwrap())
++        .collect();
++    assert_eq!(cases.len(), 50, "complete timestamp profile must execute");
++    let mut evaluations = 0;
++    for case in &cases {
++        let activation_config = configuration(flag(case.input.clone(), true));
++        if case.expected.accepted {
++            let instant = DateTime::from_timestamp(
++                case.expected.seconds.unwrap(),
++                case.expected.nanos.unwrap(),
++            )
++            .unwrap();
++            for delta in [-1, 0, 1] {
++                let adjacent = instant + TimeDelta::nanoseconds(delta);
++                // The UTC boundary itself is covered; its out-of-domain neighbor is not a
++                // valid reference timestamp. Every corpus case still executes both paths.
++                if !(0..=9999).contains(&adjacent.year()) {
++                    continue;
++                }
++                let reference = json!(adjacent.to_rfc3339_opts(SecondsFormat::Nanos, true));
++                let cutoff_config = configuration(flag(reference.clone(), true));
++                assert_timestamp_assignment(
++                    evaluate_timestamp(&cutoff_config, &case.input, MODES[2])
++                        .unwrap_or_else(|error| panic!("{} cutoff: {error}", case.id)),
++                    delta < 0,
++                    &case.id,
++                );
++                assert_timestamp_assignment(
++                    evaluate_timestamp(&activation_config, &reference, MODES[2])
++                        .unwrap_or_else(|error| panic!("{} activation: {error}", case.id)),
++                    delta > 0,
++                    &case.id,
++                );
++                evaluations += 2;
++            }
++        } else {
++            let valid_config = configuration(flag(json!("2025-01-01T00:00:00Z"), true));
++            for mode in MODES {
++                let cutoff = evaluate_timestamp(&valid_config, &case.input, mode);
++                if mode == MODES[0] {
++                    assert_timestamp_assignment(cutoff.unwrap(), true, &case.id);
++                } else {
++                    assert_eq!(
++                        cutoff.err(),
++                        Some(EvaluationError::InvalidContext),
++                        "{} cutoff: {mode:?}",
++                        case.id
++                    );
++                }
++                let activation = evaluate(&activation_config, "feature", mode, "valid");
++                if mode == MODES[2] && !case.input.is_null() {
++                    assert_eq!(
++                        activation.err(),
++                        Some(EvaluationError::FlagConfigurationInvalid),
++                        "{} activation",
++                        case.id
++                    );
++                } else {
++                    // Null remains missing activation, even though it is invalid subject input.
++                    assert_timestamp_assignment(activation.unwrap(), mode == MODES[0], &case.id);
++                }
++                assert_timestamp_assignment(
++                    evaluate(&activation_config, "feature", mode, "absent").unwrap(),
++                    true,
++                    &case.id,
++                );
++                assert!(evaluate(&activation_config, "neighbor", mode, "valid").is_ok());
++                evaluations += 4;
++            }
++        }
++    }
++    eprintln!(
++        "Lean timestamp profile: {} cases, {evaluations} evaluations, 0 failed, 0 excluded cases",
++        cases.len()
++    );
++}
+diff --git a/libdd-ffe/README.md b/libdd-ffe/README.md
+index 25d913061..288e36927 100644
+--- a/libdd-ffe/README.md
++++ b/libdd-ffe/README.md
+@@ -6,7 +6,13 @@ This is an internal DataDog library that supports Feature Flag evaluation. It is
+ 
+ The caller selects `EvaluationOptions.experimentation_opt_out_mode`; the evaluator reads no environment variables.
+ Both enabled modes require a valid `dd_experimentation_opt_out_at` timestamp when the attribute is present.
+-Cutoff and activation timestamps reject surrounding whitespace and otherwise use the existing Chrono timestamp grammar.
++Cutoff and activation timestamps use `YYYY-MM-DD[Tt]HH:mm:ss[.fraction](Z|z|±HH:mm)`
++with ASCII digits and valid Gregorian calendar fields. Seconds are `00`–`59`;
++numeric offset hours are `00`–`23` and minutes are `00`–`59`.
++Fractions contain at least one digit and truncate after nine digits without rounding.
++Both the written year and the normalized UTC year must be `0000`–`9999`.
++Whitespace, named zones, compact offsets, and leap seconds are rejected.
++The existing `startAt`/`endAt` parsing is unchanged.
+ Missing input preserves normal evaluation. Invalid input returns `InvalidContext` before flag lookup.
+ 
+ | Mode | Exposure-logging allocations |
+diff --git a/libdd-ffe/src/rules_based/eval/eval_assignment.rs b/libdd-ffe/src/rules_based/eval/eval_assignment.rs
+index ae3321ae6..7778da9ad 100644
+--- a/libdd-ffe/src/rules_based/eval/eval_assignment.rs
++++ b/libdd-ffe/src/rules_based/eval/eval_assignment.rs
+@@ -367,34 +367,26 @@ mod opt_out_tests {
+     }
+ 
+     #[test]
+-    fn opt_out_preserves_existing_timestamp_syntax_without_surrounding_whitespace() {
++    fn opt_out_timestamp_syntax_is_explicit_and_errors_are_redacted() {
+         let immediate = EvaluationOptions {
+             experimentation_opt_out_mode: ExperimentationOptOutMode::Immediate,
+         };
+-        for timestamp in [
+-            "2026-10-19T12:00:00Z",
+-            "2099-01-01T00:00:00.123456789+05:30",
+-            "2026-10-19 12:00:00Z",
+-            "2026-10-19t12:00:00z",
+-            "2016-12-31T23:59:60Z",
+-            "2026-10-19T1:00:00Z",
+-            "2026-10-19T12:00:00,123Z",
+-            "2026-10-19T12:00:00+24:00",
+-            "2026-02-30T00:00:00Z",
+-            "2026-10-19T12:00:00",
+-            "private-invalid-timestamp",
+-            "",
++        for (timestamp, accepted) in [
++            ("2026-10-19T12:00:00Z", true),
++            ("2099-01-01T00:00:00.123456789+05:30", true),
++            ("2026-10-19 12:00:00Z", false),
++            ("2026-10-19t12:00:00z", true),
++            ("2016-12-31T23:59:60Z", false),
++            ("2026-10-19T1:00:00Z", false),
++            ("2026-10-19T12:00:00,123Z", false),
++            ("2026-10-19T12:00:00+24:00", false),
++            ("2026-02-30T00:00:00Z", false),
++            ("2026-10-19T12:00:00", false),
++            ("private-invalid-timestamp", false),
++            ("", false),
+         ] {
+-            let allocation =
+-                serde_json::from_value::<crate::rules_based::ufc::AllocationWire>(json!({
+-                    "key": "test",
+-                    "startAt": timestamp,
+-                    "endAt": timestamp,
+-                    "splits": [],
+-                    "doLog": true,
+-                }));
+             let result = immediate.experimentation_exclusion(&context(Some(json!(timestamp))));
+-            let expected = if allocation.is_ok() {
++            let expected = if accepted {
+                 Ok(ExperimentationExclusion::Immediate)
+             } else {
+                 Err(EvaluationError::InvalidContext)
+diff --git a/libdd-ffe/src/rules_based/timestamp.rs b/libdd-ffe/src/rules_based/timestamp.rs
+index 0c7f9b1ab..d1ee61baf 100644
+--- a/libdd-ffe/src/rules_based/timestamp.rs
++++ b/libdd-ffe/src/rules_based/timestamp.rs
+@@ -2,8 +2,8 @@
+ // SPDX-License-Identifier: Apache-2.0
+ 
+ //! A simple wrapper around `chrono`, so users don’t have to depend on it directly.
+-use chrono::{DateTime, Utc};
+-use serde::{Deserialize, Serialize, de::value::StrDeserializer};
++use chrono::{DateTime, Datelike, NaiveDate, TimeDelta, Utc};
++use serde::{Deserialize, Serialize};
+ 
+ pub type Timestamp = DateTime<Utc>;
+ 
+@@ -14,15 +14,75 @@ pub(crate) struct OptOutTimestamp(pub Timestamp);
+ 
+ impl OptOutTimestamp {
+     pub fn parse(value: &str) -> Result<Self, &'static str> {
+-        // D005's surrounding-whitespace rule applies to opt-out timestamps only.
+-        // Other syntax retains the existing Chrono timestamp grammar.
+-        if value.trim() != value {
+-            return Err("invalid opt-out timestamp");
+-        }
+-        Timestamp::deserialize(StrDeserializer::<serde::de::value::Error>::new(value))
++        parse_opt_out_timestamp(value)
+             .map(Self)
+-            .map_err(|_| "invalid opt-out timestamp")
++            .ok_or("invalid opt-out timestamp")
++    }
++}
++
++// D005/D006/D007: exact ASCII fields, lowercase t/z, fractional truncation, and
++// UTC years 0000..9999. Chrono supplies calendar arithmetic, not the input grammar.
++fn parse_opt_out_timestamp(value: &str) -> Option<Timestamp> {
++    let bytes = value.as_bytes();
++    if bytes.len() < 20
++        || bytes[4] != b'-'
++        || bytes[7] != b'-'
++        || !matches!(bytes[10], b'T' | b't')
++        || bytes[13] != b':'
++        || bytes[16] != b':'
++    {
++        return None;
++    }
++
++    // All calls use fixed-width fields of at most four digits.
++    let decimal = |digits: &[u8]| {
++        digits.iter().try_fold(0_u32, |value, digit| {
++            digit
++                .is_ascii_digit()
++                .then(|| value * 10 + u32::from(digit - b'0'))
++        })
++    };
++    let year = i32::try_from(decimal(&bytes[..4])?).ok()?;
++    let date = NaiveDate::from_ymd_opt(year, decimal(&bytes[5..7])?, decimal(&bytes[8..10])?)?;
++    let hour = decimal(&bytes[11..13])?;
++    let minute = decimal(&bytes[14..16])?;
++    let second = decimal(&bytes[17..19])?;
++
++    let mut position = 19;
++    let mut nanos = 0;
++    if bytes[position] == b'.' {
++        position += 1;
++        let start = position;
++        let mut scale = 100_000_000;
++        while let Some(digit) = bytes.get(position).filter(|digit| digit.is_ascii_digit()) {
++            // Inspect every digit, but discard precision beyond nanoseconds without rounding.
++            nanos += u32::from(digit - b'0') * scale;
++            scale /= 10;
++            position += 1;
++        }
++        if position == start {
++            return None;
++        }
+     }
++    let zone = &bytes[position..];
++    let offset = match zone {
++        [b'Z' | b'z'] => 0,
++        [b'+' | b'-', _, _, b':', _, _] => {
++            let hours = decimal(&zone[1..3])?;
++            let minutes = decimal(&zone[4..6])?;
++            if hours > 23 || minutes > 59 {
++                return None;
++            }
++            let seconds = i64::from(hours * 3600 + minutes * 60);
++            if zone[0] == b'-' { -seconds } else { seconds }
++        }
++        _ => return None,
++    };
++    let timestamp = date
++        .and_hms_nano_opt(hour, minute, second, nanos)?
++        .and_utc()
++        .checked_sub_signed(TimeDelta::seconds(offset))?;
++    (0..=9999).contains(&timestamp.year()).then_some(timestamp)
+ }
+ 
+ impl<'de> Deserialize<'de> for OptOutTimestamp {
+diff --git a/libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl b/libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl
+new file mode 100644
+index 000000000..cd994332b
+--- /dev/null
++++ b/libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl
+@@ -0,0 +1,50 @@
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/utc", "input": "2026-01-01T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/lower-t", "input": "2026-01-01t00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/lower-z", "input": "2026-01-01T00:00:00z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/lower-both", "input": "2026-01-01t00:00:00z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/nanos", "input": "2026-10-19T12:00:00.123456789Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/ten-digits-zero", "input": "2026-10-19T12:00:00.1234567890Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/ten-digits-nine", "input": "2026-10-19T12:00:00.1234567899Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/twelve-digits", "input": "2026-10-19T12:00:00.123456789999Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/fraction-zero", "input": "2026-01-01T00:00:00.000000000000Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 100000000, "seconds": 1767225600}, "id": "timestamp/fraction-one", "input": "2026-01-01T00:00:00.1Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/offset-negative", "input": "2026-10-19T08:00:00.123456789-04:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 123456789, "seconds": 1792411200}, "id": "timestamp/offset-positive", "input": "2026-10-19T14:00:00.123456789+02:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767225600}, "id": "timestamp/offset-negative-zero", "input": "2026-01-01T00:00:00-00:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1767139260}, "id": "timestamp/offset-max", "input": "2026-01-01T00:00:00+23:59", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/space", "input": "2026-01-01 00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/comma", "input": "2026-01-01T00:00:00,123Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/leap-second", "input": "2016-12-31T23:59:60Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/unicode-minus", "input": "2026-01-01T00:00:00\u221205:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/offset-compact", "input": "2026-01-01T00:00:00+0000", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/named-zone", "input": "2026-01-01T00:00:00 UTC", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/offset-hour24", "input": "2026-01-01T00:00:00+24:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/offset-minute60", "input": "2026-01-01T00:00:00+01:60", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/one-digit-hour", "input": "2026-01-01T0:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": -62167219200}, "id": "timestamp/year-zero", "input": "0000-01-01T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/utc-year-underflow", "input": "0000-01-01T00:00:00+01:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 999999999, "seconds": 253402300799}, "id": "timestamp/year-max", "input": "9999-12-31T23:59:59.999999999Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/utc-year-overflow", "input": "9999-12-31T23:59:59-01:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/julian-leap", "input": "1500-02-29T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": -12219724800}, "id": "timestamp/gregorian-cutover", "input": "1582-10-10T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 951782400}, "id": "timestamp/leap-2000", "input": "2000-02-29T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/nonleap-1900", "input": "1900-02-29T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/bad-month", "input": "2026-13-01T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/bad-day", "input": "2026-04-31T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/hour24", "input": "2026-01-01T24:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/empty-fraction", "input": "2026-01-01T00:00:00.Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/leading-space", "input": " 2026-01-01T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/trailing-space", "input": "2026-01-01T00:00:00Z ", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/trailing-newline", "input": "2026-01-01T00:00:00Z\n", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/no-zone", "input": "2026-01-01T00:00:00", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/empty", "input": "", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/null", "input": null, "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 0}, "id": "timestamp/epoch", "input": "1970-01-01T00:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 999999999, "seconds": -1}, "id": "timestamp/pre-epoch-nanos", "input": "1969-12-31T23:59:59.999999999Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1792497600}, "id": "timestamp/libdatadog-2698/utc", "input": "2026-10-20T12:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/space", "input": "2026-10-20 12:00:00Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1792497600}, "id": "timestamp/libdatadog-2698/lowercase", "input": "2026-10-20t12:00:00z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/short-fields", "input": "2026-1-5T1:2:3Z", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/named-zone", "input": "2026-10-20T12:00:00UTC", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/compact-offset", "input": "2026-10-20T12:00:00+0000", "kind": "timestamp"}
++{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/internal-spaces", "input": "2026 - 10 - 20T12:00:00Z", "kind": "timestamp"}

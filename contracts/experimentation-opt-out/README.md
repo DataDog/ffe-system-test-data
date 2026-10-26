@@ -162,7 +162,9 @@ D021 adds six theorems in [lean/SemverDelivery.lean](lean/SemverDelivery.lean),
 and the activation review adds twelve in [lean/ActivationReview.lean](lean/ActivationReview.lean),
 bringing the current total to 71. Separate profiles cover 24 compiler/delivery,
 156 activation-producer and 36 inactive-path cases. The original 313 semantic
-cases remain unchanged.
+cases remain unchanged. Seven exact timestamp examples from libdatadog #2698
+extend the current semantic corpus to 320 cases, including 50 timestamp cases.
+They use the existing D005/D006/D007 decisions and unchanged Lean parser.
 The operational model proves zero exclusion-check events for inactive policy and
 preservation of exclusion results; native runtime measurements remain required.
 

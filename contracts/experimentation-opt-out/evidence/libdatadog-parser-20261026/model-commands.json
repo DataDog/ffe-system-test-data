@@ -1,0 +1,34 @@
+[
+  {
+    "check": "lean",
+    "argv": [
+      "python3",
+      "contracts/experimentation-opt-out/verify.py",
+      "--manifest-sha256",
+      "fb5cece55003dcc8e738ff95aea76ed9e3648f51d05356c311406e29da4ba425",
+      "--lean",
+      "/tmp/libdatadog-2698-tools/lean-4.19.0-linux/bin/lean"
+    ],
+    "exit_code": 0,
+    "executed_at": "2026-10-26T19:25:21.552484+00:00",
+    "elapsed_seconds": 14.226,
+    "log": "lean.log"
+  },
+  {
+    "check": "verifier-tests",
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "contracts/experimentation-opt-out",
+      "-p",
+      "test_verify.py"
+    ],
+    "exit_code": 0,
+    "executed_at": "2026-10-26T19:25:35.778655+00:00",
+    "elapsed_seconds": 2.214,
+    "log": "verifier-tests.log"
+  }
+]

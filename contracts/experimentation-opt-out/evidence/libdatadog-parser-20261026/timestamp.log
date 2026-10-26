@@ -1,0 +1,11 @@
+   Compiling libdd-ffe v2.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-ffe)
+   Compiling libdd-ffe-test-suite v46.0.0 (/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026/libdd-ffe-test-suite)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.83s
+     Running tests/experimentation_opt_out.rs (target/debug/deps/experimentation_opt_out-2494a0045665269c)
+
+running 1 test
+Lean timestamp profile: 50 cases, 464 evaluations, 0 failed, 0 excluded cases
+test lean_timestamp_cases_use_both_production_paths ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.04s
+

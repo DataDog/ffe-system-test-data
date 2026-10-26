@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": "sdk-adoption-20261023-v2",
+  "revision": "libdatadog-parser-20261026-v1",
   "status": "proposal",
   "fleet_approved": false,
   "imported_browser_revision": "pr-423-proposal-v2-ack",
@@ -418,7 +418,9 @@
         "RUBY-6521-003",
         "RUBY-6521-004",
         "RUBY-6521-005",
-        "RUBY-6521-006"
+        "RUBY-6521-006",
+        "LIBDATADOG-2698-PARSER-002",
+        "LIBDATADOG-2698-PARSER-004"
       ],
       "native_obligations": [
         "Parse activation once into valid/missing/invalid states without rejecting the flag for this field during decoding.",
@@ -556,7 +558,11 @@
         "LIBDATADOG-2698-006",
         "RUBY-6521-003",
         "RUBY-6521-004",
-        "RUBY-6521-006"
+        "RUBY-6521-006",
+        "LIBDATADOG-2698-PARSER-001",
+        "LIBDATADOG-2698-PARSER-002",
+        "LIBDATADOG-2698-PARSER-003",
+        "LIBDATADOG-2698-PARSER-004"
       ],
       "implementation_adoptions": [
         {
@@ -579,6 +585,25 @@
           "recorded_at": "2026-10-23T15:41:26.261159+00:00",
           "evidence": "evidence/ruby-adoption-20261023/local-adoption.json",
           "authorization_scope": "User requested Ruby modes based on libdatadog with a called-out temporary branch pin. No fleet approval."
+        },
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": null,
+          "base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "patch_sha256": "5def3d0d10c37780df8f66189c44dd7336a97af12740ebb39954a7d4eff48ddc",
+          "decision_revision": 2,
+          "status": "locally-validated-unpublished",
+          "scope_note": "Full timestamp grammar for subject cutoff and JSON activation only. Prior partial adoption retained as historical; no fleet or downstream adoption.",
+          "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+          "evidence": "evidence/libdatadog-parser-20261026/summary.json",
+          "authorization_scope": {
+            "actor": "Leo Romanovsky",
+            "kind": "local-conversation",
+            "request": "1. fix it",
+            "scope": "Apply proposed D005/D006/D007 parser to libdatadog PR2698 only",
+            "public_setting_gap": "No public author acceptance or published fix yet; reviewer URL is problem provenance, not authority for fleet policy."
+          }
         }
       ]
     },
@@ -646,7 +671,32 @@
         "SDK-ADOPTION-ANDROID-001",
         "SDK-ADOPTION-ANDROID-002",
         "SDK-ADOPTION-ANDROID-004",
-        "SDK-ADOPTION-ANDROID-009"
+        "SDK-ADOPTION-ANDROID-009",
+        "LIBDATADOG-2698-PARSER-001",
+        "LIBDATADOG-2698-PARSER-002",
+        "LIBDATADOG-2698-PARSER-003",
+        "LIBDATADOG-2698-PARSER-004"
+      ],
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": null,
+          "base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "patch_sha256": "5def3d0d10c37780df8f66189c44dd7336a97af12740ebb39954a7d4eff48ddc",
+          "decision_revision": 2,
+          "status": "locally-validated-unpublished",
+          "scope_note": "Full timestamp grammar for subject cutoff and JSON activation only. Prior partial adoption retained as historical; no fleet or downstream adoption.",
+          "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+          "evidence": "evidence/libdatadog-parser-20261026/summary.json",
+          "authorization_scope": {
+            "actor": "Leo Romanovsky",
+            "kind": "local-conversation",
+            "request": "1. fix it",
+            "scope": "Apply proposed D005/D006/D007 parser to libdatadog PR2698 only",
+            "public_setting_gap": "No public author acceptance or published fix yet; reviewer URL is problem provenance, not authority for fleet policy."
+          }
+        }
       ]
     },
     {
@@ -714,7 +764,32 @@
         "SDK-ADOPTION-ANDROID-001",
         "SDK-ADOPTION-ANDROID-002",
         "SDK-ADOPTION-ANDROID-004",
-        "SDK-ADOPTION-ANDROID-009"
+        "SDK-ADOPTION-ANDROID-009",
+        "LIBDATADOG-2698-PARSER-001",
+        "LIBDATADOG-2698-PARSER-002",
+        "LIBDATADOG-2698-PARSER-003",
+        "LIBDATADOG-2698-PARSER-004"
+      ],
+      "implementation_adoptions": [
+        {
+          "repository": "DataDog/libdatadog",
+          "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+          "source_sha": null,
+          "base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+          "patch_sha256": "5def3d0d10c37780df8f66189c44dd7336a97af12740ebb39954a7d4eff48ddc",
+          "decision_revision": 1,
+          "status": "locally-validated-unpublished",
+          "scope_note": "Full timestamp grammar for subject cutoff and JSON activation only. Prior partial adoption retained as historical; no fleet or downstream adoption.",
+          "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+          "evidence": "evidence/libdatadog-parser-20261026/summary.json",
+          "authorization_scope": {
+            "actor": "Leo Romanovsky",
+            "kind": "local-conversation",
+            "request": "1. fix it",
+            "scope": "Apply proposed D005/D006/D007 parser to libdatadog PR2698 only",
+            "public_setting_gap": "No public author acceptance or published fix yet; reviewer URL is problem provenance, not authority for fleet policy."
+          }
+        }
       ]
     },
     {
@@ -2125,7 +2200,7 @@
       }
     }
   ],
-  "previous_revision": "sdk-adoption-20261023-v1",
-  "revision_note": "Append the unknown response-mode source assessment and verified review disposition. Preserve all semantic revisions, authority, and prior evidence.",
+  "previous_revision": "sdk-adoption-20261023-v2",
+  "revision_note": "Append local libdatadog timestamp adoption and baseline/native/model evidence. All semantic revisions and global authority remain unchanged; seven review examples extend the corpus.",
   "validation_history_file": "validation-history.json"
 }

@@ -1,0 +1,144 @@
+{
+  "status": "locally-validated",
+  "publication_state": "uncommitted; not pushed; review thread remains unresolved",
+  "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+  "repository": "DataDog/libdatadog",
+  "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+  "review_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749",
+  "base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "base_is_not_fixed_implementation": true,
+  "worktree": "/home/bits/dd/libdatadog-opt-out-parser-20261026",
+  "contract_worktree": "/home/bits/dd/ffe-opt-out-parser-20261026",
+  "contract_base_sha": "9f48b7a7d141f5a781e94b536359c06eb2a38234",
+  "decision_revisions": {
+    "D005": 2,
+    "D006": 2,
+    "D007": 1
+  },
+  "profile": "libdatadog-opt-out-timestamps-v1",
+  "profile_sha256": "bc087ad3285580052b59f97ddb6a5a5e54b8327b4aa9d8382438f5f5676cbf4a",
+  "corpus_sha256": "4c4628ae30217bd2ead2ef34144f43e0163f9916ff0c8accae0847391dff64a6",
+  "timestamp_corpus_sha256": "f09e4061d624b196cc51d9c3936428621ca7a8b79f7a0ad1cc993f6b57bdf31c",
+  "model_manifest_at_execution_sha256": "fb5cece55003dcc8e738ff95aea76ed9e3648f51d05356c311406e29da4ba425",
+  "patch": "libdatadog.patch",
+  "patch_sha256": "5def3d0d10c37780df8f66189c44dd7336a97af12740ebb39954a7d4eff48ddc",
+  "source_sha256": {
+    "Cargo.lock": "061ba520979f3abb49b0c1dfb63fadb7ec2d8c71838ef12b4d776843fc7788fe",
+    "libdd-ffe-test-suite/tests/data/README.md": "e54f246477b61c77ba115924ac035528716f627e3cabab6ece7399d5e449ee29",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-policy.jsonl": "0d396beb2b627606f795386340d5e9d7443a40c51e84200b60527938969f7175",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl": "f09e4061d624b196cc51d9c3936428621ca7a8b79f7a0ad1cc993f6b57bdf31c",
+    "libdd-ffe-test-suite/tests/experimentation_opt_out.rs": "f1718bd2e4c6e5ab5f4f91b8b518d215f22ef7bb4ab5044ec8addd21aa30264e",
+    "libdd-ffe/README.md": "95a7421bfcb128af8b2b513148d849e8b28f74e5001597e8628b45d47145e8ab",
+    "libdd-ffe/src/rules_based/eval/eval_assignment.rs": "790e90036331f1c6d0377c284443f86d3c59799319d76fb6020655787deef643",
+    "libdd-ffe/src/rules_based/timestamp.rs": "2679e8a6c89b649273314e93204ef2e1c442a48f4665e313ccd9b7a32a3a1395",
+    "libdd-ffe/src/rules_based/ufc/models.rs": "0384b9964972a10f73b7c03e6c079c84e091e4ad70ae6f43228ba7cc46598719"
+  },
+  "owned_paths": [
+    "libdd-ffe-test-suite/tests/data/README.md",
+    "libdd-ffe-test-suite/tests/experimentation_opt_out.rs",
+    "libdd-ffe/README.md",
+    "libdd-ffe/src/rules_based/eval/eval_assignment.rs",
+    "libdd-ffe/src/rules_based/timestamp.rs",
+    "libdd-ffe-test-suite/tests/data/experimentation-opt-out-timestamps.jsonl"
+  ],
+  "excluded_cases": [],
+  "timestamp_cases": 50,
+  "timestamp_evaluations": 464,
+  "policy_cases_unchanged": 90,
+  "native_tests": {
+    "passed": 110,
+    "failed": 0,
+    "skipped": 0,
+    "receipt": "native-host.json"
+  },
+  "negative_control": {
+    "base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+    "adapter": "new production timestamp adapter before parser fix",
+    "exit_code": 101,
+    "log": "baseline.log",
+    "result": "Old Chrono parser accepts a forbidden timestamp; assertion expecting InvalidContext fails. Test stopped at first mismatch. Diagnostic-only unwrap_err was subsequently replaced by explicit error assertion; acceptance expectations unchanged."
+  },
+  "infrastructure_retry": "Initial native run could not bind mock loopback servers inside sandbox. Host retry passes all110; both logs retained.",
+  "lean": {
+    "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
+    "theorems_audited": 71,
+    "activation_oracle_cases": 156,
+    "semver_oracle_cases": 24,
+    "oracle_cases": 320,
+    "operational_oracle_cases": 36,
+    "native_sdk_tests_run": false,
+    "fleet_approved": false
+  },
+  "check_logs": [
+    "check.log",
+    "timestamp.log",
+    "native-commands.json",
+    "native-host.json",
+    "model-commands.json"
+  ],
+  "toolchains": {
+    "rust": "rustc 1.87.0 (17067e9ac 2025-05-09)",
+    "stable": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "format": "rustfmt 1.10.0-nightly (008fa22ce3 2026-07-25)",
+    "nextest": "cargo-nextest 0.9.96 (d9566d348 2025-05-15)\nrelease: 0.9.96\ncommit-hash: d9566d348d77a5d3f8116d5c77c350ee00d90b74\ncommit-date: 2025-05-15\nhost: x86_64-unknown-linux-gnu"
+  },
+  "limits": "Local source and native validation only. Lean proves its bounded model, not Rust equivalence. No hosted CI, independent source review, push, merge, release, downstream wrapper adoption, or fleet approval. Existing cross-SDK lowercase conflict remains open.",
+  "additional_commands": [
+    {
+      "check": "negative-control",
+      "cwd": "/home/bits/dd/libdatadog-opt-out-parser-20261026",
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "libdd-ffe-test-suite",
+        "--test",
+        "experimentation_opt_out",
+        "lean_timestamp_cases_use_both_production_paths",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 101,
+      "log": "baseline.log",
+      "source": "original parser with new adapter"
+    },
+    {
+      "check": "timestamp",
+      "cwd": "/home/bits/dd/libdatadog-opt-out-parser-20261026",
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "libdd-ffe-test-suite",
+        "--test",
+        "experimentation_opt_out",
+        "lean_timestamp_cases_use_both_production_paths",
+        "--",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "log": "timestamp.log",
+      "source": "fixed parser"
+    },
+    {
+      "check": "cargo-check",
+      "cwd": "/home/bits/dd/libdatadog-opt-out-parser-20261026",
+      "argv": [
+        "cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "-p",
+        "libdd-ffe",
+        "-p",
+        "libdd-ffe-test-suite"
+      ],
+      "exit_code": 0,
+      "log": "check.log"
+    }
+  ]
+}

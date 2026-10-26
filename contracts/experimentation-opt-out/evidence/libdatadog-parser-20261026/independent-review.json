@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-10-26T19:36:27.347573+00:00",
+  "reviewer": "independent code-reviewer agent",
+  "outcome": "no actionable findings",
+  "native_base_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+  "contract_base_sha": "9f48b7a7d141f5a781e94b536359c06eb2a38234",
+  "native_patch_sha256": "5def3d0d10c37780df8f66189c44dd7336a97af12740ebb39954a7d4eff48ddc",
+  "reviewed_manifest_sha256": "0efb9a7a1661e8e55f70b8ea0c4dab7a9fe2b93d33da55471ae30e2d885039d8",
+  "independent_execution": {
+    "opt_out_integration_tests": 7,
+    "timestamp_cases": 50,
+    "timestamp_evaluations": 464,
+    "policy_cases": 90,
+    "lean_theorems": 71,
+    "semantic_cases": 320,
+    "operational_cases": 36,
+    "activation_cases": 156,
+    "semver_cases": 24
+  },
+  "integrity": "Nine pinned native sources, unchanged original313 corpus rows, exact50-row extraction and manifest verified.",
+  "reviewed_behavior": "Both production paths match D005r2/D006r2/D007r1; D004 gating, missing/null activation and allocation scheduling preserved.",
+  "limits": "Mutable working-tree review. Signing, publication, hosted CI and downstream adoption outside review scope."
+}

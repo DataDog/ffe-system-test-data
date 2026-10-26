@@ -311,3 +311,10 @@
 {"args": {"acknowledged": "true", "cutoff": "equivalent", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "expected": {"accepted": true}, "id": "ack/future/true/future/equivalent", "kind": "ack"}
 {"args": {"acknowledged": "true", "cutoff": "different", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "expected": {"accepted": false}, "id": "ack/future/true/future/different", "kind": "ack"}
 {"args": {"acknowledged": "true", "cutoff": "invalid", "mode": "future", "policy": "future"}, "decision_ids": ["D008"], "expected": {"accepted": false}, "id": "ack/future/true/future/invalid", "kind": "ack"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1792497600}, "id": "timestamp/libdatadog-2698/utc", "input": "2026-10-20T12:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/space", "input": "2026-10-20 12:00:00Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": true, "nanos": 0, "seconds": 1792497600}, "id": "timestamp/libdatadog-2698/lowercase", "input": "2026-10-20t12:00:00z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/short-fields", "input": "2026-1-5T1:2:3Z", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/named-zone", "input": "2026-10-20T12:00:00UTC", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/compact-offset", "input": "2026-10-20T12:00:00+0000", "kind": "timestamp"}
+{"decision_ids": ["D005", "D006", "D007"], "expected": {"accepted": false}, "id": "timestamp/libdatadog-2698/internal-spaces", "input": "2026 - 10 - 20T12:00:00Z", "kind": "timestamp"}

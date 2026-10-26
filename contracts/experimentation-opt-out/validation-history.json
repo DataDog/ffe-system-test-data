@@ -2644,6 +2644,96 @@
       "expectation_profile": "libdatadog-policy-v1; unchanged 90 policy rows. Shared HTTP and released-native compatibility checks have separate profiles.",
       "evidence_file": "evidence/ruby-adoption-20261023/ci-triage/summary.json",
       "limits": "The 21 pending cases require unreleased native modes. All execute without skips in the separate pinned-native matrix. This is not full hosted CI qualification."
+    },
+    {
+      "id": "LIBDATADOG-2698-PARSER-001",
+      "decision_revisions": {
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749",
+      "target": "libdatadog opt-out timestamp grammar",
+      "source_repository_url": "https://github.com/DataDog/libdatadog",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": "new timestamp adapter only; original parser",
+      "evidence_kind": "native-negative-control",
+      "outcome": "fail",
+      "check": "New timestamp adapter rejects the old Chrono acceptance behavior; historical failing baseline retained.",
+      "expectation_profile": "libdatadog-opt-out-timestamps-v1",
+      "evidence_file": "evidence/libdatadog-parser-20261026/baseline.log",
+      "limits": "Local source and native validation only. Lean proves its bounded model, not Rust equivalence. No hosted CI, independent source review, push, merge, release, downstream wrapper adoption, or fleet approval. Existing cross-SDK lowercase conflict remains open."
+    },
+    {
+      "id": "LIBDATADOG-2698-PARSER-002",
+      "decision_revisions": {
+        "D004": 2,
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749",
+      "target": "libdatadog opt-out timestamp grammar",
+      "source_repository_url": "https://github.com/DataDog/libdatadog",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": "evidence/libdatadog-parser-20261026/libdatadog.patch",
+      "evidence_kind": "native-validation",
+      "outcome": "pass",
+      "check": "50 timestamp cases /464 evaluations and all110 native tests pass; format, check, docs, Clippy pass.",
+      "expectation_profile": "libdatadog-opt-out-timestamps-v1",
+      "evidence_file": "evidence/libdatadog-parser-20261026/summary.json",
+      "limits": "Local source and native validation only. Lean proves its bounded model, not Rust equivalence. No hosted CI, independent source review, push, merge, release, downstream wrapper adoption, or fleet approval. Existing cross-SDK lowercase conflict remains open."
+    },
+    {
+      "id": "LIBDATADOG-2698-PARSER-003",
+      "decision_revisions": {
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-26T19:27:04.020394+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749",
+      "target": "Shared timestamp contract model",
+      "source_repository_url": "https://github.com/DataDog/ffe-system-test-data",
+      "source_sha": "9f48b7a7d141f5a781e94b536359c06eb2a38234",
+      "patch": "seven new corpus rows; unchanged Lean source",
+      "evidence_kind": "lean-kernel-and-oracle",
+      "outcome": "pass",
+      "check": "71 theorems audited; 320 semantic,36 operational,156 activation,24 SemVer cases replayed;14 verifier tests pass.",
+      "expectation_profile": "libdatadog-opt-out-timestamps-v1",
+      "evidence_file": "evidence/libdatadog-parser-20261026/lean.log",
+      "limits": "Local source and native validation only. Lean proves its bounded model, not Rust equivalence. No hosted CI, independent source review, push, merge, release, downstream wrapper adoption, or fleet approval. Existing cross-SDK lowercase conflict remains open."
+    },
+    {
+      "id": "LIBDATADOG-2698-PARSER-004",
+      "decision_revisions": {
+        "D004": 2,
+        "D005": 2,
+        "D006": 2,
+        "D007": 1
+      },
+      "recorded_at": "2026-10-26T19:36:27.347573+00:00",
+      "executed_at": null,
+      "pr_url": "https://github.com/DataDog/libdatadog/pull/2698",
+      "evidence_url": "https://github.com/DataDog/libdatadog/pull/2698#discussion_r4380967749",
+      "target": "libdatadog opt-out timestamp grammar",
+      "source_repository_url": "https://github.com/DataDog/libdatadog",
+      "source_sha": "ead1d3db2aa16e494f23e47b946ff12a7a1be53a",
+      "patch": "evidence/libdatadog-parser-20261026/libdatadog.patch",
+      "evidence_kind": "independent-source-review-and-execution",
+      "outcome": "pass",
+      "check": "Independent review finds no actionable defect; independently reruns7 native integration tests and complete Lean replay.",
+      "expectation_profile": "libdatadog-opt-out-timestamps-v1",
+      "evidence_file": "evidence/libdatadog-parser-20261026/independent-review.json",
+      "limits": "Mutable working-tree review. Signing, publication, hosted CI and downstream adoption outside review scope."
     }
   ]
 }

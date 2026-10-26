@@ -1,0 +1,95 @@
+[
+  {
+    "check": "format",
+    "argv": [
+      "cargo",
+      "+nightly-2026-07-26",
+      "fmt",
+      "-p",
+      "libdd-ffe",
+      "-p",
+      "libdd-ffe-test-suite"
+    ],
+    "cwd": "/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026",
+    "exit_code": 0,
+    "seconds": 0.245,
+    "log": "format.log"
+  },
+  {
+    "check": "format-check",
+    "argv": [
+      "cargo",
+      "+nightly-2026-07-26",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "cwd": "/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026",
+    "exit_code": 0,
+    "seconds": 3.616,
+    "log": "format-check.log"
+  },
+  {
+    "check": "native",
+    "argv": [
+      "cargo",
+      "nextest",
+      "run",
+      "--locked",
+      "--offline",
+      "-p",
+      "libdd-ffe",
+      "-p",
+      "libdd-ffe-test-suite",
+      "-p",
+      "libdd-ffe-ffi",
+      "--success-output",
+      "never"
+    ],
+    "cwd": "/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026",
+    "exit_code": 100,
+    "seconds": 69.85,
+    "log": "native.log"
+  },
+  {
+    "check": "docs",
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "-p",
+      "libdd-ffe",
+      "-p",
+      "libdd-ffe-test-suite",
+      "--doc"
+    ],
+    "cwd": "/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026",
+    "exit_code": 0,
+    "seconds": 13.484,
+    "log": "docs.log"
+  },
+  {
+    "check": "clippy",
+    "argv": [
+      "cargo",
+      "+stable",
+      "clippy",
+      "--locked",
+      "--offline",
+      "-p",
+      "libdd-ffe",
+      "-p",
+      "libdd-ffe-test-suite",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "cwd": "/home/bits/go/src/github.com/DataDog/libdatadog-opt-out-parser-20261026",
+    "exit_code": 0,
+    "seconds": 28.544,
+    "log": "clippy.log"
+  }
+]

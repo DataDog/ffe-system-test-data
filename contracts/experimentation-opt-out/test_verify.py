@@ -22,7 +22,7 @@ class AcceptanceControls(unittest.TestCase):
 
     def test_original_bundle_is_accepted(self):
         _, rows = verify.check_bundle(self.root, self.pin)
-        self.assertEqual(len(rows), 313)
+        self.assertEqual(len(rows), 320)
 
     def test_cross_repository_validation_links_the_tested_commit(self):
         decisions = json.loads((self.root / 'decisions.json').read_text())
