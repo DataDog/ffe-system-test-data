@@ -52,6 +52,17 @@ projects ship support.
 3. If your test case requires a new flag, add the flag definition to `ufc-config.json`
 4. Keep the fixture SDK-neutral. Do not include SDK-specific fields such as `variant` or `flagMetadata`; downstream SDKs should derive those from `ufc-config.json` when they need them.
 
+Use `_skip` or `_include` only for a known cross-platform applicability gap.
+Never specify both. Entries must use a canonical identifier from
+`ci/validate-fixtures.py` and should include a concise reason. These controls
+apply only to rules-based evaluation cases. Do not edit precomputed-assignment
+fixtures, schemas, documentation, or validators when changing this contract.
+
+When a new feature's UFC syntax itself is not supported by every SDK, create a
+self-contained `evaluation-suites/<suite>/` directory containing its own
+`ufc-config.json` and `cases/`. Do not add that syntax to the legacy root config:
+a suite the consumer has not enabled must not have its configuration parsed.
+
 For selected split/allocation metadata, add optional `result.serialId` (integer or
 `null`) and `result.doLog` (boolean) expectations. A serial ID of `0` is valid;
 `null` asserts absence, while omitting the field leaves it unspecified. Keep
@@ -106,11 +117,14 @@ revision in downstream repos. Each rules-based consumer should:
 2. Automate fixture updates. For submodules, configure Dependabot with
    `package-ecosystem: "gitsubmodule"`; for snapshots, automate regeneration from
    the source revision.
-3. Load `ufc-config.json` and loop over every `evaluation-cases/*.json` file in
-   unit tests.
-4. Run the cases for every implemented capability as well as the baseline;
+3. Treat `ufc-config.json` and `evaluation-cases/` as the legacy `core` suite.
+4. Implement `_skip`/`_include` filtering before parametrization and side effects,
+   using the canonical platform identifiers from `ci/validate-fixtures.py`.
+5. Run applicable cases for every implemented capability as well as the baseline;
    follow the [runner requirements](README.md#implement-the-rules-based-runner).
-5. Preserve shared expectations unchanged. Avoid hand-maintained copies and
+6. Explicitly opt into supported `evaluation-suites/<suite>/` directories; do
+   not auto-enable new suites.
+7. Preserve shared expectations unchanged. Avoid hand-maintained copies and
    programmatic-only replacements for shared evaluator cases.
 
 Precomputed-assignment consumers use the same pinning and provenance rules with
