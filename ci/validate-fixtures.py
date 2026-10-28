@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import json
+import math
+import re
 from pathlib import Path
 from typing import NoReturn
 
@@ -11,7 +13,13 @@ from typing import NoReturn
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = REPOSITORY_ROOT / "ufc-config.json"
 EVALUATION_CASES_DIRECTORY = REPOSITORY_ROOT / "evaluation-cases"
+EVALUATION_SUITES_DIRECTORY = REPOSITORY_ROOT / "evaluation-suites"
+SUITE_NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+CANONICAL_PLATFORMS = frozenset(
+    {"cpp", "dotnet", "golang", "java", "nodejs", "php", "python", "ruby", "rust", "web"}
+)
 VALID_VARIATION_TYPES = frozenset({"BOOLEAN", "INTEGER", "JSON", "NUMERIC", "STRING"})
+FEATURE_DESTINATIONS = frozenset({"HOOK", "EXPOSURE", "EVALUATION"})
 REQUIRED_CASE_FIELDS = frozenset(
     {
         "attributes",
@@ -29,7 +37,10 @@ class FixtureValidationError(ValueError):
 
 
 def _relative(path: Path) -> Path:
-    return path.relative_to(REPOSITORY_ROOT)
+    try:
+        return path.relative_to(REPOSITORY_ROOT)
+    except ValueError:
+        return path
 
 
 def _fail(path: Path, message: str) -> NoReturn:
@@ -54,50 +65,83 @@ def _load_json(path: Path) -> object:
         _fail(path, str(error))
 
 
-def _validate_config(value: object) -> dict[str, object]:
+def _validate_config(path: Path, value: object) -> dict[str, object]:
     if not isinstance(value, dict):
-        _fail(CONFIG_PATH, "top-level value must be an object")
+        _fail(path, "top-level value must be an object")
 
     if not isinstance(value.get("createdAt"), str) or not value["createdAt"]:
-        _fail(CONFIG_PATH, "top-level createdAt must be a non-empty string")
+        _fail(path, "top-level createdAt must be a non-empty string")
     if not isinstance(value.get("format"), str) or not value["format"]:
-        _fail(CONFIG_PATH, "top-level format must be a non-empty string")
+        _fail(path, "top-level format must be a non-empty string")
     environment = value.get("environment")
     if not isinstance(environment, dict):
-        _fail(CONFIG_PATH, "top-level environment must be an object")
+        _fail(path, "top-level environment must be an object")
     if not isinstance(environment.get("name"), str) or not environment["name"]:
-        _fail(CONFIG_PATH, "environment.name must be a non-empty string")
+        _fail(path, "environment.name must be a non-empty string")
 
     flags = value.get("flags")
     if not isinstance(flags, dict):
-        _fail(CONFIG_PATH, "top-level flags must be an object")
+        _fail(path, "top-level flags must be an object")
     if not flags:
-        _fail(CONFIG_PATH, "top-level flags must not be empty")
+        _fail(path, "top-level flags must not be empty")
 
     for flag_name, flag_value in flags.items():
         if not isinstance(flag_name, str) or not flag_name:
-            _fail(CONFIG_PATH, "every flag map key must be a non-empty string")
+            _fail(path, "every flag map key must be a non-empty string")
         if not isinstance(flag_value, dict):
-            _fail(CONFIG_PATH, f"flag {flag_name!r} must be an object")
+            _fail(path, f"flag {flag_name!r} must be an object")
         if flag_value.get("key") != flag_name:
-            _fail(CONFIG_PATH, f"flag {flag_name!r} must repeat its map key in the key field")
+            _fail(path, f"flag {flag_name!r} must repeat its map key in the key field")
 
         variations = flag_value.get("variations")
         if not isinstance(variations, dict):
-            _fail(CONFIG_PATH, f"flag {flag_name!r} variations must be an object")
+            _fail(path, f"flag {flag_name!r} variations must be an object")
         for variation_name, variation_value in variations.items():
             if not isinstance(variation_value, dict):
-                _fail(CONFIG_PATH, f"flag {flag_name!r} variation {variation_name!r} must be an object")
+                _fail(path, f"flag {flag_name!r} variation {variation_name!r} must be an object")
             if variation_value.get("key") != variation_name:
                 _fail(
-                    CONFIG_PATH,
+                    path,
                     f"flag {flag_name!r} variation {variation_name!r} must repeat its map key in the key field",
                 )
 
         if "allocations" not in flag_value:
-            _fail(CONFIG_PATH, f"flag {flag_name!r} must declare allocations")
+            _fail(path, f"flag {flag_name!r} must declare allocations")
 
     return flags
+
+
+def _validate_platform_filter(
+    path: Path,
+    location: str,
+    value: dict[str, object],
+    platforms: frozenset[str],
+) -> None:
+    if "_skip" in value and "_include" in value:
+        _fail(path, f"{location} _skip and _include are mutually exclusive")
+
+    for field in ("_skip", "_include"):
+        if field not in value:
+            continue
+        entries = value[field]
+        if not isinstance(entries, list) or not entries:
+            _fail(path, f"{location} {field} must be a non-empty array")
+        seen: set[str] = set()
+        for entry_index, entry in enumerate(entries):
+            entry_location = f"{location} {field}[{entry_index}]"
+            if not isinstance(entry, dict):
+                _fail(path, f"{entry_location} must be an object")
+            unexpected = sorted(set(entry).difference({"platform", "reason"}))
+            if unexpected:
+                _fail(path, f"{entry_location} has unexpected fields: {', '.join(unexpected)}")
+            platform = entry.get("platform")
+            if not isinstance(platform, str) or platform not in platforms:
+                _fail(path, f"{entry_location}.platform must be a canonical platform")
+            if platform in seen:
+                _fail(path, f"{location} {field} repeats platform {platform!r}")
+            seen.add(platform)
+            if "reason" in entry and (not isinstance(entry["reason"], str) or not entry["reason"]):
+                _fail(path, f"{entry_location}.reason must be a non-empty string")
 
 
 def _validate_evaluation_case(
@@ -105,10 +149,15 @@ def _validate_evaluation_case(
     index: int,
     value: object,
     configured_flags: dict[str, object],
+    platforms: frozenset[str] | None = None,
 ) -> None:
     location = f"case {index}"
     if not isinstance(value, dict):
         _fail(path, f"{location} must be an object")
+
+    if platforms is None:
+        platforms = CANONICAL_PLATFORMS
+    _validate_platform_filter(path, location, value, platforms)
 
     missing_fields = sorted(REQUIRED_CASE_FIELDS.difference(value))
     if missing_fields:
@@ -132,27 +181,95 @@ def _validate_evaluation_case(
     if not isinstance(value["attributes"], dict):
         _fail(path, f"{location} attributes must be an object")
 
-    result = value["result"]
-    if not isinstance(result, dict):
-        _fail(path, f"{location} result must be an object")
-    if "value" not in result:
-        _fail(path, f"{location} result must include value")
-    if not isinstance(result.get("reason"), str) or not result["reason"]:
-        _fail(path, f"{location} result.reason must be a non-empty string")
+    _validate_result(path, f"{location} result", value["result"], flag, configured_flags)
+    capabilities = value.get("capabilities", {})
+    if not isinstance(capabilities, dict):
+        _fail(path, f"{location} capabilities must be an object")
+    for capability, result in capabilities.items():
+        if not capability:
+            _fail(path, f"{location} capability name must not be empty")
+        _validate_result(
+            path, f"{location} capabilities.{capability}", result, flag, configured_flags,
+            allow_invalid_context=True,
+        )
 
-    if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND":
+
+def _validate_result(
+    path: Path,
+    location: str,
+    result: object,
+    flag: str,
+    configured_flags: dict[str, object],
+    *,
+    allow_invalid_context: bool = False,
+) -> None:
+    if not isinstance(result, dict):
+        _fail(path, f"{location} must be an object")
+    if "value" not in result:
+        _fail(path, f"{location} must include value")
+    if not isinstance(result.get("reason"), str) or not result["reason"]:
+        _fail(path, f"{location}.reason must be a non-empty string")
+    if "errorCode" in result and not isinstance(result["errorCode"], str):
+        _fail(path, f"{location}.errorCode must be a string")
+    if "serialId" in result and result["serialId"] is not None and type(result["serialId"]) is not int:
+        _fail(path, f"{location}.serialId must be an integer or null")
+    if "doLog" in result and not isinstance(result["doLog"], bool):
+        _fail(path, f"{location}.doLog must be a boolean")
+    if "features" in result:
+        _validate_features(path, f"{location}.features", result["features"])
+
+    pre_lookup_error = allow_invalid_context and result.get("errorCode") == "INVALID_CONTEXT"
+    if flag not in configured_flags and result.get("errorCode") != "FLAG_NOT_FOUND" and not pre_lookup_error:
         _fail(
             path,
             f"{location} references unknown flag {flag!r} without a FLAG_NOT_FOUND expectation",
         )
 
 
-def main() -> None:
-    configured_flags = _validate_config(_load_json(CONFIG_PATH))
+def _validate_features(path: Path, location: str, features: object) -> None:
+    if not isinstance(features, dict) or set(features) != FEATURE_DESTINATIONS:
+        _fail(path, f"{location} must contain exactly HOOK, EXPOSURE, and EVALUATION maps")
+    for destination, values in features.items():
+        if not isinstance(values, dict):
+            _fail(path, f"{location}.{destination} must be an object")
+        for key, value in values.items():
+            if not isinstance(key, str) or not key:
+                _fail(path, f"{location}.{destination} keys must be non-empty strings")
+            if not isinstance(value, (str, bool, int, float)) or (
+                isinstance(value, float) and not math.isfinite(value)
+            ):
+                _fail(path, f"{location}.{destination}.{key} must be a string, boolean, or finite number")
 
-    evaluation_paths = sorted(EVALUATION_CASES_DIRECTORY.glob("*.json"))
+
+def _validate_suite(
+    config_path: Path,
+    cases_directory: Path,
+    platforms: frozenset[str],
+    *,
+    self_contained: bool = False,
+) -> tuple[int, int]:
+    if config_path.is_symlink() or not config_path.is_file():
+        _fail(config_path, "must be a regular file, not a symlink")
+    if cases_directory.is_symlink() or not cases_directory.is_dir():
+        _fail(cases_directory, "must be a directory, not a symlink")
+
+    if self_contained:
+        suite_directory = config_path.parent
+        allowed_entries = {config_path.name, cases_directory.name}
+        for entry in suite_directory.iterdir():
+            if entry.name not in allowed_entries:
+                _fail(entry, "unexpected suite entry; only ufc-config.json and cases/ are allowed")
+
+    configured_flags = _validate_config(config_path, _load_json(config_path))
+    evaluation_paths: list[Path] = []
+    for entry in sorted(cases_directory.iterdir()):
+        if entry.is_symlink() or not entry.is_file():
+            _fail(entry, "case entries must be regular files, not directories or symlinks")
+        if entry.suffix != ".json":
+            _fail(entry, "case filenames must end in .json")
+        evaluation_paths.append(entry)
     if not evaluation_paths:
-        _fail(EVALUATION_CASES_DIRECTORY, "must contain at least one JSON file")
+        _fail(cases_directory, "must contain at least one JSON file")
 
     case_count = 0
     for path in evaluation_paths:
@@ -163,12 +280,53 @@ def main() -> None:
             _fail(path, "evaluation-case array must not be empty")
 
         for index, case in enumerate(cases):
-            _validate_evaluation_case(path, index, case, configured_flags)
+            _validate_evaluation_case(path, index, case, configured_flags, platforms)
             case_count += 1
 
+    return case_count, len(evaluation_paths)
+
+
+def _validate_suite_id(suite_directory: Path, *, legacy_core_exists: bool) -> None:
+    if not SUITE_NAME_PATTERN.fullmatch(suite_directory.name):
+        _fail(suite_directory, "suite directory name must be lowercase kebab-case")
+    if legacy_core_exists and suite_directory.name == "core":
+        _fail(suite_directory, "core cannot exist in both the legacy and evaluation-suites layouts")
+
+
+def main() -> None:
+    total_cases, total_files = _validate_suite(
+        CONFIG_PATH,
+        EVALUATION_CASES_DIRECTORY,
+        CANONICAL_PLATFORMS,
+    )
+    suite_count = 1
+
+    if EVALUATION_SUITES_DIRECTORY.exists():
+        if EVALUATION_SUITES_DIRECTORY.is_symlink() or not EVALUATION_SUITES_DIRECTORY.is_dir():
+            _fail(EVALUATION_SUITES_DIRECTORY, "must be a directory, not a symlink")
+        suite_directories: list[Path] = []
+        for entry in sorted(EVALUATION_SUITES_DIRECTORY.iterdir()):
+            if entry.is_symlink() or not entry.is_dir():
+                _fail(entry, "suite entries must be directories, not files or symlinks")
+            suite_directories.append(entry)
+        if not suite_directories:
+            _fail(EVALUATION_SUITES_DIRECTORY, "must contain at least one suite directory")
+
+        for suite_directory in suite_directories:
+            _validate_suite_id(suite_directory, legacy_core_exists=True)
+            case_count, file_count = _validate_suite(
+                suite_directory / "ufc-config.json",
+                suite_directory / "cases",
+                CANONICAL_PLATFORMS,
+                self_contained=True,
+            )
+            total_cases += case_count
+            total_files += file_count
+            suite_count += 1
+
     print(
-        f"Validated {_relative(CONFIG_PATH)} and {case_count} evaluation cases "
-        f"across {len(evaluation_paths)} files."
+        f"Validated {suite_count} evaluation suite(s), {total_cases} evaluation cases "
+        f"across {total_files} files."
     )
 
 

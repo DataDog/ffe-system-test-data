@@ -92,8 +92,8 @@ elif [[ $base_status -ne 0 && $head_status -eq 0 ]]; then
   classification=improvement
   summary="The base fixture fails and the proposed fixture passes."
 else
-  classification=existing-drift
-  summary="Both fixture revisions fail; the downstream repository was already incompatible with the pull-request base."
+  classification=inconclusive
+  summary="Both fixture revisions fail; whole-suite exit codes cannot determine whether the proposed fixtures add an incompatibility."
 fi
 
 printf '\nclassification=%s\n' "$classification"
@@ -119,9 +119,9 @@ if [[ -n ${GITHUB_STEP_SUMMARY:-} ]]; then
   } >>"$GITHUB_STEP_SUMMARY"
 fi
 
-# Fail only when the pull request introduces a downstream regression. Existing
-# drift remains visible in the job summary and artifacts without blocking an
-# unrelated fixture change.
+# Fail only when the base passes and the pull request introduces a downstream
+# regression. Inconclusive results remain visible in the job summary and
+# artifacts without claiming that every head failure existed at the base.
 if [[ $classification == new-regression ]]; then
   exit 1
 fi
