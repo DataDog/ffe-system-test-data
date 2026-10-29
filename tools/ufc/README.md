@@ -3,8 +3,8 @@
 Install the locked serializer with `npm ci --prefix tools/ufc --ignore-scripts`.
 
 ```sh
-npm --prefix tools/ufc run generate -- --converter /absolute/path/to/ufc-fixtures --converter-sha256 EXPECTED_SHA256 --converter-source /absolute/path/to/dd-source
-npm --prefix tools/ufc run check -- --converter /absolute/path/to/ufc-fixtures --converter-sha256 EXPECTED_SHA256 --converter-source /absolute/path/to/dd-source
+npm --prefix tools/ufc run generate -- --converter /absolute/path/to/ufc-fixtures --converter-sha256 EXPECTED_SHA256 --converter-source /absolute/path/to/source-root --converter-source-files /outside/repository/source-files.json
+npm --prefix tools/ufc run check -- --converter /absolute/path/to/ufc-fixtures --converter-sha256 EXPECTED_SHA256 --converter-source /absolute/path/to/source-root --converter-source-files /outside/repository/source-files.json
 node tools/ufc/validate-rules-resources.mjs
 node --test tools/ufc/rules-resources.test.mjs
 python3 tools/ufc/validate-rules-schema.py
@@ -33,10 +33,14 @@ browser offline initialization proof. The evaluation clock is fixed in the diagn
 Generation stages the whole artifact set before replacing it. Check mode writes
 nothing in the repository and detects stale, missing and unexpected artifacts.
 The manifest hashes source, catalogue, tooling, schemas, cases and the committed protobuf/wire artifacts. Local diagnostic files are excluded.
-The source lock records exact production codec/CLI sources. The supplied executable
+The source lock records one opaque SHA256 digest of the converter source inventory and contents.
+The local inventory is a JSON array of relative source file paths supplied by the
+converter maintainer; keep it outside this repository. Include all relevant codec
+and CLI sources and refresh the inventory when source membership changes. Neither
+the inventory, repository location nor source revision is published. The supplied executable
 must match its expected SHA256. Source correspondence is declared build provenance,
 not a cryptographic build attestation. No immutable published converter distribution
-is configured; local generation uses the companion dd-source CLI. No CI added.
+is configured; local generation uses a separately supplied converter CLI. No CI added.
 
 `ufc.generated.json`, `report.json` and `parity.json` are local diagnostics: gitignored and excluded from the committed artifact manifest. Regenerate them locally when inspecting conversion. The report includes a structural JSON comparison (ignoring whitespace/object-key order): exact source equality, equality after only reported omissions, and the omitted flag keys. With omitted flags, exact equality is false even when all retained content is unchanged.
 

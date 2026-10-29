@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { root, compareTrees, packageWire, sourcePath } from './generate.mjs';
+import { root, compareTrees, packageWire, sourcePath, converterIdentity } from './generate.mjs';
 import { validate } from './validate-rules-resources.mjs';
 import { parity } from './parity.mjs';
 async function temporary(fn) {
@@ -153,4 +153,20 @@ test('parity reads SDK metadata and freezes constructor time without changing ex
   assert.deepEqual(metadataMismatches, []);
   assert.ok(cases.some(row => row.result.serialId === 0));
   assert.ok(cases.some(row => row.result.doLog === false));
+}));
+
+test('converter identity publishes only an opaque digest and detects source changes', async () => temporary(async directory => {
+  const inventory = path.join(directory, 'inventory.json');
+  await fs.writeFile(path.join(directory, 'codec.go'), 'first');
+  await fs.writeFile(path.join(directory, 'model.go'), 'model');
+  await fs.writeFile(inventory, JSON.stringify(['codec.go', 'model.go']));
+  const first = await converterIdentity(directory, inventory);
+  assert.deepEqual(Object.keys(first), ['sha256']);
+  assert.match(first.sha256, /^[a-f0-9]{64}$/);
+  await fs.writeFile(inventory, JSON.stringify(['model.go', 'codec.go']));
+  assert.deepEqual(await converterIdentity(directory, inventory), first);
+  await fs.writeFile(path.join(directory, 'codec.go'), 'changed');
+  assert.notDeepEqual(await converterIdentity(directory, inventory), first);
+  await fs.writeFile(inventory, JSON.stringify(['../outside.go']));
+  await assert.rejects(converterIdentity(directory, inventory), /Unsafe source path/);
 }));

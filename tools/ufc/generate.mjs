@@ -60,29 +60,24 @@ export async function compareTrees(expected, actual, ignored = []) {
   }
   return differences;
 }
-export async function converterIdentity(converterSource) {
-  const codecRoot = await fs.realpath(converterSource);
-  const sourceIdentity = { revision: execFileSync('git', ['-C', codecRoot, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), files: {} };
-  for (const directory of ['domains/ffe/libs/flagging/ufc', 'domains/ffe/libs/flagging/core/model', 'domains/ffe/tools/ufc-fixtures']) {
-    for (const relative of await filesUnder(path.join(codecRoot, directory))) {
-      if ((relative.endsWith('.go') && !relative.endsWith('_test.go')) || relative.endsWith('.proto')) {
-        const file = `${directory}/${relative}`;
-        sourceIdentity.files[file] = sha256(await fs.readFile(path.join(codecRoot, file)));
-      }
-    }
-  }
-  if (!Object.keys(sourceIdentity.files).length) throw new Error('Converter source tree is missing production codec files');
-  return sourceIdentity;
+export async function converterIdentity(converterSource, sourceFiles) {
+  const files = JSON.parse(await fs.readFile(sourceFiles, 'utf8'));
+  if (!Array.isArray(files) || !files.length || files.some(file => typeof file !== 'string') || new Set(files).size !== files.length) throw new Error('Converter source inventory must be a nonempty array of unique relative paths');
+  // The inventory stays local. Only its aggregate content identity is published.
+  const hashes = {};
+  for (const file of [...files].sort()) hashes[file] = sha256(await fs.readFile(await sourcePath(file, converterSource)));
+  return { sha256: sha256(stable(hashes)) };
 }
-export async function generate({ converter, converterSha256, converterSource, check = false, base = root } = {}) {
+export async function generate({ converter, converterSha256, converterSource, converterSourceFiles, check = false, base = root } = {}) {
   if (!converter || !/^[a-f0-9]{64}$/.test(converterSha256 ?? '')) throw new Error('Provide --converter PATH --converter-sha256 SHA256. A published immutable converter distribution is not yet configured.');
   const executable = await fs.realpath(converter);
   if (sha256(await fs.readFile(executable)) !== converterSha256) throw new Error('Converter binary SHA256 does not match expected identity');
-  if (!converterSource) throw new Error('Provide --converter-source PATH to record the local production codec source provenance');
-  const sourceIdentity = await converterIdentity(converterSource);
+  if (!converterSource || !converterSourceFiles) throw new Error('Provide --converter-source PATH and --converter-source-files PATH to a local JSON source inventory');
+  const sourceIdentity = await converterIdentity(converterSource, converterSourceFiles);
   const lockedIdentity = JSON.parse(await fs.readFile(await sourcePath('tools/ufc/converter-lock.json', base)));
   if (stable(sourceIdentity) !== stable(lockedIdentity)) throw new Error('Converter source does not match tools/ufc/converter-lock.json');
-  const identity = JSON.parse(execFileSync(executable, ['--version'], { encoding: 'utf8' }));
+  // Do not publish converter-supplied metadata, which may identify private sources.
+  const identity = { source: sourceIdentity };
   const catalogBytes = await fs.readFile(await sourcePath('rules-resources/catalog.json', base));
   const catalog = JSON.parse(catalogBytes);
   if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.resources) || !catalog.resources.length) throw new Error('Catalog must contain resources');
@@ -90,7 +85,7 @@ export async function generate({ converter, converterSha256, converterSource, ch
   const output = path.join(staging, 'generated');
   await fs.mkdir(output);
   try {
-    const manifest = { schemaVersion: 1, catalogSha256: sha256(catalogBytes), converter: { ...identity, source: sourceIdentity }, generatorInputs: {}, serializer: '@datadog/flagging-core@3.0.1', resources: [] };
+    const manifest = { schemaVersion: 1, catalogSha256: sha256(catalogBytes), converter: identity, generatorInputs: {}, serializer: '@datadog/flagging-core@3.0.1', resources: [] };
     for (const directory of ['tools/ufc', 'schemas', 'evaluation-cases']) {
       for (const relative of await filesUnder(path.join(base, directory), true)) {
         if (relative.startsWith('node_modules/')) continue;
@@ -133,7 +128,7 @@ export async function generate({ converter, converterSha256, converterSource, ch
     const destination = path.join(base, 'rules-resources/generated');
     const ignored = catalog.resources.flatMap(resource => ['ufc.generated.json', 'report.json', 'parity.json'].map(name => `${resource.id}/${name}`));
     const differences = await compareTrees(output, destination, ignored);
-    if (check && differences.length) throw new Error(`Generated artifacts differ:\n${differences.join('\n')}\nRun npm --prefix tools/ufc run generate -- --converter PATH --converter-sha256 SHA256 --converter-source DD_SOURCE_PATH`);
+    if (check && differences.length) throw new Error(`Generated artifacts differ:\n${differences.join('\n')}\nRun npm --prefix tools/ufc run generate -- --converter PATH --converter-sha256 SHA256 --converter-source SOURCE_ROOT --converter-source-files LOCAL_INVENTORY`);
     if (!check) {
       // Prepare on the destination filesystem before replacing the accepted set.
       const replacement = await fs.mkdtemp(path.join(path.dirname(destination), '.replacement-'));
@@ -157,7 +152,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (let i = 2; i < process.argv.length; i++) {
       const argument = process.argv[i];
       if (argument === '--check') options.check = true;
-      else if (argument === '--converter' || argument === '--converter-sha256' || argument === '--converter-source') options[argument === '--converter' ? 'converter' : argument === '--converter-source' ? 'converterSource' : 'converterSha256'] = process.argv[++i];
+      else if (argument === '--converter' || argument === '--converter-sha256' || argument === '--converter-source' || argument === '--converter-source-files') options[argument === '--converter' ? 'converter' : argument === '--converter-source' ? 'converterSource' : argument === '--converter-source-files' ? 'converterSourceFiles' : 'converterSha256'] = process.argv[++i];
       else throw new Error(`Unknown argument: ${argument}`);
     }
     const result = await generate(options);

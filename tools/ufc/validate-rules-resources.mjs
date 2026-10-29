@@ -30,6 +30,9 @@ export async function validate(base = root) {
   const expectedInputs = [...new Set(catalog.resources.map(x => x.source))];
   for (const directory of ['tools/ufc', 'schemas', 'evaluation-cases']) expectedInputs.push(...await inputFiles(path.join(base, directory), directory));
   assert.deepEqual(Object.keys(manifest.generatorInputs).sort(), expectedInputs.sort(), 'Generator input membership changed');
+  assert.deepEqual(Object.keys(manifest.converter), ['source'], 'Converter metadata must contain only opaque provenance');
+  assert.deepEqual(Object.keys(manifest.converter.source), ['sha256'], 'Source provenance must not publish identifiers');
+  assert.match(manifest.converter.source.sha256, /^[a-f0-9]{64}$/);
   assert.deepEqual(manifest.converter.source, JSON.parse(await fs.readFile(path.join(base, 'tools/ufc/converter-lock.json'))));
   const expectedFiles = ['manifest.json'];
   let exercised = 0;
