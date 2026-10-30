@@ -278,6 +278,38 @@
     "variationType": "STRING"
   },
   {
+    "description": "A prerequisite with no assignment makes its condition not match, so evaluation continues to the root fallback without publishing a prerequisite exposure.",
+    "attributes": {},
+    "defaultValue": "caller-default",
+    "flag": "dependent-no-assignment-root",
+    "result": {
+      "reason": "STATIC",
+      "value": "no-assignment-fallback"
+    },
+    "targetingKey": "dependent-no-assignment",
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [
+        {
+          "allocation": "fallback",
+          "flag": "dependent-no-assignment-root",
+          "variant": "fallback"
+        }
+      ],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-no-assignment-parent",
+          "errorCode": null
+        },
+        {
+          "flag": "dependent-no-assignment-root",
+          "errorCode": null
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
+  },
+  {
     "description": "A successful prerequisite followed by a missing prerequisite aborts the graph and returns the caller default.",
     "attributes": {},
     "defaultValue": "atomic-default",
