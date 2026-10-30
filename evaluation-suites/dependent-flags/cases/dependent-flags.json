@@ -278,7 +278,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "A prerequisite with no assignment makes its condition not match, so evaluation continues to the root fallback without publishing a prerequisite exposure.",
+    "description": "A prerequisite with no assignment makes ONE_OF and NOT_ONE_OF conditions not match, so evaluation continues to the root fallback without publishing a prerequisite exposure.",
     "attributes": {},
     "defaultValue": "caller-default",
     "flag": "dependent-no-assignment-root",

@@ -729,6 +729,31 @@
           "doLog": true
         },
         {
+          "key": "parent-not-assigned",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "flagEvaluation": {
+                    "key": "dependent-no-assignment-parent"
+                  },
+                  "operator": "NOT_ONE_OF",
+                  "value": [
+                    "assigned"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
           "key": "fallback",
           "splits": [
             {
