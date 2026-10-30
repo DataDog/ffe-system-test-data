@@ -41,6 +41,17 @@ test('integrity gate rejects source drift, deletion, extra output and changed to
     await fs.rm(path.join(generated, name), { force: true });
   }
   await validate(directory); // A fresh checkout has no local conversion diagnostics.
+  // Changes unrelated to committed bytes must not require converter regeneration.
+  for (const file of ['tools/ufc/README.md', 'tools/ufc/parity.mjs', 'schemas/precomputed-assignment.schema.json']) await fs.appendFile(path.join(directory, file), '\n');
+  await fs.writeFile(path.join(directory, 'tools/ufc/.DS_Store'), 'unrelated');
+  await fs.writeFile(path.join(directory, 'evaluation-cases/additional.json'), '[]');
+  await validate(directory);
+  const generator = path.join(directory, 'tools/ufc/generate.mjs');
+  const generatorBytes = await fs.readFile(generator);
+  await fs.appendFile(generator, '\n');
+  await assert.rejects(validate(directory), /generate.mjs changed/);
+  await fs.writeFile(generator, generatorBytes);
+
   for (const name of ['ufc.generated.json', 'report.json', 'parity.json']) {
     const diagnosticPath = path.join(generated, name);
     for (const value of [null, false, 0, '', [], true, 1, 'invalid']) {
@@ -87,10 +98,19 @@ test('integrity gate rejects source drift, deletion, extra output and changed to
   await fs.appendFile(pin, '\n'); await assert.rejects(validate(directory));
 }));
 
-test('source paths cannot leave repository', async () => {
-  await assert.rejects(sourcePath('../ufc-config.json'));
-  await assert.rejects(sourcePath('/etc/passwd'));
-});
+test('source paths cannot leave repository', async () => temporary(async directory => {
+  const repository = path.join(directory, 'repository');
+  await fs.mkdir(repository);
+  const inside = path.join(repository, 'inside.json');
+  const outside = path.join(directory, 'outside.json');
+  await fs.writeFile(inside, '{}');
+  await fs.writeFile(outside, '{}');
+  await fs.symlink(outside, path.join(repository, 'link.json'));
+  await assert.rejects(sourcePath('../outside.json', repository), /Unsafe source path/);
+  await assert.rejects(sourcePath(inside, repository), /Unsafe source path/);
+  await assert.rejects(sourcePath('link.json', repository), /Source escapes repository/);
+  assert.equal(await sourcePath('inside.json', repository), await fs.realpath(inside));
+}));
 
 test('parity evaluates the explicit source without requiring a root UFC file', async () => temporary(async directory => {
   await fs.cp(path.join(root, 'evaluation-cases'), path.join(directory, 'evaluation-cases'), { recursive: true });
@@ -169,4 +189,25 @@ test('converter identity publishes only an opaque digest and detects source chan
   assert.notDeepEqual(await converterIdentity(directory, inventory), first);
   await fs.writeFile(inventory, JSON.stringify(['../outside.go']));
   await assert.rejects(converterIdentity(directory, inventory), /Unsafe source path/);
+}));
+
+test('parity exercises absent keys, omits converted-away flags and compares SDK result fields', async () => temporary(async directory => {
+  const generatedDirectory = path.join(root, 'rules-resources/generated/canonical-evaluator');
+  const binary = await fs.readFile(path.join(generatedDirectory, 'ufc.pb'));
+  const wire = await fs.readFile(path.join(generatedDirectory, 'configuration-wire.json'), 'utf8');
+  const source = { flags: { omitted: {} } };
+  const generated = { flags: {} };
+  const missing = { flag: 'missing', variationType: 'BOOLEAN', defaultValue: false,
+    attributes: {}, targetingKey: 'subject', result: { value: false, reason: 'DEFAULT', errorCode: 'FLAG_NOT_FOUND', features: ['not exposed'] } };
+  await fs.mkdir(path.join(directory, 'evaluation-cases'));
+  await fs.writeFile(path.join(directory, 'evaluation-cases/coverage.json'), JSON.stringify([
+    missing, { ...missing, flag: 'omitted' }, { ...missing, result: { value: true } },
+  ]));
+  const report = parity(directory, binary, wire, generated, source);
+  assert.equal(report.exercisedCases, 2);
+  assert.deepEqual(report.omittedCases.map(row => row.flag), ['omitted']);
+  assert.ok(report.results.every(row => row.mismatches.every(m => m.field !== 'features')));
+  assert.deepEqual(report.results[1].mismatches.map(m => m.encoding), ['original', 'generated', 'binary', 'wire']);
+  assert.ok(report.results[1].mismatches.every(m => m.field === 'value'));
+  assert.ok(report.results[0].mismatches.every(m => m.field !== 'errorCode'));
 }));

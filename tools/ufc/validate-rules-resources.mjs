@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { root, sha256, packageWire, sourcePath } from './generate.mjs';
+import { root, sha256, packageWire, sourcePath, generatorInputFiles } from './generate.mjs';
 import { parity } from './parity.mjs';
 const { configurationFromRulesBinary } = createRequire(import.meta.url)('@datadog/flagging-core/rules-based');
 export async function validate(base = root) {
@@ -15,20 +15,7 @@ export async function validate(base = root) {
   for (const [relative, expected] of Object.entries(manifest.generatorInputs)) {
     assert.equal(sha256(await fs.readFile(await sourcePath(relative, base))), expected, `${relative} changed: regenerate rules resources`);
   }
-  // Detect additions/deletions as well as changes to recorded generator inputs.
-  async function inputFiles(directory, prefix) {
-    const result = [];
-    for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
-      if (entry.name === 'node_modules') continue;
-      const relative = `${prefix}/${entry.name}`;
-      assert.ok(!entry.isSymbolicLink(), `Input symlink forbidden: ${relative}`);
-      if (entry.isDirectory()) result.push(...await inputFiles(path.join(directory, entry.name), relative));
-      else result.push(relative);
-    }
-    return result;
-  }
-  const expectedInputs = [...new Set(catalog.resources.map(x => x.source))];
-  for (const directory of ['tools/ufc', 'schemas', 'evaluation-cases']) expectedInputs.push(...await inputFiles(path.join(base, directory), directory));
+  const expectedInputs = [...new Set([...catalog.resources.map(x => x.source), ...generatorInputFiles])];
   assert.deepEqual(Object.keys(manifest.generatorInputs).sort(), expectedInputs.sort(), 'Generator input membership changed');
   assert.deepEqual(Object.keys(manifest.converter), ['source'], 'Converter metadata must contain only opaque provenance');
   assert.deepEqual(Object.keys(manifest.converter.source), ['sha256'], 'Source provenance must not publish identifiers');

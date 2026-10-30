@@ -22,17 +22,28 @@ wire string itself, without extra JSON quoting. Public pinned
 `@datadog/flagging-core@3.0.1` APIs decode protobuf, serialize wire, and parse it
 again. Parser failure, empty configurations, changed semantic payload and unstable
 wire serialization fail generation. No timestamps, ETags or split reasons are added.
+Reasons survive conversion when present in `ufc-config.json`. The canonical splits
+have no `reason`, so its absence becomes `REASON_UNSPECIFIED (0)`, which the
+`@datadog/flagging-core` 3.0.1 protobuf evaluator maps to `UNKNOWN` for every
+evaluation that selects a split. Consumers cannot assert the canonical reason for
+those results against these artifacts. The diagnostic retains these differences.
+
 
 `parity.json` is a gitignored local diagnostic: existing expectations are compared with original JSON,
-filtered JSON, binary and wire for cases whose flags were converted. It records
-mismatches and cases whose flags are absent from generated configuration.
+filtered JSON, binary and wire for converted flags and deliberately nonexistent keys.
+Only cases for source flags omitted during conversion are omitted from evaluation.
+The comparison covers value, reason, errorCode, serialId and doLog, which the pinned
+evaluator exposes. Split features are not returned by that API and are not compared.
+The report is therefore limited to those observable fields, not full corpus parity.
 SDK mismatches never filter flags, rewrite expectations, or block artifact generation.
 A successful generation is serialization evidence, not a green evaluation suite or
 browser offline initialization proof. The evaluation clock is fixed in the diagnostic.
 
 Generation stages the whole artifact set before replacing it. Check mode writes
 nothing in the repository and detects stale, missing and unexpected artifacts.
-The manifest hashes source, catalogue, tooling, schemas, cases and the committed protobuf/wire artifacts. Local diagnostic files are excluded.
+The manifest hashes each source UFC, the catalogue, the converter lock, generator,
+package manifests and committed protobuf/wire artifacts. Evaluation cases, schemas,
+documentation, tests and local diagnostics are excluded from artifact provenance.
 The source lock records one opaque SHA256 digest of the converter source inventory and contents.
 The local inventory is a JSON array of relative source file paths supplied by the
 converter maintainer; keep it outside this repository. Include all relevant codec

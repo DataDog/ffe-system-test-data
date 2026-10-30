@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 const require = createRequire(import.meta.url);
 const { configurationFromRulesBinary, configurationFromString, configurationToString } = require('@datadog/flagging-core/rules-based');
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+export const generatorInputFiles = ['tools/ufc/converter-lock.json', 'tools/ufc/generate.mjs', 'tools/ufc/package-lock.json', 'tools/ufc/package.json'];
 export const sha256 = data => createHash('sha256').update(data).digest('hex');
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const stable = value => JSON.stringify(value, (_, item) => item && typeof item === 'object' && !Array.isArray(item) ? Object.fromEntries(Object.entries(item).sort(([a], [b]) => a.localeCompare(b))) : item);
@@ -86,12 +87,8 @@ export async function generate({ converter, converterSha256, converterSource, co
   await fs.mkdir(output);
   try {
     const manifest = { schemaVersion: 1, catalogSha256: sha256(catalogBytes), converter: identity, generatorInputs: {}, serializer: '@datadog/flagging-core@3.0.1', resources: [] };
-    for (const directory of ['tools/ufc', 'schemas', 'evaluation-cases']) {
-      for (const relative of await filesUnder(path.join(base, directory), true)) {
-        if (relative.startsWith('node_modules/')) continue;
-        const file = `${directory}/${relative}`;
-        manifest.generatorInputs[file] = sha256(await fs.readFile(await sourcePath(file, base)));
-      }
+    for (const file of generatorInputFiles) {
+      manifest.generatorInputs[file] = sha256(await fs.readFile(await sourcePath(file, base)));
     }
     const seen = new Set();
     for (const resource of catalog.resources) {

@@ -7,6 +7,8 @@ const require = createRequire(import.meta.url);
 const { evaluate, evaluateRulesBasedConfiguration } = require('@datadog/flagging-core');
 const { configurationFromRulesBinary, configurationFromString } = require('@datadog/flagging-core/rules-based');
 const types = { BOOLEAN: 'boolean', INTEGER: 'number', NUMERIC: 'number', STRING: 'string', JSON: 'object' };
+// Compare fields exposed by the pinned evaluator API; split features are not returned.
+const sdkFields = new Set(['value', 'reason', 'errorCode', 'serialId', 'doLog']);
 const logger = { debug() {}, info() {}, warn() {}, error() {} };
 export function parity(root, binary, wire, generated, source) {
   const configs = { binary: configurationFromRulesBinary(binary), wire: configurationFromString(wire) };
@@ -19,7 +21,7 @@ export function parity(root, binary, wire, generated, source) {
     if (value && typeof value === 'object') for (const [key, child] of Object.entries(value)) inspectNumbers(child, `${path}/${key}`);
   }
   inspectNumbers(generated, 'generated');
-  for (const c of cases) if (included.has(c.value.flag)) inspectNumbers(c.value, c.id);
+  for (const c of cases) if (included.has(c.value.flag) || !Object.hasOwn(source.flags, c.value.flag)) inspectNumbers(c.value, c.id);
   const RealDate = globalThis.Date;
   const evaluationTime = '2026-01-01T00:00:00.000Z';
   try {
@@ -30,7 +32,7 @@ export function parity(root, binary, wire, generated, source) {
       static now() { return fixedTime; }
     };
     for (const {id,value:test} of cases) {
-      if (!included.has(test.flag)) { omittedCases.push({id,flag:test.flag}); continue; }
+      if (!included.has(test.flag) && Object.hasOwn(source.flags, test.flag)) { omittedCases.push({id,flag:test.flag}); continue; }
       const context = {...test.attributes,targetingKey:test.targetingKey};
       const calls = {
         original: () => evaluateRulesBasedConfiguration(source,types[test.variationType],test.flag,test.defaultValue,context,logger),
@@ -47,7 +49,7 @@ export function parity(root, binary, wire, generated, source) {
           const actual = { ...sdkResult };
           actual.serialId = sdkResult.flagMetadata?.__dd_split_serial_id ?? null;
           actual.doLog = sdkResult.flagMetadata?.doLog;
-          for (const [field,expected] of Object.entries(test.result)) if (!isDeepStrictEqual(actual[field],expected)) mismatches.push({encoding,field,expected,actual:actual[field] ?? null});
+          for (const [field,expected] of Object.entries(test.result)) if (sdkFields.has(field) && !isDeepStrictEqual(actual[field],expected)) mismatches.push({encoding,field,expected,actual:actual[field] ?? null});
         } catch(error) { mismatches.push({encoding,error:error.message}); }
       }
       results.push({id,flag:test.flag,passed:!mismatches.length,mismatches});
