@@ -60,18 +60,24 @@ establish coverage of the other. When changing the contract, also read
 
 ## Consumers
 
-Downstream projects include:
+The following repositories consume the corpus as a git submodule:
 
-- [system-tests](https://github.com/DataDog/system-tests) - Parametric tests
-- [dd-trace-py](https://github.com/DataDog/dd-trace-py) - Python tracer
-- [dd-trace-java](https://github.com/DataDog/dd-trace-java) - Java tracer
-- [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) - .NET tracer
-- [dd-trace-go](https://github.com/DataDog/dd-trace-go) - Go tracer
-- [dd-trace-js](https://github.com/DataDog/dd-trace-js) - JavaScript tracer
-- [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) - Ruby tracer
-- [dd-trace-php](https://github.com/DataDog/dd-trace-php) - PHP tracer
-- [libdatadog](https://github.com/DataDog/libdatadog) - Shared Rust FFE evaluator
-- [openfeature-js-client](https://github.com/DataDog/openfeature-js-client) - Datadog OpenFeature JavaScript clients
+- [openfeature-js-client](https://github.com/DataDog/openfeature-js-client)
+- [dd-trace-go](https://github.com/DataDog/dd-trace-go)
+- [dd-trace-java](https://github.com/DataDog/dd-trace-java)
+- [dd-trace-php](https://github.com/DataDog/dd-trace-php)
+- [libdatadog](https://github.com/DataDog/libdatadog)
+
+The following repositories maintain copied snapshots:
+
+- [dd-trace-py](https://github.com/DataDog/dd-trace-py), updated by `scripts/update-ffe-fixtures.py`
+- [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet), updated by `Build.FfeFixtures.cs`
+- [system-tests](https://github.com/DataDog/system-tests), maintained as checked-in parametric fixtures
+
+Additional consumption mechanisms:
+
+- [dd-source](https://github.com/DataDog/dd-source) uses a pinned Bazel `http_archive`.
+- Purpose-built compatibility branches for [dd-trace-js](https://github.com/DataDog/dd-trace-js) and [dd-trace-rb](https://github.com/DataDog/dd-trace-rb) use submodules to run the advisory downstream suite. The compatibility branches for Python and .NET also use submodules, independently of their default-branch copy workflows.
 
 ## Directory Structure
 
@@ -581,7 +587,7 @@ it and are subject to the same conformance requirements.
 
 ## Downstream Updates
 
-Add shared evaluator behavior here, then update each consumer's
+Add shared evaluator behaviour here, then update each consumer's
 [pinned fixture revision](#pin-the-fixture-revision) and native test runner.
 See [Updating Downstream Repositories](CONTRIBUTING.md#updating-downstream-repositories)
 for the integration checklist.
