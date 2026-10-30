@@ -456,6 +456,25 @@ how to run the cases against each request form.
 
 ## Automated Validation
 
+### Experimentation opt-out
+
+The versioned [experimentation opt-out contract](experimentation-opt-out/v1/README.md)
+defines provider activation, allocation exclusion, Precompute acknowledgement,
+and cache transitions. It stays outside the legacy evaluation directories so
+old readers cannot silently ignore new inputs. Its manifest requires exact case
+coverage. Run its validator and rejection tests with:
+
+```bash
+python3 -m pip install 'jsonschema==4.26.0' 'referencing==0.37.0'
+python3 ci/validate-experimentation-opt-out.py
+python3 ci/test-validate-experimentation-opt-out.py
+```
+
+These checks use the same schema validator versions as CI. They validate fixture
+data, not SDK behavior.
+
+### Legacy evaluation fixtures
+
 Pull requests run a blocking static validation check over `ufc-config.json`
 and every file in `evaluation-cases/`. It rejects invalid JSON, duplicate
 object keys, malformed evaluation-case envelopes, mismatched flag or variation
