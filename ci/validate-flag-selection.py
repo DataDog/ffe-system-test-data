@@ -17,7 +17,7 @@ IGNORED_REASONS = frozenset({"malformed_selection", "too_many_values", "invalid_
 
 
 class VectorValidationError(ValueError):
-    """The vectors file is valid JSON but violates the documented format."""
+    """A flag selection file is valid JSON but violates the documented format."""
 
 
 def _fail(message: str, path: Path = VECTORS_PATH) -> NoReturn:
