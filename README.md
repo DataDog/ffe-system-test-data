@@ -53,7 +53,7 @@ behavior and does not need an update whenever a consumer ships support.
 | --- | --- | --- |
 | An SDK or backend that evaluates UFC rules | [`ufc-config.json`](ufc-config.json), [`evaluation-cases/`](evaluation-cases/), and [optional capabilities](#optional-capabilities) | Load the configuration through the real ingestion path and evaluate each case with the native evaluator. |
 | An SDK that consumes precomputed assignments | [Precomputed fixture guide](precomputed-assignments/README.md) and [schema](schemas/precomputed-assignment.schema.json) | Supply the mocked response, run the ordered evaluations, and check results and emitted events. |
-| An assignment signer or response verifier | [Response signing fixtures](response-signing/README.md) and [schema](schemas/response-signing-v3.schema.json) | Check exact request/response transcripts, certificate chains and acceptance results with the native implementation. |
+| An assignment signer or response verifier | [Response signing fixtures](response-signing/README.md) and [schema](schemas/response-signing-v1.schema.json) | Check exact request/response transcripts, certificate chains and acceptance results with the native implementation. |
 
 These families have different formats and runners. Passing one does not
 establish coverage of the other. When changing the contract, also read

@@ -2,13 +2,13 @@
   "schema_version": 1,
   "files": {
     "corpus.json": {
-      "sha256": "cc444ec8a2890430fa8dd8aee6cbde5a92d388ee55938596aac67891cfc099b6",
-      "response_cases": 43,
+      "sha256": "f749069c3344eb72eac11a614bdb92215208e472feeb98467367d78ef42782c5",
+      "response_cases": 46,
       "accepted": 6,
       "signing_cases": 2
     },
     "nested-der.json": {
-      "sha256": "cc5ce38da1d42ec389d3b0a811d04439f8e523baf4544222a6eb38a37fefa26a",
+      "sha256": "16a5de8b346087c4e4145e5c7bb43ac2dfd945a780fb56a75f38b1f7061302c4",
       "response_cases": 2,
       "accepted": 1,
       "signing_cases": 0

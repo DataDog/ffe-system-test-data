@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Response signing v3 conformance corpus",
+  "title": "Response signing v1 conformance corpus",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -41,7 +41,7 @@
       "additionalProperties": false,
       "properties": {
         "version": {
-          "const": 3
+          "const": 1
         },
         "generation": {
           "type": "string"

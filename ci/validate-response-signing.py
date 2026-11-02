@@ -10,8 +10,8 @@ import jsonschema
 
 
 def validate(root):
-    directory = root / "response-signing/v3"
-    schema = json.loads((root / "schemas/response-signing-v3.schema.json").read_text())
+    directory = root / "response-signing/v1"
+    schema = json.loads((root / "schemas/response-signing-v1.schema.json").read_text())
     jsonschema.Draft202012Validator.check_schema(schema)
     manifest = json.loads((directory / "manifest.json").read_text())
     assert manifest["schema_version"] == 1
@@ -32,6 +32,12 @@ def validate(root):
             if case["expected_accept"]:
                 assert case["rejection_reason"] is None, case["id"]
                 assert case["transcript_base64"], case["id"]
+                for message in (case["request"], case["response"]):
+                    assert [v for k, v in message["headers"] if k.lower() ==
+                            "x-datadog-feature-flags-signature-version"] == ["1"], case["id"]
+                assert base64.b64decode(case["transcript_base64"], validate=True).startswith(
+                    b"datadog.feature-flags.precomputed-assignments.v1\0"
+                ), case["id"]
             if case.get("transcript_base64") is not None:
                 base64.b64decode(case["transcript_base64"], validate=True)
         signing_cases = corpus.get("signing_cases", [])

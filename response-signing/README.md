@@ -1,6 +1,6 @@
 # Response signing conformance fixtures
 
-These fixtures define shared inputs and expected results for the v3 assignment
+These fixtures define shared inputs and expected results for the v1 assignment
 response signer and client verifiers. Consumers pin an exact repository revision
 and run their native implementation against these bytes. The files are test data;
 clients do not fetch them when evaluating flags or verifying a response.
@@ -9,16 +9,20 @@ clients do not fetch them when evaluating flags or verifying a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v3/corpus.json` | 43 response cases: 6 accepted and 37 rejected; 2 private-key matching cases | Verifiers consume `cases`; signers also consume `signing_cases` |
-| `v3/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in certificate extensions | Signers and verifiers |
+| `v1/corpus.json` | 46 response cases: 6 accepted and 40 rejected; 2 private-key matching cases | Verifiers consume `cases`; signers also consume `signing_cases` |
+| `v1/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in certificate extensions | Signers and verifiers |
 
-The core corpus is extracted without byte changes from the [browser verifier
-fixtures](https://github.com/DataDog/openfeature-js-client/blob/b2211ccacd48008f455be30608132f61d693dd23/packages/browser/test/transport/responseSigning/corpus.json).
-The nested-DER supplement preserves the independently constructed certificate
-regression inputs and their expected results. `v3/manifest.json` records hashes
-and applicability counts; extracting these fixtures does not change the protocol
-or any expected acceptance result. The existing `profile_sha256` identifier is
-retained as provenance for the original corpus.
+Version 1 is the first public response-signing protocol. Earlier POC v1/v2 and
+the implementation draft called v3 were never public release contracts. Public
+v1 requires its complete request/response transcript and leaf/intermediate chain;
+it does not accept the older POC format also named v1. X.509 v3 certificate
+encoding is independent of this protocol version and remains unchanged.
+
+These vectors regenerate the synthetic chains and signatures for public v1,
+preserving the earlier acceptance rules and adding rejection cases for prototype
+version headers and the abandoned v3 transcript domain. The [previous extraction](https://github.com/DataDog/ffe-system-test-data/tree/32f2249d66b83b507d68125fd8cda96648ab2bfd/response-signing/v3)
+remains available in history. `v1/manifest.json` records the new hashes and
+applicability counts; earlier validation receipts do not validate these new bytes.
 
 ## Running a consumer
 

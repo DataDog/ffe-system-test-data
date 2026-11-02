@@ -5,7 +5,7 @@ on:
     paths:
       - .github/workflows/validate-response-signing.yml
       - ci/validate-response-signing.py
-      - schemas/response-signing-v3.schema.json
+      - schemas/response-signing-v1.schema.json
       - response-signing/**
 
 permissions:
