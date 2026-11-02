@@ -89,7 +89,8 @@ ffe-system-test-data/
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
 ├── flag-selection/
 │   ├── README.md            # Flag selection semantics and vector format
-│   └── selection-vectors.json # Server and SDK flag selection test vectors
+│   ├── selection-vectors.json # Server and SDK flag selection test vectors
+│   └── ufc-config-tags.json # Tags of ufc-config.json flags, for selection against that configuration
 ├── schemas/                # Precomputed assignment fixture schema
 └── ci/                     # Static validators and downstream comparison runner
 ```
@@ -450,6 +451,10 @@ a selection and either the selected flag keys or the reason the selection is
 ignored. Cases with an optional `sdk` field also give the canonical selection an
 SDK sends, or the reason the SDK drops it. Validate them locally with
 `python3 ci/validate-flag-selection.py`.
+
+`flag-selection/ufc-config-tags.json` gives tags to some `ufc-config.json`
+flags, so a mock configuration endpoint can apply a selection to that
+configuration.
 
 See [flag-selection/README.md](flag-selection/README.md) for the semantics and
 how to run the cases against each request form.
