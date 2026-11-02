@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "files": {
+    "corpus.json": {
+      "sha256": "cc444ec8a2890430fa8dd8aee6cbde5a92d388ee55938596aac67891cfc099b6",
+      "response_cases": 43,
+      "accepted": 6,
+      "signing_cases": 2
+    },
+    "nested-der.json": {
+      "sha256": "cc5ce38da1d42ec389d3b0a811d04439f8e523baf4544222a6eb38a37fefa26a",
+      "response_cases": 2,
+      "accepted": 1,
+      "signing_cases": 0
+    }
+  }
+}
