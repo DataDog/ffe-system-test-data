@@ -2,7 +2,7 @@
   "schema_version": 1,
   "files": {
     "corpus.json": {
-      "sha256": "f749069c3344eb72eac11a614bdb92215208e472feeb98467367d78ef42782c5",
+      "sha256": "393490bfefe382b9b75cf2964c131a910faa679888689457f99c2da2dc57fbbd",
       "response_cases": 46,
       "accepted": 6,
       "signing_cases": 2

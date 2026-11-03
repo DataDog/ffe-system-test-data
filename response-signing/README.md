@@ -28,8 +28,12 @@ applicability counts; earlier validation receipts do not validate these new byte
 
 1. Decode `body_base64` into exact bytes. Preserve header order, duplicates and
    URL escaping: several rejection cases exercise those distinctions.
+   `response.body_base64` contains application bytes after HTTP content decoding.
+   When `wire_body_base64` is present, transport tests serve those compressed bytes
+   with the supplied encoding headers; direct verifier tests use `body_base64`.
 2. Supply the fixture's `anchor_der_base64` as the local trust anchor and `now`
-   as the clock. Use this fixed time even after the synthetic certificates expire.
+   as Unix epoch seconds, converting to the native clock unit when needed.
+   Use this fixed time even after the synthetic certificates expire.
 3. Verify each request/response pair and assert `expected_accept`. For accepted
    cases, compare the constructed transcript with `transcript_base64` as well.
    `rejection_reason` describes the violated rule; it is not a required native

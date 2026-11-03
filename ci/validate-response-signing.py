@@ -9,17 +9,31 @@ from pathlib import Path
 import jsonschema
 
 
+def reject_duplicate_keys(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate object key {key!r}")
+        result[key] = value
+    return result
+
+
 def validate(root):
     directory = root / "response-signing/v1"
-    schema = json.loads((root / "schemas/response-signing-v1.schema.json").read_text())
+    schema = json.loads(
+        (root / "schemas/response-signing-v1.schema.json").read_text(),
+        object_pairs_hook=reject_duplicate_keys,
+    )
     jsonschema.Draft202012Validator.check_schema(schema)
-    manifest = json.loads((directory / "manifest.json").read_text())
+    manifest = json.loads(
+        (directory / "manifest.json").read_text(), object_pairs_hook=reject_duplicate_keys
+    )
     assert manifest["schema_version"] == 1
     assert set(manifest["files"]) == {"corpus.json", "nested-der.json"}
     for name, expected in manifest["files"].items():
         raw = (directory / name).read_bytes()
         assert hashlib.sha256(raw).hexdigest() == expected["sha256"], name
-        corpus = json.loads(raw)
+        corpus = json.loads(raw, object_pairs_hook=reject_duplicate_keys)
         jsonschema.validate(corpus, schema)
         cases = corpus["cases"]
         ids = [case["id"] for case in cases]
