@@ -71,7 +71,7 @@
       "expectedResult": {
         "value": false,
         "reason": "ERROR",
-        "errorCode": "TYPE_MISMATCH",
+        "errorCode": "PARSE_ERROR",
         "variantKey": null
       }
     },
