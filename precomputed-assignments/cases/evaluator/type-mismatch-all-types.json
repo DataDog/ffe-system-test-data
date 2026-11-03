@@ -1,6 +1,6 @@
 {
   "name": "type-mismatch-all-types",
-  "description": "Each flag is evaluated as the wrong type. All must return their default value with a typeMismatch error. Note: the integer-as-float case (fixture.mismatch.int-as-float) is SDK-implementation-dependent \u2014 SDKs that allow implicit int-to-float promotion (Java, Swift, Dart) will not return typeMismatch for that evaluation. Add evaluation-level skipForSdks entries for those platforms once verified.",
+  "description": "Wrong typed getters return the caller default with TYPE_MISMATCH. APIs with one Number getter do not implement integer-versus-float mismatch.",
   "context": {
     "targetingKey": "mismatch-user",
     "attributes": {}
@@ -91,8 +91,12 @@
       },
       "_skip": [
         {
-          "reason": "JavaScript does not distinguish integer from float; the web SDK uses getNumberDetails for both types and does not raise typeMismatch for integer-as-float evaluations.",
-          "platform": "web"
+          "platform": "web",
+          "reason": "The public API exposes one Number getter."
+        },
+        {
+          "platform": "react-native",
+          "reason": "The public API exposes one Number getter."
         }
       ]
     },
@@ -126,7 +130,12 @@
         "_count": 5,
         "_skip": [
           {
-            "platform": "web"
+            "platform": "web",
+            "reason": "Single Number API."
+          },
+          {
+            "platform": "react-native",
+            "reason": "Single Number API."
           }
         ]
       }

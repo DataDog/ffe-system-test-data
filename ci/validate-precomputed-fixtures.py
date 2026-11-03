@@ -132,6 +132,8 @@ def validate_fixture(filepath, schema):
         errors.append(f"{rel}: schema: {json_path}: {error.message}")
 
     # Custom checks
+    if not isinstance(data, dict):
+        return errors
     errors.extend(f"{rel}: {e}" for e in check_skip_include_mutual_exclusivity(data))
     errors.extend(f"{rel}: {e}" for e in check_matcher_counts(data))
     errors.extend(f"{rel}: {e}" for e in check_name_matches_filename(data, filepath))
@@ -171,8 +173,8 @@ def main():
 
     fixtures = find_fixtures(fixture_dir)
     if not fixtures:
-        print(f"WARNING: no .json files found in {fixture_dir}", file=sys.stderr)
-        sys.exit(0)
+        print(f"ERROR: no .json files found in {fixture_dir}", file=sys.stderr)
+        sys.exit(1)
 
     all_errors = []
     valid_count = 0

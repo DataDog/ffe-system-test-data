@@ -140,7 +140,7 @@ Always `[{"platform": "<id>", "reason": "<optional>"}]`. Mutually exclusive.
 Default (neither present): applies to all platforms.
 
 Valid platforms: `web`, `ios`, `android`, `react-native`, `flutter`, `maui`,
-`kotlin-multiplatform`, `electron`.
+`kotlin-multiplatform`, `electron`, `unity`.
 
 ## Error codes
 
