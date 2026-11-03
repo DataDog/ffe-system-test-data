@@ -62,6 +62,8 @@ When a new feature's UFC syntax itself is not supported by every SDK, create a
 self-contained `evaluation-suites/<suite>/` directory containing its own
 `ufc-config.json` and `cases/`. Do not add that syntax to the legacy root config:
 a suite the consumer has not enabled must not have its configuration parsed.
+A suite may also hold `flag-tags.json` when its server double needs flag tags,
+as `flag-selection` does; see [flag selection suite](README.md#flag-selection-suite).
 
 For selected split/allocation metadata, add optional `result.serialId` (integer or
 `null`) and `result.doLog` (boolean) expectations. A serial ID of `0` is valid;

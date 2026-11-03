@@ -160,23 +160,12 @@ omitted list. Then:
   When both are empty, the SDK sends no selection parameters.
 - `sdk.dropped`: the SDK drops the selection with this reason and sends none.
 
-## Tags for `ufc-config.json`
+## End-to-end suite
 
-UFC responses carry no tags, so a mock configuration endpoint that serves the
-shared [`ufc-config.json`](../ufc-config.json) cannot apply a tag selection on
-its own. `ufc-config-tags.json` lists the tags of some of its flags, in the same
-shape as `flags` above. A flag that is not listed has no tags.
-
-```json
-{
-  "flags": [{ "key": "basic-flag", "tags": ["team:checkout", "release:summer sale"] }]
-}
-```
-
-A mock that serves `ufc-config.json` builds the flag set from every key in
-`ufc-config.json` and the tags listed here, applies the selection with the
-semantics above, and returns only the selected entries of `flags`. The vectors
-do not run against this flag set.
+[`evaluation-suites/flag-selection/`](../evaluation-suites/flag-selection/)
+runs selections through an SDK against a server double that applies these
+semantics to that suite's `ufc-config.json` and `flag-tags.json`. See
+[flag selection suite](../README.md#flag-selection-suite).
 
 ## Consumers
 
@@ -196,5 +185,4 @@ distinct, and present in `flags`. For `sdk`, it checks that every `query` case
 has one and no `rawQuery` case does, that `sdk.selection` lists hold non-empty
 strings sorted by UTF-8 bytes without duplicates, that `sdk.selection` appears
 only on `applied` cases, and that `sdk.dropped` equals `expected.reason`. It
-does not recompute expected outcomes. For `ufc-config-tags.json`, it checks the
-same `flags` shape and that every key names a flag in `ufc-config.json`.
+does not recompute expected outcomes.

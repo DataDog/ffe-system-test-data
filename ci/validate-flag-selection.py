@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the static shape of the flag selection vectors and the shared UFC tags."""
+"""Validate the static shape of the flag selection vectors."""
 
 from __future__ import annotations
 
@@ -10,18 +10,16 @@ from typing import NoReturn
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 VECTORS_PATH = REPOSITORY_ROOT / "flag-selection" / "selection-vectors.json"
-UFC_TAGS_PATH = REPOSITORY_ROOT / "flag-selection" / "ufc-config-tags.json"
-UFC_CONFIG_PATH = REPOSITORY_ROOT / "ufc-config.json"
 QUERY_PARAMETERS = frozenset({"selected_flag_tags", "selected_flag_key_patterns"})
 IGNORED_REASONS = frozenset({"malformed_selection", "too_many_values", "invalid_key_pattern", "invalid_tag"})
 
 
 class VectorValidationError(ValueError):
-    """A flag selection file is valid JSON but violates the documented format."""
+    """The vectors file is valid JSON but violates the documented format."""
 
 
-def _fail(message: str, path: Path = VECTORS_PATH) -> NoReturn:
-    raise VectorValidationError(f"{path.relative_to(REPOSITORY_ROOT)}: {message}")
+def _fail(message: str) -> NoReturn:
+    raise VectorValidationError(f"{VECTORS_PATH.relative_to(REPOSITORY_ROOT)}: {message}")
 
 
 def _reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
@@ -33,60 +31,45 @@ def _reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]
     return result
 
 
-def _load(path: Path = VECTORS_PATH) -> object:
+def _load() -> object:
     try:
-        return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_reject_duplicate_keys)
+        return json.loads(VECTORS_PATH.read_text(encoding="utf-8"), object_pairs_hook=_reject_duplicate_keys)
     except json.JSONDecodeError as error:
-        _fail(f"invalid JSON at line {error.lineno}, column {error.colno}: {error.msg}", path)
+        _fail(f"invalid JSON at line {error.lineno}, column {error.colno}: {error.msg}")
     except VectorValidationError as error:
-        _fail(str(error), path)
+        _fail(str(error))
 
 
 def _is_string_list(value: object) -> bool:
     return isinstance(value, list) and all(isinstance(item, str) for item in value)
 
 
-def _check_keys(
-    location: str, value: dict[str, object], required: set[str], optional: set[str], path: Path = VECTORS_PATH
-) -> None:
+def _check_keys(location: str, value: dict[str, object], required: set[str], optional: set[str]) -> None:
     missing = sorted(required.difference(value))
     if missing:
-        _fail(f"{location} is missing {', '.join(missing)}", path)
+        _fail(f"{location} is missing {', '.join(missing)}")
     unknown = sorted(set(value).difference(required, optional))
     if unknown:
-        _fail(f"{location} has unknown fields {', '.join(unknown)}", path)
+        _fail(f"{location} has unknown fields {', '.join(unknown)}")
 
 
-def _validate_flags(value: object, path: Path = VECTORS_PATH) -> set[str]:
+def _validate_flags(value: object) -> set[str]:
     if not isinstance(value, list) or not value:
-        _fail("flags must be a non-empty array", path)
+        _fail("flags must be a non-empty array")
     keys: set[str] = set()
     for index, flag in enumerate(value):
         location = f"flags[{index}]"
         if not isinstance(flag, dict):
-            _fail(f"{location} must be an object", path)
-        _check_keys(location, flag, {"key", "tags"}, set(), path)
+            _fail(f"{location} must be an object")
+        _check_keys(location, flag, {"key", "tags"}, set())
         if not isinstance(flag["key"], str):
-            _fail(f"{location}.key must be a string", path)
+            _fail(f"{location}.key must be a string")
         if flag["key"] in keys:
-            _fail(f"{location}.key {flag['key']!r} is repeated", path)
+            _fail(f"{location}.key {flag['key']!r} is repeated")
         if not _is_string_list(flag["tags"]):
-            _fail(f"{location}.tags must be an array of strings", path)
+            _fail(f"{location}.tags must be an array of strings")
         keys.add(flag["key"])
     return keys
-
-
-def _validate_ufc_tags() -> int:
-    tags = _load(UFC_TAGS_PATH)
-    if not isinstance(tags, dict):
-        _fail("top-level value must be an object", UFC_TAGS_PATH)
-    _check_keys("top-level object", tags, {"flags"}, set(), UFC_TAGS_PATH)
-    tagged_keys = _validate_flags(tags["flags"], UFC_TAGS_PATH)
-    config = json.loads(UFC_CONFIG_PATH.read_text(encoding="utf-8"))
-    unknown = sorted(tagged_keys.difference(config["flags"]))
-    if unknown:
-        _fail(f"flags names keys missing from ufc-config.json: {', '.join(unknown)}", UFC_TAGS_PATH)
-    return len(tagged_keys)
 
 
 def _validate_case(index: int, case: object, flag_keys: set[str]) -> str:
@@ -182,7 +165,6 @@ def main() -> None:
         names.add(name)
 
     print(f"Validated {len(cases)} flag selection vectors against {len(flag_keys)} flags.")
-    print(f"Validated tags for {_validate_ufc_tags()} ufc-config.json flags.")
 
 
 if __name__ == "__main__":

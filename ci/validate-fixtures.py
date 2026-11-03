@@ -20,6 +20,13 @@ CANONICAL_PLATFORMS = frozenset(
 )
 VALID_VARIATION_TYPES = frozenset({"BOOLEAN", "INTEGER", "JSON", "NUMERIC", "STRING"})
 FEATURE_DESTINATIONS = frozenset({"HOOK", "EXPOSURE", "EVALUATION"})
+SUITE_FLAG_TAGS_FILE = "flag-tags.json"
+FLAG_SELECTION_FIELDS = frozenset({"tags", "keyPatterns"})
+CANONICAL_SELECTION_FIELDS = ("selectedFlagTags", "selectedFlagKeyPatterns")
+NO_SELECTION_REQUEST = {"flagSelection": None}
+FLAG_SELECTION_IGNORED_REASONS = frozenset(
+    {"malformed_selection", "too_many_values", "invalid_key_pattern", "invalid_tag", "tag_load_failed"}
+)
 REQUIRED_CASE_FIELDS = frozenset(
     {
         "attributes",
@@ -192,6 +199,108 @@ def _validate_evaluation_case(
             path, f"{location} capabilities.{capability}", result, flag, configured_flags,
             allow_invalid_context=True,
         )
+    _validate_provider_start(path, location, value)
+
+
+def _is_string_list(value: object) -> bool:
+    return isinstance(value, list) and all(isinstance(item, str) for item in value)
+
+
+def _validate_provider_start(path: Path, location: str, case: dict[str, object]) -> None:
+    options = case.get("providerOptions", {})
+    if not isinstance(options, dict):
+        _fail(path, f"{location} providerOptions must be an object")
+    unknown = sorted(set(options).difference({"flagSelection"}))
+    if unknown:
+        _fail(path, f"{location} providerOptions has unknown fields: {', '.join(unknown)}")
+    if "flagSelection" in options:
+        selection = options["flagSelection"]
+        if (
+            not isinstance(selection, dict)
+            or not set(selection).issubset(FLAG_SELECTION_FIELDS)
+            or not all(_is_string_list(values) for values in selection.values())
+        ):
+            _fail(
+                path,
+                f"{location} providerOptions.flagSelection must be an object with optional tags and keyPatterns "
+                "string arrays",
+            )
+
+    expectations = case.get("expectations", {})
+    if not isinstance(expectations, dict):
+        _fail(path, f"{location} expectations must be an object")
+    sends_selection = False
+    if "configurationRequest" in expectations:
+        sends_selection = _validate_configuration_request(
+            path, f"{location} expectations.configurationRequest", expectations["configurationRequest"]
+        )
+    elif "flagSelection" in options:
+        _fail(path, f"{location} providerOptions.flagSelection requires expectations.configurationRequest")
+
+    if "configurationResponse" in case:
+        response = case["configurationResponse"]
+        if not isinstance(response, dict) or set(response) != {"flagSelectionIgnored"}:
+            _fail(path, f"{location} configurationResponse must be an object with only flagSelectionIgnored")
+        if response["flagSelectionIgnored"] not in FLAG_SELECTION_IGNORED_REASONS:
+            _fail(
+                path,
+                f"{location} configurationResponse.flagSelectionIgnored must be one of "
+                f"{', '.join(sorted(FLAG_SELECTION_IGNORED_REASONS))}",
+            )
+        if not sends_selection:
+            _fail(path, f"{location} configurationResponse requires a configurationRequest that sends a selection")
+
+
+def _validate_configuration_request(path: Path, location: str, request: object) -> bool:
+    """Validate the canonical selection on the configuration request and return whether one is sent."""
+    if request == NO_SELECTION_REQUEST:
+        return False
+    if not isinstance(request, dict) or set(request) != set(CANONICAL_SELECTION_FIELDS):
+        _fail(
+            path,
+            f"{location} must be {{\"flagSelection\": null}} or hold only selectedFlagTags and "
+            "selectedFlagKeyPatterns",
+        )
+    for field in CANONICAL_SELECTION_FIELDS:
+        values = request[field]
+        if (
+            not _is_string_list(values)
+            or not all(values)
+            or values != sorted(set(values), key=lambda value: value.encode("utf-8"))
+        ):
+            _fail(path, f"{location}.{field} must hold non-empty strings sorted by UTF-8 bytes without duplicates")
+    if not any(request[field] for field in CANONICAL_SELECTION_FIELDS):
+        _fail(path, f"{location} sends no selection; use {{\"flagSelection\": null}}")
+    return True
+
+
+def _provider_start(case: dict[str, object]) -> tuple[object, object, object]:
+    expectations = case.get("expectations", {})
+    return case.get("providerOptions"), expectations.get("configurationRequest"), case.get("configurationResponse")
+
+
+def _validate_flag_tags(path: Path, configured_flags: dict[str, object]) -> None:
+    if path.is_symlink() or not path.is_file():
+        _fail(path, "must be a regular file, not a symlink")
+    value = _load_json(path)
+    if not isinstance(value, dict) or set(value) != {"flags"}:
+        _fail(path, "top-level value must be an object with only flags")
+    flags = value["flags"]
+    if not isinstance(flags, list) or not flags:
+        _fail(path, "flags must be a non-empty array")
+    keys: set[str] = set()
+    for index, entry in enumerate(flags):
+        location = f"flags[{index}]"
+        if not isinstance(entry, dict) or set(entry) != {"key", "tags"}:
+            _fail(path, f"{location} must be an object with only key and tags")
+        key = entry["key"]
+        if not isinstance(key, str) or key not in configured_flags:
+            _fail(path, f"{location}.key must name a flag in the suite's ufc-config.json")
+        if key in keys:
+            _fail(path, f"{location}.key {key!r} is repeated")
+        keys.add(key)
+        if not _is_string_list(entry["tags"]) or not all(entry["tags"]):
+            _fail(path, f"{location}.tags must be an array of non-empty strings")
 
 
 def _validate_result(
@@ -255,12 +364,15 @@ def _validate_suite(
 
     if self_contained:
         suite_directory = config_path.parent
-        allowed_entries = {config_path.name, cases_directory.name}
+        allowed_entries = {config_path.name, cases_directory.name, SUITE_FLAG_TAGS_FILE}
         for entry in suite_directory.iterdir():
             if entry.name not in allowed_entries:
-                _fail(entry, "unexpected suite entry; only ufc-config.json and cases/ are allowed")
+                _fail(entry, "unexpected suite entry; only ufc-config.json, flag-tags.json, and cases/ are allowed")
 
     configured_flags = _validate_config(config_path, _load_json(config_path))
+    flag_tags_path = config_path.parent / SUITE_FLAG_TAGS_FILE
+    if self_contained and (flag_tags_path.exists() or flag_tags_path.is_symlink()):
+        _validate_flag_tags(flag_tags_path, configured_flags)
     evaluation_paths: list[Path] = []
     for entry in sorted(cases_directory.iterdir()):
         if entry.is_symlink() or not entry.is_file():
@@ -281,6 +393,13 @@ def _validate_suite(
 
         for index, case in enumerate(cases):
             _validate_evaluation_case(path, index, case, configured_flags, platforms)
+            # A case file is one provider start, so its cases share the start's inputs and request.
+            if _provider_start(case) != _provider_start(cases[0]):
+                _fail(
+                    path,
+                    f"case {index} providerOptions, expectations.configurationRequest, and configurationResponse "
+                    "must equal case 0's",
+                )
             case_count += 1
 
     return case_count, len(evaluation_paths)
