@@ -1,2 +1,10 @@
 # OSS readiness tool artifacts
 .oss-readiness/
+
+# Local fixture generation dependencies
+tools/ufc/node_modules/
+
+# Local UFC conversion diagnostics (regenerated, never committed)
+/rules-resources/generated/**/ufc.generated.json
+/rules-resources/generated/**/report.json
+/rules-resources/generated/**/parity.json
