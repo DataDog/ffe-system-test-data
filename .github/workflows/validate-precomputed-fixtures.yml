@@ -5,6 +5,8 @@ on:
     paths:
       - .github/workflows/validate-precomputed-fixtures.yml
       - ci/validate-precomputed-fixtures.py
+      - ci/test_precomputed*.py
+      - ci/sync-precomputed-fixtures.py
       - schemas/precomputed-assignment.schema.json
       - precomputed-assignments/**
 
@@ -32,3 +34,6 @@ jobs:
 
       - name: Validate precomputed fixtures
         run: python3 ci/validate-precomputed-fixtures.py
+
+      - name: Test fixture validation and snapshot import
+        run: python3 -m unittest discover -s ci -p 'test_precomputed*.py'

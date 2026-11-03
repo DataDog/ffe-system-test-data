@@ -221,3 +221,11 @@ Fixture PRs can expose existing SDK defects. Record those failures rather than
 changing expectations or adding local skips. Platform filters describe API
 applicability, not temporary implementation failures. `unity` is the identifier
 for the Unity Flags implementation.
+
+`--verify` checks local file digests and the discovery index without networking.
+Use it in consumer CI. `--check` also verifies upstream provenance. For Unity,
+set `unityMetadata: true` to preserve existing asset GUIDs and create missing metadata.
+
+Unsupported variation types are omitted independently. Their lookups return
+`FLAG_NOT_FOUND`. A supported flag read with the wrong getter returns `TYPE_MISMATCH`.
+Missing `extraLogging` is equivalent to an empty object.

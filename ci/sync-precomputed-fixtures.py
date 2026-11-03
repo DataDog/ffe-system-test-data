@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import subprocess
 import tempfile
+import uuid
 
 REPOSITORY = 'https://github.com/DataDog/ffe-system-test-data.git'
 PREFIX = 'precomputed-assignments/'
@@ -74,10 +75,37 @@ def read_snapshot(destination):
     return result
 
 
+def verify(destination):
+    content = read_snapshot(destination)
+    metadata = json.loads(content.pop('SOURCE.json'))
+    if metadata['repository'] != REPOSITORY or not re.fullmatch(r'[0-9a-f]{40}', metadata['commit']):
+        raise ValueError('Invalid source provenance')
+    hashes = {p: hashlib.sha256(v).hexdigest() for p, v in sorted(content.items())}
+    if hashes != metadata['files']:
+        raise ValueError('Snapshot content differs from its recorded checksums')
+    cases = sorted(p for p in content if p.startswith('cases/') and p.endswith('.json'))
+    if not cases or json.loads(content['index.json']) != cases:
+        raise ValueError('Missing, empty, or stale fixture index')
+    print(f"Verified {len(cases)} fixtures at {metadata['commit']}")
+
+
+def unity_metadata(destination):
+    for asset in sorted(destination.rglob('*')):
+        if asset.suffix == '.meta':
+            continue
+        meta = asset.with_name(asset.name + '.meta')
+        if not meta.exists():
+            guid = uuid.uuid5(uuid.NAMESPACE_URL, 'ffe-precomputed/' + asset.relative_to(destination).as_posix()).hex
+            folder = 'folderAsset: yes\n' if asset.is_dir() else ''
+            importer = 'DefaultImporter' if asset.is_dir() or asset.suffix != '.json' else 'TextScriptImporter'
+            meta.write_text(f'fileFormatVersion: 2\nguid: {guid}\n{folder}{importer}:\n  externalObjects: {{}}\n  userData: \n  assetBundleName: \n  assetBundleVariant: \n')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ref', default='main')
     parser.add_argument('--source', type=Path, help='Read a local Git checkout at the requested committed revision')
+    parser.add_argument('--verify', action='store_true', help='Verify local checksums and discovery index without network access')
     parser.add_argument('--check', action='store_true', help='Compare with the recorded upstream SHA; do not write')
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
@@ -90,6 +118,9 @@ def main():
         raise ValueError('Destination escapes the repository')
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]*', args.ref) or '..' in args.ref:
         raise ValueError('Invalid fixture revision')
+    if args.verify:
+        verify(destination)
+        return
     before = read_snapshot(destination)
     ref = json.loads(before['SOURCE.json'])['commit'] if args.check else args.ref
     with tempfile.TemporaryDirectory(prefix='ffe-precompute-') as temporary:
@@ -129,6 +160,8 @@ def main():
                         raise
                 else:
                     staged.rename(destination)
+        if config.get('unityMetadata') and not args.check:
+            unity_metadata(destination)
         selected = before if args.check or not changed else after
         metadata = json.loads(selected['SOURCE.json'])
         count = len(json.loads(selected['index.json']))
