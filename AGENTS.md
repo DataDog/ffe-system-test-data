@@ -207,3 +207,18 @@ Example — web aggregates 2 evaluations into 1 event:
   {"_count": 1, "_include": [{"platform": "web"}], "evaluation_count": 2}
 ]
 ```
+
+## Obfuscated companions
+
+Generate a companion for each plain precomputed fixture:
+
+```bash
+python3 ci/precomputed_obfuscation.py --write
+python3 ci/precomputed_obfuscation.py --check
+```
+
+Do not edit `precomputed-assignments/cases/obfuscation/generated/` manually.
+Keep rejection fixtures and fixed digest vectors outside that generated folder.
+CI checks companion content, not just file existence. A new case is discovered
+without a filename list. Read [the coverage policy](precomputed-assignments/README.md#plain-and-obfuscated-coverage)
+for the explicit exception format and platform applicability rules.
