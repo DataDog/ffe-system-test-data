@@ -801,8 +801,7 @@
             "platform": "unity",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
@@ -819,16 +818,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-2"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -845,8 +842,7 @@
             "platform": "unity",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
@@ -863,16 +859,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-5"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -907,16 +901,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-8"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -951,16 +943,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-11"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -977,16 +967,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-13"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -1003,8 +991,7 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
@@ -1029,8 +1016,7 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
@@ -1055,8 +1041,7 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
@@ -1081,16 +1066,14 @@
             "platform": "flutter",
             "reason": "This case requires the stated native numeric accessor range."
           }
-        ],
-        "runtime_default_used": false
+        ]
       },
       {
         "_count": 1,
         "flag": {
           "key": "numeric-boundaries-number-21"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       }
     ]
   },

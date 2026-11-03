@@ -367,48 +367,42 @@
         "flag": {
           "key": "obfuscation-numeric-integer-0"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
         "flag": {
           "key": "obfuscation-numeric-integer-1"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
         "flag": {
           "key": "obfuscation-numeric-integer-2"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
         "flag": {
           "key": "obfuscation-numeric-integer-3"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
         "flag": {
           "key": "obfuscation-numeric-integer-4"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
         "flag": {
           "key": "obfuscation-numeric-integer-5"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -441,8 +435,7 @@
         "flag": {
           "key": "obfuscation-numeric-integer-7"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -475,8 +468,7 @@
         "flag": {
           "key": "obfuscation-numeric-integer-9"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       },
       {
         "_count": 1,
@@ -509,8 +501,7 @@
         "flag": {
           "key": "obfuscation-numeric-integer-11"
         },
-        "evaluation_count": 1,
-        "runtime_default_used": false
+        "evaluation_count": 1
       }
     ]
   },
