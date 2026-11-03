@@ -45,6 +45,15 @@ class PrecomputedValidationTest(unittest.TestCase):
     def test_non_object_is_reported_not_crashed(self):
         self.assertTrue(self.validate([]))
 
+    def test_malformed_expectations_are_reported_not_crashed(self):
+        for value in [None, [], {"exposures": None}, {"exposures": [None]}]:
+            self.case['expectations'] = value
+            self.assertTrue(self.validate(self.case))
+
+    def test_payload_keys_are_not_platform_filters(self):
+        self.case['response']['custom'] = {'_skip': 'payload', '_include': 'payload'}
+        self.assertEqual([], self.validate(self.case))
+
     def test_new_nested_fixture_is_discovered(self):
         path = Path(self.directory.name) / 'new' / 'nested' / 'numeric-number.json'
         path.parent.mkdir(parents=True)
