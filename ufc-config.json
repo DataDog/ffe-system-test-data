@@ -5625,6 +5625,282 @@
         }
       ]
     },
+    "layer-checkout-layout": {
+      "key": "layer-checkout-layout",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "not-enrolled": {
+          "key": "not-enrolled",
+          "value": "not-enrolled"
+        },
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        }
+      },
+      "allocations": [
+        {
+          "key": "checkout-layout-experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "serialId": 31001,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 2500
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-layout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "treatment",
+              "serialId": 31002,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 2500
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-layout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "checkout-layout-not-enrolled",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "not-enrolled",
+              "serialId": 31003,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "layer-checkout-pricing": {
+      "key": "layer-checkout-pricing",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "not-enrolled": {
+          "key": "not-enrolled",
+          "value": "not-enrolled"
+        },
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        }
+      },
+      "allocations": [
+        {
+          "key": "checkout-pricing-experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "serialId": 32001,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 2500,
+                      "end": 5000
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-pricing-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "treatment",
+              "serialId": 32002,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 2500,
+                      "end": 5000
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-pricing-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "checkout-pricing-not-enrolled",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "not-enrolled",
+              "serialId": 32003,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "layer-checkout-messaging": {
+      "key": "layer-checkout-messaging",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "not-enrolled": {
+          "key": "not-enrolled",
+          "value": "not-enrolled"
+        },
+        "control": {
+          "key": "control",
+          "value": "control"
+        },
+        "treatment": {
+          "key": "treatment",
+          "value": "treatment"
+        }
+      },
+      "allocations": [
+        {
+          "key": "checkout-messaging-experiment",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "control",
+              "serialId": 33001,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 7500
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-messaging-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "variationKey": "treatment",
+              "serialId": 33002,
+              "shards": [
+                {
+                  "salt": "layer-checkout-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 7500
+                    }
+                  ]
+                },
+                {
+                  "salt": "split-layer-checkout-messaging-v1",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "checkout-messaging-not-enrolled",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "not-enrolled",
+              "serialId": 33003,
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
     "split-features-selected-allocation": {
       "key": "split-features-selected-allocation",
       "enabled": true,

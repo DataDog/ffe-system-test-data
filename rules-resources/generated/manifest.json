@@ -11,14 +11,14 @@
     "tools/ufc/generate.mjs": "7e6d634547ead40137226b026d74a003f3b5320bf995006d6e16b9dc7c47e4c8",
     "tools/ufc/package-lock.json": "503a5cbe78ac55bbfe96aa544d57696885175248d105ab6f47f01598961b618c",
     "tools/ufc/package.json": "c75341d53e2362a05b316e978f96a4cded0bc5ea7f65ac0e221f22246b6ea1f8",
-    "ufc-config.json": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79"
+    "ufc-config.json": "f78f5c260b7a16cb2e74b3e4e15e1e6587f1f05fad96c1fd4d9816c605485be2"
   },
   "serializer": "@datadog/flagging-core@3.0.1",
   "resources": [
     {
       "id": "canonical-evaluator",
       "source": "ufc-config.json",
-      "sourceSha256": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79",
+      "sourceSha256": "f78f5c260b7a16cb2e74b3e4e15e1e6587f1f05fad96c1fd4d9816c605485be2",
       "convertedFlagKeys": [
         "basic-flag",
         "boolean-false-assignment",
@@ -34,6 +34,9 @@
         "invalid-regex-flag",
         "json-config-flag",
         "kill-switch",
+        "layer-checkout-layout",
+        "layer-checkout-messaging",
+        "layer-checkout-pricing",
         "microsecond-date-test",
         "missing-split-shards-flag",
         "multi-serial-flag-1",
@@ -88,10 +91,10 @@
       ],
       "artifacts": {
         "configuration-wire.json": {
-          "sha256": "0cf561fff82f5e1081df0626efe3856578e062d6ae8d6538e053c2ffef588758"
+          "sha256": "dd185d008f5773859fafd2ec5f57f9347fda3fa5429452a06dc4d67a0cf0df16"
         },
         "ufc.pb": {
-          "sha256": "97d0f2126a280f7a8704bd3b97b4c25dd3df033d74446d2412f5b5e91738941d"
+          "sha256": "3baaec0f85e933ef522dfb682c24113d1a8cf40de159b4e271d2e49e06836353"
         }
       }
     }
