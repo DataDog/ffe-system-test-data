@@ -45,6 +45,14 @@
     {
       "platform": "flutter",
       "reason": "Implements assignment-encoding-flag-key-256-v1."
+    },
+    {
+      "platform": "react-native",
+      "reason": "Reject invalid or unsupported encoding before installation."
+    },
+    {
+      "platform": "unity",
+      "reason": "Reject invalid or unsupported encoding before installation."
     }
   ],
   "expectedResponseError": "INVALID_RESPONSE"
