@@ -302,69 +302,210 @@
     "noUnmatchedEvents": true,
     "exposures": [
       {
-        "_count": 9,
-        "_include": [
-          {
-            "platform": "ios",
-            "reason": "Applicable evaluations for this API."
-          },
-          {
-            "platform": "android",
-            "reason": "Applicable evaluations for this API."
-          },
-          {
-            "platform": "flutter",
-            "reason": "Applicable evaluations for this API."
-          },
-          {
-            "platform": "unity",
-            "reason": "Applicable evaluations for this API."
-          },
-          {
-            "platform": "web",
-            "reason": "Applicable evaluations for this API."
-          },
-          {
-            "platform": "react-native",
-            "reason": "Applicable evaluations for this API."
-          }
-        ]
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-0"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-1"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-2"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-3"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-4"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-5"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-7"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-9"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-11"
+        }
       }
     ],
     "evaluationEvents": [
       {
-        "_count": 12,
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-0"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-1"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-2"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-3"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-4"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-5"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-6"
+        },
+        "evaluation_count": 1,
         "_include": [
           {
             "platform": "ios",
-            "reason": "Applicable evaluations for this API."
+            "reason": "This case requires the stated native numeric accessor range."
           },
           {
             "platform": "android",
-            "reason": "Applicable evaluations for this API."
+            "reason": "This case requires the stated native numeric accessor range."
           },
           {
             "platform": "flutter",
-            "reason": "Applicable evaluations for this API."
+            "reason": "This case requires the stated native numeric accessor range."
           },
           {
             "platform": "unity",
-            "reason": "Applicable evaluations for this API."
+            "reason": "This case requires the stated native numeric accessor range."
           }
-        ]
+        ],
+        "runtime_default_used": true
       },
       {
-        "_count": 9,
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-7"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-8"
+        },
+        "evaluation_count": 1,
         "_include": [
           {
-            "platform": "web",
-            "reason": "Applicable evaluations for this API."
+            "platform": "ios",
+            "reason": "This case requires the stated native numeric accessor range."
           },
           {
-            "platform": "react-native",
-            "reason": "Applicable evaluations for this API."
+            "platform": "android",
+            "reason": "This case requires the stated native numeric accessor range."
+          },
+          {
+            "platform": "flutter",
+            "reason": "This case requires the stated native numeric accessor range."
+          },
+          {
+            "platform": "unity",
+            "reason": "This case requires the stated native numeric accessor range."
           }
-        ]
+        ],
+        "runtime_default_used": true
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-9"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-10"
+        },
+        "evaluation_count": 1,
+        "_include": [
+          {
+            "platform": "ios",
+            "reason": "This case requires the stated native numeric accessor range."
+          },
+          {
+            "platform": "android",
+            "reason": "This case requires the stated native numeric accessor range."
+          },
+          {
+            "platform": "flutter",
+            "reason": "This case requires the stated native numeric accessor range."
+          },
+          {
+            "platform": "unity",
+            "reason": "This case requires the stated native numeric accessor range."
+          }
+        ],
+        "runtime_default_used": true
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "numeric-integer-11"
+        },
+        "evaluation_count": 1,
+        "runtime_default_used": false
       }
     ]
   }
