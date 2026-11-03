@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Unless explicitly stated otherwise, all files in this repository are licensed under the
+# Apache License Version 2.0. This product includes software developed at Datadog
+# (https://www.datadoghq.com/). Copyright 2025-Present Datadog, Inc.
 """Import a reproducible precompute test snapshot; never edit imported JSON."""
 import argparse
 import hashlib
@@ -98,7 +101,7 @@ def unity_metadata(destination):
             guid = uuid.uuid5(uuid.NAMESPACE_URL, 'ffe-precomputed/' + asset.relative_to(destination).as_posix()).hex
             folder = 'folderAsset: yes\n' if asset.is_dir() else ''
             importer = 'DefaultImporter' if asset.is_dir() or asset.suffix != '.json' else 'TextScriptImporter'
-            meta.write_text(f'fileFormatVersion: 2\nguid: {guid}\n{folder}{importer}:\n  externalObjects: {{}}\n  userData: \n  assetBundleName: \n  assetBundleVariant: \n')
+            meta.write_text(f'fileFormatVersion: 2\nguid: {guid}\n{folder}{importer}:\n  externalObjects: {{}}\n  userData:\n  assetBundleName:\n  assetBundleVariant:\n')
 
 
 def main():
