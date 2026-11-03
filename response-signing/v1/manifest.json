@@ -12,6 +12,12 @@
       "response_cases": 2,
       "accepted": 1,
       "signing_cases": 0
+    },
+    "isolated-certificate-rules.json": {
+      "sha256": "7304bb12f011688a39b53ebd5fb5d842febd0f5ae81e67126a7e24d1e79a225a",
+      "response_cases": 4,
+      "accepted": 1,
+      "signing_cases": 0
     }
   }
 }

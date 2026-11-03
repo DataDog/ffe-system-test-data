@@ -10,6 +10,7 @@ clients do not fetch them when evaluating flags or verifying a response.
 | File | Coverage | Consumers |
 | --- | --- | --- |
 | `v1/corpus.json` | 46 response cases: 6 accepted and 40 rejected; 2 private-key matching cases | Verifiers consume `cases`; signers also consume `signing_cases` |
+| `v1/isolated-certificate-rules.json` | Accepted control and isolated certificate-size, leaf-CA and intermediate-CA rejections | Signers and verifiers |
 | `v1/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in certificate extensions | Signers and verifiers |
 
 Version 1 is the first public response-signing protocol. Earlier POC v1/v2 and
@@ -74,3 +75,11 @@ Review expectation changes together with the fixtures and update the manifest
 deliberately. Do not reformat signed body bytes, regenerate keys, or normalize
 headers during import. Follow the repository's [consumer pinning
 rules](../CONTRIBUTING.md#updating-downstream-repositories).
+
+The isolated certificate cases retain valid certificate and response signatures.
+The oversized leaf uses a noncritical DER OCTET STRING extension for padding;
+the leaf-CA case keeps leaf KeyUsage and no path-length constraint; the
+intermediate-CA case keeps CA KeyUsage and path length zero while omitting
+the default false CA flag. Each negative changes only the named profile rule.
+Consumers must explicitly load this supplement; a manifest entry alone does
+not exercise it. Its leaf credentials are public synthetic test material.

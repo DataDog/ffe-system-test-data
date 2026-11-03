@@ -44,6 +44,11 @@ class ResponseSigningValidationTest(unittest.TestCase):
                 '"expected_accept": false, "expected_accept": true',
             ),
             (
+                "response-signing/v1/isolated-certificate-rules.json",
+                '"expected_accept": true',
+                '"expected_accept": false, "expected_accept": true',
+            ),
+            (
                 "response-signing/v1/corpus.json",
                 '"expected_accept": true',
                 '"expected_accept": false, "expected\\u005faccept": true',
@@ -58,7 +63,7 @@ class ResponseSigningValidationTest(unittest.TestCase):
                 raw = path.read_text()
                 self.assertIn(old, raw)
                 path.write_text(raw.replace(old, new, 1))
-                if path.name in ("corpus.json", "nested-der.json"):
+                if path.name in ("corpus.json", "nested-der.json", "isolated-certificate-rules.json"):
                     # Keep integrity checks valid so rejection must come from JSON parsing.
                     manifest_path = root / "response-signing/v1/manifest.json"
                     manifest = json.loads(manifest_path.read_text())
