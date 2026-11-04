@@ -48,14 +48,14 @@
       }
     ]
   },
-  "_skip": [
+  "_include": [
     {
-      "reason": "JavaScript cannot represent integers beyond 2^53-1 without loss of precision. This fixture uses a value outside the safe JavaScript integer range.",
-      "platform": "web"
+      "platform": "ios",
+      "reason": "The native integer API preserves signed 64-bit integers. Browser Dart must report separate applicability."
     },
     {
-      "reason": "The Android public integer flag evaluation API currently uses Int32 and cannot represent this value. Revisit when the API supports Long.",
-      "platform": "android"
+      "platform": "flutter",
+      "reason": "The native integer API preserves signed 64-bit integers. Browser Dart must report separate applicability."
     }
   ]
 }
