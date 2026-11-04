@@ -71,7 +71,7 @@
       "expectedResult": {
         "value": false,
         "reason": "ERROR",
-        "errorCode": "FLAG_NOT_FOUND",
+        "errorCode": "PARSE_ERROR",
         "variantKey": null
       }
     },
