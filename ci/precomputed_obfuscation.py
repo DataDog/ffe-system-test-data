@@ -2,6 +2,7 @@
 
 import argparse
 import copy
+from dataclasses import dataclass
 import hashlib
 import json
 from pathlib import Path
@@ -9,6 +10,31 @@ from pathlib import Path
 SUPPORTED_PLATFORMS = ("ios", "android", "flutter")
 SALT = "000102030405060708090a0b0c0d0e0f"
 DOMAIN = b"datadog.feature-flags.flag-key.v1\0"
+
+
+@dataclass(frozen=True)
+class NumberLiteral:
+    """An original JSON number token, never converted through binary floating point."""
+    text: str
+
+
+def literal_json(value, depth=0):
+    """Pretty-print JSON while preserving number tokens captured by json.loads."""
+    if isinstance(value, NumberLiteral):
+        return value.text
+    indent = '  ' * (depth + 1)
+    if isinstance(value, dict):
+        items = [json.dumps(k, ensure_ascii=False) + ': ' + literal_json(v, depth + 1)
+                 for k, v in value.items()]
+        opening, closing = '{', '}'
+    elif isinstance(value, list):
+        items = [literal_json(v, depth + 1) for v in value]
+        opening, closing = '[', ']'
+    else:
+        return json.dumps(value, ensure_ascii=False, allow_nan=False)
+    if not items:
+        return opening + closing
+    return opening + '\n' + indent + (',\n' + indent).join(items) + '\n' + '  ' * depth + closing
 
 
 def encode_key(key):
@@ -59,9 +85,9 @@ def expected_companions(cases, exceptions_path):
     for path, source in sources.items():
         if path in exceptions:
             continue
-        data = companion(json.loads(source.read_text()))
+        data = companion(json.loads(source.read_text(), parse_int=NumberLiteral, parse_float=NumberLiteral))
         relative = Path(path).with_name(data["name"] + ".json")
-        result[relative] = (json.dumps(data, indent=2, ensure_ascii=False) + "\n").encode()
+        result[relative] = (literal_json(data) + "\n").encode()
     return result
 
 

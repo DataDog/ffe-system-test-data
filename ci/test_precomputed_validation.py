@@ -40,7 +40,18 @@ class PrecomputedValidationTest(unittest.TestCase):
         self.case['evaluations'] = []
         self.assertTrue(self.validate(self.case))
         self.case['expectedResponseError'] = 'INVALID_RESPONSE'
+        self.case['expectations'] = {'noUnmatchedEvents': True, 'exposures': [], 'evaluationEvents': []}
         self.assertEqual([], self.validate(self.case))
+
+    def test_rejected_response_cannot_allow_or_expect_events(self):
+        self.case['evaluations'] = []
+        self.case['expectedResponseError'] = 'INVALID_RESPONSE'
+        for expectations in [{}, {'noUnmatchedEvents': False},
+                             {'noUnmatchedEvents': True, 'exposures': [{'_count': 1}]},
+                             {'noUnmatchedEvents': True, 'evaluationEvents': [{'_count': 1}]}]:
+            with self.subTest(expectations=expectations):
+                self.case['expectations'] = expectations
+                self.assertTrue(self.validate(self.case))
 
     def test_non_object_is_reported_not_crashed(self):
         self.assertTrue(self.validate([]))

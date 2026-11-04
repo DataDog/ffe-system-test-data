@@ -147,8 +147,8 @@ Valid platforms: `web`, `ios`, `android`, `react-native`, `flutter`, `maui`,
 | Code | When |
 |------|------|
 | `FLAG_NOT_FOUND` | Flag key not in response, or flag dropped due to malformed data |
-| `TYPE_MISMATCH` | Incompatible getter or numeric conversion loses information |
-| `PARSE_ERROR` | Enumerated field contains unexpected value |
+| `TYPE_MISMATCH` | Incompatible getter, fractional/out-of-range Integer read, or rejected Double conversion (see the README numeric rules) |
+| `PARSE_ERROR` | Enumerated field contains an unexpected value. Unsupported `variationType` values are omitted; lookup returns `FLAG_NOT_FOUND`. |
 | `TARGETING_KEY_MISSING` | Evaluation requires targeting key but none provided |
 
 ## Reason codes
@@ -191,8 +191,9 @@ return correct values. Assert malformed flags return `defaultValue` with
 
 ### Testing type mismatch
 
-Put a valid flag in the response but evaluate with a different `variationType`.
-Expect `defaultValue` with `TYPE_MISMATCH`.
+Put a valid flag in the response but evaluate with an incompatible getter, such
+as a boolean getter on a string flag. Expect `defaultValue` with `TYPE_MISMATCH`.
+Numeric getters follow the README numeric rules: exact numeric conversions succeed.
 
 ### Platform-specific behavior
 
@@ -200,11 +201,11 @@ Use `_skip`/`_include` on individual evaluations or matchers. For different
 expected event counts per platform, use separate matchers with `_skip`/`_include`
 rather than platform overrides.
 
-Example — web aggregates 2 evaluations into 1 event:
+Example — only platforms with a separate Integer getter emit this event:
 ```json
 "evaluationEvents": [
-  {"_count": 2, "_skip": [{"platform": "web"}]},
-  {"_count": 1, "_include": [{"platform": "web"}], "evaluation_count": 2}
+  {"_count": 1, "_include": [{"platform": "ios"}, {"platform": "android"}, {"platform": "flutter"}, {"platform": "unity"}],
+   "flag": {"key": "numeric-number-6"}, "evaluation_count": 1, "runtime_default_used": true}
 ]
 ```
 

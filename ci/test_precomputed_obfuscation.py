@@ -30,6 +30,17 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
     def sync(self, check=True):
         return obfuscation.synchronize(self.cases, self.exceptions, check)
 
+    def test_number_tokens_survive_generation_without_rounding(self):
+        for token in ['5.0', '-0', '-0.0', '1e+02', '1.20000000000000001',
+                      '1.00000000000000001', '4503599627370497.5', '9007199254740993.5']:
+            with self.subTest(token=token):
+                raw = json.dumps(self.fixture).replace('"variationValue": 7', '"variationValue": ' + token)
+                self.source.write_text(raw)
+                self.sync(False)
+                generated = next((self.cases / 'obfuscation').rglob('*.json')).read_text()
+                self.assertIn('"variationValue": ' + token + '\n', generated)
+                self.assertEqual([], self.sync())
+
     def test_missing_companion_fails_cli(self):
         result = subprocess.run([sys.executable, str(Path(obfuscation.__file__)), "--check",
                                  "--cases", str(self.cases), "--exceptions", str(self.exceptions)],
