@@ -249,6 +249,30 @@ those known digests, including Unicode, whitespace, and embedded NUL keys.
 
 ## Snapshot maintenance
 
+### Preview client compatibility in fixture PRs
+
+The [mobile compatibility workflow](../.github/workflows/mobile-compatibility.yml)
+runs the iOS canonical XCTest suite on an iOS Simulator and the Android canonical
+JVM unit suite on Linux. Each job checks out its SDK once, records the resolved
+commit, and runs that same code against the fixture merge base and proposed head.
+Snapshots are imported into disposable CI checkouts; SDK repositories are not
+updated or published. The SDK refs temporarily select the development branches
+containing the canonical runners. After those land, change the workflow refs to
+the SDKs' default branches (`develop`).
+
+The PR's Actions summaries show both fixture revisions, the SDK commit, test
+counts, and failures. Artifacts contain separate logs, JUnit XML or Xcode result
+bundles, and `comparison.json`. Test mismatches are advisory. Missing tests,
+snapshot failures, and build/runner failures make the preview incomplete and are
+reported separately. When both revisions fail, the result is inconclusive, not
+proof that the proposed fixtures introduce no additional failures.
+
+These jobs run the checked-out SDK runners unchanged. Their coverage and numeric
+parsing limitations still apply: a green run does not prove preservation of raw
+numeric literals, native-device behavior, or deployed-backend compatibility.
+
+### Refresh consumer snapshots
+
 Consumers can copy `ci/sync-precomputed-fixtures.py` and configure the destination
 in `ci/precomputed-fixtures.json`. The importer copies committed source bytes,
 records the full SHA and file digests in `SOURCE.json`, generates `index.json`,
