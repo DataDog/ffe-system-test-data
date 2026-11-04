@@ -54,6 +54,9 @@ class ResponseSigningValidationTest(unittest.TestCase):
                 '"expected_accept": false, "expected\\u005faccept": true',
             ),
         ]
+        for name in ("subject-der.json", "near-expiry.json"):
+            mutations.append((f"response-signing/v1/{name}", '"expected_accept": true',
+                              '"expected_accept": false, "expected_accept": true'))
         for relative, old, new in mutations:
             with self.subTest(document=relative, replacement=new), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
@@ -63,7 +66,7 @@ class ResponseSigningValidationTest(unittest.TestCase):
                 raw = path.read_text()
                 self.assertIn(old, raw)
                 path.write_text(raw.replace(old, new, 1))
-                if path.name in ("corpus.json", "nested-der.json", "isolated-certificate-rules.json"):
+                if path.parent.name == "v1" and path.name != "manifest.json":
                     # Keep integrity checks valid so rejection must come from JSON parsing.
                     manifest_path = root / "response-signing/v1/manifest.json"
                     manifest = json.loads(manifest_path.read_text())

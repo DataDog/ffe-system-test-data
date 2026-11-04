@@ -29,7 +29,10 @@ def validate(root):
         (directory / "manifest.json").read_text(), object_pairs_hook=reject_duplicate_keys
     )
     assert manifest["schema_version"] == 1
-    assert set(manifest["files"]) == {"corpus.json", "nested-der.json", "isolated-certificate-rules.json"}
+    assert set(manifest["files"]) == {
+        "corpus.json", "nested-der.json", "isolated-certificate-rules.json",
+        "subject-der.json", "near-expiry.json",
+    }
     for name, expected in manifest["files"].items():
         raw = (directory / name).read_bytes()
         assert hashlib.sha256(raw).hexdigest() == expected["sha256"], name
