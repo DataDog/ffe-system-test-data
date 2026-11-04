@@ -2,7 +2,9 @@
 import importlib.util
 import json
 from pathlib import Path
+import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -72,6 +74,48 @@ class SnapshotTests(unittest.TestCase):
         sync.unity_metadata(self.destination)
         self.assertEqual(original, meta.read_text())
         sync.verify(self.destination)
+
+    def test_cli_refresh_preserves_guids_and_replaces_cases(self):
+        consumer = self.root / 'consumer'
+        ci = consumer / 'ci'
+        ci.mkdir(parents=True)
+        importer = ci / 'sync-precomputed-fixtures.py'
+        shutil.copyfile(sync.__file__, importer)
+        (ci / 'precomputed-fixtures.json').write_text(json.dumps({
+            'destination': 'fixtures', 'unityMetadata': True,
+        }))
+        command = [sys.executable, str(importer), '--source', str(self.source), '--ref', 'HEAD']
+        subprocess.run(command, check=True, capture_output=True)
+        destination = consumer / 'fixtures'
+        meta = destination / 'cases/new/nested/case.json.meta'
+        custom_guid = '0123456789abcdef0123456789abcdef'
+        meta.write_text(meta.read_text().replace(
+            meta.read_text().split('guid: ')[1].splitlines()[0], custom_guid,
+        ))
+        removed = self.source / 'precomputed-assignments/cases/removed.json'
+        removed.write_text(json.dumps({'name': 'removed', 'evaluations': []}))
+        subprocess.run(['git', '-C', self.source, 'add', '.'], check=True)
+        commit = ['git', '-C', self.source, '-c', 'commit.gpgsign=false', '-c',
+                  'core.hooksPath=/dev/null', '-c', 'user.name=Fixture test', '-c',
+                  'user.email=fixture@example.invalid', 'commit', '-qm', 'fixture update']
+        subprocess.run(commit, check=True)
+        subprocess.run(command, check=True, capture_output=True)
+        self.assertTrue((destination / 'cases/removed.json.meta').exists())
+        removed.unlink()
+        changed = self.source / 'precomputed-assignments/cases/new/nested/case.json'
+        changed.write_text(json.dumps({'name': 'case', 'evaluations': [], 'description': 'Updated'}))
+        added = changed.with_name('added.json')
+        added.write_text(json.dumps({'name': 'added', 'evaluations': []}))
+        subprocess.run(['git', '-C', self.source, 'add', '.'], check=True)
+        subprocess.run(commit, check=True)
+        subprocess.run(command, check=True, capture_output=True)
+        self.assertIn('guid: ' + custom_guid, meta.read_text())
+        self.assertEqual(changed.read_bytes(), (destination / 'cases/new/nested/case.json').read_bytes())
+        self.assertFalse((destination / 'cases/removed.json').exists())
+        self.assertFalse((destination / 'cases/removed.json.meta').exists())
+        self.assertTrue((destination / 'cases/new/nested/added.json.meta').exists())
+        subprocess.run(command + ['--verify'], check=True, capture_output=True)
+        subprocess.run(command + ['--check'], check=True, capture_output=True)
 
 
 if __name__ == '__main__':
