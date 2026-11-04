@@ -78,6 +78,7 @@ exposure and evaluation events.
 ```json
 "expectations": {
   "noUnmatchedEvents": true,
+  "orderedEvents": true,
   "exposures": [
     {"_count": 1, "flag": "my-flag"}
   ],
@@ -104,6 +105,13 @@ the event is unavailable to later matchers.
 When `true`, the test runner asserts that all received events (both exposures
 and evaluations) are consumed by matchers. No extra events allowed. Applies to
 both event types.
+
+### `orderedEvents`
+
+When `true`, the test runner also asserts that events are emitted in matcher
+order. This is useful when dependency evaluations or exposures must precede the
+root flag's event. Runners that do not support ordered assertions may ignore the
+field unless the fixture includes that platform explicitly.
 
 ### Control fields
 
@@ -241,10 +249,13 @@ python3 ci/validate-precomputed-fixtures.py
 ```
 
 The generator discovers plain JSON files recursively. It changes response-map
-keys and encoding metadata. Public lookup keys, values, results, and event
-expectations stay unchanged. The generated platform filter intersects the
-source filter with consumers that support obfuscation. Evaluation and event
-filters remain unchanged.
+keys, response-internal flag references such as `dependencyEvaluations.flagKey`,
+and encoding metadata. Public lookup keys, values, results, and root event
+identities stay unchanged. Event matchers for response-only dependency identities
+use the same encoded keys as the dependency references. The generated platform
+filter intersects the source filter with consumers that support obfuscation. Web
+remains explicitly opt-in per source fixture until its complete corpus is enabled.
+Evaluation and event filters remain unchanged.
 
 Generated files are under `cases/obfuscation/generated/`, preserving source
 categories and nested paths. Do not edit these files directly. CI compares them

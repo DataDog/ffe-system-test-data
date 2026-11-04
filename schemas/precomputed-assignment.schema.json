@@ -357,6 +357,11 @@
           "default": false,
           "description": "When true, assert that all received events (exposures and evaluations) are consumed by matchers. No extra events allowed."
         },
+        "orderedEvents": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, assert that exposure and evaluation events are emitted in the order declared by their matcher lists."
+        },
         "exposures": {
           "type": "array",
           "items": {

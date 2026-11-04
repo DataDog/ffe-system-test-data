@@ -93,6 +93,47 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         self.assertEqual(["ios", "flutter"], [p["platform"] for p in result["_include"]])
         self.assertNotIn("_skip", result)
 
+    def test_web_only_fixture_gets_obfuscated_companion(self):
+        self.fixture["_include"] = [{"platform": "web"}]
+        result = obfuscation.companion(self.fixture)
+        self.assertEqual(["web"], [p["platform"] for p in result["_include"]])
+
+    def test_response_internal_dependency_keys_are_encoded(self):
+        assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
+        assignment["dependencyEvaluations"] = [
+            {"flagKey": "parent", "isPresentInAssignment": True},
+            {"flagKey": "missing", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND"},
+        ]
+        self.fixture["expectations"] = {
+            "exposures": [{"_count": 1, "flag": {"key": "parent"}}],
+            "evaluationEvents": [{"_count": 1, "flag": {"key": "missing"}}],
+        }
+
+        result = obfuscation.companion(self.fixture)
+        encoded_assignment = result["response"]["data"]["attributes"]["flags"][
+            obfuscation.encode_key("flag")
+        ]
+
+        self.assertEqual(
+            [obfuscation.encode_key("parent"), obfuscation.encode_key("missing")],
+            [entry["flagKey"] for entry in encoded_assignment["dependencyEvaluations"]],
+        )
+        self.assertEqual("parent", assignment["dependencyEvaluations"][0]["flagKey"])
+        self.assertEqual(
+            obfuscation.encode_key("parent"),
+            result["expectations"]["exposures"][0]["flag"]["key"],
+        )
+        self.assertEqual(
+            obfuscation.encode_key("missing"),
+            result["expectations"]["evaluationEvents"][0]["flag"]["key"],
+        )
+
+    def test_root_and_dependency_identity_ambiguity_is_rejected(self):
+        assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
+        assignment["dependencyEvaluations"] = [{"flagKey": "flag", "isPresentInAssignment": True}]
+        with self.assertRaises(ValueError):
+            obfuscation.companion(self.fixture)
+
     def test_exception_requires_existing_source_and_reason(self):
         for entries in [{"evaluator/case.json": ""}, {"deleted.json": "Not applicable"}]:
             self.exceptions.write_text(json.dumps(entries))

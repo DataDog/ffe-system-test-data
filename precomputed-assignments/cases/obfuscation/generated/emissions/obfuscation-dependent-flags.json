@@ -1,0 +1,193 @@
+{
+  "name": "obfuscation-dependent-flags",
+  "description": "Generated obfuscated companion: A successful dependency graph emits all reached evaluations and exposures; a graph with a missing node returns the caller default, emits the missing and propagated ancestor evaluations, and emits no exposures.",
+  "_include": [
+    {
+      "platform": "web",
+      "reason": "Supports obfuscation and the source fixture."
+    }
+  ],
+  "context": {
+    "targetingKey": "dependent-subject",
+    "attributes": {
+      "plan": "pro"
+    }
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-10-21T00:00:00Z",
+        "flags": {
+          "ed34a39386eeed78c9a3c77f87f63f5931da7133da6f331b21efcd81d65de9a3": {
+            "allocationKey": "allocation-success-root",
+            "variationKey": "success-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true,
+            "dependencyEvaluations": [
+              {
+                "flagKey": "52e164353df37bd1dcf216dea0c80ecbdbce0ab0b7b1117d6e2b637f5e3c9736",
+                "isPresentInAssignment": true
+              },
+              {
+                "flagKey": "a09db0bea9c8fc685e2f75cf86f1e5fe4072e57ba787fd3cd761540ef0144169",
+                "isPresentInAssignment": true
+              }
+            ]
+          },
+          "52e164353df37bd1dcf216dea0c80ecbdbce0ab0b7b1117d6e2b637f5e3c9736": {
+            "allocationKey": "allocation-success-leaf",
+            "variationKey": "leaf-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "a09db0bea9c8fc685e2f75cf86f1e5fe4072e57ba787fd3cd761540ef0144169": {
+            "allocationKey": "allocation-success-parent",
+            "variationKey": "parent-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "deb1d0f9fe8eb5b067763cf1c5d97a65e0b3decd3165b7016a0c26e63767710e": {
+            "reason": "ERROR",
+            "errorCode": "FLAG_NOT_FOUND",
+            "dependencyEvaluations": [
+              {
+                "flagKey": "a468d9e8653c270c407fdbe548125b4abdf9b463b97b03d61484bb8304df727f",
+                "isPresentInAssignment": false
+              },
+              {
+                "flagKey": "94132990b418ac174a57ceca4c315217c333a0c3518d6a76b3245a2d9a42e69a",
+                "reason": "ERROR",
+                "errorCode": "FLAG_NOT_FOUND"
+              },
+              {
+                "flagKey": "01b5557f45e5573ee297e3704203cb62077f1db7e111d661c09a92aa38a67924",
+                "reason": "ERROR",
+                "errorCode": "FLAG_NOT_FOUND"
+              }
+            ]
+          },
+          "a468d9e8653c270c407fdbe548125b4abdf9b463b97b03d61484bb8304df727f": {
+            "allocationKey": "allocation-failure-leaf",
+            "variationKey": "leaf-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        },
+        "obfuscated": true,
+        "obfuscation": {
+          "scheme": "flag-key-sha256-v1",
+          "salt": "000102030405060708090a0b0c0d0e0f"
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.dependent.success",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "expectedResult": {
+        "value": true,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "success-on"
+      }
+    },
+    {
+      "flag": "fixture.dependent.failure",
+      "variationType": "boolean",
+      "defaultValue": false,
+      "expectedResult": {
+        "value": false,
+        "reason": "ERROR",
+        "errorCode": "FLAG_NOT_FOUND",
+        "variantKey": null
+      }
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "orderedEvents": true,
+    "exposures": [
+      {
+        "_count": 1,
+        "flag": {
+          "key": "52e164353df37bd1dcf216dea0c80ecbdbce0ab0b7b1117d6e2b637f5e3c9736"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "a09db0bea9c8fc685e2f75cf86f1e5fe4072e57ba787fd3cd761540ef0144169"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "fixture.dependent.success"
+        }
+      }
+    ],
+    "evaluationEvents": [
+      {
+        "_count": 1,
+        "flag": {
+          "key": "52e164353df37bd1dcf216dea0c80ecbdbce0ab0b7b1117d6e2b637f5e3c9736"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "a09db0bea9c8fc685e2f75cf86f1e5fe4072e57ba787fd3cd761540ef0144169"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "fixture.dependent.success"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "a468d9e8653c270c407fdbe548125b4abdf9b463b97b03d61484bb8304df727f"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "94132990b418ac174a57ceca4c315217c333a0c3518d6a76b3245a2d9a42e69a"
+        },
+        "error": {
+          "message": "FLAG_NOT_FOUND"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "01b5557f45e5573ee297e3704203cb62077f1db7e111d661c09a92aa38a67924"
+        },
+        "error": {
+          "message": "FLAG_NOT_FOUND"
+        }
+      },
+      {
+        "_count": 1,
+        "flag": {
+          "key": "fixture.dependent.failure"
+        },
+        "error": {
+          "message": "FLAG_NOT_FOUND"
+        }
+      }
+    ]
+  }
+}
