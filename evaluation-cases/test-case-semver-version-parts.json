@@ -1,5 +1,11 @@
 [
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A one-part version is normalized with missing minor and patch parts: \"18\" compares equal to \"18.0.0\".",
     "attributes": {
       "scenario": "one-part-input",
@@ -15,6 +21,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A one-part configured comparand is valid and normalized: \"18.0.0\" compares equal to configured \"18\".",
     "attributes": {
       "app_version": "18.0.0"
@@ -29,6 +41,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A two-part version is normalized with a missing patch part: \"18.0\" compares equal to \"18.0.0\".",
     "attributes": {
       "scenario": "two-part-input",
@@ -44,6 +62,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A two-part configured comparand is valid and normalized: \"18.0.0\" compares equal to configured \"18.0\".",
     "attributes": {
       "app_version": "18.0.0"
@@ -58,6 +82,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A four-part version is accepted as an attribute and compares above a canonical three-part lower version.",
     "attributes": {
       "scenario": "four-part-input",
@@ -73,6 +103,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A four-part configured comparand is accepted and compares below a canonical three-part higher version.",
     "attributes": {
       "app_version": "19.0.0"
@@ -87,6 +123,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A five-part version is accepted as an attribute and compares above a canonical three-part lower version.",
     "attributes": {
       "scenario": "five-part-input",
@@ -102,6 +144,12 @@
     "variationType": "STRING"
   },
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet support the canonical extended SemVer behavior."
+      }
+    ],
     "description": "A five-part configured comparand is accepted and compares below a canonical three-part higher version.",
     "attributes": {
       "app_version": "19.0.0"

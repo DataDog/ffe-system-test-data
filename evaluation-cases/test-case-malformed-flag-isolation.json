@@ -1,5 +1,11 @@
 [
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet isolate malformed flag data."
+      }
+    ],
     "description": "The malformed flag has allocations encoded as a string instead of an array. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {},
     "defaultValue": "default",

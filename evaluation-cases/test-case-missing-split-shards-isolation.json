@@ -1,5 +1,11 @@
 [
   {
+    "_skip": [
+      {
+        "platform": "java",
+        "reason": "FFLSDK-288: dd-trace-java does not yet reject a split with missing shards."
+      }
+    ],
     "description": "The malformed flag has a split that omits required shards. SDKs must return a parse error without poisoning the full configuration.",
     "attributes": {},
     "defaultValue": "default",
