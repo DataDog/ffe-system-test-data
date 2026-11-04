@@ -1,0 +1,136 @@
+name: Mobile compatibility preview
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/mobile-compatibility.yml
+      - ci/mobile_conformance.py
+      - ci/test_mobile_conformance.py
+      - ci/sync-precomputed-fixtures.py
+      - ci/precomputed_obfuscation.py
+      - schemas/precomputed-assignment.schema.json
+      - precomputed-assignments/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-compatibility-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  tooling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s ci -p 'test_mobile_conformance.py'
+
+  mobile:
+    name: ${{ matrix.platform }} unit compatibility (advisory)
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Temporary development branches. Switch each ref to develop after the
+          # canonical runner lands; the checked-out SDK SHA stays fixed per run.
+          - platform: ios
+            runner: macos-26
+            repository: DataDog/dd-sdk-ios
+            ref: leo.romanovsky/precompute-fixture-fanout
+          - platform: android
+            runner: ubuntu-latest
+            repository: DataDog/dd-sdk-android
+            ref: leo.romanovsky/ffl-3568/precompute-fixture-fanout
+    steps:
+      - name: Check out fixture PR
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          path: fixtures
+          persist-credentials: false
+      - name: Check out SDK once for both fixture revisions
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.ref }}
+          path: downstream
+          persist-credentials: false
+      - name: Record revisions
+        id: revisions
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          SDK_REPOSITORY: ${{ matrix.repository }}
+          SDK_REF: ${{ matrix.ref }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/mobile-conformance"
+          base=$(git -C fixtures merge-base "$BASE_SHA" "$HEAD_SHA")
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          {
+            echo "SDK: $SDK_REPOSITORY @ $SDK_REF"
+            git -C downstream rev-parse HEAD
+            echo "Base fixtures: $base"
+            echo "Proposed fixtures: $HEAD_SHA"
+          } | tee "$RUNNER_TEMP/mobile-conformance/revisions.txt" >> "$GITHUB_STEP_SUMMARY"
+      - name: Set up Java
+        if: matrix.platform == 'android'
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare Android build tools
+        if: matrix.platform == 'android'
+        run: |
+          set -o pipefail
+          {
+            java -version
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+              'platforms;android-36' 'build-tools;36.0.0'
+          } 2>&1 | tee "$RUNNER_TEMP/mobile-conformance/setup.log"
+      - name: Set up Ruby for iOS repository setup
+        if: matrix.platform == 'ios'
+        uses: ruby/setup-ruby@a0102e0972be65f351c307e2d64b9314a57c8073 # v1.324.0
+        with:
+          ruby-version: '3.3'
+      - name: Prepare iOS dependencies
+        if: matrix.platform == 'ios'
+        working-directory: downstream
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+        run: |
+          set -o pipefail
+          {
+            xcodebuild -version
+            xcrun simctl list devices available
+            make repo-setup ENV=ci
+            # Public dependencies; the SDK's GitLab STS wrapper is not needed here.
+            carthage bootstrap --platform iOS --use-xcframeworks
+          } 2>&1 | tee "$RUNNER_TEMP/mobile-conformance/setup.log"
+      - name: Compare native unit-test results
+        id: comparison
+        env:
+          PLATFORM: ${{ matrix.platform }}
+          BASE_SHA: ${{ steps.revisions.outputs.base }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+          IOS_DESTINATION: platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5
+        run: |
+          python3 fixtures/ci/mobile_conformance.py \
+            --platform "$PLATFORM" --fixtures "$GITHUB_WORKSPACE/fixtures" \
+            --sdk "$GITHUB_WORKSPACE/downstream" --base "$BASE_SHA" --head "$HEAD_SHA" \
+            --output "$RUNNER_TEMP/mobile-conformance"
+      - name: Report unavailable preview
+        if: failure() && steps.comparison.outcome != 'success'
+        run: |
+          echo 'Mobile preview incomplete: inspect setup/build logs. This is not evidence of fixture compatibility.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload native results and logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: mobile-compatibility-${{ matrix.platform }}
+          path: ${{ runner.temp }}/mobile-conformance
+          if-no-files-found: warn

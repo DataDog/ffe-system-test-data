@@ -140,15 +140,15 @@ Always `[{"platform": "<id>", "reason": "<optional>"}]`. Mutually exclusive.
 Default (neither present): applies to all platforms.
 
 Valid platforms: `web`, `ios`, `android`, `react-native`, `flutter`, `maui`,
-`kotlin-multiplatform`, `electron`.
+`kotlin-multiplatform`, `electron`, `unity`.
 
 ## Error codes
 
 | Code | When |
 |------|------|
 | `FLAG_NOT_FOUND` | Flag key not in response, or flag dropped due to malformed data |
-| `TYPE_MISMATCH` | Requested type does not match `variationType` |
-| `PARSE_ERROR` | Enumerated field contains unexpected value |
+| `TYPE_MISMATCH` | Incompatible getter, fractional/out-of-range Integer read, or rejected Double conversion (see the README numeric rules) |
+| `PARSE_ERROR` | Enumerated field contains an unexpected value, including an unsupported `variationType`. Preserve the per-flag parse error; healthy sibling flags remain evaluable. |
 | `TARGETING_KEY_MISSING` | Evaluation requires targeting key but none provided |
 
 ## Reason codes
@@ -191,8 +191,9 @@ return correct values. Assert malformed flags return `defaultValue` with
 
 ### Testing type mismatch
 
-Put a valid flag in the response but evaluate with a different `variationType`.
-Expect `defaultValue` with `TYPE_MISMATCH`.
+Put a valid flag in the response but evaluate with an incompatible getter, such
+as a boolean getter on a string flag. Expect `defaultValue` with `TYPE_MISMATCH`.
+Numeric getters follow the README numeric rules: exact numeric conversions succeed.
 
 ### Platform-specific behavior
 
@@ -200,10 +201,25 @@ Use `_skip`/`_include` on individual evaluations or matchers. For different
 expected event counts per platform, use separate matchers with `_skip`/`_include`
 rather than platform overrides.
 
-Example — web aggregates 2 evaluations into 1 event:
+Example — only platforms with a separate Integer getter emit this event:
 ```json
 "evaluationEvents": [
-  {"_count": 2, "_skip": [{"platform": "web"}]},
-  {"_count": 1, "_include": [{"platform": "web"}], "evaluation_count": 2}
+  {"_count": 1, "_include": [{"platform": "ios"}, {"platform": "android"}, {"platform": "flutter"}, {"platform": "unity"}],
+   "flag": {"key": "numeric-number-6"}, "evaluation_count": 1, "runtime_default_used": true}
 ]
 ```
+
+## Obfuscated companions
+
+Generate a companion for each plain precomputed fixture:
+
+```bash
+python3 ci/precomputed_obfuscation.py --write
+python3 ci/precomputed_obfuscation.py --check
+```
+
+Do not edit `precomputed-assignments/cases/obfuscation/generated/` manually.
+Keep rejection fixtures and fixed digest vectors outside that generated folder.
+CI checks companion content, not just file existence. A new case is discovered
+without a filename list. Read [the coverage policy](precomputed-assignments/README.md#plain-and-obfuscated-coverage)
+for the explicit exception format and platform applicability rules.
