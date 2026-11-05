@@ -341,7 +341,7 @@
     "variationType": "STRING"
   },
   {
-    "description": "Unknown fields inside flagEvaluation, on its condition, and in evaluatorParams are ignored while the prerequisite key is evaluated normally.",
+    "description": "The 'property' key inside flagEvaluation is deliberately unknown and must be ignored; only 'key' selects the prerequisite. The unknownConditionField and unknownEvaluatorField keys must also be ignored, preserving the normal assignment and telemetry.",
     "attributes": {},
     "defaultValue": "caller-default",
     "flag": "dependent-unknown-fields-root",
