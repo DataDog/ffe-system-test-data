@@ -111,7 +111,7 @@ than one reason applies, the first in this table wins:
 | 2 | `too_many_values` | A list holds more than 31 values after normalization | Yes |
 | 3 | `invalid_key_pattern` | A key pattern is longer than 200 bytes after trimming | Yes |
 | 4 | `invalid_tag` | A tag is longer than 200 bytes after trimming | Yes |
-| 5 | `tag_load_failed` | The selection uses tags and the server cannot load the tags of the configured flags | No, server state |
+| 5 | `tag_load_failed` | The server cannot load the tags of the configured flags, whether or not the selection uses tags | No, server state |
 
 A parameter that is not a selection parameter never causes `malformed_selection`,
 even when it cannot be decoded. Parameter names are percent-decoded before they
@@ -157,7 +157,8 @@ to the SDK's canonicalization step. A parameter missing from `query` is an
 omitted list. Then:
 
 - `sdk.selection`: compare the canonical lists the SDK would send, in order.
-  When both are empty, the SDK sends no selection parameters.
+  The SDK sends no parameter for an empty list, so when both are empty it sends
+  no selection parameters.
 - `sdk.dropped`: the SDK drops the selection with this reason and sends none.
 
 ## End-to-end suite

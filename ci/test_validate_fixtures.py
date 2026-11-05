@@ -213,9 +213,11 @@ class FlagSelectionSuiteValidationTest(unittest.TestCase):
             ({"flags": [{"key": "root-only-flag", "tags": []}]}, "must name a flag"),
             ({"flags": [{"key": "suite-flag", "tags": []}, {"key": "suite-flag", "tags": []}]}, "is repeated"),
             ({"flags": [{"key": "suite-flag", "tags": ["", "team:checkout"]}]}, "non-empty strings"),
-            ({"flags": [{"key": "suite-flag"}]}, "only key and tags"),
+            ({"flags": [{"key": "suite-flag"}]}, "exactly key and tags"),
+            ({"flags": [{"key": "suite-flag", "tags": [], "owner": "team-checkout"}]}, "exactly key and tags"),
+            ({"flags": [{"key": "suite-flag", "tags": "team:checkout"}]}, "non-empty strings"),
             ({"flags": []}, "non-empty array"),
-            ({"flags": [], "extra": True}, "only flags"),
+            ({"flags": [], "extra": True}, "exactly one field, flags"),
         )
         for flag_tags, message in invalid:
             with self.subTest(flag_tags=flag_tags), tempfile.TemporaryDirectory() as temporary_directory:
@@ -263,7 +265,9 @@ class FlagSelectionSuiteValidationTest(unittest.TestCase):
                 "sends no selection",
             ),
             ({"configurationResponse": {"flagSelectionIgnored": "unknown_reason"}}, "must be one of"),
-            ({"configurationResponse": {"reason": "tag_load_failed"}}, "only flagSelectionIgnored"),
+            ({"configurationResponse": {"flagSelectionIgnored": ["tag_load_failed"]}}, "must be one of"),
+            ({"providerOptions": {}}, "without the provider option"),
+            ({"configurationResponse": {"reason": "tag_load_failed"}}, "exactly one field, flagSelectionIgnored"),
             (
                 {"expectations": no_selection, "configurationResponse": {"flagSelectionIgnored": "tag_load_failed"}},
                 "sends a selection",
@@ -273,6 +277,99 @@ class FlagSelectionSuiteValidationTest(unittest.TestCase):
             with self.subTest(fields=fields):
                 with self.assertRaisesRegex(validator.FixtureValidationError, message):
                     self.validate_case(self.case(**fields))
+
+    def test_provider_start_fields_reject_more_invalid_shapes(self) -> None:
+        def request(tags: object, key_patterns: object) -> dict[str, object]:
+            selection = {"selectedFlagTags": tags, "selectedFlagKeyPatterns": key_patterns}
+            return {"expectations": {"configurationRequest": selection}}
+
+        invalid = (
+            ({"providerOptions": {"flagSelection": []}}, "string arrays"),
+            ({"providerOptions": {"flagSelection": {"tags": "team:checkout"}}}, "string arrays"),
+            ({"expectations": []}, "expectations must be an object"),
+            ({"expectations": {"configurationRequest": None}}, "flagSelection\": null"),
+            (request(["", "team:checkout"], []), "selectedFlagTags must hold"),
+            (request([" team:checkout"], []), "selectedFlagTags must hold trimmed"),
+            (request(["team:checkout"], ["b*", "a*"]), "selectedFlagKeyPatterns must hold"),
+            (request(["team:checkout"], [""]), "selectedFlagKeyPatterns must hold"),
+            (request(["\U0001F600", "\uff61"], []), "sorted by UTF-8 bytes"),
+            ({"configurationResponse": None}, "exactly one field, flagSelectionIgnored"),
+            (
+                {"configurationResponse": {"flagSelectionIgnored": "tag_load_failed", "status": 200}},
+                "exactly one field, flagSelectionIgnored",
+            ),
+        )
+        for fields, message in invalid:
+            with self.subTest(fields=fields):
+                with self.assertRaisesRegex(validator.FixtureValidationError, message):
+                    self.validate_case(self.case(**fields))
+
+    def test_provider_start_fields_accept_utf8_order(self) -> None:
+        for tags in (["\uff61", "\U0001F600"], ["\ud800"]):
+            with self.subTest(tags=tags):
+                self.validate_case(
+                    self.case(
+                        providerOptions={"flagSelection": {"tags": tags}},
+                        expectations={
+                            "configurationRequest": {"selectedFlagTags": tags, "selectedFlagKeyPatterns": []}
+                        },
+                    )
+                )
+
+    def test_each_provider_start_field_must_match_case_0(self) -> None:
+        differing = (
+            (self.case(configurationResponse={"flagSelectionIgnored": "tag_load_failed"}), "configurationResponse"),
+            (self.case(providerOptions={"flagSelection": {"tags": ["team:checkout"]}}), "providerOptions"),
+            (
+                self.case(expectations={"configurationRequest": {"flagSelection": None}}),
+                "expectations.configurationRequest",
+            ),
+        )
+        for other, field in differing:
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as temporary_directory:
+                config_path, cases_directory = self.write_suite(
+                    temporary_directory,
+                    {"flags": [{"key": "suite-flag", "tags": ["team:checkout"]}]},
+                    [self.case(), other],
+                )
+                with self.assertRaisesRegex(validator.FixtureValidationError, f"case 1 {field} must equal case 0's"):
+                    validator._validate_suite(config_path, cases_directory, self.platforms, self_contained=True)
+
+    def test_flag_tags_must_be_a_regular_file(self) -> None:
+        flag_tags = {"flags": [{"key": "suite-flag", "tags": ["team:checkout"]}]}
+        for kind in ("symlink", "dangling symlink", "directory"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temporary_directory:
+                config_path, cases = self.write_suite(temporary_directory, flag_tags, [self.case()])
+                flag_tags_path = config_path.parent / "flag-tags.json"
+                flag_tags_path.unlink()
+                if kind == "directory":
+                    flag_tags_path.mkdir()
+                else:
+                    target = Path(temporary_directory) / "flag-tags-target.json"
+                    if kind == "symlink":
+                        target.write_text(json.dumps(flag_tags), encoding="utf-8")
+                    flag_tags_path.symlink_to(target)
+                with self.assertRaisesRegex(validator.FixtureValidationError, "must be a regular file"):
+                    validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+
+    def test_flag_selection_fields_require_flag_tags(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            config_path, cases = self.write_suite(
+                temporary_directory, {"flags": [{"key": "suite-flag", "tags": []}]}, [self.case()]
+            )
+            (config_path.parent / "flag-tags.json").unlink()
+            with self.assertRaisesRegex(validator.FixtureValidationError, "require a suite with flag-tags.json"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+
+    def test_suite_with_flag_tags_requires_a_configuration_request(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            config_path, cases = self.write_suite(
+                temporary_directory,
+                {"flags": [{"key": "suite-flag", "tags": []}]},
+                [EvaluationSuiteValidationTest.case("suite-flag")],
+            )
+            with self.assertRaisesRegex(validator.FixtureValidationError, "needs expectations.configurationRequest"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
 
     def test_cases_in_a_file_share_one_provider_start(self) -> None:
         other_start = self.case(
