@@ -1,0 +1,1027 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DataDog/ffe-system-test-data/schemas/experimentation-opt-out.schema.json",
+  "title": "Experimentation opt-out v1 contract artifacts",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/manifest"
+    },
+    {
+      "$ref": "#/$defs/evaluationCase"
+    },
+    {
+      "$ref": "#/$defs/protocolCase"
+    },
+    {
+      "$ref": "#/$defs/sequence"
+    },
+    {
+      "$ref": "#/$defs/independentShardVectors"
+    }
+  ],
+  "$defs": {
+    "feature": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "destinations"
+      ],
+      "additionalProperties": false
+    },
+    "assignment": {
+      "type": "object",
+      "properties": {
+        "value": {},
+        "allocationKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variationKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doLog": {
+          "type": "boolean"
+        },
+        "serialId": {
+          "type": "integer"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/feature"
+          }
+        },
+        "wireReason": {
+          "enum": [
+            "STATIC",
+            "SPLIT",
+            "DEFAULT",
+            "TARGETING_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "allocationKey",
+        "variationKey",
+        "doLog",
+        "serialId",
+        "wireReason"
+      ],
+      "additionalProperties": false
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "enableExperimentationOptOutParameter": {
+          "type": "boolean"
+        },
+        "enableEvaluationTelemetryOptOutParameter": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "context": {
+      "$ref": "precomputed-assignment.schema.json#/$defs/EvaluationContext"
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "flag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variationType": {
+          "enum": [
+            "STRING",
+            "BOOLEAN",
+            "INTEGER",
+            "NUMERIC",
+            "JSON"
+          ]
+        },
+        "defaultValue": {},
+        "now": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "flag",
+        "variationType",
+        "defaultValue",
+        "now"
+      ],
+      "additionalProperties": false
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "effectiveExperimentationOptOut": {
+          "type": "boolean"
+        },
+        "outcome": {
+          "enum": [
+            "assignment",
+            "no-assignment",
+            "incompatible-configuration",
+            "invalid-configuration"
+          ]
+        },
+        "assignment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/assignment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value": {},
+        "evaluationTelemetryEnabled": {
+          "type": "boolean"
+        },
+        "requestEvaluationOptions": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "experimentation_opt_out": {
+                  "const": true
+                }
+              },
+              "required": [
+                "experimentation_opt_out"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "effectiveExperimentationOptOut",
+        "outcome",
+        "assignment",
+        "value",
+        "evaluationTelemetryEnabled",
+        "requestEvaluationOptions"
+      ],
+      "additionalProperties": false
+    },
+    "evaluationCase": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "evaluation"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configuration": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "providerOptions": {
+          "$ref": "#/$defs/options"
+        },
+        "context": {
+          "$ref": "#/$defs/context"
+        },
+        "evaluation": {
+          "$ref": "#/$defs/evaluation"
+        },
+        "expected": {
+          "$ref": "#/$defs/expected"
+        },
+        "expectations": {
+          "$ref": "precomputed-assignment.schema.json#/$defs/Expectations"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "id",
+        "description",
+        "configuration",
+        "providerOptions",
+        "context",
+        "evaluation",
+        "expected",
+        "expectations",
+        "tags"
+      ],
+      "additionalProperties": false
+    },
+    "protocolCase": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "protocol"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "enum": [
+            "request-validation",
+            "response-validation"
+          ]
+        },
+        "requestedOptOut": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "object"
+        },
+        "expected": {
+          "type": "object",
+          "properties": {
+            "accepted": {
+              "type": "boolean"
+            },
+            "effectiveExperimentationOptOut": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "publishAssignments": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "accepted",
+            "effectiveExperimentationOptOut",
+            "publishAssignments"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "id",
+        "description",
+        "operation",
+        "requestedOptOut",
+        "message",
+        "expected"
+      ],
+      "additionalProperties": false
+    },
+    "step": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "configure"
+            },
+            "providerOptions": {
+              "$ref": "#/$defs/options"
+            },
+            "environment": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "action",
+            "providerOptions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "set-context"
+            },
+            "context": {
+              "$ref": "#/$defs/context"
+            },
+            "expectedPublishedCase": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "context",
+            "expectedPublishedCase"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "start-request"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "expectedEvaluationOptions": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "experimentation_opt_out": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "experimentation_opt_out"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "requestId",
+            "expectedEvaluationOptions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "deliver-response"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "caseId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "acknowledgement": {
+              "enum": [
+                "applied",
+                "missing",
+                "false"
+              ]
+            },
+            "expectedAccepted": {
+              "type": "boolean"
+            },
+            "expectedPublishedCase": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "requestId",
+            "caseId",
+            "acknowledgement",
+            "expectedAccepted",
+            "expectedPublishedCase"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "fail-request"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "expectedPublishedCase": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "requestId",
+            "expectedPublishedCase"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "evaluate"
+            },
+            "caseId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "expectedValue": {},
+            "expectedExposureCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "expectedEvaluationTelemetry": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "action",
+            "caseId",
+            "expectedValue",
+            "expectedExposureCount",
+            "expectedEvaluationTelemetry"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "persist-cache"
+            },
+            "cacheId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            }
+          },
+          "required": [
+            "action",
+            "cacheId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "restart"
+            },
+            "providerOptions": {
+              "$ref": "#/$defs/options"
+            },
+            "context": {
+              "$ref": "#/$defs/context"
+            },
+            "cacheId": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]*$"
+            },
+            "expectedPublishedCase": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "environment": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "action",
+            "providerOptions",
+            "context",
+            "cacheId",
+            "expectedPublishedCase"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "sequence": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "sequence"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "flag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "defaultValue": {},
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "id",
+        "description",
+        "flag",
+        "defaultValue",
+        "steps"
+      ],
+      "additionalProperties": false
+    },
+    "fileEntry": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(cases|protocol|sequences)/[a-z0-9-]+\\.json$"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "path",
+        "ids"
+      ],
+      "additionalProperties": false
+    },
+    "configEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^configurations/[a-z0-9-]+\\.json$"
+        },
+        "provenance": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "reviewed-contract-input"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "kind",
+                "description"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "compiler-generated"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "scenario": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]*$"
+                }
+              },
+              "required": [
+                "kind",
+                "description",
+                "scenario"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "path",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "manifest"
+        },
+        "capability": {
+          "const": "experimentation-opt-out-v1"
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/configEntry"
+          },
+          "minItems": 1
+        },
+        "evaluationCases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fileEntry"
+          },
+          "minItems": 1
+        },
+        "protocolCases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fileEntry"
+          },
+          "minItems": 1
+        },
+        "sequences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fileEntry"
+          },
+          "minItems": 1
+        },
+        "expectedCounts": {
+          "type": "object",
+          "properties": {
+            "configurations": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "evaluations": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "protocols": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "sequences": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "configurations",
+            "evaluations",
+            "protocols",
+            "sequences"
+          ],
+          "additionalProperties": false
+        },
+        "bucketing": {
+          "type": "object",
+          "properties": {
+            "salt": {
+              "type": "string",
+              "minLength": 1
+            },
+            "totalShards": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "algorithm": {
+              "type": "string",
+              "minLength": 1
+            },
+            "vectors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "targetingKey": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "md5": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{32}$"
+                  },
+                  "shard": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "targetingKey",
+                  "md5",
+                  "shard"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "salt",
+            "totalShards",
+            "algorithm",
+            "vectors"
+          ],
+          "additionalProperties": false
+        },
+        "invariants": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eligibleParityCaseIds",
+            "concurrentServerCaseIds",
+            "concurrentServerRepetitions",
+            "localRepresentations"
+          ],
+          "properties": {
+            "eligibleParityCaseIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            },
+            "concurrentServerCaseIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true,
+              "minItems": 2
+            },
+            "concurrentServerRepetitions": {
+              "type": "integer",
+              "minimum": 2
+            },
+            "localRepresentations": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "json",
+                  "protobuf",
+                  "rkyv"
+                ]
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          }
+        },
+        "compilerGeneration": {
+          "type": "object",
+          "properties": {
+            "provenancePath": {
+              "const": "compiler-generated/PROVENANCE.md"
+            },
+            "provenanceSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "observationsPath": {
+              "const": "compiler-generated/compiler-scenarios.json"
+            },
+            "observationsSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "hashVectorsPath": {
+              "const": "compiler-generated/hash-vectors.json"
+            },
+            "hashVectorsSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "pairs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "scenario": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9-]*$"
+                  },
+                  "configurationId": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9-]*$"
+                  },
+                  "jsonSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "protobufPath": {
+                    "type": "string",
+                    "pattern": "^compiler-generated/compiler-[a-z0-9-]+\\.pb$"
+                  },
+                  "protobufSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "scenario",
+                  "configurationId",
+                  "jsonSha256",
+                  "protobufPath",
+                  "protobufSha256"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "eligibleParityCaseIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "provenancePath",
+            "provenanceSha256",
+            "observationsPath",
+            "observationsSha256",
+            "hashVectorsPath",
+            "hashVectorsSha256",
+            "pairs",
+            "eligibleParityCaseIds"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "capability",
+        "configurations",
+        "evaluationCases",
+        "protocolCases",
+        "sequences",
+        "expectedCounts",
+        "bucketing",
+        "invariants"
+      ],
+      "additionalProperties": false
+    },
+    "independentShardVectors": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "independent-shard-vectors"
+        },
+        "algorithm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetingKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "salt": {
+                "type": "string",
+                "minLength": 1
+              },
+              "totalShards": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "md5": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{32}$"
+              },
+              "shard": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "targetingKey",
+              "salt",
+              "totalShards",
+              "md5",
+              "shard"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "subjectRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "targetingKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "targetingKey",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "kind",
+        "algorithm",
+        "vectors",
+        "subjectRoles"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
