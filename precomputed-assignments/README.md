@@ -74,8 +74,35 @@ A flag key must occur in at most one map. Clients that support dependent flags
 resolve an error entry with the caller's default value. Legacy clients ignore
 the unknown sibling map and treat the failed flag as absent. Fixtures must never
 invent a variation value or other legacy assignment fields for a failed
-evaluation. Obfuscated responses encode keys in both maps and every
-`dependencyEvaluations[].flagKey`.
+evaluation.
+
+### Obfuscated dependency references
+
+In an obfuscated response, keys in `flags` and `flagEvaluationErrors` use the
+existing `flag-key-sha256-v1` digest. Each
+`dependencyEvaluations[].flagKey` instead contains the plaintext dependency
+key encrypted for its plaintext root flag key. A capable SDK already has the
+root key supplied to the getter: it decrypts the dependency key, applies the
+normal `flag-key-sha256-v1` digest to that plaintext key, and uses the digest
+to find the dependency's top-level entry. Dependency telemetry uses the
+recovered plaintext key.
+
+The encrypted value is unpadded base64url of `nonce || ciphertext || tag`:
+
+- Cipher: AES-256-GCM with a 12-byte nonce and 16-byte tag.
+- Key: HKDF-SHA256 with UTF-8 root flag key as input key material, the
+  response obfuscation salt as the salt, and
+  `datadog.feature-flags.dependency-key.v1` as `info`.
+- Nonce: the first 12 bytes of
+  `HMAC-SHA256(key, "datadog.feature-flags.dependency-key.nonce.v1\\0" ||
+  UTF8(dependencyKey))`.
+- AAD: `datadog.feature-flags.dependency-key.v1\0`.
+
+The response salt is freshly generated for every response, so this
+deterministic nonce is scoped to one root key and response salt. Authentication
+or UTF-8 decoding failure makes the root evaluation fail with `PARSE_ERROR`;
+SDKs must not fall back to interpreting the value as plaintext or as a digest.
+Plain responses continue to carry plaintext dependency keys.
 
 ## Evaluations
 
@@ -283,8 +310,10 @@ python3 ci/validate-precomputed-fixtures.py
 The generator discovers plain JSON files recursively. It changes response-map
 keys, response-internal flag references such as `dependencyEvaluations.flagKey`,
 and encoding metadata. Public lookup keys, values, results, and root event
-identities stay unchanged. Event matchers for response-only dependency identities
-use the same encoded keys as the dependency references. The generated platform
+identities stay unchanged. In obfuscated responses, dependency references are
+AES-256-GCM ciphertexts derived from the plaintext root key and response salt.
+Capable SDKs decrypt them for plaintext telemetry, then hash the recovered key
+for top-level lookup. The generated platform
 filter intersects the source filter with consumers that support obfuscation. Web
 remains explicitly opt-in per source fixture until its complete corpus is enabled.
 Evaluation and event filters remain unchanged.

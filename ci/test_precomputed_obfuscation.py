@@ -98,7 +98,7 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         result = obfuscation.companion(self.fixture)
         self.assertEqual(["web"], [p["platform"] for p in result["_include"]])
 
-    def test_response_internal_dependency_keys_are_encoded(self):
+    def test_response_internal_dependency_keys_are_encrypted_for_the_root(self):
         assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
         assignment["dependencyEvaluations"] = [
             {"flagKey": "parent", "isPresentInAssignment": True},
@@ -115,24 +115,33 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         ]
 
         self.assertEqual(
-            [obfuscation.encode_key("parent"), obfuscation.encode_key("missing")],
+            [
+                obfuscation.encrypt("flag", "parent", bytes.fromhex(obfuscation.SALT)),
+                obfuscation.encrypt("flag", "missing", bytes.fromhex(obfuscation.SALT)),
+            ],
             [entry["flagKey"] for entry in encoded_assignment["dependencyEvaluations"]],
         )
         self.assertEqual("parent", assignment["dependencyEvaluations"][0]["flagKey"])
         self.assertEqual(
-            obfuscation.encode_key("parent"),
+            "parent",
             result["expectations"]["exposures"][0]["flag"]["key"],
         )
         self.assertEqual(
-            obfuscation.encode_key("missing"),
+            "missing",
             result["expectations"]["evaluationEvents"][0]["flag"]["key"],
         )
 
-    def test_root_and_dependency_identity_ambiguity_is_rejected(self):
+    def test_flag_can_be_both_a_root_and_a_dependency(self):
         assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
         assignment["dependencyEvaluations"] = [{"flagKey": "flag", "isPresentInAssignment": True}]
-        with self.assertRaises(ValueError):
-            obfuscation.companion(self.fixture)
+        result = obfuscation.companion(self.fixture)
+        encoded_assignment = result["response"]["data"]["attributes"]["flags"][
+            obfuscation.encode_key("flag")
+        ]
+        self.assertEqual(
+            obfuscation.encrypt("flag", "flag", bytes.fromhex(obfuscation.SALT)),
+            encoded_assignment["dependencyEvaluations"][0]["flagKey"],
+        )
 
     def test_error_map_and_its_dependency_keys_are_encoded(self):
         attributes = self.fixture["response"]["data"]["attributes"]
@@ -150,7 +159,7 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         errors = result["response"]["data"]["attributes"]["flagEvaluationErrors"]
         encoded_error = errors[obfuscation.encode_key("failed")]
         self.assertEqual(
-            obfuscation.encode_key("missing"),
+            obfuscation.encrypt("failed", "missing", bytes.fromhex(obfuscation.SALT)),
             encoded_error["dependencyEvaluations"][0]["flagKey"],
         )
 

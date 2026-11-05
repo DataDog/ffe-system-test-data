@@ -7,6 +7,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from dependency_key_encryption import encrypt
+
 SUPPORTED_PLATFORMS = ("ios", "android", "flutter")
 EXPLICIT_SUPPORTED_PLATFORMS = ("web",)
 SALT = "000102030405060708090a0b0c0d0e0f"
@@ -42,8 +44,8 @@ def encode_key(key):
     return hashlib.sha256(DOMAIN + bytes.fromhex(SALT) + key.encode("utf-8")).hexdigest()
 
 
-def encode_assignment_references(assignment, dependency_keys):
-    """Encode response-internal flag references and collect their plaintext identities."""
+def encode_assignment_references(assignment, root_key):
+    """Encrypt response-internal flag references for the plaintext root identity."""
     if not isinstance(assignment, dict):
         return assignment
     dependencies = assignment.get("dependencyEvaluations")
@@ -54,24 +56,8 @@ def encode_assignment_references(assignment, dependency_keys):
     for dependency in dependencies:
         if not isinstance(dependency, dict) or not isinstance(dependency.get("flagKey"), str):
             raise ValueError("Dependency evaluation must contain a string flagKey")
-        dependency_keys.add(dependency["flagKey"])
-        dependency["flagKey"] = encode_key(dependency["flagKey"])
+        dependency["flagKey"] = encrypt(root_key, dependency["flagKey"], bytes.fromhex(SALT))
     return assignment
-
-
-def encode_dependency_event_expectations(fixture, dependency_keys):
-    """Keep caller-known root identities plain and encode response-only dependency identities."""
-    public_keys = {evaluation.get("flag") for evaluation in fixture.get("evaluations", [])}
-    ambiguous = dependency_keys & public_keys
-    if ambiguous:
-        raise ValueError("Cannot generate event identities for a flag evaluated as both root and dependency")
-    expectations = fixture.get("expectations", {})
-    for family in ("exposures", "evaluationEvents"):
-        for matcher in expectations.get(family, []):
-            flag = matcher.get("flag")
-            if isinstance(flag, dict) and flag.get("key") in dependency_keys:
-                flag["key"] = encode_key(flag["key"])
-
 
 def companion(source):
     result = copy.deepcopy(source)
@@ -94,9 +80,8 @@ def companion(source):
         {"platform": p, "reason": "Supports obfuscation and the source fixture."}
         for p in platforms
     ]
-    dependency_keys = set()
     attributes["flags"] = {
-        encode_key(key): encode_assignment_references(value, dependency_keys)
+        encode_key(key): encode_assignment_references(value, key)
         for key, value in attributes["flags"].items()
     }
     if "flagEvaluationErrors" in attributes:
@@ -104,10 +89,9 @@ def companion(source):
         if not isinstance(errors, dict):
             raise ValueError("flagEvaluationErrors must be an object")
         attributes["flagEvaluationErrors"] = {
-            encode_key(key): encode_assignment_references(value, dependency_keys)
+            encode_key(key): encode_assignment_references(value, key)
             for key, value in errors.items()
         }
-    encode_dependency_event_expectations(result, dependency_keys)
     attributes["obfuscated"] = True
     attributes["obfuscation"] = {"scheme": "flag-key-sha256-v1", "salt": SALT}
     # Public lookup keys, results, events, and evaluation filters remain identical.
