@@ -45,6 +45,38 @@ Each fixture file is a single JSON object:
 | `_skip` | array | no | Skip entire fixture for listed platforms |
 | `_include` | array | no | Run fixture only for listed platforms |
 
+### Assignment and evaluation-error maps
+
+`response.data.attributes.flags` contains only complete assignments that legacy
+clients can evaluate. A dependent evaluation that fails is absent from `flags`
+and is represented for capable clients in the optional sibling
+`flagEvaluationErrors` map:
+
+```json
+{
+  "flags": {
+    "successful-flag": {
+      "variationType": "boolean",
+      "variationValue": true
+    }
+  },
+  "flagEvaluationErrors": {
+    "failed-flag": {
+      "reason": "ERROR",
+      "errorCode": "FLAG_NOT_FOUND",
+      "dependencyEvaluations": []
+    }
+  }
+}
+```
+
+A flag key must occur in at most one map. Clients that support dependent flags
+resolve an error entry with the caller's default value. Legacy clients ignore
+the unknown sibling map and treat the failed flag as absent. Fixtures must never
+invent a variation value or other legacy assignment fields for a failed
+evaluation. Obfuscated responses encode keys in both maps and every
+`dependencyEvaluations[].flagKey`.
+
 ## Evaluations
 
 Each evaluation calls a typed getter on the SDK and asserts the result:

@@ -65,6 +65,28 @@ class PrecomputedValidationTest(unittest.TestCase):
         self.case['response']['custom'] = {'_skip': 'payload', '_include': 'payload'}
         self.assertEqual([], self.validate(self.case))
 
+    def test_assignment_and_error_maps_are_mutually_exclusive(self):
+        attributes = self.case['response']['data']['attributes']
+        assigned_key = next(iter(attributes['flags']))
+        attributes['flagEvaluationErrors'] = {
+            assigned_key: {
+                'reason': 'ERROR',
+                'errorCode': 'GENERAL',
+                'dependencyEvaluations': [],
+            }
+        }
+        self.assertTrue(self.validate(self.case))
+
+    def test_error_entries_require_reason_code_and_dependencies(self):
+        attributes = self.case['response']['data']['attributes']
+        for entry in [{}, {'reason': 'ERROR'}, {'reason': 'ERROR', 'errorCode': 'GENERAL'}]:
+            with self.subTest(entry=entry):
+                candidate = copy.deepcopy(self.case)
+                candidate['response']['data']['attributes']['flagEvaluationErrors'] = {
+                    'failed': entry
+                }
+                self.assertTrue(self.validate(candidate))
+
     def test_new_nested_fixture_is_discovered(self):
         path = Path(self.directory.name) / 'new' / 'nested' / 'numeric-number.json'
         path.parent.mkdir(parents=True)

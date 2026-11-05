@@ -27,7 +27,25 @@
     },
     "response": {
       "type": "object",
-      "description": "Mocked precomputed-assignments response. Open-ended; downstream code validates the payload shape."
+      "description": "Mocked precomputed-assignments response. Legacy assignments remain in attributes.flags; capable-client failures use attributes.flagEvaluationErrors.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "flagEvaluationErrors": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/$defs/FlagEvaluationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "evaluations": {
       "type": "array",
@@ -58,6 +76,50 @@
     ]
   },
   "$defs": {
+    "FlagEvaluationError": {
+      "type": "object",
+      "required": [
+        "reason",
+        "errorCode",
+        "dependencyEvaluations"
+      ],
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "dependencyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DependencyEvaluation"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "DependencyEvaluation": {
+      "type": "object",
+      "required": [
+        "flagKey"
+      ],
+      "properties": {
+        "flagKey": {
+          "type": "string"
+        },
+        "isPresentInAssignment": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
     "PlatformFilterEntry": {
       "type": "object",
       "required": [

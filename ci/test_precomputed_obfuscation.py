@@ -134,6 +134,26 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             obfuscation.companion(self.fixture)
 
+    def test_error_map_and_its_dependency_keys_are_encoded(self):
+        attributes = self.fixture["response"]["data"]["attributes"]
+        attributes["flagEvaluationErrors"] = {
+            "failed": {
+                "reason": "ERROR",
+                "errorCode": "FLAG_NOT_FOUND",
+                "dependencyEvaluations": [
+                    {"flagKey": "missing", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND"}
+                ],
+            }
+        }
+
+        result = obfuscation.companion(self.fixture)
+        errors = result["response"]["data"]["attributes"]["flagEvaluationErrors"]
+        encoded_error = errors[obfuscation.encode_key("failed")]
+        self.assertEqual(
+            obfuscation.encode_key("missing"),
+            encoded_error["dependencyEvaluations"][0]["flagKey"],
+        )
+
     def test_exception_requires_existing_source_and_reason(self):
         for entries in [{"evaluator/case.json": ""}, {"deleted.json": "Not applicable"}]:
             self.exceptions.write_text(json.dumps(entries))

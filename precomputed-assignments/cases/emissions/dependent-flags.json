@@ -51,6 +51,16 @@
             "reason": "TARGETING_MATCH",
             "doLog": true
           },
+          "fixture.dependent.failure.leaf": {
+            "allocationKey": "allocation-failure-leaf",
+            "variationKey": "leaf-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        },
+        "flagEvaluationErrors": {
           "fixture.dependent.failure": {
             "reason": "ERROR",
             "errorCode": "FLAG_NOT_FOUND",
@@ -70,14 +80,6 @@
                 "errorCode": "FLAG_NOT_FOUND"
               }
             ]
-          },
-          "fixture.dependent.failure.leaf": {
-            "allocationKey": "allocation-failure-leaf",
-            "variationKey": "leaf-on",
-            "variationType": "boolean",
-            "variationValue": true,
-            "reason": "TARGETING_MATCH",
-            "doLog": true
           }
         }
       }

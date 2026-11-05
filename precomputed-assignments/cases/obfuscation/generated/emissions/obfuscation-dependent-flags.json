@@ -52,6 +52,16 @@
             "reason": "TARGETING_MATCH",
             "doLog": true
           },
+          "a468d9e8653c270c407fdbe548125b4abdf9b463b97b03d61484bb8304df727f": {
+            "allocationKey": "allocation-failure-leaf",
+            "variationKey": "leaf-on",
+            "variationType": "boolean",
+            "variationValue": true,
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        },
+        "flagEvaluationErrors": {
           "deb1d0f9fe8eb5b067763cf1c5d97a65e0b3decd3165b7016a0c26e63767710e": {
             "reason": "ERROR",
             "errorCode": "FLAG_NOT_FOUND",
@@ -71,14 +81,6 @@
                 "errorCode": "FLAG_NOT_FOUND"
               }
             ]
-          },
-          "a468d9e8653c270c407fdbe548125b4abdf9b463b97b03d61484bb8304df727f": {
-            "allocationKey": "allocation-failure-leaf",
-            "variationKey": "leaf-on",
-            "variationType": "boolean",
-            "variationValue": true,
-            "reason": "TARGETING_MATCH",
-            "doLog": true
           }
         },
         "obfuscated": true,

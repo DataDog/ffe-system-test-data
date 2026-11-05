@@ -91,6 +91,34 @@ def check_name_matches_filename(data, filepath):
     return errors
 
 
+def check_assignment_error_partition(data):
+    """Errors are separate from complete legacy assignments."""
+    errors = []
+    try:
+        attributes = data["response"]["data"]["attributes"]
+    except (KeyError, TypeError):
+        return errors
+    flags = attributes.get("flags")
+    evaluation_errors = attributes.get("flagEvaluationErrors", {})
+    if not isinstance(flags, dict) or not isinstance(evaluation_errors, dict):
+        return errors
+    overlap = set(flags) & set(evaluation_errors)
+    if overlap:
+        errors.append(
+            "$.response.data.attributes: keys must occur in at most one of "
+            f"flags or flagEvaluationErrors: {', '.join(sorted(overlap))}"
+        )
+    for key, entry in evaluation_errors.items():
+        path = f"$.response.data.attributes.flagEvaluationErrors[{key!r}]"
+        if not isinstance(entry, dict):
+            errors.append(f"{path}: must be an object")
+            continue
+        for field in ("reason", "errorCode", "dependencyEvaluations"):
+            if field not in entry:
+                errors.append(f"{path}: missing required {field}")
+    return errors
+
+
 def check_skip_entry_format(obj, path="$"):
     """Check that _skip and _include entries are arrays of {platform, reason?} objects."""
     errors = []
@@ -147,6 +175,7 @@ def validate_fixture(filepath, schema):
     errors.extend(f"{rel}: {e}" for e in check_skip_include_mutual_exclusivity(data))
     errors.extend(f"{rel}: {e}" for e in check_matcher_counts(data))
     errors.extend(f"{rel}: {e}" for e in check_name_matches_filename(data, filepath))
+    errors.extend(f"{rel}: {e}" for e in check_assignment_error_partition(data))
     errors.extend(f"{rel}: {e}" for e in check_skip_entry_format(data))
 
     return errors

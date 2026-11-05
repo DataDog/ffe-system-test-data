@@ -99,6 +99,14 @@ def companion(source):
         encode_key(key): encode_assignment_references(value, dependency_keys)
         for key, value in attributes["flags"].items()
     }
+    if "flagEvaluationErrors" in attributes:
+        errors = attributes["flagEvaluationErrors"]
+        if not isinstance(errors, dict):
+            raise ValueError("flagEvaluationErrors must be an object")
+        attributes["flagEvaluationErrors"] = {
+            encode_key(key): encode_assignment_references(value, dependency_keys)
+            for key, value in errors.items()
+        }
     encode_dependency_event_expectations(result, dependency_keys)
     attributes["obfuscated"] = True
     attributes["obfuscation"] = {"scheme": "flag-key-sha256-v1", "salt": SALT}
