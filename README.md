@@ -580,6 +580,12 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
 
+In `dependent-flags`, when dependency evaluation fails (a reached prerequisite is
+missing or has no assignment, the depth limit is exceeded, or a cycle is found),
+the root returns the caller default with reason `ERROR` and error code `GENERAL`.
+The failed prerequisite's own evaluation event keeps its specific error code, such
+as `FLAG_NOT_FOUND` for a missing prerequisite.
+
 ## Origin
 
 These fixtures originated in the Go SDK (`dd-trace-go`). This repository now
