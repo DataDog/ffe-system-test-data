@@ -541,6 +541,7 @@ fixture defining the intended behavior.
 | `test-case-variant-type-mismatch.json` | A flag whose variant violates its declared type is removed without poisoning valid neighboring flags |
 | `test-case-microsecond-date-flag.json` | Flag with microsecond-precision date targeting |
 | `test-case-missing-split-shards-isolation.json` | A flag with a split missing required `shards` is removed without poisoning valid flags |
+| `test-case-mutually-exclusive-layer-allocations.json` | Shared layer sharding selects at most one experiment allocation across multiple flags, with an unallocated subject falling back in every flag |
 | `test-case-new-user-onboarding-flag.json` | Multi-allocation onboarding flag with sharding |
 | `test-case-no-allocations-flag.json` | Flag with no allocations (returns default) |
 | `test-case-null-operator-flag.json` | Flag using IS_NULL operator |
