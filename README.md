@@ -598,7 +598,7 @@ and `cases/` directory.
 | Suite | Description |
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
-| `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+| `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
 
 ### Flag selection suite
 
@@ -641,6 +641,9 @@ The limit applies to the full URL, with scheme, host, path, and query, measured
 in UTF-8 bytes after percent-encoding.
 The long-URL case uses non-ASCII tags, so the URL is over that limit only once
 percent-encoded.
+The at-the-limits case has a percent-encoded URL of about 6.8 KB, which the SDK
+must still send. Its reserved characters (`&`, `+`, `#`, `%`, `/`, `?`, `=`)
+reach the server intact only when the SDK percent-encodes each value.
 
 ## Origin
 
