@@ -63,7 +63,8 @@ and is represented for capable clients in the optional sibling
   "flagEvaluationErrors": {
     "failed-flag": {
       "reason": "ERROR",
-      "errorCode": "FLAG_NOT_FOUND",
+      "errorCode": "GENERAL",
+      "errorMessage": "A prerequisite flag could not be evaluated",
       "dependencyEvaluations": []
     }
   }
@@ -75,6 +76,10 @@ resolve an error entry with the caller's default value. Legacy clients ignore
 the unknown sibling map and treat the failed flag as absent. Fixtures must never
 invent a variation value or other legacy assignment fields for a failed
 evaluation.
+
+When any ancestor evaluation encounters an error, the requested root and each
+intermediate failed ancestor report `GENERAL`. Only the originating failed node
+retains its specific error code, such as `FLAG_NOT_FOUND`.
 
 ### Obfuscated dependency references
 

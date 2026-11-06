@@ -63,7 +63,8 @@
         "flagEvaluationErrors": {
           "fixture.dependent.failure": {
             "reason": "ERROR",
-            "errorCode": "FLAG_NOT_FOUND",
+            "errorCode": "GENERAL",
+            "errorMessage": "A prerequisite flag could not be evaluated",
             "dependencyEvaluations": [
               {
                 "flagKey": "fixture.dependent.failure.leaf",
@@ -77,7 +78,7 @@
               {
                 "flagKey": "fixture.dependent.failure.parent",
                 "reason": "ERROR",
-                "errorCode": "FLAG_NOT_FOUND"
+                "errorCode": "GENERAL"
               }
             ]
           }
@@ -104,7 +105,7 @@
       "expectedResult": {
         "value": false,
         "reason": "ERROR",
-        "errorCode": "FLAG_NOT_FOUND",
+        "errorCode": "GENERAL",
         "variantKey": null
       }
     }
@@ -172,7 +173,7 @@
           "key": "fixture.dependent.failure.parent"
         },
         "error": {
-          "message": "FLAG_NOT_FOUND"
+          "message": "GENERAL"
         }
       },
       {
@@ -181,7 +182,7 @@
           "key": "fixture.dependent.failure"
         },
         "error": {
-          "message": "FLAG_NOT_FOUND"
+          "message": "GENERAL"
         }
       }
     ]

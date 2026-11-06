@@ -113,9 +113,11 @@ def check_assignment_error_partition(data):
         if not isinstance(entry, dict):
             errors.append(f"{path}: must be an object")
             continue
-        for field in ("reason", "errorCode", "dependencyEvaluations"):
+        for field in ("reason", "errorCode", "errorMessage", "dependencyEvaluations"):
             if field not in entry:
                 errors.append(f"{path}: missing required {field}")
+        if entry.get("errorCode") != "GENERAL":
+            errors.append(f"{path}: root dependency failure errorCode must be GENERAL")
     return errors
 
 

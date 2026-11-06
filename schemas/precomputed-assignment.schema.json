@@ -81,14 +81,19 @@
       "required": [
         "reason",
         "errorCode",
+        "errorMessage",
         "dependencyEvaluations"
       ],
       "properties": {
         "reason": {
-          "type": "string"
+          "const": "ERROR"
         },
         "errorCode": {
-          "type": "string"
+          "const": "GENERAL"
+        },
+        "errorMessage": {
+          "type": "string",
+          "minLength": 1
         },
         "dependencyEvaluations": {
           "type": "array",

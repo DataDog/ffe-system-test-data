@@ -72,6 +72,7 @@ class PrecomputedValidationTest(unittest.TestCase):
             assigned_key: {
                 'reason': 'ERROR',
                 'errorCode': 'GENERAL',
+                'errorMessage': 'A prerequisite flag could not be evaluated',
                 'dependencyEvaluations': [],
             }
         }
@@ -79,7 +80,17 @@ class PrecomputedValidationTest(unittest.TestCase):
 
     def test_error_entries_require_reason_code_and_dependencies(self):
         attributes = self.case['response']['data']['attributes']
-        for entry in [{}, {'reason': 'ERROR'}, {'reason': 'ERROR', 'errorCode': 'GENERAL'}]:
+        for entry in [
+            {},
+            {'reason': 'ERROR'},
+            {'reason': 'ERROR', 'errorCode': 'GENERAL'},
+            {
+                'reason': 'ERROR',
+                'errorCode': 'FLAG_NOT_FOUND',
+                'errorMessage': 'A prerequisite flag could not be evaluated',
+                'dependencyEvaluations': [],
+            },
+        ]:
             with self.subTest(entry=entry):
                 candidate = copy.deepcopy(self.case)
                 candidate['response']['data']['attributes']['flagEvaluationErrors'] = {

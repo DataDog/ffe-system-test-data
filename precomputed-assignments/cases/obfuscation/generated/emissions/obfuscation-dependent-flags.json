@@ -64,7 +64,8 @@
         "flagEvaluationErrors": {
           "deb1d0f9fe8eb5b067763cf1c5d97a65e0b3decd3165b7016a0c26e63767710e": {
             "reason": "ERROR",
-            "errorCode": "FLAG_NOT_FOUND",
+            "errorCode": "GENERAL",
+            "errorMessage": "A prerequisite flag could not be evaluated",
             "dependencyEvaluations": [
               {
                 "flagKey": "stYtxI--7eBtJg_Vq2ydRQ0GEldK0pFtl5UK8VPYtnGwjlaoS79O0VlB4cffViCePsKasBspVY_W2Q",
@@ -78,7 +79,7 @@
               {
                 "flagKey": "lZkvGHelQ_qmeZrMnpgyWtxWrhJRx1i5NVeONy3FfXorNljFAVtjfMolW_J_A55RISSrLKi0_Tio4Ygk",
                 "reason": "ERROR",
-                "errorCode": "FLAG_NOT_FOUND"
+                "errorCode": "GENERAL"
               }
             ]
           }
@@ -110,7 +111,7 @@
       "expectedResult": {
         "value": false,
         "reason": "ERROR",
-        "errorCode": "FLAG_NOT_FOUND",
+        "errorCode": "GENERAL",
         "variantKey": null
       }
     }
@@ -178,7 +179,7 @@
           "key": "fixture.dependent.failure.parent"
         },
         "error": {
-          "message": "FLAG_NOT_FOUND"
+          "message": "GENERAL"
         }
       },
       {
@@ -187,7 +188,7 @@
           "key": "fixture.dependent.failure"
         },
         "error": {
-          "message": "FLAG_NOT_FOUND"
+          "message": "GENERAL"
         }
       }
     ]
