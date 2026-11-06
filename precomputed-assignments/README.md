@@ -45,6 +45,70 @@ Each fixture file is a single JSON object:
 | `_skip` | array | no | Skip entire fixture for listed platforms |
 | `_include` | array | no | Run fixture only for listed platforms |
 
+### Assignment and evaluation-error maps
+
+`response.data.attributes.flags` contains only complete assignments that legacy
+clients can evaluate. A dependent evaluation that fails is absent from `flags`
+and is represented for capable clients in the optional sibling
+`flagEvaluationErrors` map:
+
+```json
+{
+  "flags": {
+    "successful-flag": {
+      "variationType": "boolean",
+      "variationValue": true
+    }
+  },
+  "flagEvaluationErrors": {
+    "failed-flag": {
+      "reason": "ERROR",
+      "errorCode": "GENERAL",
+      "errorMessage": "A prerequisite flag could not be evaluated",
+      "dependencyEvaluations": []
+    }
+  }
+}
+```
+
+A flag key must occur in at most one map. Clients that support dependent flags
+resolve an error entry with the caller's default value. Legacy clients ignore
+the unknown sibling map and treat the failed flag as absent. Fixtures must never
+invent a variation value or other legacy assignment fields for a failed
+evaluation.
+
+When any ancestor evaluation encounters an error, the requested root and each
+intermediate failed ancestor report `GENERAL`. Only the originating failed node
+retains its specific error code, such as `FLAG_NOT_FOUND`.
+
+### Obfuscated dependency references
+
+In an obfuscated response, keys in `flags` and `flagEvaluationErrors` use the
+existing `flag-key-sha256-v1` digest. Each
+`dependencyEvaluations[].flagKey` instead contains the plaintext dependency
+key encrypted for its plaintext root flag key. A capable SDK already has the
+root key supplied to the getter: it decrypts the dependency key, applies the
+normal `flag-key-sha256-v1` digest to that plaintext key, and uses the digest
+to find the dependency's top-level entry. Dependency telemetry uses the
+recovered plaintext key.
+
+The encrypted value is unpadded base64url of `nonce || ciphertext || tag`:
+
+- Cipher: AES-256-GCM with a 12-byte nonce and 16-byte tag.
+- Key: HKDF-SHA256 with UTF-8 root flag key as input key material, the
+  response obfuscation salt as the salt, and
+  `datadog.feature-flags.dependency-key.v1` as `info`.
+- Nonce: the first 12 bytes of
+  `HMAC-SHA256(key, "datadog.feature-flags.dependency-key.nonce.v1\\0" ||
+  UTF8(dependencyKey))`.
+- AAD: `datadog.feature-flags.dependency-key.v1\0`.
+
+The response salt is freshly generated for every response, so this
+deterministic nonce is scoped to one root key and response salt. Authentication
+or UTF-8 decoding failure makes the root evaluation fail with `PARSE_ERROR`;
+SDKs must not fall back to interpreting the value as plaintext or as a digest.
+Plain responses continue to carry plaintext dependency keys.
+
 ## Evaluations
 
 Each evaluation calls a typed getter on the SDK and asserts the result:
@@ -78,6 +142,7 @@ exposure and evaluation events.
 ```json
 "expectations": {
   "noUnmatchedEvents": true,
+  "orderedEvents": true,
   "exposures": [
     {"_count": 1, "flag": "my-flag"}
   ],
@@ -104,6 +169,13 @@ the event is unavailable to later matchers.
 When `true`, the test runner asserts that all received events (both exposures
 and evaluations) are consumed by matchers. No extra events allowed. Applies to
 both event types.
+
+### `orderedEvents`
+
+When `true`, the test runner also asserts that events are emitted in matcher
+order. This is useful when dependency evaluations or exposures must precede the
+root flag's event. Runners that do not support ordered assertions may ignore the
+field unless the fixture includes that platform explicitly.
 
 ### Control fields
 
@@ -241,10 +313,15 @@ python3 ci/validate-precomputed-fixtures.py
 ```
 
 The generator discovers plain JSON files recursively. It changes response-map
-keys and encoding metadata. Public lookup keys, values, results, and event
-expectations stay unchanged. The generated platform filter intersects the
-source filter with consumers that support obfuscation. Evaluation and event
-filters remain unchanged.
+keys, response-internal flag references such as `dependencyEvaluations.flagKey`,
+and encoding metadata. Public lookup keys, values, results, and root event
+identities stay unchanged. In obfuscated responses, dependency references are
+AES-256-GCM ciphertexts derived from the plaintext root key and response salt.
+Capable SDKs decrypt them for plaintext telemetry, then hash the recovered key
+for top-level lookup. The generated platform
+filter intersects the source filter with consumers that support obfuscation. Web
+remains explicitly opt-in per source fixture until its complete corpus is enabled.
+Evaluation and event filters remain unchanged.
 
 Generated files are under `cases/obfuscation/generated/`, preserving source
 categories and nested paths. Do not edit these files directly. CI compares them

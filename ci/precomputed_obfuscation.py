@@ -7,7 +7,10 @@ import hashlib
 import json
 from pathlib import Path
 
+from dependency_key_encryption import encrypt
+
 SUPPORTED_PLATFORMS = ("ios", "android", "flutter")
+EXPLICIT_SUPPORTED_PLATFORMS = ("web",)
 SALT = "000102030405060708090a0b0c0d0e0f"
 DOMAIN = b"datadog.feature-flags.flag-key.v1\0"
 
@@ -41,6 +44,21 @@ def encode_key(key):
     return hashlib.sha256(DOMAIN + bytes.fromhex(SALT) + key.encode("utf-8")).hexdigest()
 
 
+def encode_assignment_references(assignment, root_key):
+    """Encrypt response-internal flag references for the plaintext root identity."""
+    if not isinstance(assignment, dict):
+        return assignment
+    dependencies = assignment.get("dependencyEvaluations")
+    if dependencies is None:
+        return assignment
+    if not isinstance(dependencies, list):
+        raise ValueError("Assignment dependencyEvaluations must be an array")
+    for dependency in dependencies:
+        if not isinstance(dependency, dict) or not isinstance(dependency.get("flagKey"), str):
+            raise ValueError("Dependency evaluation must contain a string flagKey")
+        dependency["flagKey"] = encrypt(root_key, dependency["flagKey"], bytes.fromhex(SALT))
+    return assignment
+
 def companion(source):
     result = copy.deepcopy(source)
     attributes = result["response"]["data"]["attributes"]
@@ -50,7 +68,8 @@ def companion(source):
         raise ValueError("Source must contain a flag map; document an exception if inapplicable")
     included = {entry["platform"] for entry in source.get("_include", [])}
     skipped = {entry["platform"] for entry in source.get("_skip", [])}
-    platforms = [p for p in SUPPORTED_PLATFORMS
+    supported = SUPPORTED_PLATFORMS + tuple(p for p in EXPLICIT_SUPPORTED_PLATFORMS if p in included)
+    platforms = [p for p in supported
                  if ("_include" not in source or p in included) and p not in skipped]
     if not platforms:
         raise ValueError("No supported obfuscation consumer; document an exception")
@@ -61,7 +80,18 @@ def companion(source):
         {"platform": p, "reason": "Supports obfuscation and the source fixture."}
         for p in platforms
     ]
-    attributes["flags"] = {encode_key(key): value for key, value in attributes["flags"].items()}
+    attributes["flags"] = {
+        encode_key(key): encode_assignment_references(value, key)
+        for key, value in attributes["flags"].items()
+    }
+    if "flagEvaluationErrors" in attributes:
+        errors = attributes["flagEvaluationErrors"]
+        if not isinstance(errors, dict):
+            raise ValueError("flagEvaluationErrors must be an object")
+        attributes["flagEvaluationErrors"] = {
+            encode_key(key): encode_assignment_references(value, key)
+            for key, value in errors.items()
+        }
     attributes["obfuscated"] = True
     attributes["obfuscation"] = {"scheme": "flag-key-sha256-v1", "salt": SALT}
     # Public lookup keys, results, events, and evaluation filters remain identical.

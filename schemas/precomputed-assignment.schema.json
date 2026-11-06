@@ -27,7 +27,25 @@
     },
     "response": {
       "type": "object",
-      "description": "Mocked precomputed-assignments response. Open-ended; downstream code validates the payload shape."
+      "description": "Mocked precomputed-assignments response. Legacy assignments remain in attributes.flags; capable-client failures use attributes.flagEvaluationErrors.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "flagEvaluationErrors": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/$defs/FlagEvaluationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "evaluations": {
       "type": "array",
@@ -58,6 +76,55 @@
     ]
   },
   "$defs": {
+    "FlagEvaluationError": {
+      "type": "object",
+      "required": [
+        "reason",
+        "errorCode",
+        "errorMessage",
+        "dependencyEvaluations"
+      ],
+      "properties": {
+        "reason": {
+          "const": "ERROR"
+        },
+        "errorCode": {
+          "const": "GENERAL"
+        },
+        "errorMessage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependencyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DependencyEvaluation"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "DependencyEvaluation": {
+      "type": "object",
+      "required": [
+        "flagKey"
+      ],
+      "properties": {
+        "flagKey": {
+          "type": "string"
+        },
+        "isPresentInAssignment": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
     "PlatformFilterEntry": {
       "type": "object",
       "required": [
@@ -356,6 +423,11 @@
           "type": "boolean",
           "default": false,
           "description": "When true, assert that all received events (exposures and evaluations) are consumed by matchers. No extra events allowed."
+        },
+        "orderedEvents": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, assert that exposure and evaluation events are emitted in the order declared by their matcher lists."
         },
         "exposures": {
           "type": "array",
