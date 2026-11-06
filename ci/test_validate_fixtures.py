@@ -361,6 +361,30 @@ class FlagSelectionSuiteValidationTest(unittest.TestCase):
             with self.assertRaisesRegex(validator.FixtureValidationError, "require a suite with flag-tags.json"):
                 validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
 
+    def test_root_cases_reject_flag_selection_fields_even_beside_flag_tags(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            config_path, cases = self.write_suite(
+                temporary_directory, {"flags": [{"key": "suite-flag", "tags": []}]}, [self.case()]
+            )
+            with self.assertRaisesRegex(validator.FixtureValidationError, "require a suite with flag-tags.json"):
+                validator._validate_suite(config_path, cases, self.platforms, self_contained=False)
+
+    def test_canonical_values_are_trimmed_of_unicode_white_space_only(self) -> None:
+        def case(tag: str) -> dict[str, object]:
+            return self.case(
+                providerOptions={"flagSelection": {"tags": [tag]}},
+                expectations={"configurationRequest": {"selectedFlagTags": [tag], "selectedFlagKeyPatterns": []}},
+            )
+
+        for tag in ("\u3000team:checkout", "team:checkout\x85", "\xa0team:checkout"):
+            with self.subTest(tag=tag), self.assertRaisesRegex(
+                validator.FixtureValidationError, "selectedFlagTags must hold trimmed"
+            ):
+                self.validate_case(case(tag))
+        for tag in ("\x1fteam:checkout", "\ufeffteam:checkout"):
+            with self.subTest(tag=tag):
+                self.validate_case(case(tag))
+
     def test_suite_with_flag_tags_requires_a_configuration_request(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             config_path, cases = self.write_suite(
