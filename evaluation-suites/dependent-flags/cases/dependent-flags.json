@@ -311,6 +311,7 @@
     "flag": "dependent-atomic-error-root",
     "result": {
       "reason": "ERROR",
+      "errorCode": "GENERAL",
       "value": "atomic-default"
     },
     "targetingKey": "dependent-atomic-error",
@@ -323,6 +324,7 @@
     "flag": "dependent-depth-three-root",
     "result": {
       "reason": "ERROR",
+      "errorCode": "GENERAL",
       "value": "depth-default"
     },
     "targetingKey": "dependent-over-depth",
@@ -335,6 +337,7 @@
     "flag": "dependent-cycle-a",
     "result": {
       "reason": "ERROR",
+      "errorCode": "GENERAL",
       "value": "cycle-default"
     },
     "targetingKey": "dependent-cycle",
