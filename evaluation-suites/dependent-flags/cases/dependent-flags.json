@@ -315,7 +315,56 @@
       "value": "atomic-default"
     },
     "targetingKey": "dependent-atomic-error",
-    "variationType": "STRING"
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-leaf-on",
+          "errorCode": null
+        },
+        {
+          "flag": "dependent-missing-prerequisite",
+          "errorCode": "FLAG_NOT_FOUND"
+        },
+        {
+          "flag": "dependent-atomic-error-root",
+          "errorCode": "GENERAL"
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
+  },
+  {
+    "description": "A missing prerequisite under a configured parent aborts the graph. The missing prerequisite reports FLAG_NOT_FOUND, and the configured parent and the requested root report GENERAL.",
+    "attributes": {},
+    "defaultValue": "transitive-error-default",
+    "flag": "dependent-transitive-error-root",
+    "result": {
+      "reason": "ERROR",
+      "errorCode": "GENERAL",
+      "value": "transitive-error-default"
+    },
+    "targetingKey": "dependent-transitive-error",
+    "variationType": "STRING",
+    "expectations": {
+      "exposures": [],
+      "evaluationEvents": [
+        {
+          "flag": "dependent-missing-prerequisite",
+          "errorCode": "FLAG_NOT_FOUND"
+        },
+        {
+          "flag": "dependent-transitive-error-parent",
+          "errorCode": "GENERAL"
+        },
+        {
+          "flag": "dependent-transitive-error-root",
+          "errorCode": "GENERAL"
+        }
+      ],
+      "noUnmatchedEvents": true
+    }
   },
   {
     "description": "With maxDependencyDepth 2, a third dependency edge aborts the graph and returns the caller default.",

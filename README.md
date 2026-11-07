@@ -582,9 +582,12 @@ and `cases/` directory.
 
 In `dependent-flags`, when dependency evaluation fails (a reached prerequisite is
 missing or has no assignment, the depth limit is exceeded, or a cycle is found),
-the root returns the caller default with reason `ERROR` and error code `GENERAL`.
-The failed prerequisite's own evaluation event keeps its specific error code, such
-as `FLAG_NOT_FOUND` for a missing prerequisite.
+the requested root returns the caller default with reason `ERROR` and error code
+`GENERAL`. A specific error code applies only to the flag where the failure
+originates: a missing prerequisite reports `FLAG_NOT_FOUND` in its evaluation
+event. The other failures have no more specific code and report `GENERAL`. Every
+configured flag that fails because of a failed prerequisite, including
+intermediate prerequisites and the requested root, reports `GENERAL`.
 
 ## Origin
 

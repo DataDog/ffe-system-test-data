@@ -787,6 +787,82 @@
         }
       ]
     },
+    "dependent-transitive-error-parent": {
+      "key": "dependent-transitive-error-parent",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "must-not-be-returned-transitive-error-parent"
+        }
+      },
+      "allocations": [
+        {
+          "key": "requires-missing",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "flagEvaluation": {
+                    "key": "dependent-missing-prerequisite"
+                  },
+                  "operator": "ONE_OF",
+                  "value": [
+                    "on"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "dependent-transitive-error-root": {
+      "key": "dependent-transitive-error-root",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "matched": {
+          "key": "matched",
+          "value": "must-not-be-returned"
+        }
+      },
+      "allocations": [
+        {
+          "key": "requires-parent",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "flagEvaluation": {
+                    "key": "dependent-transitive-error-parent"
+                  },
+                  "operator": "ONE_OF",
+                  "value": [
+                    "matched"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "matched",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
     "dependent-cycle-a": {
       "key": "dependent-cycle-a",
       "enabled": true,
