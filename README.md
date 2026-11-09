@@ -642,8 +642,8 @@ in UTF-8 bytes after percent-encoding.
 The long-URL case uses non-ASCII tags, so the URL is over that limit only once
 percent-encoded.
 The at-the-limits case has a percent-encoded URL of about 6.8 KB, which the SDK
-must still send. Its reserved characters (`&`, `+`, `#`, `%`, `/`, `?`, `=`)
-reach the server intact only when the SDK percent-encodes each value.
+must still send. Its `&`, `+`, `#`, and `%` characters reach the server intact
+only when the SDK percent-encodes each value.
 
 ## Origin
 
