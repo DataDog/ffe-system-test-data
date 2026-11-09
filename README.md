@@ -88,9 +88,13 @@ ffe-system-test-data/
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
 ├── evaluation-suites/       # Optional self-contained, explicitly activated feature suites
-│   └── dependent-flags/
-│       ├── ufc-config.json  # UFC containing only dependent-flag fixtures
-│       └── cases/           # Evaluation cases for this feature
+│   ├── dependent-flags/
+│   │   ├── ufc-config.json  # UFC containing only dependent-flag fixtures
+│   │   └── cases/           # Evaluation cases for this feature
+│   └── flag-selection/
+│       ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
+│       ├── flag-tags.json   # Tags of those flags, which UFC does not carry
+│       └── cases/           # One flag selection per case file
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
@@ -159,6 +163,10 @@ results in a downstream copy.
 The legacy `core` suite uses root `ufc-config.json` and `evaluation-cases/`.
 Feature suites use `evaluation-suites/<suite>/ufc-config.json` and the adjacent
 `cases/` directory. Never parse the configuration of an unselected suite.
+For the `flag-selection` suite, step 6 serves the UFC through a server double
+instead of loading it, and step 7 starts the provider once per case file with
+that file's `providerOptions` instead of default options; see
+[flag selection suite](#flag-selection-suite).
 
 For backward-compatible core-only consumers, the equivalent minimum flow is:
 
@@ -231,6 +239,9 @@ Each evaluation case uses a universal schema with the following fields:
 | `result.doLog` | boolean | Optional expected selected allocation's logging decision |
 | `result.features` | object | Optional exact feature maps for `HOOK`, `EXPOSURE`, and `EVALUATION`; empty maps assert no features, omission leaves routing unspecified |
 | `capabilities` | object | Optional expected results when a named capability is enabled; uses the same result format |
+| `providerOptions.flagSelection` | object | Only in a suite with `flag-tags.json`. Optional raw flag selection, `{"tags": [...], "keyPatterns": [...]}`, passed untouched to the SDK's flag selection provider option. See [flag selection suite](#flag-selection-suite) |
+| `expectations.configurationRequest` | object | Required in a suite with `flag-tags.json`, not allowed elsewhere. The selection the SDK sends on its configuration request: canonical `selectedFlagTags` and `selectedFlagKeyPatterns` lists, or `{"flagSelection": null}` when it sends none |
+| `configurationResponse.flagSelectionIgnored` | string | Only in a suite with `flag-tags.json`. Optional reason the server double gives for ignoring the valid selection it receives |
 | `_skip` | array | Optional platforms that exclude this case |
 | `_include` | array | Optional exclusive list of platforms that include this case |
 
@@ -459,7 +470,9 @@ SDK sends, or the reason the SDK drops it. Validate them locally with
 `python3 ci/validate-flag-selection.py`.
 
 See [flag-selection/README.md](flag-selection/README.md) for the semantics and
-how to run the cases against each request form.
+how to run the cases against each request form. The
+[flag selection suite](#flag-selection-suite) runs selections through an SDK
+end to end.
 
 ## Automated Validation
 
@@ -469,6 +482,12 @@ object keys, malformed evaluation-case envelopes, mismatched flag or variation
 map keys, and references to unknown flags without a `FLAG_NOT_FOUND`
 expectation. Capability expectations may instead use `INVALID_CONTEXT` when
 context validation precedes flag lookup. The baseline still requires `FLAG_NOT_FOUND`.
+In a suite with `flag-tags.json`, it checks that the file names only the suite's
+flags, that every case carries `expectations.configurationRequest`, that the flag
+selection case fields have their documented shape and the same values across a
+file, and that a request sends a selection only when `providerOptions.flagSelection`
+is set. Other cases must not carry these fields. It does not recompute the
+canonical selection or expected results.
 
 The validator deliberately does not fully schema-check allocation internals.
 Some fixtures contain malformed flag fields on purpose to verify that consumers
@@ -579,6 +598,52 @@ and `cases/` directory.
 | Suite | Description |
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
+| `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+
+### Flag selection suite
+
+`evaluation-suites/flag-selection/` checks that an SDK sends its flag selection
+on the agentless configuration request and serves only the flags the server
+returns. Each case file is one provider start, so every case in a file carries
+the same `providerOptions`, `expectations.configurationRequest`, and
+`configurationResponse`; the validator enforces this.
+
+`flag-tags.json` holds the tags of the suite's flags as
+`{"flags": [{"key": "<flag key>", "tags": ["<tag>", ...]}]}`, the shape of
+`flags` in [`selection-vectors.json`](flag-selection/README.md#format). `flags`
+is non-empty, each key names a flag in the suite's `ufc-config.json` at most
+once, and each tag is a non-empty string.
+
+The runner cannot load the suite's `ufc-config.json` directly. It serves it
+through a server double that applies the selection in the request with the
+[flag selection semantics](flag-selection/README.md) and the tags in
+`flag-tags.json` (a flag that is not listed has no tags), and returns only the
+selected flags. For each case file:
+
+1. Configure the server double. When `configurationResponse.flagSelectionIgnored`
+   is set, it answers a valid selection with every flag and that reason in the
+   `DD-Flag-Selection-Ignored` header.
+2. Start the provider in agentless mode against the server double, passing
+   `providerOptions.flagSelection` untouched to the SDK's flag selection option.
+   Omit the option when the field is absent.
+3. Check the first configuration request: it carries each
+   `expectations.configurationRequest` value as a repeated `selected_flag_tags`
+   or `selected_flag_key_patterns` parameter, in order, with no parameter for an
+   empty list, or no selection parameter for `{"flagSelection": null}`.
+4. Evaluate the applicable cases as usual. A flag the server omitted evaluates
+   to the caller default with `ERROR` / `FLAG_NOT_FOUND`.
+
+An SDK sends no selection when the selection is empty after canonicalization,
+breaks a limit in [flag-selection/README.md](flag-selection/README.md#semantics),
+or would make the configuration request URL longer than 8192 bytes
+([Fastly's URL limit](https://docs.fastly.com/products/network-services-resource-limits)).
+The limit applies to the full URL, with scheme, host, path, and query, measured
+in UTF-8 bytes after percent-encoding.
+The long-URL case uses non-ASCII tags, so the URL is over that limit only once
+percent-encoded.
+The at-the-limits case has a percent-encoded URL of about 6.8 KB, which the SDK
+must still send. Its `&`, `+`, `#`, and `%` characters reach the server intact
+only when the SDK percent-encodes each value.
 
 ## Origin
 
