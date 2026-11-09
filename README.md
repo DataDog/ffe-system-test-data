@@ -578,7 +578,7 @@ and `cases/` directory.
 
 | Suite | Description |
 |-------|-------------|
-| `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, and cycles |
+| `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 
 ## Origin
 

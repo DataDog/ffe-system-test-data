@@ -887,7 +887,7 @@
                 {
                   "flagEvaluation": {
                     "key": "dependent-leaf-on",
-                    "property": "variant"
+                    "unknownFlagEvaluationField": "ignored"
                   },
                   "operator": "ONE_OF",
                   "value": [
