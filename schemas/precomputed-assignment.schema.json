@@ -5,7 +5,14 @@
   "description": "Schema for precomputed assignment test fixtures consumed by client SDKs.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["name", "description", "context", "response", "evaluations", "expectations"],
+  "required": [
+    "name",
+    "description",
+    "context",
+    "response",
+    "evaluations",
+    "expectations"
+  ],
   "properties": {
     "name": {
       "type": "string",
@@ -26,8 +33,7 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/Evaluation"
-      },
-      "minItems": 1
+      }
     },
     "expectations": {
       "$ref": "#/$defs/Expectations"
@@ -39,20 +45,40 @@
     "_include": {
       "$ref": "#/$defs/PlatformFilter",
       "description": "Run this fixture only for listed platforms."
+    },
+    "expectedResponseError": {
+      "const": "INVALID_RESPONSE",
+      "description": "Reject the complete response before installation; run no evaluations and emit no events."
     }
   },
   "not": {
-    "required": ["_skip", "_include"]
+    "required": [
+      "_skip",
+      "_include"
+    ]
   },
   "$defs": {
     "PlatformFilterEntry": {
       "type": "object",
-      "required": ["platform"],
+      "required": [
+        "platform"
+      ],
       "additionalProperties": false,
       "properties": {
         "platform": {
           "type": "string",
-          "description": "Platform identifier (e.g., web, ios, android, flutter, react-native, maui, kotlin-multiplatform, electron)."
+          "description": "Platform identifier (e.g., web, ios, android, flutter, react-native, maui, kotlin-multiplatform, electron).",
+          "enum": [
+            "web",
+            "ios",
+            "android",
+            "react-native",
+            "flutter",
+            "unity",
+            "maui",
+            "kotlin-multiplatform",
+            "electron"
+          ]
         },
         "reason": {
           "type": "string",
@@ -69,11 +95,17 @@
     },
     "EvaluationContext": {
       "type": "object",
-      "required": ["targetingKey", "attributes"],
+      "required": [
+        "targetingKey",
+        "attributes"
+      ],
       "additionalProperties": false,
       "properties": {
         "targetingKey": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "attributes": {
           "type": "object"
@@ -82,29 +114,45 @@
     },
     "ExpectedResult": {
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "additionalProperties": false,
       "properties": {
         "value": {
           "description": "Expected flag value; must match the evaluation variationType."
         },
         "reason": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Expected OpenFeature reason code."
         },
         "errorCode": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Expected OpenFeature error code."
         },
         "variantKey": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Expected variation key."
         }
       }
     },
     "Evaluation": {
       "type": "object",
-      "required": ["flag", "variationType", "defaultValue", "expectedResult"],
+      "required": [
+        "flag",
+        "variationType",
+        "defaultValue",
+        "expectedResult"
+      ],
       "additionalProperties": false,
       "properties": {
         "flag": {
@@ -113,7 +161,13 @@
         },
         "variationType": {
           "type": "string",
-          "enum": ["boolean", "string", "integer", "float", "object"],
+          "enum": [
+            "boolean",
+            "string",
+            "integer",
+            "float",
+            "object"
+          ],
           "description": "Type to request from the SDK getter."
         },
         "defaultValue": {
@@ -137,7 +191,9 @@
                 "const": "boolean"
               }
             },
-            "required": ["variationType"]
+            "required": [
+              "variationType"
+            ]
           },
           "then": {
             "properties": {
@@ -161,7 +217,9 @@
                 "const": "string"
               }
             },
-            "required": ["variationType"]
+            "required": [
+              "variationType"
+            ]
           },
           "then": {
             "properties": {
@@ -185,7 +243,9 @@
                 "const": "integer"
               }
             },
-            "required": ["variationType"]
+            "required": [
+              "variationType"
+            ]
           },
           "then": {
             "properties": {
@@ -209,7 +269,9 @@
                 "const": "float"
               }
             },
-            "required": ["variationType"]
+            "required": [
+              "variationType"
+            ]
           },
           "then": {
             "properties": {
@@ -233,7 +295,9 @@
                 "const": "object"
               }
             },
-            "required": ["variationType"]
+            "required": [
+              "variationType"
+            ]
           },
           "then": {
             "properties": {
@@ -252,12 +316,17 @@
         }
       ],
       "not": {
-        "required": ["_skip", "_include"]
+        "required": [
+          "_skip",
+          "_include"
+        ]
       }
     },
     "EventMatcher": {
       "type": "object",
-      "required": ["_count"],
+      "required": [
+        "_count"
+      ],
       "description": "Matches received events by subset. All keys not prefixed with _ are match fields compared against event data. Control fields: _count (required), _skip, _include.",
       "properties": {
         "_count": {
@@ -273,7 +342,10 @@
         }
       },
       "not": {
-        "required": ["_skip", "_include"]
+        "required": [
+          "_skip",
+          "_include"
+        ]
       }
     },
     "Expectations": {
@@ -301,5 +373,44 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "expectedResponseError"
+        ]
+      },
+      "then": {
+        "properties": {
+          "evaluations": {
+            "maxItems": 0
+          },
+          "expectations": {
+            "required": [
+              "noUnmatchedEvents"
+            ],
+            "properties": {
+              "noUnmatchedEvents": {
+                "const": true
+              },
+              "exposures": {
+                "maxItems": 0
+              },
+              "evaluationEvents": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "evaluations": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
 }
