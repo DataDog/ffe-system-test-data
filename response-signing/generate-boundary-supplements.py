@@ -161,7 +161,8 @@ def generate():
     original_extensions = children(children(children(original_leaf)[0])[7])[0]
     for case_id, oid, value, accepted in [
         ("extension-profile-valid", None, None, True),
-        ("noncritical-policy-mappings", b"\x06\x03\x55\x1d\x21", b"\x30\x00", False),
+        ("noncritical-policy-mappings", b"\x06\x03\x55\x1d\x21",
+         b"\x30\x0c\x30\x0a\x06\x03\x2a\x03\x04\x06\x03\x2a\x03\x05", False),
         ("empty-authority-key-identifier", b"\x06\x03\x55\x1d\x23", b"\x30\x00", False),
         ("empty-authority-key-value", b"\x06\x03\x55\x1d\x23", b"\x30\x02\x80\x00", False),
         ("empty-subject-key-identifier", b"\x06\x03\x55\x1d\x0e", b"\x04\x00", False),
@@ -169,8 +170,11 @@ def generate():
     ]:
         entries = children(original_extensions)
         if oid:
-            entries = [entry for entry in entries if children(entry)[0] != oid]
-            entries.append(tlv(0x30, oid + tlv(4, value)))
+            replacement = tlv(0x30, oid + tlv(4, value))
+            if any(children(entry)[0] == oid for entry in entries):
+                entries = [replacement if children(entry)[0] == oid else entry for entry in entries]
+            else:
+                entries.append(replacement)
         elif case_id == "absent-optional-key-identifiers":
             entries = [entry for entry in entries
                        if children(entry)[0] not in [b"\x06\x03\x55\x1d\x0e", b"\x06\x03\x55\x1d\x23"]]

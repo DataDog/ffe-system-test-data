@@ -32,7 +32,7 @@
       "signing_cases": 6
     },
     "extension-profile.json": {
-      "sha256": "2b7dbba4bb3e4149a5e7af75f5e32c37bd1c43e6e6f5c279cb635df63b3d54c4",
+      "sha256": "e3ca10b6429d171126d81c50fe4d624ae24a3450cf3ee121f2b1e437d84a9439",
       "response_cases": 6,
       "accepted": 2,
       "signing_cases": 6

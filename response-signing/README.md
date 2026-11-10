@@ -63,8 +63,10 @@ implementation being tested.
 
 All certificates, identities, tokens and private keys in this suite are synthetic
 test material. The included leaf private keys are intentionally public so signer
-implementations can be tested. They must never be trusted or provisioned outside
-tests. There are no production or staging credentials or customer responses here.
+implementations can be tested. In `subject-der.json` and `extension-profile.json`,
+the root and intermediate reuse that public leaf key. These keys and certificates
+must never be trusted or provisioned outside tests. There are no production or
+staging credentials or customer responses here.
 
 ## Validation and updates
 
@@ -95,11 +97,17 @@ The canonical encoding is `02 01 01`; `02 02 00 01` must be rejected because
 its leading zero is unnecessary. A typed certificate parser can preserve this
 opaque attribute during decode/re-encode, so equality of re-encoded bytes alone
 is insufficient. Existing extension-payload checks do not cover subject values.
-The synthetic root, intermediate, and leaf use the same public test key here to
-isolate encoding from signature validity; these are never deployment credentials.
+The subject-DER and extension-profile chains reuse the public corpus leaf key
+for the root, intermediate and leaf to isolate encoding from signature validity,
+so their root and intermediate private keys are public too. These roots and
+intermediates keep the corpus certificates' names, serial numbers and key
+identifiers with a different key. Use each file's `anchor_der_base64` only for
+that file, and never combine supplement anchors in one trust store.
+`near-expiry.json` uses the corpus chain unchanged. These are never deployment
+credentials.
 
 `near-expiry.json` accepts proofs when the leaf has 301, 300, 299, or 1 second
-remaining. Each supplied proof expires at `min(issued_at + 300, leaf.not_after)`.
+remaining. Each accepted proof expires at `min(issued_at + 300, leaf.not_after)`.
 The negative controls retain valid signatures: one proof extends a single second
 past the leaf while staying within the 300-second proof lifetime, and another is
 verified exactly when both leaf and proof expire. No live wall clock is used.
