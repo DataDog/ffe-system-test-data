@@ -538,6 +538,23 @@ fixture defining the intended behavior.
 
 ## Evaluation Cases
 
+### Time-bounded holdout evaluation
+
+`test-case-time-bounded-holdout.json` exercises an active holdout allocation
+with separate membership and assignment-group shards. Both status-quo and
+all-shipped assignments report `SPLIT` even when the allocation has start and
+end dates. A matching targeting rule takes precedence and reports
+`TARGETING_MATCH`; a time-bounded fallback with one unsharded split reports
+`DEFAULT`. The cases also assert the selected serial ID and `doLog` decision.
+These are evaluator expectations, not proof of exposure delivery.
+
+The holdout admits half of the 1,048,576 membership buckets and divides members
+equally across 10,000 assignment-group buckets. For the salts in the config,
+`frank` maps to membership bucket 363176 and group bucket 1543 (status quo),
+`eve` to 64560 and 6240 (all shipped), and `alice` to 639464 and 6575 (outside
+the holdout). The active window is January 1, 2020 through January 1, 2099;
+these cases do not test exact time boundaries or clock injection.
+
 | File | Description |
 |------|-------------|
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
@@ -579,6 +596,7 @@ fixture defining the intended behavior.
 | `test-case-serial-id-metadata.json` | Selected split IDs, including zero, absence, targeting, and repeated evaluations |
 | `test-case-span-enrichment-inputs.json` | Selected IDs and logging decisions used by downstream span-enrichment tests |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
+| `test-case-time-bounded-holdout.json` | Both holdout groups, membership fallback, and targeting precedence with reason, serial ID, and logging assertions |
 | `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and logging decisions |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |

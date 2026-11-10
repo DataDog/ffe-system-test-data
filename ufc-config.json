@@ -8,6 +8,96 @@
   "unknownTopLevelField": "ignored",
   "unknownTopLevelNull": null,
   "flags": {
+    "time-bounded-holdout": {
+      "key": "time-bounded-holdout",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "status-quo": { "key": "status-quo", "value": "status-quo" },
+        "all-shipped": { "key": "all-shipped", "value": "all-shipped" },
+        "targeted": { "key": "targeted", "value": "targeted" },
+        "fallback": { "key": "fallback", "value": "fallback" }
+      },
+      "allocations": [
+        {
+          "key": "targeted-override",
+          "startAt": "2020-01-01T00:00:00Z",
+          "endAt": "2099-01-01T00:00:00Z",
+          "rules": [
+            {
+              "conditions": [
+                { "attribute": "tier", "operator": "ONE_OF", "value": ["internal"] }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "targeted",
+              "serialId": 201,
+              "shards": [
+                {
+                  "salt": "targeted-override",
+                  "totalShards": 10000,
+                  "ranges": [{ "start": 0, "end": 10000 }]
+                }
+              ]
+            }
+          ],
+          "doLog": false
+        },
+        {
+          "key": "holdout",
+          "startAt": "2020-01-01T00:00:00Z",
+          "endAt": "2099-01-01T00:00:00Z",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "status-quo",
+              "serialId": 202,
+              "shards": [
+                {
+                  "salt": "shared-holdout-holdout-traffic",
+                  "totalShards": 1048576,
+                  "ranges": [{ "start": 0, "end": 524288 }]
+                },
+                {
+                  "salt": "shared-holdout-holdout-split",
+                  "totalShards": 10000,
+                  "ranges": [{ "start": 0, "end": 5000 }]
+                }
+              ]
+            },
+            {
+              "variationKey": "all-shipped",
+              "serialId": 203,
+              "shards": [
+                {
+                  "salt": "shared-holdout-holdout-traffic",
+                  "totalShards": 1048576,
+                  "ranges": [{ "start": 0, "end": 524288 }]
+                },
+                {
+                  "salt": "shared-holdout-holdout-split",
+                  "totalShards": 10000,
+                  "ranges": [{ "start": 5000, "end": 10000 }]
+                }
+              ]
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "time-bounded-fallback",
+          "startAt": "2020-01-01T00:00:00Z",
+          "endAt": "2099-01-01T00:00:00Z",
+          "rules": [],
+          "splits": [
+            { "variationKey": "fallback", "serialId": 204, "shards": [] }
+          ],
+          "doLog": false
+        }
+      ]
+    },
     "empty_flag": {
       "key": "empty_flag",
       "enabled": true,

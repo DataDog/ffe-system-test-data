@@ -1,0 +1,67 @@
+[
+  {
+    "flag": "time-bounded-holdout",
+    "variationType": "STRING",
+    "defaultValue": "caller-default",
+    "targetingKey": "frank",
+    "attributes": {},
+    "result": {
+      "value": "status-quo",
+      "reason": "SPLIT",
+      "serialId": 202,
+      "doLog": true
+    }
+  },
+  {
+    "flag": "time-bounded-holdout",
+    "variationType": "STRING",
+    "defaultValue": "caller-default",
+    "targetingKey": "eve",
+    "attributes": {},
+    "result": {
+      "value": "all-shipped",
+      "reason": "SPLIT",
+      "serialId": 203,
+      "doLog": true
+    }
+  },
+  {
+    "flag": "time-bounded-holdout",
+    "variationType": "STRING",
+    "defaultValue": "caller-default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "fallback",
+      "reason": "DEFAULT",
+      "serialId": 204,
+      "doLog": false
+    }
+  },
+  {
+    "flag": "time-bounded-holdout",
+    "variationType": "STRING",
+    "defaultValue": "caller-default",
+    "targetingKey": "frank",
+    "attributes": { "tier": "internal" },
+    "result": {
+      "value": "targeted",
+      "reason": "TARGETING_MATCH",
+      "serialId": 201,
+      "doLog": false
+    }
+  },
+  {
+    "flag": "time-bounded-holdout",
+    "variationType": "STRING",
+    "defaultValue": "caller-default",
+    "targetingKey": "eve",
+    "attributes": { "tier": "internal" },
+    "result": {
+      "value": "targeted",
+      "reason": "TARGETING_MATCH",
+      "serialId": 201,
+      "doLog": false
+    }
+  }
+]
