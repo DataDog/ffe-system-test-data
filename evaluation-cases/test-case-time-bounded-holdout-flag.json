@@ -1,0 +1,68 @@
+[
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "frank",
+    "attributes": {},
+    "result": {
+      "value": "status-quo",
+      "reason": "SPLIT"
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "rupert",
+    "attributes": {},
+    "result": {
+      "value": "status-quo",
+      "reason": "SPLIT"
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "dave",
+    "attributes": {},
+    "result": {
+      "value": "shipped",
+      "reason": "SPLIT"
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "erin",
+    "attributes": {},
+    "result": {
+      "value": "shipped",
+      "reason": "SPLIT"
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "shipped",
+      "reason": "STATIC"
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "bob",
+    "attributes": {},
+    "result": {
+      "value": "shipped",
+      "reason": "STATIC"
+    }
+  }
+]

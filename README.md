@@ -580,6 +580,7 @@ fixture defining the intended behavior.
 | `test-case-span-enrichment-inputs.json` | Selected IDs and logging decisions used by downstream span-enrichment tests |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and logging decisions |
+| `test-case-time-bounded-holdout-flag.json` | Holdout-shaped time-bounded allocation with sharded splits returning SPLIT, followed by an unbounded rollout returning STATIC |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
