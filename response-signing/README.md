@@ -12,6 +12,7 @@ clients do not fetch them when evaluating flags or verifying a response.
 | `v1/corpus.json` | 46 response cases: 6 accepted and 40 rejected; 2 private-key matching cases | Verifiers consume `cases`; signers also consume `signing_cases` |
 | `v1/isolated-certificate-rules.json` | Accepted control and isolated certificate-size, leaf-CA and intermediate-CA rejections | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
+| `v1/extension-profile.json` | Accepted controls and isolated policy-mapping/empty key-identifier rejections | Signers and verifiers |
 | `v1/near-expiry.json` | Four valid near-expiry proofs, a proof outliving its leaf, and exact-expiry rejection | Signers and verifiers |
 | `v1/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in certificate extensions | Signers and verifiers |
 
@@ -103,7 +104,12 @@ The negative controls retain valid signatures: one proof extends a single second
 past the leaf while staying within the 300-second proof lifetime, and another is
 verified exactly when both leaf and proof expire. No live wall clock is used.
 
-Load both supplements explicitly. Verifiers consume `cases` and compare exact
+`extension-profile.json` requires rejection of policy mappings, even when
+noncritical, and nonempty identifiers whenever SKI or AKI is present. Optional
+SKI/AKI extensions may be absent. Every rejection retains valid certificate and
+proof signatures, with valid and absent-identifier controls.
+
+Load all supplements explicitly. Verifiers consume `cases` and compare exact
 transcripts for accepted responses. Signers consume `signing_cases`, resolve
 `case_id`, and sign that case's request/body at `now` with the supplied credential.
 Assert `expected_signing` separately from `expected_accept`: the overlong proof

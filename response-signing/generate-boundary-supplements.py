@@ -156,7 +156,31 @@ def generate():
     for case in expiry["cases"]:
         expiry["signing_cases"].append(dict(id=case["id"], case_id=case["id"], credential=credential,
                                              expected_signing=case["now"] < end))
-    results = {"subject-der.json": subject, "near-expiry.json": expiry}
+    extensions = {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(root),
+                  "cases": [], "signing_cases": []}
+    original_extensions = children(children(children(original_leaf)[0])[7])[0]
+    for case_id, oid, value, accepted in [
+        ("extension-profile-valid", None, None, True),
+        ("noncritical-policy-mappings", b"\x06\x03\x55\x1d\x21", b"\x30\x00", False),
+        ("empty-authority-key-identifier", b"\x06\x03\x55\x1d\x23", b"\x30\x00", False),
+        ("empty-authority-key-value", b"\x06\x03\x55\x1d\x23", b"\x30\x02\x80\x00", False),
+        ("empty-subject-key-identifier", b"\x06\x03\x55\x1d\x0e", b"\x04\x00", False),
+        ("absent-optional-key-identifiers", None, None, True),
+    ]:
+        entries = children(original_extensions)
+        if oid:
+            entries = [entry for entry in entries if children(entry)[0] != oid]
+            entries.append(tlv(0x30, oid + tlv(4, value)))
+        elif case_id == "absent-optional-key-identifiers":
+            entries = [entry for entry in entries
+                       if children(entry)[0] not in [b"\x06\x03\x55\x1d\x0e", b"\x06\x03\x55\x1d\x23"]]
+        leaf = resign(original_leaf, key, {7: tlv(0xa3, tlv(0x30, b"".join(entries)))})
+        cred = dict(credential, certificate_der_base64=encode(leaf), intermediate_der_base64=encode(intermediate))
+        now = base["now"]
+        reason = None if accepted else "Unsupported certificate extension form despite valid signatures"
+        extensions["cases"].append(response_case(base, key, cred, case_id, now, now, now + 300, accepted, reason))
+        extensions["signing_cases"].append(dict(id=case_id, case_id=case_id, credential=cred, expected_signing=accepted))
+    results = {"subject-der.json": subject, "near-expiry.json": expiry, "extension-profile.json": extensions}
     for corpus in results.values():
         verify_signatures(corpus)
     return results

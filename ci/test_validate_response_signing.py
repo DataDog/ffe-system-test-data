@@ -54,7 +54,7 @@ class ResponseSigningValidationTest(unittest.TestCase):
                 '"expected_accept": false, "expected\\u005faccept": true',
             ),
         ]
-        for name in ("subject-der.json", "near-expiry.json"):
+        for name in ("subject-der.json", "near-expiry.json", "extension-profile.json"):
             mutations.append((f"response-signing/v1/{name}", '"expected_accept": true',
                               '"expected_accept": false, "expected_accept": true'))
         for relative, old, new in mutations:

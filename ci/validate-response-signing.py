@@ -31,7 +31,7 @@ def validate(root):
     assert manifest["schema_version"] == 1
     assert set(manifest["files"]) == {
         "corpus.json", "nested-der.json", "isolated-certificate-rules.json",
-        "subject-der.json", "near-expiry.json",
+        "subject-der.json", "near-expiry.json", "extension-profile.json",
     }
     for name, expected in manifest["files"].items():
         raw = (directory / name).read_bytes()
