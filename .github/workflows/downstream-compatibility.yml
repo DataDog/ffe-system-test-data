@@ -6,6 +6,7 @@ on:
       - .github/workflows/downstream-compatibility.yml
       - ci/run-downstream-conformance.sh
       - evaluation-cases/**
+      - evaluation-suites/**
       - ufc-config.json
 
 permissions:
