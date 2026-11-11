@@ -1059,9 +1059,50 @@
         "shipped": {
           "key": "shipped",
           "value": "shipped"
+        },
+        "targeted": {
+          "key": "targeted",
+          "value": "targeted"
         }
       },
       "allocations": [
+        {
+          "key": "targeted-override",
+          "startAt": "2022-10-31T09:00:00.594Z",
+          "endAt": "2050-10-31T09:00:00.594Z",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "tier",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "internal"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "targeted",
+              "serialId": 201,
+              "shards": [
+                {
+                  "salt": "targeted-override",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "doLog": false
+        },
         {
           "key": "holdout-a",
           "splits": [
@@ -1088,7 +1129,8 @@
                   ],
                   "totalShards": 10000
                 }
-              ]
+              ],
+              "serialId": 202
             },
             {
               "variationKey": "shipped",
@@ -1113,7 +1155,8 @@
                   ],
                   "totalShards": 10000
                 }
-              ]
+              ],
+              "serialId": 203
             }
           ],
           "startAt": "2022-10-31T09:00:00.594Z",
@@ -1127,7 +1170,8 @@
           "splits": [
             {
               "variationKey": "shipped",
-              "shards": []
+              "shards": [],
+              "serialId": 204
             }
           ],
           "doLog": false

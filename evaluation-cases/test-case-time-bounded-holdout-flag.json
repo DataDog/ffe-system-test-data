@@ -7,7 +7,9 @@
     "attributes": {},
     "result": {
       "value": "status-quo",
-      "reason": "SPLIT"
+      "reason": "SPLIT",
+      "serialId": 202,
+      "doLog": true
     }
   },
   {
@@ -18,7 +20,9 @@
     "attributes": {},
     "result": {
       "value": "status-quo",
-      "reason": "SPLIT"
+      "reason": "SPLIT",
+      "serialId": 202,
+      "doLog": true
     }
   },
   {
@@ -29,7 +33,9 @@
     "attributes": {},
     "result": {
       "value": "shipped",
-      "reason": "SPLIT"
+      "reason": "SPLIT",
+      "serialId": 203,
+      "doLog": true
     }
   },
   {
@@ -40,7 +46,9 @@
     "attributes": {},
     "result": {
       "value": "shipped",
-      "reason": "SPLIT"
+      "reason": "SPLIT",
+      "serialId": 203,
+      "doLog": true
     }
   },
   {
@@ -51,7 +59,9 @@
     "attributes": {},
     "result": {
       "value": "shipped",
-      "reason": "STATIC"
+      "reason": "STATIC",
+      "serialId": 204,
+      "doLog": false
     }
   },
   {
@@ -62,7 +72,39 @@
     "attributes": {},
     "result": {
       "value": "shipped",
-      "reason": "STATIC"
+      "reason": "STATIC",
+      "serialId": 204,
+      "doLog": false
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "frank",
+    "attributes": {
+      "tier": "internal"
+    },
+    "result": {
+      "value": "targeted",
+      "reason": "TARGETING_MATCH",
+      "serialId": 201,
+      "doLog": false
+    }
+  },
+  {
+    "flag": "time-bounded-holdout-flag",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "dave",
+    "attributes": {
+      "tier": "internal"
+    },
+    "result": {
+      "value": "targeted",
+      "reason": "TARGETING_MATCH",
+      "serialId": 201,
+      "doLog": false
     }
   }
 ]

@@ -11,14 +11,14 @@
     "tools/ufc/generate.mjs": "7e6d634547ead40137226b026d74a003f3b5320bf995006d6e16b9dc7c47e4c8",
     "tools/ufc/package-lock.json": "503a5cbe78ac55bbfe96aa544d57696885175248d105ab6f47f01598961b618c",
     "tools/ufc/package.json": "c75341d53e2362a05b316e978f96a4cded0bc5ea7f65ac0e221f22246b6ea1f8",
-    "ufc-config.json": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79"
+    "ufc-config.json": "8edacb835266511581dc97231f846766236754bc94ad363e5607dcc0e3b64a14"
   },
   "serializer": "@datadog/flagging-core@3.0.1",
   "resources": [
     {
       "id": "canonical-evaluator",
       "source": "ufc-config.json",
-      "sourceSha256": "f5d6ad45d2f3cd3eb55f1484bee183ba58d2cb9293b6f4d25014a1a830336a79",
+      "sourceSha256": "8edacb835266511581dc97231f846766236754bc94ad363e5607dcc0e3b64a14",
       "convertedFlagKeys": [
         "basic-flag",
         "boolean-false-assignment",
@@ -63,6 +63,7 @@
         "split-features-selected-allocation",
         "start-and-end-date-test",
         "string_flag_with_special_characters",
+        "time-bounded-holdout-flag",
         "unknown-fields-tolerance-flag",
         "valid-flag-after-invalid-config"
       ],
@@ -88,10 +89,10 @@
       ],
       "artifacts": {
         "configuration-wire.json": {
-          "sha256": "0cf561fff82f5e1081df0626efe3856578e062d6ae8d6538e053c2ffef588758"
+          "sha256": "463df193bb5485a1ad2b7b96628da0cd0a233c26a230e05dec4f91f7802cbc78"
         },
         "ufc.pb": {
-          "sha256": "97d0f2126a280f7a8704bd3b97b4c25dd3df033d74446d2412f5b5e91738941d"
+          "sha256": "e591999fb47f8d0111a0047ca0d37adb1e54f2b98f4dc6af41882b7bebb76796"
         }
       }
     }
