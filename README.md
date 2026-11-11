@@ -538,6 +538,35 @@ fixture defining the intended behavior.
 
 ## Evaluation Cases
 
+### Time-bounded holdout evaluation
+
+`test-case-time-bounded-holdout-flag.json` exercises both groups of an active
+holdout-shaped allocation. Membership and group shards must both match, and the
+selected group reports `SPLIT` even when the allocation has start and end dates.
+A matching targeting override takes precedence and reports `TARGETING_MATCH`;
+subjects outside the holdout fall through to an unbounded rollout with `STATIC`.
+Every case also asserts the selected serial ID and `doLog` decision. The existing
+`test-case-start-and-end-date-flag.json` separately covers bounded, single-unsharded
+allocations returning `DEFAULT`. These are evaluator expectations, not proof of
+exposure delivery.
+
+The holdout admits half of 5,120,000 membership buckets and divides members equally
+across 10,000 group buckets. For its configured salts, the subject buckets are:
+
+| Subject | Membership bucket | Group bucket | Selection without targeting override |
+| --- | ---: | ---: | --- |
+| `frank` | 536823 | 3789 | `status-quo` |
+| `rupert` | 1703105 | 3308 | `status-quo` |
+| `dave` | 2022416 | 8425 | `shipped` holdout group |
+| `erin` | 649306 | 7166 | `shipped` holdout group |
+| `alice` | 2852227 | 2390 | `shipped` rollout |
+| `bob` | 3363725 | 738 | `shipped` rollout |
+
+The active window runs from October 31, 2022 through October 31, 2050 and retains
+`randomizationActivatedAt` on the holdout. The cases do not test exact clock
+boundaries. Adding `tier: internal` overrides either holdout group; the two
+targeting cases use `frank` and `dave`.
+
 | File | Description |
 |------|-------------|
 | `test-case-boolean-false-assignment.json` | Boolean flag with false assignment via targeting |
@@ -580,6 +609,7 @@ fixture defining the intended behavior.
 | `test-case-span-enrichment-inputs.json` | Selected IDs and logging decisions used by downstream span-enrichment tests |
 | `test-case-start-and-end-date-flag.json` | Flag with start/end date time bounds |
 | `test-case-split-features.json` | Selected-split feature routing, scalar/malformed inputs, first-valid-key handling, and logging decisions |
+| `test-case-time-bounded-holdout-flag.json` | Both time-bounded holdout groups, unbounded rollout fallback, and targeting precedence with reason, serial ID, and logging assertions |
 | `test-case-unknown-fields-tolerance.json` | Unknown UFC object fields are ignored |
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
