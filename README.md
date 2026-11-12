@@ -675,6 +675,15 @@ The at-the-limits case has a percent-encoded URL of about 6.8 KB, which the SDK
 must still send. Its `&`, `+`, `#`, and `%` characters reach the server intact
 only when the SDK percent-encodes each value.
 
+In `dependent-flags`, when dependency evaluation fails (a reached prerequisite is
+missing or has no assignment, the depth limit is exceeded, or a cycle is found),
+the requested root returns the caller default with reason `ERROR` and error code
+`GENERAL`. A specific error code applies only to the flag where the failure
+originates: a missing prerequisite reports `FLAG_NOT_FOUND` in its evaluation
+event. The other failures have no more specific code and report `GENERAL`. Every
+configured flag that fails because of a failed prerequisite, including
+intermediate prerequisites and the requested root, reports `GENERAL`.
+
 ## Origin
 
 These fixtures originated in the Go SDK (`dd-trace-go`). This repository now
