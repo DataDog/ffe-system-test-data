@@ -147,6 +147,7 @@ Valid platforms: `web`, `ios`, `android`, `react-native`, `flutter`, `maui`,
 | Code | When |
 |------|------|
 | `FLAG_NOT_FOUND` | Flag key not in response, or flag dropped due to malformed data |
+| `GENERAL` | A requested root or intermediate ancestor failed because a dependency returned a specific error |
 | `TYPE_MISMATCH` | Incompatible getter, fractional/out-of-range Integer read, or rejected Double conversion (see the README numeric rules) |
 | `PARSE_ERROR` | Enumerated field contains an unexpected value. Unsupported `variationType` values are omitted; lookup returns `FLAG_NOT_FOUND`. |
 | `TARGETING_KEY_MISSING` | Evaluation requires targeting key but none provided |

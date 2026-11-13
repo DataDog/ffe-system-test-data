@@ -27,7 +27,31 @@
     },
     "response": {
       "type": "object",
-      "description": "Mocked precomputed-assignments response. Open-ended; downstream code validates the payload shape."
+      "description": "Mocked precomputed-assignments response. Legacy assignments remain in attributes.flags; capable-client failures use attributes.flagEvaluationErrors.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "flags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/$defs/FlagAssignment"
+                  }
+                },
+                "flagEvaluationErrors": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/$defs/FlagEvaluationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "evaluations": {
       "type": "array",
@@ -58,6 +82,107 @@
     ]
   },
   "$defs": {
+    "FlagAssignment": {
+      "type": "object",
+      "properties": {
+        "dependencyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DependencyEvaluation"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "FlagEvaluationError": {
+      "type": "object",
+      "required": [
+        "reason",
+        "errorCode"
+      ],
+      "properties": {
+        "reason": {
+          "const": "ERROR"
+        },
+        "errorCode": {
+          "const": "GENERAL"
+        },
+        "errorMessage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependencyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DependencyEvaluation"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "DependencyEvaluation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SuccessfulDependencyEvaluation"
+        },
+        {
+          "$ref": "#/$defs/FailedDependencyEvaluation"
+        }
+      ]
+    },
+    "SuccessfulDependencyEvaluation": {
+      "type": "object",
+      "required": [
+        "flagKey",
+        "isPresentInAssignment"
+      ],
+      "properties": {
+        "flagKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isPresentInAssignment": {
+          "type": "boolean"
+        }
+      },
+      "not": {
+        "anyOf": [
+          { "required": ["reason"] },
+          { "required": ["errorCode"] },
+          { "required": ["errorMessage"] }
+        ]
+      },
+      "additionalProperties": true
+    },
+    "FailedDependencyEvaluation": {
+      "type": "object",
+      "required": [
+        "flagKey",
+        "reason",
+        "errorCode"
+      ],
+      "properties": {
+        "flagKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "const": "ERROR"
+        },
+        "errorCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "errorMessage": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "not": {
+        "required": ["isPresentInAssignment"]
+      },
+      "additionalProperties": true
+    },
     "PlatformFilterEntry": {
       "type": "object",
       "required": [
@@ -356,6 +481,11 @@
           "type": "boolean",
           "default": false,
           "description": "When true, assert that all received events (exposures and evaluations) are consumed by matchers. No extra events allowed."
+        },
+        "orderedEvents": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, assert that exposure and evaluation events are emitted in the order declared by their matcher lists."
         },
         "exposures": {
           "type": "array",
