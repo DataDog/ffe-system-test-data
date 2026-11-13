@@ -260,6 +260,33 @@ Example:
 ]
 ```
 
+### Required allocation `doLog`
+
+Every UFC allocation must include `doLog` as a JSON boolean.
+
+| Input | Expected behavior |
+| --- | --- |
+| `true` | Accept the allocation with exposure logging enabled. |
+| `false` | Accept the allocation with exposure logging disabled. |
+| Omitted or `null` | Reject the affected flag with `ERROR` / `PARSE_ERROR`. |
+| String, number, array, or object | Reject the affected flag with `ERROR` / `PARSE_ERROR`; do not coerce the value. |
+
+Validate every allocation during configuration ingestion, even if another
+allocation would match first. Return the caller default for a rejected flag.
+Do not skip the invalid allocation or select a later fallback.
+Valid neighboring flags must remain usable.
+
+`test-case-dolog-required.json` covers missing and null values, strings
+`"true"` and `"false"`, numbers `0` and `1`, an array, and an object.
+It also checks invalid allocations before a fallback and after an unconditional
+match. Positive controls reuse existing flags with explicit booleans.
+These cases use the existing fixture format; no new capability is required.
+
+The evaluation cases assert values and errors. SDK tests must also verify
+that rejected flags emit no exposures and retain their normal evaluation-error
+telemetry. This contract concerns UFC allocation parsing, not precomputed
+assignment response parsing.
+
 `_skip` and `_include` are mutually exclusive non-empty arrays of objects shaped
 as `{"platform": "python", "reason": "optional explanation"}`. Each object
 has exactly one required canonical `platform` and an optional non-empty
@@ -573,6 +600,7 @@ targeting cases use `frank` and `dave`.
 | `test-case-boolean-one-of-matches.json` | Boolean flag with ONE_OF operator matching |
 | `test-case-comparator-operator-flag.json` | Flag using comparator operators (GT, LT, etc.) |
 | `test-case-disabled-flag.json` | Disabled flag returning DISABLED reason |
+| `test-case-dolog-required.json` | Required boolean `doLog`, malformed flag isolation, and validation before allocation selection |
 | `test-case-empty-flag.json` | Flag with empty configuration |
 | `test-case-empty-string-variation.json` | Flag returning empty string as value |
 | `test-case-experimentation-opt-out.json` | Baseline, immediate, and future opt-out behavior, including invalid subject input and ordinary fallbacks |
