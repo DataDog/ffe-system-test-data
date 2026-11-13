@@ -63,9 +63,7 @@ and is represented for capable clients in the optional sibling
   "flagEvaluationErrors": {
     "failed-flag": {
       "reason": "ERROR",
-      "errorCode": "GENERAL",
-      "errorMessage": "A prerequisite flag could not be evaluated",
-      "dependencyEvaluations": []
+      "errorCode": "GENERAL"
     }
   }
 }
@@ -76,6 +74,12 @@ resolve an error entry with the caller's default value. Legacy clients ignore
 the unknown sibling map and treat the failed flag as absent. Fixtures must never
 invent a variation value or other legacy assignment fields for a failed
 evaluation.
+
+`errorMessage` and `dependencyEvaluations` are optional. Producers omit an
+empty dependency list. Unknown fields are ignored, but each dependency entry
+must be exactly one logical shape: a successful entry has
+`isPresentInAssignment` and no error fields, while a failed entry has
+`reason: "ERROR"` and `errorCode` and no `isPresentInAssignment`.
 
 When any ancestor evaluation encounters an error, the requested root and each
 intermediate failed ancestor report `GENERAL`. Only the originating failed node
@@ -92,14 +96,32 @@ normal `flag-key-sha256-v1` digest to that plaintext key, and uses the digest
 to find the dependency's top-level entry. Dependency telemetry uses the
 recovered plaintext key.
 
+The response declares the dependency scheme alongside the top-level hashing
+scheme:
+
+```json
+{
+  "obfuscation": {
+    "scheme": "flag-key-sha256-v1",
+    "salt": "000102030405060708090a0b0c0d0e0f",
+    "dependencyKeyEncryption": {
+      "scheme": "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+    }
+  }
+}
+```
+
 The encrypted value is unpadded base64url of `nonce || ciphertext || tag`:
 
 - Cipher: AES-256-GCM with a 12-byte nonce and 16-byte tag.
-- Key: HKDF-SHA256 with UTF-8 root flag key as input key material, the
-  response obfuscation salt as the salt, and
-  `datadog.feature-flags.dependency-key.v1` as `info`.
+- Extract: HKDF-SHA256 with the UTF-8 root flag key as input key material and
+  the response obfuscation salt as the salt.
+- Encryption key: HKDF-Expand of the extracted key with
+  `datadog.feature-flags.dependency-key.v1\0enc` as `info`.
+- Nonce key: HKDF-Expand of the extracted key with
+  `datadog.feature-flags.dependency-key.v1\0nonce` as `info`.
 - Nonce: the first 12 bytes of
-  `HMAC-SHA256(key, "datadog.feature-flags.dependency-key.nonce.v1\\0" ||
+  `HMAC-SHA256(nonceKey, "datadog.feature-flags.dependency-key.nonce.v1\0" ||
   UTF8(dependencyKey))`.
 - AAD: `datadog.feature-flags.dependency-key.v1\0`.
 
@@ -108,6 +130,9 @@ deterministic nonce is scoped to one root key and response salt. Authentication
 or UTF-8 decoding failure makes the root evaluation fail with `PARSE_ERROR`;
 SDKs must not fall back to interpreting the value as plaintext or as a digest.
 Plain responses continue to carry plaintext dependency keys.
+The envelope reveals the UTF-8 byte length of the dependency key. Flag keys
+are not secrets, and this format is an obfuscation mechanism rather than a
+confidentiality or authorization boundary.
 
 ## Evaluations
 

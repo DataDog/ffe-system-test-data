@@ -113,11 +113,22 @@ def check_assignment_error_partition(data):
         if not isinstance(entry, dict):
             errors.append(f"{path}: must be an object")
             continue
-        for field in ("reason", "errorCode", "errorMessage", "dependencyEvaluations"):
+        for field in ("reason", "errorCode"):
             if field not in entry:
                 errors.append(f"{path}: missing required {field}")
         if entry.get("errorCode") != "GENERAL":
             errors.append(f"{path}: root dependency failure errorCode must be GENERAL")
+    if "expectedResponseError" not in data:
+        obfuscation = attributes.get("obfuscation")
+        if isinstance(obfuscation, dict) and "dependencyKeyEncryption" in obfuscation:
+            encryption = obfuscation["dependencyKeyEncryption"]
+            if not isinstance(encryption, dict) or encryption.get("scheme") != (
+                "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+            ):
+                errors.append(
+                    "$.response.data.attributes.obfuscation.dependencyKeyEncryption: "
+                    "unsupported scheme"
+                )
     return errors
 
 

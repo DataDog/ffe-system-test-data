@@ -93,7 +93,13 @@ def companion(source):
             for key, value in errors.items()
         }
     attributes["obfuscated"] = True
-    attributes["obfuscation"] = {"scheme": "flag-key-sha256-v1", "salt": SALT}
+    attributes["obfuscation"] = {
+        "scheme": "flag-key-sha256-v1",
+        "salt": SALT,
+        "dependencyKeyEncryption": {
+            "scheme": "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+        },
+    }
     # Public lookup keys, results, events, and evaluation filters remain identical.
     return result
 

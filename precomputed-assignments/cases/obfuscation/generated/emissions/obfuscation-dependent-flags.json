@@ -27,11 +27,11 @@
             "doLog": true,
             "dependencyEvaluations": [
               {
-                "flagKey": "vA3siGb19FapOg5co5wkEbkWfl89-g82liKoVd9McRv-oajFNOSysVXu6PpOESySgbuN15N5pGAmVA",
+                "flagKey": "dJ6J_8Z79Vg6HYhgU8Ps9NNLN2zb11dzTB6wcffSnCTK8HkeQX_N77qL_KBfB9L5vHyLgzt8CkZzhg",
                 "isPresentInAssignment": true
               },
               {
-                "flagKey": "oGUNK3OtzQzFq2wUOyu8RUo8Cf-T8I0kwYIvM2tF4CWW-PhoL-h3eJ-Fb__vozULaCx93si_xXs4DelR",
+                "flagKey": "zgwpu9m4IEYijKC8oylNd8_CuendYNRKlikV03ggDILuFw5NZL2qYLM8K-diSG44OPmfc8loEIDazbpQ",
                 "isPresentInAssignment": true
               }
             ]
@@ -65,19 +65,18 @@
           "deb1d0f9fe8eb5b067763cf1c5d97a65e0b3decd3165b7016a0c26e63767710e": {
             "reason": "ERROR",
             "errorCode": "GENERAL",
-            "errorMessage": "A prerequisite flag could not be evaluated",
             "dependencyEvaluations": [
               {
-                "flagKey": "stYtxI--7eBtJg_Vq2ydRQ0GEldK0pFtl5UK8VPYtnGwjlaoS79O0VlB4cffViCePsKasBspVY_W2Q",
+                "flagKey": "5Mf6P2wP9ZQ4w6gFlmM4902ElLkSIzhGEp2Gch4o2PcctxJNTqalvuxKwOpFfO0wwZZxeIYXeggpxQ",
                 "isPresentInAssignment": false
               },
               {
-                "flagKey": "A-E3LPfoUFu6-SUjJ0VlglQNn5MJHemZiI0F3ywQDLGNPM7P8WasTiLxEHBw9na0tXeRAwyRKk7N33CR7A",
+                "flagKey": "piaceIQTbDZN3OQSHM_uPe5EsLAhT9pnLZ5H8Zyfh5ypsYRUSZW66ntzcgBxuRNMD7vfbJDPcrpg2YIVxA",
                 "reason": "ERROR",
                 "errorCode": "FLAG_NOT_FOUND"
               },
               {
-                "flagKey": "lZkvGHelQ_qmeZrMnpgyWtxWrhJRx1i5NVeONy3FfXorNljFAVtjfMolW_J_A55RISSrLKi0_Tio4Ygk",
+                "flagKey": "kmtXnIWiMbnlFWBE-l-WlPVTDV_TuU3Xr7rVtbxPgAwmmrKpWsI-JkRIdU98PnAqAEuYYeRN-M-a2IDh",
                 "reason": "ERROR",
                 "errorCode": "GENERAL"
               }
@@ -87,7 +86,10 @@
         "obfuscated": true,
         "obfuscation": {
           "scheme": "flag-key-sha256-v1",
-          "salt": "000102030405060708090a0b0c0d0e0f"
+          "salt": "000102030405060708090a0b0c0d0e0f",
+          "dependencyKeyEncryption": {
+            "scheme": "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+          }
         }
       }
     }

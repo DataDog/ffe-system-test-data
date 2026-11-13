@@ -6,7 +6,7 @@ from dependency_key_encryption import encrypt
 class DependencyKeyEncryptionTest(unittest.TestCase):
     def test_matches_independent_node_crypto_vector(self):
         self.assertEqual(
-            "Eb_cST-0-FZKdvcpKLHbDDG_CX2hK4Xfrw7h5o-47Gp6GyFntOGTZO3wmLg",
+            "tATBHdKpF-zxZ2Fr70UGwTMfPcXSdulh78uKYPpNzVBoSlNnB6qMCTtI1o8",
             encrypt(
                 "checkout-redesign",
                 "new-payment-flow",

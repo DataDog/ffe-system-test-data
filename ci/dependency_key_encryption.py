@@ -6,14 +6,18 @@ import hmac
 
 AAD = b"datadog.feature-flags.dependency-key.v1\0"
 INFO = b"datadog.feature-flags.dependency-key.v1"
+ENCRYPTION_INFO = INFO + b"\0enc"
+NONCE_KEY_INFO = INFO + b"\0nonce"
 NONCE_DOMAIN = b"datadog.feature-flags.dependency-key.nonce.v1\0"
 
 
 def encrypt(root_key, dependency_key, salt):
-    key = _hkdf(root_key.encode(), salt)
+    extracted = hmac.new(salt, root_key.encode(), hashlib.sha256).digest()
+    encryption_key = _hkdf_expand(extracted, ENCRYPTION_INFO)
+    nonce_key = _hkdf_expand(extracted, NONCE_KEY_INFO)
     plaintext = dependency_key.encode()
-    nonce = hmac.new(key, NONCE_DOMAIN + plaintext, hashlib.sha256).digest()[:12]
-    expanded = _expand_key(key)
+    nonce = hmac.new(nonce_key, NONCE_DOMAIN + plaintext, hashlib.sha256).digest()[:12]
+    expanded = _expand_key(encryption_key)
     j0 = nonce + b"\0\0\0\1"
     ciphertext = _ctr(expanded, j0, plaintext)
     lengths = (len(AAD) * 8).to_bytes(8, "big") + (len(ciphertext) * 8).to_bytes(
@@ -29,9 +33,8 @@ def encrypt(root_key, dependency_key, salt):
     return base64.urlsafe_b64encode(nonce + ciphertext + tag).rstrip(b"=").decode()
 
 
-def _hkdf(input_key, salt):
-    extracted = hmac.new(salt, input_key, hashlib.sha256).digest()
-    return hmac.new(extracted, INFO + b"\1", hashlib.sha256).digest()
+def _hkdf_expand(extracted, info):
+    return hmac.new(extracted, info + b"\1", hashlib.sha256).digest()
 
 
 def _expand_key(key):

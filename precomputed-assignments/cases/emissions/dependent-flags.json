@@ -64,7 +64,6 @@
           "fixture.dependent.failure": {
             "reason": "ERROR",
             "errorCode": "GENERAL",
-            "errorMessage": "A prerequisite flag could not be evaluated",
             "dependencyEvaluations": [
               {
                 "flagKey": "fixture.dependent.failure.leaf",

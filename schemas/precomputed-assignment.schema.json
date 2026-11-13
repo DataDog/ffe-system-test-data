@@ -35,6 +35,12 @@
             "attributes": {
               "type": "object",
               "properties": {
+                "flags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/$defs/FlagAssignment"
+                  }
+                },
                 "flagEvaluationErrors": {
                   "type": "object",
                   "additionalProperties": {
@@ -76,13 +82,23 @@
     ]
   },
   "$defs": {
+    "FlagAssignment": {
+      "type": "object",
+      "properties": {
+        "dependencyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DependencyEvaluation"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
     "FlagEvaluationError": {
       "type": "object",
       "required": [
         "reason",
-        "errorCode",
-        "errorMessage",
-        "dependencyEvaluations"
+        "errorCode"
       ],
       "properties": {
         "reason": {
@@ -105,23 +121,65 @@
       "additionalProperties": true
     },
     "DependencyEvaluation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SuccessfulDependencyEvaluation"
+        },
+        {
+          "$ref": "#/$defs/FailedDependencyEvaluation"
+        }
+      ]
+    },
+    "SuccessfulDependencyEvaluation": {
       "type": "object",
       "required": [
-        "flagKey"
+        "flagKey",
+        "isPresentInAssignment"
       ],
       "properties": {
         "flagKey": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "isPresentInAssignment": {
           "type": "boolean"
+        }
+      },
+      "not": {
+        "anyOf": [
+          { "required": ["reason"] },
+          { "required": ["errorCode"] },
+          { "required": ["errorMessage"] }
+        ]
+      },
+      "additionalProperties": true
+    },
+    "FailedDependencyEvaluation": {
+      "type": "object",
+      "required": [
+        "flagKey",
+        "reason",
+        "errorCode"
+      ],
+      "properties": {
+        "flagKey": {
+          "type": "string",
+          "minLength": 1
         },
         "reason": {
-          "type": "string"
+          "const": "ERROR"
         },
         "errorCode": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
+        },
+        "errorMessage": {
+          "type": "string",
+          "minLength": 1
         }
+      },
+      "not": {
+        "required": ["isPresentInAssignment"]
       },
       "additionalProperties": true
     },
