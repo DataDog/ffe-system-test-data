@@ -18,6 +18,24 @@
       "response_cases": 4,
       "accepted": 1,
       "signing_cases": 0
+    },
+    "subject-der.json": {
+      "sha256": "c3cc9c3992ddb9b77892d0230212c9e6b383dbf7aeab705af6132125245afc59",
+      "response_cases": 2,
+      "accepted": 1,
+      "signing_cases": 2
+    },
+    "near-expiry.json": {
+      "sha256": "f0de3afa5ed0083ddb9d687238431286fc025d9a72c29ba7eb0c4dc304d7914f",
+      "response_cases": 6,
+      "accepted": 4,
+      "signing_cases": 6
+    },
+    "extension-profile.json": {
+      "sha256": "e3ca10b6429d171126d81c50fe4d624ae24a3450cf3ee121f2b1e437d84a9439",
+      "response_cases": 6,
+      "accepted": 2,
+      "signing_cases": 6
     }
   }
 }
