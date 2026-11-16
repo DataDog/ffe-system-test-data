@@ -91,10 +91,13 @@ ffe-system-test-data/
 │   ├── dependent-flags/
 │   │   ├── ufc-config.json  # UFC containing only dependent-flag fixtures
 │   │   └── cases/           # Evaluation cases for this feature
-│   └── flag-selection/
-│       ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
-│       ├── flag-tags.json   # Tags of those flags, which UFC does not carry
-│       └── cases/           # One flag selection per case file
+│   ├── flag-selection/
+│   │   ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
+│   │   ├── flag-tags.json   # Tags of those flags, which UFC does not carry
+│   │   └── cases/           # One flag selection per case file
+│   └── scale/
+│       ├── ufc-config.json  # Large lists, long regex inputs, deep rules, and large JSON values
+│       └── cases/           # Evaluation cases at those sizes
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
@@ -629,6 +632,19 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+| `scale` | Standard UFC syntax at sizes found in production configurations: 10,000-entry `ONE_OF` and `NOT_ONE_OF` lists with string and number attributes, regex conditions on 2 KB inputs, 300 conditions that share 10 patterns, 20 allocations of 5 conditions, a 200-attribute context, and JSON values with 719 nodes, 2,000 keys, and 16 levels of nesting. See below |
+
+### Scale suite
+
+The `scale` suite uses only syntax from the root configuration. It is a separate
+suite because of its size: its configuration is about 1.3 MB, and some regex
+cases are slow for backtracking regex engines. A consumer that does not enable it
+does not parse it.
+
+The expected results are behavior only. The suite does not define time or memory
+limits, because those depend on the machine. A benchmark can load the same
+configuration and cases as its input. No flag uses shards, so no expected result
+depends on a hash. All values are synthetic.
 
 ### Flag selection suite
 
