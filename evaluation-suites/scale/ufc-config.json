@@ -30178,7 +30178,7 @@
                 {
                   "attribute": "email",
                   "operator": "MATCHES",
-                  "value": ".*@(alpha|bravo)\\.(com|io)$"
+                  "value": ".*@(alpha|bravo)\\.(example|test)$"
                 }
               ]
             }
