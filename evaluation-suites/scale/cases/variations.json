@@ -1,0 +1,5 @@
+[
+  {"flag":"scale-many-variations","variationType":"STRING","defaultValue":"default","targetingKey":"scale-subject","attributes":{"slot":"s0000"},"result":{"value":"slot-0000","reason":"TARGETING_MATCH"}},
+  {"flag":"scale-many-variations","variationType":"STRING","defaultValue":"default","targetingKey":"scale-subject","attributes":{"slot":"s0999"},"result":{"value":"slot-0999","reason":"TARGETING_MATCH"}},
+  {"flag":"scale-many-variations","variationType":"STRING","defaultValue":"default","targetingKey":"scale-subject","attributes":{"slot":"s1000"},"result":{"value":"fallback","reason":"STATIC"}}
+]
