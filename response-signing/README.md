@@ -11,6 +11,9 @@ clients do not fetch them when evaluating flags or verifying a response.
 | --- | --- | --- |
 | `v1/corpus.json` | 46 response cases: 6 accepted and 40 rejected; 2 private-key matching cases | Verifiers consume `cases`; signers also consume `signing_cases` |
 | `v1/isolated-certificate-rules.json` | Accepted control and isolated certificate-size, leaf-CA and intermediate-CA rejections | Signers and verifiers |
+| `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
+| `v1/extension-profile.json` | Accepted controls and isolated policy-mapping/empty key-identifier rejections | Signers and verifiers |
+| `v1/near-expiry.json` | Four valid near-expiry proofs, a proof outliving its leaf, and exact-expiry rejection | Signers and verifiers |
 | `v1/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in certificate extensions | Signers and verifiers |
 
 Version 1 is the first public response-signing protocol. Earlier POC v1/v2 and
@@ -60,8 +63,10 @@ implementation being tested.
 
 All certificates, identities, tokens and private keys in this suite are synthetic
 test material. The included leaf private keys are intentionally public so signer
-implementations can be tested. They must never be trusted or provisioned outside
-tests. There are no production or staging credentials or customer responses here.
+implementations can be tested. In `subject-der.json` and `extension-profile.json`,
+the root and intermediate reuse that public leaf key. These keys and certificates
+must never be trusted or provisioned outside tests. There are no production or
+staging credentials or customer responses here.
 
 ## Validation and updates
 
@@ -83,3 +88,59 @@ intermediate-CA case keeps CA KeyUsage and path length zero while omitting
 the default false CA flag. Each negative changes only the named profile rule.
 Consumers must explicitly load this supplement; a manifest entry alone does
 not exercise it. Its leaf credentials are public synthetic test material.
+
+## Subject encoding and expiry boundaries
+
+`subject-der.json` holds two otherwise-valid, correctly signed chains and proofs.
+The leaf subject contains an attribute with OID `1.2.3.4` and INTEGER value 1.
+The canonical encoding is `02 01 01`; `02 02 00 01` must be rejected because
+its leading zero is unnecessary. A typed certificate parser can preserve this
+opaque attribute during decode/re-encode, so equality of re-encoded bytes alone
+is insufficient. Existing extension-payload checks do not cover subject values.
+The subject-DER and extension-profile chains reuse the public corpus leaf key
+for the root, intermediate and leaf to isolate encoding from signature validity,
+so their root and intermediate private keys are public too. These roots and
+intermediates keep the corpus certificates' names, serial numbers and key
+identifiers with a different key. Use each file's `anchor_der_base64` only for
+that file, and never combine supplement anchors in one trust store.
+`near-expiry.json` uses the corpus chain unchanged. These are never deployment
+credentials.
+
+`near-expiry.json` accepts proofs when the leaf has 301, 300, 299, or 1 second
+remaining. Each accepted proof expires at `min(issued_at + 300, leaf.not_after)`.
+The negative controls retain valid signatures: one proof extends a single second
+past the leaf while staying within the 300-second proof lifetime, and another is
+verified exactly when both leaf and proof expire. No live wall clock is used.
+
+`extension-profile.json` requires rejection of policy mappings, even when
+noncritical, and nonempty identifiers whenever SKI or AKI is present. Optional
+SKI/AKI extensions may be absent. Every rejection retains valid certificate and
+proof signatures, with valid and absent-identifier controls.
+
+Load all supplements explicitly. Verifiers consume `cases` and compare exact
+transcripts for accepted responses. Signers consume `signing_cases`, resolve
+`case_id`, and sign that case's request/body at `now` with the supplied credential.
+Assert `expected_signing` separately from `expected_accept`: the overlong proof
+must be rejected by a verifier, but its valid credential can still produce a new,
+clipped proof. For every successful signing, verify the emitted proof and assert
+`now < expires_at <= min(now + 300, leaf.not_after)`. Do not require the signer to
+choose the longest possible lifetime or reproduce the fixture's signature bytes.
+At exact leaf expiry, signing must fail. Native fallback/transport behavior stays
+in consumer tests.
+
+Regenerate only these supplements with:
+
+```sh
+python3 -m pip install cryptography==46.0.3
+python3 response-signing/generate-boundary-supplements.py
+python3 response-signing/generate-boundary-supplements.py --check
+python3 ci/validate-response-signing.py
+```
+
+The generator uses deterministic ECDSA and the frozen corpus's public synthetic
+leaf key and request-transcript prefix. It verifies certificate and response
+signatures even for rejection controls; expectations are specified from encoding
+and time rules, not derived from an SDK result. CI checks exact regeneration as
+well as manifest integrity. If a fixture changes intentionally, update its
+manifest hash and review the change. Existing corpus files and the wire protocol
+are unchanged. Merge fixture updates before bumping downstream pins or snapshots.

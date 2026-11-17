@@ -27,7 +27,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Install dependencies
-        run: pip install jsonschema
+        run: pip install jsonschema cryptography==46.0.3
+      - name: Verify boundary fixture reproducibility and signatures
+        run: python3 response-signing/generate-boundary-supplements.py --check
       - name: Validate response signing fixtures
         run: python3 ci/validate-response-signing.py
       - name: Test response signing fixture validation
