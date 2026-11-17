@@ -146,9 +146,10 @@ Valid platforms: `web`, `ios`, `android`, `react-native`, `flutter`, `maui`,
 
 | Code | When |
 |------|------|
-| `FLAG_NOT_FOUND` | Flag key not in response, or flag dropped due to malformed data |
+| `FLAG_NOT_FOUND` | Flag key absent from both the active and failure maps |
+| `GENERAL` | A requested root or intermediate ancestor failed because a dependency returned a specific error |
 | `TYPE_MISMATCH` | Incompatible getter, fractional/out-of-range Integer read, or rejected Double conversion (see the README numeric rules) |
-| `PARSE_ERROR` | Enumerated field contains an unexpected value. Unsupported `variationType` values are omitted; lookup returns `FLAG_NOT_FOUND`. |
+| `PARSE_ERROR` | Enumerated field contains an unexpected value, including an unsupported `variationType`. Preserve the per-flag parse error; healthy sibling flags remain evaluable. |
 | `TARGETING_KEY_MISSING` | Evaluation requires targeting key but none provided |
 
 ## Reason codes
@@ -186,8 +187,8 @@ Checks: JSON Schema conformance, `_skip`/`_include` mutual exclusivity,
 ### Testing flag isolation
 
 Interleave valid and malformed flags in the response. Assert valid flags
-return correct values. Assert malformed flags return `defaultValue` with
-`FLAG_NOT_FOUND`.
+remain evaluable and return correct values. Retain malformed flags in rejected-key
+tracking and assert they return `defaultValue` with `PARSE_ERROR`.
 
 ### Testing type mismatch
 

@@ -93,6 +93,76 @@ class ObfuscatedCompanionsTest(unittest.TestCase):
         self.assertEqual(["ios", "flutter"], [p["platform"] for p in result["_include"]])
         self.assertNotIn("_skip", result)
 
+    def test_web_only_fixture_gets_obfuscated_companion(self):
+        self.fixture["_include"] = [{"platform": "web"}]
+        result = obfuscation.companion(self.fixture)
+        self.assertEqual(["web"], [p["platform"] for p in result["_include"]])
+
+    def test_response_internal_dependency_keys_are_encrypted_for_the_root(self):
+        assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
+        assignment["dependencyEvaluations"] = [
+            {"flagKey": "parent", "isPresentInAssignment": True},
+            {"flagKey": "missing", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND"},
+        ]
+        self.fixture["expectations"] = {
+            "exposures": [{"_count": 1, "flag": {"key": "parent"}}],
+            "evaluationEvents": [{"_count": 1, "flag": {"key": "missing"}}],
+        }
+
+        result = obfuscation.companion(self.fixture)
+        encoded_assignment = result["response"]["data"]["attributes"]["flags"][
+            obfuscation.encode_key("flag")
+        ]
+
+        self.assertEqual(
+            [
+                obfuscation.encrypt("flag", "parent", bytes.fromhex(obfuscation.SALT)),
+                obfuscation.encrypt("flag", "missing", bytes.fromhex(obfuscation.SALT)),
+            ],
+            [entry["flagKey"] for entry in encoded_assignment["dependencyEvaluations"]],
+        )
+        self.assertEqual("parent", assignment["dependencyEvaluations"][0]["flagKey"])
+        self.assertEqual(
+            "parent",
+            result["expectations"]["exposures"][0]["flag"]["key"],
+        )
+        self.assertEqual(
+            "missing",
+            result["expectations"]["evaluationEvents"][0]["flag"]["key"],
+        )
+
+    def test_flag_can_be_both_a_root_and_a_dependency(self):
+        assignment = self.fixture["response"]["data"]["attributes"]["flags"]["flag"]
+        assignment["dependencyEvaluations"] = [{"flagKey": "flag", "isPresentInAssignment": True}]
+        result = obfuscation.companion(self.fixture)
+        encoded_assignment = result["response"]["data"]["attributes"]["flags"][
+            obfuscation.encode_key("flag")
+        ]
+        self.assertEqual(
+            obfuscation.encrypt("flag", "flag", bytes.fromhex(obfuscation.SALT)),
+            encoded_assignment["dependencyEvaluations"][0]["flagKey"],
+        )
+
+    def test_error_map_and_its_dependency_keys_are_encoded(self):
+        attributes = self.fixture["response"]["data"]["attributes"]
+        attributes["flagEvaluationErrors"] = {
+            "failed": {
+                "reason": "ERROR",
+                "errorCode": "FLAG_NOT_FOUND",
+                "dependencyEvaluations": [
+                    {"flagKey": "missing", "reason": "ERROR", "errorCode": "FLAG_NOT_FOUND"}
+                ],
+            }
+        }
+
+        result = obfuscation.companion(self.fixture)
+        errors = result["response"]["data"]["attributes"]["flagEvaluationErrors"]
+        encoded_error = errors[obfuscation.encode_key("failed")]
+        self.assertEqual(
+            obfuscation.encrypt("failed", "missing", bytes.fromhex(obfuscation.SALT)),
+            encoded_error["dependencyEvaluations"][0]["flagKey"],
+        )
+
     def test_exception_requires_existing_source_and_reason(self):
         for entries in [{"evaluator/case.json": ""}, {"deleted.json": "Not applicable"}]:
             self.exceptions.write_text(json.dumps(entries))
