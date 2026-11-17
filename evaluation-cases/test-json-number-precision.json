@@ -31,16 +31,6 @@
     }
   },
   {
-    "_skip": [
-      {
-        "platform": "nodejs",
-        "reason": "JavaScript numbers are IEEE 754 doubles and cannot hold integers above 2^53."
-      },
-      {
-        "platform": "web",
-        "reason": "JavaScript numbers are IEEE 754 doubles and cannot hold integers above 2^53."
-      }
-    ],
     "flag": "json-number-precision-flag",
     "variationType": "JSON",
     "defaultValue": {
