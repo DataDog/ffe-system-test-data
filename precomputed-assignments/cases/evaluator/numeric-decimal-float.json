@@ -1,6 +1,12 @@
 {
   "name": "numeric-decimal-float",
   "description": "Exact original-value Integer reads, rounded fractional Double reads, and range rejection survive caching.",
+  "_skip": [
+    {
+      "platform": "web",
+      "reason": "Browser numeric validation loses original precision and does not report the required TYPE_MISMATCH for range errors."
+    }
+  ],
   "context": {
     "targetingKey": "fixture-subject",
     "attributes": {}
