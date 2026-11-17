@@ -192,8 +192,10 @@ For backward-compatible core-only consumers, the equivalent minimum flow is:
 The adapter may translate API names and native result containers. It must
 preserve the meaning and precision of the inputs and expected results, including
 `false`, `0`, empty values, and the distinction between absent and null fields.
-For JSON values, this includes numbers: an integer stays an integer (`5`, not
-`5.0`), and integers above 2^53 stay exact where the platform can represent them.
+For JSON values, this includes numbers: preserve each number's value; where the
+platform has separate integer and floating-point types, return integers as
+integers; and integers above 2^53 stay exact where the SDK's value type can hold
+them.
 Use SDK-local tests for behavior outside these fixtures, such as concurrency,
 transport failures, and provider lifecycle.
 
@@ -627,7 +629,7 @@ targeting cases use `frank` and `dave`.
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
 | `test-json-config-flag.json` | JSON-typed flag returning object value |
-| `test-json-number-precision.json` | JSON values keep integers exact and distinct from floats, including integers above 2^53 |
+| `test-json-number-precision.json` | JSON values keep each number's value, including integers above 2^53 where the SDK's value type can hold them |
 | `test-no-allocations-flag.json` | Another no-allocations variant |
 | `test-special-characters.json` | Flag keys/values with special characters |
 | `test-string-with-special-characters.json` | String values with special characters |
