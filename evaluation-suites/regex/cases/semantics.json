@@ -252,6 +252,90 @@
     "variationType": "STRING"
   },
   {
+    "description": "\\d matches any Unicode decimal digit. Arabic-Indic digits are decimal digits.",
+    "attributes": {
+      "value": "٣٤٥"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-digit",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "match"
+    },
+    "targetingKey": "unicode-digit-0",
+    "variationType": "STRING"
+  },
+  {
+    "description": "\\d matches any Unicode decimal digit. Fullwidth digits are decimal digits.",
+    "attributes": {
+      "value": "１２３"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-digit",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "match"
+    },
+    "targetingKey": "unicode-digit-1",
+    "variationType": "STRING"
+  },
+  {
+    "description": "\\d matches any Unicode decimal digit. a is not a digit.",
+    "attributes": {
+      "value": "12a"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-digit",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "no-match"
+    },
+    "targetingKey": "unicode-digit-2",
+    "variationType": "STRING"
+  },
+  {
+    "description": "\\s matches any Unicode white space. A no-break space (U+00A0) is white space.",
+    "attributes": {
+      "value": "a\u00a0b"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-space",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "match"
+    },
+    "targetingKey": "unicode-space-0",
+    "variationType": "STRING"
+  },
+  {
+    "description": "\\s matches any Unicode white space. An ideographic space (U+3000) is white space.",
+    "attributes": {
+      "value": "a\u3000b"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-space",
+    "result": {
+      "reason": "TARGETING_MATCH",
+      "value": "match"
+    },
+    "targetingKey": "unicode-space-1",
+    "variationType": "STRING"
+  },
+  {
+    "description": "\\s matches any Unicode white space. A zero-width space (U+200B) is not white space.",
+    "attributes": {
+      "value": "a\u200bb"
+    },
+    "defaultValue": "no-match",
+    "flag": "regex-unicode-space",
+    "result": {
+      "reason": "DEFAULT",
+      "value": "no-match"
+    },
+    "targetingKey": "unicode-space-2",
+    "variationType": "STRING"
+  },
+  {
     "description": "NOT_MATCHES is true when the pattern does not match. The pattern does not match.",
     "attributes": {
       "value": "a@other.com"

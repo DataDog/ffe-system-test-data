@@ -787,6 +787,74 @@
         }
       ]
     },
+    "regex-unicode-digit": {
+      "key": "regex-unicode-digit",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "match": {
+          "key": "match",
+          "value": "match"
+        }
+      },
+      "allocations": [
+        {
+          "key": "match",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "value",
+                  "operator": "MATCHES",
+                  "value": "^\\d+$"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "match",
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
+    "regex-unicode-space": {
+      "key": "regex-unicode-space",
+      "enabled": true,
+      "variationType": "STRING",
+      "variations": {
+        "match": {
+          "key": "match",
+          "value": "match"
+        }
+      },
+      "allocations": [
+        {
+          "key": "match",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "value",
+                  "operator": "MATCHES",
+                  "value": "^a\\sb$"
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "match",
+              "shards": []
+            }
+          ],
+          "doLog": false
+        }
+      ]
+    },
     "regex-not-matches": {
       "key": "regex-not-matches",
       "enabled": true,

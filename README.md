@@ -656,7 +656,7 @@ own flag, so cases cannot overlap under first-match semantics.
 | Case file | What it checks |
 |-----------|----------------|
 | `literals.json` | Patterns that are only text: anchors, escapes, a leading or trailing `.*`, and groups of literal alternatives |
-| `semantics.json` | Places where regex dialects differ: `$` before a final line feed, `.` and line feeds, the `m`, `s`, `i`, and `u` flags, POSIX classes, counted repetition, Unicode word boundaries, and NOT_MATCHES with a missing attribute |
+| `semantics.json` | Places where regex dialects differ: `$` before a final line feed, `.` and line feeds, the `m`, `s`, `i`, and `u` flags, POSIX classes, counted repetition, Unicode word boundaries, Unicode `\d` and `\s`, and NOT_MATCHES with a missing attribute |
 | `backtracking.json` | Nested quantifiers, overlapping alternatives, a leading `.*` on a 20,000-character input, and chains of `.*` |
 | `unsupported-syntax.json` | Lookahead, lookbehind, backreferences, and atomic groups. The Rust `regex` crate rejects them, so the flag has a parse error |
 
