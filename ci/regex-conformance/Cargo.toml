@@ -1,0 +1,10 @@
+[package]
+name = "regex-conformance"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "Evaluates evaluation-suites/regex with the Rust regex crate"
+
+[dependencies]
+regex = "=1.13.1"
+serde_json = "1"

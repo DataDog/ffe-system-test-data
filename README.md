@@ -660,7 +660,13 @@ own flag, so cases cannot overlap under first-match semantics.
 | `backtracking.json` | Nested quantifiers, overlapping alternatives, a leading `.*` on a 20,000-character input, and chains of `.*` |
 | `unsupported-syntax.json` | Lookahead, lookbehind, backreferences, and atomic groups. The Rust `regex` crate rejects them, so the flag has a parse error |
 
-The expected results come from the libdatadog rules-based evaluator. The
+CI evaluates every case with `ci/regex-conformance`, a small evaluator built on
+the Rust `regex` crate at 1.13.1, pinned by its `Cargo.lock`. It fails on a
+different value, reason, or error code, or on a different number of cases; add
+a case and update the count in `.github/workflows/validate-fixtures.yml`. The
+libdatadog rules-based evaluator also agreed with the 63 cases that predate the
+Unicode `\d` and `\s` cases. The six Unicode cases were checked only against the
+Rust `regex` crate. The
 backtracking results are the same in every regex engine, but the inputs are
 large enough that a backtracking engine can take seconds or more for one
 evaluation. The JDK `java.util.regex` engine, for example, does not finish the
