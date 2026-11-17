@@ -95,6 +95,9 @@ ffe-system-test-data/
 │   │   ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
 │   │   ├── flag-tags.json   # Tags of those flags, which UFC does not carry
 │   │   └── cases/           # One flag selection per case file
+│   ├── regex/
+│   │   ├── ufc-config.json  # One MATCHES or NOT_MATCHES flag for each pattern
+│   │   └── cases/           # Literal, dialect, backtracking, and unsupported-syntax cases
 │   └── scale/
 │       ├── ufc-config.json  # Large lists, long regex inputs, many allocations, and large JSON values
 │       └── cases/           # Evaluation cases at those sizes
@@ -633,7 +636,35 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+| `regex` | MATCHES and NOT_MATCHES in the dialect of the Rust `regex` crate: literal patterns, dialect differences, inputs that make a backtracking engine slow, and syntax that the dialect rejects. See below |
 | `scale` | Standard UFC syntax at large sizes: 10,000-entry `ONE_OF` and `NOT_ONE_OF` lists with string and number attributes, regex conditions on 2 KB inputs, 300 conditions that share 10 patterns, 20 allocations of 5 conditions, a 200-attribute context, and JSON values with 719 nodes, 2,000 keys, and 16 levels of nesting. See below |
+
+### Regex suite
+
+`evaluation-suites/regex/` checks MATCHES and NOT_MATCHES in the dialect of
+the Rust `regex` crate, which the libdatadog evaluator uses. Each flag has one
+condition on the `value` attribute. A case returns `match` when the condition
+holds, and the caller default `no-match` when it does not. Each pattern has its
+own flag, so cases cannot overlap under first-match semantics.
+
+| Case file | What it checks |
+|-----------|----------------|
+| `literals.json` | Patterns that are only text: anchors, escapes, a leading or trailing `.*`, and groups of literal alternatives |
+| `semantics.json` | Places where regex dialects differ: `$` before a final line feed, `.` and line feeds, the `m`, `s`, `i`, and `u` flags, POSIX classes, counted repetition, Unicode word boundaries, and NOT_MATCHES with a missing attribute |
+| `backtracking.json` | Nested quantifiers, overlapping alternatives, a leading `.*` on a 20,000-character input, and chains of `.*` |
+| `unsupported-syntax.json` | Lookahead, lookbehind, backreferences, and atomic groups. The Rust `regex` crate rejects them, so the flag has a parse error |
+
+The expected results come from the libdatadog rules-based evaluator. The
+backtracking results are the same in every regex engine, but the inputs are
+large enough that a backtracking engine can take seconds or more for one
+evaluation. The JDK `java.util.regex` engine, for example, does not finish the
+`.*` chain case. A linear-time engine finishes each case in microseconds.
+
+Enable this suite only for an evaluator that uses the Rust dialect and a
+linear-time engine. Other dialects differ on purpose in `semantics.json` and
+`unsupported-syntax.json`: for example, `java.util.regex`, JavaScript `RegExp`,
+and .NET `Regex` accept lookaround, and `java.util.regex` and .NET match `$`
+before a final line feed.
 
 ### Scale suite
 
