@@ -54,6 +54,7 @@ Each case file is one dimension, so a benchmark can select it by name.
 | Suite | Case file | Flags | N × M |
 |-------|-----------|-------|-------|
 | `scale` | `one-of.json` | `scale-one-of-strings`, `scale-not-one-of-strings`, `scale-one-of-numbers` | 1 list × 10,000 entries; string and number attributes |
+| `scale` | `one-of-small-numbers.json` | `scale-one-of-small-integers`, `scale-one-of-powers-of-two` | 1,000 small integers and 53 powers of two as numeric strings in byte order; integer and string attributes |
 | `scale` | `one-of-many.json` | `scale-one-of-per-tenant`, `scale-one-of-long-values`, `scale-one-of-many-attributes` | 500 allocations × 100 UUIDs; 1,000 entries × 256 characters; 50 attributes × 200 entries |
 | `scale` | `regex.json` | `scale-regex-wildcard`, `scale-regex-charclass`, `scale-regex-duplicates` | 2 KB inputs; 300 conditions × 10 distinct patterns |
 | `scale` | `regex-many.json` | `scale-regex-distinct`, `scale-regex-alternation`, `scale-regex-counted` | 1,000 distinct patterns; 500 alternatives; counted repetition |
