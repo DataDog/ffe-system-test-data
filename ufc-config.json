@@ -5825,6 +5825,85 @@
           ]
         }
       ]
+    },
+    "json-number-precision-flag": {
+      "key": "json-number-precision-flag",
+      "enabled": true,
+      "variationType": "JSON",
+      "variations": {
+        "within-double": {
+          "key": "within-double",
+          "value": {
+            "zero": 0,
+            "small": 5,
+            "negative": -7,
+            "int32Max": 2147483647,
+            "int32Min": -2147483648,
+            "aboveInt32": 2147483648,
+            "maxSafeInteger": 9007199254740991,
+            "float": 5.0,
+            "fraction": 0.25,
+            "nested": {
+              "count": 3,
+              "values": [
+                1,
+                2.5,
+                -3
+              ]
+            }
+          }
+        },
+        "above-double": {
+          "key": "above-double",
+          "value": {
+            "aboveMaxSafeInteger": 9007199254740993,
+            "int64Max": 9223372036854775807,
+            "int64Min": -9223372036854775808,
+            "nested": {
+              "ids": [
+                9007199254740993,
+                18014398509481985
+              ]
+            }
+          }
+        }
+      },
+      "allocations": [
+        {
+          "key": "above-double-precision",
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "attribute": "precision",
+                  "operator": "ONE_OF",
+                  "value": [
+                    "above-double"
+                  ]
+                }
+              ]
+            }
+          ],
+          "splits": [
+            {
+              "variationKey": "above-double",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        },
+        {
+          "key": "within-double-precision",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "within-double",
+              "shards": []
+            }
+          ],
+          "doLog": true
+        }
+      ]
     }
   }
 }
