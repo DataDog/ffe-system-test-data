@@ -8,6 +8,7 @@
   "response": {
     "data": {
       "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
         "flags": {
           "8c7c04076517d2c3c0633fda9a6664d4b114cb359cc512dd38c4ef69373032fd": {
             "allocationKey": "holdout-allocation",
