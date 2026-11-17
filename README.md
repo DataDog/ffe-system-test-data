@@ -647,7 +647,7 @@ and `cases/` directory.
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
 | `regex` | MATCHES and NOT_MATCHES in the dialect of the Rust `regex` crate: literal patterns, dialect differences, inputs that make a backtracking engine slow, and syntax that the dialect rejects. See below |
-| `scale` | Standard UFC syntax at large N and N × M: lists of 10,000 entries and 500 × 100, regex on 2 KB inputs and 1,000 distinct patterns, allocations × rules × conditions sweeps, SemVer and numeric ladders, time windows, rollouts and splits with shards, 1,000 variations, and 10,000 flags. See below |
+| `scale` | Standard UFC syntax at large N and N × M: lists of 10,000 entries and 500 × 100, small-integer lists, regex on 2 KB inputs and 1,000 distinct patterns, allocations × rules × conditions sweeps, SemVer and numeric ladders, time windows, rollouts and splits with shards, 1,000 variations, and 10,000 flags. See below |
 | `scale-json` | JSON variant values from 719 nodes to 10 MB, and shapes that stress JSON parsing: 100,000-number arrays, a 1 MB string, and escapes. See below |
 
 ### Regex suite

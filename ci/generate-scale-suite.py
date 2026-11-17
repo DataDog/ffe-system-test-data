@@ -170,6 +170,20 @@ def lists(s):
     s.case(f, "scale-one-of-numbers", {"account_num": 1_000_043}, "unlisted", "STATIC")
     s.case(f, "scale-one-of-numbers", {"account_num": "1000042"}, "listed", "TARGETING_MATCH")
 
+    # Small integers: 1..1,000 and the powers of two to 2^52. Byte order puts "10" before "2", so the
+    # worst case is the last entry in byte order, not the largest number. Dense or regular keys like
+    # these defeat a weak hash in a lookup table.
+    f = "one-of-small-numbers.json"
+    for key, values in (("scale-one-of-small-integers", range(1, 1_001)),
+                        ("scale-one-of-powers-of-two", (2 ** k for k in range(53)))):
+        listed = sorted((str(v) for v in values), key=lambda v: v.encode("utf-8"))
+        s.flag(key, "STRING", {"listed": "listed", "unlisted": "unlisted"},
+               [allocation("listed-numbers", "listed", [cond("count", "ONE_OF", listed)]), allocation("fallback", "unlisted")])
+        s.case(f, key, {"count": int(listed[-1])}, "listed", "TARGETING_MATCH")
+        s.case(f, key, {"count": int(listed[0])}, "listed", "TARGETING_MATCH")
+        s.case(f, key, {"count": listed[len(listed) // 2]}, "listed", "TARGETING_MATCH")
+        s.case(f, key, {"count": 1_000_003}, "unlisted", "STATIC")
+
     # Allocations x list size: per-tenant targeting. 500 allocations of 100 UUID-shaped accounts.
     rng = random.Random(20261117)
     tenants = []
