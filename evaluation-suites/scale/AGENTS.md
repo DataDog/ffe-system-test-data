@@ -14,7 +14,7 @@ results are behavior only. The suites set no time or memory limits.
 | Suite | Holds | Why it is separate |
 |-------|-------|--------------------|
 | `scale` | Targeting structure at large N and N × M: lists, regex, rules, splits, shards, time windows, variations, flag count | The cost is in targeting. The values are small |
-| `scale-json` | JSON variant values from hundreds of nodes to 10 MB | A benchmark of targeting must not parse 14 MB of JSON values |
+| `scale-json` | JSON variant values from hundreds of nodes to 4 MB | A benchmark of targeting must not parse 8 MB of JSON values |
 
 ## Files
 
@@ -68,7 +68,7 @@ Each case file is one dimension, so a benchmark can select it by name.
 | `scale` | `variations.json` | `scale-many-variations` | 1,000 variations × 1,000 allocations, `doLog`, serial IDs, 200 split features |
 | `scale` | `flags.json` | `scale-bulk-00000` … `scale-bulk-09999` | 10,000 flags, every 10th disabled |
 | `scale-json` | `json-values.json` | `scale-json-large`, `scale-json-wide`, `scale-json-deep` | 719 nodes; 2,000 keys; 16 levels |
-| `scale-json` | `json-sizes.json` | `scale-json-100kb`, `scale-json-1mb`, `scale-json-10mb` | A list of records at 100 KB, 1 MB, and 10 MB, behind a targeting rule |
+| `scale-json` | `json-sizes.json` | `scale-json-100kb`, `scale-json-1mb`, `scale-json-4mb` | A list of records at 100 KB, 1 MB, and 4 MB, behind a targeting rule |
 | `scale-json` | `json-shapes.json` | `scale-json-number-array`, `scale-json-long-string`, `scale-json-escapes`, `scale-json-nested-arrays` | 100,000 numbers; a 1 MB string; 5,000 escaped strings; 500 × 50 nested arrays |
 
 ## Design rules
@@ -133,9 +133,11 @@ These rules keep each expected result derived, not recorded from an SDK run.
 
 ## Size
 
-The files are large on purpose: about 8 MB for `scale` and 27 MB for
+The files are large on purpose: about 8 MB for `scale` and 16 MB for
 `scale-json`. Every consumer that checks out this repository downloads them,
-so do not raise the largest size past 10 MB without a reason, and prefer a new
-shape over a bigger copy of an existing one. `.gitattributes` marks the
+so prefer a new shape over a bigger copy of an existing one. Keep each
+`ufc-config.json` under 10 MiB: dd-trace-go and libdatadog reject a
+configuration response larger than that, so a bigger configuration tests a
+payload no SDK can receive. The generator fails if a configuration reaches it. `.gitattributes` marks the
 generated files, so GitHub collapses them in a pull request diff. Review the
 generator, not the output.
