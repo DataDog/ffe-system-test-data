@@ -99,7 +99,33 @@
       "tenant": "tenant-3-77"
     },
     "result": {
-      "value": "duplicate",
+      "value": "dup-003",
+      "reason": "TARGETING_MATCH"
+    }
+  },
+  {
+    "flag": "scale-regex-duplicates",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "scale-subject",
+    "attributes": {
+      "tenant": "tenant-0-1"
+    },
+    "result": {
+      "value": "dup-000",
+      "reason": "TARGETING_MATCH"
+    }
+  },
+  {
+    "flag": "scale-regex-duplicates",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "scale-subject",
+    "attributes": {
+      "tenant": "tenant-9-0"
+    },
+    "result": {
+      "value": "dup-009",
       "reason": "TARGETING_MATCH"
     }
   },

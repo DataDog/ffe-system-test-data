@@ -87,7 +87,7 @@ ffe-system-test-data/
 ├── ufc-config.json          # Shared rules-based configuration, including malformed test inputs
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
-├── evaluation-suites/       # Optional self-contained, explicitly activated feature suites
+├── evaluation-suites/       # Optional self-contained, explicitly activated suites
 │   ├── dependent-flags/
 │   │   ├── ufc-config.json  # UFC containing only dependent-flag fixtures
 │   │   └── cases/           # Evaluation cases for this feature
@@ -96,7 +96,7 @@ ffe-system-test-data/
 │   │   ├── flag-tags.json   # Tags of those flags, which UFC does not carry
 │   │   └── cases/           # One flag selection per case file
 │   └── scale/
-│       ├── ufc-config.json  # Large lists, long regex inputs, deep rules, and large JSON values
+│       ├── ufc-config.json  # Large lists, long regex inputs, many allocations, and large JSON values
 │       └── cases/           # Evaluation cases at those sizes
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
@@ -623,7 +623,8 @@ targeting cases use `frank` and `dave`.
 
 ## Feature Evaluation Suites
 
-Feature-specific UFC syntax is isolated from the shared root configuration in
+Feature-specific UFC syntax, and fixtures that are too large or slow for every
+core run, are isolated from the shared root configuration in
 self-contained `evaluation-suites/<suite>/` directories. Consumers explicitly
 activate the suites they support and use each suite's adjacent `ufc-config.json`
 and `cases/` directory.
@@ -632,7 +633,7 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
-| `scale` | Standard UFC syntax at sizes found in production configurations: 10,000-entry `ONE_OF` and `NOT_ONE_OF` lists with string and number attributes, regex conditions on 2 KB inputs, 300 conditions that share 10 patterns, 20 allocations of 5 conditions, a 200-attribute context, and JSON values with 719 nodes, 2,000 keys, and 16 levels of nesting. See below |
+| `scale` | Standard UFC syntax at large sizes: 10,000-entry `ONE_OF` and `NOT_ONE_OF` lists with string and number attributes, regex conditions on 2 KB inputs, 300 conditions that share 10 patterns, 20 allocations of 5 conditions, a 200-attribute context, and JSON values with 719 nodes, 2,000 keys, and 16 levels of nesting. See below |
 
 ### Scale suite
 
@@ -645,6 +646,14 @@ The expected results are behavior only. The suite does not define time or memory
 limits, because those depend on the machine. A benchmark can load the same
 configuration and cases as its input. No flag uses shards, so no expected result
 depends on a hash. All values are synthetic.
+
+Compare JSON values exactly. An integer in an expected JSON value must be an
+integer in the result, not a float such as `5.0`. A platform with only one number
+type compares by value.
+
+Do not edit the suite files by hand. Change `ci/generate-scale-suite.py`, then
+regenerate the files with `python3 ci/generate-scale-suite.py --write`. CI runs
+`python3 ci/generate-scale-suite.py --check` and fails when the files differ.
 
 ### Flag selection suite
 
