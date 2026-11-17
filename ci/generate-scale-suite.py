@@ -15,7 +15,9 @@ import argparse
 import hashlib
 import json
 import random
+import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -82,6 +84,8 @@ class Suite:
     def case(self, file, flag, attributes, value, reason, variation_type="STRING", default=STRING_DEFAULT,
              targeting_key=TARGETING_KEY):
         assert flag in self.flags, flag
+        sharded = any(split["shards"] for a in self.flags[flag]["allocations"] for split in a["splits"])
+        assert not sharded or targeting_key != TARGETING_KEY, f"{flag}: derive the targeting key with first_key()"
         self.cases.setdefault(file, []).append(
             {
                 "flag": flag,
@@ -500,6 +504,120 @@ def json_values(s):
         s.case(f, key, {}, value, "STATIC", variation_type="JSON", default=JSON_DEFAULT)
 
 
+# ---------------------------------------------------------------------------------------------
+# Self-check: a small UFC evaluator, written apart from the builders above, evaluates every case,
+# and the design rules in AGENTS.md are checked on the output. --write and --check both run it,
+# so a wrong expected result fails CI. It covers only the operators and shapes the suites use.
+# ---------------------------------------------------------------------------------------------
+
+SEMVER = re.compile(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z.-]+))?(?:\+[0-9A-Za-z.-]+)?")
+REAL_DOMAIN = re.compile(r"\.(com|net|org|io)\b")
+
+
+def semver_order(text):
+    """A sort key with SemVer 2.0 precedence, or None if text is not a version."""
+    m = SEMVER.fullmatch(text) if isinstance(text, str) else None
+    if not m:
+        return None
+    release = tuple(int(part) for part in m.group(1, 2, 3))
+    if m.group(4) is None:
+        return release, (1,)
+    identifiers = tuple((0, int(p), "") if p.isdigit() else (1, 0, p) for p in m.group(4).split("."))
+    return release, (0, identifiers)
+
+
+def condition_holds(c, attributes, targeting_key):
+    name, operator, expected = c["attribute"], c["operator"], c["value"]
+    actual = attributes.get(name, targeting_key if name == "id" else None)
+    if actual is None:
+        return False
+    if operator in ("ONE_OF", "NOT_ONE_OF"):
+        text = actual if isinstance(actual, str) else json.dumps(actual)
+        return (text in expected) == (operator == "ONE_OF")
+    if operator == "MATCHES":
+        return re.search(expected, actual) is not None
+    if operator in ("SEMVER_GTE", "SEMVER_LT"):
+        actual, expected = semver_order(actual), semver_order(expected)
+        if actual is None or expected is None:
+            return False
+    if operator in ("GTE", "SEMVER_GTE"):
+        return actual >= expected
+    if operator in ("LT", "SEMVER_LT"):
+        return actual < expected
+    raise ValueError(f"the self-check does not support {operator}; add it to condition_holds()")
+
+
+def instant(text):
+    return datetime.fromisoformat(text.replace("Z", "+00:00"))
+
+
+def bucket(salt, targeting_key, total):
+    return int.from_bytes(hashlib.md5(f"{salt}-{targeting_key}".encode("utf-8")).digest()[:4], "big") % total
+
+
+def reference_evaluate(flag, targeting_key, attributes):
+    """Returns (variation value or None, reason) for the shapes the suites use."""
+    if not flag["enabled"]:
+        return None, "DISABLED"
+    now = datetime.now(timezone.utc)
+    for alloc in flag["allocations"]:
+        if "startAt" in alloc and now < instant(alloc["startAt"]) or "endAt" in alloc and now >= instant(alloc["endAt"]):
+            continue
+        rules = alloc["rules"]
+        if rules and not any(all(condition_holds(c, attributes, targeting_key) for c in r["conditions"]) for r in rules):
+            continue
+        for split in alloc["splits"]:
+            if all(any(r["start"] <= bucket(s["salt"], targeting_key, s["totalShards"]) < r["end"] for r in s["ranges"])
+                   for s in split["shards"]):
+                value = flag["variations"][split["variationKey"]]["value"]
+                if rules:
+                    return value, "TARGETING_MATCH"
+                if split["shards"]:
+                    return value, "SPLIT"
+                return value, "DEFAULT" if "startAt" in alloc or "endAt" in alloc else "STATIC"
+    return None, "DEFAULT"
+
+
+def design_problems(value, where):
+    """Rules 8 and 9 in AGENTS.md: portable numbers and synthetic domains."""
+    if isinstance(value, bool) or value is None:
+        return []
+    if isinstance(value, int):
+        return [f"{where}: integer {value} is outside ±2^53"] if abs(value) > 2 ** 53 else []
+    if isinstance(value, float):
+        return [f"{where}: float {value} is not a short binary fraction"] if value.as_integer_ratio()[1] > 1024 else []
+    if isinstance(value, str):
+        return [f"{where}: {value[:40]!r} looks like a real domain"] if REAL_DOMAIN.search(value) else []
+    items = value.values() if isinstance(value, dict) else value
+    return [problem for item in items for problem in design_problems(item, where)]
+
+
+def verify(name, suite):
+    problems = []
+    for key, flag in suite.flags.items():
+        for variation in flag["variations"].values():
+            problems += design_problems(variation["value"], key)
+        for alloc in flag["allocations"]:
+            for rule in alloc["rules"]:
+                for c in rule["conditions"]:
+                    if isinstance(c["value"], list) and c["value"] != sorted(c["value"], key=lambda v: v.encode("utf-8")):
+                        problems.append(f"{key}/{alloc['key']}: list is not in UTF-8 byte order")
+                    problems += design_problems(c["value"], f"{key}/{alloc['key']}")
+    for file, items in suite.cases.items():
+        for i, case in enumerate(items):
+            where = f"{name}/cases/{file}[{i}] {case['flag']}"
+            problems += design_problems(case["attributes"], where)
+            value, reason = reference_evaluate(suite.flags[case["flag"]], case["targetingKey"], case["attributes"])
+            if value is None:
+                value = case["defaultValue"]
+            expected = (case["result"]["value"], case["result"]["reason"])
+            if (value, reason) != expected:
+                problems.append(f"{where}: expected {compact(expected)[:60]}, the reference evaluator returns "
+                                f"{compact((value, reason))[:60]}")
+    if problems:
+        raise SystemExit("The scale suite generator failed its self-check:\n  " + "\n  ".join(problems[:20]))
+
+
 def build():
     """Returns {path relative to evaluation-suites/: file text} for every scale suite."""
     scale = Suite()
@@ -507,6 +625,8 @@ def build():
         part(scale)
     scale_json = Suite()
     json_values(scale_json)
+    verify("scale", scale)
+    verify("scale-json", scale_json)
     out = {}
     for name, suite in (("scale", scale), ("scale-json", scale_json)):
         for relative, text in suite.files().items():
