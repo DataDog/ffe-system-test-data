@@ -40,6 +40,13 @@ python3 ci/validate-fixtures.py              # CI: validate every suite
 
 `--write` also deletes a case file that the generator no longer makes.
 
+Both modes first run the generator's self-check. A small reference evaluator,
+written apart from the builders, evaluates every case, and the design rules
+below are checked on the output: list order, number range, and domains. A wrong
+expected result fails `--check` in CI. The evaluator covers only the operators
+and allocation shapes the suites use; extend it when a new dimension uses
+another.
+
 ## Dimensions
 
 Each case file is one dimension, so a benchmark can select it by name.
@@ -92,8 +99,8 @@ These rules keep each expected result derived, not recorded from an SDK run.
    `regex` crate all accept with the same meaning. The `regex` suite covers
    dialect differences.
 8. **Keep JSON numbers portable.** Integers within ±2^53, and floats that are
-   exact in binary (for example `n / 8`). The core case
-   `test-json-number-precision.json` covers integers above 2^53.
+   exact in binary (for example `n / 8`). Integers above 2^53 belong in the
+   core suite, not here.
 9. **Keep values synthetic.** No customer data, no real domains (use `.test`).
 
 ## Adding a dimension
@@ -105,16 +112,23 @@ These rules keep each expected result derived, not recorded from an SDK run.
    `bulk`, `json_values`). Use a new case file name for a new dimension.
 3. Run `--write`, then `--check` and `ci/validate-fixtures.py`.
 4. Add a row to the dimensions table above.
-5. Run at least one SDK against the new cases before you open the pull
-   request. In dd-trace-java, `ScaleSuiteBenchmark` checks every case in its
-   setup and fails on the first wrong result:
+5. `--write` and `--check` verify every expected result with the self-check,
+   so no SDK is needed to check a new dimension. If the self-check does not
+   support a new operator or shape, extend it in the same change.
+6. Optionally, run an SDK too. The dd-trace-java benchmark
+   `ScaleSuiteBenchmark` (DataDog/dd-trace-java#13485, not yet on `master`)
+   checks every case of the files it loads and fails on the first wrong
+   result. Point its `dd-smoke-tests/openfeature/src/test/resources/ffe-system-test-data`
+   submodule at your commit, then run the new file:
 
    ```bash
-   ./gradlew :dd-openfeature:jmh -Pjmh.includes=ScaleSuiteBenchmark -Pjmh.params=cases=<file>
+   ./gradlew :dd-openfeature:jmhJar
+   java -jar dd-openfeature/build/libs/dd-openfeature-*-jmh.jar ScaleSuiteBenchmark -p cases=<suite>/<file>
    ```
 
-   A failure there is a bug in the generator or in the SDK. Find which one
-   before you change an expected result.
+   To measure the file by default, also add `"<suite>/<file>"` to the
+   benchmark's `cases` `@Param` list. A failure is a bug in the generator or
+   in the SDK. Find which one before you change an expected result.
 
 ## Size
 

@@ -686,13 +686,14 @@ limits, because those depend on the machine. A benchmark can load the same
 configuration and cases as its input. Sharded flags have results that the
 generator derives with the UFC hash. All values are synthetic.
 
-Compare JSON values exactly. An integer in an expected JSON value must be an
-integer in the result, not a float such as `5.0`. A platform with only one number
-type compares by value.
+Compare JSON values by value, as the core cases do: a JSON integer may come back
+as an integer or as a float of equal value, and a float written as `5.0` may come
+back as either.
 
 Do not edit the suite files by hand. Change `ci/generate-scale-suite.py`, then
 regenerate the files with `python3 ci/generate-scale-suite.py --write`. CI runs
-`python3 ci/generate-scale-suite.py --check` and fails when the files differ.
+`python3 ci/generate-scale-suite.py --check` and fails when the files differ, or
+when the generator's reference evaluator disagrees with an expected result.
 [`evaluation-suites/scale/AGENTS.md`](evaluation-suites/scale/AGENTS.md) lists
 every dimension and the rules for adding one.
 
