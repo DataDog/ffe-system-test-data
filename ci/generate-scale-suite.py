@@ -30,6 +30,7 @@ CREATED_AT = "2026-11-16T00:00:00.000Z"
 EXPIRED_AT = "2020-01-01T00:00:00.000Z"
 FUTURE_AT = "2099-01-01T00:00:00.000Z"
 TOTAL_SHARDS = 10_000
+MAX_CONFIG_BYTES = 10 << 20  # The response cap in dd-trace-go and libdatadog
 
 
 def compact(value):
@@ -439,7 +440,7 @@ def bulk(s):
 
 
 # ---------------------------------------------------------------------------------------------
-# scale-json: JSON variant values from hundreds of nodes to 10 MB.
+# scale-json: JSON variant values from hundreds of nodes to 4 MB.
 # ---------------------------------------------------------------------------------------------
 
 
@@ -495,7 +496,7 @@ def json_values(s):
         return out
 
     f = "json-sizes.json"
-    for key, size in (("scale-json-100kb", 100_000), ("scale-json-1mb", 1_000_000), ("scale-json-10mb", 10_000_000)):
+    for key, size in (("scale-json-100kb", 100_000), ("scale-json-1mb", 1_000_000), ("scale-json-4mb", 4_000_000)):
         value = records(size, size)
         s.flag(key, "JSON", {"value": value, "small": {"small": True}},
                [allocation("targeted", "value", [cond("plan", "ONE_OF", ["pro"])]), allocation("fallback", "small")])
@@ -645,6 +646,9 @@ def build():
     for name, suite in (("scale", scale), ("scale-json", scale_json)):
         for relative, text in suite.files().items():
             out[f"{name}/{relative}"] = text
+        size = len(out[f"{name}/ufc-config.json"].encode("utf-8"))
+        if size >= MAX_CONFIG_BYTES:
+            raise SystemExit(f"{name}/ufc-config.json is {size:,} bytes; SDKs reject a configuration of 10 MiB or more")
     return out
 
 

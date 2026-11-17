@@ -104,7 +104,7 @@ ffe-system-test-data/
 │   │   └── cases/           # One case file for each dimension (generated)
 │   └── scale-json/
 │       ├── AGENTS.md        # Points to scale/AGENTS.md
-│       ├── ufc-config.json  # JSON variant values up to 10 MB (generated)
+│       ├── ufc-config.json  # JSON variant values up to 4 MB (generated)
 │       └── cases/           # One case file for each dimension (generated)
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
@@ -643,7 +643,7 @@ and `cases/` directory.
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
 | `regex` | MATCHES and NOT_MATCHES in the dialect of the Rust `regex` crate: literal patterns, dialect differences, inputs that make a backtracking engine slow, and syntax that the dialect rejects. See below |
 | `scale` | Standard UFC syntax at large N and N × M: lists of 10,000 entries and 500 × 100, small-integer lists, regex on 2 KB inputs and 1,000 distinct patterns, allocations × rules × conditions sweeps, SemVer and numeric ladders, time windows, rollouts and splits with shards, 1,000 variations, and 10,000 flags. See below |
-| `scale-json` | JSON variant values from 719 nodes to 10 MB, and shapes that stress JSON parsing: 100,000-number arrays, a 1 MB string, and escapes. See below |
+| `scale-json` | JSON variant values from 719 nodes to 4 MB, and shapes that stress JSON parsing: 100,000-number arrays, a 1 MB string, and escapes. See below |
 
 ### Regex suite
 
@@ -676,7 +676,7 @@ before a final line feed.
 
 The `scale` and `scale-json` suites use only syntax from the root
 configuration. They are separate suites because of their size (about 8 MB and
-27 MB), and because some regex cases are slow for backtracking regex engines. A
+16 MB), and because some regex cases are slow for backtracking regex engines. A
 consumer that does not enable them does not parse them. `scale` holds targeting
 structure with small values. `scale-json` holds large JSON values, so a
 benchmark of targeting does not parse them.
