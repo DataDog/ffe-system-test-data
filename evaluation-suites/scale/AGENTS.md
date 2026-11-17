@@ -43,9 +43,10 @@ python3 ci/validate-fixtures.py              # CI: validate every suite
 Both modes first run the generator's self-check. A small reference evaluator,
 written apart from the builders, evaluates every case, and the design rules
 below are checked on the output: list order, number range, and domains. A wrong
-expected result fails `--check` in CI. The evaluator covers only the operators
-and allocation shapes the suites use; extend it when a new dimension uses
-another.
+expected result fails `--check` in CI, and so does a wrong `serialId`,
+`doLog`, or `features` expectation where a case has one. The evaluator covers
+only the operators and allocation shapes the suites use; extend it when a new
+dimension uses another.
 
 ## Dimensions
 
@@ -65,7 +66,7 @@ Each case file is one dimension, so a benchmark can select it by name.
 | `scale` | `time-windows.json` | `scale-time-windows` | 100 expired + 100 future allocations before the active one |
 | `scale` | `wide-context.json` | `scale-wide-context`, `scale-id-wide-context` | 200 context attributes; 20 rules on `id` with that context |
 | `scale` | `splits.json` | `scale-rollout-allocations`, `scale-many-splits`, `scale-shard-ranges`, `scale-targeted-rollouts` | 50 allocations × 1 shard; 100 splits × 2 shards; 1 shard × 1,000 ranges; 20 rules × 1 shard |
-| `scale` | `variations.json` | `scale-many-variations` | 1,000 variations × 1,000 allocations, `doLog`, serial IDs, 200 split features |
+| `scale` | `variations.json` | `scale-many-variations` | 1,000 variations × 1,000 allocations, `doLog`, serial IDs, 200 split features; the cases assert `serialId`, `doLog`, and `features` |
 | `scale` | `flags.json` | `scale-bulk-00000` … `scale-bulk-09999` | 10,000 flags, every 10th disabled |
 | `scale-json` | `json-values.json` | `scale-json-large`, `scale-json-wide`, `scale-json-deep` | 719 nodes; 2,000 keys; 16 levels |
 | `scale-json` | `json-sizes.json` | `scale-json-100kb`, `scale-json-1mb`, `scale-json-4mb` | A list of records at 100 KB, 1 MB, and 4 MB, behind a targeting rule |

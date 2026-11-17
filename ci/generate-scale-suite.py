@@ -30,6 +30,8 @@ CREATED_AT = "2026-11-16T00:00:00.000Z"
 EXPIRED_AT = "2020-01-01T00:00:00.000Z"
 FUTURE_AT = "2099-01-01T00:00:00.000Z"
 TOTAL_SHARDS = 10_000
+DESTINATIONS = ("HOOK", "EXPOSURE", "EVALUATION")
+SPLIT_FEATURES = 200
 MAX_CONFIG_BYTES = 10 << 20  # The response cap in dd-trace-go and libdatadog
 
 
@@ -83,10 +85,12 @@ class Suite:
         }
 
     def case(self, file, flag, attributes, value, reason, variation_type="STRING", default=STRING_DEFAULT,
-             targeting_key=TARGETING_KEY):
+             targeting_key=TARGETING_KEY, metadata=None):
+        """metadata holds the optional result.serialId, result.doLog, and result.features expectations."""
         assert flag in self.flags, flag
         sharded = any(split["shards"] for a in self.flags[flag]["allocations"] for split in a["splits"])
         assert not sharded or targeting_key != TARGETING_KEY, f"{flag}: derive the targeting key with first_key()"
+        assert set(metadata or {}) <= {"serialId", "doLog", "features"}, metadata
         self.cases.setdefault(file, []).append(
             {
                 "flag": flag,
@@ -94,7 +98,7 @@ class Suite:
                 "defaultValue": default,
                 "targetingKey": targeting_key,
                 "attributes": attributes,
-                "result": {"value": value, "reason": reason},
+                "result": {"value": value, "reason": reason, **(metadata or {})},
             }
         )
 
@@ -160,12 +164,15 @@ def lists(s):
     s.flag("scale-not-one-of-strings", "STRING", {"outside": "outside", "inside": "inside"},
            [allocation("outside-accounts", "outside", [cond("account", "NOT_ONE_OF", accounts)]),
             allocation("fallback", "inside")])
+    s.case(f, "scale-not-one-of-strings", {"account": "acct-00000"}, "inside", "STATIC")
     s.case(f, "scale-not-one-of-strings", {"account": "acct-04242"}, "inside", "STATIC")
+    s.case(f, "scale-not-one-of-strings", {"account": "acct-09999"}, "inside", "STATIC")
     s.case(f, "scale-not-one-of-strings", {"account": "acct-99999"}, "outside", "TARGETING_MATCH")
 
     s.flag("scale-one-of-numbers", "STRING", {"listed": "listed", "unlisted": "unlisted"},
            [allocation("listed-numbers", "listed", [cond("account_num", "ONE_OF", numbers)]),
             allocation("fallback", "unlisted")])
+    s.case(f, "scale-one-of-numbers", {"account_num": 1_000_000}, "listed", "TARGETING_MATCH")
     s.case(f, "scale-one-of-numbers", {"account_num": 1_000_042}, "listed", "TARGETING_MATCH")
     s.case(f, "scale-one-of-numbers", {"account_num": 1_069_993}, "listed", "TARGETING_MATCH")
     s.case(f, "scale-one-of-numbers", {"account_num": 1_000_043}, "unlisted", "STATIC")
@@ -204,6 +211,7 @@ def lists(s):
     long_values = sorted(f"{i:04d}-" + "x" * 251 for i in range(1_000))
     s.flag("scale-one-of-long-values", "STRING", {"listed": "listed", "unlisted": "unlisted"},
            [allocation("long", "listed", [cond("token", "ONE_OF", long_values)]), allocation("fallback", "unlisted")])
+    s.case(f, "scale-one-of-long-values", {"token": long_values[0]}, "listed", "TARGETING_MATCH")
     s.case(f, "scale-one-of-long-values", {"token": long_values[-1]}, "listed", "TARGETING_MATCH")
     s.case(f, "scale-one-of-long-values", {"token": long_values[-1][:-1] + "y"}, "unlisted", "STATIC")
 
@@ -214,6 +222,7 @@ def lists(s):
             allocation("fallback", "fallback")])
     member = {a: v[-1] for a, v in attribute_lists.items()}
     s.case(f, "scale-one-of-many-attributes", member, "all", "TARGETING_MATCH")
+    s.case(f, "scale-one-of-many-attributes", {**member, "dim00": "d00-9999"}, "fallback", "STATIC")
     s.case(f, "scale-one-of-many-attributes", {**member, "dim49": "d49-9999"}, "fallback", "STATIC")
 
 
@@ -285,13 +294,15 @@ def rules(s):
            deep + [allocation("fallback", "fallback")])
     f = "rules.json"
     member = {"country": "c19", "age": 30, "plan": "pro", "email": "user@deep.test"}
+    s.case(f, "scale-deep-rules", {**member, "country": "c00"}, "rule-00", "TARGETING_MATCH")
     s.case(f, "scale-deep-rules", member, "rule-19", "TARGETING_MATCH")
     s.case(f, "scale-deep-rules", {**member, "country": "c07"}, "rule-07", "TARGETING_MATCH")
     s.case(f, "scale-deep-rules", {**member, "age": 70}, "fallback", "STATIC")
     s.case(f, "scale-deep-rules", {**member, "email": "user@deep.test.example"}, "fallback", "STATIC")
 
-    # Allocations x rules x conditions. In each shape the subject matches only the last rule of the
-    # last allocation, and each rule fails on its last condition, so every condition runs.
+    # Allocations x rules x conditions. In the worst case the subject matches only the last rule of the
+    # last allocation, and each rule fails on its last condition, so every condition runs. The first
+    # case matches the first rule of the first allocation.
     def shape(allocations, rules_per_allocation, conditions_per_rule):
         key = f"scale-rules-{allocations}x{rules_per_allocation}x{conditions_per_rule}"
         built = []
@@ -305,6 +316,8 @@ def rules(s):
                built + [allocation("fallback", "fallback")])
         attributes = {f"attr{c:02d}": 100 for c in range(conditions_per_rule - 1)}
         last = f"alloc-{allocations - 1:03d}"
+        if allocations * rules_per_allocation > 1:
+            s.case(f, key, {**attributes, "slot": "a000-r000"}, "alloc-000", "TARGETING_MATCH")
         s.case(f, key, {**attributes, "slot": f"a{allocations - 1:03d}-r{rules_per_allocation - 1:03d}"}, last, "TARGETING_MATCH")
         s.case(f, key, {**attributes, "slot": "none"}, "fallback", "STATIC")
 
@@ -357,6 +370,7 @@ def rules(s):
     s.flag("scale-id-wide-context", "STRING", {"matched": "matched", "fallback": "fallback"},
            [allocation("id-rules", "matched", [[cond("id", "ONE_OF", [f"user-{r:02d}"])] for r in range(20)]),
             allocation("fallback", "fallback")])
+    s.case(f, "scale-id-wide-context", wide, "matched", "TARGETING_MATCH", targeting_key="user-00")
     s.case(f, "scale-id-wide-context", wide, "matched", "TARGETING_MATCH", targeting_key="user-19")
     s.case(f, "scale-id-wide-context", wide, "fallback", "STATIC", targeting_key="user-20")
 
@@ -396,23 +410,32 @@ def splits(s):
     fragmented = [(i * 10, i * 10 + 5) for i in range(1_000)]
     s.flag("scale-shard-ranges", "STRING", {"in": "in", "out": "out"},
            [allocation("fragmented", "in", shards=[shard_spec("fragmented", fragmented)]), allocation("fallback", "out")])
+    first = first_key(lambda k: in_ranges(shard("fragmented", k), fragmented[:1]))
     hit = first_key(lambda k: shard("fragmented", k) >= 9_990 and in_ranges(shard("fragmented", k), fragmented))
     miss = first_key(lambda k: not in_ranges(shard("fragmented", k), fragmented))
+    s.case(f, "scale-shard-ranges", {}, "in", "SPLIT", targeting_key=first)
     s.case(f, "scale-shard-ranges", {}, "in", "SPLIT", targeting_key=hit)
     s.case(f, "scale-shard-ranges", {}, "out", "STATIC", targeting_key=miss)
 
-    # Rules x shards: 20 targeted rollouts. Each allocation's rule matches, but its shard does not.
+    # Rules x shards: 20 targeted rollouts with the same rule. The worst case matches every rule but no
+    # shard. The other cases fall in the first rollout, and in the last one but no earlier one.
     targeted = [(f"targeted-{i:02d}", [(0, 100)]) for i in range(20)]
     s.flag("scale-targeted-rollouts", "STRING", {**names("targeted", 20), "fallback": "fallback"},
            [allocation(salt, f"targeted-{i:04d}", [cond("plan", "ONE_OF", ["pro"])], shards=[shard_spec(salt, ranges)])
             for i, (salt, ranges) in enumerate(targeted)] + [allocation("fallback", "fallback")])
+    for target in (0, len(targeted) - 1):
+        salt, ranges = targeted[target]
+        key = first_key(lambda k: in_ranges(shard(salt, k), ranges)
+                        and not any(in_ranges(shard(sl, k), r) for sl, r in targeted[:target]))
+        s.case(f, "scale-targeted-rollouts", {"plan": "pro"}, f"targeted-{target:04d}", "TARGETING_MATCH", targeting_key=key)
     none = first_key(lambda k: not any(in_ranges(shard(salt, k), r) for salt, r in targeted))
     s.case(f, "scale-targeted-rollouts", {"plan": "pro"}, "fallback", "STATIC", targeting_key=none)
 
-    # Many variations x many allocations, with split features and doLog on every allocation.
+    # Many variations x many allocations, with split features and doLog on every allocation. The cases
+    # assert the selected serial ID, doLog, and feature maps, so a consumer that drops them fails.
     f = "variations.json"
-    features = [{"key": f"feature.{i:03d}", "value": f"value-{i:03d}", "destinations": ["HOOK", "EXPOSURE", "EVALUATION"]}
-                for i in range(200)]
+    features = [{"key": f"feature.{i:03d}", "value": f"value-{i:03d}", "destinations": list(DESTINATIONS)}
+                for i in range(SPLIT_FEATURES)]
     allocations = []
     for i in range(1_000):
         alloc = allocation(f"slot-{i:04d}", f"slot-{i:04d}", [cond("slot", "ONE_OF", [f"s{i:04d}"])], doLog=True)
@@ -422,9 +445,15 @@ def splits(s):
         allocations.append(alloc)
     s.flag("scale-many-variations", "STRING", {**names("slot", 1_000), "fallback": "fallback"},
            allocations + [allocation("fallback", "fallback")])
-    s.case(f, "scale-many-variations", {"slot": "s0000"}, "slot-0000", "TARGETING_MATCH")
-    s.case(f, "scale-many-variations", {"slot": "s0999"}, "slot-0999", "TARGETING_MATCH")
-    s.case(f, "scale-many-variations", {"slot": "s1000"}, "fallback", "STATIC")
+    # The expected maps are written out here, not read from features, so a shorter list fails.
+    no_features = {d: {} for d in DESTINATIONS}
+    all_features = {d: {f"feature.{i:03d}": f"value-{i:03d}" for i in range(200)} for d in DESTINATIONS}
+    s.case(f, "scale-many-variations", {"slot": "s0000"}, "slot-0000", "TARGETING_MATCH",
+           metadata={"serialId": 0, "doLog": True, "features": no_features})
+    s.case(f, "scale-many-variations", {"slot": "s0999"}, "slot-0999", "TARGETING_MATCH",
+           metadata={"serialId": 999, "doLog": True, "features": all_features})
+    s.case(f, "scale-many-variations", {"slot": "s1000"}, "fallback", "STATIC",
+           metadata={"serialId": None, "doLog": False, "features": no_features})
 
 
 def bulk(s):
@@ -570,10 +599,29 @@ def bucket(salt, targeting_key, total):
     return int.from_bytes(hashlib.md5(f"{salt}-{targeting_key}".encode("utf-8")).digest()[:4], "big") % total
 
 
+def routed_features(split):
+    """result.features for a split: the first valid entry for each key wins, routed to known destinations."""
+    routed = {d: {} for d in DESTINATIONS}
+    seen = set()
+    for entry in split.get("features", []):
+        key, destinations = entry.get("key"), entry.get("destinations")
+        if not isinstance(key, str) or not isinstance(destinations, list) or key in seen:
+            continue
+        seen.add(key)
+        for destination in destinations:
+            if destination in routed:
+                routed[destination][key] = entry["value"]
+    return routed
+
+
+def selection_metadata(alloc, split):
+    return {"serialId": split.get("serialId"), "doLog": alloc["doLog"], "features": routed_features(split)}
+
+
 def reference_evaluate(flag, targeting_key, attributes):
-    """Returns (variation value or None, reason) for the shapes the suites use."""
+    """Returns (variation value or None, reason, metadata or None) for the shapes the suites use."""
     if not flag["enabled"]:
-        return None, "DISABLED"
+        return None, "DISABLED", None
     now = datetime.now(timezone.utc)
     for alloc in flag["allocations"]:
         if "startAt" in alloc and now < instant(alloc["startAt"]) or "endAt" in alloc and now >= instant(alloc["endAt"]):
@@ -585,12 +633,13 @@ def reference_evaluate(flag, targeting_key, attributes):
             if all(any(r["start"] <= bucket(s["salt"], targeting_key, s["totalShards"]) < r["end"] for r in s["ranges"])
                    for s in split["shards"]):
                 value = flag["variations"][split["variationKey"]]["value"]
+                metadata = selection_metadata(alloc, split)
                 if rules:
-                    return value, "TARGETING_MATCH"
+                    return value, "TARGETING_MATCH", metadata
                 if split["shards"]:
-                    return value, "SPLIT"
-                return value, "DEFAULT" if "startAt" in alloc or "endAt" in alloc else "STATIC"
-    return None, "DEFAULT"
+                    return value, "SPLIT", metadata
+                return value, "DEFAULT" if "startAt" in alloc or "endAt" in alloc else "STATIC", metadata
+    return None, "DEFAULT", None
 
 
 def design_problems(value, where):
@@ -622,13 +671,17 @@ def verify(name, suite):
         for i, case in enumerate(items):
             where = f"{name}/cases/{file}[{i}] {case['flag']}"
             problems += design_problems(case["attributes"], where)
-            value, reason = reference_evaluate(suite.flags[case["flag"]], case["targetingKey"], case["attributes"])
+            value, reason, metadata = reference_evaluate(suite.flags[case["flag"]], case["targetingKey"], case["attributes"])
             if value is None:
                 value = case["defaultValue"]
             expected = (case["result"]["value"], case["result"]["reason"])
             if (value, reason) != expected:
                 problems.append(f"{where}: expected {compact(expected)[:60]}, the reference evaluator returns "
                                 f"{compact((value, reason))[:60]}")
+            for field in ("serialId", "doLog", "features"):
+                if field in case["result"] and (metadata or {}).get(field, "absent") != case["result"][field]:
+                    problems.append(f"{where}: expected {field} {compact(case['result'][field])[:60]}, the reference "
+                                    f"evaluator returns {compact((metadata or {}).get(field, 'absent'))[:60]}")
     if problems:
         raise SystemExit("The scale suite generator failed its self-check:\n  " + "\n  ".join(problems[:20]))
 
