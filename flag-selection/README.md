@@ -111,7 +111,7 @@ than one reason applies, the first in this table wins:
 | 2 | `too_many_values` | A list holds more than 31 values after normalization | Yes |
 | 3 | `invalid_key_pattern` | A key pattern is longer than 200 bytes after trimming | Yes |
 | 4 | `invalid_tag` | A tag is longer than 200 bytes after trimming | Yes |
-| 5 | `tag_load_failed` | The selection uses tags and the server cannot load the tags of the configured flags | No, server state |
+| 5 | `tag_load_failed` | The server cannot load the tags of the configured flags. Applies to any valid, non-empty selection, whether or not it uses tags | No, server state |
 
 A parameter that is not a selection parameter never causes `malformed_selection`,
 even when it cannot be decoded. Parameter names are percent-decoded before they
@@ -157,8 +157,20 @@ to the SDK's canonicalization step. A parameter missing from `query` is an
 omitted list. Then:
 
 - `sdk.selection`: compare the canonical lists the SDK would send, in order.
-  When both are empty, the SDK sends no selection parameters.
+  The SDK sends no parameter for an empty list, so when both are empty it sends
+  no selection parameters.
 - `sdk.dropped`: the SDK drops the selection with this reason and sends none.
+
+An SDK also sends no selection when the full GET configuration request URL would
+be longer than 8192 bytes, measured in UTF-8 bytes after percent-encoding; see
+[flag selection suite](../README.md#flag-selection-suite).
+
+## End-to-end suite
+
+[`evaluation-suites/flag-selection/`](../evaluation-suites/flag-selection/)
+runs selections through an SDK against a server double that applies these
+semantics to that suite's `ufc-config.json` and `flag-tags.json`. See
+[flag selection suite](../README.md#flag-selection-suite).
 
 ## Consumers
 

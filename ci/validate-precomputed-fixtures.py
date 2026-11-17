@@ -48,6 +48,8 @@ def check_skip_include_mutual_exclusivity(obj, path="$"):
         if "_skip" in obj and "_include" in obj:
             errors.append(f"{path}: _skip and _include are mutually exclusive")
         for key, value in obj.items():
+            if key in ("response", "context", "defaultValue", "expectedResult"):
+                continue
             errors.extend(check_skip_include_mutual_exclusivity(value, f"{path}.{key}"))
     elif isinstance(obj, list):
         for i, item in enumerate(obj):
@@ -59,9 +61,15 @@ def check_matcher_counts(data, path="$"):
     """Check that all EventMatchers have _count >= 1."""
     errors = []
     expectations = data.get("expectations", {})
+    if not isinstance(expectations, dict):
+        return errors
     for list_name in ("exposures", "evaluationEvents"):
         matchers = expectations.get(list_name, [])
+        if not isinstance(matchers, list):
+            continue
         for i, matcher in enumerate(matchers):
+            if not isinstance(matcher, dict):
+                continue
             mpath = f"{path}.expectations.{list_name}[{i}]"
             count = matcher.get("_count")
             if count is None:
@@ -80,6 +88,47 @@ def check_name_matches_filename(data, filepath):
         errors.append(
             f"$.name: fixture name '{name}' does not match filename '{stem}'"
         )
+    return errors
+
+
+def check_assignment_error_partition(data):
+    """Errors are separate from complete legacy assignments."""
+    errors = []
+    try:
+        attributes = data["response"]["data"]["attributes"]
+    except (KeyError, TypeError):
+        return errors
+    flags = attributes.get("flags")
+    evaluation_errors = attributes.get("flagEvaluationErrors", {})
+    if not isinstance(flags, dict) or not isinstance(evaluation_errors, dict):
+        return errors
+    overlap = set(flags) & set(evaluation_errors)
+    if overlap:
+        errors.append(
+            "$.response.data.attributes: keys must occur in at most one of "
+            f"flags or flagEvaluationErrors: {', '.join(sorted(overlap))}"
+        )
+    for key, entry in evaluation_errors.items():
+        path = f"$.response.data.attributes.flagEvaluationErrors[{key!r}]"
+        if not isinstance(entry, dict):
+            errors.append(f"{path}: must be an object")
+            continue
+        for field in ("reason", "errorCode"):
+            if field not in entry:
+                errors.append(f"{path}: missing required {field}")
+        if entry.get("errorCode") != "GENERAL":
+            errors.append(f"{path}: root dependency failure errorCode must be GENERAL")
+    if "expectedResponseError" not in data:
+        obfuscation = attributes.get("obfuscation")
+        if isinstance(obfuscation, dict) and "dependencyKeyEncryption" in obfuscation:
+            encryption = obfuscation["dependencyKeyEncryption"]
+            if not isinstance(encryption, dict) or encryption.get("scheme") != (
+                "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+            ):
+                errors.append(
+                    "$.response.data.attributes.obfuscation.dependencyKeyEncryption: "
+                    "unsupported scheme"
+                )
     return errors
 
 
@@ -107,6 +156,8 @@ def check_skip_entry_format(obj, path="$"):
                             f"{epath}: unexpected fields: {', '.join(sorted(extra))}"
                         )
         for key, value in obj.items():
+            if key in ("response", "context", "defaultValue", "expectedResult"):
+                continue
             errors.extend(check_skip_entry_format(value, f"{path}.{key}"))
     elif isinstance(obj, list):
         for i, item in enumerate(obj):
@@ -127,14 +178,17 @@ def validate_fixture(filepath, schema):
 
     # JSON Schema validation
     validator = jsonschema.Draft202012Validator(schema)
-    for error in sorted(validator.iter_errors(data), key=lambda e: list(e.path)):
+    for error in sorted(validator.iter_errors(data), key=lambda e: tuple(str(p) for p in e.path)):
         json_path = ".".join(str(p) for p in error.absolute_path) or "$"
         errors.append(f"{rel}: schema: {json_path}: {error.message}")
 
     # Custom checks
+    if not isinstance(data, dict):
+        return errors
     errors.extend(f"{rel}: {e}" for e in check_skip_include_mutual_exclusivity(data))
     errors.extend(f"{rel}: {e}" for e in check_matcher_counts(data))
     errors.extend(f"{rel}: {e}" for e in check_name_matches_filename(data, filepath))
+    errors.extend(f"{rel}: {e}" for e in check_assignment_error_partition(data))
     errors.extend(f"{rel}: {e}" for e in check_skip_entry_format(data))
 
     return errors
@@ -171,8 +225,8 @@ def main():
 
     fixtures = find_fixtures(fixture_dir)
     if not fixtures:
-        print(f"WARNING: no .json files found in {fixture_dir}", file=sys.stderr)
-        sys.exit(0)
+        print(f"ERROR: no .json files found in {fixture_dir}", file=sys.stderr)
+        sys.exit(1)
 
     all_errors = []
     valid_count = 0

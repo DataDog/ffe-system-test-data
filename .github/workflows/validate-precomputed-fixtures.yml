@@ -5,6 +5,9 @@ on:
     paths:
       - .github/workflows/validate-precomputed-fixtures.yml
       - ci/validate-precomputed-fixtures.py
+      - ci/test_precomputed*.py
+      - ci/precomputed_obfuscation.py
+      - ci/sync-precomputed-fixtures.py
       - schemas/precomputed-assignment.schema.json
       - precomputed-assignments/**
 
@@ -32,3 +35,9 @@ jobs:
 
       - name: Validate precomputed fixtures
         run: python3 ci/validate-precomputed-fixtures.py
+
+      - name: Verify plain and obfuscated fixture parity
+        run: python3 ci/precomputed_obfuscation.py --check
+
+      - name: Test fixture validation and snapshot import
+        run: python3 -m unittest discover -s ci -p 'test_precomputed*.py'
