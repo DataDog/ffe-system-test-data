@@ -4,7 +4,7 @@ id: ffe-system-test-data.contract.decision-record
 description: Ask for a KB decision citation when contract paths change.
 adapter: foundation-nudge-v1
 implementation:
-  module: ffe_contract_nudges
+  module: scripts.ffe_contract_nudges
   function: contract_decision_nudges
 input_schema: factory/schemas/v1/nudge-input.schema.json
 output_schema: factory/schemas/v1/nudge-result.schema.json
@@ -14,5 +14,5 @@ guidance:
 binding:
   entry_point: scripts/foundation_check.py
   extension:
-    module: ffe_contract_nudges
+    module: scripts.ffe_contract_nudges
     function: contract_decision_nudges

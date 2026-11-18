@@ -6,6 +6,6 @@ foundation_entry(
     check_extensions=(),
     nudge_extensions=(
         ("factorykit.foundation_nudges", "baseline_nudges"),
-        ("ffe_contract_nudges", "contract_decision_nudges"),
+        ("scripts.ffe_contract_nudges", "contract_decision_nudges"),
     ),
 )
