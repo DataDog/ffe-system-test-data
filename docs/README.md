@@ -12,6 +12,7 @@ repository. This map lists the current contract and contributor routes.
 | Flag selection vectors | [Flag selection](../flag-selection/README.md) |
 | UFC tooling | [UFC tools](../tools/ufc/README.md) |
 | Verification procedures | [Verification](VERIFICATION.md) |
+| FactoryKit POC results | [FactoryKit POC findings](FACTORYKIT-POC.md) |
 
 ## Contract decisions
 
