@@ -1,0 +1,135 @@
+{
+  "name": "hostile-flag-keys",
+  "description": "Flag keys that match built-in object properties. Present keys (__proto__, constructor, prototype, hasOwnProperty) must resolve to their own assignments. Absent keys (toString, valueOf, __defineGetter__) must return the default with FLAG_NOT_FOUND, not an inherited property. Only exposures are counted because evaluation-event aggregation for missing flags differs by platform. The SDK must return the served value unchanged: the same string code points, or an object with the same keys and values. The SDK must never execute, render, parse, format, or interpret a flag value.",
+  "context": {
+    "targetingKey": "hostile-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "__proto__": {
+            "allocationKey": "allocation-__proto__",
+            "variationKey": "variation-__proto__",
+            "variationType": "string",
+            "variationValue": "value-of-__proto__",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "constructor": {
+            "allocationKey": "allocation-constructor",
+            "variationKey": "variation-constructor",
+            "variationType": "string",
+            "variationValue": "value-of-constructor",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "prototype": {
+            "allocationKey": "allocation-prototype",
+            "variationKey": "variation-prototype",
+            "variationType": "string",
+            "variationValue": "value-of-prototype",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "hasOwnProperty": {
+            "allocationKey": "allocation-hasOwnProperty",
+            "variationKey": "variation-hasOwnProperty",
+            "variationType": "string",
+            "variationValue": "value-of-hasOwnProperty",
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "__proto__",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "value-of-__proto__",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-__proto__"
+      }
+    },
+    {
+      "flag": "constructor",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "value-of-constructor",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-constructor"
+      }
+    },
+    {
+      "flag": "prototype",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "value-of-prototype",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-prototype"
+      }
+    },
+    {
+      "flag": "hasOwnProperty",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "value-of-hasOwnProperty",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-hasOwnProperty"
+      }
+    },
+    {
+      "flag": "toString",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "fallback",
+        "reason": "ERROR",
+        "errorCode": "FLAG_NOT_FOUND",
+        "variantKey": null
+      }
+    },
+    {
+      "flag": "valueOf",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "fallback",
+        "reason": "ERROR",
+        "errorCode": "FLAG_NOT_FOUND",
+        "variantKey": null
+      }
+    },
+    {
+      "flag": "__defineGetter__",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "fallback",
+        "reason": "ERROR",
+        "errorCode": "FLAG_NOT_FOUND",
+        "variantKey": null
+      }
+    }
+  ],
+  "expectations": {
+    "exposures": [
+      {
+        "_count": 4
+      }
+    ]
+  }
+}

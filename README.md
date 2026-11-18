@@ -642,9 +642,31 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+| `hostile-values` | STRING and JSON values that are attack payloads (HTML, `javascript:` URLs, template and format syntax, prototype-pollution keys, control and bidirectional characters, NUL, a 16,384-character string, 64 levels of nesting), and flag keys that match built-in object properties. The SDK must return each value unchanged and never execute or interpret it. See below |
 | `regex` | MATCHES and NOT_MATCHES in the dialect of the Rust `regex` crate: literal patterns, dialect differences, inputs that make a backtracking engine slow, and syntax that the dialect rejects. See below |
 | `scale` | Standard UFC syntax at large N and N × M: lists of 10,000 entries and 500 × 100, small-integer lists, regex on 2 KB inputs and 1,000 distinct patterns, allocations × rules × conditions sweeps, SemVer and numeric ladders, time windows, rollouts and splits with shards, 1,000 variations, and 10,000 flags. See below |
 | `scale-json` | JSON variant values from 719 nodes to 4 MB, and shapes that stress JSON parsing: 100,000-number arrays, a 1 MB string, and escapes. See below |
+
+### Hostile values suite
+
+`evaluation-suites/hostile-values/` checks that an SDK treats flag values as
+data. Each flag has one static allocation, so every case returns `STATIC`.
+
+| Case file | What it checks |
+|-----------|----------------|
+| `string-values.json` | STRING values that hold HTML, `javascript:` and `data:` URLs, JSON text, a regular expression, format and template syntax, CRLF, terminal escapes, bidirectional and invisible characters, NUL, and a 16,384-character string |
+| `json-values.json` | JSON values with `__proto__`, `constructor.prototype`, and `prototype` keys, keys named like built-in object methods, nested markup strings, and 64 levels of nesting |
+| `flag-keys.json` | Flag keys that match built-in object properties. Present keys resolve to their own flag. Absent keys return the default with `FLAG_NOT_FOUND` |
+
+Compare each result with the expected value exactly: the same code points for
+a string, and the same keys and values for an object. In JavaScript, also check
+that `Object.prototype` has no new properties after the cases run. A consumer
+that has a known gap, for example a C boundary that ends a string at NUL, should
+exclude that case and report the gap.
+
+The same payloads are in the precomputed fixtures
+`precomputed-assignments/cases/evaluator/hostile-*.json` for browser and mobile
+SDKs.
 
 ### Regex suite
 
