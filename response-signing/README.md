@@ -97,9 +97,9 @@ Accepted cases:
 - One intermediate (`valid-current`), a rotated leaf, a rotated intermediate in
   2032, an effective token with authorization, gzip transport bytes, and IPv6 with
   absent optional headers.
-- Two intermediates (root, DC intermediate with pathLen 1, lower intermediate with
+- Two intermediates (root, upper intermediate with pathLen 1, lower intermediate with
   pathLen 0, leaf) and three intermediates.
-- A rotated lower intermediate under the same DC intermediate, with no earlier history.
+- A rotated lower intermediate under the same upper intermediate, with no earlier history.
 - A leaf EKU with the FFE EKU and other OIDs. An intermediate EKU with the FFE EKU,
   or with anyExtendedKeyUsage. An intermediate pathLen of 1 at index 0
   (`intermediate-pathlen-one`).

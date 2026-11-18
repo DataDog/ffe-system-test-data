@@ -459,11 +459,11 @@ INTERMEDIATE = make_ca("intermediate-2026", "Synthetic Intermediate 2026", ROOT,
                        "2026-10-01T00:00:00", "2027-10-01T00:00:00", path_length=0)
 LEAF = make_leaf("leaf-2026", INTERMEDIATE)
 # Two-intermediate hierarchy: root -> upper intermediate -> lower intermediate -> leaf.
-DC = make_ca("dc-2026", "Synthetic DC Intermediate 2026", ROOT,
+UPPER = make_ca("upper-2026", "Synthetic Upper Intermediate 2026", ROOT,
              "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=1)
-VAULT = make_ca("vault-2026", "Synthetic Vault Intermediate 2026", DC,
+LOWER = make_ca("lower-2026", "Synthetic Lower Intermediate 2026", UPPER,
                 "2026-10-01T00:00:00", "2027-04-01T00:00:00", path_length=0)
-VAULT_LEAF = make_leaf("leaf-vault-2026", VAULT)
+LOWER_LEAF = make_leaf("leaf-lower-2026", LOWER)
 
 
 def corpus():
@@ -493,12 +493,12 @@ def corpus():
     request = make_request("valid-ipv6-and-absent-optional-headers",
                            url="https://[2001:db8::1]:8443/precompute/assignments", headers=headers)
     add(signed_case("valid-ipv6-and-absent-optional-headers", LEAF, [INTERMEDIATE], True, None, request=request))
-    two = signed_case("valid-two-intermediates", VAULT_LEAF, [VAULT, DC], True, None)
+    two = signed_case("valid-two-intermediates", LOWER_LEAF, [LOWER, UPPER], True, None)
     add(two)
-    vault_b = make_ca("vault-2026-b", "Synthetic Vault Intermediate 2026 B", DC,
+    lower_b = make_ca("lower-2026-b", "Synthetic Lower Intermediate 2026 B", UPPER,
                       "2026-10-20T00:00:00", "2027-04-20T00:00:00", path_length=0)
-    vault_b_leaf = make_leaf("leaf-vault-2026-b", vault_b, "2026-10-28T00:00:00", "2026-10-31T00:00:00")
-    add(signed_case("valid-rotated-lower-intermediate-no-history", vault_b_leaf, [vault_b, DC], True, None,
+    lower_b_leaf = make_leaf("leaf-lower-2026-b", lower_b, "2026-10-28T00:00:00", "2026-10-31T00:00:00")
+    add(signed_case("valid-rotated-lower-intermediate-no-history", lower_b_leaf, [lower_b, UPPER], True, None,
                     now=timestamp("2026-10-28T01:00:00")))
     top = make_ca("three-top", "Synthetic Three Level Top", ROOT,
                   "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=2)
@@ -527,12 +527,12 @@ def corpus():
         "valid-root-eku-any": make_root("root-eku-any", ROOT_NAME, ROOT.key, purposes=(ANY_EKU,)),
     }
     for case_id, anchor in root_variants.items():
-        add(signed_case(case_id, VAULT_LEAF, [VAULT, DC], True, None, anchor=anchor,
+        add(signed_case(case_id, LOWER_LEAF, [LOWER, UPPER], True, None, anchor=anchor,
                         request=make_request(case_id)))
     # The same lower key and name, issued directly by the root, is a second valid path.
-    vault_direct = make_ca("vault-2026-direct", "Synthetic Vault Intermediate 2026", ROOT,
-                           "2026-10-01T00:00:00", "2027-04-01T00:00:00", key=VAULT.key)
-    add(signed_case("valid-cross-issued-lower-intermediate", VAULT_LEAF, [vault_direct], True, None))
+    lower_direct = make_ca("lower-2026-direct", "Synthetic Lower Intermediate 2026", ROOT,
+                           "2026-10-01T00:00:00", "2027-04-01T00:00:00", key=LOWER.key)
+    add(signed_case("valid-cross-issued-lower-intermediate", LOWER_LEAF, [lower_direct], True, None))
 
     # Chain-of-trust and certificate-profile rejections.
     rogue_root = make_root("rogue-root", "Synthetic Unrelated Root")
@@ -574,21 +574,21 @@ def corpus():
     ]:
         parent = make_ca(case_id, case_id, ROOT, "2026-10-01T00:00:00", "2027-10-01T00:00:00", **options)
         add(signed_case(case_id, make_leaf(case_id + "-leaf", parent), [parent], False, reason))
-    short_dc = make_ca("dc-pathlen-zero", "Synthetic DC Intermediate 2026", ROOT,
-                       "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=0, key=DC.key)
-    add(signed_case("intermediate-pathlen-too-small-at-index-1", VAULT_LEAF, [VAULT, short_dc], False,
+    short_upper = make_ca("upper-pathlen-zero", "Synthetic Upper Intermediate 2026", ROOT,
+                       "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=0, key=UPPER.key)
+    add(signed_case("intermediate-pathlen-too-small-at-index-1", LOWER_LEAF, [LOWER, short_upper], False,
                     "intermediate-path-length"))
     for case_id, anchor, chain, reason in [
         ("root-pathlen-below-chain-length", make_root("root-pathlen-1", ROOT_NAME, ROOT.key, path_length=1),
-         [VAULT, DC], "root-path-length"),
+         [LOWER, UPPER], "root-path-length"),
         ("root-pathlen-zero", make_root("root-pathlen-0", ROOT_NAME, ROOT.key, path_length=0), [INTERMEDIATE],
          "root-path-length"),
         ("root-eku-codesigning", make_root("root-eku-codesigning", ROOT_NAME, ROOT.key,
-                                           purposes=(CODE_SIGNING_EKU,)), [VAULT, DC], "root-eku"),
+                                           purposes=(CODE_SIGNING_EKU,)), [LOWER, UPPER], "root-eku"),
     ]:
-        leaf = VAULT_LEAF if len(chain) == 2 else LEAF
+        leaf = LOWER_LEAF if len(chain) == 2 else LEAF
         add(signed_case(case_id, leaf, chain, False, reason, anchor=anchor))
-    add(signed_case("missing-middle-intermediate", VAULT_LEAF, [VAULT], False, "chain-root"))
+    add(signed_case("missing-middle-intermediate", LOWER_LEAF, [LOWER], False, "chain-root"))
     # Both path lengths allow either position, so only the order is wrong.
     upper = make_ca("reversed-upper", "Synthetic Reversed Upper", ROOT,
                     "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=1)
@@ -605,12 +605,12 @@ def corpus():
     q4 = make_ca("four-4", "Synthetic Four Level 4", q3, "2026-10-01T00:00:00", "2027-04-01T00:00:00")
     four_leaf = make_leaf("leaf-four", q4)
     add(signed_case("four-intermediates", four_leaf, [q4, q3, q2, q1], False, "chain-count"))
-    vault, dc = encode(VAULT.der), encode(DC.der)
-    for case_id, value in [("chain-empty-entry", f"{vault},,{dc}"),
-                           ("chain-trailing-comma", f"{vault},{dc},"),
-                           ("chain-space-after-comma", f"{vault}, {dc}"),
-                           ("chain-entry-not-base64", f"{vault},not@base64")]:
-        case = signed_case(case_id, VAULT_LEAF, [VAULT, DC], False, "chain-encoding")
+    lower_b64, upper_b64 = encode(LOWER.der), encode(UPPER.der)
+    for case_id, value in [("chain-empty-entry", f"{lower_b64},,{upper_b64}"),
+                           ("chain-trailing-comma", f"{lower_b64},{upper_b64},"),
+                           ("chain-space-after-comma", f"{lower_b64}, {upper_b64}"),
+                           ("chain-entry-not-base64", f"{lower_b64},not@base64")]:
+        case = signed_case(case_id, LOWER_LEAF, [LOWER, UPPER], False, "chain-encoding")
         set_header(case, "signing-chain", value)
         add(case)
     padding = extension(oid("1.2.3.4"), octet(b"\x00" * 3800))
@@ -623,11 +623,11 @@ def corpus():
     headers = case["response"]["headers"]
     headers[[key for key, _ in headers].index(PREFIX + "signing-chain")][0] = PREFIX + "signing-intermediate"
     add(case)
-    case = signed_case("duplicate-chain-header", VAULT_LEAF, [VAULT, DC], False, "duplicate-proof")
-    case["response"]["headers"].append([PREFIX + "signing-chain", f"{vault},{dc}"])
+    case = signed_case("duplicate-chain-header", LOWER_LEAF, [LOWER, UPPER], False, "duplicate-proof")
+    case["response"]["headers"].append([PREFIX + "signing-chain", f"{lower_b64},{upper_b64}"])
     add(case)
-    add(signed_case("chain-differs-from-signed-chain", VAULT_LEAF, [vault_direct], False, "transcript-signature",
-                    signed_intermediates=[VAULT, DC]))
+    add(signed_case("chain-differs-from-signed-chain", LOWER_LEAF, [lower_direct], False, "transcript-signature",
+                    signed_intermediates=[LOWER, UPPER]))
     add(signed_case("legacy-v1-transcript-tail", LEAF, [INTERMEDIATE], False, "transcript-tail",
                     legacy_tail=True))
     add(mutated(base, "missing-intermediate", "missing-proof", lambda c: remove_header(c, "signing-chain")))
@@ -705,11 +705,11 @@ def corpus():
         signing_case("signer-private-key-mismatch", "valid-current",
                      credential("valid-current", LEAF, [INTERMEDIATE], key=rotated.key), False),
         signing_case("signer-two-intermediates", "valid-two-intermediates",
-                     credential("two", VAULT_LEAF, [VAULT, DC]), True),
+                     credential("two", LOWER_LEAF, [LOWER, UPPER]), True),
         signing_case("signer-three-intermediates", "valid-three-intermediates",
                      credential("three", three_leaf, [lower, middle, top]), True),
         signing_case("signer-root-eku-ffe", "valid-root-eku-ffe",
-                     credential("root-eku-ffe", VAULT_LEAF, [VAULT, DC]), True),
+                     credential("root-eku-ffe", LOWER_LEAF, [LOWER, UPPER]), True),
         signing_case("signer-legacy-intermediate-field", "valid-current",
                      {key: value for key, value in good.items() if key != "intermediates_der_base64"}
                      | {"intermediate_der_base64": encode(INTERMEDIATE.der)}, False),
@@ -718,13 +718,13 @@ def corpus():
         signing_case("signer-four-intermediates", "four-intermediates",
                      credential("four", four_leaf, [q4, q3, q2, q1]), False),
         signing_case("signer-reversed-chain", "valid-two-intermediates",
-                     credential("reversed", VAULT_LEAF, [DC, VAULT]), False),
+                     credential("reversed", LOWER_LEAF, [UPPER, LOWER]), False),
         signing_case("signer-missing-middle-intermediate", "valid-two-intermediates",
-                     credential("missing-middle", VAULT_LEAF, [VAULT]), False),
+                     credential("missing-middle", LOWER_LEAF, [LOWER]), False),
         signing_case("signer-leaf-without-ffe-eku", "valid-current",
                      credential("codesigning", leaves["leaf-wrong-eku"], [INTERMEDIATE]), False),
         signing_case("signer-root-pathlen-below-chain-length", "root-pathlen-below-chain-length",
-                     credential("root-pathlen-one", VAULT_LEAF, [VAULT, DC]), False),
+                     credential("root-pathlen-one", LOWER_LEAF, [LOWER, UPPER]), False),
     ]
     return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(ROOT.der),
             "cases": cases, "signing_cases": signing}
