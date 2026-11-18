@@ -1,5 +1,8 @@
 # AGENTS.md — Writing FLEX Precomputed Assignment Fixtures
 
+Use [the documentation map](docs/README.md) to find current repository rules,
+contract decisions, and verification procedures.
+
 This guide is for AI agents and contributors writing precomputed assignment
 test fixtures for the Datadog Feature Flag Evaluation (FFE) system test data
 repository.

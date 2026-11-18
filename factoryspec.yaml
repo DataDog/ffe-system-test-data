@@ -1,0 +1,32 @@
+# FactoryKit POC. Foundation selections for the FFE shared contract repository.
+schema_version: 1
+kind: factoryspec
+id: ffe-system-test-data.repository
+description: FactoryKit Foundation POC for the FFE shared behavioral contract.
+capabilities: [foundation]
+checks:
+  - id: ffe-system-test-data.foundation.report
+    description: Run the repository-owned Foundation report.
+    ref:
+      path: factory/checks/foundation-report.yaml
+      id: ffe-system-test-data.foundation.report
+  - id: ffe-system-test-data.fixture-suite
+    description: Run one CI fixture validation suite.
+    ref:
+      path: factory/checks/fixture-suite.yaml
+      id: ffe-system-test-data.fixture-suite
+nudges:
+  - id: ffe-system-test-data.foundation.documentation-review
+    description: Give the selected baseline documentation reminder.
+    ref:
+      path: factory/nudges/baseline-documentation-review.yaml
+      id: ffe-system-test-data.foundation.documentation-review
+  - id: ffe-system-test-data.contract.decision-record
+    description: Ask for a KB decision citation when contract paths change.
+    ref:
+      path: factory/nudges/contract-decision-record.yaml
+      id: ffe-system-test-data.contract.decision-record
+skills: []
+contracts:
+  verification: {path: factory/contracts/verification.yaml, id: ffe-system-test-data.verification}
+  work_result: factory/schemas/v1/work-result.schema.json

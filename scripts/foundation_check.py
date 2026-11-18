@@ -1,0 +1,11 @@
+from factorykit.document_checks import foundation_entry
+
+foundation_entry(
+    entry_documents=("AGENTS.md",),
+    document_indexes=("docs/README.md",),
+    check_extensions=(),
+    nudge_extensions=(
+        ("factorykit.foundation_nudges", "baseline_nudges"),
+        ("ffe_contract_nudges", "contract_decision_nudges"),
+    ),
+)

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "context_mode", "request_ref", "selection_basis", "planning_status", "gaps", "blockers", "procedures"],
+  "properties": {
+    "schema_version": {"const": 1}, "kind": {"const": "verification-plan"}, "context_mode": {"enum": ["standalone", "agent_team"]},
+    "request_ref": {"$ref": "#/$defs/ref"}, "task_ref": {"type": "object", "additionalProperties": false, "required": ["provider", "id", "content_hash"], "properties": {"provider": {"type": "string", "minLength": 1}, "id": {"type": "string", "minLength": 1}, "identifier": {"type": "string", "minLength": 1}, "content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}},
+    "selection_basis": {"type": "object", "additionalProperties": false, "required": ["base_revision", "head_revision", "configuration_identity", "diff_hash", "changed_paths"], "properties": {
+      "base_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "head_revision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+      "configuration_identity": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}, "diff_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+      "changed_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+    }},
+    "planning_status": {"enum": ["ready", "blocked"]},
+    "gaps": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["criterion_id", "reason"], "properties": {"criterion_id": {"type": "string", "minLength": 1}, "reason": {"type": "string", "minLength": 1}}}},
+    "blockers": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "procedures": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "catalog_id", "criteria", "selection", "implementation_id", "configuration_identity", "implementation_identity", "input", "success_condition"], "properties": {
+      "id": {"type": "string", "pattern": "^P[1-9][0-9]*$"}, "catalog_id": {"type": "string", "minLength": 1},
+      "criteria": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+      "selection": {"type": "object", "additionalProperties": false, "required": ["basis", "reason"], "properties": {"basis": {"enum": ["rule", "criterion", "risk"]}, "reason": {"type": "string", "minLength": 1}}},
+      "implementation_id": {"type": "string", "minLength": 1}, "configuration_identity": {"type": "string", "minLength": 1}, "implementation_identity": {"type": "string", "minLength": 1},
+      "input": {"type": "object"}, "success_condition": {"type": "string", "minLength": 1}
+    }}}
+  },
+  "allOf": [{"if": {"properties": {"context_mode": {"const": "agent_team"}}}, "then": {"required": ["task_ref"]}}],
+  "$defs": {"ref": {"type": "object", "additionalProperties": false, "required": ["id", "content_hash"], "properties": {"id": {"type": "string", "minLength": 1}, "content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}}}
+}

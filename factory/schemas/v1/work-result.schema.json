@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "id", "context_mode", "request_ref", "stage", "result_scope", "evaluated_revision", "outcome", "evidence", "blockers", "unrun", "configuration_identity", "implementation_identity"],
+  "properties": {
+    "schema_version": {"const": 1}, "kind": {"const": "work-result"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*(?:\\.[a-z0-9][a-z0-9-]*)+$"},
+    "context_mode": {"enum": ["standalone", "agent_team"]},
+    "request_ref": {"type": "object", "additionalProperties": false, "required": ["id", "content_hash"], "properties": {"id": {"type": "string", "minLength": 1}, "content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}},
+    "task_ref": {"type": "object"},
+    "execution_profile": {"enum": ["direct", "planned"]}, "stage": {"enum": ["build", "verify"]},
+    "plan_ref": {"type": "object"}, "selection_basis": {"type": "object"},
+    "result_scope": {"enum": ["build", "procedure", "plan"]}, "procedure_id": {"type": "string", "minLength": 1},
+    "configuration_identity": {"type": "string", "minLength": 1}, "implementation_identity": {"type": "string", "minLength": 1},
+    "evaluated_revision": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+    "outcome": {"enum": ["pass", "fail", "blocked", "partial"]},
+    "evidence": {"type": "array"}, "criterion_results": {"type": "array"},
+    "build_summary": {"type": "string", "minLength": 1}, "change_refs": {"type": "array"}, "remaining_work": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "blockers": {"type": "array", "items": {"type": "string", "minLength": 1}}, "unrun": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "allOf": [
+    {"if": {"properties": {"stage": {"const": "build"}}}, "then": {"properties": {"result_scope": {"const": "build"}}, "required": ["build_summary", "change_refs", "remaining_work"], "not": {"required": ["execution_profile"]}}},
+    {"if": {"properties": {"stage": {"const": "verify"}}}, "then": {"properties": {"result_scope": {"enum": ["procedure", "plan"]}}, "required": ["execution_profile"]}},
+    {"if": {"required": ["result_scope"], "properties": {"result_scope": {"const": "procedure"}}}, "then": {"required": ["procedure_id", "criterion_results"]}},
+    {"if": {"required": ["execution_profile"], "properties": {"execution_profile": {"const": "planned"}}}, "then": {"required": ["plan_ref", "selection_basis"]}},
+    {"if": {"required": ["execution_profile"], "properties": {"execution_profile": {"const": "direct"}}}, "then": {"not": {"anyOf": [{"required": ["plan_ref"]}, {"required": ["selection_basis"]}]}}},
+    {"if": {"required": ["result_scope"], "properties": {"result_scope": {"const": "plan"}}}, "then": {"properties": {"execution_profile": {"const": "planned"}, "stage": {"const": "verify"}}}},
+    {"if": {"required": ["evaluated_revision"], "properties": {"evaluated_revision": {"const": null}}}, "then": {"properties": {"outcome": {"enum": ["blocked", "partial"]}}}},
+    {"if": {"properties": {"context_mode": {"const": "agent_team"}}}, "then": {"required": ["task_ref"]}},
+    {"if": {"properties": {"context_mode": {"const": "agent_team"}, "execution_profile": {"const": "planned"}}, "required": ["execution_profile"]}, "then": {"properties": {"plan_ref": {"type": "object", "required": ["external_ref"]}}}}
+  ]
+}

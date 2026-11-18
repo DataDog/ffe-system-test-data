@@ -1,0 +1,30 @@
+schema_version: 1
+kind: verification-contract
+id: ffe-system-test-data.verification
+description: Select CI fixture validators from a committed diff.
+content_schema: factory/schemas/v1/verification-plan.schema.json
+procedure_catalog:
+  - id: ufc-fixtures
+    implementation: {path: factory/checks/fixture-suite.yaml, id: ffe-system-test-data.fixture-suite}
+    select_when: {changed_paths: ["ufc-config.json", "evaluation-cases/**", "evaluation-suites/**", "rules-resources/**", "ci/validate-fixtures.py", "ci/generate-scale-suite.py"]}
+    input: {suite: ufc-fixtures}
+    success_condition: UFC fixture validation and the scale-suite check exit zero.
+  - id: precomputed
+    implementation: {path: factory/checks/fixture-suite.yaml, id: ffe-system-test-data.fixture-suite}
+    select_when: {changed_paths: ["precomputed-assignments/**", "schemas/precomputed-assignment.schema.json", "ci/*precomputed*.py"]}
+    input: {suite: precomputed}
+    success_condition: Precomputed schema validation, obfuscation check and unit tests exit zero.
+  - id: response-signing
+    implementation: {path: factory/checks/fixture-suite.yaml, id: ffe-system-test-data.fixture-suite}
+    prerequisites: [python-cryptography]
+    select_when: {changed_paths: ["response-signing/**", "schemas/response-signing-v1.schema.json", "ci/validate-response-signing.py"]}
+    input: {suite: response-signing}
+    success_condition: Response-signing supplements and validation exit zero.
+  - id: flag-selection
+    implementation: {path: factory/checks/fixture-suite.yaml, id: ffe-system-test-data.fixture-suite}
+    select_when: {changed_paths: ["flag-selection/**", "evaluation-suites/flag-selection/**", "ci/validate-flag-selection.py"]}
+    input: {suite: flag-selection}
+    success_condition: Flag-selection validation exits zero.
+selection_rules: {combine: union, path_matching: root-relative-globs-old-and-new, missing_prerequisite: blocked}
+runbook_refs:
+  - {path: docs/VERIFICATION.md}

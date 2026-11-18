@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "id", "description", "content_schema", "procedure_catalog", "selection_rules", "runbook_refs"],
+  "properties": {
+    "schema_version": {"const": 1}, "kind": {"const": "verification-contract"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*(?:\\.[a-z0-9][a-z0-9-]*)+$"},
+    "description": {"type": "string", "minLength": 1},
+    "content_schema": {"type": "string", "minLength": 1},
+    "planner_skill": {"$ref": "#/$defs/ref"},
+    "agent_team": {"type": "object", "additionalProperties": false, "required": ["provider", "outline_section_heading", "plan_section_heading", "outline_content_schema"], "properties": {"provider": {"const": "linear"}, "outline_section_heading": {"type": "string", "minLength": 1}, "plan_section_heading": {"type": "string", "minLength": 1}, "outline_content_schema": {"type": "string", "minLength": 1}}},
+    "procedure_catalog": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/procedure"}},
+    "selection_rules": {"type": "object", "additionalProperties": false, "required": ["combine", "path_matching", "missing_prerequisite"], "properties": {"combine": {"const": "union"}, "path_matching": {"const": "root-relative-globs-old-and-new"}, "missing_prerequisite": {"const": "blocked"}}},
+    "runbook_refs": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["path"], "properties": {"path": {"type": "string", "minLength": 1}}}}
+  },
+  "$defs": {
+    "ref": {"type": "object", "additionalProperties": false, "required": ["path", "id"], "properties": {"path": {"type": "string", "minLength": 1}, "id": {"type": "string", "minLength": 1}}},
+    "procedure": {"type": "object", "additionalProperties": false, "required": ["id", "implementation", "input", "success_condition"], "properties": {
+      "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+      "implementation": {"$ref": "#/$defs/ref"},
+      "direct_only": {"type": "boolean"},
+      "planned_only": {"type": "boolean"},
+      "select_when": {"type": "object", "additionalProperties": false, "required": ["changed_paths"], "properties": {"changed_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}}},
+      "prerequisites": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+      "input": {"type": "object"}, "success_condition": {"type": "string", "minLength": 1}
+    }}
+  }
+}

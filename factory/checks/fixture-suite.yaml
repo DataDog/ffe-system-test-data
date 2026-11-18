@@ -1,0 +1,13 @@
+schema_version: 1
+kind: check
+id: ffe-system-test-data.fixture-suite
+description: Run one CI fixture validation suite and report command evidence.
+adapter: command-v1
+implementation:
+  argv: [python3, scripts/factorykit_fixture_check.py]
+  working_directory: .
+input_schema: factory/schemas/v1/fixture-suite-input.schema.json
+output_schema: factory/schemas/v1/work-result.schema.json
+binding:
+  input_transport: stdin-json
+  output_transport: stdout-json
