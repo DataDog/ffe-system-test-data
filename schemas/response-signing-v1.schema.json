@@ -7,15 +7,12 @@
     "schema_version": {
       "const": 1
     },
-    "profile_sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$"
-    },
     "synthetic": {
       "const": true
     },
     "anchor_der_base64": {
-      "type": "string"
+      "type": "string",
+      "description": "Default pinned root for every case in this file."
     },
     "cases": {
       "type": "array",
@@ -39,6 +36,40 @@
     "credential": {
       "type": "object",
       "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "generation": {
+          "type": "string"
+        },
+        "private_key_pkcs8_der_base64": {
+          "type": "string"
+        },
+        "certificate_der_base64": {
+          "type": "string"
+        },
+        "intermediates_der_base64": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Intermediates as standard base64 DER. Index 0 issued the leaf. A valid credential has 1 to 3 entries; signer rejection cases can have other counts."
+        }
+      },
+      "required": [
+        "version",
+        "generation",
+        "private_key_pkcs8_der_base64",
+        "certificate_der_base64",
+        "intermediates_der_base64"
+      ],
+      "description": "Edge credential: version 1 with an intermediate chain. Index 0 issued the leaf."
+    },
+    "legacyCredential": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Removed single-intermediate credential. Signers must fail to parse it.",
       "properties": {
         "version": {
           "const": 1
@@ -178,6 +209,10 @@
         },
         "credential": {
           "$ref": "#/$defs/credential"
+        },
+        "anchor_der_base64": {
+          "type": "string",
+          "description": "Pinned root for this case only. It replaces the file anchor_der_base64."
         }
       },
       "required": [
@@ -200,7 +235,14 @@
           "type": "string"
         },
         "credential": {
-          "$ref": "#/$defs/credential"
+          "oneOf": [
+            {
+              "$ref": "#/$defs/credential"
+            },
+            {
+              "$ref": "#/$defs/legacyCredential"
+            }
+          ]
         },
         "expected_signing": {
           "type": "boolean"
