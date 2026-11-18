@@ -15,7 +15,7 @@
       "signing_cases": 0
     },
     "nested-der.json": {
-      "sha256": "1e170f2252e3abac8beb78853c3e3d64f908965c4770a29c1618e308e3ea3d8e",
+      "sha256": "dafdd19b167ad4acb3d140c86d21511129bd3855660d2f6c93459b12e8e3a6a3",
       "response_cases": 2,
       "accepted": 1,
       "signing_cases": 2

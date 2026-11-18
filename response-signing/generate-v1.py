@@ -790,13 +790,13 @@ def isolated_rules():
 
 
 def nested_der():
-    root = small_root("crucible", "SYNTHETIC CRUCIBLE ROOT")
-    intermediate = small_ca("crucible-intermediate", root, "SYNTHETIC CRUCIBLE INTERMEDIATE")
-    key = Key("crucible-leaf")
+    root = small_root("nested-der", "SYNTHETIC NESTED DER ROOT")
+    intermediate = small_ca("nested-der-intermediate", root, "SYNTHETIC NESTED DER INTERMEDIATE")
+    key = Key("nested-der-leaf")
     cases, signing = [], []
     for case_id, value, accept in [("valid-nested-integer", b"\x30\x03\x02\x01\x01", True),
                                    ("nonminimal-nested-integer", b"\x30\x04\x02\x02\x00\x01", False)]:
-        leaf = small_leaf(case_id, key, intermediate, "SYNTHETIC CRUCIBLE LEAF",
+        leaf = small_leaf(case_id, key, intermediate, "SYNTHETIC NESTED DER LEAF",
                           extra=[extension(oid("1.2.3.4"), value)])
         case = signed_case(case_id, leaf, [intermediate], accept, None if accept else "certificate-encoding",
                            now=SUPPLEMENT_NOW, include_credential=True, include_transcript=True)
