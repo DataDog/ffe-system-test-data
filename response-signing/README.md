@@ -51,7 +51,7 @@ The chain contract has these rules:
   field fails to parse, and the signer does not sign.
 
 The FFE EKU in these fixtures is the placeholder `1.3.6.1.4.1.99999.1.1`.
-This arc does not belong to Datadog. Identity-core must assign the production OID
+This arc does not belong to Datadog. Datadog must assign the production OID
 before release. Then change `FFE_EKU` in `generate-v1.py` and
 `ci/verify-response-signing-vectors.py`, and regenerate all fixtures.
 

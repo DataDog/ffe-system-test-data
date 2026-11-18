@@ -31,7 +31,7 @@ PREFIX = "x-datadog-feature-flags-"
 DOMAIN = b"datadog.feature-flags.precomputed-assignments.v1\0"
 PROTOTYPE_CHAIN_DOMAIN = b"datadog.feature-flags.precomputed-assignments.v2\0"
 DRAFT_V3_DOMAIN = b"datadog.feature-flags.precomputed-assignments.v3\0"
-# PLACEHOLDER: 1.3.6.1.4.1.99999 is not a Datadog-owned arc. Identity-core must
+# PLACEHOLDER: 1.3.6.1.4.1.99999 is not a Datadog-owned arc. Datadog must
 # assign the production FFE assignment-signing EKU OID before release. Change it
 # here only, then regenerate every fixture file.
 FFE_EKU = "1.3.6.1.4.1.99999.1.1"
@@ -458,7 +458,7 @@ ROOT = make_root("root", ROOT_NAME)
 INTERMEDIATE = make_ca("intermediate-2026", "Synthetic Intermediate 2026", ROOT,
                        "2026-10-01T00:00:00", "2027-10-01T00:00:00", path_length=0)
 LEAF = make_leaf("leaf-2026", INTERMEDIATE)
-# Identity-core hierarchy: root -> DC intermediate -> lower (Vault) intermediate -> leaf.
+# Two-intermediate hierarchy: root -> upper intermediate -> lower intermediate -> leaf.
 DC = make_ca("dc-2026", "Synthetic DC Intermediate 2026", ROOT,
              "2026-09-15T00:00:00", "2028-09-15T00:00:00", path_length=1)
 VAULT = make_ca("vault-2026", "Synthetic Vault Intermediate 2026", DC,

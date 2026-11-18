@@ -29,7 +29,7 @@ PROOF = "x-datadog-feature-flags-"
 DOMAIN = b"datadog.feature-flags.precomputed-assignments.v1\0"
 OTHER_DOMAINS = [b"datadog.feature-flags.precomputed-assignments.v2\0",
                  b"datadog.feature-flags.precomputed-assignments.v3\0"]
-FFE_EKU = "1.3.6.1.4.1.99999.1.1"  # Placeholder OID; identity-core assigns the real one.
+FFE_EKU = "1.3.6.1.4.1.99999.1.1"  # Placeholder OID; Datadog assigns the real one.
 ANY_EKU = "2.5.29.37.0"
 MAX_CERTIFICATE = 4096
 MAX_BASE64 = 4 * -(-MAX_CERTIFICATE // 3)
