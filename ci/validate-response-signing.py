@@ -101,5 +101,29 @@ def validate(root):
         print(f"{name}: {len(cases)} response cases, {len(signing_cases)} signer cases validated")
 
 
+def validate_chain(root):
+    directory = root / "response-signing/chain"
+    manifest = json.loads(
+        (directory / "manifest.json").read_text(), object_pairs_hook=reject_duplicate_keys
+    )
+    assert manifest["schema_version"] == 1
+    on_disk = {p.name for p in directory.iterdir()} - {"manifest.json", "README.md"}
+    assert set(manifest["files"]) == on_disk, sorted(on_disk ^ set(manifest["files"]))
+    for name, expected in manifest["files"].items():
+        raw = (directory / name).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == expected["sha256"], name
+        if name.endswith(".json"):
+            check_credential(json.loads(raw, object_pairs_hook=reject_duplicate_keys), name)
+        elif name.endswith(".pem"):
+            lines = raw.decode().strip().splitlines()
+            assert lines[0] == "-----BEGIN CERTIFICATE-----" and lines[-1] == "-----END CERTIFICATE-----", name
+            base64.b64decode("".join(lines[1:-1]), validate=True)
+        for key in ("anchor", "credential"):
+            if key in expected:
+                assert expected[key] in manifest["files"], (name, expected[key])
+    print(f"chain: {len(manifest['files'])} files validated")
+
+
 if __name__ == "__main__":
     validate(Path(__file__).resolve().parents[1])
+    validate_chain(Path(__file__).resolve().parents[1])

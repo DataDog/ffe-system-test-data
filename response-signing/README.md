@@ -15,6 +15,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
 | `v1/near-expiry.json` | Four valid near-expiry proofs, a proof that outlives its leaf, and an exact-expiry rejection | Signers and verifiers |
 | `v1/nested-der.json` | Canonical and noncanonical nested INTEGER encodings in a certificate extension | Signers and verifiers |
+| `chain/` | Static test-CA credentials and roots for chain building, root rotation, leaf and root EKU, and root path length. Also the real us1.staging DC intermediate. See `chain/README.md`. | Verifiers |
 
 ## Protocol version 1 with a certificate chain
 
