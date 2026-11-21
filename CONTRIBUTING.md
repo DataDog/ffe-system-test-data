@@ -65,6 +65,11 @@ a suite the consumer has not enabled must not have its configuration parsed.
 A suite whose cases carry flag selection fields must also hold `flag-tags.json`,
 which its server double uses to apply the selection, as `flag-selection` does; see
 [flag selection suite](README.md#flag-selection-suite).
+When fixtures use standard syntax but are too large or slow for every core run,
+also create a suite, as `scale` does. Generate large fixtures with a script under
+`ci/` that has `--write` and `--check` modes, and run `--check` in CI.
+To add a scale dimension, follow
+[`evaluation-suites/scale/AGENTS.md`](evaluation-suites/scale/AGENTS.md).
 
 For selected split/allocation metadata, add optional `result.serialId` (integer or
 `null`) and `result.doLog` (boolean) expectations. A serial ID of `0` is valid;

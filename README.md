@@ -87,14 +87,25 @@ ffe-system-test-data/
 ├── ufc-config.json          # Shared rules-based configuration, including malformed test inputs
 ├── evaluation-cases/
 │   └── test-*.json          # Evaluation test case files
-├── evaluation-suites/       # Optional self-contained, explicitly activated feature suites
+├── evaluation-suites/       # Optional self-contained, explicitly activated suites
 │   ├── dependent-flags/
 │   │   ├── ufc-config.json  # UFC containing only dependent-flag fixtures
 │   │   └── cases/           # Evaluation cases for this feature
-│   └── flag-selection/
-│       ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
-│       ├── flag-tags.json   # Tags of those flags, which UFC does not carry
-│       └── cases/           # One flag selection per case file
+│   ├── flag-selection/
+│   │   ├── ufc-config.json  # Flags a server double narrows to the SDK's flag selection
+│   │   ├── flag-tags.json   # Tags of those flags, which UFC does not carry
+│   │   └── cases/           # One flag selection per case file
+│   ├── regex/
+│   │   ├── ufc-config.json  # One MATCHES or NOT_MATCHES flag for each pattern
+│   │   └── cases/           # Literal, dialect, backtracking, and unsupported-syntax cases
+│   ├── scale/
+│   │   ├── AGENTS.md        # How to generate the scale suites and add a dimension
+│   │   ├── ufc-config.json  # Targeting structure at large N and N × M (generated)
+│   │   └── cases/           # One case file for each dimension (generated)
+│   └── scale-json/
+│       ├── AGENTS.md        # Points to scale/AGENTS.md
+│       ├── ufc-config.json  # JSON variant values up to 4 MB (generated)
+│       └── cases/           # One case file for each dimension (generated)
 ├── precomputed-assignments/
 │   ├── README.md            # Precomputed assignment fixture format
 │   └── cases/               # Precomputed assignment fixtures, discovered recursively
@@ -181,6 +192,10 @@ For backward-compatible core-only consumers, the equivalent minimum flow is:
 The adapter may translate API names and native result containers. It must
 preserve the meaning and precision of the inputs and expected results, including
 `false`, `0`, empty values, and the distinction between absent and null fields.
+For JSON values, this includes numbers: preserve each number's value; where the
+platform has separate integer and floating-point types, return integers as
+integers; and integers above 2^53 stay exact where the SDK's value type can hold
+them.
 Use SDK-local tests for behavior outside these fixtures, such as concurrency,
 transport failures, and provider lifecycle.
 
@@ -615,13 +630,15 @@ targeting cases use `frank` and `dave`.
 | `test-case-unknown-operator-isolation.json` | A flag with an unknown operator is removed without poisoning valid flags |
 | `test-flag-that-does-not-exist.json` | Non-existent flag returning the default value with `FLAG_NOT_FOUND` |
 | `test-json-config-flag.json` | JSON-typed flag returning object value |
+| `test-json-number-precision.json` | JSON values keep each number's value, including integers above 2^53 where the SDK's value type can hold them |
 | `test-no-allocations-flag.json` | Another no-allocations variant |
 | `test-special-characters.json` | Flag keys/values with special characters |
 | `test-string-with-special-characters.json` | String values with special characters |
 
 ## Feature Evaluation Suites
 
-Feature-specific UFC syntax is isolated from the shared root configuration in
+Feature-specific UFC syntax, and fixtures that are too large or slow for every
+core run, are isolated from the shared root configuration in
 self-contained `evaluation-suites/<suite>/` directories. Consumers explicitly
 activate the suites they support and use each suite's adjacent `ufc-config.json`
 and `cases/` directory.
@@ -630,6 +647,67 @@ and `cases/` directory.
 |-------|-------------|
 | `dependent-flags` | Direct and transitive dependencies, short-circuiting, repeated prerequisites, failure propagation, depth limiting, cycles, and unknown-field tolerance |
 | `flag-selection` | SDK flag selection end to end: tags, key patterns, both, canonical form, a tag with interior whitespace, an empty selection, a selection that matches no flag, a selection at the tag-count and value-size limits with a long URL below the URL limit, which the SDK still sends, selections the SDK drops, and a selection the server ignores. Needs a server double; see below |
+| `regex` | MATCHES and NOT_MATCHES in the dialect of the Rust `regex` crate: literal patterns, dialect differences, inputs that make a backtracking engine slow, and syntax that the dialect rejects. See below |
+| `scale` | Standard UFC syntax at large N and N × M: lists of 10,000 entries and 500 × 100, small-integer lists, regex on 2 KB inputs and 1,000 distinct patterns, allocations × rules × conditions sweeps, SemVer and numeric ladders, time windows, rollouts and splits with shards, 1,000 variations, and 10,000 flags. See below |
+| `scale-json` | JSON variant values from 719 nodes to 4 MB, and shapes that stress JSON parsing: 100,000-number arrays, a 1 MB string, and escapes. See below |
+
+### Regex suite
+
+`evaluation-suites/regex/` checks MATCHES and NOT_MATCHES in the dialect of
+the Rust `regex` crate, which the libdatadog evaluator uses. Each flag has one
+condition on the `value` attribute. A case returns `match` when the condition
+holds, and the caller default `no-match` when it does not. Each pattern has its
+own flag, so cases cannot overlap under first-match semantics.
+
+| Case file | What it checks |
+|-----------|----------------|
+| `literals.json` | Patterns that are only text: anchors, escapes, a leading or trailing `.*`, and groups of literal alternatives |
+| `semantics.json` | Places where regex dialects differ: `$` before a final line feed, `.` and line feeds, the `m`, `s`, `i`, and `u` flags, POSIX classes, counted repetition, Unicode word boundaries, Unicode `\d` and `\s`, and NOT_MATCHES with a missing attribute |
+| `backtracking.json` | Nested quantifiers, overlapping alternatives, a leading `.*` on a 20,000-character input, and chains of `.*` |
+| `unsupported-syntax.json` | Lookahead, lookbehind, backreferences, and atomic groups. The Rust `regex` crate rejects them, so the flag has a parse error |
+
+CI evaluates every case with `ci/regex-conformance`, a small evaluator built on
+the Rust `regex` crate at 1.13.1, pinned by its `Cargo.lock`. It fails on a
+different value, reason, or error code, or on a different number of cases; add
+a case and update the count in `.github/workflows/validate-fixtures.yml`. The
+libdatadog rules-based evaluator also agreed with the 63 cases that predate the
+Unicode `\d` and `\s` cases. The six Unicode cases were checked only against the
+Rust `regex` crate. The
+backtracking results are the same in every regex engine, but the inputs are
+large enough that a backtracking engine can take seconds or more for one
+evaluation. The JDK `java.util.regex` engine, for example, does not finish the
+`.*` chain case. A linear-time engine finishes each case in microseconds.
+
+Enable this suite only for an evaluator that uses the Rust dialect and a
+linear-time engine. Other dialects differ on purpose in `semantics.json` and
+`unsupported-syntax.json`: for example, `java.util.regex`, JavaScript `RegExp`,
+and .NET `Regex` accept lookaround, and `java.util.regex` and .NET match `$`
+before a final line feed.
+
+### Scale suites
+
+The `scale` and `scale-json` suites use only syntax from the root
+configuration. They are separate suites because of their size (about 8 MB and
+16 MB), and because some regex cases are slow for backtracking regex engines. A
+consumer that does not enable them does not parse them. `scale` holds targeting
+structure with small values. `scale-json` holds large JSON values, so a
+benchmark of targeting does not parse them.
+
+The expected results are behavior only. The suites do not define time or memory
+limits, because those depend on the machine. A benchmark can load the same
+configuration and cases as its input. Sharded flags have results that the
+generator derives with the UFC hash. All values are synthetic.
+
+Compare JSON values by value, as the core cases do: a JSON integer may come back
+as an integer or as a float of equal value, and a float written as `5.0` may come
+back as either.
+
+Do not edit the suite files by hand. Change `ci/generate-scale-suite.py`, then
+regenerate the files with `python3 ci/generate-scale-suite.py --write`. CI runs
+`python3 ci/generate-scale-suite.py --check` and fails when the files differ, or
+when the generator's reference evaluator disagrees with an expected result.
+[`evaluation-suites/scale/AGENTS.md`](evaluation-suites/scale/AGENTS.md) lists
+every dimension and the rules for adding one.
 
 ### Flag selection suite
 
