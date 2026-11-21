@@ -76,6 +76,51 @@ class ResponseSigningValidationTest(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "duplicate object key"):
                         validator.validate(root)
 
+    def mutate_corpus(self, transform):
+        """Validate a copy whose corpus.json was changed and rehashed."""
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ("schemas", "response-signing"):
+                shutil.copytree(ROOT / name, root / name)
+            path = root / "response-signing/v1/corpus.json"
+            corpus = json.loads(path.read_text())
+            transform(corpus)
+            path.write_text(json.dumps(corpus, indent=2) + "\n")
+            manifest_path = root / "response-signing/v1/manifest.json"
+            manifest = json.loads(manifest_path.read_text())
+            manifest["files"]["corpus.json"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+            manifest_path.write_text(json.dumps(manifest))
+            with contextlib.redirect_stdout(io.StringIO()):
+                validator.validate(root)
+
+    def test_legacy_credential_must_not_sign(self):
+        def transform(corpus):
+            case = next(c for c in corpus["signing_cases"] if "intermediate_der_base64" in c["credential"])
+            case["expected_signing"] = True
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_accepted_case_requires_chain_header(self):
+        def transform(corpus):
+            headers = corpus["cases"][0]["response"]["headers"]
+            for pair in headers:
+                if pair[0] == "x-datadog-feature-flags-signing-chain":
+                    pair[0] = "x-datadog-feature-flags-signing-intermediate"
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_accepted_case_rejects_more_than_three_intermediates(self):
+        def transform(corpus):
+            headers = corpus["cases"][0]["response"]["headers"]
+            for pair in headers:
+                if pair[0] == "x-datadog-feature-flags-signing-chain":
+                    pair[1] = ",".join([pair[1]] * 4)
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_rehashed_unchanged_copy_is_valid(self):
+        self.mutate_corpus(lambda corpus: None)
+
 
 if __name__ == "__main__":
     unittest.main()
