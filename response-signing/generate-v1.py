@@ -92,7 +92,7 @@ def rfc6979_nonce(secret, digest_bytes):
         v = hmac.new(k, v, hashlib.sha256).digest()
 
 
-def ecdsa_sign(secret, message):
+def ecdsa_sign(secret, message, high_s=False):
     digest_bytes = hashlib.sha256(message).digest()
     e = int.from_bytes(digest_bytes, "big")
     nonce = rfc6979_nonce(secret, digest_bytes)
@@ -100,6 +100,10 @@ def ecdsa_sign(secret, message):
     s = pow(nonce, -1, CURVE_N) * (e + r * secret) % CURVE_N
     assert r and s
     if s > CURVE_N // 2:
+        s = CURVE_N - s
+    if high_s:
+        # The same signature with s replaced by n - s. ECDSA accepts both forms,
+        # and the edge signer emits the high-S form about half of the time.
         s = CURVE_N - s
     return sequence(integer(r), integer(s))
 
@@ -125,8 +129,8 @@ class Key:
         self.public = b"\x04" + x.to_bytes(32, "big") + y.to_bytes(32, "big")
         self.identifier = hashlib.sha1(self.public).digest()
 
-    def sign(self, message):
-        return ecdsa_sign(self.secret, message)
+    def sign(self, message, high_s=False):
+        return ecdsa_sign(self.secret, message, high_s)
 
     def pkcs8(self):
         ec_private_key = sequence(integer(1), octet(self.secret.to_bytes(32, "big")),
@@ -335,7 +339,8 @@ def request_prefix(request, domain=DOMAIN):
     body = base64.b64decode(request["body_base64"])
     output = domain
     for value in [request["method"], url.scheme, authority, url.path,
-                  f"?{url.query}" if url.query else ""]:
+                  # A URL that ends in "?" keeps the "?", the same as the edge.
+                  f"?{url.query}" if "?" in request["url"] else ""]:
         output += length_prefixed(value.encode())
     output += length_prefixed(nonce) + digest(body)
     output += digest(header_values(headers, "dd-client-token")[0].encode())
@@ -394,7 +399,8 @@ def credential(generation, leaf, intermediates, key=None):
 
 def signed_case(case_id, leaf, intermediates, accept, reason, now=NOW, issued_at=None, expires_at=None,
                 request=None, anchor=None, domain=DOMAIN, legacy_tail=False, signed_intermediates=None,
-                leaf_der=None, include_credential=None, include_transcript=False, wire=False):
+                leaf_der=None, include_credential=None, include_transcript=False, wire=False,
+                high_s=False):
     """Build one response signed by `leaf.key` over the chain transcript."""
     request = request or make_request(case_id)
     issued_at = now if issued_at is None else issued_at
@@ -404,7 +410,7 @@ def signed_case(case_id, leaf, intermediates, accept, reason, now=NOW, issued_at
     signed_chain = chain if signed_intermediates is None else [node.der for node in signed_intermediates]
     body = RESPONSE_BODY
     signed = transcript(request, body, issued_at, expires_at, leaf_der, signed_chain, domain, legacy_tail)
-    signature = leaf.key.sign(signed)
+    signature = leaf.key.sign(signed, high_s)
     assert ecdsa_verify(leaf.key.public, signed, signature)
     headers = [["content-type", "application/json"], ["cache-control", "no-store, no-transform"],
                [PREFIX + "signature-version", "1"],
@@ -726,6 +732,16 @@ def corpus():
         signing_case("signer-root-pathlen-below-chain-length", "root-pathlen-below-chain-length",
                      credential("root-pathlen-one", LOWER_LEAF, [LOWER, UPPER]), False),
     ]
+
+    # Wire encodings that every verifier must accept.
+    add(signed_case("valid-empty-query", LEAF, [INTERMEDIATE], True, None,
+                    request=make_request("valid-empty-query",
+                                         "https://flags.example.test:443/precompute/assignments?")))
+    high_s = signed_case("valid-high-s-signature", LEAF, [INTERMEDIATE], True, None, high_s=True)
+    r, s_value = (int.from_bytes(value[2:], "big") for value in
+                  children(base64.b64decode(header_values(high_s["response"]["headers"], PREFIX + "signature")[0])))
+    assert s_value > CURVE_N // 2
+    add(high_s)
     return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(ROOT.der),
             "cases": cases, "signing_cases": signing}
 

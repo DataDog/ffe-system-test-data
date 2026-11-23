@@ -347,7 +347,7 @@ def binding(request, domain):
         authority = f"{authority}:{url.port}"
     headers = request["headers"]
     parts = [domain, lp(request["method"].encode()), lp(url.scheme.encode()), lp(authority.encode()),
-             lp(url.path.encode()), lp((("?" + url.query) if url.query else "").encode()),
+             lp(url.path.encode()), lp((("?" + url.query) if "?" in request["url"] else "").encode()),
              lp(bytes.fromhex(values(headers, PROOF + "request-nonce")[0])),
              hashlib.sha256(base64.b64decode(request["body_base64"])).digest(),
              hashlib.sha256(values(headers, "dd-client-token")[0].encode()).digest()]

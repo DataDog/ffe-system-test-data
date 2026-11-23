@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 77 response cases: 17 accepted and 60 rejected. 12 signer cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 79 response cases: 19 accepted and 60 rejected. 12 signer cases. Includes `valid-empty-query` and `valid-high-s-signature`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -181,6 +181,28 @@ can still sign a new, clipped proof. For each successful signing, verify the new
 proof and assert `now < expires_at <= min(now + 300, leaf.not_after)`. Do not
 require the signer to choose the longest lifetime or to reproduce the fixture
 signature bytes. At exact leaf expiry, signing must fail.
+
+## Wire encodings that every verifier must accept
+
+- **Empty query.** A request URL that ends in `?` with no query, such as
+  `https://h/p?`, binds the query field as `?`. It does not bind an empty value.
+  The edge, iOS and Android already do this. `valid-empty-query` tests it.
+- **High-S ECDSA signature.** A verifier must accept a P-256 signature whose `s`
+  is greater than `n / 2`. The edge signer emits this form about half of the
+  time. `valid-high-s-signature` tests it. All other fixture signatures are
+  low-S.
+
+## Counts
+
+`ci/validate-response-signing.py` prints the counts for each file.
+`ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
+99 response cases and 49 signer checks. A signer check is a signer case, or a
+check that the credential of an accepted case can sign a new proof.
+
+| Scope | Response cases | Signer |
+| --- | --- | --- |
+| `v1/corpus.json` | 79 | 12 signer cases |
+| All six v1 files | 99 | 49 signer checks |
 
 ## Validation and regeneration
 
