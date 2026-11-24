@@ -541,7 +541,7 @@
                   ]
                 }
               ],
-              "reason": "DEFAULT"
+              "reason": "SPLIT"
             }
           ],
           "doLog": true
@@ -640,7 +640,7 @@
             {
               "variationKey": "off",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -1014,7 +1014,7 @@
             {
               "variationKey": "fallback",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -1210,7 +1210,7 @@
               "variationKey": "shipped",
               "shards": [],
               "serialId": 204,
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": false
@@ -1404,7 +1404,7 @@
                   ]
                 }
               ],
-              "reason": "SPLIT"
+              "reason": "TARGETING_MATCH"
             },
             {
               "variationKey": "red",
@@ -1430,7 +1430,7 @@
                   ]
                 }
               ],
-              "reason": "SPLIT"
+              "reason": "TARGETING_MATCH"
             },
             {
               "variationKey": "yellow",
@@ -1456,7 +1456,7 @@
                   ]
                 }
               ],
-              "reason": "SPLIT"
+              "reason": "TARGETING_MATCH"
             }
           ],
           "doLog": true,
@@ -1498,7 +1498,7 @@
                 "allocationvalue_type": "rollout",
                 "owner": "hippo"
               },
-              "reason": "SPLIT"
+              "reason": "TARGETING_MATCH"
             }
           ],
           "doLog": true
@@ -1848,7 +1848,7 @@
             {
               "variationKey": "de",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": false
@@ -4100,7 +4100,7 @@
             {
               "variationKey": "on",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -4152,7 +4152,7 @@
             {
               "variationKey": "catch-all",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -4234,7 +4234,7 @@
             {
               "variationKey": "catch-all",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -4286,7 +4286,7 @@
             {
               "variationKey": "catch-all",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -4338,7 +4338,7 @@
             {
               "variationKey": "catch-all",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -4498,7 +4498,7 @@
             {
               "variationKey": "catch-all",
               "shards": [],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -5580,7 +5580,7 @@
               "variationKey": "standard",
               "shards": [],
               "serialId": 200,
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ],
           "doLog": true
@@ -6296,7 +6296,7 @@
                   ]
                 }
               ],
-              "reason": "DEFAULT"
+              "reason": "STATIC"
             }
           ]
         }
