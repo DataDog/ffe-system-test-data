@@ -453,6 +453,40 @@ def can_sign(credential, case, anchor_der):
         return False
 
 
+def pem_der(text):
+    lines = text.strip().splitlines()
+    require(lines[0] == "-----BEGIN CERTIFICATE-----" and lines[-1] == "-----END CERTIFICATE-----", "credential")
+    return base64.b64decode("".join(lines[1:-1]), validate=True)
+
+
+def chain_failures():
+    """Check each chain/ expectation with the same chain rules at the manifest `now`."""
+    directory = ROOT / "response-signing/chain"
+    manifest = json.loads((directory / "manifest.json").read_bytes())
+    now, failures, count = manifest["now"], [], 0
+    for name, entry in sorted(manifest["files"].items()):
+        if "expected" not in entry:
+            continue
+        credential_name = entry.get("credential", name)
+        anchor_name = entry.get("anchor", name)
+        credential = json.loads((directory / credential_name).read_bytes())
+        anchor = pem_der((directory / anchor_name).read_text())
+        leaf_der = base64.b64decode(credential["certificate_der_base64"], validate=True)
+        chain = [base64.b64decode(item, validate=True) for item in credential["intermediates_der_base64"]]
+        count += 1
+        try:
+            expires_at = min(now + 300, parse_certificate(leaf_der)["not_after"])
+            validate_chain(anchor, chain, leaf_der, now, now, expires_at)
+            reason = None
+        except Reject as rejection:
+            reason = rejection.reason
+        if entry["expected"] == "accept" and reason is not None:
+            failures.append(f"chain/{name}: expected accept, got reason {reason}")
+        elif entry["expected"] != "accept" and reason != entry["rejection_reason"]:
+            failures.append(f"chain/{name}: expected reason {entry['rejection_reason']}, got {reason}")
+    return failures, count
+
+
 def main():
     failures, response_count, signing_count = [], 0, 0
     for path in sorted(DIRECTORY.glob("*.json")):
@@ -484,10 +518,12 @@ def main():
             signing_count += 1
             if can_sign(signing["credential"], case, anchor) != signing["expected_signing"]:
                 failures.append(f"{path.name}:{signing['id']}: expected signing={signing['expected_signing']}")
+    chain_problems, chain_count = chain_failures()
+    failures += chain_problems
     for failure in failures:
         print("FAIL", failure)
-    print(f"independent verifier: {response_count} response cases and {signing_count} signer checks, "
-          f"{len(failures)} failures")
+    print(f"independent verifier: {response_count} response cases, {signing_count} signer checks and "
+          f"{chain_count} chain cases, {len(failures)} failures")
     return 1 if failures else 0
 
 

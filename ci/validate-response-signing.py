@@ -2,6 +2,8 @@
 """Validate the shape and pinned bytes of the response-signing conformance data."""
 
 import base64
+import binascii
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -24,6 +26,19 @@ MAX_INTERMEDIATES = 3
 
 def header(message, name):
     return [v for k, v in message["headers"] if k.lower() == "x-datadog-feature-flags-" + name]
+
+
+def check_wire_body(response, case_id):
+    """Compressed transport bytes must decode to the signed application bytes."""
+    if "wire_body_base64" not in response:
+        return
+    encodings = [v for k, v in response["headers"] if k.lower() == "content-encoding"]
+    assert encodings == ["gzip"], case_id
+    try:
+        wire = base64.b64decode(response["wire_body_base64"], validate=True)
+    except binascii.Error:
+        raise AssertionError(case_id)
+    assert gzip.decompress(wire) == base64.b64decode(response["body_base64"], validate=True), case_id
 
 
 def check_credential(credential, case_id):
@@ -63,10 +78,11 @@ def validate(root):
         for case in cases:
             for message in (case["request"], case["response"]):
                 base64.b64decode(message["body_base64"], validate=True)
+            check_wire_body(case["response"], case["id"])
             if "anchor_der_base64" in case:
                 base64.b64decode(case["anchor_der_base64"], validate=True)
             if case["expected_accept"]:
-                assert case["rejection_reason"] is None, case["id"]
+                assert case["rejection_reason"] is None and "sdk_reason" not in case, case["id"]
                 assert case["transcript_base64"], case["id"]
                 for message in (case["request"], case["response"]):
                     assert header(message, "signature-version") == ["1"], case["id"]
@@ -84,7 +100,7 @@ def validate(root):
                 if "credential" in case:
                     check_credential(case["credential"], case["id"])
             else:
-                assert case["rejection_reason"], case["id"]
+                assert case["rejection_reason"] and case.get("sdk_reason"), case["id"]
             if case.get("transcript_base64") is not None:
                 base64.b64decode(case["transcript_base64"], validate=True)
         signing_cases = corpus.get("signing_cases", [])

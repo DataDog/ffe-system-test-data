@@ -9,8 +9,8 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 79 response cases: 19 accepted and 60 rejected. 12 signer cases. Includes `valid-empty-query` and `valid-high-s-signature`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
-| `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections | Signers and verifiers |
+| `v1/corpus.json` | 94 response cases: 23 accepted and 71 rejected. 12 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries and `valid-mixed-case-header-names`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
 | `v1/near-expiry.json` | Four valid near-expiry proofs, a proof that outlives its leaf, and an exact-expiry rejection | Signers and verifiers |
@@ -38,8 +38,9 @@ The chain contract has these rules:
   Index `i + 1` issued index `i`. The pinned root issued the last entry.
 - The header `x-datadog-feature-flags-signing-intermediate` is removed. A
   response that has only this header has no chain, and a verifier rejects it.
-- The transcript bytes before `SHA256(leaf)` are the same as before. The tail is
-  `SHA256(leaf) || u8(n) || SHA256(int[0]) || ... || SHA256(int[n-1])`.
+- The transcript ends with
+  `SHA256(leaf) || u8(n) || SHA256(int[0]) || ... || SHA256(int[n-1])`. See
+  [Transcript bytes](#transcript-bytes) for the complete layout.
 - The leaf extended key usage (EKU) must contain the FFE assignment-signing EKU.
   It must not contain anyExtendedKeyUsage (`2.5.29.37.0`). Other OIDs are allowed.
 - Intermediate `i` must have a critical basicConstraints with cA TRUE and a
@@ -61,6 +62,51 @@ It also rejects proofs signed with the abandoned draft-v3 domain and the chain
 prototype v2 domain. The [single-intermediate v1 fixtures](https://github.com/DataDog/ffe-system-test-data/tree/efa1612b3a7a2217078b268af499e0dd4e8ab727/response-signing/v1)
 remain available in history. Earlier validation receipts do not validate these bytes.
 
+## Transcript bytes
+
+The signature covers these bytes, in this order. `lp(x)` is `u32be(len(x)) || x`.
+All integers are big-endian. Header names match case-insensitively. The
+signature binds header values, not header names.
+
+| Field | Bytes |
+| --- | --- |
+| Domain | `datadog.feature-flags.precomputed-assignments.v1\0` |
+| Method | `lp(method)`, for example `lp("POST")` |
+| Scheme | `lp("https")` |
+| Authority | `lp(host)`. The host is lowercase. An IPv6 host is in brackets. A port is present only when it is not the scheme default. |
+| Path | `lp(path)` with the request escaping unchanged |
+| Query | `lp("?" + query)` when the URL contains `?`, also for an empty query. Otherwise `lp("")`. |
+| Nonce | `lp(nonce)`, the 16 bytes that `x-datadog-feature-flags-request-nonce` encodes as 32 lowercase hex digits |
+| Request body | `SHA256(request body)` |
+| Client token | `SHA256(dd-client-token value)` |
+| `content-type`, `dd-application-id`, `x-rkyv`, `x-use-cache`, `x-dd-feature-flags-capabilities` | For each header in this order: `u8(0)` when absent, or `u8(1) || lp(value)` |
+| `authorization` | `u8(0)` when absent, or `u8(1) || SHA256(value)` |
+| Status | `u16(200)` |
+| Times | `u64(issued_at) || u64(expires_at)` |
+| Response body | `u64(len(body)) || SHA256(body)`, over the application bytes after content decoding |
+| Leaf | `SHA256(leaf DER)` |
+| Chain | `u8(n) || SHA256(int[0]) || ... || SHA256(int[n-1])` |
+
+## Time rules
+
+`issued-at` and `expires-at` are decimal Unix seconds: `0`, or digits without a
+leading zero, at most `2^53 - 1`. A verifier accepts a proof at time `now` only
+when all of these are true:
+
+- `issued_at <= now + 30`. This allows a device clock that is up to 30 seconds slow.
+- `now < expires_at`.
+- `issued_at < expires_at`.
+- `expires_at - issued_at <= 300`.
+- For the leaf, each intermediate and the pinned root:
+  `not_before <= now < not_after`, `not_before <= issued_at` and
+  `expires_at <= not_after`.
+
+There is no other limit on the age of a proof. A proof issued 299 seconds before
+`now` is valid until `expires_at`. These cases test the boundaries:
+`valid-issued-at-30-seconds-ahead`, `valid-issued-at-1-second-ahead`,
+`future-issued-at` (31 seconds ahead), `valid-proof-aged-299-seconds`,
+`issued-at-equals-expires-at` and `leaf-not-before-after-issued-at`.
+
 ## Running a consumer
 
 1. Decode `body_base64` into exact bytes. Keep header order, duplicates and URL
@@ -76,7 +122,10 @@ remain available in history. Earlier validation receipts do not validate these b
 3. Verify each request/response pair and assert `expected_accept`. For accepted
    cases, also compare the constructed transcript with `transcript_base64`.
    `rejection_reason` is a code for the violated rule. It is not a required native
-   error string.
+   error string. Each rejected case also has `sdk_reason`: the reason code that
+   every SDK reports for that case. Assert it in each SDK. The codes come from the
+   browser verifier, which is the reference for all SDKs. `missing-proof` means
+   that one or more proof headers are absent, including the chain header.
 4. Signers also load each `signing_cases` credential and the referenced response
    case. They sign that case's request and body at its `now`, with its trust
    anchor, and assert `expected_signing`. Clients do not run these cases, because
@@ -98,6 +147,10 @@ Accepted cases:
 - One intermediate (`valid-current`), a rotated leaf, a rotated intermediate in
   2032, an effective token with authorization, gzip transport bytes, and IPv6 with
   absent optional headers.
+- `issued_at` 30 seconds and 1 second after `now`, and a proof issued 299
+  seconds before `now`.
+- Request and response header names in mixed case
+  (`valid-mixed-case-header-names`).
 - Two intermediates (root, upper intermediate with pathLen 1, lower intermediate with
   pathLen 0, leaf) and three intermediates.
 - A rotated lower intermediate under the same upper intermediate, with no earlier history.
@@ -124,6 +177,15 @@ Rejected chain cases:
 - `chain-differs-from-signed-chain`: the proof was signed for one valid chain, and
   the response carries a different valid chain. The transcript binds the chain.
 - `legacy-v1-transcript-tail`: the proof was signed with the removed tail.
+
+Rejected binding and time cases:
+
+- One changed request field after signing: the path, `content-type`,
+  `dd-application-id`, an added `x-rkyv`, the capabilities value (it still
+  contains `response-signing-v1`) and `authorization`.
+- A `certificate-id` for a different leaf, and an uppercase `certificate-id`.
+- `issued_at` equal to `expires_at`, a leaf whose `not_before` is after
+  `issued_at`, and a leaf that starts before its intermediate.
 
 The other rejections cover unrelated roots, the leaf profile, expiry, changed
 request or response bytes, malformed proof headers, signature tampering,
@@ -196,13 +258,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-99 response cases and 49 signer checks. A signer check is a signer case, or a
-check that the credential of an accepted case can sign a new proof.
+114 response cases and 57 signer checks. A signer check is a signer case, or a
+check that the credential of an accepted case can sign a new proof. It also
+prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 79 | 12 signer cases |
-| All six v1 files | 99 | 49 signer checks |
+| `v1/corpus.json` | 94 | 12 signer cases |
+| All six v1 files | 114 | 57 signer checks |
 
 ## Validation and regeneration
 
@@ -216,7 +279,7 @@ edge or signer implementation. It sets each expectation from the protocol rules.
 python3 response-signing/generate-v1.py
 python3 response-signing/generate-v1.py --check
 python3 ci/verify-response-signing-vectors.py
-python3 -m pip install jsonschema
+python3 -m pip install jsonschema==4.25.1
 python3 ci/validate-response-signing.py
 python3 -m unittest discover -s ci -p 'test_validate_response_signing.py'
 ```
@@ -226,10 +289,12 @@ the generator. It has its own strict DER parser, certificate profile, chain rule
 time rules and transcript builder. It uses the `openssl` command to verify each
 ECDSA signature. For each response case, it checks `expected_accept`, the
 `rejection_reason` code and the transcript of accepted cases. For each signer
-case, it checks `expected_signing`.
+case, it checks `expected_signing`. It also runs each `chain/` expectation at the
+`now` in `chain/manifest.json`, and checks the rule code of each rejection.
 
 `ci/validate-response-signing.py` checks the schema, the exact file hashes, case
-identities, references and counts. It allows malformed proof and certificate
+identities, references and counts. It checks that each rejected case has an
+`sdk_reason`, and that each `wire_body_base64` decodes to the signed body. It allows malformed proof and certificate
 fields, because negative cases use them. Structural validation does not prove
 cryptographic correctness. Run native signer and verifier tests when you change
 this contract.

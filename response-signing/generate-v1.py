@@ -456,6 +456,46 @@ def signing_case(case_id, response_case, cred, expected):
     return {"id": case_id, "case_id": response_case, "credential": cred, "expected_signing": expected}
 
 
+# The shared SDK reason code for each rule code. These are the browser verifier's
+# codes, chosen as the one reference for every SDK. Each rejected case records
+# its code as `sdk_reason`. A wrong header text encoding is a proof problem, so
+# `certificate-encoding` from a malformed base64 header maps to `invalid-proof`.
+SDK_REASONS = {
+    "canonical-time": "invalid-proof", "certificate-encoding": "invalid-certificate",
+    "certificate-id": "invalid-proof", "certificate-size": "invalid-proof",
+    "certificate-time": "expired-proof", "chain-count": "invalid-proof", "chain-encoding": "invalid-proof",
+    "chain-link": "invalid-certificate", "chain-name": "invalid-certificate",
+    "chain-root": "invalid-certificate", "combined-proof": "invalid-proof",
+    "critical-extension": "invalid-certificate", "duplicate-proof": "invalid-proof",
+    "duplicate-semantic-header": "unsupported-request",
+    "intermediate-basic-constraints": "invalid-certificate", "intermediate-eku": "invalid-certificate",
+    "intermediate-key-usage": "invalid-certificate", "intermediate-path-length": "invalid-certificate",
+    "key-identifier": "invalid-certificate", "leaf-basic-constraints": "invalid-certificate",
+    "leaf-eku": "invalid-certificate", "leaf-key-usage": "invalid-certificate", "missing-proof": "missing-proof",
+    "protocol-version": "invalid-proof", "response-status": "invalid-proof", "response-time": "expired-proof",
+    "root-eku": "invalid-certificate", "root-path-length": "invalid-certificate",
+    "signature-encoding": "invalid-proof", "transcript-domain": "invalid-signature",
+    "transcript-signature": "invalid-signature", "transcript-tail": "invalid-signature",
+    "unsupported-constraint": "invalid-certificate", "validity-containment": "invalid-certificate",
+}
+SDK_REASON_OVERRIDES = {"malformed-certificate-base64": "invalid-proof"}
+
+
+def with_sdk_reasons(files):
+    """Insert `sdk_reason` after `rejection_reason` in every rejected case."""
+    for corpus_value in files.values():
+        for index, case in enumerate(corpus_value["cases"]):
+            if case["expected_accept"]:
+                continue
+            reason = SDK_REASON_OVERRIDES.get(case["id"], SDK_REASONS[case["rejection_reason"]])
+            ordered = {}
+            for key, value in case.items():
+                ordered[key] = value
+                if key == "rejection_reason":
+                    ordered["sdk_reason"] = reason
+            corpus_value["cases"][index] = ordered
+
+
 # ---------------------------------------------------------------------------
 # The PKI used by corpus.json.
 
@@ -492,7 +532,9 @@ def corpus():
     request = make_request("valid-effective-token-and-authorization", headers=headers)
     request["headers"] += [["dd-client-token", "synthetic-overridden-token"],
                            ["authorization", "Bearer synthetic-opaque-value"], ["dd-application-id", ""]]
-    add(signed_case("valid-effective-token-and-authorization", LEAF, [INTERMEDIATE], True, None, request=request))
+    authorized = signed_case("valid-effective-token-and-authorization", LEAF, [INTERMEDIATE], True, None,
+                             request=request)
+    add(authorized)
     add(signed_case("valid-gzip-application-bytes", LEAF, [INTERMEDIATE], True, None, wire=True))
     headers = [["content-type", "application/json"], ["dd-client-token", "synthetic-client-token"],
                ["x-dd-feature-flags-capabilities", "response-signing-v1"], [PREFIX + "signature-version", "1"]]
@@ -742,6 +784,46 @@ def corpus():
                   children(base64.b64decode(header_values(high_s["response"]["headers"], PREFIX + "signature")[0])))
     assert s_value > CURVE_N // 2
     add(high_s)
+
+    # Time-rule boundaries. A verifier allows `issued_at` up to 30 seconds after
+    # `now`, and accepts a proof until `expires_at`.
+    add(signed_case("valid-issued-at-30-seconds-ahead", LEAF, [INTERMEDIATE], True, None, issued_at=NOW + 30))
+    add(signed_case("valid-issued-at-1-second-ahead", LEAF, [INTERMEDIATE], True, None, issued_at=NOW + 1))
+    add(signed_case("valid-proof-aged-299-seconds", LEAF, [INTERMEDIATE], True, None, issued_at=NOW - 299))
+    add(signed_case("issued-at-equals-expires-at", LEAF, [INTERMEDIATE], False, "response-time",
+                    issued_at=NOW + 1, expires_at=NOW + 1))
+    late = make_leaf("leaf-not-before-after-issued-at", INTERMEDIATE, "2026-10-27T00:59:30", "2026-10-30T00:00:00")
+    add(signed_case("leaf-not-before-after-issued-at", late, [INTERMEDIATE], False, "certificate-time",
+                    issued_at=NOW - 60))
+    early = make_leaf("leaf-starts-before-intermediate", INTERMEDIATE, "2026-09-30T00:00:00", "2026-10-30T00:00:00")
+    add(signed_case("leaf-starts-before-intermediate", early, [INTERMEDIATE], False, "validity-containment"))
+
+    # The certificate id is the lowercase hex SHA-256 of the leaf DER.
+    add(mutated(base, "certificate-id-mismatch", "certificate-id",
+                lambda c: set_header(c, "certificate-id", digest(rotated.der).hex())))
+    add(mutated(base, "certificate-id-uppercase", "certificate-id",
+                lambda c: set_header(c, "certificate-id", digest(LEAF.der).hex().upper())))
+
+    # One bound request field changes after signing.
+    add(mutated(base, "changed-request-path", "transcript-signature",
+                url("https://flags.example.test:443/precompute/other?dd_env=production&marker=a%2Fb")))
+    add(mutated(base, "changed-content-type", "transcript-signature",
+                request_header("content-type", "application/json; charset=utf-8")))
+    add(mutated(base, "changed-application-id", "transcript-signature",
+                request_header("dd-application-id", "synthetic-other-app")))
+    add(mutated(base, "added-x-rkyv", "transcript-signature",
+                lambda c: c["request"]["headers"].append(["x-rkyv", "true"])))
+    add(mutated(base, "changed-capabilities", "transcript-signature",
+                request_header("x-dd-feature-flags-capabilities", "response-signing-v1,synthetic-capability")))
+    add(mutated(authorized, "changed-authorization", "transcript-signature",
+                request_header("authorization", "Bearer synthetic-other-value")))
+
+    # Header names are case-insensitive. The signature binds header values only.
+    mixed = signed_case("valid-mixed-case-header-names", LEAF, [INTERMEDIATE], True, None)
+    for message in (mixed["request"], mixed["response"]):
+        message["headers"] = [["-".join(part[:1].upper() + part[1:] for part in name.split("-")), value]
+                              for name, value in message["headers"]]
+    add(mixed)
     return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(ROOT.der),
             "cases": cases, "signing_cases": signing}
 
@@ -786,7 +868,7 @@ def isolated_rules():
     name = "SYNTHETIC ISOLATED LEAF"
     # A noncritical DER OCTET STRING extension pads the leaf past 4096 bytes.
     padding = extension(oid("1.2.3.4"), octet(b"\x00" * 3840))
-    cases = []
+    cases, signing = [], []
     for case_id, leaf, parent, reason in [
         ("isolated-valid", small_leaf("isolated-valid", key, intermediate, name), intermediate, None),
         ("isolated-oversized-certificate",
@@ -799,10 +881,14 @@ def isolated_rules():
         ("isolated-intermediate-ca-false", small_leaf("isolated-intermediate-ca-false", key, no_ca_flag, name),
          no_ca_flag, "intermediate-basic-constraints"),
     ]:
-        cases.append(signed_case(case_id, leaf, [parent], reason is None, reason, now=SUPPLEMENT_NOW,
-                                 include_credential=True, include_transcript=True))
+        case = signed_case(case_id, leaf, [parent], reason is None, reason, now=SUPPLEMENT_NOW,
+                           include_credential=True, include_transcript=True)
+        cases.append(case)
+        # Each isolated certificate rule also applies to signing.
+        signing.append(signing_case(case_id, case_id, case["credential"], reason is None))
     assert len(base64.b64decode(cases[1]["credential"]["certificate_der_base64"])) > 4096
-    return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(root.der), "cases": cases}
+    return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(root.der),
+            "cases": cases, "signing_cases": signing}
 
 
 def nested_der():
@@ -905,9 +991,9 @@ def self_check(files):
             assert case["id"] and isinstance(case["expected_accept"], bool), name
             if case["expected_accept"]:
                 assert case["rejection_reason"] is None and case["transcript_base64"], case["id"]
-                headers = dict(case["response"]["headers"])
-                signature = base64.b64decode(headers[PREFIX + "signature"])
-                leaf = base64.b64decode(headers[PREFIX + "signing-certificate"])
+                headers = case["response"]["headers"]
+                signature = base64.b64decode(header_values(headers, PREFIX + "signature")[0])
+                leaf = base64.b64decode(header_values(headers, PREFIX + "signing-certificate")[0])
                 spki = children(children(leaf)[0])[6]
                 public = children(spki)[1][3:]
                 assert ecdsa_verify(public, base64.b64decode(case["transcript_base64"]), signature), case["id"]
@@ -924,6 +1010,7 @@ def generate():
         "near-expiry.json": near_expiry(),
         "extension-profile.json": extension_profile(),
     }
+    with_sdk_reasons(files)
     self_check(files)
     rendered = {name: (json.dumps(value, indent=2) + "\n").encode() for name, value in files.items()}
     manifest = {"schema_version": 1, "generator": "response-signing/generate-v1.py", "files": {}}

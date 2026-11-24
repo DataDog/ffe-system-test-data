@@ -1,6 +1,8 @@
 """Regression checks for unambiguous response-signing fixture inputs."""
 
+import base64
 import contextlib
+import gzip
 import hashlib
 import importlib.util
 import io
@@ -115,6 +117,19 @@ class ResponseSigningValidationTest(unittest.TestCase):
             for pair in headers:
                 if pair[0] == "x-datadog-feature-flags-signing-chain":
                     pair[1] = ",".join([pair[1]] * 4)
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_gzip_wire_bytes_must_decode_to_the_signed_body(self):
+        def transform(corpus):
+            case = next(c for c in corpus["cases"] if c["id"] == "valid-gzip-application-bytes")
+            case["response"]["wire_body_base64"] = base64.b64encode(gzip.compress(b"{}", mtime=0)).decode()
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_rejected_case_requires_sdk_reason(self):
+        def transform(corpus):
+            next(c for c in corpus["cases"] if not c["expected_accept"]).pop("sdk_reason")
         with self.assertRaises(AssertionError):
             self.mutate_corpus(transform)
 

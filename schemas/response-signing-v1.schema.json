@@ -201,6 +201,17 @@
             "null"
           ]
         },
+        "sdk_reason": {
+          "enum": [
+            "unsupported-request",
+            "missing-proof",
+            "invalid-proof",
+            "invalid-certificate",
+            "invalid-signature",
+            "expired-proof"
+          ],
+          "description": "The shared SDK reason code for a rejected case. Every SDK reports this code. Accepted cases omit it."
+        },
         "transcript_base64": {
           "type": [
             "string",
