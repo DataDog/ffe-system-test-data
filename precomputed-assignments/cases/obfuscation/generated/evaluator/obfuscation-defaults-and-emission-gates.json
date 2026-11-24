@@ -99,20 +99,7 @@
     "noUnmatchedEvents": true,
     "evaluationEvents": [
       {
-        "_count": 4,
-        "_skip": [
-          {
-            "platform": "web"
-          }
-        ]
-      },
-      {
-        "_count": 1,
-        "_include": [
-          {
-            "platform": "web"
-          }
-        ]
+        "_count": 4
       }
     ]
   },
