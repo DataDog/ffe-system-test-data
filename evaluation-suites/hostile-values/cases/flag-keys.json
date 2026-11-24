@@ -1,0 +1,89 @@
+[
+  {
+    "description": "The flag key __proto__ matches a built-in object property. The SDK resolves the configured flag.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "__proto__",
+    "result": {
+      "reason": "STATIC",
+      "value": "value-of-__proto__"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "The flag key constructor matches a built-in object property. The SDK resolves the configured flag.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "constructor",
+    "result": {
+      "reason": "STATIC",
+      "value": "value-of-constructor"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "The flag key prototype matches a built-in object property. The SDK resolves the configured flag.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "prototype",
+    "result": {
+      "reason": "STATIC",
+      "value": "value-of-prototype"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "The flag key hasOwnProperty matches a built-in object property. The SDK resolves the configured flag.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "hasOwnProperty",
+    "result": {
+      "reason": "STATIC",
+      "value": "value-of-hasOwnProperty"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "No flag has the key toString, which matches a built-in object property. The SDK returns the default and does not read an inherited property.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "toString",
+    "result": {
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
+      "value": "fallback"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "No flag has the key valueOf, which matches a built-in object property. The SDK returns the default and does not read an inherited property.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "valueOf",
+    "result": {
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
+      "value": "fallback"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  },
+  {
+    "description": "No flag has the key __defineGetter__, which matches a built-in object property. The SDK returns the default and does not read an inherited property.",
+    "attributes": {},
+    "defaultValue": "fallback",
+    "flag": "__defineGetter__",
+    "result": {
+      "errorCode": "FLAG_NOT_FOUND",
+      "reason": "ERROR",
+      "value": "fallback"
+    },
+    "targetingKey": "hostile-user",
+    "variationType": "STRING"
+  }
+]

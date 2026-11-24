@@ -1,0 +1,462 @@
+{
+  "name": "hostile-object-values",
+  "description": "Object flags whose values probe prototype pollution (__proto__, constructor.prototype, prototype), keys named like built-in object methods, nested markup and template strings, and 64 levels of nesting. Runners in JavaScript should also check that Object.prototype has no new properties after the evaluations. The SDK must return the served value unchanged: the same string code points, or an object with the same keys and values. The SDK must never execute, render, parse, format, or interpret a flag value.",
+  "context": {
+    "targetingKey": "hostile-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "fixture.hostile.proto-key": {
+            "allocationKey": "allocation-fixture.hostile.proto-key",
+            "variationKey": "variation-fixture.hostile.proto-key",
+            "variationType": "object",
+            "variationValue": {
+              "__proto__": {
+                "polluted": true
+              }
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.hostile.constructor-prototype": {
+            "allocationKey": "allocation-fixture.hostile.constructor-prototype",
+            "variationKey": "variation-fixture.hostile.constructor-prototype",
+            "variationType": "object",
+            "variationValue": {
+              "constructor": {
+                "prototype": {
+                  "polluted": true
+                }
+              }
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.hostile.prototype-key": {
+            "allocationKey": "allocation-fixture.hostile.prototype-key",
+            "variationKey": "variation-fixture.hostile.prototype-key",
+            "variationType": "object",
+            "variationValue": {
+              "prototype": {
+                "polluted": true
+              },
+              "__defineGetter__": "x"
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.hostile.builtin-method-keys": {
+            "allocationKey": "allocation-fixture.hostile.builtin-method-keys",
+            "variationKey": "variation-fixture.hostile.builtin-method-keys",
+            "variationType": "object",
+            "variationValue": {
+              "toString": "x",
+              "valueOf": 1,
+              "hasOwnProperty": false,
+              "toJSON": "replaced"
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.hostile.markup-values": {
+            "allocationKey": "allocation-fixture.hostile.markup-values",
+            "variationKey": "variation-fixture.hostile.markup-values",
+            "variationType": "object",
+            "variationValue": {
+              "html": "<script>alert(1)</script>",
+              "url": "javascript:alert(1)",
+              "template": "{{7*7}}",
+              "list": [
+                "<img src=x onerror=alert(1)>",
+                "${7*7}"
+              ]
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          },
+          "fixture.hostile.deep-nesting": {
+            "allocationKey": "allocation-fixture.hostile.deep-nesting",
+            "variationKey": "variation-fixture.hostile.deep-nesting",
+            "variationType": "object",
+            "variationValue": {
+              "level1": {
+                "level2": {
+                  "level3": {
+                    "level4": {
+                      "level5": {
+                        "level6": {
+                          "level7": {
+                            "level8": {
+                              "level9": {
+                                "level10": {
+                                  "level11": {
+                                    "level12": {
+                                      "level13": {
+                                        "level14": {
+                                          "level15": {
+                                            "level16": {
+                                              "level17": {
+                                                "level18": {
+                                                  "level19": {
+                                                    "level20": {
+                                                      "level21": {
+                                                        "level22": {
+                                                          "level23": {
+                                                            "level24": {
+                                                              "level25": {
+                                                                "level26": {
+                                                                  "level27": {
+                                                                    "level28": {
+                                                                      "level29": {
+                                                                        "level30": {
+                                                                          "level31": {
+                                                                            "level32": {
+                                                                              "level33": {
+                                                                                "level34": {
+                                                                                  "level35": {
+                                                                                    "level36": {
+                                                                                      "level37": {
+                                                                                        "level38": {
+                                                                                          "level39": {
+                                                                                            "level40": {
+                                                                                              "level41": {
+                                                                                                "level42": {
+                                                                                                  "level43": {
+                                                                                                    "level44": {
+                                                                                                      "level45": {
+                                                                                                        "level46": {
+                                                                                                          "level47": {
+                                                                                                            "level48": {
+                                                                                                              "level49": {
+                                                                                                                "level50": {
+                                                                                                                  "level51": {
+                                                                                                                    "level52": {
+                                                                                                                      "level53": {
+                                                                                                                        "level54": {
+                                                                                                                          "level55": {
+                                                                                                                            "level56": {
+                                                                                                                              "level57": {
+                                                                                                                                "level58": {
+                                                                                                                                  "level59": {
+                                                                                                                                    "level60": {
+                                                                                                                                      "level61": {
+                                                                                                                                        "level62": {
+                                                                                                                                          "level63": {
+                                                                                                                                            "level64": {
+                                                                                                                                              "leaf": "<script>alert(1)</script>"
+                                                                                                                                            }
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "reason": "TARGETING_MATCH",
+            "doLog": true
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "fixture.hostile.proto-key",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "__proto__": {
+            "polluted": true
+          }
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.proto-key"
+      }
+    },
+    {
+      "flag": "fixture.hostile.constructor-prototype",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "constructor": {
+            "prototype": {
+              "polluted": true
+            }
+          }
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.constructor-prototype"
+      }
+    },
+    {
+      "flag": "fixture.hostile.prototype-key",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "prototype": {
+            "polluted": true
+          },
+          "__defineGetter__": "x"
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.prototype-key"
+      }
+    },
+    {
+      "flag": "fixture.hostile.builtin-method-keys",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "toString": "x",
+          "valueOf": 1,
+          "hasOwnProperty": false,
+          "toJSON": "replaced"
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.builtin-method-keys"
+      }
+    },
+    {
+      "flag": "fixture.hostile.markup-values",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "html": "<script>alert(1)</script>",
+          "url": "javascript:alert(1)",
+          "template": "{{7*7}}",
+          "list": [
+            "<img src=x onerror=alert(1)>",
+            "${7*7}"
+          ]
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.markup-values"
+      }
+    },
+    {
+      "flag": "fixture.hostile.deep-nesting",
+      "variationType": "object",
+      "defaultValue": {},
+      "expectedResult": {
+        "value": {
+          "level1": {
+            "level2": {
+              "level3": {
+                "level4": {
+                  "level5": {
+                    "level6": {
+                      "level7": {
+                        "level8": {
+                          "level9": {
+                            "level10": {
+                              "level11": {
+                                "level12": {
+                                  "level13": {
+                                    "level14": {
+                                      "level15": {
+                                        "level16": {
+                                          "level17": {
+                                            "level18": {
+                                              "level19": {
+                                                "level20": {
+                                                  "level21": {
+                                                    "level22": {
+                                                      "level23": {
+                                                        "level24": {
+                                                          "level25": {
+                                                            "level26": {
+                                                              "level27": {
+                                                                "level28": {
+                                                                  "level29": {
+                                                                    "level30": {
+                                                                      "level31": {
+                                                                        "level32": {
+                                                                          "level33": {
+                                                                            "level34": {
+                                                                              "level35": {
+                                                                                "level36": {
+                                                                                  "level37": {
+                                                                                    "level38": {
+                                                                                      "level39": {
+                                                                                        "level40": {
+                                                                                          "level41": {
+                                                                                            "level42": {
+                                                                                              "level43": {
+                                                                                                "level44": {
+                                                                                                  "level45": {
+                                                                                                    "level46": {
+                                                                                                      "level47": {
+                                                                                                        "level48": {
+                                                                                                          "level49": {
+                                                                                                            "level50": {
+                                                                                                              "level51": {
+                                                                                                                "level52": {
+                                                                                                                  "level53": {
+                                                                                                                    "level54": {
+                                                                                                                      "level55": {
+                                                                                                                        "level56": {
+                                                                                                                          "level57": {
+                                                                                                                            "level58": {
+                                                                                                                              "level59": {
+                                                                                                                                "level60": {
+                                                                                                                                  "level61": {
+                                                                                                                                    "level62": {
+                                                                                                                                      "level63": {
+                                                                                                                                        "level64": {
+                                                                                                                                          "leaf": "<script>alert(1)</script>"
+                                                                                                                                        }
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "variation-fixture.hostile.deep-nesting"
+      }
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "exposures": [
+      {
+        "_count": 6
+      }
+    ],
+    "evaluationEvents": [
+      {
+        "_count": 6
+      }
+    ]
+  }
+}
