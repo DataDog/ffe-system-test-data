@@ -813,6 +813,11 @@ def corpus():
                 request_header("dd-application-id", "synthetic-other-app")))
     add(mutated(base, "added-x-rkyv", "transcript-signature",
                 lambda c: c["request"]["headers"].append(["x-rkyv", "true"])))
+    rkyv = make_request("valid-x-rkyv-present")
+    rkyv["headers"].insert(-1, ["x-rkyv", "true"])
+    rkyv_case = signed_case("valid-x-rkyv-present", LEAF, [INTERMEDIATE], True, None, request=rkyv)
+    add(rkyv_case)
+    add(mutated(rkyv_case, "changed-x-rkyv", "transcript-signature", request_header("x-rkyv", "false")))
     add(mutated(base, "changed-capabilities", "transcript-signature",
                 request_header("x-dd-feature-flags-capabilities", "response-signing-v1,synthetic-capability")))
     add(mutated(authorized, "changed-authorization", "transcript-signature",

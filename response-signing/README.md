@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 94 response cases: 23 accepted and 71 rejected. 12 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries and `valid-mixed-case-header-names`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 96 response cases: 24 accepted and 72 rejected. 12 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries and `valid-mixed-case-header-names`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -150,7 +150,8 @@ Accepted cases:
 - `issued_at` 30 seconds and 1 second after `now`, and a proof issued 299
   seconds before `now`.
 - Request and response header names in mixed case
-  (`valid-mixed-case-header-names`).
+  (`valid-mixed-case-header-names`), and a request with `x-rkyv`
+  (`valid-x-rkyv-present`).
 - Two intermediates (root, upper intermediate with pathLen 1, lower intermediate with
   pathLen 0, leaf) and three intermediates.
 - A rotated lower intermediate under the same upper intermediate, with no earlier history.
@@ -181,7 +182,7 @@ Rejected chain cases:
 Rejected binding and time cases:
 
 - One changed request field after signing: the path, `content-type`,
-  `dd-application-id`, an added `x-rkyv`, the capabilities value (it still
+  `dd-application-id`, an added `x-rkyv`, a changed `x-rkyv`, the capabilities value (it still
   contains `response-signing-v1`) and `authorization`.
 - A `certificate-id` for a different leaf, and an uppercase `certificate-id`.
 - `issued_at` equal to `expires_at`, a leaf whose `not_before` is after
@@ -258,14 +259,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-114 response cases and 57 signer checks. A signer check is a signer case, or a
+116 response cases and 58 signer checks. A signer check is a signer case, or a
 check that the credential of an accepted case can sign a new proof. It also
 prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 94 | 12 signer cases |
-| All six v1 files | 114 | 57 signer checks |
+| `v1/corpus.json` | 96 | 12 signer cases |
+| All six v1 files | 116 | 58 signer checks |
 
 ## Validation and regeneration
 
