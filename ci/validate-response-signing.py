@@ -2,6 +2,8 @@
 """Validate the shape and pinned bytes of the response-signing conformance data."""
 
 import base64
+import binascii
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -16,6 +18,35 @@ def reject_duplicate_keys(pairs):
             raise ValueError(f"duplicate object key {key!r}")
         result[key] = value
     return result
+
+
+DOMAIN = b"datadog.feature-flags.precomputed-assignments.v1\0"
+MAX_INTERMEDIATES = 3
+
+
+def header(message, name):
+    return [v for k, v in message["headers"] if k.lower() == "x-datadog-feature-flags-" + name]
+
+
+def check_wire_body(response, case_id):
+    """Compressed transport bytes must decode to the signed application bytes."""
+    if "wire_body_base64" not in response:
+        return
+    encodings = [v for k, v in response["headers"] if k.lower() == "content-encoding"]
+    assert encodings == ["gzip"], case_id
+    try:
+        wire = base64.b64decode(response["wire_body_base64"], validate=True)
+    except binascii.Error:
+        raise AssertionError(case_id)
+    assert gzip.decompress(wire) == base64.b64decode(response["body_base64"], validate=True), case_id
+
+
+def check_credential(credential, case_id):
+    assert credential["version"] == 1, case_id
+    intermediates = credential["intermediates_der_base64"]
+    assert 1 <= len(intermediates) <= MAX_INTERMEDIATES, case_id
+    for value in [credential["certificate_der_base64"], credential["private_key_pkcs8_der_base64"], *intermediates]:
+        base64.b64decode(value, validate=True)
 
 
 def validate(root):
@@ -43,18 +74,33 @@ def validate(root):
         assert len(ids) == len(set(ids)), f"{name}: duplicate case id"
         assert len(cases) == expected["response_cases"], name
         assert sum(case["expected_accept"] for case in cases) == expected["accepted"], name
+        base64.b64decode(corpus["anchor_der_base64"], validate=True)
         for case in cases:
             for message in (case["request"], case["response"]):
                 base64.b64decode(message["body_base64"], validate=True)
+            check_wire_body(case["response"], case["id"])
+            if "anchor_der_base64" in case:
+                base64.b64decode(case["anchor_der_base64"], validate=True)
             if case["expected_accept"]:
-                assert case["rejection_reason"] is None, case["id"]
+                assert case["rejection_reason"] is None and "sdk_reason" not in case, case["id"]
                 assert case["transcript_base64"], case["id"]
                 for message in (case["request"], case["response"]):
-                    assert [v for k, v in message["headers"] if k.lower() ==
-                            "x-datadog-feature-flags-signature-version"] == ["1"], case["id"]
-                assert base64.b64decode(case["transcript_base64"], validate=True).startswith(
-                    b"datadog.feature-flags.precomputed-assignments.v1\0"
-                ), case["id"]
+                    assert header(message, "signature-version") == ["1"], case["id"]
+                # The chain header replaces the removed single-intermediate header.
+                assert header(case["response"], "signing-intermediate") == [], case["id"]
+                chain = header(case["response"], "signing-chain")
+                assert len(chain) == 1 and 1 <= len(chain[0].split(",")) <= MAX_INTERMEDIATES, case["id"]
+                for entry in chain[0].split(","):
+                    base64.b64decode(entry, validate=True)
+                transcript = base64.b64decode(case["transcript_base64"], validate=True)
+                assert transcript.startswith(DOMAIN), case["id"]
+                # Tail: u8 intermediate count, then one SHA-256 digest per intermediate.
+                count = len(chain[0].split(","))
+                assert transcript[-32 * count - 1] == count, case["id"]
+                if "credential" in case:
+                    check_credential(case["credential"], case["id"])
+            else:
+                assert case["rejection_reason"] and case.get("sdk_reason"), case["id"]
             if case.get("transcript_base64") is not None:
                 base64.b64decode(case["transcript_base64"], validate=True)
         signing_cases = corpus.get("signing_cases", [])
@@ -63,8 +109,37 @@ def validate(root):
         assert len(signing_ids) == len(set(signing_ids)), name
         for case in signing_cases:
             assert case["case_id"] in ids, case["id"]
+            if "intermediate_der_base64" in case["credential"]:
+                # The removed credential field must never sign.
+                assert case["expected_signing"] is False, case["id"]
+            elif case["expected_signing"]:
+                check_credential(case["credential"], case["id"])
         print(f"{name}: {len(cases)} response cases, {len(signing_cases)} signer cases validated")
+
+
+def validate_chain(root):
+    directory = root / "response-signing/chain"
+    manifest = json.loads(
+        (directory / "manifest.json").read_text(), object_pairs_hook=reject_duplicate_keys
+    )
+    assert manifest["schema_version"] == 1
+    on_disk = {p.name for p in directory.iterdir()} - {"manifest.json", "README.md"}
+    assert set(manifest["files"]) == on_disk, sorted(on_disk ^ set(manifest["files"]))
+    for name, expected in manifest["files"].items():
+        raw = (directory / name).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == expected["sha256"], name
+        if name.endswith(".json"):
+            check_credential(json.loads(raw, object_pairs_hook=reject_duplicate_keys), name)
+        elif name.endswith(".pem"):
+            lines = raw.decode().strip().splitlines()
+            assert lines[0] == "-----BEGIN CERTIFICATE-----" and lines[-1] == "-----END CERTIFICATE-----", name
+            base64.b64decode("".join(lines[1:-1]), validate=True)
+        for key in ("anchor", "credential"):
+            if key in expected:
+                assert expected[key] in manifest["files"], (name, expected[key])
+    print(f"chain: {len(manifest['files'])} files validated")
 
 
 if __name__ == "__main__":
     validate(Path(__file__).resolve().parents[1])
+    validate_chain(Path(__file__).resolve().parents[1])

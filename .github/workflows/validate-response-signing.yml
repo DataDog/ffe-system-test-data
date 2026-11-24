@@ -6,6 +6,17 @@ on:
       - .github/workflows/validate-response-signing.yml
       - ci/validate-response-signing.py
       - ci/test_validate_response_signing.py
+      - ci/verify-response-signing-vectors.py
+      - schemas/response-signing-v1.schema.json
+      - response-signing/**
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/validate-response-signing.yml
+      - ci/validate-response-signing.py
+      - ci/test_validate_response_signing.py
+      - ci/verify-response-signing-vectors.py
       - schemas/response-signing-v1.schema.json
       - response-signing/**
 
@@ -13,7 +24,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: response-signing-validation-${{ github.event.pull_request.number }}
+  group: response-signing-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -27,9 +38,11 @@ jobs:
         with:
           persist-credentials: false
       - name: Install dependencies
-        run: pip install jsonschema cryptography==46.0.3
-      - name: Verify boundary fixture reproducibility and signatures
-        run: python3 response-signing/generate-boundary-supplements.py --check
+        run: pip install jsonschema==4.25.1
+      - name: Verify fixture reproducibility
+        run: python3 response-signing/generate-v1.py --check
+      - name: Verify every expectation with the independent verifier
+        run: python3 ci/verify-response-signing-vectors.py
       - name: Validate response signing fixtures
         run: python3 ci/validate-response-signing.py
       - name: Test response signing fixture validation
