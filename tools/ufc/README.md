@@ -22,11 +22,16 @@ wire string itself, without extra JSON quoting. Public pinned
 `@datadog/flagging-core@3.0.1` APIs decode protobuf, serialize wire, and parse it
 again. Parser failure, empty configurations, changed semantic payload and unstable
 wire serialization fail generation. No timestamps, ETags or split reasons are added.
-Reasons survive conversion when present in `ufc-config.json`. The canonical splits
-have no `reason`, so its absence becomes `REASON_UNSPECIFIED (0)`, which the
-`@datadog/flagging-core` 3.0.1 protobuf evaluator maps to `UNKNOWN` for every
-evaluation that selects a split. Consumers cannot assert the canonical reason for
-those results against these artifacts. The diagnostic retains these differences.
+Reasons survive conversion when present in `ufc-config.json`. Canonical splits
+declare their evaluation reasons explicitly, except for deliberately malformed
+splits. Missing reasons become `REASON_UNSPECIFIED (0)`, which the pinned protobuf
+evaluator maps to `UNKNOWN`; the converter does not infer them.
+The authored reasons follow the existing evaluation-case contract: `TARGETING_MATCH`
+for targeting rules, otherwise `SPLIT` for any shard definition (including a full-range
+shard), otherwise `DEFAULT` for allocation dates, otherwise `STATIC`. Allocation order
+does not change this reason. With the pinned evaluator, the remaining differences
+concern malformed-input/error handling. `parity.json` retains those differences;
+explicit reason annotations do not establish full SDK conformance.
 
 
 `parity.json` is a gitignored local diagnostic: existing expectations are compared with original JSON,

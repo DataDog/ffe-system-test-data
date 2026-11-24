@@ -417,6 +417,73 @@ class FlagSelectionSuiteValidationTest(unittest.TestCase):
                     validator._validate_suite(config_path, cases_directory, self.platforms, self_contained=True)
 
 
+class SplitReasonValidationTest(unittest.TestCase):
+    def config(self, split: dict[str, object], flag: str = "flag") -> dict[str, object]:
+        config = EvaluationSuiteValidationTest.config(flag)
+        config["flags"][flag]["allocations"] = [{"splits": [split]}]
+        return config
+
+    def test_known_split_reasons_are_valid(self) -> None:
+        for reason in validator.VALID_SPLIT_REASONS:
+            with self.subTest(reason=reason):
+                validator._validate_config(validator.CONFIG_PATH, self.config({"reason": reason}))
+
+    def test_invalid_reasons_are_rejected_in_every_suite(self) -> None:
+        for path in (validator.CONFIG_PATH, validator.EVALUATION_SUITES_DIRECTORY / "example" / "ufc-config.json"):
+            for reason in ("STATIK", "UNKNOWN", "", None, False, 1, [], {}):
+                with self.subTest(path=path, reason=reason):
+                    with self.assertRaisesRegex(validator.FixtureValidationError, r"splits\[0\].reason must be one of"):
+                        validator._validate_config(path, self.config({"reason": reason}))
+
+    def test_core_requires_reasons_but_feature_suites_may_omit_them(self) -> None:
+        config = self.config({"variationKey": "on", "shards": []})
+        with self.assertRaisesRegex(validator.FixtureValidationError, "reason is required"):
+            validator._validate_config(validator.CONFIG_PATH, config)
+        validator._validate_config(validator.EVALUATION_SUITES_DIRECTORY / "example" / "ufc-config.json", config)
+
+    def test_malformed_exceptions_apply_only_to_the_exact_split(self) -> None:
+        for flag in ("missing-split-shards-flag", "null-shard-range-flag"):
+            with self.subTest(flag=flag):
+                config = self.config({"variationKey": "trap"}, flag)
+                validator._validate_config(validator.CONFIG_PATH, config)
+                config["flags"][flag]["allocations"].append({"splits": [{"variationKey": "on"}]})
+                with self.assertRaisesRegex(validator.FixtureValidationError, r"allocations\[1\].*reason is required"):
+                    validator._validate_config(validator.CONFIG_PATH, config)
+                with self.assertRaisesRegex(validator.FixtureValidationError, "reason must be one of"):
+                    validator._validate_config(validator.CONFIG_PATH, self.config({"reason": "STATIK"}, flag))
+
+    def test_deliberately_malformed_allocation_shapes_remain_valid(self) -> None:
+        for allocations in ("malformed", [None], [{"splits": None}], [{"splits": [None]}]):
+            with self.subTest(allocations=allocations):
+                config = EvaluationSuiteValidationTest.config("flag")
+                config["flags"]["flag"]["allocations"] = allocations
+                validator._validate_config(validator.CONFIG_PATH, config)
+
+    def test_authored_reasons_follow_the_existing_case_contract(self) -> None:
+        for path in (
+            validator.CONFIG_PATH,
+            validator.EVALUATION_SUITES_DIRECTORY / "dependent-flags" / "ufc-config.json",
+            validator.EVALUATION_SUITES_DIRECTORY / "flag-selection" / "ufc-config.json",
+        ):
+            for flag in validator._load_json(path)["flags"].values():
+                if not isinstance(flag["allocations"], list):
+                    continue
+                for allocation in flag["allocations"]:
+                    for split in allocation.get("splits", []):
+                        if "reason" not in split:
+                            continue
+                        if allocation.get("rules"):
+                            expected = "TARGETING_MATCH"
+                        elif split.get("shards"):
+                            expected = "SPLIT"
+                        elif "startAt" in allocation or "endAt" in allocation:
+                            expected = "DEFAULT"
+                        else:
+                            expected = "STATIC"
+                        with self.subTest(path=path, flag=flag["key"], allocation=allocation["key"]):
+                            self.assertEqual(expected, split["reason"])
+
+
 class EvaluationPlatformValidationTest(unittest.TestCase):
     platforms = frozenset({"php", "python"})
     path = validator.EVALUATION_CASES_DIRECTORY / "test-case-filter.json"

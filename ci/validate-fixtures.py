@@ -19,6 +19,9 @@ CANONICAL_PLATFORMS = frozenset(
     {"cpp", "dotnet", "golang", "java", "nodejs", "php", "python", "ruby", "rust", "web"}
 )
 VALID_VARIATION_TYPES = frozenset({"BOOLEAN", "INTEGER", "JSON", "NUMERIC", "STRING"})
+VALID_SPLIT_REASONS = frozenset({"TARGETING_MATCH", "SPLIT", "DEFAULT", "STATIC"})
+# Preserve the exact malformed inputs exercised by these two core cases.
+UNANNOTATED_CORE_SPLITS = frozenset({("missing-split-shards-flag", 0, 0), ("null-shard-range-flag", 0, 0)})
 FEATURE_DESTINATIONS = frozenset({"HOOK", "EXPOSURE", "EVALUATION"})
 SUITE_FLAG_TAGS_FILE = "flag-tags.json"
 # A suite may document itself. Consumers read only the configuration and the cases.
@@ -121,8 +124,29 @@ def _validate_config(path: Path, value: object) -> dict[str, object]:
 
         if "allocations" not in flag_value:
             _fail(path, f"flag {flag_name!r} must declare allocations")
+        _validate_split_reasons(path, flag_name, flag_value)
 
     return flags
+
+
+def _validate_split_reasons(path: Path, flag_name: str, flag: dict[str, object]) -> None:
+    allocations = flag["allocations"]
+    if not isinstance(allocations, list):
+        return
+    for allocation_index, allocation in enumerate(allocations):
+        if not isinstance(allocation, dict) or not isinstance(allocation.get("splits"), list):
+            continue
+        for split_index, split in enumerate(allocation["splits"]):
+            if not isinstance(split, dict):
+                continue
+            location = f"flag {flag_name!r} allocations[{allocation_index}].splits[{split_index}].reason"
+            if "reason" not in split:
+                if path == CONFIG_PATH and (flag_name, allocation_index, split_index) not in UNANNOTATED_CORE_SPLITS:
+                    _fail(path, f"{location} is required in the core configuration")
+                continue
+            reason = split["reason"]
+            if not isinstance(reason, str) or reason not in VALID_SPLIT_REASONS:
+                _fail(path, f"{location} must be one of {', '.join(sorted(VALID_SPLIT_REASONS))}")
 
 
 def _validate_platform_filter(
