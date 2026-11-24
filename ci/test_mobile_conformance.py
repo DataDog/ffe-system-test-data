@@ -76,6 +76,31 @@ class PreviewTests(unittest.TestCase):
         for name, value in preview.importer.snapshot(fixtures, 'HEAD').items():
             self.assertEqual((destination / name).read_bytes(), value)
 
+    def test_android_legacy_pin_uses_selected_revision(self):
+        self._assert_android_pin(False)
+
+    def test_android_manifest_pin_preserves_other_sources(self):
+        self._assert_android_pin(True)
+
+    def _assert_android_pin(self, manifest):
+        fixtures = Path(__file__).resolve().parent.parent
+        config_path = self.sdk / 'ci/feature-flags-precomputed-fixtures.json'
+        config_path.parent.mkdir()
+        source = {'name': 'precomputed-assignments', 'format': 'precomputed-assignments',
+                  'path': 'precomputed-assignments/', 'destination': preview.DESTINATIONS['android'],
+                  'commit': 'a' * 40, 'files': {'LICENSE': 'LICENSE'}}
+        other = {'name': 'signing', 'format': 'tree', 'path': 'response-signing/v1/',
+                 'destination': 'signing', 'commit': 'b' * 40}
+        config_path.write_text(json.dumps({'sources': [source, other]} if manifest else source))
+        preview.install_snapshot(fixtures, 'HEAD', self.sdk, 'android')
+        config = json.loads(config_path.read_text())
+        selected = config['sources'][0] if manifest else config
+        metadata = json.loads((self.sdk / preview.DESTINATIONS['android'] / 'SOURCE.json').read_text())
+        self.assertEqual(selected['commit'], metadata['commit'])
+        self.assertEqual(selected['files'], {'LICENSE': 'LICENSE'})
+        if manifest:
+            self.assertEqual(config['sources'][1], other)
+
     def test_refuses_unowned_or_symlink_destination(self):
         destination = self.sdk / preview.DESTINATIONS['android']
         destination.mkdir(parents=True)

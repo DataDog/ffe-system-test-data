@@ -41,6 +41,26 @@ def install_snapshot(fixtures, sha, sdk, platform):
         path = destination / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
+    # Align only the precomputed source in this disposable SDK checkout.
+    config_path = sdk / 'ci/feature-flags-precomputed-fixtures.json'
+    if platform == 'android' and config_path.is_file():
+        config = json.loads(config_path.read_text())
+        if 'sources' in config:
+            sources = config['sources']
+            if not isinstance(sources, list):
+                raise ValueError('Android fixture sources must be a list')
+            selected = [source for source in sources if isinstance(source, dict) and
+                        source.get('name') == 'precomputed-assignments']
+            if len(selected) != 1 or selected[0].get('format') != 'precomputed-assignments' or \
+                    selected[0].get('path') != 'precomputed-assignments/':
+                raise ValueError('Android preview requires one precomputed assignment source')
+            selected = selected[0]
+        else:
+            selected = config
+        if selected.get('destination') != DESTINATIONS[platform]:
+            raise ValueError('Android fixture pin has an unexpected destination')
+        selected['commit'] = json.loads(content['SOURCE.json'])['commit']
+        config_path.write_text(json.dumps(config, indent=2) + '\n')
     return len(json.loads(content['index.json']))
 
 
