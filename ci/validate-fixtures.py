@@ -21,6 +21,8 @@ CANONICAL_PLATFORMS = frozenset(
 VALID_VARIATION_TYPES = frozenset({"BOOLEAN", "INTEGER", "JSON", "NUMERIC", "STRING"})
 FEATURE_DESTINATIONS = frozenset({"HOOK", "EXPOSURE", "EVALUATION"})
 SUITE_FLAG_TAGS_FILE = "flag-tags.json"
+# A suite may document itself. Consumers read only the configuration and the cases.
+SUITE_GUIDE_FILES = frozenset({"AGENTS.md", "README.md"})
 FLAG_SELECTION_FIELDS = frozenset({"tags", "keyPatterns"})
 CANONICAL_SELECTION_FIELDS = ("selectedFlagTags", "selectedFlagKeyPatterns")
 NO_SELECTION_REQUEST = {"flagSelection": None}
@@ -380,8 +382,13 @@ def _validate_suite(
         suite_directory = config_path.parent
         allowed_entries = {config_path.name, cases_directory.name, SUITE_FLAG_TAGS_FILE}
         for entry in suite_directory.iterdir():
+            if entry.name in SUITE_GUIDE_FILES and entry.is_file() and not entry.is_symlink():
+                continue
             if entry.name not in allowed_entries:
-                _fail(entry, "unexpected suite entry; only ufc-config.json, flag-tags.json, and cases/ are allowed")
+                _fail(
+                    entry,
+                    "unexpected suite entry; only ufc-config.json, flag-tags.json, cases/, AGENTS.md, and README.md are allowed",
+                )
 
     configured_flags = _validate_config(config_path, _load_json(config_path))
     flag_tags_path = config_path.parent / SUITE_FLAG_TAGS_FILE

@@ -163,6 +163,12 @@ class EvaluationSuiteValidationTest(unittest.TestCase):
             (cases / "test-suite.json").write_text(
                 json.dumps([self.case("suite-flag")]), encoding="utf-8",
             )
+            (suite / "AGENTS.md").write_text("# Guide\n", encoding="utf-8")
+            (suite / "README.md").write_text("# Guide\n", encoding="utf-8")
+            self.assertEqual(
+                (1, 1), validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
+            )
+
             (suite / "unexpected.json").write_text("{}", encoding="utf-8")
             with self.assertRaisesRegex(validator.FixtureValidationError, "unexpected suite entry"):
                 validator._validate_suite(config_path, cases, self.platforms, self_contained=True)
