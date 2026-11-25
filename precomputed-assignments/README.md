@@ -157,6 +157,10 @@ Each evaluation calls a typed getter on the SDK and asserts the result:
 `float` accepts any JSON number; `integer` accepts only integral JSON numbers
 (including `1.0`). Arrays and null are not valid for either field.
 
+The response `data.attributes.createdAt` is a string. The browser SDK rejects a
+response whose `createdAt` is missing or invalid. Mobile SDKs may ignore it.
+Every fixture response should set it.
+
 Evaluations may carry `_skip` or `_include` to control per-platform applicability.
 
 An evaluation may also carry `restoredReason`. A runner that evaluates a snapshot
