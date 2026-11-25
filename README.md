@@ -614,6 +614,7 @@ targeting cases use `frank` and `dave`.
 | `test-case-numeric-one-of.json` | Numeric ONE_OF operator matching |
 | `test-case-of-7-empty-targeting-key.json` | Evaluation with empty targeting key |
 | `test-case-numeric-one-of-default.json` | Numeric ONE_OF flag returning the default value when no rule matches |
+| `test-case-reason-shard-shape.json` | Reasons follow the selected split, not how its shards are written: a full-range shard and adjacent covering ranges both give `SPLIT` in a date window; a 0% split beside an unsharded split leaves `STATIC`, or `DEFAULT` in a date window |
 | `test-case-regex-flag.json` | Flag using regex matching operator |
 | `test-case-semver-comparison-flag.json` | Flag using semver comparison operators (SEMVER_EQ, SEMVER_NEQ, SEMVER_LT, SEMVER_LTE, SEMVER_GT, SEMVER_GTE), including prerelease ordering and invalid/missing attribute handling |
 | `test-case-semver-precedence-flag.json` | SemVer precedence edge cases that are easy to get wrong: multi-digit numeric prerelease ordering (beta.2 < beta.11), build-metadata-ignored across every operator (EQ/NEQ/LT/LTE/GT/GTE), and alphanumeric prerelease ordering (alpha < alpha.1 < alpha.beta < beta < release) |
