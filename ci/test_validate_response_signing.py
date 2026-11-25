@@ -133,6 +133,28 @@ class ResponseSigningValidationTest(unittest.TestCase):
         with self.assertRaises(AssertionError):
             self.mutate_corpus(transform)
 
+    def test_accepted_case_requires_response_list(self):
+        def transform(corpus):
+            response = corpus["cases"][0]["response"]
+            response["headers"] = [pair for pair in response["headers"]
+                                   if pair[0] != "x-datadog-feature-flags-signed-response-headers"]
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_accepted_case_requires_sorted_request_list(self):
+        def transform(corpus):
+            for pair in corpus["cases"][0]["request"]["headers"]:
+                if pair[0] == "x-datadog-feature-flags-signed-headers":
+                    pair[1] = ",".join(reversed(pair[1].split(",")))
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
+    def test_verified_response_headers_match_the_response(self):
+        def transform(corpus):
+            corpus["cases"][0]["verified_response_headers"]["content-type"] = "text/plain"
+        with self.assertRaises(AssertionError):
+            self.mutate_corpus(transform)
+
     def test_rehashed_unchanged_copy_is_valid(self):
         self.mutate_corpus(lambda corpus: None)
 

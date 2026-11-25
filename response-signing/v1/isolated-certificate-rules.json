@@ -34,6 +34,10 @@
             "1"
           ],
           [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
+          ],
+          [
             "x-datadog-feature-flags-request-nonce",
             "0d880f7f78978ceddea2fd58cb1f09ec"
           ]
@@ -76,8 +80,12 @@
             "1793333100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQCupJRdQ47PZZPUfmsU7ChMeporIzpwgq1dkLm1uUefJAIgUuPn6ZyuyZ7kfzleAf4LGe0ErO0EX0C7L+sklpXgOBo="
+            "MEUCIQC8cv7F+lkA04dLaZfc5zv9GqhlJkhTiEgnnYbzs8IpCwIgG4Z1JS822VMolkIOpes9jeCF9V7zYpMx5Gp4Ih6WiHY="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -85,7 +93,11 @@
       "now": 1793332800,
       "expected_accept": true,
       "rejection_reason": null,
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEA2ID394l4zt3qL9WMsfCey7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJBJXaS89WyQf6JbM965tTU32QjPmQu0+IQitkuvwHjRsBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74=",
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEA2ID394l4zt3qL9WMsfCey7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJBJXaS89WyQf6JbM965tTU32QjPmQu0+IQitkuvwHjRsBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74CAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
+      "verified_response_headers": {
+        "content-type": "application/json",
+        "dd-flag-selection-ignored": null
+      },
       "credential": {
         "version": 1,
         "generation": "isolated-valid",
@@ -125,6 +137,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -169,8 +185,12 @@
             "1793333100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEQCIBQOW6Gly6oolE0ooDPHJStkAUyQYSKogjRyfus54EYAAiAXeOwwDRAT6BprA1nUTKTtm8iCnAjY5QS5vyeHo18rBQ=="
+            "MEQCIBa2BUg2eBmKGNuPbONj6Ll4MbnEfUFZbowTAk5J+JHIAiAwkzTGLxqTfRYT/R/poso8DTLnTvRmrIrndSrkog9phQ=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -179,7 +199,7 @@
       "expected_accept": false,
       "rejection_reason": "certificate-size",
       "sdk_reason": "invalid-proof",
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEApTsXr1ob7V5Tr+Se48vIq7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ+JkJ0X27qp+V9wejo4BdydFmoGH+00BMINjk5lSX0kYBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74=",
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEApTsXr1ob7V5Tr+Se48vIq7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ+JkJ0X27qp+V9wejo4BdydFmoGH+00BMINjk5lSX0kYBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74CAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
       "credential": {
         "version": 1,
         "generation": "isolated-oversized-certificate",
@@ -219,6 +239,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -263,8 +287,12 @@
             "1793333100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQCElQVtzku7znmbtL8djKl4NSLShKKRB1rM1dTWVdbfcAIgIBisiCb34+CwfqQCleqYOfmFI+OtLM1psAt49Jrxhps="
+            "MEQCIFxWHsQU06F1naX7DE+aRyZGGNRTgwyaCIIokMa9baVZAiB5WgHmOBBhALcLgFWpj8iKZM33/8lzCf+3d7vmsYzvHw=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -273,7 +301,7 @@
       "expected_accept": false,
       "rejection_reason": "leaf-basic-constraints",
       "sdk_reason": "invalid-certificate",
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEHM9OTDfuTqT8CwKCBXFaz+7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ/CMXwiHKnmcOGmW4ms96dw6gag9jA9YVn0Ul/2MiOQEBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74=",
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEHM9OTDfuTqT8CwKCBXFaz+7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ/CMXwiHKnmcOGmW4ms96dw6gag9jA9YVn0Ul/2MiOQEBwf7B721rRO+9KVTCgRD17CDfTiysHoCrnRr/7ekTn74CAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
       "credential": {
         "version": 1,
         "generation": "isolated-leaf-ca-true",
@@ -313,6 +341,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -357,8 +389,12 @@
             "1793333100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQDl4sYflT+qSti99DnHqufdqN0FZyncre/XRUiznVJeVwIgRSaeTYhr+YNop2FBJGOQ8wcXlbgrY/PAu9K8zHnNia4="
+            "MEQCIFDqL/VZvHIwH6kI4JuK20/hIb2tMyQCLnqRjCvEdIHwAiA3mQ3tIR3p+jzC1dQYIeGgSWfvZp57fli9jSDVLjumRw=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -367,7 +403,7 @@
       "expected_accept": false,
       "rejection_reason": "intermediate-basic-constraints",
       "sdk_reason": "invalid-certificate",
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAECEAIxq5Vj1x6ElnwDsFuxG7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ8VwfbfS57Bk0fAJj8gv/sNeVsRr2baND3cAle379pDIBNAYEybH2UT2ku6XWtpcYLgDEWCif+0TBSwWRnEZ/EZg=",
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAECEAIxq5Vj1x6ElnwDsFuxG7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq5BZAAAAAAGrkF2wAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJ8VwfbfS57Bk0fAJj8gv/sNeVsRr2baND3cAle379pDIBNAYEybH2UT2ku6XWtpcYLgDEWCif+0TBSwWRnEZ/EZgCAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
       "credential": {
         "version": 1,
         "generation": "isolated-intermediate-ca-false",
