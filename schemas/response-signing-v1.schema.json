@@ -218,6 +218,16 @@
             "null"
           ]
         },
+        "verified_response_headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": "Accepted cases only. Each name in the signed response list, in list order, with the verified value, or null when the header is absent. An SDK acts only on these values."
+        },
         "credential": {
           "$ref": "#/$defs/credential"
         },

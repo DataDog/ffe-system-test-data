@@ -22,10 +22,37 @@ def reject_duplicate_keys(pairs):
 
 DOMAIN = b"datadog.feature-flags.precomputed-assignments.v1\0"
 MAX_INTERMEDIATES = 3
+MAX_LISTED_NAMES = 32
+MAX_NAME_BYTES = 64
 
 
 def header(message, name):
     return [v for k, v in message["headers"] if k.lower() == "x-datadog-feature-flags-" + name]
+
+
+def plain_header(message, name):
+    return [v for k, v in message["headers"] if k.lower() == name]
+
+
+def check_name_list(value, case_id):
+    """An accepted list: lowercase, sorted, unique names joined by "," with no spaces."""
+    names = value.split(",")
+    assert 1 <= len(names) <= MAX_LISTED_NAMES, case_id
+    assert all(name and name == name.lower() and " " not in name and len(name.encode()) <= MAX_NAME_BYTES
+               for name in names), case_id
+    assert names == sorted(set(names)), case_id
+    return names
+
+
+def name_values(names, message):
+    """u8(count), then lp(name) || u8(presence) || lp(value) for each name."""
+    output = bytes([len(names)])
+    for name in names:
+        found = plain_header(message, name)
+        value = found[0].encode() if found else b""
+        output += len(name).to_bytes(4, "big") + name.encode() + bytes([1 if found else 0])
+        output += len(value).to_bytes(4, "big") + value
+    return output
 
 
 def check_wire_body(response, case_id):
@@ -94,13 +121,30 @@ def validate(root):
                     base64.b64decode(entry, validate=True)
                 transcript = base64.b64decode(case["transcript_base64"], validate=True)
                 assert transcript.startswith(DOMAIN), case["id"]
-                # Tail: u8 intermediate count, then one SHA-256 digest per intermediate.
-                count = len(chain[0].split(","))
-                assert transcript[-32 * count - 1] == count, case["id"]
+                request_list = header(case["request"], "signed-headers")
+                assert len(request_list) == 1, case["id"]
+                request_names = check_name_list(request_list[0], case["id"])
+                assert {"content-type", "x-dd-feature-flags-capabilities"} <= set(request_names), case["id"]
+                assert name_values(request_names, case["request"]) in transcript, case["id"]
+                response_list = header(case["response"], "signed-response-headers")
+                assert len(response_list) == 1, case["id"]
+                response_names = check_name_list(response_list[0], case["id"])
+                assert "content-type" in response_names, case["id"]
+                verified = case["verified_response_headers"]
+                assert list(verified) == response_names, case["id"]
+                for listed in response_names:
+                    assert verified[listed] == (plain_header(case["response"], listed) or [None])[0], case["id"]
+                # Tail: u8 intermediate count, one SHA-256 digest per intermediate,
+                # then the signed response list.
+                entries = chain[0].split(",")
+                tail = bytes([len(entries)]) + b"".join(
+                    hashlib.sha256(base64.b64decode(entry)).digest() for entry in entries)
+                assert transcript.endswith(tail + name_values(response_names, case["response"])), case["id"]
                 if "credential" in case:
                     check_credential(case["credential"], case["id"])
             else:
                 assert case["rejection_reason"] and case.get("sdk_reason"), case["id"]
+                assert "verified_response_headers" not in case, case["id"]
             if case.get("transcript_base64") is not None:
                 base64.b64decode(case["transcript_base64"], validate=True)
         signing_cases = corpus.get("signing_cases", [])

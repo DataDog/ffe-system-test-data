@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 96 response cases: 24 accepted and 72 rejected. 12 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries and `valid-mixed-case-header-names`. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 144 response cases: 35 accepted and 109 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -57,6 +57,11 @@ This arc does not belong to Datadog. Datadog must assign the production OID
 before release. Then change `FFE_EKU` in `generate-v1.py` and
 `ci/verify-response-signing-vectors.py`, and regenerate all fixtures.
 
+v1 changed in place a second time to bind signed lists of request and response
+header names. See [Signed header lists](#signed-header-lists). Only staging used
+the earlier form, and no public client verified it. The proof
+`previous-v1-header-layout` uses the earlier form, and a verifier rejects it.
+
 The corpus keeps rejection cases for the prototype version headers `2` and `3`.
 It also rejects proofs signed with the abandoned draft-v3 domain and the chain
 prototype v2 domain. The [single-intermediate v1 fixtures](https://github.com/DataDog/ffe-system-test-data/tree/efa1612b3a7a2217078b268af499e0dd4e8ab727/response-signing/v1)
@@ -65,8 +70,16 @@ remain available in history. Earlier validation receipts do not validate these b
 ## Transcript bytes
 
 The signature covers these bytes, in this order. `lp(x)` is `u32be(len(x)) || x`.
-All integers are big-endian. Header names match case-insensitively. The
-signature binds header values, not header names.
+All integers are big-endian. Header names match case-insensitively. The two
+signed lists bind the listed names and their values. `list(names)` is:
+
+```text
+u8(count) || for each name, in list order: lp(name) || u8(presence) || lp(value)
+```
+
+`presence` is `1` when the header is present, and `value` is its value. When the
+header is absent, `presence` is `0` and `value` is empty, so the entry is
+`lp(name) || u8(0) || lp("")`.
 
 | Field | Bytes |
 | --- | --- |
@@ -79,13 +92,101 @@ signature binds header values, not header names.
 | Nonce | `lp(nonce)`, the 16 bytes that `x-datadog-feature-flags-request-nonce` encodes as 32 lowercase hex digits |
 | Request body | `SHA256(request body)` |
 | Client token | `SHA256(dd-client-token value)` |
-| `content-type`, `dd-application-id`, `x-rkyv`, `x-use-cache`, `x-dd-feature-flags-capabilities` | For each header in this order: `u8(0)` when absent, or `u8(1) || lp(value)` |
+| Signed request headers | `list(names)` for the names in `x-datadog-feature-flags-signed-headers` |
 | `authorization` | `u8(0)` when absent, or `u8(1) || SHA256(value)` |
 | Status | `u16(200)` |
 | Times | `u64(issued_at) || u64(expires_at)` |
 | Response body | `u64(len(body)) || SHA256(body)`, over the application bytes after content decoding |
 | Leaf | `SHA256(leaf DER)` |
 | Chain | `u8(n) || SHA256(int[0]) || ... || SHA256(int[n-1])` |
+| Signed response headers | `list(names)` for the names in `x-datadog-feature-flags-signed-response-headers` |
+
+These fixtures do not contain the draft revocation floor tail. That draft is on
+hold, and its code does not change. While an SDK keeps the draft tail, the tail
+stays the last field, after the signed response headers.
+
+## Signed header lists
+
+Each signed list is one header value: lowercase names, sorted in ascending byte
+order, unique, and joined by `,` with no spaces. A name is an HTTP token of
+lowercase characters. A list has 1 to 32 names. Each name has at most 64 bytes.
+An empty entry, a space, an uppercase name, an unsorted list or a duplicate name
+is malformed.
+
+### Request list
+
+The request header `x-datadog-feature-flags-signed-headers` names the request
+headers that the SDK bound. The verifier of these fixtures applies these rules
+to the request that the SDK sends:
+
+- The list header is present on exactly one line.
+- The list names `content-type` and `x-dd-feature-flags-capabilities`.
+- The list does not name `dd-client-token`, `authorization` or a
+  `x-datadog-feature-flags-` header. The token and `authorization` keep their
+  hashed slots.
+- Each listed header and each bound header has at most one line.
+- A bound header that is present is in the list. The bound headers are
+  `content-type`, `dd-application-id`, `x-dd-feature-flags-capabilities` and
+  `x-rkyv`. These are the headers of the edge `bound` class.
+- `x-use-cache` is a staging header, not a bound header. When the SDK lists it,
+  the transcript binds it like any listed name. When it is not listed, it is not
+  signed (`valid-unlisted-staging-header`).
+- Each listed header is present. The SDK lists only the headers that it set.
+- Only the `x-dd-feature-flags-capabilities` value can contain a comma.
+- The list can name other headers. The transcript binds them with no format change.
+- Headers that are not listed and not bound are not signed, for example
+  `dd-assignment-token`, `dd-service` and `traceparent`.
+
+The edge writes the values that it received. When a listed header did not arrive,
+the edge signs presence `0`, and the SDK verification fails. The edge does not
+sign a request that has an unlisted bound header or a malformed list.
+
+### Response list
+
+The response header `x-datadog-feature-flags-signed-response-headers` is a proof
+header. It is required, and it has exactly one line. It names the response
+headers that the edge bound. A verifier applies these rules:
+
+- The list names `content-type`.
+- When the request has a flag selection, the list names
+  `dd-flag-selection-ignored`. Presence `0` is valid. A request has a flag
+  selection when its JSON:API body has a `data.attributes.flag_selection`
+  object that is not null. A top-level `flag_selection` and the URL query are
+  not a selection.
+- The edge names `dd-flag-selection-ignored` in every signed response list.
+- The list does not name one of the 8 proof headers.
+- Each listed header has at most one line. A listed header can be absent.
+
+An SDK acts on a listed response header only after verification passes. It uses
+the verified value. Each accepted case gives these values in
+`verified_response_headers`, with `null` for an absent header. A response header
+that is not listed is not verified, also when it is present
+(`valid-unlisted-response-header-not-verified`).
+
+### Rule codes
+
+| `rejection_reason` | `sdk_reason` | Rule |
+| --- | --- | --- |
+| `signed-headers-missing` | `unsupported-request` | The request list header is absent. |
+| `signed-headers-syntax` | `unsupported-request` | The request list has an empty entry, a space or a character that is not a lowercase token character. |
+| `signed-headers-limit` | `unsupported-request` | More than 32 names, or a name longer than 64 bytes. |
+| `signed-headers-duplicate` | `unsupported-request` | A name occurs twice. |
+| `signed-headers-order` | `unsupported-request` | The names are not sorted. |
+| `signed-headers-forbidden` | `unsupported-request` | The list names a credential or a proof header. |
+| `signed-headers-required` | `unsupported-request` | `content-type` or `x-dd-feature-flags-capabilities` is not listed. |
+| `signed-header-absent` | `unsupported-request` | A listed header is absent from the request. |
+| `unlisted-bound-header` | `unsupported-request` | A bound header is present and not listed. |
+| `combined-semantic-header` | `unsupported-request` | A listed value other than the capabilities contains a comma. |
+| `duplicate-semantic-header` | `unsupported-request` | A listed or bound header, or the list header, has more than one line. |
+| `response-headers-syntax`, `-limit`, `-duplicate`, `-order` | `invalid-proof` | The response list is malformed. The rules are the same as for the request list. |
+| `response-headers-forbidden` | `invalid-proof` | The response list names a proof header. |
+| `response-headers-required` | `invalid-proof` | A required response name is not listed. |
+| `duplicate-response-header` | `invalid-proof` | A listed response header has more than one line. |
+| `transcript-layout` | `invalid-signature` | The proof signs the earlier v1 layout with fixed header slots. |
+
+An absent response list is `missing-proof`, and a second list line is
+`duplicate-proof`. A listed header that changes after signing is
+`transcript-signature`.
 
 ## Time rules
 
@@ -100,6 +201,10 @@ when all of these are true:
 - For the leaf, each intermediate and the pinned root:
   `not_before <= now < not_after`, `not_before <= issued_at` and
   `expires_at <= not_after`.
+- For the leaf: `not_after - not_before <= 432300` (120 hours and 5 minutes,
+  rule F16). A longer leaf has `rejection_reason` `leaf-lifetime` and
+  `sdk_reason` `invalid-certificate`. `valid-leaf-lifetime-at-limit` spans
+  exactly 432300 seconds. `leaf-lifetime-over-limit` spans 432301 seconds.
 
 There is no other limit on the age of a proof. A proof issued 299 seconds before
 `now` is valid until `expires_at`. These cases test the boundaries:
@@ -125,10 +230,13 @@ There is no other limit on the age of a proof. A proof issued 299 seconds before
    error string. Each rejected case also has `sdk_reason`: the reason code that
    every SDK reports for that case. Assert it in each SDK. The codes come from the
    browser verifier, which is the reference for all SDKs. `missing-proof` means
-   that one or more proof headers are absent, including the chain header.
+   that one or more proof headers are absent, including the chain header and the
+   signed response list. For accepted cases, also compare the verified response
+   values with `verified_response_headers`. A rejected case that has
+   `transcript_base64` gives the bytes that the signer signs for that case.
 4. Signers also load each `signing_cases` credential and the referenced response
-   case. They sign that case's request and body at its `now`, with its trust
-   anchor, and assert `expected_signing`. Clients do not run these cases, because
+   case. They sign that case's request, body and listed response headers at its
+   `now`, with its trust anchor, and assert `expected_signing`. Clients do not run these cases, because
    they do not hold signing keys.
 
 Each response carries its leaf and its chain. Verification fetches no certificate.
@@ -182,21 +290,52 @@ Rejected chain cases:
 Rejected binding and time cases:
 
 - One changed request field after signing: the path, `content-type`,
-  `dd-application-id`, an added `x-rkyv`, a changed `x-rkyv`, the capabilities value (it still
-  contains `response-signing-v1`) and `authorization`.
+  `dd-application-id`, a changed `x-rkyv`, the capabilities value (it still
+  contains `response-signing-v1`) and `authorization`. An added `x-rkyv` that is
+  not listed is `unlisted-bound-header`.
 - A `certificate-id` for a different leaf, and an uppercase `certificate-id`.
 - `issued_at` equal to `expires_at`, a leaf whose `not_before` is after
   `issued_at`, and a leaf that starts before its intermediate.
+
+Signed request list cases:
+
+- Accepted: an unknown listed header (`valid-listed-unknown-request-header`),
+  unlisted gate and telemetry headers, an unlisted `x-use-cache`, and 32 names
+  with one name of 64 bytes (`valid-signed-headers-at-limits`).
+- Rejected: no list, two list lines, `content-type` or the capabilities not
+  listed, unsorted, a duplicate name, uppercase, a space after a comma, an empty
+  entry, a trailing comma, a listed `dd-client-token`, a listed proof header,
+  33 names, a name of 65 bytes, a listed header that is absent
+  (`signed-header-absent`), an unlisted bound header, and a comma in
+  `content-type`.
+- `listed-request-header-removed-in-transit`: the edge did not receive a listed
+  header and signed presence `0`. The SDK binds the value that it sent.
+
+Signed response list cases:
+
+- Accepted: `dd-flag-selection-ignored` present and absent for a request with a
+  selection, a list with only `content-type`, a list with only `content-type`
+  for a body with a top-level `flag_selection`, an unlisted response header,
+  and extra listed names with one absent name.
+- Rejected: no list, two list lines, `content-type` not listed,
+  `dd-flag-selection-ignored` not listed for a selection, unsorted, a duplicate
+  name, uppercase, an empty entry, a space after a comma, a listed proof header,
+  33 names, a name of 65 bytes, and two `content-type` lines.
+- A listed header that changes after signing: `content-type`, and
+  `dd-flag-selection-ignored` added, removed or changed.
+- `previous-v1-header-layout`: the proof signs the earlier v1 layout.
 
 The other rejections cover unrelated roots, the leaf profile, expiry, changed
 request or response bytes, malformed proof headers, signature tampering,
 prototype versions and earlier domains. Each rejection changes one rule. The
 certificate and proof signatures stay valid unless the case tests a signature.
 
-Signer cases sign one, two and three intermediates, and a root with an FFE EKU.
+Signer cases sign one, two and three intermediates, a root with an FFE EKU, a
+listed `dd-flag-selection-ignored`, and a listed request header that is absent.
 Signing must fail for a mismatched private key, the legacy credential field, an
 empty chain, four intermediates, a reversed chain, a missing middle intermediate,
-a leaf without the FFE EKU, and a root pathLen below the chain length.
+a leaf without the FFE EKU, a root pathLen below the chain length, an unlisted
+bound header and an unsorted request list.
 
 ## Synthetic credentials
 
@@ -259,14 +398,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-116 response cases and 58 signer checks. A signer check is a signer case, or a
+164 response cases and 73 signer checks. A signer check is a signer case, or a
 check that the credential of an accepted case can sign a new proof. It also
 prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 96 | 12 signer cases |
-| All six v1 files | 116 | 58 signer checks |
+| `v1/corpus.json` | 144 | 16 signer cases |
+| All six v1 files | 164 | 73 signer checks |
 
 ## Validation and regeneration
 
@@ -289,13 +428,17 @@ python3 -m unittest discover -s ci -p 'test_validate_response_signing.py'
 the generator. It has its own strict DER parser, certificate profile, chain rules,
 time rules and transcript builder. It uses the `openssl` command to verify each
 ECDSA signature. For each response case, it checks `expected_accept`, the
-`rejection_reason` code and the transcript of accepted cases. For each signer
+`rejection_reason` code, and the transcript and `verified_response_headers` of
+accepted cases. It also checks the signer transcript of a rejected case that
+has one. For each signer
 case, it checks `expected_signing`. It also runs each `chain/` expectation at the
 `now` in `chain/manifest.json`, and checks the rule code of each rejection.
 
 `ci/validate-response-signing.py` checks the schema, the exact file hashes, case
 identities, references and counts. It checks that each rejected case has an
-`sdk_reason`, and that each `wire_body_base64` decodes to the signed body. It allows malformed proof and certificate
+`sdk_reason`, and that each `wire_body_base64` decodes to the signed body. For
+accepted cases, it checks the syntax of both signed lists, and that the
+transcript contains the list bytes. It allows malformed proof and certificate
 fields, because negative cases use them. Structural validation does not prove
 cryptographic correctness. Run native signer and verifier tests when you change
 this contract.

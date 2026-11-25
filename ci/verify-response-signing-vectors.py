@@ -34,10 +34,25 @@ ANY_EKU = "2.5.29.37.0"
 MAX_CERTIFICATE = 4096
 MAX_BASE64 = 4 * -(-MAX_CERTIFICATE // 3)
 MAX_SAFE_INTEGER = 2 ** 53 - 1
+# F16: the leaf validity span is at most 120 hours and 5 minutes.
+MAX_LEAF_LIFETIME = 432300
 FORBIDDEN_EXTENSIONS = {"2.5.29.30", "2.5.29.33", "2.5.29.36", "2.5.29.54"}
 KNOWN_EXTENSIONS = {"2.5.29.19", "2.5.29.15", "2.5.29.37", "2.5.29.14", "2.5.29.35"}
-SEMANTIC_HEADERS = ["content-type", "dd-application-id", "x-rkyv", "x-use-cache",
-                    "x-dd-feature-flags-capabilities"]
+# The previous fixed request slots. Only the transcript-layout diagnosis uses them.
+FIXED_HEADERS = ["content-type", "dd-application-id", "x-rkyv", "x-use-cache",
+                 "x-dd-feature-flags-capabilities"]
+# Request headers of the edge `bound` class. Each must be listed when present.
+# Staging headers such as x-use-cache are bound only when they are listed.
+BOUND_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities", "x-rkyv"]
+CAPABILITIES = "x-dd-feature-flags-capabilities"
+SIGNED_HEADERS = PROOF + "signed-headers"
+SIGNED_RESPONSE_HEADERS = PROOF + "signed-response-headers"
+PROOF_NAMES = ["signature-version", "signing-certificate", "signing-chain", "certificate-id",
+               "issued-at", "expires-at", "signed-response-headers", "signature"]
+# Lowercase HTTP token characters (RFC 9110 tchar without uppercase letters).
+LIST_NAME = re.compile(r"[0-9a-z!#$%&'*+.^_`|~-]+")
+MAX_NAMES = 32
+MAX_NAME_BYTES = 64
 
 
 class Reject(Exception):
@@ -323,6 +338,7 @@ def validate_chain(anchor_der, intermediate_ders, leaf_der, now, issued_at, expi
         require(not (child.get("aki") and parent.get("ski")) or child["aki"] == parent["ski"], "key-identifier")
         require(parent["not_before"] <= child["not_before"] and child["not_after"] <= parent["not_after"],
                 "validity-containment")
+    require(leaf["not_after"] - leaf["not_before"] <= MAX_LEAF_LIFETIME, "leaf-lifetime")
     for item in path:
         require(item["not_before"] <= now < item["not_after"], "certificate-time")
         require(item["not_before"] <= issued_at and expires_at <= item["not_after"], "certificate-time")
@@ -339,7 +355,43 @@ def lp(data):
     return struct.pack(">I", len(data)) + data
 
 
-def binding(request, domain):
+def name_list(value, code):
+    """Parse one signed list value. `code` is the rule-code prefix."""
+    entries = value.split(",")
+    require(len(entries) <= MAX_NAMES, code + "-limit")
+    for entry in entries:
+        require(LIST_NAME.fullmatch(entry), code + "-syntax")
+        require(len(entry.encode()) <= MAX_NAME_BYTES, code + "-limit")
+    require(len(set(entries)) == len(entries), code + "-duplicate")
+    require(entries == sorted(entries), code + "-order")
+    return entries
+
+
+def listed(headers, list_header):
+    found = values(headers, list_header)
+    return found[0].split(",") if found else []
+
+
+def name_values(names, headers):
+    parts = [bytes([len(names)])]
+    for name in names:
+        found = values(headers, name)
+        parts.append(lp(name.encode()) + (b"\x01" + lp(found[0].encode()) if found else b"\x00" + lp(b"")))
+    return b"".join(parts)
+
+
+def has_selection(request):
+    # The edge reads only the JSON:API path data.attributes.flag_selection.
+    try:
+        body = json.loads(base64.b64decode(request["body_base64"]))
+    except ValueError:
+        return False
+    for key in ("data", "attributes"):
+        body = body.get(key) if isinstance(body, dict) else None
+    return isinstance(body, dict) and body.get("flag_selection") is not None
+
+
+def binding(request, domain, fixed=False):
     url = urlsplit(request["url"])
     host = url.hostname.lower()
     authority = "[" + host + "]" if ":" in host else host
@@ -351,25 +403,34 @@ def binding(request, domain):
              lp(bytes.fromhex(values(headers, PROOF + "request-nonce")[0])),
              hashlib.sha256(base64.b64decode(request["body_base64"])).digest(),
              hashlib.sha256(values(headers, "dd-client-token")[0].encode()).digest()]
-    for name in SEMANTIC_HEADERS:
-        found = values(headers, name)
-        parts.append(b"\x01" + lp(found[0].encode()) if found else b"\x00")
+    if fixed:
+        for name in FIXED_HEADERS:
+            found = values(headers, name)
+            parts.append(b"\x01" + lp(found[0].encode()) if found else b"\x00")
+    else:
+        parts.append(name_values(listed(headers, SIGNED_HEADERS), headers))
     found = values(headers, "authorization")
     parts.append(b"\x01" + hashlib.sha256(found[0].encode()).digest() if found else b"\x00")
     return b"".join(parts)
 
 
-def response_tail(body, issued_at, expires_at, leaf, intermediates, legacy=False):
+def response_tail(body, issued_at, expires_at, leaf, intermediates, response_headers=None, legacy=False):
+    """Response fields. Without `response_headers` the tail ends at the chain (previous layouts)."""
     tail = struct.pack(">H", 200) + struct.pack(">Q", issued_at) + struct.pack(">Q", expires_at)
     tail += struct.pack(">Q", len(body)) + hashlib.sha256(body).digest() + hashlib.sha256(leaf).digest()
     if legacy:
         return tail + hashlib.sha256(intermediates[0]).digest()
-    return tail + bytes([len(intermediates)]) + b"".join(hashlib.sha256(item).digest() for item in intermediates)
+    tail += bytes([len(intermediates)]) + b"".join(hashlib.sha256(item).digest() for item in intermediates)
+    if response_headers is None:
+        return tail
+    return tail + name_values(listed(response_headers, SIGNED_RESPONSE_HEADERS), response_headers)
 
 
 # ---------------------------------------------------------------- verifier
 
-def check_request(request):
+def check_request(request, signer=False):
+    """The SDK checks its own request. With `signer`, apply only the edge rules:
+    the edge signs presence 0 for a listed header that it did not receive."""
     url = urlsplit(request["url"])
     headers = request["headers"]
     require(request["method"] == "POST" and url.scheme == "https" and url.hostname, "request")
@@ -379,10 +440,35 @@ def check_request(request):
     require(len(nonce) == 1 and re.fullmatch(r"[0-9a-f]{32}", nonce[0]), "request")
     token = values(headers, "dd-client-token")
     require(len(token) == 1 and "," not in token[0], "request")
-    for name in SEMANTIC_HEADERS + ["authorization"]:
-        require(len(values(headers, name)) <= 1, "duplicate-semantic-header")
-    capabilities = [item.strip() for item in (values(headers, "x-dd-feature-flags-capabilities") or [""])[0].split(",")]
+    capabilities = [item.strip() for item in (values(headers, CAPABILITIES) or [""])[0].split(",")]
     require("response-signing-v1" in capabilities, "request")
+    lists = values(headers, SIGNED_HEADERS)
+    require(lists, "signed-headers-missing")
+    require(len(lists) == 1, "duplicate-semantic-header")
+    names = name_list(lists[0], "signed-headers")
+    require(not any(name in ("dd-client-token", "authorization") or name.startswith(PROOF) for name in names),
+            "signed-headers-forbidden")
+    require("content-type" in names and CAPABILITIES in names, "signed-headers-required")
+    for name in names + BOUND_HEADERS + ["authorization"]:
+        require(len(values(headers, name)) <= 1, "duplicate-semantic-header")
+    for name in BOUND_HEADERS:
+        require(name in names or not values(headers, name), "unlisted-bound-header")
+    for name in names:
+        found = values(headers, name)
+        require(found or signer, "signed-header-absent")
+        # Only the capability list can hold a comma.
+        require(name == CAPABILITIES or not found or "," not in found[0], "combined-semantic-header")
+
+
+def check_response_list(request, response, value):
+    names = name_list(value, "response-headers")
+    require(not any(name.startswith(PROOF) and name[len(PROOF):] in PROOF_NAMES for name in names),
+            "response-headers-forbidden")
+    required = {"content-type"} | ({"dd-flag-selection-ignored"} if has_selection(request) else set())
+    require(required <= set(names), "response-headers-required")
+    for name in names:
+        require(len(values(response["headers"], name)) <= 1, "duplicate-response-header")
+    return {name: (values(response["headers"], name) or [None])[0] for name in names}
 
 
 def verify(case, anchor_der):
@@ -390,14 +476,14 @@ def verify(case, anchor_der):
     check_request(request)
     require(response["status"] == 200, "response-status")
     proof = {}
-    for name in ["signature-version", "signing-certificate", "signing-chain", "certificate-id",
-                 "issued-at", "expires-at", "signature"]:
+    for name in PROOF_NAMES:
         found = values(response["headers"], PROOF + name)
         require(found, "missing-proof")
         require(len(found) == 1, "duplicate-proof")
-        require(name == "signing-chain" or "," not in found[0], "combined-proof")
+        require(name in ("signing-chain", "signed-response-headers") or "," not in found[0], "combined-proof")
         proof[name] = found[0]
     require(proof["signature-version"] == "1", "protocol-version")
+    verified = check_response_list(request, response, proof["signed-response-headers"])
     leaf_der = canonical_base64(proof["signing-certificate"], "certificate-encoding")
     entries = proof["signing-chain"].split(",")
     require(1 <= len(entries) <= 3, "chain-count")
@@ -416,22 +502,36 @@ def verify(case, anchor_der):
     require(len(signature) <= 72, "signature-encoding")
     ecdsa_der(signature)
     body = base64.b64decode(response["body_base64"])
-    tail = response_tail(body, issued_at, expires_at, leaf_der, chain)
+    tail = response_tail(body, issued_at, expires_at, leaf_der, chain, response["headers"])
     message = binding(request, DOMAIN) + tail
     if verify_signature(leaf["spki"], message, signature):
-        return message
+        return message, verified
     # Diagnose the rejection; any path below still rejects.
     for domain in OTHER_DOMAINS:
         require(not verify_signature(leaf["spki"], binding(request, domain) + tail, signature), "transcript-domain")
     if len(chain) == 1:
-        legacy = binding(request, DOMAIN) + response_tail(body, issued_at, expires_at, leaf_der, chain, True)
+        legacy = binding(request, DOMAIN) + response_tail(body, issued_at, expires_at, leaf_der, chain, legacy=True)
         require(not verify_signature(leaf["spki"], legacy, signature), "transcript-tail")
+    previous = binding(request, DOMAIN, fixed=True) + response_tail(body, issued_at, expires_at, leaf_der, chain)
+    require(not verify_signature(leaf["spki"], previous, signature), "transcript-layout")
     raise Reject("transcript-signature")
+
+
+def signer_transcript(case):
+    """The bytes that the edge signs for this case, without any verifier rule."""
+    request, headers = case["request"], case["response"]["headers"]
+    proof = {name: values(headers, PROOF + name)[0] for name in ["signing-certificate", "signing-chain",
+                                                                  "issued-at", "expires-at"]}
+    chain = [base64.b64decode(entry) for entry in proof["signing-chain"].split(",")]
+    return binding(request, DOMAIN) + response_tail(
+        base64.b64decode(case["response"]["body_base64"]), int(proof["issued-at"]), int(proof["expires-at"]),
+        base64.b64decode(proof["signing-certificate"]), chain, headers)
 
 
 def can_sign(credential, case, anchor_der):
     """A signer accepts the credential only if it could emit a valid proof at `now`."""
     try:
+        check_request(case["request"], signer=True)
         require(set(credential) == {"version", "generation", "private_key_pkcs8_der_base64",
                                     "certificate_der_base64", "intermediates_der_base64"}, "credential")
         require(credential["version"] == 1, "credential")
@@ -498,15 +598,20 @@ def main():
             anchor = base64.b64decode(case.get("anchor_der_base64", corpus["anchor_der_base64"]))
             by_id[case["id"]] = (case, anchor)
             try:
-                message, reason = verify(case, anchor), None
+                (message, verified), reason = verify(case, anchor), None
             except Reject as rejection:
-                message, reason = None, rejection.reason
+                message, verified, reason = None, None, rejection.reason
             response_count += 1
             label = f"{path.name}:{case['id']}"
             if (message is not None) != case["expected_accept"]:
                 failures.append(f"{label}: expected accept={case['expected_accept']}, got reason {reason}")
             elif message is not None and base64.b64decode(case["transcript_base64"]) != message:
                 failures.append(f"{label}: transcript differs")
+            elif message is not None and case.get("verified_response_headers") != verified:
+                failures.append(f"{label}: verified response headers differ")
+            elif message is None and case.get("transcript_base64") and \
+                    base64.b64decode(case["transcript_base64"]) != signer_transcript(case):
+                failures.append(f"{label}: signer transcript differs")
             elif message is None and reason != case["rejection_reason"]:
                 failures.append(f"{label}: expected reason {case['rejection_reason']}, got {reason}")
             if case["expected_accept"] and "credential" in case:

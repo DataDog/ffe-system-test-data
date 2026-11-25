@@ -38,6 +38,18 @@ FFE_EKU = "1.3.6.1.4.1.99999.1.1"
 OTHER_PRODUCT_EKU = "1.3.6.1.4.1.99999.1.2"
 ANY_EKU = "2.5.29.37.0"
 CODE_SIGNING_EKU = "1.3.6.1.5.5.7.3.3"
+# The request and response headers that carry the signed header name lists.
+SIGNED_HEADERS = PREFIX + "signed-headers"
+SIGNED_RESPONSE_HEADERS = PREFIX + "signed-response-headers"
+# Request headers of the edge `bound` class. Each one must be in the signed
+# request list when it is present. A list can also name other headers.
+BOUND_REQUEST_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities", "x-rkyv"]
+# The synthetic SDK also lists the staging header x-use-cache when it sets it.
+# A listed staging header is bound like any listed name. An unlisted one is not.
+SDK_LISTED_HEADERS = BOUND_REQUEST_HEADERS + ["x-use-cache"]
+DEFAULT_RESPONSE_LIST = "content-type,dd-flag-selection-ignored"
+MAX_LISTED_NAMES = 32
+MAX_NAME_LENGTH = 64
 
 # ---------------------------------------------------------------------------
 # P-256 ECDSA (FIPS 186-4) with RFC 6979 nonces.
@@ -327,8 +339,29 @@ def header_values(headers, name):
     return [value for key, value in headers if key.lower() == name]
 
 
-def request_prefix(request, domain=DOMAIN):
-    """Bytes before the response fields: the v1 request binding."""
+def listed_names(headers, list_header):
+    """The names in one signed list header, as sent. Empty when the header is absent."""
+    values = header_values(headers, list_header)
+    return values[0].split(",") if values else []
+
+
+def name_values(names, headers):
+    """u8(count), then lp(name) || u8(presence) || lp(value) for each listed name."""
+    output = bytes([len(names)])
+    for name in names:
+        values = header_values(headers, name)
+        output += length_prefixed(name.encode())
+        # An absent header binds presence 0 and an empty value.
+        output += b"\x01" + length_prefixed(values[0].encode()) if values else b"\x00" + length_prefixed(b"")
+    return output
+
+
+def request_prefix(request, domain=DOMAIN, layout="lists"):
+    """Bytes before the response fields: the v1 request binding.
+
+    `layout="fixed"` writes the previous v1 layout: five fixed header slots and
+    no name list. Only the `previous-v1-header-layout` rejection uses it.
+    """
     url = urlsplit(request["url"])
     headers = request["headers"]
     host = url.hostname
@@ -344,17 +377,21 @@ def request_prefix(request, domain=DOMAIN):
         output += length_prefixed(value.encode())
     output += length_prefixed(nonce) + digest(body)
     output += digest(header_values(headers, "dd-client-token")[0].encode())
-    for name in ["content-type", "dd-application-id", "x-rkyv", "x-use-cache",
-                 "x-dd-feature-flags-capabilities"]:
-        values = header_values(headers, name)
-        output += b"\x00" if not values else b"\x01" + length_prefixed(values[0].encode())
+    if layout == "fixed":
+        for name in ["content-type", "dd-application-id", "x-rkyv", "x-use-cache",
+                     "x-dd-feature-flags-capabilities"]:
+            values = header_values(headers, name)
+            output += b"\x00" if not values else b"\x01" + length_prefixed(values[0].encode())
+    else:
+        output += name_values(listed_names(headers, SIGNED_HEADERS), headers)
     values = header_values(headers, "authorization")
     output += b"\x00" if not values else b"\x01" + digest(values[0].encode())
     return output
 
 
-def transcript(request, body, issued_at, expires_at, leaf, intermediates, domain=DOMAIN, legacy_tail=False):
-    output = request_prefix(request, domain)
+def transcript(request, response_headers, body, issued_at, expires_at, leaf, intermediates, domain=DOMAIN,
+               legacy_tail=False, layout="lists"):
+    output = request_prefix(request, domain, layout)
     output += struct.pack(">HQQQ", 200, issued_at, expires_at, len(body)) + digest(body) + digest(leaf)
     if legacy_tail:
         # The removed single-intermediate tail: one digest and no count byte.
@@ -363,10 +400,21 @@ def transcript(request, body, issued_at, expires_at, leaf, intermediates, domain
     output += bytes([len(intermediates)])
     for intermediate in intermediates:
         output += digest(intermediate)
-    return output
+    if layout == "fixed":
+        return output
+    return output + name_values(listed_names(response_headers, SIGNED_RESPONSE_HEADERS), response_headers)
 
 
 REQUEST_BODY = b'{"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production"}'
+# A request with a flag selection in data.attributes.flag_selection, as the
+# SDKs send it. The response list must then name dd-flag-selection-ignored.
+SELECTION_REQUEST_BODY = (b'{"data":{"type":"precompute-assignments-request","attributes":{'
+                          b'"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production",'
+                          b'"flag_selection":{"tags":["team:payments"],"key_patterns":null}}}}')
+# A top-level flag_selection is not a selection. The edge reads only
+# data.attributes.flag_selection.
+TOP_LEVEL_SELECTION_REQUEST_BODY = (b'{"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production",'
+                                    b'"flag_selection":{"tags":["team:payments"],"key_patterns":null}}')
 RESPONSE_BODY = (b'{"flags":{"critical-demo":{"variation":"off","value":false}},'
                  b'"rulesRevision":"synthetic-r1","label":"caf\xc3\xa9"}')
 # Fixed gzip bytes of RESPONSE_BODY; zlib output can differ between builds.
@@ -380,14 +428,22 @@ def nonce_for(case_id):
     return hashlib.sha256(b"nonce/" + case_id.encode()).hexdigest()[:32]
 
 
-def make_request(case_id, url=BASE_URL, headers=None):
-    if headers is None:
-        headers = [["content-type", "application/json"], ["dd-client-token", "synthetic-client-token"],
+def default_list(headers):
+    """The signed request list that the synthetic SDK sends for these headers."""
+    return ",".join(sorted({key.lower() for key, _ in headers if key.lower() in SDK_LISTED_HEADERS}))
+
+
+DEFAULT_HEADERS = [["content-type", "application/json"], ["dd-client-token", "synthetic-client-token"],
                    ["dd-application-id", "synthetic-app"], ["x-use-cache", "true"],
                    ["x-dd-feature-flags-capabilities", "response-signing-v1"],
                    [PREFIX + "signature-version", "1"]]
-    headers = headers + [[PREFIX + "request-nonce", nonce_for(case_id)]]
-    return {"url": url, "method": "POST", "headers": headers, "body_base64": encode(REQUEST_BODY)}
+
+
+def make_request(case_id, url=BASE_URL, headers=None, body=REQUEST_BODY, signed_headers=None):
+    headers = copy.deepcopy(DEFAULT_HEADERS if headers is None else headers)
+    signed_headers = default_list(headers) if signed_headers is None else signed_headers
+    headers = headers + [[SIGNED_HEADERS, signed_headers], [PREFIX + "request-nonce", nonce_for(case_id)]]
+    return {"url": url, "method": "POST", "headers": headers, "body_base64": encode(body)}
 
 
 def credential(generation, leaf, intermediates, key=None):
@@ -400,8 +456,12 @@ def credential(generation, leaf, intermediates, key=None):
 def signed_case(case_id, leaf, intermediates, accept, reason, now=NOW, issued_at=None, expires_at=None,
                 request=None, anchor=None, domain=DOMAIN, legacy_tail=False, signed_intermediates=None,
                 leaf_der=None, include_credential=None, include_transcript=False, wire=False,
-                high_s=False):
-    """Build one response signed by `leaf.key` over the chain transcript."""
+                high_s=False, response_list=DEFAULT_RESPONSE_LIST, response_extra=(), layout="lists"):
+    """Build one response signed by `leaf.key` over the chain transcript.
+
+    `response_extra` adds response headers before signing. `response_list` is the
+    signed response list value, or None to omit the list header.
+    """
     request = request or make_request(case_id)
     issued_at = now if issued_at is None else issued_at
     expires_at = min(issued_at + 300, leaf.not_after) if expires_at is None else expires_at
@@ -409,16 +469,20 @@ def signed_case(case_id, leaf, intermediates, accept, reason, now=NOW, issued_at
     chain = [node.der for node in intermediates]
     signed_chain = chain if signed_intermediates is None else [node.der for node in signed_intermediates]
     body = RESPONSE_BODY
-    signed = transcript(request, body, issued_at, expires_at, leaf_der, signed_chain, domain, legacy_tail)
-    signature = leaf.key.sign(signed, high_s)
-    assert ecdsa_verify(leaf.key.public, signed, signature)
     headers = [["content-type", "application/json"], ["cache-control", "no-store, no-transform"],
+               *[list(pair) for pair in response_extra],
                [PREFIX + "signature-version", "1"],
                [PREFIX + "signing-certificate", encode(leaf_der)],
                [PREFIX + "signing-chain", ",".join(encode(der) for der in chain)],
                [PREFIX + "certificate-id", digest(leaf_der).hex()],
-               [PREFIX + "issued-at", str(issued_at)], [PREFIX + "expires-at", str(expires_at)],
-               [PREFIX + "signature", encode(signature)]]
+               [PREFIX + "issued-at", str(issued_at)], [PREFIX + "expires-at", str(expires_at)]]
+    if response_list is not None:
+        headers.append([SIGNED_RESPONSE_HEADERS, response_list])
+    signed = transcript(request, headers, body, issued_at, expires_at, leaf_der, signed_chain, domain,
+                        legacy_tail, layout)
+    signature = leaf.key.sign(signed, high_s)
+    assert ecdsa_verify(leaf.key.public, signed, signature)
+    headers.append([PREFIX + "signature", encode(signature)])
     response = {"status": 200, "headers": headers, "body_base64": encode(body)}
     if wire:
         response["headers"].append(["content-encoding", "gzip"])
@@ -426,6 +490,10 @@ def signed_case(case_id, leaf, intermediates, accept, reason, now=NOW, issued_at
     case = {"id": case_id, "request": request, "response": response, "now": now,
             "expected_accept": accept, "rejection_reason": reason,
             "transcript_base64": encode(signed) if accept or include_transcript else None}
+    if accept:
+        # The values that verification returns. An SDK acts on these, not on a second read.
+        case["verified_response_headers"] = {
+            name: (header_values(headers, name) or [None])[0] for name in listed_names(headers, SIGNED_RESPONSE_HEADERS)}
     if anchor is not None:
         case["anchor_der_base64"] = encode(anchor.der)
     if include_credential if include_credential is not None else accept:
@@ -448,6 +516,7 @@ def mutated(base, case_id, reason, transform):
     case = copy.deepcopy(base)
     case.update(id=case_id, expected_accept=False, rejection_reason=reason, transcript_base64=None)
     case.pop("credential", None)
+    case.pop("verified_response_headers", None)
     transform(case)
     return case
 
@@ -477,6 +546,18 @@ SDK_REASONS = {
     "signature-encoding": "invalid-proof", "transcript-domain": "invalid-signature",
     "transcript-signature": "invalid-signature", "transcript-tail": "invalid-signature",
     "unsupported-constraint": "invalid-certificate", "validity-containment": "invalid-certificate",
+    "leaf-lifetime": "invalid-certificate",
+    # The SDK checks its own request before it sends it.
+    "signed-headers-missing": "unsupported-request", "signed-headers-syntax": "unsupported-request",
+    "signed-headers-limit": "unsupported-request", "signed-headers-duplicate": "unsupported-request",
+    "signed-headers-order": "unsupported-request", "signed-headers-forbidden": "unsupported-request",
+    "signed-headers-required": "unsupported-request", "signed-header-absent": "unsupported-request",
+    "unlisted-bound-header": "unsupported-request", "combined-semantic-header": "unsupported-request",
+    # The signed response list is part of the proof.
+    "response-headers-syntax": "invalid-proof", "response-headers-limit": "invalid-proof",
+    "response-headers-duplicate": "invalid-proof", "response-headers-order": "invalid-proof",
+    "response-headers-forbidden": "invalid-proof", "response-headers-required": "invalid-proof",
+    "duplicate-response-header": "invalid-proof", "transcript-layout": "invalid-signature",
 }
 SDK_REASON_OVERRIDES = {"malformed-certificate-base64": "invalid-proof"}
 
@@ -528,10 +609,10 @@ def corpus():
     add(signed_case("valid-2032-rotated-intermediate-no-history", later_leaf, [later], True, None,
                     now=timestamp("2032-10-27T01:00:00")))
     headers = [["content-type", "application/json"], ["x-use-cache", "true"],
-               ["x-dd-feature-flags-capabilities", "response-signing-v1"], [PREFIX + "signature-version", "1"]]
+               ["x-dd-feature-flags-capabilities", "response-signing-v1"], [PREFIX + "signature-version", "1"],
+               ["dd-client-token", "synthetic-overridden-token"],
+               ["authorization", "Bearer synthetic-opaque-value"], ["dd-application-id", ""]]
     request = make_request("valid-effective-token-and-authorization", headers=headers)
-    request["headers"] += [["dd-client-token", "synthetic-overridden-token"],
-                           ["authorization", "Bearer synthetic-opaque-value"], ["dd-application-id", ""]]
     authorized = signed_case("valid-effective-token-and-authorization", LEAF, [INTERMEDIATE], True, None,
                              request=request)
     add(authorized)
@@ -614,6 +695,13 @@ def corpus():
     for case_id, options, reason in variants:
         leaves[case_id] = make_leaf(case_id, INTERMEDIATE, **options)
         add(signed_case(case_id, leaves[case_id], [INTERMEDIATE], False, reason))
+    # F16: the leaf spans at most 432300 seconds (120 hours and 5 minutes).
+    add(signed_case("valid-leaf-lifetime-at-limit",
+                    make_leaf("valid-leaf-lifetime-at-limit", INTERMEDIATE, not_after="2026-11-01T00:05:00"),
+                    [INTERMEDIATE], True, None))
+    add(signed_case("leaf-lifetime-over-limit",
+                    make_leaf("leaf-lifetime-over-limit", INTERMEDIATE, not_after="2026-11-01T00:05:01"),
+                    [INTERMEDIATE], False, "leaf-lifetime"))
     for case_id, options, reason in [
         ("intermediate-ca-false", dict(basic=b"\x30\x00"), "intermediate-basic-constraints"),
         ("intermediate-pathlen-absent", dict(path_length=None), "intermediate-path-length"),
@@ -811,10 +899,10 @@ def corpus():
                 request_header("content-type", "application/json; charset=utf-8")))
     add(mutated(base, "changed-application-id", "transcript-signature",
                 request_header("dd-application-id", "synthetic-other-app")))
-    add(mutated(base, "added-x-rkyv", "transcript-signature",
+    # An added bound header that the list does not name. The SDK rejects its own request.
+    add(mutated(base, "added-x-rkyv", "unlisted-bound-header",
                 lambda c: c["request"]["headers"].append(["x-rkyv", "true"])))
-    rkyv = make_request("valid-x-rkyv-present")
-    rkyv["headers"].insert(-1, ["x-rkyv", "true"])
+    rkyv = make_request("valid-x-rkyv-present", headers=DEFAULT_HEADERS + [["x-rkyv", "true"]])
     rkyv_case = signed_case("valid-x-rkyv-present", LEAF, [INTERMEDIATE], True, None, request=rkyv)
     add(rkyv_case)
     add(mutated(rkyv_case, "changed-x-rkyv", "transcript-signature", request_header("x-rkyv", "false")))
@@ -829,8 +917,211 @@ def corpus():
         message["headers"] = [["-".join(part[:1].upper() + part[1:] for part in name.split("-")), value]
                               for name, value in message["headers"]]
     add(mixed)
+    signed_header_lists(cases, signing, base, request_header)
     return {"schema_version": 1, "synthetic": True, "anchor_der_base64": encode(ROOT.der),
             "cases": cases, "signing_cases": signing}
+
+
+
+def set_request_list(value):
+    def transform(c):
+        headers = c["request"]["headers"]
+        headers[[key for key, _ in headers].index(SIGNED_HEADERS)][1] = value
+    return transform
+
+
+def remove_request_header(name):
+    def transform(c):
+        c["request"]["headers"] = [pair for pair in c["request"]["headers"] if pair[0].lower() != name]
+    return transform
+
+
+def set_response_header(name, value):
+    """Change, add (when absent) or remove (value None) one response header after signing."""
+    def transform(c):
+        headers = c["response"]["headers"]
+        names = [key.lower() for key, _ in headers]
+        if value is None:
+            c["response"]["headers"] = [pair for pair in headers if pair[0].lower() != name]
+        elif name in names:
+            headers[names.index(name)][1] = value
+        else:
+            headers.insert(2, [name, value])
+    return transform
+
+
+def synthetic_names(count, long_name=None):
+    """`count` synthetic header names. One of them is `long_name` when it is given."""
+    names = [f"x-synthetic-{index:02d}" for index in range(count)]
+    if long_name is not None:
+        names[-1] = long_name
+    return names
+
+
+def signed_header_lists(cases, signing, base, request_header):
+    """Vectors for the signed request and response header name lists."""
+    add = cases.append
+
+    # Accepted request lists.
+    future = make_request("valid-listed-unknown-request-header",
+                          headers=DEFAULT_HEADERS + [["x-synthetic-future", "synthetic-value"]],
+                          signed_headers=",".join(sorted(default_list(DEFAULT_HEADERS).split(",") + ["x-synthetic-future"])))
+    add(signed_case("valid-listed-unknown-request-header", LEAF, [INTERMEDIATE], True, None, request=future))
+    # Gate, telemetry and tracing headers are not bound, so they stay out of the list.
+    unlisted = make_request("valid-unlisted-gate-and-telemetry-headers", headers=DEFAULT_HEADERS + [
+        ["dd-assignment-token", "synthetic-assignment-token"], ["dd-service", "synthetic-service"],
+        ["traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"]])
+    add(signed_case("valid-unlisted-gate-and-telemetry-headers", LEAF, [INTERMEDIATE], True, None,
+                    request=unlisted))
+    # x-use-cache is a staging header, so it can stay out of the list.
+    staging = make_request("valid-unlisted-staging-header",
+                           signed_headers="content-type,dd-application-id,x-dd-feature-flags-capabilities")
+    assert header_values(staging["headers"], "x-use-cache") == ["true"]
+    add(signed_case("valid-unlisted-staging-header", LEAF, [INTERMEDIATE], True, None, request=staging))
+    # 32 names, and one name of 64 bytes. Each listed header is present.
+    long_name = "x-synthetic-" + "n" * (MAX_NAME_LENGTH - len("x-synthetic-"))
+    extra = synthetic_names(MAX_LISTED_NAMES - 4, long_name)
+    limits = make_request("valid-signed-headers-at-limits",
+                          headers=DEFAULT_HEADERS + [[name, "synthetic-value"] for name in extra],
+                          signed_headers=",".join(sorted(default_list(DEFAULT_HEADERS).split(",") + extra)))
+    assert len(listed_names(limits["headers"], SIGNED_HEADERS)) == MAX_LISTED_NAMES
+    add(signed_case("valid-signed-headers-at-limits", LEAF, [INTERMEDIATE], True, None, request=limits))
+
+    # Rejected request lists. The SDK checks its own request and does not send it.
+    default = default_list(DEFAULT_HEADERS)
+    add(mutated(base, "signed-headers-missing", "signed-headers-missing", remove_request_header(SIGNED_HEADERS)))
+    add(mutated(base, "duplicate-signed-headers-header", "duplicate-semantic-header",
+                lambda c: c["request"]["headers"].insert(0, [SIGNED_HEADERS, default])))
+
+    def without_content_type(c):
+        remove_request_header("content-type")(c)
+        set_request_list("dd-application-id,x-dd-feature-flags-capabilities,x-use-cache")(c)
+    add(mutated(base, "signed-headers-required-content-type", "signed-headers-required", without_content_type))
+    add(mutated(base, "signed-headers-required-capabilities", "signed-headers-required",
+                set_request_list("content-type,dd-application-id,x-use-cache")))
+    for case_id, value, reason in [
+        ("signed-headers-unsorted", "dd-application-id,content-type,x-dd-feature-flags-capabilities,x-use-cache",
+         "signed-headers-order"),
+        ("signed-headers-duplicate-name",
+         "content-type,content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache",
+         "signed-headers-duplicate"),
+        ("signed-headers-uppercase", "Content-Type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache",
+         "signed-headers-syntax"),
+        ("signed-headers-space-after-comma",
+         "content-type, dd-application-id,x-dd-feature-flags-capabilities,x-use-cache", "signed-headers-syntax"),
+        ("signed-headers-empty-entry",
+         "content-type,,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache", "signed-headers-syntax"),
+        ("signed-headers-trailing-comma", default + ",", "signed-headers-syntax"),
+        ("signed-headers-lists-client-token",
+         "content-type,dd-application-id,dd-client-token,x-dd-feature-flags-capabilities,x-use-cache",
+         "signed-headers-forbidden"),
+        ("signed-headers-lists-proof-header", ",".join(sorted(default.split(",") + [PREFIX + "request-nonce"])),
+         "signed-headers-forbidden"),
+    ]:
+        add(mutated(base, case_id, reason, set_request_list(value)))
+    too_many = synthetic_names(MAX_LISTED_NAMES - 3)
+    many = make_request("signed-headers-too-many-names",
+                        headers=DEFAULT_HEADERS + [[name, "synthetic-value"] for name in too_many],
+                        signed_headers=",".join(sorted(default.split(",") + too_many)))
+    assert len(listed_names(many["headers"], SIGNED_HEADERS)) == MAX_LISTED_NAMES + 1
+    add(signed_case("signed-headers-too-many-names", LEAF, [INTERMEDIATE], False, "signed-headers-limit",
+                    request=many))
+    too_long = long_name + "n"
+    wide = make_request("signed-headers-name-too-long",
+                        headers=DEFAULT_HEADERS + [[too_long, "synthetic-value"]],
+                        signed_headers=",".join(sorted(default.split(",") + [too_long])))
+    add(signed_case("signed-headers-name-too-long", LEAF, [INTERMEDIATE], False, "signed-headers-limit",
+                    request=wide))
+    # The list names x-rkyv, but the request has no x-rkyv. The SDK lists only the
+    # headers that it set. The transcript is the one that the edge signs: it
+    # writes presence 0 for a listed header that it did not receive.
+    absent = make_request("signed-header-absent", signed_headers=",".join(sorted(default.split(",") + ["x-rkyv"])))
+    add(signed_case("signed-header-absent", LEAF, [INTERMEDIATE], False, "signed-header-absent", request=absent,
+                    include_transcript=True))
+    add(mutated(base, "unlisted-bound-header", "unlisted-bound-header",
+                set_request_list("content-type,x-dd-feature-flags-capabilities,x-use-cache")))
+    add(mutated(base, "comma-in-single-value-header", "combined-semantic-header",
+                request_header("content-type", "application/json,text/plain")))
+    # A proxy removed a listed header. The edge signed presence 0, and the SDK
+    # binds the value that it sent.
+    edge_view = make_request("listed-request-header-removed-in-transit",
+                             signed_headers=",".join(sorted(default.split(",") + ["x-rkyv"])))
+    removed = signed_case("listed-request-header-removed-in-transit", LEAF, [INTERMEDIATE], False,
+                          "transcript-signature", request=edge_view)
+    removed["request"]["headers"].insert(-2, ["x-rkyv", "true"])
+    add(removed)
+
+    # Accepted response lists.
+    selection = make_request("valid-flag-selection-ignored-present", body=SELECTION_REQUEST_BODY)
+    present = signed_case("valid-flag-selection-ignored-present", LEAF, [INTERMEDIATE], True, None,
+                          request=selection, response_extra=[["dd-flag-selection-ignored", "invalid_tag"]])
+    add(present)
+    absent_ignored = signed_case("valid-flag-selection-ignored-absent", LEAF, [INTERMEDIATE], True, None,
+                                 request=make_request("valid-flag-selection-ignored-absent",
+                                                      body=SELECTION_REQUEST_BODY))
+    add(absent_ignored)
+    add(signed_case("valid-response-list-content-type-only", LEAF, [INTERMEDIATE], True, None,
+                    response_list="content-type"))
+    add(signed_case("valid-top-level-flag-selection-not-selection", LEAF, [INTERMEDIATE], True, None,
+                    request=make_request("valid-top-level-flag-selection-not-selection",
+                                         body=TOP_LEVEL_SELECTION_REQUEST_BODY),
+                    response_list="content-type"))
+    # The raw header is present but not listed. Verification does not return it.
+    add(signed_case("valid-unlisted-response-header-not-verified", LEAF, [INTERMEDIATE], True, None,
+                    response_list="content-type", response_extra=[["dd-flag-selection-ignored", "invalid_tag"]]))
+    add(signed_case("valid-response-list-extra-names", LEAF, [INTERMEDIATE], True, None,
+                    response_list="cache-control,content-type,dd-flag-selection-ignored,x-synthetic-absent"))
+
+    # Rejected response lists.
+    add(mutated(base, "signed-response-headers-missing", "missing-proof",
+                set_response_header(SIGNED_RESPONSE_HEADERS, None)))
+    add(mutated(base, "duplicate-signed-response-headers", "duplicate-proof",
+                lambda c: c["response"]["headers"].append([SIGNED_RESPONSE_HEADERS, DEFAULT_RESPONSE_LIST])))
+    for case_id, value, reason, request in [
+        ("response-headers-required-content-type", "dd-flag-selection-ignored", "response-headers-required", None),
+        ("selection-ignored-not-listed", "content-type", "response-headers-required",
+         make_request("selection-ignored-not-listed", body=SELECTION_REQUEST_BODY)),
+        ("response-headers-unsorted", "dd-flag-selection-ignored,content-type", "response-headers-order", None),
+        ("response-headers-duplicate-name", "content-type,content-type,dd-flag-selection-ignored",
+         "response-headers-duplicate", None),
+        ("response-headers-uppercase", "Content-Type,dd-flag-selection-ignored", "response-headers-syntax", None),
+        ("response-headers-empty-entry", "content-type,,dd-flag-selection-ignored", "response-headers-syntax",
+         None),
+        ("response-headers-space-after-comma", "content-type, dd-flag-selection-ignored",
+         "response-headers-syntax", None),
+        ("response-headers-lists-proof-header", DEFAULT_RESPONSE_LIST + "," + PREFIX + "signature",
+         "response-headers-forbidden", None),
+        ("response-headers-too-many-names",
+         ",".join(sorted(DEFAULT_RESPONSE_LIST.split(",") + synthetic_names(MAX_LISTED_NAMES - 1))),
+         "response-headers-limit", None),
+        ("response-headers-name-too-long", DEFAULT_RESPONSE_LIST + "," + too_long, "response-headers-limit", None),
+    ]:
+        # Each proof is signed over its own list, so only the list rule fails.
+        add(signed_case(case_id, LEAF, [INTERMEDIATE], False, reason, response_list=value, request=request))
+    add(mutated(base, "duplicate-listed-response-header", "duplicate-response-header",
+                lambda c: c["response"]["headers"].append(["content-type", "application/json"])))
+    add(mutated(base, "changed-listed-content-type", "transcript-signature",
+                set_response_header("content-type", "text/plain")))
+    add(mutated(absent_ignored, "added-flag-selection-ignored", "transcript-signature",
+                set_response_header("dd-flag-selection-ignored", "invalid_tag")))
+    add(mutated(present, "removed-flag-selection-ignored", "transcript-signature",
+                set_response_header("dd-flag-selection-ignored", None)))
+    add(mutated(present, "changed-flag-selection-ignored", "transcript-signature",
+                set_response_header("dd-flag-selection-ignored", "too_many_values")))
+    # A proof over the previous v1 layout: five fixed request slots and no lists.
+    add(signed_case("previous-v1-header-layout", LEAF, [INTERMEDIATE], False, "transcript-layout",
+                    layout="fixed"))
+
+    # The edge signs the listed response values, and it does not sign a request
+    # that has an unlisted bound header or a malformed list. A listed header that
+    # is absent is signed with presence 0.
+    good = credential("valid-current", LEAF, [INTERMEDIATE])
+    signing += [
+        signing_case("signer-flag-selection-ignored", "valid-flag-selection-ignored-present", good, True),
+        signing_case("signer-listed-header-absent", "signed-header-absent", good, True),
+        signing_case("signer-unlisted-bound-header", "unlisted-bound-header", good, False),
+        signing_case("signer-signed-headers-unsorted", "signed-headers-unsorted", good, False),
+    ]
 
 
 

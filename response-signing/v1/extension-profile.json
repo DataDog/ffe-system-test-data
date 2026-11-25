@@ -34,6 +34,10 @@
             "1"
           ],
           [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
+          ],
+          [
             "x-datadog-feature-flags-request-nonce",
             "5c98a254177fb4d3ba2e34bef3c9be58"
           ]
@@ -76,8 +80,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQDu4IQyH/rkoiQ6oJDG5AnRqA8pTvrAofsWnLaJOxZ2pAIgUJ1SjsUE0m1fNLkpZlL+TYqx+9r444dihl1jLv9XGJM="
+            "MEQCIGz462kN7J6QeFzMemfLJzw5y96AE4tpQs57HeoecjleAiB5hVqUR1zrnxUad9+V2/CMXwybQBPVV6n4DSRbCvqNUQ=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -85,7 +93,11 @@
       "now": 1793062800,
       "expected_accept": true,
       "rejection_reason": null,
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEFyYolQXf7TTui40vvPJvli7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq3/eQAAAAAGrf+LwAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJDTzf8nuuURyoI0LgYTRR87PW5somuUjrncxOlovSKFkB+AnbtrzJe1+CNLMgT/2pdkWJmxIPBnpByKs1r+3hqPY="
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAEFyYolQXf7TTui40vvPJvli7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq3/eQAAAAAGrf+LwAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJDTzf8nuuURyoI0LgYTRR87PW5somuUjrncxOlovSKFkB+AnbtrzJe1+CNLMgT/2pdkWJmxIPBnpByKs1r+3hqPYCAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
+      "verified_response_headers": {
+        "content-type": "application/json",
+        "dd-flag-selection-ignored": null
+      }
     },
     {
       "id": "noncritical-policy-mappings",
@@ -116,6 +128,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -160,8 +176,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQCY6baA9eqA7rHw66VEoM8Rxf8yoD4xWGTd/+pX9+DDTwIgQ/q0iffUKQbkkSBdQvh7hFldWcEU+jFCgDYkH5GnE4w="
+            "MEQCIGwvpSQlm21ghrs6GZHHoNB4w5O56TYb6AAUZfY8aQEdAiBK6rSart/s1XyYUhtv5T2rNLTWviwqJO/OUj5Zz+1FgQ=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -201,6 +221,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -245,8 +269,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEQCIEB2jnO7W6KK/ujWrYc55io88insnXniiWJ6yGTPWTQ4AiBbub+S/85/PReQZn0IkmwBus3vEc9EceGBGuILoaw9Ng=="
+            "MEQCID+4N6O7qDGIzUi7Q6kKNK2JwiGEOADjw6NMvax+E67gAiBTbUDTS79JrHRMjLdepVuxAc1FrZQhfFSGc9KzwT3ntg=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -286,6 +314,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -330,8 +362,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEQCIBryprBzpibSSeO/er0rhnVhxJkf+iJLwtkV58kPtkH8AiAo0FGciuKhqs/M/J2cBjWgdcz0240a2DQC35FVP3bJ+g=="
+            "MEQCIFJeXxFFSrpxbgAnEb49xZtpr1jJysk+f9UFS23ev/DeAiB5Z4OEt0HT0uZ15OA+FZ8aAbrBKlxYfB4xXwM5SpMSjQ=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -371,6 +407,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -415,8 +455,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEQCIB9KHZ4ckKJxLxUx5Wvzgah6dxydI5Ty7WEssHXcgpu3AiA7ES2te6QVcJfDZLc/iW23AAzsNfFjjsk/kgXollwERA=="
+            "MEUCIQC5HGxJcx5tEN0WFHF/RekNUnTKNSkpHRnY2oRKgZRx1gIgarZJgGdhi90bpeCY+K9fuqqbMm3k2zShpkZ97ngMjPo="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -456,6 +500,10 @@
           [
             "x-datadog-feature-flags-signature-version",
             "1"
+          ],
+          [
+            "x-datadog-feature-flags-signed-headers",
+            "content-type,dd-application-id,x-dd-feature-flags-capabilities,x-use-cache"
           ],
           [
             "x-datadog-feature-flags-request-nonce",
@@ -500,8 +548,12 @@
             "1793063100"
           ],
           [
+            "x-datadog-feature-flags-signed-response-headers",
+            "content-type,dd-flag-selection-ignored"
+          ],
+          [
             "x-datadog-feature-flags-signature",
-            "MEUCIQDDSuEzwjPrzcreZ+R8fX1s/RwoaENbN+lcNE+G5RxlCQIgRaffyk1GezP0YZbb3OJE0psHnvfc60Tx8upi4jbWADA="
+            "MEQCIF4u7JJ1Y6nOmFjseShTi1LgezzKlpqsfB5DhOPhkmj2AiBW+yVbFbGPhyeMvsELol4LHel7hj7FIBWuNahwMtfWvQ=="
           ]
         ],
         "body_base64": "eyJmbGFncyI6eyJjcml0aWNhbC1kZW1vIjp7InZhcmlhdGlvbiI6Im9mZiIsInZhbHVlIjpmYWxzZX19LCJydWxlc1JldmlzaW9uIjoic3ludGhldGljLXIxIiwibGFiZWwiOiJjYWbDqSJ9"
@@ -509,7 +561,11 @@
       "now": 1793062800,
       "expected_accept": true,
       "rejection_reason": null,
-      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAELTRvUNqPmp833Kf/ka3JaC7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPAQAAABBhcHBsaWNhdGlvbi9qc29uAQAAAA1zeW50aGV0aWMtYXBwAAEAAAAEdHJ1ZQEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAyAAAAABq3/eQAAAAAGrf+LwAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJUbrO7GuHGZtrizXMpTyGRJ3uMuTn1SaQpKumuSUzELcB+AnbtrzJe1+CNLMgT/2pdkWJmxIPBnpByKs1r+3hqPY="
+      "transcript_base64": "ZGF0YWRvZy5mZWF0dXJlLWZsYWdzLnByZWNvbXB1dGVkLWFzc2lnbm1lbnRzLnYxAAAAAARQT1NUAAAABWh0dHBzAAAAEmZsYWdzLmV4YW1wbGUudGVzdAAAABcvcHJlY29tcHV0ZS9hc3NpZ25tZW50cwAAAB8/ZGRfZW52PXByb2R1Y3Rpb24mbWFya2VyPWElMkZiAAAAELTRvUNqPmp833Kf/ka3JaC7RTYkNmgw7InPBvfo1awKbp0Kv9q6SfxCHygN4pcnh/6Ng8TcBPzzrxF/TDOL/e9gFxG7FxwZhrfj79251AdPBAAAAAxjb250ZW50LXR5cGUBAAAAEGFwcGxpY2F0aW9uL2pzb24AAAARZGQtYXBwbGljYXRpb24taWQBAAAADXN5bnRoZXRpYy1hcHAAAAAfeC1kZC1mZWF0dXJlLWZsYWdzLWNhcGFiaWxpdGllcwEAAAATcmVzcG9uc2Utc2lnbmluZy12MQAAAAt4LXVzZS1jYWNoZQEAAAAEdHJ1ZQAAyAAAAABq3/eQAAAAAGrf+LwAAAAAAAAAbBjoo2BVrsFBvsb7/kndkWuEJugJckBE6x8yNdHqNEVJUbrO7GuHGZtrizXMpTyGRJ3uMuTn1SaQpKumuSUzELcB+AnbtrzJe1+CNLMgT/2pdkWJmxIPBnpByKs1r+3hqPYCAAAADGNvbnRlbnQtdHlwZQEAAAAQYXBwbGljYXRpb24vanNvbgAAABlkZC1mbGFnLXNlbGVjdGlvbi1pZ25vcmVkAAAAAAA=",
+      "verified_response_headers": {
+        "content-type": "application/json",
+        "dd-flag-selection-ignored": null
+      }
     }
   ],
   "signing_cases": [
