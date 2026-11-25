@@ -110,8 +110,12 @@ Each fixture file is a single JSON object. Schema: `schemas/precomputed-assignme
 | `expectedResult.reason` | string? | no | Expected reason code (null if error) |
 | `expectedResult.errorCode` | string? | no | Expected error code (null if success) |
 | `expectedResult.variantKey` | string? | no | Expected variation key (null if error) |
+| `restoredReason` | string | no | Reason expected for a successful result from a snapshot restored from persistent storage (mobile: `CACHED`). Not allowed on an error result. A runner with no restore pass ignores it. |
 | `_skip` | array | no | Skip this evaluation for listed platforms |
 | `_include` | array | no | Run this evaluation only for listed platforms |
+
+The response `data.attributes.createdAt` is a string. Set it in every fixture response.
+The browser SDK rejects a response without a valid `createdAt`.
 
 `defaultValue` and `expectedResult.value` must use the JSON type declared by
 `variationType`: boolean, string, integer, number for `float`, or object.

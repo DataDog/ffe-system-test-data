@@ -1,0 +1,138 @@
+{
+  "name": "signed-zero",
+  "description": "Negative zero tokens read as zero. Signed zero is numerically equivalent to zero, so a runner must not depend on the sign. Integer getters apply to native platforms only.",
+  "context": {
+    "targetingKey": "signed-zero-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "zero-integer-token": {"allocationKey": "a-int", "variationKey": "zero-int", "variationType": "integer", "variationValue": -0, "reason": "TARGETING_MATCH", "doLog": false},
+          "zero-fraction-token": {"allocationKey": "a-frac", "variationKey": "zero-frac", "variationType": "float", "variationValue": -0.0, "reason": "TARGETING_MATCH", "doLog": false},
+          "zero-number-token": {"allocationKey": "a-num", "variationKey": "zero-num", "variationType": "number", "variationValue": -0, "reason": "TARGETING_MATCH", "doLog": false}
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "zero-integer-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-int"
+      }
+    },
+    {
+      "flag": "zero-integer-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-int"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    },
+    {
+      "flag": "zero-fraction-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-frac"
+      }
+    },
+    {
+      "flag": "zero-fraction-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-frac"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    },
+    {
+      "flag": "zero-number-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-num"
+      }
+    },
+    {
+      "flag": "zero-number-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-num"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "evaluationEvents": [
+      {
+        "_count": 3
+      }
+    ]
+  }
+}

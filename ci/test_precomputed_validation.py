@@ -28,6 +28,16 @@ class PrecomputedValidationTest(unittest.TestCase):
     def test_valid_numeric_matrix(self):
         self.assertEqual([], self.validate(self.case))
 
+    def test_restored_reason_is_allowed_on_success(self):
+        self.case['evaluations'][0]['restoredReason'] = 'CACHED'
+        self.assertEqual([], self.validate(self.case))
+
+    def test_restored_reason_is_rejected_on_error(self):
+        evaluation = self.case['evaluations'][0]
+        evaluation['restoredReason'] = 'CACHED'
+        evaluation['expectedResult'].update({'reason': 'ERROR', 'errorCode': 'TYPE_MISMATCH'})
+        self.assertTrue(any('restoredReason' in error for error in self.validate(self.case)))
+
     def test_unknown_platform_fails(self):
         self.case['_skip'] = [{'platform': 'andriod'}]
         self.assertTrue(self.validate(self.case))

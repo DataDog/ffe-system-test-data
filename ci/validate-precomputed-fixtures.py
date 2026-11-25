@@ -165,6 +165,23 @@ def check_skip_entry_format(obj, path="$"):
     return errors
 
 
+def check_restored_reason(data):
+    """restoredReason applies to successful results only."""
+    errors = []
+    evaluations = data.get("evaluations")
+    if not isinstance(evaluations, list):
+        return errors
+    for i, evaluation in enumerate(evaluations):
+        if not isinstance(evaluation, dict) or "restoredReason" not in evaluation:
+            continue
+        expected = evaluation.get("expectedResult")
+        code = expected.get("errorCode") if isinstance(expected, dict) else None
+        reason = expected.get("reason") if isinstance(expected, dict) else None
+        if code is not None or reason == "ERROR":
+            errors.append(f"evaluations[{i}]: restoredReason is not allowed on an error result")
+    return errors
+
+
 def validate_fixture(filepath, schema):
     """Validate a single fixture file. Returns list of error strings."""
     errors = []
@@ -190,6 +207,7 @@ def validate_fixture(filepath, schema):
     errors.extend(f"{rel}: {e}" for e in check_name_matches_filename(data, filepath))
     errors.extend(f"{rel}: {e}" for e in check_assignment_error_partition(data))
     errors.extend(f"{rel}: {e}" for e in check_skip_entry_format(data))
+    errors.extend(f"{rel}: {e}" for e in check_restored_reason(data))
 
     return errors
 

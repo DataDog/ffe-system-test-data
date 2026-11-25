@@ -45,6 +45,10 @@ Each fixture file is a single JSON object:
 | `_skip` | array | no | Skip entire fixture for listed platforms |
 | `_include` | array | no | Run fixture only for listed platforms |
 
+The response `data.attributes.createdAt` is a string. The browser SDK rejects a
+response whose `createdAt` is missing or invalid. Mobile SDKs may ignore it.
+Every fixture response should set it.
+
 ### Assignment and evaluation-error maps
 
 `response.data.attributes.flags` contains only complete assignments that legacy
@@ -157,7 +161,19 @@ Each evaluation calls a typed getter on the SDK and asserts the result:
 `float` accepts any JSON number; `integer` accepts only integral JSON numbers
 (including `1.0`). Arrays and null are not valid for either field.
 
+A runner compares numeric values numerically. `-0` and `0` are equal. A runner that
+uses a comparison which separates the two (such as `Object.is`) must not use it
+for `expectedResult.value`.
+
 Evaluations may carry `_skip` or `_include` to control per-platform applicability.
+
+An evaluation may also carry `restoredReason`. A runner that evaluates a snapshot
+restored from persistent storage compares the reason of a successful result with
+`restoredReason` in place of `expectedResult.reason`. Value, variant key and
+error fields keep their `expectedResult` meaning. Mobile SDKs report `CACHED`.
+The field is not part of `expectedResult`, so a runner that checks every
+`expectedResult` entry needs no change. Error results keep reason `ERROR`.
+A runner with no restore pass ignores the field.
 
 ## Expectations and event matchers
 
