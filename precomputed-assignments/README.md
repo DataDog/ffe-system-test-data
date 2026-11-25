@@ -45,6 +45,10 @@ Each fixture file is a single JSON object:
 | `_skip` | array | no | Skip entire fixture for listed platforms |
 | `_include` | array | no | Run fixture only for listed platforms |
 
+The response `data.attributes.createdAt` is a string. The browser SDK rejects a
+response whose `createdAt` is missing or invalid. Mobile SDKs may ignore it.
+Every fixture response should set it.
+
 ### Assignment and evaluation-error maps
 
 `response.data.attributes.flags` contains only complete assignments that legacy
@@ -157,9 +161,9 @@ Each evaluation calls a typed getter on the SDK and asserts the result:
 `float` accepts any JSON number; `integer` accepts only integral JSON numbers
 (including `1.0`). Arrays and null are not valid for either field.
 
-The response `data.attributes.createdAt` is a string. The browser SDK rejects a
-response whose `createdAt` is missing or invalid. Mobile SDKs may ignore it.
-Every fixture response should set it.
+A runner compares numeric values numerically. `-0` and `0` are equal. A runner that
+uses a comparison which separates the two (such as `Object.is`) must not use it
+for `expectedResult.value`.
 
 Evaluations may carry `_skip` or `_include` to control per-platform applicability.
 
