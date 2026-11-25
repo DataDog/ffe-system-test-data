@@ -1,0 +1,87 @@
+{
+  "name": "obfuscation-plaintext-key-unicode-both-spellings",
+  "description": "Generated obfuscated companion: Plaintext flag keys are exact code-point sequences. The response serves the composed key (U+00E9) and the decomposed key (U+0065 U+0301) with different values. A runtime that normalizes keys, or stores them in a map that treats canonically equivalent strings as equal, returns one value for both.",
+  "context": {
+    "targetingKey": "unicode-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "3bfa8c3c17c1b61035b98ecf14007cdf5cba5ce61a48e8cfb65f8106541892d3": {
+            "allocationKey": "a-composed",
+            "variationKey": "composed",
+            "variationType": "string",
+            "variationValue": "composed-value",
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          },
+          "1e8b7ec5e8028a1ec96b38dd37f6ccea041c0a90358904af40ac5810c23c8765": {
+            "allocationKey": "a-decomposed",
+            "variationKey": "decomposed",
+            "variationType": "string",
+            "variationValue": "decomposed-value",
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          }
+        },
+        "obfuscated": true,
+        "obfuscation": {
+          "scheme": "flag-key-sha256-v1",
+          "salt": "000102030405060708090a0b0c0d0e0f",
+          "dependencyKeyEncryption": {
+            "scheme": "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "café",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "composed-value",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "composed"
+      }
+    },
+    {
+      "flag": "café",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "decomposed-value",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "decomposed"
+      }
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "evaluationEvents": [
+      {
+        "_count": 2
+      }
+    ]
+  },
+  "_include": [
+    {
+      "platform": "ios",
+      "reason": "Supports obfuscation and the source fixture."
+    },
+    {
+      "platform": "android",
+      "reason": "Supports obfuscation and the source fixture."
+    },
+    {
+      "platform": "flutter",
+      "reason": "Supports obfuscation and the source fixture."
+    }
+  ]
+}

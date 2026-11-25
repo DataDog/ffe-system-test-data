@@ -1,0 +1,50 @@
+{
+  "name": "plaintext-key-unicode-single-spelling",
+  "description": "The response serves only the composed key (U+00E9). A lookup with the canonically equivalent decomposed key (U+0065 U+0301) is a different key and returns FLAG_NOT_FOUND. No normalization or fallback applies.",
+  "context": {
+    "targetingKey": "unicode-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "caf\u00e9": {"allocationKey": "a-composed", "variationKey": "composed", "variationType": "string", "variationValue": "composed-value", "reason": "TARGETING_MATCH", "doLog": false}
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "caf\u00e9",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "composed-value",
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "composed"
+      }
+    },
+    {
+      "flag": "cafe\u0301",
+      "variationType": "string",
+      "defaultValue": "fallback",
+      "expectedResult": {
+        "value": "fallback",
+        "reason": "ERROR",
+        "errorCode": "FLAG_NOT_FOUND",
+        "variantKey": null
+      }
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "evaluationEvents": [
+      {
+        "_count": 2
+      }
+    ]
+  }
+}

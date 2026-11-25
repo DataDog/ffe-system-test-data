@@ -159,6 +159,14 @@ Each evaluation calls a typed getter on the SDK and asserts the result:
 
 Evaluations may carry `_skip` or `_include` to control per-platform applicability.
 
+An evaluation may also carry `restoredReason`. A runner that evaluates a snapshot
+restored from persistent storage compares the reason of a successful result with
+`restoredReason` in place of `expectedResult.reason`. Value, variant key and
+error fields keep their `expectedResult` meaning. Mobile SDKs report `CACHED`.
+The field is not part of `expectedResult`, so a runner that checks every
+`expectedResult` entry needs no change. Error results keep reason `ERROR`.
+A runner with no restore pass ignores the field.
+
 ## Expectations and event matchers
 
 The `expectations` block uses ordered, exclusive matchers to assert on emitted

@@ -301,6 +301,10 @@
         "expectedResult": {
           "$ref": "#/$defs/ExpectedResult"
         },
+        "restoredReason": {
+          "type": "string",
+          "description": "Reason expected when a successful evaluation runs against a snapshot restored from persistent storage. A runner with a restore pass compares it in place of expectedResult.reason. A runner without one ignores it."
+        },
         "_skip": {
           "$ref": "#/$defs/PlatformFilter"
         },

@@ -1,0 +1,181 @@
+{
+  "name": "obfuscation-signed-zero",
+  "description": "Generated obfuscated companion: Negative zero tokens read as zero. Signed zero is numerically equivalent to zero, so a runner must not depend on the sign. Integer getters apply to native platforms only.",
+  "context": {
+    "targetingKey": "signed-zero-user",
+    "attributes": {}
+  },
+  "response": {
+    "data": {
+      "attributes": {
+        "createdAt": "2026-01-01T00:00:00Z",
+        "flags": {
+          "f174940d6892c9c821be788e5d49952a866c87f08dcf51f56780a238f4a2f9b0": {
+            "allocationKey": "a-int",
+            "variationKey": "zero-int",
+            "variationType": "integer",
+            "variationValue": -0,
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          },
+          "a00265ba44e19781a84699a0758ca71d891211b1532896b7fafc1af6e79545b9": {
+            "allocationKey": "a-frac",
+            "variationKey": "zero-frac",
+            "variationType": "float",
+            "variationValue": -0.0,
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          },
+          "41ba0499883025a8333832d1eb370ac9abae914d009f049216f21230f838acb4": {
+            "allocationKey": "a-num",
+            "variationKey": "zero-num",
+            "variationType": "number",
+            "variationValue": -0,
+            "reason": "TARGETING_MATCH",
+            "doLog": false
+          }
+        },
+        "obfuscated": true,
+        "obfuscation": {
+          "scheme": "flag-key-sha256-v1",
+          "salt": "000102030405060708090a0b0c0d0e0f",
+          "dependencyKeyEncryption": {
+            "scheme": "dependency-key-hkdf-sha256-aes-256-gcm-v1"
+          }
+        }
+      }
+    }
+  },
+  "evaluations": [
+    {
+      "flag": "zero-integer-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-int"
+      }
+    },
+    {
+      "flag": "zero-integer-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-int"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    },
+    {
+      "flag": "zero-fraction-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-frac"
+      }
+    },
+    {
+      "flag": "zero-fraction-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-frac"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    },
+    {
+      "flag": "zero-number-token",
+      "variationType": "float",
+      "defaultValue": -99.5,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-num"
+      }
+    },
+    {
+      "flag": "zero-number-token",
+      "variationType": "integer",
+      "defaultValue": -99,
+      "expectedResult": {
+        "value": 0,
+        "reason": "TARGETING_MATCH",
+        "errorCode": null,
+        "variantKey": "zero-num"
+      },
+      "_include": [
+        {
+          "platform": "ios"
+        },
+        {
+          "platform": "android"
+        },
+        {
+          "platform": "flutter"
+        },
+        {
+          "platform": "unity"
+        }
+      ]
+    }
+  ],
+  "expectations": {
+    "noUnmatchedEvents": true,
+    "evaluationEvents": [
+      {
+        "_count": 3
+      }
+    ]
+  },
+  "_include": [
+    {
+      "platform": "ios",
+      "reason": "Supports obfuscation and the source fixture."
+    },
+    {
+      "platform": "android",
+      "reason": "Supports obfuscation and the source fixture."
+    },
+    {
+      "platform": "flutter",
+      "reason": "Supports obfuscation and the source fixture."
+    }
+  ]
+}
