@@ -41,10 +41,12 @@ CODE_SIGNING_EKU = "1.3.6.1.5.5.7.3.3"
 # The request and response headers that carry the signed header name lists.
 SIGNED_HEADERS = PREFIX + "signed-headers"
 SIGNED_RESPONSE_HEADERS = PREFIX + "signed-response-headers"
-# Request headers that an SDK binds when it sets them. Each one must be in the
-# signed request list when it is present. A list can also name other headers.
-BOUND_REQUEST_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities",
-                         "x-rkyv", "x-use-cache"]
+# Request headers of the edge `bound` class. Each one must be in the signed
+# request list when it is present. A list can also name other headers.
+BOUND_REQUEST_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities", "x-rkyv"]
+# The synthetic SDK also lists the staging header x-use-cache when it sets it.
+# A listed staging header is bound like any listed name. An unlisted one is not.
+SDK_LISTED_HEADERS = BOUND_REQUEST_HEADERS + ["x-use-cache"]
 DEFAULT_RESPONSE_LIST = "content-type,dd-flag-selection-ignored"
 MAX_LISTED_NAMES = 32
 MAX_NAME_LENGTH = 64
@@ -422,8 +424,8 @@ def nonce_for(case_id):
 
 
 def default_list(headers):
-    """The signed request list that an SDK sends: every bound header that is present."""
-    return ",".join(sorted({key.lower() for key, _ in headers if key.lower() in BOUND_REQUEST_HEADERS}))
+    """The signed request list that the synthetic SDK sends for these headers."""
+    return ",".join(sorted({key.lower() for key, _ in headers if key.lower() in SDK_LISTED_HEADERS}))
 
 
 DEFAULT_HEADERS = [["content-type", "application/json"], ["dd-client-token", "synthetic-client-token"],
@@ -958,6 +960,11 @@ def signed_header_lists(cases, signing, base, request_header):
         ["traceparent", "00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01"]])
     add(signed_case("valid-unlisted-gate-and-telemetry-headers", LEAF, [INTERMEDIATE], True, None,
                     request=unlisted))
+    # x-use-cache is a staging header, so it can stay out of the list.
+    staging = make_request("valid-unlisted-staging-header",
+                           signed_headers="content-type,dd-application-id,x-dd-feature-flags-capabilities")
+    assert header_values(staging["headers"], "x-use-cache") == ["true"]
+    add(signed_case("valid-unlisted-staging-header", LEAF, [INTERMEDIATE], True, None, request=staging))
     # 32 names, and one name of 64 bytes. Each listed header is present.
     long_name = "x-synthetic-" + "n" * (MAX_NAME_LENGTH - len("x-synthetic-"))
     extra = synthetic_names(MAX_LISTED_NAMES - 4, long_name)

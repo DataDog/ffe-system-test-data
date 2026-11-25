@@ -39,8 +39,9 @@ KNOWN_EXTENSIONS = {"2.5.29.19", "2.5.29.15", "2.5.29.37", "2.5.29.14", "2.5.29.
 # The previous fixed request slots. Only the transcript-layout diagnosis uses them.
 FIXED_HEADERS = ["content-type", "dd-application-id", "x-rkyv", "x-use-cache",
                  "x-dd-feature-flags-capabilities"]
-# Request headers that an SDK binds when it sets them. Each must be listed when present.
-BOUND_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities", "x-rkyv", "x-use-cache"]
+# Request headers of the edge `bound` class. Each must be listed when present.
+# Staging headers such as x-use-cache are bound only when they are listed.
+BOUND_HEADERS = ["content-type", "dd-application-id", "x-dd-feature-flags-capabilities", "x-rkyv"]
 CAPABILITIES = "x-dd-feature-flags-capabilities"
 SIGNED_HEADERS = PROOF + "signed-headers"
 SIGNED_RESPONSE_HEADERS = PROOF + "signed-response-headers"

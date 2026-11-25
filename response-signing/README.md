@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 140 response cases: 32 accepted and 108 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 141 response cases: 33 accepted and 108 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -126,8 +126,11 @@ to the request that the SDK sends:
   hashed slots.
 - Each listed header and each bound header has at most one line.
 - A bound header that is present is in the list. The bound headers are
-  `content-type`, `dd-application-id`, `x-dd-feature-flags-capabilities`,
-  `x-rkyv` and `x-use-cache`.
+  `content-type`, `dd-application-id`, `x-dd-feature-flags-capabilities` and
+  `x-rkyv`. These are the headers of the edge `bound` class.
+- `x-use-cache` is a staging header, not a bound header. When the SDK lists it,
+  the transcript binds it like any listed name. When it is not listed, it is not
+  signed (`valid-unlisted-staging-header`).
 - Each listed header is present. The SDK lists only the headers that it set.
 - Only the `x-dd-feature-flags-capabilities` value can contain a comma.
 - The list can name other headers. The transcript binds them with no format change.
@@ -291,8 +294,8 @@ Rejected binding and time cases:
 Signed request list cases:
 
 - Accepted: an unknown listed header (`valid-listed-unknown-request-header`),
-  unlisted gate and telemetry headers, and 32 names with one name of 64 bytes
-  (`valid-signed-headers-at-limits`).
+  unlisted gate and telemetry headers, an unlisted `x-use-cache`, and 32 names
+  with one name of 64 bytes (`valid-signed-headers-at-limits`).
 - Rejected: no list, two list lines, `content-type` or the capabilities not
   listed, unsorted, a duplicate name, uppercase, a space after a comma, an empty
   entry, a trailing comma, a listed `dd-client-token`, a listed proof header,
@@ -388,14 +391,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-160 response cases and 70 signer checks. A signer check is a signer case, or a
+161 response cases and 71 signer checks. A signer check is a signer case, or a
 check that the credential of an accepted case can sign a new proof. It also
 prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 140 | 16 signer cases |
-| All six v1 files | 160 | 70 signer checks |
+| `v1/corpus.json` | 141 | 16 signer cases |
+| All six v1 files | 161 | 71 signer checks |
 
 ## Validation and regeneration
 
