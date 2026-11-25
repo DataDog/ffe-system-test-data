@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 141 response cases: 33 accepted and 108 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 142 response cases: 34 accepted and 108 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -150,8 +150,10 @@ headers that the edge bound. A verifier applies these rules:
 - The list names `content-type`.
 - When the request has a flag selection, the list names
   `dd-flag-selection-ignored`. Presence `0` is valid. A request has a flag
-  selection when its JSON body has a non-null `flag_selection`, or its URL query
-  has `selected_flag_tags` or `selected_flag_key_patterns`.
+  selection when its JSON:API body has a `data.attributes.flag_selection`
+  object that is not null. A top-level `flag_selection` and the URL query are
+  not a selection.
+- The edge names `dd-flag-selection-ignored` in every signed response list.
 - The list does not name one of the 8 proof headers.
 - Each listed header has at most one line. A listed header can be absent.
 
@@ -308,8 +310,9 @@ Signed request list cases:
 Signed response list cases:
 
 - Accepted: `dd-flag-selection-ignored` present and absent for a request with a
-  selection, a list with only `content-type`, an unlisted response header, and
-  extra listed names with one absent name.
+  selection, a list with only `content-type`, a list with only `content-type`
+  for a body with a top-level `flag_selection`, an unlisted response header,
+  and extra listed names with one absent name.
 - Rejected: no list, two list lines, `content-type` not listed,
   `dd-flag-selection-ignored` not listed for a selection, unsorted, a duplicate
   name, uppercase, an empty entry, a space after a comma, a listed proof header,
@@ -391,14 +394,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-161 response cases and 71 signer checks. A signer check is a signer case, or a
+162 response cases and 72 signer checks. A signer check is a signer case, or a
 check that the credential of an accepted case can sign a new proof. It also
 prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 141 | 16 signer cases |
-| All six v1 files | 161 | 71 signer checks |
+| `v1/corpus.json` | 142 | 16 signer cases |
+| All six v1 files | 162 | 72 signer checks |
 
 ## Validation and regeneration
 

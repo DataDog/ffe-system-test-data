@@ -21,7 +21,7 @@ import struct
 import subprocess
 import sys
 import tempfile
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY = ROOT / "response-signing/v1"
@@ -51,7 +51,6 @@ PROOF_NAMES = ["signature-version", "signing-certificate", "signing-chain", "cer
 LIST_NAME = re.compile(r"[0-9a-z!#$%&'*+.^_`|~-]+")
 MAX_NAMES = 32
 MAX_NAME_BYTES = 64
-SELECTION_PARAMETERS = {"selected_flag_tags", "selected_flag_key_patterns"}
 
 
 class Reject(Exception):
@@ -379,12 +378,13 @@ def name_values(names, headers):
 
 
 def has_selection(request):
-    if SELECTION_PARAMETERS & set(parse_qs(urlsplit(request["url"]).query)):
-        return True
+    # The edge reads only the JSON:API path data.attributes.flag_selection.
     try:
         body = json.loads(base64.b64decode(request["body_base64"]))
     except ValueError:
         return False
+    for key in ("data", "attributes"):
+        body = body.get(key) if isinstance(body, dict) else None
     return isinstance(body, dict) and body.get("flag_selection") is not None
 
 

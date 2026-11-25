@@ -406,10 +406,15 @@ def transcript(request, response_headers, body, issued_at, expires_at, leaf, int
 
 
 REQUEST_BODY = b'{"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production"}'
-# A request with a flag selection. The response list must then name
-# dd-flag-selection-ignored.
-SELECTION_REQUEST_BODY = (b'{"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production",'
-                          b'"flag_selection":{"tags":["team:payments"],"key_patterns":null}}')
+# A request with a flag selection in data.attributes.flag_selection, as the
+# SDKs send it. The response list must then name dd-flag-selection-ignored.
+SELECTION_REQUEST_BODY = (b'{"data":{"type":"precompute-assignments-request","attributes":{'
+                          b'"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production",'
+                          b'"flag_selection":{"tags":["team:payments"],"key_patterns":null}}}}')
+# A top-level flag_selection is not a selection. The edge reads only
+# data.attributes.flag_selection.
+TOP_LEVEL_SELECTION_REQUEST_BODY = (b'{"subject":{"id":"synthetic-user","country":"US"},"dd_env":"production",'
+                                    b'"flag_selection":{"tags":["team:payments"],"key_patterns":null}}')
 RESPONSE_BODY = (b'{"flags":{"critical-demo":{"variation":"off","value":false}},'
                  b'"rulesRevision":"synthetic-r1","label":"caf\xc3\xa9"}')
 # Fixed gzip bytes of RESPONSE_BODY; zlib output can differ between builds.
@@ -1048,6 +1053,10 @@ def signed_header_lists(cases, signing, base, request_header):
                                                       body=SELECTION_REQUEST_BODY))
     add(absent_ignored)
     add(signed_case("valid-response-list-content-type-only", LEAF, [INTERMEDIATE], True, None,
+                    response_list="content-type"))
+    add(signed_case("valid-top-level-flag-selection-not-selection", LEAF, [INTERMEDIATE], True, None,
+                    request=make_request("valid-top-level-flag-selection-not-selection",
+                                         body=TOP_LEVEL_SELECTION_REQUEST_BODY),
                     response_list="content-type"))
     # The raw header is present but not listed. Verification does not return it.
     add(signed_case("valid-unlisted-response-header-not-verified", LEAF, [INTERMEDIATE], True, None,
