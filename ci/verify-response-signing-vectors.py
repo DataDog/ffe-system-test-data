@@ -34,6 +34,8 @@ ANY_EKU = "2.5.29.37.0"
 MAX_CERTIFICATE = 4096
 MAX_BASE64 = 4 * -(-MAX_CERTIFICATE // 3)
 MAX_SAFE_INTEGER = 2 ** 53 - 1
+# F16: the leaf validity span is at most 120 hours and 5 minutes.
+MAX_LEAF_LIFETIME = 432300
 FORBIDDEN_EXTENSIONS = {"2.5.29.30", "2.5.29.33", "2.5.29.36", "2.5.29.54"}
 KNOWN_EXTENSIONS = {"2.5.29.19", "2.5.29.15", "2.5.29.37", "2.5.29.14", "2.5.29.35"}
 # The previous fixed request slots. Only the transcript-layout diagnosis uses them.
@@ -336,6 +338,7 @@ def validate_chain(anchor_der, intermediate_ders, leaf_der, now, issued_at, expi
         require(not (child.get("aki") and parent.get("ski")) or child["aki"] == parent["ski"], "key-identifier")
         require(parent["not_before"] <= child["not_before"] and child["not_after"] <= parent["not_after"],
                 "validity-containment")
+    require(leaf["not_after"] - leaf["not_before"] <= MAX_LEAF_LIFETIME, "leaf-lifetime")
     for item in path:
         require(item["not_before"] <= now < item["not_after"], "certificate-time")
         require(item["not_before"] <= issued_at and expires_at <= item["not_after"], "certificate-time")

@@ -3,9 +3,9 @@
   "generator": "response-signing/generate-v1.py",
   "files": {
     "corpus.json": {
-      "sha256": "c8035121546040a2e33c330ef28d8ea9294a8635291925c36818c9a157c5c938",
-      "response_cases": 142,
-      "accepted": 34,
+      "sha256": "a87f6bc8ca2b78b52b38123594284883f62063a818f2ffb2113d1f620ee44d52",
+      "response_cases": 144,
+      "accepted": 35,
       "signing_cases": 16
     },
     "isolated-certificate-rules.json": {

@@ -31,9 +31,11 @@ and `intermediates_der_base64`. Index 0 issued the leaf. Pin `root-a.pem` or
 | `missing-upper-intermediate.json` | the lower intermediate only | `root-a.pem` | reject (no pinned root issued the chain) |
 | `unrelated-root.json` | a chain under a root that is not pinned | `root-a.pem` | reject (no pinned root issued the chain) |
 
-The leaves are valid for 72 hours from issuance. Tests must use a fixed time inside
-that period, so the files do not need regeneration when the leaves expire. Use the
-`now` in `manifest.json`.
+The leaves are valid for 72 hours from issuance. The `root-eku-chain.json` leaf is
+valid for 120 hours. Each leaf spans at most 432300 seconds (120 hours and 5
+minutes), as rule F16 requires. Tests must use a fixed time inside that period, so
+the files do not need regeneration when the leaves expire. Use the `now` in
+`manifest.json`.
 
 ## Root rule variants
 

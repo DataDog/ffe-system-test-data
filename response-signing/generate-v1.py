@@ -546,6 +546,7 @@ SDK_REASONS = {
     "signature-encoding": "invalid-proof", "transcript-domain": "invalid-signature",
     "transcript-signature": "invalid-signature", "transcript-tail": "invalid-signature",
     "unsupported-constraint": "invalid-certificate", "validity-containment": "invalid-certificate",
+    "leaf-lifetime": "invalid-certificate",
     # The SDK checks its own request before it sends it.
     "signed-headers-missing": "unsupported-request", "signed-headers-syntax": "unsupported-request",
     "signed-headers-limit": "unsupported-request", "signed-headers-duplicate": "unsupported-request",
@@ -694,6 +695,13 @@ def corpus():
     for case_id, options, reason in variants:
         leaves[case_id] = make_leaf(case_id, INTERMEDIATE, **options)
         add(signed_case(case_id, leaves[case_id], [INTERMEDIATE], False, reason))
+    # F16: the leaf spans at most 432300 seconds (120 hours and 5 minutes).
+    add(signed_case("valid-leaf-lifetime-at-limit",
+                    make_leaf("valid-leaf-lifetime-at-limit", INTERMEDIATE, not_after="2026-11-01T00:05:00"),
+                    [INTERMEDIATE], True, None))
+    add(signed_case("leaf-lifetime-over-limit",
+                    make_leaf("leaf-lifetime-over-limit", INTERMEDIATE, not_after="2026-11-01T00:05:01"),
+                    [INTERMEDIATE], False, "leaf-lifetime"))
     for case_id, options, reason in [
         ("intermediate-ca-false", dict(basic=b"\x30\x00"), "intermediate-basic-constraints"),
         ("intermediate-pathlen-absent", dict(path_length=None), "intermediate-path-length"),

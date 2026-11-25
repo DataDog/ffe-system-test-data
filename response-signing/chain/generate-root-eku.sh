@@ -17,6 +17,10 @@ trap 'rm -rf "$WORK"' EXIT
 FFE_EKU="1.3.6.1.4.1.99999.1.1"
 NOT_BEFORE="20261101000000Z"
 NOT_AFTER="20361101000000Z"
+# The leaf spans 120 hours. F16 rejects a leaf that spans more than 432300 seconds
+# (120 hours and 5 minutes). The manifest `now` (2026-11-19T12:00:00Z) is inside the span.
+LEAF_NOT_BEFORE="20261117000000Z"
+LEAF_NOT_AFTER="20261122000000Z"
 SUBJECT="/CN=Response Signing Root EKU (test)"
 
 "$OPENSSL" ecparam -name prime256v1 -genkey -noout -out "$WORK/root.key"
@@ -73,7 +77,7 @@ EOF
 "$OPENSSL" x509 -in "$WORK/intermediate.der" -inform DER -out "$WORK/intermediate.pem"
 "$OPENSSL" req -new -key "$WORK/leaf.key" -subj "/CN=ffe-signer" -out "$WORK/leaf.csr"
 "$OPENSSL" x509 -req -in "$WORK/leaf.csr" -CA "$WORK/intermediate.pem" -CAkey "$WORK/intermediate.key" \
-    -sha256 -not_before "$NOT_BEFORE" -not_after "$NOT_AFTER" -set_serial 3 \
+    -sha256 -not_before "$LEAF_NOT_BEFORE" -not_after "$LEAF_NOT_AFTER" -set_serial 3 \
     -extfile "$WORK/leaf.cnf" -extensions ext -outform DER -out "$WORK/leaf.der"
 
 "$OPENSSL" pkcs8 -topk8 -nocrypt -in "$WORK/leaf.key" -outform DER -out "$WORK/leaf.pk8"

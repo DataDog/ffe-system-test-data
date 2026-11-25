@@ -9,7 +9,7 @@ Clients do not fetch them when they evaluate flags or verify a response.
 
 | File | Coverage | Consumers |
 | --- | --- | --- |
-| `v1/corpus.json` | 142 response cases: 34 accepted and 108 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
+| `v1/corpus.json` | 144 response cases: 35 accepted and 109 rejected. 16 signer cases. Includes `valid-empty-query`, `valid-high-s-signature`, the time-rule boundaries, `valid-mixed-case-header-names` and the signed header list cases. | Verifiers consume `cases`. Signers also consume `signing_cases`. |
 | `v1/isolated-certificate-rules.json` | An accepted control, and isolated certificate-size, leaf-CA and intermediate-CA rejections. 4 signer cases. | Signers and verifiers |
 | `v1/subject-der.json` | Canonical and nonminimal INTEGER encodings in the leaf subject, with valid signatures | Signers and verifiers |
 | `v1/extension-profile.json` | Accepted controls, and isolated policy-mapping and empty key-identifier rejections | Signers and verifiers |
@@ -201,6 +201,10 @@ when all of these are true:
 - For the leaf, each intermediate and the pinned root:
   `not_before <= now < not_after`, `not_before <= issued_at` and
   `expires_at <= not_after`.
+- For the leaf: `not_after - not_before <= 432300` (120 hours and 5 minutes,
+  rule F16). A longer leaf has `rejection_reason` `leaf-lifetime` and
+  `sdk_reason` `invalid-certificate`. `valid-leaf-lifetime-at-limit` spans
+  exactly 432300 seconds. `leaf-lifetime-over-limit` spans 432301 seconds.
 
 There is no other limit on the age of a proof. A proof issued 299 seconds before
 `now` is valid until `expires_at`. These cases test the boundaries:
@@ -394,14 +398,14 @@ signature bytes. At exact leaf expiry, signing must fail.
 
 `ci/validate-response-signing.py` prints the counts for each file.
 `ci/verify-response-signing-vectors.py` prints the totals for all six v1 files:
-162 response cases and 72 signer checks. A signer check is a signer case, or a
+164 response cases and 73 signer checks. A signer check is a signer case, or a
 check that the credential of an accepted case can sign a new proof. It also
 prints the 14 `chain/` cases.
 
 | Scope | Response cases | Signer |
 | --- | --- | --- |
-| `v1/corpus.json` | 142 | 16 signer cases |
-| All six v1 files | 162 | 72 signer checks |
+| `v1/corpus.json` | 144 | 16 signer cases |
+| All six v1 files | 164 | 73 signer checks |
 
 ## Validation and regeneration
 

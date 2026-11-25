@@ -14,7 +14,7 @@
       "rejection_reason": "leaf-eku"
     },
     "generate-root-eku.sh": {
-      "sha256": "40c031f18ec5920d199399a1fd49f777928c0b425e0f5742ffffc606d85df0d4",
+      "sha256": "e8c8219d6a11c85ad30dbaa3200b7aaa3d1b73ae8079b282cbdf22d1d930f5a5",
       "role": "OpenSSL generator for root-eku-chain.json and the root variants"
     },
     "missing-upper-intermediate.json": {
@@ -43,37 +43,37 @@
       "role": "pinned test root B"
     },
     "root-eku-any.pem": {
-      "sha256": "22b931d3da0aed4c7442919993c8d04d97e3d0b32cdd846e819fc1b09ed26577",
+      "sha256": "31b8ae22fd49a09d9deb0cdbd11f178941fcf0a6aeb280025ef7109c7eea29b7",
       "credential": "root-eku-chain.json",
       "expected": "accept"
     },
     "root-eku-chain.json": {
-      "sha256": "6b780d1c4ec099f2ee386e15fa6ea1369a8dc5ea2282c7c12ddd6d7e493053b2",
+      "sha256": "8dbc7a8e4677eb87adf06c7e12ddfc752fa8d893ea822e0fdbf4a6840d164a43",
       "role": "credential that each root-eku-* and root-pathlen-0 variant can anchor"
     },
     "root-eku-codesigning-ffe.pem": {
-      "sha256": "c87c927450380f0045be777445a66240f85603395e0b6fe9a8d7760a2c481b2f",
+      "sha256": "4e5b67887d4bb0c64cb8c3ef781abd8420ff6e48ff493837d43357c4d0121bfc",
       "credential": "root-eku-chain.json",
       "expected": "accept"
     },
     "root-eku-codesigning.pem": {
-      "sha256": "94e904ed3040292dd195a724947958d2a19ba9377bedb713f1847a574aef43fd",
+      "sha256": "ed0be5d2a512843287a5082cd6827b8588d214fd6b957e034b24e3f488422212",
       "credential": "root-eku-chain.json",
       "expected": "reject: root EKU",
       "rejection_reason": "root-eku"
     },
     "root-eku-ffe.pem": {
-      "sha256": "5f64629a52a61118fd412e285f338298509159adb33a44d05ca7c71cab899cff",
+      "sha256": "e86cc54df2f51f0c9e5d89dcf012efea0fad3052c2d269cb804a3bad91a25772",
       "credential": "root-eku-chain.json",
       "expected": "accept"
     },
     "root-eku-none.pem": {
-      "sha256": "bc1044ba53cc22e2d2fb049e6eb58c89c6ec194295445779d2792d56d9374f62",
+      "sha256": "0044b8a341e91e3eb24d8d4033ff1f8a152182641503aa5a7a0b2a1e90a0d4e1",
       "credential": "root-eku-chain.json",
       "expected": "accept"
     },
     "root-pathlen-0.pem": {
-      "sha256": "850704dd77f67f2b827b47ca7b4ed6bc1f78cdca4ae0e00898f4334e93816dbf",
+      "sha256": "218b11e3bdbbf8763df65d8590de3a7a06221bea1e19fdac044503e3baa5e1f9",
       "credential": "root-eku-chain.json",
       "expected": "reject: root path length",
       "rejection_reason": "root-path-length"
