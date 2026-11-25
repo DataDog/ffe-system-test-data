@@ -1,0 +1,146 @@
+[
+  {
+    "flag": "reason-time-bounded-full-range-shard",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-full-range-shard",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "bob",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-full-range-shard",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "charlie",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-covering-ranges",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-covering-ranges",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "bob",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-covering-ranges",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "charlie",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "SPLIT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-zero-percent-split-static",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "STATIC",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-zero-percent-split-static",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "bob",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "STATIC",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-zero-percent-split-static",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "charlie",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "STATIC",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-zero-percent-split-default",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "alice",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "DEFAULT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-zero-percent-split-default",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "bob",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "DEFAULT",
+      "doLog": true
+    }
+  },
+  {
+    "flag": "reason-time-bounded-zero-percent-split-default",
+    "variationType": "STRING",
+    "defaultValue": "default",
+    "targetingKey": "charlie",
+    "attributes": {},
+    "result": {
+      "value": "on",
+      "reason": "DEFAULT",
+      "doLog": true
+    }
+  }
+]

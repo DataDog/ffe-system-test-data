@@ -6382,6 +6382,190 @@
           "doLog": true
         }
       ]
+    },
+    "reason-time-bounded-full-range-shard": {
+      "key": "reason-time-bounded-full-range-shard",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "A date-window allocation whose only split has a full-range shard. The split has shards, so the reason is SPLIT.",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on"
+        },
+        "off": {
+          "key": "off",
+          "value": "off"
+        }
+      },
+      "allocations": [
+        {
+          "key": "dated-full-range",
+          "rules": [],
+          "startAt": "2022-10-31T09:00:00.594Z",
+          "endAt": "2050-10-31T09:00:00.594Z",
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [
+                {
+                  "salt": "reason-full-range",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ],
+              "reason": "SPLIT"
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "reason-time-bounded-covering-ranges": {
+      "key": "reason-time-bounded-covering-ranges",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "Same as reason-time-bounded-full-range-shard, with the full range written as two adjacent ranges.",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on"
+        },
+        "off": {
+          "key": "off",
+          "value": "off"
+        }
+      },
+      "allocations": [
+        {
+          "key": "dated-covering-ranges",
+          "rules": [],
+          "startAt": "2022-10-31T09:00:00.594Z",
+          "endAt": "2050-10-31T09:00:00.594Z",
+          "splits": [
+            {
+              "variationKey": "on",
+              "shards": [
+                {
+                  "salt": "reason-full-range",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 5000
+                    },
+                    {
+                      "start": 5000,
+                      "end": 10000
+                    }
+                  ]
+                }
+              ],
+              "reason": "SPLIT"
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "reason-zero-percent-split-static": {
+      "key": "reason-zero-percent-split-static",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "A 0% split (only an empty range) before an unsharded split. The selected split has no shards, so the reason is STATIC.",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on"
+        },
+        "off": {
+          "key": "off",
+          "value": "off"
+        }
+      },
+      "allocations": [
+        {
+          "key": "zero-percent-then-everyone",
+          "rules": [],
+          "splits": [
+            {
+              "variationKey": "off",
+              "shards": [
+                {
+                  "salt": "reason-zero-percent",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 0
+                    }
+                  ]
+                }
+              ],
+              "reason": "SPLIT"
+            },
+            {
+              "variationKey": "on",
+              "shards": [],
+              "reason": "STATIC"
+            }
+          ],
+          "doLog": true
+        }
+      ]
+    },
+    "reason-time-bounded-zero-percent-split-default": {
+      "key": "reason-time-bounded-zero-percent-split-default",
+      "enabled": true,
+      "variationType": "STRING",
+      "comment": "A date-window allocation with a 0% split before an unsharded split. The selected split has no shards, so the reason is DEFAULT; the split count does not matter.",
+      "variations": {
+        "on": {
+          "key": "on",
+          "value": "on"
+        },
+        "off": {
+          "key": "off",
+          "value": "off"
+        }
+      },
+      "allocations": [
+        {
+          "key": "dated-zero-percent-then-everyone",
+          "rules": [],
+          "startAt": "2022-10-31T09:00:00.594Z",
+          "endAt": "2050-10-31T09:00:00.594Z",
+          "splits": [
+            {
+              "variationKey": "off",
+              "shards": [
+                {
+                  "salt": "reason-zero-percent",
+                  "totalShards": 10000,
+                  "ranges": [
+                    {
+                      "start": 0,
+                      "end": 0
+                    }
+                  ]
+                }
+              ],
+              "reason": "SPLIT"
+            },
+            {
+              "variationKey": "on",
+              "shards": [],
+              "reason": "DEFAULT"
+            }
+          ],
+          "doLog": true
+        }
+      ]
     }
   }
 }
