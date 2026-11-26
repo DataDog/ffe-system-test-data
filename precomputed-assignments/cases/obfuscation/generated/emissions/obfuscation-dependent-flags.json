@@ -3,6 +3,10 @@
   "description": "Generated obfuscated companion: A successful dependency graph emits all reached evaluations and exposures; a graph with a missing node returns the caller default, emits the missing and propagated ancestor evaluations, and emits no exposures.",
   "_include": [
     {
+      "platform": "android",
+      "reason": "Supports obfuscation and the source fixture."
+    },
+    {
       "platform": "web",
       "reason": "Supports obfuscation and the source fixture."
     }
