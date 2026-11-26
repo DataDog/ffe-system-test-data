@@ -4,6 +4,9 @@
   "_include": [
     {
       "platform": "web"
+    },
+    {
+      "platform": "android"
     }
   ],
   "context": {
