@@ -269,3 +269,12 @@ Separate Android metadata limitation: public OpenFeature Kotlin0.6.2 exposes sca
 BITS-01 archive reconstructed from15numbered Slack chunks; each chunk checksum,28511-byte archive SHA-256 b4e547fc6649e98072f8e479ec9eb7507afddf7d318b9b6ca1c67704f080a4c1, ZIP integrity and exact corpus patch SHA-256 00d91c75efac3a4f5a4cfc2f95fcc081663f472822760bd29687aa9484719d04 verified by coordinator. Local WS-05 executor assigned semantic/static verification, exact17nodes then full65function; no runtime result yet.
 
 Flutter full Android corpus run is live with exact retained handle and owned AVD. Full framework unit run reported996pass/1missing-Browser-source failure; exact pinned Browser source was subsequently reused and that audit independently passed1/1. These are separate executions. Flutter lint reported41Dartfiles/analyzer clean. Host free space12.132GiB is close to12GiBfloor; no concurrent large builds/downloads. Only measured owned reproducible intermediates may be reclaimed after preserving APK/evidence.
+
+
+## Independent checks and resource recovery — CONTROL-023
+
+WS-05 independently reproduced32-file patch semantics: all65 non-root-applicability JSON field spans byte-identical, other eight platforms unchanged, Web applicability20to37. All65schemas valid, generator synchronization and41tooling tests pass. Exactly17nodes collected; focused Browser run is live with passive context/config/intake receipts and unchanged sourcebundle/lock. No download/build/SDKchange. Full65run remains subsequent work; no focused pass claim yet.
+
+WS-04 independent correctness reviewer returns no actionable finding after service/lifecycle/context/details/native-error mapping and exact paired exclusion review. Independently confirms all24changed corpus JSON files preserve every non-root-applicability field,5compatibility tests pass. This is one lens, not full Crucible acceptance. Performance reviewer started; other lenses/coverage/verifier pending.
+
+Disk fell below12GiBfloor while corpus runners were live. Coordinator reclaimed only task-owned unused Electron41.1.0 SDK development runtime and completed iOS compiler intermediates/index; tested Electron45runtime, iOS built app/Products, all source and evidence preserved. Measured13.386GiB free after recovery. Flutter retained the identical live runner without pause/restart; no process timing intervention. No concurrent large builds/downloads.

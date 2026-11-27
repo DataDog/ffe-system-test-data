@@ -22,3 +22,6 @@ CONTROL-021: coordinator independently verified signed/clean paired iOS FIT4bc3a
 
 
 CONTROL-022 Android correctness result: oneP1 pending repair, noP0 found in this lens. Android InitProvider lacks strict malformed-response translation; exact pinned SDK public error state retained, no public parse-specific code. Owner must add bounded mapping and positive/negative controls, followed by independent re-review. Root73affected tests pass; they do not prove device mapping. Other specialist lenses/coverage/verifier remain incomplete. Metadata enumeration is a separate SDK/API capability gap.
+
+
+CONTROL-023 iOS correctness lens: NONE,5independent compatibility passes and all24changed corpus files verified non-filter-equivalent. Performance lens live; other council jobs/coverage/verifier incomplete. Root independently verified signed heads as recorded above. No platform accepted.
