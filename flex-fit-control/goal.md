@@ -1,0 +1,164 @@
+# Control policy — authoritative update, November 27, 2026
+
+The coordinator oversees all nine platform rows × four deployment modes below, plus tracked API/telemetry sub-features. Repository support and SDK conformance are separate facts. The inventory below is a November 27 audit snapshot, not a new runtime validation or an assignment to begin implementation.
+
+**Latest user policy supersedes earlier publication and conformance wording:** activate the imported corpus directly while developing; investigate every failure; record SDK defects in WORKSTREAM.md before narrowly scoped skips/xfails; then push activation branches when locally green with those exclusions. **Do not open activation PRs.** Consolidate whole platform rows into PRs later where practical. No requirement that every SDK pass every fixture. Keep authored expected behaviour intact and document the excluded coverage.
+
+Read [Instructions.md](Instructions.md), [REFERENCE.md](REFERENCE.md), [WORKSTREAM.md](WORKSTREAM.md) and [REQUESTS.md](REQUESTS.md). The Control Branch itself never gets a PR. A later instruction may authorise implementation assignments; current setup authorises acknowledgement/access verification only.
+
+---
+
+# FLEX-FIT delivery matrix and open workstreams
+
+Last refreshed: **November 27, 2026 — America/Edmonton**.
+
+FLEX means **FLagging EXpectations**, within the **RUM Framework Integration Testing** platform.
+
+This document tracks test delivery and its supporting work. It does not assert that an SDK lacks a feature because its FIT coverage is planned. Online/offline configuration delivery, precomputed/rules evaluation, OpenFeature/direct API access and telemetry destinations are separate axes.
+
+## Platform × deployment mode
+
+**Enabled** means available in main with stated coverage limits. **PR** means published implementation still open. **Local** means an unpublished candidate. **Planned** means ticketed work without an enabled FIT path established by this inventory. Ticket workflow state can lag delivered code; for example, Browser offline rules is merged while its Linear issue is still selected for development.
+
+| Platform | Online precomputed | Offline precomputed | Online rules | Offline rules |
+| --- | --- | --- | --- | --- |
+| Browser | Enabled; partial conformance — [FFLSDK-29](https://linear.app/datadoghq-pilot/issue/FFLSDK-29); dependent coverage [#234](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/234) | Draft; conflicts — [#235](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/235) / [FFLSDK-21](https://linear.app/datadoghq-pilot/issue/FFLSDK-21) | Planned; selected for development — [FFLSDK-36](https://linear.app/datadoghq-pilot/issue/FFLSDK-36) | Merged; limited lifecycle coverage — [#221](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/221) / [FFLSDK-31](https://linear.app/datadoghq-pilot/issue/FFLSDK-31); full corpus skipped |
+| Android | Open PRs; integration blocked — [#136](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/136), [#240](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/240), [#241](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/241) / [FFLSDK-137](https://linear.app/datadoghq-pilot/issue/FFLSDK-137) (In Review) | Planned; backlog — [FFLSDK-116](https://linear.app/datadoghq-pilot/issue/FFLSDK-116) | Planned; backlog — [FFLSDK-120](https://linear.app/datadoghq-pilot/issue/FFLSDK-120) | Planned; backlog — [FFLSDK-138](https://linear.app/datadoghq-pilot/issue/FFLSDK-138) |
+| iOS | Local implementation; unpublished — [FFLSDK-114](https://linear.app/datadoghq-pilot/issue/FFLSDK-114) | Planned; backlog — [FFLSDK-135](https://linear.app/datadoghq-pilot/issue/FFLSDK-135) | Planned; backlog — [FFLSDK-119](https://linear.app/datadoghq-pilot/issue/FFLSDK-119) | Planned; backlog — [FFLSDK-136](https://linear.app/datadoghq-pilot/issue/FFLSDK-136) |
+| React Native | Draft [#230](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/230) plus newer unpublished local fixes — [FFLSDK-115](https://linear.app/datadoghq-pilot/issue/FFLSDK-115) | Planned; selected for development — [FFLSDK-140](https://linear.app/datadoghq-pilot/issue/FFLSDK-140) | Planned; backlog — [FFLSDK-121](https://linear.app/datadoghq-pilot/issue/FFLSDK-121) | Planned; backlog — [FFLSDK-125](https://linear.app/datadoghq-pilot/issue/FFLSDK-125) |
+| Flutter | Local implementation; unpublished — [FFLSDK-141](https://linear.app/datadoghq-pilot/issue/FFLSDK-141) | Planned; backlog — [FFLSDK-118](https://linear.app/datadoghq-pilot/issue/FFLSDK-118) | Planned; backlog — [FFLSDK-122](https://linear.app/datadoghq-pilot/issue/FFLSDK-122) | Planned; backlog — [FFLSDK-142](https://linear.app/datadoghq-pilot/issue/FFLSDK-142) |
+| Kotlin Multiplatform | Planned; backlog — [FFLSDK-143](https://linear.app/datadoghq-pilot/issue/FFLSDK-143) | Planned; backlog — [FFLSDK-117](https://linear.app/datadoghq-pilot/issue/FFLSDK-117) | Planned; backlog — [FFLSDK-128](https://linear.app/datadoghq-pilot/issue/FFLSDK-128) | Planned; backlog — [FFLSDK-124](https://linear.app/datadoghq-pilot/issue/FFLSDK-124) |
+| MAUI | Planned; backlog — [FFLSDK-147](https://linear.app/datadoghq-pilot/issue/FFLSDK-147) | Planned; backlog — [FFLSDK-148](https://linear.app/datadoghq-pilot/issue/FFLSDK-148) | Planned; backlog — [FFLSDK-149](https://linear.app/datadoghq-pilot/issue/FFLSDK-149) | Planned; backlog — [FFLSDK-126](https://linear.app/datadoghq-pilot/issue/FFLSDK-126) |
+| Electron | Activation/verification planned — [FFLSDK-144](https://linear.app/datadoghq-pilot/issue/FFLSDK-144) | Planned; backlog — [FFLSDK-145](https://linear.app/datadoghq-pilot/issue/FFLSDK-145) | Planned; backlog — [FFLSDK-123](https://linear.app/datadoghq-pilot/issue/FFLSDK-123) | Planned; backlog — [FFLSDK-146](https://linear.app/datadoghq-pilot/issue/FFLSDK-146) |
+| Unity* | Local; native validation licence-blocked — umbrella [FFLSDK-109](https://linear.app/datadoghq-pilot/issue/FFLSDK-109) | No dedicated platform ticket found — umbrella [FFLSDK-110](https://linear.app/datadoghq-pilot/issue/FFLSDK-110) | No dedicated platform ticket found — umbrella [FFLSDK-111](https://linear.app/datadoghq-pilot/issue/FFLSDK-111) | No dedicated platform ticket found — umbrella [FFLSDK-112](https://linear.app/datadoghq-pilot/issue/FFLSDK-112) |
+
+*Unity is additional to the original 32-cell grid and is not currently a FIT Platform enum member. No dedicated Unity delivery ticket was found in the fully paginated FLEX project inventory; the four links above are mode umbrella tickets, not Unity implementation tickets. A broader global text search was partial and is not proof that no ticket exists elsewhere.
+
+Coverage and evidence:
+
+- PR metadata/check states were refreshed today; native candidate receipts are historical, principally November 17, and were not rerun for this inventory. Android/iOS host results must be tracked separately for RN, Flutter, KMP and MAUI. A framework-wide tick is insufficient.
+- Browser offline rules #221 is merged. Its full rules corpus remains intentionally skipped; the lifecycle proof is not a required CI gate. Browser online rules still needs the public fetch-helper/binary endpoint path.
+- Android #136 and the overlapping #240 conflict with main; #241 targets #136's branch. No duplicate or superseded PR was closed during this scan. Reconcile ownership and exact deltas before choosing a delivery branch.
+- Direct access is an additional slice: Android [#139](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/139) / [FFLSDK-213](https://linear.app/datadoghq-pilot/issue/FFLSDK-213) is draft; iOS [FFLSDK-214](https://linear.app/datadoghq-pilot/issue/FFLSDK-214) is backlog.
+- Shared optional tracking hooks are in [#231](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/231); portable configuration [#235](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/235) is stacked on it. Green Web jobs do not prove native or all-mode coverage.
+- Shared native CI repair [#244](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/244) remains separate from flag conformance. Earlier KMP iOS logs executed 14 passed / 40 skipped; Flutter/RN failures are distinct blockers.
+
+## Activation audit and missing work — November 27
+
+The original **32 cells already have tickets**. Missing work is mainly shared activation reliability and sub-feature consumers, plus Unity FIT delivery tracking. Full audit, evidence and per-platform routing (coordinator-local evidence; request a portable summary through REQUESTS.md).
+
+**Current activation policy:** edit the imported corpus directly during development. Investigate and record SDK failures before narrowly scoped skips/xfails. Once locally green with declared exclusions, push activation branches and record paired FIT/corpus revisions. Do not open activation PRs; consolidate platform rows later. Include FIT activation with implementation where practical. See Instructions.md for the authoritative workflow.
+
+| Audit ID | Gap / remaining work | Tracking and next delivery |
+| --- | --- | --- |
+| ACT-01 | Corpus-only pins do not select native jobs; green #205 has no runtime execution | New shared CI activation work; ensure corpus checkout and deliberate affected-host runs. Corpus preview repair already exists as [data #84](https://github.com/DataDog/ffe-system-test-data/pull/84). |
+| ACT-02 | Module/class platform markers are ignored by own-marker collection/parametrisation | New shared FIT fix; especially relevant to #235's module-level applicability. |
+| ACT-03 | Three Web numeric fixtures still quarantined although FFLSDK-292 is Done | Verify fixed SDK pin, run and remove exact FIT skips; no extra corpus PR needed. |
+| ACT-04–06 | Native publication plus dependent/obfuscation/rejection activation | Use existing platform tickets and implementation PRs. [Data #88](https://github.com/DataDog/ffe-system-test-data/pull/88) already covers Android dependent includes; other platforms need capability-led companions. Integrate unpublished rejection handling; preserve legitimate numeric restrictions. |
+| ACT-07–08 | Context/refetch/cache sequences and full offline-precomputed corpus remain incomplete | Expand existing [FFLSDK-29](https://linear.app/datadoghq-pilot/issue/FFLSDK-29), [FFL-1334](https://linear.app/datadoghq-pilot/issue/FFL-1334), [FFLSDK-21](https://linear.app/datadoghq-pilot/issue/FFLSDK-21); #235's targeted portable cases do not close full corpus scope. |
+| ACT-09–10 | Native rules identifiers rejected; binary fetch and full-corpus activation incomplete | Existing mode/cell tickets; loader/endpoint/scenario activation in implementation. Proposed UFC changes, including [data #86](https://github.com/DataDog/ffe-system-test-data/pull/86), need regenerated resources and FIT uptake. Current main manifest matches its source. Full offline corpus remains intentionally disabled; retain manual lifecycle outside required CI. |
+| ACT-11 | restoredReason fixtures have no restore-aware FIT consumer | New persistent-cache/restore coverage work paired with [data #85](https://github.com/DataDog/ffe-system-test-data/pull/85); portable config load alone is insufficient. |
+| ACT-12 | Browser tracking hooks do not establish native/mode combinations | Explicit capability-led follow-ups to [#231](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/231), preserving independent exposure/evaluation/RUM controls. |
+| ACT-13 | Unity lacks dedicated FIT delivery tracking in the project inventory | Add a delivery item for existing online-precomputed WIP/platform integration/native proof; [FFLSDK-263](https://linear.app/datadoghq-pilot/issue/FFLSDK-263) already tracks SDK obfuscation. Other modes need capability/scope decisions. |
+| ACT-14–15 | Proposed contracts lack consumers; older tickets/overlapping PRs obscure ownership | Name consumers before activation work; reconcile existing tickets and PRs rather than duplicate them. |
+
+Audited all 45 open PRs, 61 fully paginated FLEX issues, targeted related issues, saved native WIP and exact-main activation paths/65 precomputed fixtures. Static fixture eligibility is not execution: Web 20, Android 60, iOS 62, RN 35, Flutter 62, KMP/MAUI/Electron 18 each, Unity 38 (of 65; nested filters and FIT skips further reduce these). Native receipts remain historical. No tickets/PRs opened or changed and no runtime tests rerun.
+
+## Scan coverage and interpretation
+
+All **30 open RUM FIT PRs** and **15 open ffe-system-test-data PRs** were enumerated, with descriptions, changed-file lists, head/base references, draft state, review decision, mergeability and reported check rollups retained. Both lists used a limit of 500 and returned fewer than that limit. Detail reads succeeded for all 45 PRs. This is a PR/workstream inventory, not a code review, CI-log audit or fresh SDK/runtime validation. Descriptions' test claims remain author-reported unless separately linked to independently examined evidence.
+
+The tables include adjacent infrastructure explicitly, so shared-driver/CI work does not disappear while also avoiding an implication that every open PR implements FLEX. Reported-check status includes advisory checks; it is separate from review approval, branch conflicts and actual merge eligibility. “All reported checks green” includes skipped/neutral jobs where present and does not establish which platform tests executed.
+
+### RUM FIT: direct FLEX work
+
+| PR | Workstream / relationship | Owner | Draft / branch state | Reported checks | Review state |
+| --- | --- | --- | --- | --- | --- |
+| [#136](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/136) | Android OpenFeature + shared precomputed harness; base main; foundation for #139/#241 | typotter | Draft; conflicting | Contains failures | REVIEW_REQUIRED |
+| [#240](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/240) | Overlapping Android OpenFeature publication; same workstream as #136, not another platform capability | typotter | Open; conflicting | Contains failures | REVIEW_REQUIRED |
+| [#241](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/241) | Incremental #136 companion: fixtures, endpoint alias, raw JSON fidelity, wire tests and scoped CI/MAUI cleanup | typotter | Open; mergeable | Contains failures | Not reported |
+| [#139](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/139) | Android direct FlagsClient; stacked on #136 | typotter | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#138](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/138) | Older source/type/access deployment schema; base of #230; reconcile with access-only #136 before reuse | typotter | Open; conflicting | Contains failures | REVIEW_REQUIRED |
+| [#230](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/230) | React Native OpenFeature adapter; stacked on #138; SDK custom-intake dependency; both host adapters | sameerank | Draft; mergeable | Contains failures | Not reported |
+| [#170](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/170) | Matcher-aware emission polling; shared correctness/reliability across platform runners | typotter | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#231](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/231) | Independent browser exposure/evaluation/RUM hooks; main-based after merged #221 | sameerank | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#235](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/235) | Portable configuration round trips and offline precomputed browser tests; stacked on #231 | sameerank | Draft; conflicting | Contains failures | Not reported |
+| [#234](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/234) | Web dependent precomputed flags, ordered telemetry and RUM enrichment; corpus/SDK WIP pins | typotter | Draft; conflicting | Contains failures | REVIEW_REQUIRED |
+
+### RUM FIT: shared infrastructure and adjacent work
+
+| PR | Relationship to FLEX-FIT | Owner | Draft / branch state | Reported checks | Review state |
+| --- | --- | --- | --- | --- | --- |
+| [#205](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/205) | SDK and corpus pin refresh; current green run has fixture validation/orchestration, no platform test jobs | app/dd-octo-sts | Open; mergeable | All reported checks green | APPROVED |
+| [#244](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/244) | KMP iOS swift-log compatibility and build diagnostics; shared CI unblock, not new FLEX coverage | typotter | Draft; mergeable | Contains failures | APPROVED |
+| [#171](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/171) | Move platform lint to Linux; shared runner capacity/toolchain work | abrooksv | Draft; conflicting | Contains failures | REVIEW_REQUIRED |
+| [#225](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/225) | Autonomous failure-diagnosis/fix infrastructure; general FIT, not a FLEX test implementation | allspain | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#236](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/236) | Native iOS RUM Remote Configuration suite; adjacent shared iOS driver work, not flag rules/configuration delivery | hamorillo | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#237](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/237) | RC iOS sentinel observation; stacked on #236; adjacent sequencing pattern, not FLEX coverage | hamorillo | Draft; mergeable | Contains failures | Not reported |
+
+### ffe-system-test-data: every open PR
+
+All 15 belong to the shared flagging data/tooling repository; their relationship to FIT is stated rather than assuming every format is consumed by its current runner.
+
+| PR | Contract / relationship to FIT | Owner | Draft / branch state | Reported checks | Review state |
+| --- | --- | --- | --- | --- | --- |
+| [#88](https://github.com/DataDog/ffe-system-test-data/pull/88) | Activate plain + obfuscated dependent fixtures on Android; expectations unchanged; Android advisory compatibility fails | typotter | Open; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#87](https://github.com/DataDog/ffe-system-test-data/pull/87) | Response-signing transcript/header-list vectors; adjacent transport/security contract, not currently established as a FIT runner path | leoromanovsky | Open; mergeable | All reported checks green | REVIEW_REQUIRED |
+| [#86](https://github.com/DataDog/ffe-system-test-data/pull/86) | Rules evaluation reasons for shard shape/zero-percent splits; rules-resources NOT regenerated per description; FIT propagation remains separate | leoromanovsky | Open; mergeable | All reported checks green | APPROVED |
+| [#85](https://github.com/DataDog/ffe-system-test-data/pull/85) | Precomputed restoredReason, signed-zero and Unicode identity fixtures; a restore-aware runner is needed to assert restoredReason | leoromanovsky | Open; mergeable | All reported checks green | APPROVED |
+| [#84](https://github.com/DataDog/ffe-system-test-data/pull/84) | Repair Android compatibility preview so importer uses proposed corpus pin; avoids false-green fixture evidence; draft despite approval | leoromanovsky | Draft; mergeable | All reported checks green | APPROVED |
+| [#81](https://github.com/DataDog/ffe-system-test-data/pull/81) | Hostile-value pass-through: default precomputed fixtures + opt-in UFC suite; FIT uptake requires pin/applicability | leoromanovsky | Draft; mergeable | All reported checks green | REVIEW_REQUIRED |
+| [#79](https://github.com/DataDog/ffe-system-test-data/pull/79) | Opt-in Rust-dialect/linear-time regex evaluation suite; not universal core or automatic FIT enablement | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#69](https://github.com/DataDog/ffe-system-test-data/pull/69) | Dependency updates to downstream/mobile compatibility workflows | app/dependabot | Open; mergeable | All reported checks green | APPROVED |
+| [#51](https://github.com/DataDog/ffe-system-test-data/pull/51) | Require boolean doLog; malformed/missing forms produce per-flag PARSE_ERROR | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#48](https://github.com/DataDog/ffe-system-test-data/pull/48) | Versioned experimentation opt-out contract, compiler-generated inputs and lifecycle cases; proposed contract, no FIT consumer established | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#41](https://github.com/DataDog/ffe-system-test-data/pull/41) | Null versus empty targeting keys with sharding and implicit id; shared evaluation contract | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#28](https://github.com/DataDog/ffe-system-test-data/pull/28) | Non-positive shard isolation and explicit ERROR errorCode requirements | leoromanovsky | Draft; unknown | Contains failures | REVIEW_REQUIRED |
+| [#23](https://github.com/DataDog/ffe-system-test-data/pull/23) | Downstream regex conformance evidence; author explicitly says evidence-only, not intended for merge | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#13](https://github.com/DataDog/ffe-system-test-data/pull/13) | Precompute producer request/full-response contract; precompute-cases format differs from client typed/evaluation-emission fixtures | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#12](https://github.com/DataDog/ffe-system-test-data/pull/12) | Legacy precomputed fixture proposal; current main uses precomputed-assignments; reconcile overlap rather than treating as missing foundation | leoromanovsky | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+
+### RUM FIT: remaining open maintenance/scenario PRs
+
+These were scanned and retained for completeness; none establishes an additional FLEX deployment-mode implementation.
+
+| PR | Scope | Owner | Draft / branch state | Reported checks | Review state |
+| --- | --- | --- | --- | --- | --- |
+| [#243](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/243) | Electron undici maintenance | app/datadog-datadog-prod-us1-2 | Open; mergeable | All reported checks green | REVIEW_REQUIRED |
+| [#242](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/242) | RN node-forge lockfile maintenance; overlaps #239 | app/datadog-datadog-prod-us1 | Open; mergeable | Contains failures | APPROVED |
+| [#239](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/239) | RN node-forge lockfile maintenance; overlaps #242 | app/gh-worker-campaigns-3e9aa4 | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#232](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/232) | pytest major update | app/gh-worker-campaigns-3e9aa4 | Open; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#182](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/182) | RN Kotlin Gradle plugin update | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#149](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/149) | Android/KMP/RN ktlint plugin update | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#148](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/148) | Flutter/RN Gradle wrapper update; potential toolchain intersection, not a validated Flutter repair | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#147](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/147) | Android OkHttp major update | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#146](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/146) | Android Apollo runtime update | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#145](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/145) | Broad Android/Flutter/KMP/RN Gradle/AGP maintenance; toolchain intersection, not proven repair | app/dd-octo-sts | Draft; mergeable | Contains failures | REVIEW_REQUIRED |
+| [#99](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/99) | RN scenario styles refactor | rgaignault | Open; unknown | Contains failures | APPROVED |
+| [#55](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/55) | Distributed tracing/iOS driver flake repair | app/datadog-official | Open; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#54](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/54) | iOS driver/WDA and RUM scenario flake repair | app/datadog-prod-us1-3 | Open; unknown | All reported checks green | REVIEW_REQUIRED |
+| [#53](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/53) | Multiview scenario/shared fixture flake repair | app/datadog-datadog-prod-us1-2 | Draft; unknown | All reported checks green | REVIEW_REQUIRED |
+
+## Audited dependencies, overlaps and next decisions
+
+1. **Android delivery:** reconcile #136 / #240; preserve #139 direct access and #241's incremental fixes. Confirm compatible SDK dependencies and actual device/IPC/intake evidence before calling the online-precomputed cell delivered.
+2. **IPC schema:** #138 carries source/type enums; #136 uses access-only selection; #230 is still stacked on #138. #231/#235 also change protobuf/generated bindings. Reconcile these contracts and generated files before combining branches.
+3. **Browser:** main already contains #221; #231 now targets main, while #235 stays stacked on #231. #234 overlaps the shared harness and fixture pins and still describes an obfuscated dependency SDK gap. Resolve actual compatibility without weakening fixture expectations.
+4. **New fixture uptake:** #88, #85 and #81 expand precomputed applicability/contracts. #84 repairs preview fidelity; currently green preview status is not by itself proof the requested fixture revision was exercised. #86 changes canonical UFC without regenerated rules-resources, so offline FIT artifact regeneration/provenance needs an explicit follow-up.
+5. **Broader contracts:** #48 opt-out, #79 regex, #41 identity, #51 doLog, #28 invalid bounds and #13 producer responses do not become active FIT tests merely by merging fixture files. Identify the consumer, mode, representation, required SDK support and assertions for each.
+6. **Legacy/diagnostic PRs:** fixture #12 predates today's precomputed-assignments foundation; #23 explicitly remains evidence-only. Neither should be counted as a new deliverable awaiting ordinary merge without reconciliation.
+7. **Shared runtime blockers:** keep #244, the local RN workspace/source-registration candidate and Flutter stdin/readiness/toolchain diagnosis separate from platform flag conformance. Dependency updates #145/#148 may intersect Flutter tooling but were not validated here as fixes.
+8. **Pin update #205:** approved, mergeable, all reported checks green. Its current rollup lists dynamic build creation, no-op, fixture validation and mergegate only. No native/Web runtime suite execution is established by that run.
+9. **No external changes:** this scan did not push, post comments, resolve threads, rerun CI, change PR readiness, merge, or change Linear. Recommendations above are planning, not approval to perform those actions.
+
+## Preserved unpublished work and sources
+
+- Existing FLEX workstream (coordinator-local evidence; request a portable summary through REQUESTS.md).
+- Native IPC publication package (coordinator-local evidence; request a portable summary through REQUESTS.md): 12 logical SDK/provider/FIT deliveries, with overlapping candidates and outstanding publication/validation gates. This is historical local WIP, not 12 open PRs or a new branch scan today.
+- Native CI investigation and local candidates (coordinator-local evidence; request a portable summary through REQUESTS.md).
+- Earlier matrix/assessment (coordinator-local evidence; request a portable summary through REQUESTS.md); historical statuses are superseded by this scan where refreshed.
+- Complete RUM FIT PR descriptions/heads/bases (coordinator-local evidence; request a portable summary through REQUESTS.md).
+- Complete fixture PR descriptions/heads/bases (coordinator-local evidence; request a portable summary through REQUESTS.md).
+- All 45 changed-file lists and check/review states (coordinator-local evidence; request a portable summary through REQUESTS.md).
+
+Scope limits: all open PRs in these two repositories are covered. Closed/merged historical work is referenced where necessary, but was not exhaustively inventoried. Unpublished branches, other chats, Linear projects outside the previously refreshed FLEX inventory and companion SDK PR repositories were not freshly exhaustively scanned. No source code/tests were changed or executed for this inventory.
