@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-030, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-031, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -205,3 +205,10 @@ Tyler said to hold while confirming the relationship between offline initializat
 Tyler clarified that offline initialization receives exactly the serialized ConfigurationWire payload over FLEX/FIT RPC. The corpus generator or test runner produces that serialization; IPC servers never construct or serialize ConfigurationWire from UFC, fixture objects or another intermediate representation. Carry the exact produced payload without rewriting, re-encoding or reconstructing it in the platform adapter, then pass it to the SDK's supported initialization/parser API. Calling the SDK's parser is consumption, not permission to generate the wire in the IPC server. Test equality of producer output and SDK-bound input, including required encoding/content.
 
 CONTROL-028 overextended this instruction into a generic binary request/response transport rewrite; that coordinator interpretation is withdrawn. It is not a new assignment or acceptance requirement. CONTROL-029's clarification hold is resolved only to this payload requirement. The independent empty-flag-key/default-value control-transport defect remains WS-11 work, with isolated candidate, independent review and actual Browser proof required; do not couple it to offline payload generation or silently change the overall RPC architecture. Existing platform sequencing remains: no later-mode execution until the platform's online-precomputed cell is accepted.
+
+
+## All-mode init audit and existing artifact producer — CONTROL-031
+
+Tyler confirmed existing generated configuration-wire.json is the offline rules input: Python verifies/loads and forwards its exact serialized contents; IPC servers never produce it. Stop the new Python SDK serializer investigation.
+
+The requested all-WIP init audit found source-only inference insufficient: current Web distinguishes URL versus wire, portable235 permits multiple capabilities, and native candidates currently implement online precomputed only. A proposed explicit four-mode selector, independent of API access, requires strict mode/source/evaluator validation. This is a review proposal, not an approved or implemented schema migration. Preserve consumed field numbers, reconcile all bindings and old consumers, and do not begin later-mode execution or generic RPC rewriting. See [INIT-CONTRACT-AUDIT.md](INIT-CONTRACT-AUDIT.md).

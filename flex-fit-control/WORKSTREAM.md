@@ -335,3 +335,8 @@ Tyler asked to hold while discussing serialized ConfigurationWire for offline ru
 Tyler confirmed offline init input is a serialized ConfigurationWire and requires that exact payload to cross FLEX/FIT RPC. Production belongs exclusively in the corpus generator or test runner, never an IPC server. Coordinator withdraws CONTROL-028's broader generic binary-RPC rewrite interpretation and separates this producer/payload contract from WS-11's online-precomputed default-value defect. Shared components row/brief now state ownership and exact producer-to-SDK equality proof. No later-mode work dispatched.
 
 Coordinator independently reproduced all110WS-11 neighbouring tests in152.91seconds; original narrower candidate retained for complete review rather than architecture rewrite. iOS exact-child simulator run completed10passed/55skipped/0fail in498.37seconds, exit0; fresh AI/traffic/corpus exclusion audit assigned independently. No row acceptance or activation push.
+
+
+## All-mode init audit — CONTROL-031
+
+Tyler requested all-WIP verification and a non-ambiguous final init shape. Two independent source audits plus coordinator refreshed30open FIT PR heads and privately read current RN workspace staged tree4ad01494f28936830d1a876271515a6eb16b6c8c. Existing schema lacks a four-mode discriminator;235 hybrid acceptance cannot prove the requested pure evaluator. Explicit mode/source validation draft prepared for review, no implementation/live changes. Existing serialized rules artifact confirmed; new Python serializer investigation stopped. Matrix shared row/reference refreshed.

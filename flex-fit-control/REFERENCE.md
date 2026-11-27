@@ -59,3 +59,8 @@ An existing core FIT IPC server gates row eligibility; no server means the whole
 At the inspected FIT origin/main, src/rum_sdk_test/flagging/server.py exposes POST /flag-config returning precomputed JSON and OPTIONS; it does not implement a binary rules endpoint. Reconcile WIP/PR extensions before adding one. This is a source inspection, not runtime proof or a complete audit of every branch.
 
 Corpus tools/ufc/README.md documents generation through the production Go converter and pinned flagging-core serializer. rules-resources/catalog.json currently names canonical-evaluator from ufc-config.json. The generated resource contains ufc.pb and configuration-wire.json with manifest provenance. The latter contains the portable wire string without extra JSON quoting. Use these generated resources and their paired cases; inspect open and merged corpus changes for additional UFCs/encodings. Do not assume every opt-in suite is already represented in the catalogue or that conversion includes every source flag.
+
+
+## All-mode init reconciliation — CONTROL-031
+
+See [INIT-CONTRACT-AUDIT.md](INIT-CONTRACT-AUDIT.md). URL versus wire cannot select all four modes. Explicit mode/source/evaluator validation and coordinated generated-client/server migration are proposed, not implemented. Existing rules artifact production is JavaScript-backed; Python verifies/loads/forwards it. No new Python SDK serializer or generic RPC rewrite is assigned.
