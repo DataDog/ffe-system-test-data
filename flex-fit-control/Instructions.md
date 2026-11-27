@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-044, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-045, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN device isolation and aggregate prerequisites — CONTROL-045
+
+Workspace feasibility audit confirms ample disk but Linux lacks Xcode/SwiftLint/.NET/native packs required by the unchanged aggregate wrapper. Do not claim a full pass or run the MAUI cleanup against shared development caches. RN host audit finds all35Android-applicable canonical cases affected by known SDK gaps; do not turn wholesale skips into a coverage claim. Run rejection controls before finalising their classification policy. A second emulator is connected; local worker owns selected-device-only Metro forwarding repair plus regression tests, preserving existing forwards and all other WIP. Independently review and verify that repair before device execution. No BitsCode implementation assignment or activation PRs.
 
 ## Aggregate validation preparation — CONTROL-044
 
