@@ -226,3 +226,10 @@ WS-08 reports94 focused topology/forwarding checks and Android build pass. Initi
 Tyler explicitly changed the entire Unity row to **Not planned**. All four matrix cells, current instructions/reference/eligibility disposition and ACT-13 now agree. Earlier deferred/unverified Unity entries are historical and superseded. Preserve candidate inventory; no Unity eligibility, core IPC, implementation or delivery-ticket work is assigned. The other eight delivery rows retain their gates.
 
 Following Tyler's requested retry, signed CONTROL-016 publication succeeded at 1383fff31f7e4bd9f8f722396dfd2d385255be87; signature verified good and remote head matched. This update preserves signed publication and the configured identity.
+
+
+## Emulator transport diagnosis and current execution — CONTROL-018
+
+WS-08's genuine Flutter Android app installed and reached its own InitProvider over the allocated gRPC forward. Provider initialisation then failed with no configuration HTTP receipts; no typed/intake pass claimed. On the task AVD, the same temporary mock POST via advertised LAN returned no HTTP bytes, while the documented emulator host alias returned HTTP200 and a receipt. This is a transport/infrastructure gap, not an SDK exclusion. Coordinator approved explicit declared emulator host access with physical-device/default preservation; actual SDK smoke must verify it. Task AVD/owned forwards were released after diagnosis. All runtime retries and AI reports are retained privately.
+
+Current SDK identities, canonical fixtures and Unity Not planned disposition are unchanged. Android private bundle reassembled and checksums verified for local review; no device runtime yet. Electron real smoke passes and its18-case current-applicability inventory continues, separate from47 static exclusions. Matrix cells refreshed and shortened to show current state without contradictory historical zero-runtime summaries.

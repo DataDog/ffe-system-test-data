@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-017, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-018, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -133,3 +133,10 @@ Configured SSH signing-agent failures delayed this revision. Preserve signed-com
 ## Unity disposition — CONTROL-017
 
 Tyler directs that the entire Unity row is **Not planned**. This supersedes earlier deferred/unverified Unity wording. All four deployment-mode cells reflect Not planned. Unity is outside current execution scope; preserve historical candidates without assigning new work or creating delivery tracking. Other rows retain their existing eligibility and online-precomputed-first gates.
+
+
+## Explicit Android Emulator host access — CONTROL-018
+
+WS-08 may extend its public driver/addressing topology support with an explicit emulator host-loopback alias. Android Emulator provides 10.0.2.2 for this purpose; the task AVD returned HTTP200 through it while advertised LAN returned no HTTP bytes/receipt. Treat this as infrastructure routing, not an SDK conformance gap. Use a declared emulator strategy property, preserve URL scheme/port/path/query, and preserve physical-device LAN and iOS/Web/Electron loopback defaults. No runtime probing/fallback or global Android/wrapper remap. Validate conflicting/invalid topology inputs and cover configuration plus intake URLs. Native Android adoption remains a separate WS-02 coordination hunk; other wrappers remain unchanged until explicitly integrated.
+
+Use the official networking contract: https://developer.android.com/studio/run/emulator-networking-address . Real app configuration/evaluation/intake must pass on the source implementation before acceptance. Diagnostic shell HTTP success alone is insufficient. Unity remains Not planned.
