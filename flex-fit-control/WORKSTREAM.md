@@ -60,3 +60,11 @@ Tyler clarified row eligibility and order: existing core IPC server, then comple
 Tyler authorised execution under the revised sequence. BITS-01 is assigned Browser online precomputed, conditional on actual FIT access. WS-02 is assigned Android online precomputed in a dedicated workspace chat, including ownership of the shared native Android prerequisite lane. All other platform implementation rows await explicit assignment. Preliminary core-IPC source audit finds eight existing platform transports; Unity lacks an established mainline core and its candidate remains unvalidated, so its entire row is deferred pending confirmed eligibility evidence. Full source receipts are being assembled.
 
 WS-01 reports signed local head 47f8760c5c7ca870a13029bb711cd74d3a506bae based on e07ae57ef3108b18b10d2f67690bc36caf8303af, 912 unit passes, 49 focused checks, Python lint/type checks and no new exclusions. These are implementor-reported. Publication is blocked by repository-wide lint/tooling requirements and sandbox limits; Dynamic Build authentication/native runtime remain unverified. Portable patch/report requested for independent local review. No acceptance or remote activation branch is claimed.
+
+## Active execution — CONTROL-006
+
+- BITS-01 dispatched in Slack: https://dd.slack.com/archives/C0CKGQ8T483/p1795801633460089 . Browser online precomputed; actual FIT access acknowledgement pending.
+- WS-02 workspace chat created: FLEX Android online precomputed, ID 01a21e1e-6622-7d42-877a-d0fd475f729d, x-platform testing. Execution receipt pending.
+- WS-03 coordinator-local shared_native_foundation agent is reconciling minimum shared online-precomputed foundations; existing main already has configuration_wire/metadata and fixture_json fidelity, so avoid duplicate schema/helpers.
+- WS-04 coordinator-local ios_online_precomputed agent is recovering app/service/tests and comparing SDK/provider companions. Xcode exists; disk is limited, so reuse assets. Exact shared dependency remains pending.
+- [IPC-ELIGIBILITY.md](IPC-ELIGIBILITY.md) records eight source-eligible rows and Unity deferred. RN/Flutter/KMP/MAUI/Electron are not yet separately assigned implementation lanes; they await bounded shared-interface/ownership handoffs. No later-mode work dispatched.

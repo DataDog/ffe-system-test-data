@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-005, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-006, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -9,7 +9,9 @@ Tyler resumed the matrix goal and explicitly requested workspace chats in the x-
 - **WS-01 — workspace activation foundations:** the newly created workspace chat owns the bounded assignment in [assignments/WS-01.md](assignments/WS-01.md). First verify workspace execution and Control Branch/repository access, then implement shared CI activation and inherited platform-marker fixes within that scope.
 - **BITS-01 — Browser online precomputed:** BitsCode owns the bounded assignment in [assignments/BITS-01.md](assignments/BITS-01.md). Verify FIT source access first; do not duplicate WS-01 or broaden into later modes.
 - **WS-02 — Android online precomputed:** a dedicated x-platform testing workspace chat owns [assignments/WS-02.md](assignments/WS-02.md). Reconcile existing stacks and native Android prerequisites; no other row may modify that shared SDK prerequisite without coordination.
-- **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Other platform assignments follow after workspace creation/execution is verified.
+- **WS-03 — shared native online-precomputed foundation:** coordinator-local implementation agent owns [assignments/WS-03.md](assignments/WS-03.md), excluding WS-01 CI/markers/conftest ownership.
+- **WS-04 — iOS online precomputed:** coordinator-local implementation agent owns [assignments/WS-04.md](assignments/WS-04.md) and the shared native iOS prerequisite lane used by RN.
+- **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Coordinate the active lanes below and independently review handed-off heads.
 
 No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
 
