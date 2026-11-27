@@ -413,3 +413,6 @@ CONTROL-045: workspace capacity audit terminal:141GiBcheckout/752GiBcachefree, b
 
 
 CONTROL-046: selected-device-only RN Metro repair frozen and independently reviewed:5native lenses/nativecoveragefallback/final verifier noP0/P1. Coordinator95mocked tests pass; wrong-device in-memory mutant fails; earlier94pass/1test-binding failure corrected before frozen review. RetainP2best-effort cleanup and timeout residue plus existing localADB/restart races; no guaranteed cleanup under failure claim. Full65-selection canonical RN Android now live with no new exclusions and unchanged source expectations/SDK/service. Exact launch manifest and no-mutation observer recorded privately; other device reverse baseline captured. Telemetry start/finish recorded but two stage records unavailable, separate from review outcome.
+
+
+CONTROL-047: start independent prerequisite audits while RN full canonical run continues. Local shared owner audits existing FIT rules-server/WIP and exact SDK-fetch method/path/headers. BitsCode assigned separate public corpus generated-resource catalogue/provenance and relatedPR audit, documentation-only branch; no fixture changes or platform-mode execution. Preserve exact serialized ConfigurationWire artifact, no new serializer or RPC rewrite. No activation PRs.

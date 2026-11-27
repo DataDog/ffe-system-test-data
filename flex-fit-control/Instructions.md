@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-046, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-047, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Shared rules prerequisite audit — CONTROL-047
+
+BITS-02 is assigned the bounded public corpus catalogue/provenance audit in [assignments/BITS-02-RULES-CORPUS-AUDIT.md](assignments/BITS-02-RULES-CORPUS-AUDIT.md). Report in the channel and read requirements here. A separate documentation-only audit branch is allowed; no fixture/activation changes, PRs or tickets. The local shared-infrastructure agent owns existing FIT binary-serving/WIP and SDK-fetch contract audit. These are prerequisite audits, not later platform-mode implementation/execution. Preserve current RN live candidate and devices.
 
 ## RN full canonical execution — CONTROL-046
 
