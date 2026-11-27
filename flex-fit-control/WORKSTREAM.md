@@ -8,7 +8,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | --- | --- | --- | --- |
 | Control setup and matrix coordination | Codex coordinator | Initial control files pushed; signed commit verified | CONTROL-001 acknowledgement requested; implementation remains unassigned |
 | BitsCode | No implementation assignment yet | CONTROL-001 acknowledged at c481ab2; all six reads succeeded | Read CONTROL-002; avoid overlapping WS-01 |
-| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Chat created and execution verified on ffe-xplatform; waiting on approval | Complete Control Branch read/access receipt, implement ACT-01/02 and report local checks |
+| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Chat created and execution verified on ffe-xplatform; implementing; Control Branch read confirmed | Implement ACT-01/02, report local checks and ready branch for local Crucible review |
 | Platform rows | Await coordinator assignment | Preserve existing WIP and owners | Reconcile dependencies before fanout |
 
 ## Control publication receipt
@@ -21,7 +21,11 @@ BitsCode notification and acknowledgement request: https://dd.slack.com/archives
 
 Chat: FLEX workspace activation foundations; thread ID 01a21df1-4c96-7152-b4f1-2a5be423c216; host workspace-ffe-xplatform; project x-platform testing. Initial commands returned hostname ffe-xplatform and resolved workspace /home/bits/go/src/github.com/DataDog. This verifies remote chat creation and command execution. The repository-collection root is not a Git checkout; the coordinator directed the implementor to scope commands to the FIT and fixture repositories.
 
-Assignment: [WS-01](assignments/WS-01.md), CONTROL-002. Latest app status is active/waitingOnApproval; the exact pending approval and Control Branch read receipt have not yet been returned. Do not claim source access or implementation validation from workspace launch alone. No implementation branch or PR is reported. Coordinator requested the concrete approval/access blocker and will validate the eventual result independently.
+Assignment: [WS-01](assignments/WS-01.md), CONTROL-002. Latest workspace progress confirms CONTROL-002 is readable and current FIT main plus Android #136/#241 heads were fetched. The agent is implementing shared fixes while preserving that stack. Earlier waiting-on-approval status has cleared. No ready branch or completed validation is reported. CONTROL-003 adds mandatory local Crucible review at the ready handoff; see REVIEWS.md.
+
+## Review policy update — CONTROL-003
+
+Tyler requires local Crucible reviews on branches reported ready. Coordinator reviews exact heads and paired dependencies, validates exclusions and iterates on P0/P1 findings before acceptance. [Review queue](REVIEWS.md) established; no current assignment has reported a ready branch. No activation PRs or external review publication.
 
 ## Recording implementation progress
 

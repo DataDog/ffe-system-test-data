@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-002, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-003, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -38,6 +38,14 @@ Use REQUESTS.md for a repository you cannot access. Record target repository/bas
 ## Branch discipline
 
 Control Branch: documentation/coordination only; never open a PR. Keep implementation and fixture activation off this branch. Follow repository instructions and signing requirements. Commit only owned files. Coordinate Control Branch updates by fetching/rebasing or serialising pushes; never force-push over another contributor. Prefer platform-specific workstream/request files if simultaneous updates would collide; keep the indexes updated.
+
+## Local Crucible review gate
+
+Tyler requires local Crucible reviews on branches reported as **ready**. Treat ready as an implementor handoff, not coordinator acceptance. The coordinator queues and reviews the exact published branch head against its declared actual base, including paired FIT/corpus activation revisions and recorded exclusions. No PR is required to conduct this local branch review, and the no-activation-PR policy remains in force.
+
+A ready handoff must identify repository, branch URL, exact base/head, matching corpus/FIT dependencies, local test evidence, diagnosed SDK gaps and exact exclusions. Use [REVIEWS.md](REVIEWS.md) to track pending/in-progress/changes-required/accepted reviews. Run local Crucible independently of implementation; record completed specialist/peer coverage, verification and any unavailable checks. Do not claim a complete council or native runtime pass when evidence is partial.
+
+Iterate on reproduced P0/P1 findings and re-review the changed head until none remain in implementation, harness, activation or exclusion handling. Diagnosed SDK defects may retain the authorised narrow exclusions; review their evidence, scope and re-enable conditions instead of requiring every SDK fixture to pass. Keep unverified access/runtime checks explicit. Every material head/dependency change invalidates affected review evidence and requires a refreshed review. Do not post GitHub review comments, apply labels, approve PRs or open PRs as a side effect of these local branch reviews.
 
 ## Delivery gates
 

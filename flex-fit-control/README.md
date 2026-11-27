@@ -6,11 +6,12 @@ This branch is the team's authoritative coordination home for the FLEX platform 
 
 ## Read in this order
 
-1. [Instructions.md](Instructions.md) — current assignments, authority, activation/exclusion workflow and communications. Current revision: CONTROL-002; workspace foundation implementation assigned.
+1. [Instructions.md](Instructions.md) — current assignments, authority, activation/exclusion workflow and communications. Current revision: CONTROL-003; workspace foundation implementation assigned; local Crucible reviews required for ready branches.
 2. [goal.md](goal.md) — full matrix, existing tickets/PRs and activation audit. November 27 status snapshot; refresh mutable state before implementation.
 3. [REFERENCE.md](REFERENCE.md) — source contract, baseline revisions and known integration pitfalls.
 4. [WORKSTREAM.md](WORKSTREAM.md) — ownership, implementation receipts and SDK defect/exclusion ledger.
-5. [REQUESTS.md](REQUESTS.md) — requested diffs/implementation changes for repositories a contributor cannot access.
+5. [REVIEWS.md](REVIEWS.md) — exact-head local Crucible review queue and acceptance receipts.
+6. [REQUESTS.md](REQUESTS.md) — requested diffs/implementation changes for repositories a contributor cannot access.
 
 ## Location and communication
 

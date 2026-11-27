@@ -4,6 +4,8 @@ The coordinator oversees all nine platform rows × four deployment modes below, 
 
 **Latest user policy supersedes earlier publication and conformance wording:** activate the imported corpus directly while developing; investigate every failure; record SDK defects in WORKSTREAM.md before narrowly scoped skips/xfails; then push activation branches when locally green with those exclusions. **Do not open activation PRs.** Consolidate whole platform rows into PRs later where practical. No requirement that every SDK pass every fixture. Keep authored expected behaviour intact and document the excluded coverage.
 
+Every branch reported ready must receive an independent local Crucible review before coordinator acceptance, with iteration until no P0/P1 implementation/activation/exclusion findings remain. See [REVIEWS.md](REVIEWS.md). Recorded SDK gaps may retain justified scoped exclusions.
+
 Read [Instructions.md](Instructions.md), [REFERENCE.md](REFERENCE.md), [WORKSTREAM.md](WORKSTREAM.md) and [REQUESTS.md](REQUESTS.md). The Control Branch itself never gets a PR. Implementation resumed under CONTROL-002. WS-01 owns shared workspace activation foundations; other platform assignments remain pending.
 
 ---
