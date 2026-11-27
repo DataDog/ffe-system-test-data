@@ -1,10 +1,10 @@
 # Instructions
 
-Revision: CONTROL-041, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-042, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
-## Current verification state — CONTROL-041
+## Current verification state — CONTROL-042
 
-This section supersedes historical running/blocked notices below. Signing is working and Control publication resumed. Electron activated catalogue completed34passed/31skipped; coordinator audited160actualRPC,34matchingconfigurationPOST/HTTP200,130exposures/168evaluationrecords and62freshreports. Android canonical scoped catalogue completed36passed/94skipped with audited scope limited to empty-response/malformed-rejection cases; successful-assignment SDK gaps remain explicit. RN actual canonical smoke now reaches configurationHTTP200 but fails native parsing and missing-flag evaluation telemetry; SDK-source investigation and diagnostic-only control are active. Flutter repaired full catalogue/context-preservation controls passed. No cell or activation branch is accepted yet; full lint/publication prerequisites remain. No new BitsCode implementation assignment; no activation PRs.
+This section supersedes historical running/blocked notices below. Signing is working and Control publication resumed. Electron activated catalogue completed34passed/31skipped; coordinator audited160actualRPC,34matchingconfigurationPOST/HTTP200,130exposures/168evaluationrecords and62freshreports. Android canonical scoped catalogue completed36passed/94skipped with audited scope limited to empty-response/malformed-rejection cases; successful-assignment SDK gaps remain explicit. RN actual canonical smoke now reaches configurationHTTP200 but fails native parsing and missing-flag evaluation telemetry; SDK-source investigation confirms three distinct gaps in [RN-GAPS.md](RN-GAPS.md); diagnostic-only extraLogging control passes1case/5actualRPC/5exposures/5evaluationrecords. Service unchanged;29characterization tests pass. No RN exclusions applied yet. Flutter repaired full catalogue/context-preservation controls passed. No cell or activation branch is accepted yet; full lint/publication prerequisites remain. No new BitsCode implementation assignment; no activation PRs.
 
 ## Current assignments — implementation resumed
 

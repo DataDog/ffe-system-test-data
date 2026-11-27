@@ -1,0 +1,15 @@
+# React Native SDK gaps from actual online-precomputed execution
+
+CONTROL-042, November27,2026. SDK source pinned at0e2f26fb60361f3394062302dbab37b1e406d1a1; Android native flags3.16.0. Actual native evidence is Android only. No fixture expectations changed and no new exclusions applied yet. These are recorded for subsequent ticket filing, not claims of upstream fixes.
+
+| ID | Observed behaviour and impact | Evidence and exclusion boundary |
+| --- | --- | --- |
+| RN-001 | Canonical response omitting extraLogging returns HTTP200 but initialization fails with the native response-parser error. | Same released Android parser gap independently reproduced in Android. RN diagnostic-only response control adds the five missing empty objects:1case passes,5actual typed evaluations,5exposures/5evaluationrecords,0observed diagnostics. Canonical fixture remains unchanged and failing. Android-host scope; do not suppress untested RN/iOS for this native gap. |
+| RN-002 | Missing flags return correct default values/error codes but emit no evaluation records. Empty-response fixture expects3records and receives0. | Actual RN Android:3typed RPC results match. Coordinator reproduction transpiles actual pinned SDK source:3missing getters make0native tracking calls, present-flag positive control makes1. Common JavaScript early return precedes tracking; source applies to both hosts, iOS runtime unverified. |
+| RN-003 | Android bridge collapses parse and network failures into CLIENT_NOT_INITIALIZED, preventing safe invalid-response classification. | Pinned Android bridge source preserves stale assignments but collapses other failures. iOS source distinguishes INVALID_RESPONSE and NETWORK_ERROR. Existing IPC service correctly requires typed INVALID_RESPONSE; no English-message heuristic or broad code remapping. Scope any future malformed-response exclusion to the Android host and exact investigated cases. |
+
+Public SDK source: [missing-flag getter](https://github.com/DataDog/dd-sdk-reactnative/blob/0e2f26fb60361f3394062302dbab37b1e406d1a1/packages/core/src/flags/FlagsClient.ts#L529), [Android bridge](https://github.com/DataDog/dd-sdk-reactnative/blob/0e2f26fb60361f3394062302dbab37b1e406d1a1/packages/core/android/src/main/kotlin/com/datadog/reactnative/DdFlagsImplementation.kt#L91), [iOS classification](https://github.com/DataDog/dd-sdk-reactnative/blob/0e2f26fb60361f3394062302dbab37b1e406d1a1/packages/core/ios/Sources/DdFlagsImplementation.swift#L81).
+
+The actual evaluation endpoint is configured correctly; missing tracking inputs cannot be repaired by a longer flush wait or synthetic IPC emissions. Service source remains unchanged. Six added characterization tests preserve typed positive/negative classification; coordinator29tests pass, both classification mutation controls fail as intended. Full aggregate lint remains outstanding.
+
+Next: independently review host-aware exact exclusion/xfail scope, then execute the full canonical catalogue. Re-enable each group only after unchanged fixture runtime and intake evidence passes on the upgraded SDK. A diagnostic control is never canonical conformance.
