@@ -68,3 +68,7 @@ WS-01 reports signed local head 47f8760c5c7ca870a13029bb711cd74d3a506bae based o
 - WS-03 coordinator-local shared_native_foundation agent is reconciling minimum shared online-precomputed foundations; existing main already has configuration_wire/metadata and fixture_json fidelity, so avoid duplicate schema/helpers.
 - WS-04 coordinator-local ios_online_precomputed agent is recovering app/service/tests and comparing SDK/provider companions. Xcode exists; disk is limited, so reuse assets. Exact shared dependency remains pending.
 - [IPC-ELIGIBILITY.md](IPC-ELIGIBILITY.md) records eight source-eligible rows and Unity deferred. RN/Flutter/KMP/MAUI/Electron are not yet separately assigned implementation lanes; they await bounded shared-interface/ownership handoffs. No later-mode work dispatched.
+
+## Delegated BitsCode runtime — CONTROL-007
+
+Tyler confirmed BitsCode cannot run FIT; all its FIT execution now belongs to local/workspace executors. WS-05 local Browser execution assigned; BitsCode remains code/activation owner and supplies exact test requests/patches. BitsCode verified FIT read and reported WRITE permission, actual push untested. It identified separate RUM SDK and npm flagging-provider pins. Its Chromium download request was denied; do not retry that runtime setup in BitsCode. No Browser runtime pass is claimed. Coordinator independently reproduced WS-01 focused49pass and both failing mutation controls; full review/council/unit run remains in progress.

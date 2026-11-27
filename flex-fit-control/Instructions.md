@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-006, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-007, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -11,6 +11,7 @@ Tyler resumed the matrix goal and explicitly requested workspace chats in the x-
 - **WS-02 — Android online precomputed:** a dedicated x-platform testing workspace chat owns [assignments/WS-02.md](assignments/WS-02.md). Reconcile existing stacks and native Android prerequisites; no other row may modify that shared SDK prerequisite without coordination.
 - **WS-03 — shared native online-precomputed foundation:** coordinator-local implementation agent owns [assignments/WS-03.md](assignments/WS-03.md), excluding WS-01 CI/markers/conftest ownership.
 - **WS-04 — iOS online precomputed:** coordinator-local implementation agent owns [assignments/WS-04.md](assignments/WS-04.md) and the shared native iOS prerequisite lane used by RN.
+- **WS-05 — Browser execution:** coordinator-local execution agent owns [assignments/WS-05.md](assignments/WS-05.md); executes BITS-01 candidates and returns exact-head receipts.
 - **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Coordinate the active lanes below and independently review handed-off heads.
 
 No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
@@ -24,6 +25,10 @@ For every eligible row, complete online precomputed first, with applicable fixtu
 Before implementing a deployment-mode path, inventory existing FIT infrastructure and open/merged changes. In particular, inspect FlagServer for actual rules payload delivery rather than assuming the endpoint exists. Rules-based protobuf and portable wire payloads must come from the corpus generation/catalogue tooling and the selected corpus revision, including applicable existing PRs. Do not invent a second converter, hand-edit generated payloads or treat generation success as SDK conformance. Record source/artifact provenance, conversion omissions and the corresponding evaluation cases. Online rules additionally requires the appropriate HTTP endpoint/headers and actual SDK consumption; offline rules requires the corresponding local-loading path.
 
 WS-01 ownership is unchanged. CONTROL-005 assigns BITS-01 and WS-02 below; other rows await explicit assignment. No activation PRs.
+
+## BitsCode execution boundary — CONTROL-007
+
+Tyler confirmed BitsCode cannot run the FIT suite. BitsCode owns preparation, code/fixture changes and diagnosis from returned evidence, but delegates all FIT suite execution to coordinator-assigned local or workspace agents. Do not request more browser downloads/network permissions or attempt an execution workaround in BitsCode. Provide exact candidate patches/heads, FIT/corpus/SDK/provider revisions, commands, case selections, expected observations and setup requirements. WS-05 initially owns Browser FIT execution. Coordinator serialises shared runtime/toolchain use and returns failures for iteration. Static/schema/format checks in accessible repositories remain in BitsCode's scope where supported. A delegated run is attributed to the executor and tied to exact source identity; BitsCode must not claim it ran the suite itself. No activation push or ready acceptance before applicable delegated checks/publication gates pass.
 
 ## Authority and communication
 

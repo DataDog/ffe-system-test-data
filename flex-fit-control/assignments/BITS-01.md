@@ -1,6 +1,6 @@
 # BITS-01 — Browser online precomputed
 
-Owner: BitsCode in the designated Slack channel. Revision CONTROL-005, November 27, 2026. Tyler explicitly authorised goal execution. Read Instructions.md, REFERENCE.md, goal.md and WIP-INVENTORY.md before acting.
+Owner: BitsCode in the designated Slack channel. Revision CONTROL-007, November 27, 2026. Tyler explicitly authorised goal execution. Read Instructions.md, REFERENCE.md, goal.md and WIP-INVENTORY.md before acting.
 
 ## Scope and ownership
 
@@ -10,8 +10,12 @@ First verify actual access to DataDog/rum-sdk-integration-test-framework and the
 
 Reconcile existing main and PRs #231/#234/#235, fixture pin work and applicable SDK capabilities rather than duplicating their changes. Preserve independent exposure/evaluation/RUM controls. Verify whether the selected Browser SDK contains the FFLSDK-292 numeric fix, reproduce the three existing numeric quarantines and remove only obsolete skips after passing execution. Inspect all applicable online-precomputed core/dependent/plain/obfuscated/rejection cases and nested filters; do not infer completeness from top-level eligibility. Identify missing capabilities/consumer paths explicitly.
 
+## FIT execution is delegated
+
+Tyler confirmed BitsCode cannot run FIT. Do not attempt FIT runtime execution or request browser download/network permissions. Own changes and test requests; WS-05 local execution agent runs FIT. Supply portable exact candidate diffs/heads, matching FIT/corpus/SDK/provider revisions, commands/case IDs, setup requirements and expected outcomes through BITS-01-specific Control evidence/request files. Distinguish an execution request from a passing result. Iterate on returned failures and attribute delegated runs accurately. Source access is already verified; actual branch push remains untested.
+
 ## Verification and delivery
 
-Edit the imported corpus directly during development where activation is needed. Run selected cases through the real browser IPC/provider/FlagServer/intake path; record selected, excluded, executed, passed, failed and xfail counts and exact FIT/corpus/SDK revisions. Investigate every failure. Record SDK defects in a portable workstream before narrow supported exclusions, retaining canonical expectations and re-enable conditions. Environment failures are blockers, not SDK xfails. Follow repository instructions and signing/publication gates. Once locally green with declared exclusions, push activation branches for changed repos, no PRs. Hand off exact bases/heads/dependencies and commands/evidence for independent coordinator local Crucible review. Online-precomputed acceptance precedes later-mode assignments.
+Edit the imported corpus directly during development where activation is needed. Have WS-05 run selected cases through the real browser IPC/provider/FlagServer/intake path; record selected, excluded, executed, passed, failed and xfail counts and exact FIT/corpus/SDK revisions. Investigate every failure. Record SDK defects in a portable workstream before narrow supported exclusions, retaining canonical expectations and re-enable conditions. Environment failures are blockers, not SDK xfails. Follow repository instructions and signing/publication gates. Once locally green with declared exclusions, push activation branches for changed repos, no PRs. Hand off exact bases/heads/dependencies and commands/evidence for independent coordinator local Crucible review. Online-precomputed acceptance precedes later-mode assignments.
 
 Use BITS-01-specific evidence/request files on the Control Branch to avoid central-document write races. Fetch/reconcile before pushing; never force-push. Report progress and blockers in Slack, tagging Datadog where appropriate; the Control Branch is the specification source. No PRs, tickets, external reviews or CI triggers as side effects.
