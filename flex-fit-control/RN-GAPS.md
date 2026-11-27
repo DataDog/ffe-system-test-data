@@ -1,6 +1,6 @@
 # React Native SDK gaps from actual online-precomputed execution
 
-CONTROL-042, November27,2026. SDK source pinned at0e2f26fb60361f3394062302dbab37b1e406d1a1; Android native flags3.16.0. Actual native evidence is Android only. No fixture expectations changed and no new exclusions applied yet. These are recorded for subsequent ticket filing, not claims of upstream fixes.
+CONTROL-049, November 27, 2026. SDK source pinned at0e2f26fb60361f3394062302dbab37b1e406d1a1; Android native flags3.16.0. Actual native evidence is Android only. No fixture expectations changed and no new exclusions applied yet. These are recorded for subsequent ticket filing, not claims of upstream fixes.
 
 | ID | Observed behaviour and impact | Evidence and exclusion boundary |
 | --- | --- | --- |
@@ -13,3 +13,6 @@ Public SDK source: [missing-flag getter](https://github.com/DataDog/dd-sdk-react
 The actual evaluation endpoint is configured correctly; missing tracking inputs cannot be repaired by a longer flush wait or synthetic IPC emissions. Service source remains unchanged. Six added characterization tests preserve typed positive/negative classification; coordinator29tests pass, both classification mutation controls fail as intended. Full aggregate lint remains outstanding.
 
 Next: independently review host-aware exact exclusion/xfail scope, then execute the full canonical catalogue. Re-enable each group only after unchanged fixture runtime and intake evidence passes on the upgraded SDK. A diagnostic control is never canonical conformance.
+
+
+The coordinator’s full unchanged Android catalogue completed **35 failed / 30 skipped** in 972.33 seconds. All 35 configuration fetches returned HTTP200 with exact fixture contexts. Seventeen ordinary cases hit the parser gap before evaluation; all 17 response-rejection cases hit the wrong error category. The empty-response case returns three correct typed default/error details and emits zero evaluation records. No unexpected failure category was found in this run; assertions behind parsing remain untested. All 65 reports were archived and candidate source hashes matched. WS-13 prepares narrowly guarded strict expected failures, not an all-skip conformance claim.

@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-048, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-049, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Current runtime and shared component evidence — CONTROL-049
+
+RN canonical Android run is terminal:35failed/30skipped,35configurationHTTP200/exact contexts,34native parser-category errors plus one missing-evaluation-record failure. Three default RPCs match;65freshreports archived; source hashes unchanged. Owned emulator reverse mapping is empty and proxy cleanup succeeded. The other emulator disappeared before the final read, so its mapping preservation is unverified. [WS-13](assignments/WS-13-RN-EXPECTED-FAILURES.md) assigns exact guarded expected-failure policy and tests; no new exclusions exist yet. Shared WS-12 final coordinator checks pass43HTTP+91loader/parsing/report tests;398pinned cases unchanged and exact producer bytes preserved. Review fixed204header and serializer-identity P2 issues, with independent red mutation control. Aggregate lint/publication and SDK mode-runtime proof remain separate. The prior open-PR inventory count was30, not31; corrected below. No activation PRs.
 
 ## Shared rules infrastructure implementation — CONTROL-048
 

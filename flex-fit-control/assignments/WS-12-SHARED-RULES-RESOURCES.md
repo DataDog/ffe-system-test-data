@@ -2,7 +2,7 @@
 
 CONTROL-048. Scope: shared infrastructure implementation only. No later platform-mode execution, activation PRs, SDK API changes, new serializer or init-contract/RPC rewrite.
 
-The prerequisite audit found existing generated protobuf/wire artifacts and merged offline resource loading, but no reusable binary GET server. Coordinator refreshed all31open FIT PR inventories and inspected exact relevant235/231/138heads; no server overlap established. Preserve and extend existing loader work rather than replace it. A new isolated local candidate starts from the reviewed shared foundation; active native/Browser/Electron candidates remain untouched.
+The prerequisite audit found existing generated protobuf/wire artifacts and merged offline resource loading, but no reusable binary GET server. Coordinator refreshed all30 open FIT PR inventories and inspected exact relevant235/231/138heads; no server overlap established. Preserve and extend existing loader work rather than replace it. A new isolated local candidate starts from the reviewed shared foundation; active native/Browser/Electron candidates remain untouched.
 
 Server owner: local server worker. Own mock FlagServer and its unit tests only. Add independent rules-byte state and exact-byte GET serving at the SDK production rules path, preserving configured URL query, byte length, appropriate protobuf content type and browser CORS. Preserve precomputed POST aliases and authored JSON fidelity. Separate rules request receipts must identify served bytes and status. Respect not-started and stop/restart behaviour, concurrent request/replacement isolation and unsupported method/path behaviour. Default optional SDK headers must not become blanket server requirements.
 
