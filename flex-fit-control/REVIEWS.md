@@ -43,3 +43,6 @@ CONTROL-032 WS-11: exact basee07ae57ef3108b18b10d2f67690bc36caf8303af, reviewed 
 
 
 CONTROL-033 Android stateful verifier completed on clean repaired headacbeb6b2de9f9b6ddee1653697ac4768ce7c2f48. Exact released SDK objectdad2312223110e2e7ed84cf46cefe3a45bc759c6 confirms fresh malformed-response classification and cancellation identity. No remainingP0/P1 found across council/coverage/verifier. ConfirmedP2 repeated-init registration/worker retention within one process; current driver clears app data and launches fresh per case with one init, so no cross-case carryover demonstrated. Device RPC/HTTP/intake proof still absent; no acceptance.
+
+
+CONTROL-037 RN exact signed local importb31433e3d7bf2121cb74bead81a68d85d5ecfa9b/basef00e34003d4f35026653c16a945389aa24dd5844/tree4ad01494f28936830d1a876271515a6eb16b6c8c: five native specialist jobs completed, plus native coverage fallback/targeted verifier (external launcher absent). Empty-key/default request defect repaired in private candidate tree4c379e205e0c5d69260453bd60b083a2d4caf66c; root16tests pass and6baseline failures verified separately. Follow-up non-finite float response encoding and repeat-init retained client/worker lifecycle remainP2; response repair assigned. Actual native SDK/runtime, resolved iOS build and full corpus evidence pending; no acceptance.

@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-036, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-037, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -245,3 +245,10 @@ Android exact repaired APK has been privately transferred and checksum verified.
 ## iOS lint prerequisite progress — CONTROL-036
 
 Coordinator populated the unchanged pinned Flutter/MAUI SDK sources missing from the exact signed iOS candidate. Flutter lint stage now passes:32files formatted with0changes, analyzer no issues. The invocation refreshed its dependency lock; that generated diff is privately archived and reverted so the signed source remains clean. This clears one prior lint stage, not aggregate lint or activation acceptance. MAUI build/format and other remaining gates still require separate evidence. RN local review is pinned to exact signed importb31433e with tree identical to owner handoff; review/repair and native runtime remain pending.
+
+
+## RN response-boundary follow-up — CONTROL-037
+
+Coordinator independently verified the owner repair tree4c379e205e0c5d69260453bd60b083a2d4caf66c in a separate validation checkout:16tests pass; restoring the baseline adapter with the new controls yields6failures/10passes. Native coverage/stateful verifier confirms the empty-key/default request repair. No native device result is implied.
+
+WS-10 owner additionally owns bounded float-response repair: valid ProtoJSON non-finite defaults now decode to numbers, but ordinary response JSON serialization converts NaN/infinities into null. Preserve protobuf special-string representation for the FeatureFlagService float response across the actual native-JS response boundary. Do not rewrite generic RPC transport or unrelated metadata. Add dispatcher-output/native-parser round-trip controls, including finite/zero values and unchanged other service responses. Return a private exact delta/tree/red-green evidence, no push/PR/FIT run. Repeated-initialization client/worker retention remains documentedP2, bounded by current fresh-process corpus; no reusable-init safety claim.

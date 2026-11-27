@@ -361,3 +361,6 @@ CONTROL-035: fresh KMP upstream source confirms no flagging API/module; pinned M
 
 
 CONTROL-036 iOS environment repair: exact pinned Flutter/MAUI SDK submodules populated without changing gitlinks. Flutter lint stage passes32files/0format changes/no analyzer issues; generated lock diff archived then reverted, candidate clean. Aggregate lint remains incomplete. RN exact private import signedb31433e has matching owner tree; correctness/performance reviews completed withoutP0/P1, raw-getter default defect repair is assigned, other council lenses pending.
+
+
+CONTROL-037 RN: five native specialist lenses completed; native coverage fallback and targeted stateful verifier independently confirm five-getter default decoding repair. Coordinator independently reproduced6failed/10passed baseline versus16passed repair, using existing local tooling in separate mutation checkout. Follow-upP2 non-finite float response becomesnull at ordinary JSON serialization; owner repair assigned with response-boundary controls. Repeated-init retention remainsP2 under fresh-process corpus bounds. No native RN runtime or full acceptance. Browser/Flutter runs remain live separately.
