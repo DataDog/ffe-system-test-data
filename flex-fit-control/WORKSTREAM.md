@@ -454,3 +454,7 @@ Complete RNAndroid scoped-policy run:35XFAIL/30skip,0unexpected/XPASS,1044.68s;3
 ### CONTROL-057 — concrete framework SDK prerequisite briefings
 
 BITS-03 assigned to BitsCode after corpus audit handoff: inspect actual current public KMP/MAUI exports and native interop, then deliver concrete SDK API/binding/file/test/dependency plans. Refreshed platform tickets/parent and complete SDK trees/open PR inventories. This advances the missing framework SDK prerequisites without labelling native calls as framework proof. No SDK implementation, build, new ticket or PR authorised by this design-only assignment. WS-14 exact RN candidate checks are active separately; no ownership overlap.
+
+### CONTROL-058 — exact RN lint correction independently verified
+
+WS-14 base comparison and full candidate fix/check passes are terminal. Earlier generated-import errors remain unreproduced on both controlled bases. Three-file candidate correction clears Python diagnostics; aggregate exit1 remains on RN Yarn/native setup. Coordinator retrieved and verified private evidence checksums and all18 source hashes, applied only the correction without staging, and reran142 affected tests successfully. Runtime non-import AST equality and independent follow-up review confirm no behavioural/assertion/exclusion change and no P0/P1/P2. No repeated device run for this lint-only delta; no aggregate pass, activation acceptance or publication. BITS-03 briefing assignment delivered and acknowledged.

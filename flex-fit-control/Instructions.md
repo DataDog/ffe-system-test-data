@@ -1,6 +1,14 @@
 # Instructions
 
-Revision: CONTROL-057, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-058, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN exact-candidate lint correction verified — CONTROL-058
+
+WS-14 phases 2 and 3 are terminal. The signed RN base with the same Python package inventory has zero diagnostics; the earlier generated-import hypothesis remains unreproduced. On the frozen 18-file runtime candidate, the unchanged fix/check wrapper identified import-order, regex-literal and three untyped-callback issues. Its three-file correction passes final Python checks. Android, KMP and Web pass; RN Yarn and unavailable native/tooling prerequisites keep aggregate exit at1.
+
+Coordinator privately retrieved and checksum-verified the correction and full logs, verified all18 before/after source hashes, applied only the correction without changing the existing index, and reran the affected SDK-gap/rejection/compatibility suite: **142 passed**. Both runtime modules have identical non-import ASTs; independent follow-up review found no P0/P1/P2 and confirmed assertions, exclusion scope, receipt guards and strict-XPASS policy unchanged. This lint-only delta does not require a repeated device run; prior exact-source runtime evidence remains scoped to the documented equivalent runtime behaviour. No aggregate pass or activation acceptance/publication is claimed.
+
+BITS-03 was delivered and acknowledged; its read-only KMP/MAUI SDK briefings remain active. No new implementation dispatch or activation PRs.
 
 ## Framework SDK prerequisite briefings — CONTROL-057
 
