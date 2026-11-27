@@ -6,7 +6,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 
 | Work | Owner | State | Next action |
 | --- | --- | --- | --- |
-| Control and matrix coordination | Codex coordinator | CONTROL-010 current; matrix refreshed with each material publication | Independently validate exact candidates and maintain evidence/gap ledger |
+| Control and matrix coordination | Codex coordinator | CONTROL-032 current; matrix refreshed with each material publication | Independently validate exact candidates and maintain evidence/gap ledger |
 | BITS-01 Browser implementation | BitsCode | FIT preparation and diagnosis; runtime delegated | Supply candidates and consume WS-05 evidence; no FIT runs in BitsCode |
 | WS-01 shared activation foundations | x-platform testing workspace chat | Local candidate; independent specialist review found no actionable defect; coordinator environment reruns pending | Finish independent verification and required publication gates |
 | WS-02 Android online precomputed | Dedicated x-platform testing workspace chat | Shared private handoff delivered; integration/compilation underway | Actual native runtime proof; shared Android SDK lane ownership retained |
@@ -340,3 +340,12 @@ Coordinator independently reproduced all110WS-11 neighbouring tests in152.91seco
 ## All-mode init audit — CONTROL-031
 
 Tyler requested all-WIP verification and a non-ambiguous final init shape. Two independent source audits plus coordinator refreshed30open FIT PR heads and privately read current RN workspace staged tree4ad01494f28936830d1a876271515a6eb16b6c8c. Existing schema lacks a four-mode discriminator;235 hybrid acceptance cannot prove the requested pure evaluator. Explicit mode/source validation draft prepared for review, no implementation/live changes. Existing serialized rules artifact confirmed; new Python serializer investigation stopped. Matrix shared row/reference refreshed.
+
+
+## CONTROL-032 — terminal Flutter evidence and Browser repair integration
+
+Flutter Android full02:24passed/40failed/1skipped in2317.41seconds. Independent audit read all65fresh reports and confirmed64configuration POSTs/HTTP200 with matching contexts. Six SDK gap groups own the40failures; see [FLUTTER-GAPS.md](FLUTTER-GAPS.md). Failed-case zero intake counts precede flush and prove no emission absence. Android-only exclusions are preparation, not acceptance; Flutter iOS remains untested.
+
+Browser unchanged full run is incomplete: its process handle is missing, authoritative process inspection found no runner, no terminal JUnit exists. Keep its partial evidence separate. The independently reviewed WS-11 default-preservation repair is integrated locally for the two previously failing vectors; runtime is live using unchanged assets/corpus. Coordinator19focused/110neighbouring passes and five specialists/coverage fallback/stateful verifier found no actionable defect. Full repaired corpus and aggregate lint remain pending.
+
+RN workspace produced an ARM64 compile-only APK and private source handoff; reported10bridge/54Python checks do not establish runtime conformance. iOS fresh exact-child receipts independently establish10passes/55scopedskips,10matching configuration requests/HTTP200,31typed evaluations represented by30evaluation records,27exposures and no observed diagnostics;973unit passes are separate. No activation branch accepted or PR opened.

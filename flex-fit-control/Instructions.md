@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-031, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-032, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -212,3 +212,12 @@ CONTROL-028 overextended this instruction into a generic binary request/response
 Tyler confirmed existing generated configuration-wire.json is the offline rules input: Python verifies/loads and forwards its exact serialized contents; IPC servers never produce it. Stop the new Python SDK serializer investigation.
 
 The requested all-WIP init audit found source-only inference insufficient: current Web distinguishes URL versus wire, portable235 permits multiple capabilities, and native candidates currently implement online precomputed only. A proposed explicit four-mode selector, independent of API access, requires strict mode/source/evaluator validation. This is a review proposal, not an approved or implemented schema migration. Preserve consumed field numbers, reconcile all bindings and old consumers, and do not begin later-mode execution or generic RPC rewriting. See [INIT-CONTRACT-AUDIT.md](INIT-CONTRACT-AUDIT.md).
+
+
+## Runtime handoffs and investigated Flutter gaps — CONTROL-032
+
+The coordinator completed independent WS-11 review: five specialist lenses, native coverage-search fallback and stateful verifier found no actionable defect. Coordinator19focused and110neighbouring tests pass. The unchanged Browser full65run stopped without a terminal result; preserve it as incomplete evidence. Apply the reviewed serializer fix and run the two empty-key vectors, then the full function with unchanged assets and fixture expectations. This is not a generic RPC rewrite or later-mode assignment.
+
+Flutter Android full02 completed24passed/40failed/1skipped. All65fresh reports, receipts and pinned SDK source were independently audited; six investigated gap groups are in [FLUTTER-GAPS.md](FLUTTER-GAPS.md). WS-08 may prepare narrowly scoped Android-host online-precomputed exclusions for those exact cases, preserving canonical expectations and all iOS applicability. Never classify every generic provider initialization error as INVALID_RESPONSE. Exclusions need independent review and actual rerun; this is not acceptance.
+
+RN ARM64 build is complete as compile-only evidence; actual native execution remains pending. iOS exact-child receipts have been independently audited, with10passed/55skipped and973unit passes; full lint/publication gates remain. No cell is independently accepted and no later-mode gate is open.
