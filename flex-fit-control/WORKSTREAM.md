@@ -6,10 +6,15 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 
 | Work | Owner | State | Next action |
 | --- | --- | --- | --- |
-| Control setup and matrix coordination | Codex coordinator | Initial control files pushed; signed commit verified | CONTROL-001 acknowledgement requested; implementation remains unassigned |
-| BitsCode | No implementation assignment yet | CONTROL-001 acknowledged at c481ab2; all six reads succeeded | Read CONTROL-002; avoid overlapping WS-01 |
-| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Chat created and execution verified on ffe-xplatform; implementing; Control Branch read confirmed | Implement ACT-01/02, report local checks and ready branch for local Crucible review |
-| Platform rows | Await coordinator assignment | Preserve existing WIP and owners | Reconcile dependencies before fanout |
+| Control and matrix coordination | Codex coordinator | CONTROL-010 current; matrix refreshed with each material publication | Independently validate exact candidates and maintain evidence/gap ledger |
+| BITS-01 Browser implementation | BitsCode | FIT preparation and diagnosis; runtime delegated | Supply candidates and consume WS-05 evidence; no FIT runs in BitsCode |
+| WS-01 shared activation foundations | x-platform testing workspace chat | Local candidate; independent specialist review found no actionable defect; coordinator environment reruns pending | Finish independent verification and required publication gates |
+| WS-02 Android online precomputed | Dedicated x-platform testing workspace chat | Shared private handoff delivered; integration/compilation underway | Actual native runtime proof; shared Android SDK lane ownership retained |
+| WS-03 shared native foundation and simulator topology | Coordinator-local agent | Local signed candidates; focused checks pass, topology full suite pending | Independent review and source-based iOS execution |
+| WS-04 iOS online precomputed | Coordinator-local agent | Simulator built on unchanged pins; full source-based FIT run underway | Diagnose every failure and record gaps before exclusions |
+| WS-05 Browser FIT execution | Coordinator-local agent | Baseline underway; numeric diagnostic queued | Return actual runtime/configuration/intake evidence to BitsCode |
+| WS-06 KMP/MAUI/Electron prerequisites | Existing WS-01 workspace chat | Read-only audit assigned | Establish actual API/pin/host prerequisites before implementation |
+| Other platform rows | Queued; Unity deferred | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
 
 ## Control publication receipt
 
@@ -84,3 +89,20 @@ WS-04 reports simulator app compilation and15helper passes using unchanged pinne
 ## Runtime transport and queued-row audit — CONTROL-010
 
 Browser WS-05 baseline is executing with 65 discovered / 17 applicable / 48 skipped; completed result pending. iOS reached InitProvider; independent plain HTTP reproduction isolates advertised-LAN self-connect failure, while one actual simulator loopback diagnostic passes typed evaluation/intake. WS-03 owns a separate source-level topology candidate; no SDK exclusion or accepted runtime result follows from the diagnostic. Android received its private shared diff and is integrating/compiling. WS-06 read-only KMP/MAUI/Electron capability audit is assigned to the existing WS-01 workspace chat. WS-01 independent council/verifier is complete with no actionable defect; full coordinator unit run still underway. Matrix refreshed in this publication.
+
+
+## Latest execution handoff and matrix refresh — November 27, 2026
+
+WS-03 reports a separate simulator-only topology candidate, 14 focused passes, and full unit execution in progress. Its required lint run still fails at the existing MAUI checkout and missing Flutter tooling stages. WS-04 integrated this candidate and is running the full selected corpus using actual source address selection, without the diagnostic plugin. No cell is accepted and no activation branch has been pushed.
+
+The coordinator's WS-01 full unit run completed with 882 passes and 30 browser-runtime failures before Chromium setup. The exact 30 failed tests are being rerun after runtime preparation; these are separate executions, not a single clean full-suite result.
+
+BitsCode supplied [BITS-01-EXEC-001](https://dd.slack.com/archives/C0CKGQ8T483/p1795803243456209). WS-05 keeps its existing baseline running, then diagnoses the three numeric quarantines with a temporary local probe. This is neither permanent exclusion removal nor readiness. Actual FIT source remains in the access-controlled handoff. goal.md is refreshed in the same publication.
+
+### GAP-ios-001 — OpenFeature error codes omitted
+
+Owner: WS-04; observed November 27, 2026. iOS simulator, online precomputed, OpenFeature API. Native SDK 44a1d94727b0f6ec2382c0d65d0662a1c66cae03; provider 075e5f85e6d25cc07ca22ad536ba6a36adbd6d49; OpenFeature Swift 0.3.1; corpus fe24ed2c4872bf109b0c71ffb2229152d76b8963. These are the unchanged SDK/provider pins used by the candidate.
+
+Diagnostic real-RPC/configuration/intake executions found two failures: defaults-and-emission-gates expects TYPE_MISMATCH for flutter.fixture.string; empty-flags-response expects FLAG_NOT_FOUND for fixture.bool.missing. Actual errorCode is absent in both results. Implementor source inspection attributes this to provider conversions omitting the native error code. The diagnostic transport override was required for those runs; confirmation in the current source-based full run is pending. This is separate from the host LAN transport failure and absent-key SDK capability investigation.
+
+Evidence: WS-04 coordinator-local probe-reports contains the two case AI reports. Full private paths and logs remain access-controlled. No new ticket or exclusion has been created. Preserve authored expectations. Before using an exclusion, confirm affected cases/access paths in the source-based run and record its exact scope, removal owner and re-enable check. Re-enable condition: corresponding typed provider evaluations return the expected OpenFeature error code and both cases pass with configuration/intake evidence.
