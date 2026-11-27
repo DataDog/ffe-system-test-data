@@ -28,3 +28,6 @@ CONTROL-023 iOS correctness lens: NONE,5independent compatibility passes and all
 
 
 CONTROL-024 iOS council partial: correctness/QA/SRE NONE; senior P1 confirmed by coordinator source trace through MauiDriver -> IosDriver -> unconditionalgrpc readiness. Owner repair assigned; P1 remains open until tested/re-reviewed. Performance twoP2 observations retained in private candidate ledger for adjudication. Other required coverage/verifier work pending. Android repair handed off, independent delta verification pending. No full clean council or cell acceptance claimed.
+
+
+CONTROL-026 Android P1 source delta confirmed fixed at signedacbeb6b2de9f9b6ddee1653697ac4768ce7c2f48 by original independent correctness reviewer; actual device/gRPC control still open and full council incomplete. iOS readiness repair reports31focused positives/negative controls; signed child/delta verification pending. Two performance P2 observations remain under adjudication.

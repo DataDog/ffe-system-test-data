@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-025, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-026, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -174,3 +174,10 @@ Two iOS performance observations (actor-blocking SDK flush and retained native c
 ## Matrix infrastructure row — CONTROL-025
 
 Tyler requests a shared FLEX/FIT components row above Browser. Keep its four cells current alongside platform updates, with requirements, current evidence/gaps and links to assignments/SHARED-DEPLOYMENT-COMPONENTS.md. This row is infrastructure tracking, not an additional platform or permission to bypass per-platform online-precomputed acceptance gates. Reuse existing corpus UFC generators/resources and inspect existing FIT mode infrastructure before adding components.
+
+
+## RN executable dependency pairing — CONTROL-026
+
+WS-10 may consume matching RN core/OpenFeature packages from exact public PR1507 source0e2f26fb60361f3394062302dbab37b1e406d1a1 for online-precomputed smoke and complete applicable inventory, with its declared published Android3.16/iOS3.21 dependencies. Record the exact source/package/native resolutions and preserve other rows' SDK pins. Exclude separate PR1567 evaluation-logging hook changes and optional conformance overlays. This chooses a consistent executable prerequisite, not a claim of full SDK correctness or PR approval.
+
+Do not block the inventory on implementing missing SDK capabilities such as absent targeting keys, recursive attributes or typed native error propagation. Diagnose them against the actual public mapper/bridge/native source and actual runtime or equivalent native controls; record SDK gaps before proposing narrow per-case/feature exclusions. Preserve canonical fixtures and distinct Android/iOS receipts. Unsupported integration must fail explicitly, never coerce absent keys or synthesize context/errors. SDK conformance fixes belong to later processing unless separately authorised; the current task is faithful SDK integration plus documented gaps. Preserve Sameeran's reusable adapter/registration changes. No later deployment modes, activation push before gates, or PR.

@@ -294,3 +294,14 @@ Flutter child handoff runner/emulator disappeared: both session handles unavaila
 ## Shared components matrix row — CONTROL-025
 
 Per Tyler, inserted Shared FLEX/FIT components immediately above Browser. Each deployment-mode column now calls out required server/loader/IPC/scenario/intake/CI components, current implementation limits and a linked component brief. Online-precomputed foundations are local/integrating; offline-precomputed portable/full-corpus work incomplete; online-rules binary endpoint absent on inspected main while corpus protobuf production already exists; offline-rules Browser lifecycle/loader exists with full-corpus/native activation incomplete. No new later-mode work or acceptance inferred; Unity remains Not planned.
+
+
+## Repair verification and first encoded Browser results — CONTROL-026
+
+Coordinator imported Android child acbeb6b2de9f9b6ddee1653697ac4768ce7c2f48 after verifying raw bundle SHA-256 ae7a2102232978c01ab76ee7209baacc946fffbe5e779ed0d5777d1d189cdd16, bundle prerequisites, good configured signature and exact treeb429406124efa20732510b635018d9a21959a78b. Isolated review tree moved cleanly to child. Independent correctness delta confirms bounded repair/no remaining actionable delta finding; source review does not prove device/gRPC integration. Fresh native evidence/identity required, cancellation/timeouts/network/HTTP remain unclassified and pinned compatibility-shim documentation is accurate. Full Android council/runtime remain pending.
+
+iOS owner reproduced MAUI/iOS transport regression before change and reports31focused checks passing after transport-aware readiness repair, including real HTTP404 listener and nativegRPC probes. Mandatory lint caught new-test style/type issues being corrected. Unrelated RN lockfile modified only by lint preparation is being preserved diagnostically and restored before signed child. No native build/device actions. Delta review and full council/verifier remain pending.
+
+BITS-01-EXEC-002 focused17case Browser run completed675.46seconds:15passed/2failed/0skipped. Both fixed digest/salt vectors fail at eighth evaluation with an empty flag key: expected canonical value-7/TARGETING_MATCH/variant/noerror, observed fallback/ERROR/GENERAL/no variant. Owning layer remains under diagnosis; no SDK gap exclusion or canonical change inferred yet. All17fresh AI reports read and preserved. Full65same-candidate run remains required; positive earlier cases prove encoded coverage directly.
+
+RN owner verified both private WIP patches and reports9mocked bridge tests passing. Coordinator chooses matching public RN1507 source0e2f26fb60361f3394062302dbab37b1e406d1a1 for actual smoke/full inventory with its published native dependencies, excluding separate1567hook changes. SDK context/error capability gaps require diagnosis/recording rather than blocking the run or importing optional overlays. No Android/iOS platform owner pins changed.
