@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-045, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-046, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN full canonical execution — CONTROL-046
+
+Selected-device Metro forwarding repair completed independent local Crucible review:5native lenses, nativecoveragefallback because configured external gateway is absent, and final targeted verifier find noP0/P1. Coordinator95mocked tests pass; wrong-device mutation fails. RetainedP2cleanup/timeout residue and existing ambient localADB/restart limits are documented privately. The full65-selection canonical RN Android catalogue is running on owned fit-ipc-api36 with unchanged SDK/corpus/service and no new exclusions. Do not edit its candidate or use its emulator/Metro until terminal. The runner clears its selected-device local-only TCP proxy on exit and records both device reverse tables. Do not infer runtime success from source review. No activation PRs or new BitsCode assignment.
 
 ## RN device isolation and aggregate prerequisites — CONTROL-045
 
