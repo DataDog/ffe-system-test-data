@@ -328,3 +328,10 @@ RN workspace reports65canonical cases collected,35applicable including17response
 ## Transport clarification hold — CONTROL-029
 
 Tyler asked to hold while discussing serialized ConfigurationWire for offline rules initialization. Coordinator clarified SDK configuration payload and outer control RPC are distinct layers; serialized configuration remains unchanged inside the request. Binary replacement has not been dispatched or integrated. Both proposed transport remedies remain on hold; WS-05 confirmed it will finish the existing unchanged baseline only. Other platform reviews and existing iOS/Flutter executions continue.
+
+
+## ConfigurationWire ownership clarified — CONTROL-030
+
+Tyler confirmed offline init input is a serialized ConfigurationWire and requires that exact payload to cross FLEX/FIT RPC. Production belongs exclusively in the corpus generator or test runner, never an IPC server. Coordinator withdraws CONTROL-028's broader generic binary-RPC rewrite interpretation and separates this producer/payload contract from WS-11's online-precomputed default-value defect. Shared components row/brief now state ownership and exact producer-to-SDK equality proof. No later-mode work dispatched.
+
+Coordinator independently reproduced all110WS-11 neighbouring tests in152.91seconds; original narrower candidate retained for complete review rather than architecture rewrite. iOS exact-child simulator run completed10passed/55skipped/0fail in498.37seconds, exit0; fresh AI/traffic/corpus exclusion audit assigned independently. No row acceptance or activation push.
