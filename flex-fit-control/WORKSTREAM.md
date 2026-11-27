@@ -72,3 +72,7 @@ WS-01 reports signed local head 47f8760c5c7ca870a13029bb711cd74d3a506bae based o
 ## Delegated BitsCode runtime — CONTROL-007
 
 Tyler confirmed BitsCode cannot run FIT; all its FIT execution now belongs to local/workspace executors. WS-05 local Browser execution assigned; BitsCode remains code/activation owner and supplies exact test requests/patches. BitsCode verified FIT read and reported WRITE permission, actual push untested. It identified separate RUM SDK and npm flagging-provider pins. Its Chromium download request was denied; do not retry that runtime setup in BitsCode. No Browser runtime pass is claimed. Coordinator independently reproduced WS-01 focused49pass and both failing mutation controls; full review/council/unit run remains in progress.
+
+## Matrix freshness — CONTROL-008
+
+goal.md now reflects every active lane and the whole deferred Unity row. Each subsequent material update must refresh affected matrix cells in the same publication. WS-05 browser_execution local agent launched; BitsCode remains implementation owner. WS-01 local Crucible has independently reproduced49focused passes plus killed inherited-filter and corpus-route mutants; council/full-suite work continues. WS-03 broader failures were reported as missing Chromium; bounded local runtime preparation underway, with no SDK exclusions or acceptance claimed. WS-04 helper15passes remains separate from pending simulator proof.

@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-007, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-008, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -29,6 +29,10 @@ WS-01 ownership is unchanged. CONTROL-005 assigns BITS-01 and WS-02 below; other
 ## BitsCode execution boundary — CONTROL-007
 
 Tyler confirmed BitsCode cannot run the FIT suite. BitsCode owns preparation, code/fixture changes and diagnosis from returned evidence, but delegates all FIT suite execution to coordinator-assigned local or workspace agents. Do not request more browser downloads/network permissions or attempt an execution workaround in BitsCode. Provide exact candidate patches/heads, FIT/corpus/SDK/provider revisions, commands, case selections, expected observations and setup requirements. WS-05 initially owns Browser FIT execution. Coordinator serialises shared runtime/toolchain use and returns failures for iteration. Static/schema/format checks in accessible repositories remain in BitsCode's scope where supported. A delegated run is attributed to the executor and tied to exact source identity; BitsCode must not claim it ran the suite itself. No activation push or ready acceptance before applicable delegated checks/publication gates pass.
+
+## Matrix freshness — CONTROL-008
+
+Tyler requires the matrix view in goal.md to be updated with every material implementation, assignment, blocker, test, publication or review update. Update the affected cells in the same control publication as detailed workstream/assignment changes, preserving ticket/PR links. Show owner, current stage and decisive evidence/blocker; distinguish implementor reports from independent verification. Reflect row-wide deferrals in every cell. Routine unchanged monitoring does not create a new matrix state.
 
 ## Authority and communication
 
