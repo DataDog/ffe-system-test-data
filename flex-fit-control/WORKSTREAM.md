@@ -416,3 +416,6 @@ CONTROL-046: selected-device-only RN Metro repair frozen and independently revie
 
 
 CONTROL-047: start independent prerequisite audits while RN full canonical run continues. Local shared owner audits existing FIT rules-server/WIP and exact SDK-fetch method/path/headers. BitsCode assigned separate public corpus generated-resource catalogue/provenance and relatedPR audit, documentation-only branch; no fixture changes or platform-mode execution. Preserve exact serialized ConfigurationWire artifact, no new serializer or RPC rewrite. No activation PRs.
+
+
+CONTROL-048: local rules audit completed. Existing producer emits paired protobuf/wire resources; current offline loader must be extended. Actual Browser fetch helper uses GET/raw protobuf with version-specific optional requestheaders. Inspected123localrefs/57worktrees and refreshed31openFITPRs with exact relevant235/231/138fileinventories; no binary-server overlap established. Assigned isolated WS-12 reusable server/resource implementation in two non-overlapping files/test pairs from reviewed shared foundation. No later platform-mode execution, serializer/RPC changes or activation publication. BITS-02 retains corpus-audit ownership. RN canonical run remains live.

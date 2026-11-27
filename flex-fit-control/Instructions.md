@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-047, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-048, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Shared rules infrastructure implementation — CONTROL-048
+
+Prerequisite audit identifies a non-overlapping binary GET server plus verified resource-loader delta. [WS-12](assignments/WS-12-SHARED-RULES-RESOURCES.md) assigns separate local server and resource owners in an isolated candidate based on the reviewed shared foundation. This is reusable infrastructure, not later platform-mode implementation/execution. Preserve BITS-02’s separate corpus audit and active RN candidate/devices. No new serializer, init-contract change, RPC rewrite, activation PR or premature branch publication.
 
 ## Shared rules prerequisite audit — CONTROL-047
 
