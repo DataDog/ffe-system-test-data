@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-026, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-027, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -181,3 +181,8 @@ Tyler requests a shared FLEX/FIT components row above Browser. Keep its four cel
 WS-10 may consume matching RN core/OpenFeature packages from exact public PR1507 source0e2f26fb60361f3394062302dbab37b1e406d1a1 for online-precomputed smoke and complete applicable inventory, with its declared published Android3.16/iOS3.21 dependencies. Record the exact source/package/native resolutions and preserve other rows' SDK pins. Exclude separate PR1567 evaluation-logging hook changes and optional conformance overlays. This chooses a consistent executable prerequisite, not a claim of full SDK correctness or PR approval.
 
 Do not block the inventory on implementing missing SDK capabilities such as absent targeting keys, recursive attributes or typed native error propagation. Diagnose them against the actual public mapper/bridge/native source and actual runtime or equivalent native controls; record SDK gaps before proposing narrow per-case/feature exclusions. Preserve canonical fixtures and distinct Android/iOS receipts. Unsupported integration must fail explicitly, never coerce absent keys or synthesize context/errors. SDK conformance fixes belong to later processing unless separately authorised; the current task is faithful SDK integration plus documented gaps. Preserve Sameeran's reusable adapter/registration changes. No later deployment modes, activation push before gates, or PR.
+
+
+## Shared Playwright protobuf fidelity — CONTROL-027
+
+WS-11 owns the bounded internal FIT transport repair in assignments/WS-11-protobuf-defaults.md. Preserve no-presence protobuf defaults including empty flag keys while preserving optional-field absence. Existing Browser17case failures are a transport defect, not grounds for SDK exclusions. WS-05 continues its unchanged full65run; integrate only afterwards with exact patch identity and affected/full reruns. BitsCode retains corpus ownership; no duplicate serializer implementation or fixture skips. Shared components matrix cell tracks this dependency for Browser and Electron.

@@ -1,0 +1,11 @@
+# WS-11 — Preserve protobuf scalar defaults in Playwright IPC
+
+CONTROL-027. Coordinator-assigned local shared FIT transport owner. This is a harness defect exposed by newly activated Browser encoded fixtures, not an SDK conformance gap. Work in a separate isolated checkout; never edit the live WS-05 executor or other owners' worktrees. Base inspected FIT main e07ae57ef3108b18b10d2f67690bc36caf8303af.
+
+Python PlaywrightServiceStub serialises requests with MessageToDict's default omission of no-presence scalar defaults. An empty proto3 flag_key is therefore absent in the JS request and the Web executor forwards undefined to the provider. The two fixed digest/salt fixtures fail at the eighth evaluation. Independent core3.6 control confirms explicit empty string evaluates the authored assignment, whereas undefined throws. Preserve protobuf semantics across this transport rather than excluding fixtures or special-casing expected data.
+
+Own src/rum_sdk_test/ipc/playwright_stub.py, focused transport tests and directly affected transport documentation. Prefer a principled serializer correction preserving all no-presence scalar defaults while retaining presence for proto3 optional fields and message fields. Audit every service/method consumer, empty strings/false/zero/enums/maps/lists and absent-versus-explicit optional values before choosing the exact change. No SDK/provider/app evaluator changes or fixture rewrites.
+
+Add meaningful controls proving the old serializer loses required defaults and the repaired transport preserves them, including the empty-key call boundary and absent optional targeting key/and_wait semantics. Exercise real browser JS IPC when assets can be reused without download/build, or provide an exact bounded request for WS-05 after its live full run. Keep current full run unchanged. Run affected repository tests/types/lint and record mandatory aggregate gaps without weakening gates.
+
+Return exact private patch/signed local child, base/head/tree and positive/pre-change-failure controls. Coordinator independently reviews this ready branch through Crucible and reruns the two fixed vectors plus full Browser corpus after integration. No SDK skips, activation push, PR, CI trigger or device actions. Preserve source/evidence and12GiB disk floor; no downloads or large build.

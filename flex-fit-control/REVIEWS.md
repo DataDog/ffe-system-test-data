@@ -31,3 +31,6 @@ CONTROL-024 iOS council partial: correctness/QA/SRE NONE; senior P1 confirmed by
 
 
 CONTROL-026 Android P1 source delta confirmed fixed at signedacbeb6b2de9f9b6ddee1653697ac4768ce7c2f48 by original independent correctness reviewer; actual device/gRPC control still open and full council incomplete. iOS readiness repair reports31focused positives/negative controls; signed child/delta verification pending. Two performance P2 observations remain under adjudication.
+
+
+CONTROL-027: iOS signed child215fb35b2b3283ec39fb5d39c3bcd1e32b638865 signature verified; original senior reviewer confirms P1 fixed/no remaining actionable delta. Correctness, QA, SRE, senior and native coverage lenses complete; external launcher absent, native fallback disclosed. Performance P2 actor-blockingflush/client-retention candidates remain in private ledger. Root full-unit exact child run live; final targeted stateful verifier pending. WS-11 transport branch will require its own independent local review and runtime controls once ready.
