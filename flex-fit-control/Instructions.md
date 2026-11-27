@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-024, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-025, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -169,3 +169,8 @@ Also document OpenFeature Kotlin0.6.2 metadata enumeration limitation separately
 WS-04 owns the coordinator-confirmed P1 in the iOS candidate: unconditional gRPC startup readiness is also reached through MauiDriver's iOS composition, whose app serves HTTP/JSON. Add explicit transport-aware readiness to IosDriver consistent with Android's existing grpc/http distinction, and pass HTTP from MAUI/iOS. Preserve native gRPC defaults, startup gating, simulator addressing and existing wrapper behaviour. Add positive native-gRPC and composed-MAUI-HTTP controls plus invalid transport/negative readiness checks; demonstrate pre-change failure. No MAUI native build or new flags implementation is needed for this bounded shared-driver repair. Return signed child and exact checks for independent delta review. No simulator/AVD use while root Flutter run owns the device.
 
 Two iOS performance observations (actor-blocking SDK flush and retained native client registry entries) remain under coordinator adjudication; do not impose an arbitrary client budget or weaken fresh-client rejection fidelity. Keep them distinct from the confirmed P1 and from SDK capability gaps.
+
+
+## Matrix infrastructure row — CONTROL-025
+
+Tyler requests a shared FLEX/FIT components row above Browser. Keep its four cells current alongside platform updates, with requirements, current evidence/gaps and links to assignments/SHARED-DEPLOYMENT-COMPONENTS.md. This row is infrastructure tracking, not an additional platform or permission to bypass per-platform online-precomputed acceptance gates. Reuse existing corpus UFC generators/resources and inspect existing FIT mode infrastructure before adding components.
