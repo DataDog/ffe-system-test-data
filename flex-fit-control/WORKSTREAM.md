@@ -15,6 +15,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | WS-05 Browser FIT execution | Coordinator-local agent | Baseline underway; numeric diagnostic queued | Return actual runtime/configuration/intake evidence to BitsCode |
 | WS-06 KMP/MAUI/Electron prerequisites | Existing WS-01 workspace chat | Read-only audit complete | Preserve source evidence; integration prerequisites recorded |
 | WS-07 Electron online precomputed | Existing WS-01 workspace chat | Implementation assigned under CONTROL-011 | Separate candidate, renderer IPC/configuration/intake and delegated runtime proof |
+| WS-09 Electron FIT execution | Coordinator-local executor | Assigned under CONTROL-016 | Exact private candidate build and actual runtime receipts |
 | WS-08 Flutter online precomputed | Coordinator-local agent | Implementation assigned under CONTROL-013 | Reconcile WIP and verify both native hosts |
 | Other platform rows | Queued; Unity deferred | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
 
@@ -159,3 +160,62 @@ WS-05's source audit of 45 excluded Browser corpus cases found material stale fi
 WS-05 also confirmed all-types traffic: one HTTP200 configuration request, five evaluations, five exposures and five evaluation events. Full private evidence remains access-controlled.
 
 WS-08 reports the pinned Flutter package lacks the recovered OpenFeature API; a clean newer pure-Dart flag package may be separable from the current native RUM/plugin pin. Coordinator granted bounded Flutter scenario/init/flush hunks and requires real package-resolution/compatibility evidence before adopting that proposal. Optional historical conformance overlays remain separate. No Flutter runtime result or pin-change acceptance is claimed. Matrix updated alongside these instructions.
+
+
+## Local runtime expansion and toolchain preparation — CONTROL-016
+
+WS-09 local Electron executor is assigned; WS-07 remains code owner. Coordinator imported and checksum-verified the private initial signed bundle, preserving the exact WS-01 prerequisite. The authorised observation-fix child is pending. No Electron runtime proof yet; actual loaded identities and separate renderer/main traffic must be verified.
+
+WS-08 prepared Flutter3.44.0/Dart3.12.0 from its verified official release tag, satisfying the existing Dart constraint without a constraint bump. The executable absence is resolved; this does not establish dependency resolution, full lint or Flutter native runtime success. Coordinator is materialising exact pinned MAUI/Flutter SDK checkouts in the shared review tree to investigate remaining lint gates. Disk remains bounded; no broad cleanup or source changes claimed. Matrix reflects both updates.
+
+
+## Latest local execution state — CONTROL-016 awaiting signing recovery
+
+Remote remains CONTROL-015 because the configured 1Password SSH signing agent refused local and workspace signed commits. Same-identity retry failed; no bypass or unsigned commit/push. Latest matrix/instructions remain staged locally, and runtime work continues under existing authorisation. Tyler has been asked to unlock/approve the configured agent.
+
+WS-09 verified the exact unsigned Electron observation-fix overlay tree and is building actual runtime assets; no Electron execution result yet. WS-08 resolved the clean separate Dart flag package against unchanged RUM/plugin, reports 19 Dart tests/analyzer, 13 launcher tests and Android APK build success. Runtime awaits dynamic forwarding; task-owned emulator only. Bounded explicit Flutter topology and dynamic-owned-port forwarding ownership granted; no native proof yet.
+
+WS-04 full real-source iOS baseline: 10 passed, 52 failed, three existing platform skips from 65, 1256.70 seconds. Every failing AI report was read. Proposed diagnosis groups are three provider error-code cases, five native numeric conversion cases, four native whole-response numeric parsing cases and 40 applicable encoded fixtures. No exclusions authored. Coordinator inspected exact unmodified provider typed conversions and SDK strict numeric casts/dictionary decoding; a separate direct native public-API control is pending to strengthen attribution. Detailed gap scope and re-enable criteria below precede any reliance on exclusions.
+
+### GAP-ios-001 — source-based confirmation and expanded scope
+
+Same pinned SDK/provider/corpus as earlier entry. Source-based baseline confirms defaults-and-emission-gates, empty-flags-response and type-mismatch-all-types fail because expected error codes are absent. All five provider typed conversions omit the native error; coordinator inspected exact source. Removal owner WS-04; restore all three cases when public provider typed value/reason/error/variant and emission assertions pass. No expectation edits or exclusions yet.
+
+### GAP-ios-002 — strict numeric conversion
+
+Owner/removal owner WS-04. Same SDK44a1d947/provider075e5f85/corpusfe24ed2 and FIT a1fb408f250b20eaa46f9cd7994849c3e77bfcd3. Source-based baseline fails numeric-boundaries-float, numeric-boundaries-integer, numeric-boundaries-number, numeric-float and numeric-number. Valid exact cross-numeric requests return defaults, for example -2147483648 becomes -99 or -99.5. Coordinator inspected SDK numeric variants using strict type casts and public provider delegation. Direct native public-API control is pending; do not attribute an adapter defect to this gap. Re-enable these cases after valid widening/integral conversions and authored reason/error/emission assertions pass. No exclusion yet.
+
+### GAP-ios-003 — whole-response numeric parsing
+
+Owner/removal owner WS-04; same exact inputs above. Numeric-decimal-float, numeric-decimal-integer, numeric-decimal-number and numeric-integer fail InitProvider with the explicit SDK-invalid-response classification for valid authored JSON numeric edge cases. Expected behaviour preserves healthy assignments and per-flag numeric failures. Coordinator inspected the SDK whole-dictionary throwing decoder and strict numeric decoding; keep transport/IPC errors distinct. Re-enable when all four authored cases complete with their exact numeric/negative-result and intake assertions. No exclusion yet.
+
+### GAP-ios-004 — encoded assignments and rejection feature
+
+Owner/removal owner WS-04; same exact inputs above. All 40 applicable encoded fixtures fail: positive encoded assignments return defaults and the 16 malformed-descriptor cases are accepted instead of explicit INVALID_RESPONSE rejection. Two other encoded cases already exclude iOS. Pinned SDK lacks the corresponding encoding/descriptor path in the inspected implementation; generated numeric/error cases also intersect the other gaps. Proposed scope is an iOS-only encoded-feature compatibility exclusion, preserving generated canonical fixtures. Re-enable after key encoding/rotation and descriptor-rejection matrix pass, then evaluate remaining numeric/provider gaps individually. No exclusion authored yet; exact failure inventory/private reports retained by WS-04.
+
+
+## Latest runtime receipts and Android ready handoff — local CONTROL-016
+
+WS-09 actual Electron smoke passed on exact unsigned observation-fix tree e08134afdee24a807a03956b0ea61b6e55f90417: one case in45.33seconds, immediate AI-report read, one HTTP200 configuration POST with authored context, five typed results and five exposure/five evaluation events. Separate main-bridged RUM recorded six resource/six view events. Loaded Electron45.3.2/Chromium156.0.8078.100; renderer version dev tied to verified Browser b3bd0bc build. Three exact numeric cases now running; no exclusions or acceptance.
+
+WS-02 reports signed local f00e34003d4f35026653c16a945389aa24dd5844 ready for emulator execution. Established selector and Android flush-order integration complete; 960 FIT unit tests, three JVM selector cases, Kotlin compile/ktlint, Python/type checks and Web types pass reported. Corpus #88 head26f75b6; Python/Web/Android generated bindings included, Swift/Dart regeneration needs local coordination. 130 cases collect across direct/OpenFeature; zero device executions. Private exact bundle requested; independent local Crucible queued. No push or acceptance.
+
+Coordinator Flutter lint stage now passes after exact SDK materialisation/toolchain preparation:32 files formatted with no changes and analyzer zero issues. Its normal pub-get step changed the old lock resolution, including plugin3.4.0 to actual pinned-source3.6.0; coordinator inspected/restored only that generated lock change to keep reviewed source exact. This is not a claim of an unchanged-lock full lint pass. MAUI full native build/lint remains unproven; disk now approximately13GiB, so large builds/downloads are paused pending bounded owned-artifact budgeting. No broad cache cleanup.
+
+
+## iOS exclusion preparation authorised — local CONTROL-016
+
+Coordinator read the exact independent native-control source/log. Same-type native getters returned float0 and integer5; cross-numeric getters returned defaults with native typeMismatch before any IPC mapping. Two HTTP200 receipts were recorded. This macOS diagnostic is not an officially supported platform conformance run and its overall exit1 came from a separate incorrect raw-provider reason assertion; do not call the whole diagnostic passing. Combined with the actual iOS simulator failures and inspected SDK casts, this supports GAP-ios-002 attribution. No further unsupported initialisation retries are required.
+
+WS-04 may now prepare exclusions for the recorded12 authored plain cases (GAP-ios-001/002/003) in the imported corpus and the40 applicable encoded cases through iOS-only feature compatibility (GAP-ios-004), respecting generator rules and canonical expectations. Preserve already-excluded cases/reasons, use canonical gap IDs and stated removal conditions, then rerun the whole65-case selection with actual configuration/evaluation/intake evidence. Anticipated10passed/55skipped is only a prediction until executed; report actual counts and remaining coverage. No activation push or cell acceptance before independent review and publication gates. Matrix reflects preparation, not a green result.
+
+
+### GAP-electron-001 — renderer numeric gap reproduced
+
+Owner/removal owner WS-07; executor WS-09. Existing related ticket FFLSDK-292. Exact parent4191626a9894199b0768311fb991b912a4fc2ba1 plus unsigned observation treee08134afdee24a807a03956b0ea61b6e55f90417; same corpus/Browser/provider/core pins as the execution brief. Actual Electron45.3.2/Chromium156.0.8078.100. All three exact numeric-decimal cases failed in34.62seconds with no skips, reproducing inexact-whole-double actual9007199254740992/TARGETING_MATCH/variant present/noerror versus default-99.5/ERROR/TYPE_MISMATCH/no variant. Fifteen of21 applicable evaluations attempted:12matched/3failed, six not reached. Each configuration request returnedHTTP200. These failures occur before flush/poll: call-end zero emission counts provide no absence or emission-conformance proof. All AI reports read immediately. No exclusion authored. Re-enable after all three exact value/reason/error/variant and bounded emission assertions pass. Current18 applicable authored nodes are now running as an unexcluded inventory; static65discovered/47excluded is separate from actual runtime selection. The two dependent fixtures' Web-only includes look stale for the same renderer and remain unverified activation work.
+
+## Latest private execution progress — local CONTROL-016
+
+WS-04 prepared the recorded authored-case filters and iOS encoded-feature compatibility after diagnosis, respecting include-versus-skip schema rules; generator companions regenerated and all65schema checks pass reported, four compatibility checks pass. Its complete actual-source rerun is starting; no green result claimed. Three additional no-init/no-IPC SDK model controls pass reported, supplementing the earlier limited direct control.
+
+WS-08 reports94 focused topology/forwarding checks and Android build pass. Initial smoke was blocked before launch by mobilecli missing from PATH; it reused WS-04's existing1.0.24 installation and the smoke retry is live. This is an environment recovery, not an SDK failure. Dynamic forwarding avoids wrong-app connections. No new download and no native pass yet. Root matrix refreshed; remote publication still awaits the configured signing agent.

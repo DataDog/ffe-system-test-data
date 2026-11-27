@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-015, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-016, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -116,3 +116,15 @@ Sixteen malformed-encoding rejection cases require actual Web init-error classif
 ## Flutter integration hunk ownership — CONTROL-015
 
 WS-08 may own Flutter-only scenario inclusion and conftest provider-init/flush/readiness hunks, preserving WS-01 marker/CI, iOS, Android and other owners' behaviour. Its proposed separate clean Dart flag-package pin is provisional: prove actual dependency resolution and compatibility with the existing RUM/plugin pin before adopting it. Use genuine batching and bounded intake where no public flush API exists; no fake acknowledgement. Native SDK prerequisite ownership remains unchanged.
+
+
+## Electron delegated local execution — CONTROL-016
+
+WS-09 coordinator-local Electron executor is assigned [assignments/WS-09.md](assignments/WS-09.md). WS-07 remains implementation owner. Prepare the exact private candidate and actual macOS runtime, then smoke/decimal/full applicable execution after the authorised observation fix is integrated. Existing WS-05 Browser evidence is retained; future Browser requests remain delegated. No activation PRs.
+
+
+## Local execution coordination — CONTROL-016
+
+WS-08 owns two bounded prerequisites in its candidate: explicit Flutter native-host topology through a public driver property and shared address-selector factory, and Android host-port allocation via adb's dynamic port forwarding. Keep Android device IPC port unchanged, connect to the exact returned host port and remove only the owned forward. No global wrapper loopback, private-field inspection, host-port guessing or remove-all cleanup. Root coordinates shared harness/conftest construction-site hunks and retains other owners' changes. These changes need focused regression controls and actual Flutter runtime identity checks.
+
+Configured SSH signing-agent failures delayed this revision. Preserve signed-commit requirements and verify the signed remote head before claiming publication. Runtime work and exact private patch testing may proceed during a signing interruption; no unsigned commits/pushes or ready-publication claims.
