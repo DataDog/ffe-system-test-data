@@ -4,7 +4,7 @@ Policy revision CONTROL-003, November 27, 2026. Coordinator owns review acceptan
 
 | Assignment / branch | Reported ready | Exact base/head and paired dependencies | Review state | Evidence / next action |
 | --- | --- | --- | --- | --- |
-| WS-01 shared activation foundations | No; implementation in progress | Not handed off yet | Awaiting ready branch | Workspace confirmed CONTROL-002 read and fetched current FIT/Android stack heads; queue review when the implementor supplies a ready branch and verification receipt. |
+| WS-01 shared activation foundations | Local implementation handed off; publication blocked | FIT base e07ae57ef3108b18b10d2f67690bc36caf8303af; head 47f8760c5c7ca870a13029bb711cd74d3a506bae; paired pins requested | Awaiting portable patch for independent local Crucible review; not accepted | Implementor reports 912 unit passes / 49 focused checks and no new exclusions; full lint/tooling, Dynamic Build auth and native runtime gaps remain. No remote activation branch. |
 
 For each ready handoff record repository/remote branch, actual base/head and merge base, FIT/corpus/SDK revisions, ownership, local check commands/counts, exclusions with workstream gap IDs, specialist/peer coverage, numbered findings with evidence, fixes and verification, remaining P0/P1 count and coordinator disposition. Keep evidence tied to exact revisions. If a dependency or branch head changes, refresh affected checks/review.
 

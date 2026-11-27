@@ -1,13 +1,14 @@
 # Instructions
 
-Revision: CONTROL-004, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-005, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
 Tyler resumed the matrix goal and explicitly requested workspace chats in the x-platform testing project. CONTROL-002 supersedes CONTROL-001's setup-only pause for the assignment below. Other rows are not implicitly assigned.
 
 - **WS-01 — workspace activation foundations:** the newly created workspace chat owns the bounded assignment in [assignments/WS-01.md](assignments/WS-01.md). First verify workspace execution and Control Branch/repository access, then implement shared CI activation and inherited platform-marker fixes within that scope.
-- **BitsCode:** continue to use this branch as the specification source and report in the designated Slack channel. No overlapping implementation assignment yet. WS-01's shared activation changes are owned by the workspace chat; do not duplicate them.
+- **BITS-01 — Browser online precomputed:** BitsCode owns the bounded assignment in [assignments/BITS-01.md](assignments/BITS-01.md). Verify FIT source access first; do not duplicate WS-01 or broaden into later modes.
+- **WS-02 — Android online precomputed:** a dedicated x-platform testing workspace chat owns [assignments/WS-02.md](assignments/WS-02.md). Reconcile existing stacks and native Android prerequisites; no other row may modify that shared SDK prerequisite without coordination.
 - **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Other platform assignments follow after workspace creation/execution is verified.
 
 No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
@@ -20,7 +21,7 @@ For every eligible row, complete online precomputed first, with applicable fixtu
 
 Before implementing a deployment-mode path, inventory existing FIT infrastructure and open/merged changes. In particular, inspect FlagServer for actual rules payload delivery rather than assuming the endpoint exists. Rules-based protobuf and portable wire payloads must come from the corpus generation/catalogue tooling and the selected corpus revision, including applicable existing PRs. Do not invent a second converter, hand-edit generated payloads or treat generation success as SDK conformance. Record source/artifact provenance, conversion omissions and the corresponding evaluation cases. Online rules additionally requires the appropriate HTTP endpoint/headers and actual SDK consumption; offline rules requires the corresponding local-loading path.
 
-WS-01 ownership is unchanged. BitsCode remains unassigned; this sequencing update does not dispatch implementation. No activation PRs.
+WS-01 ownership is unchanged. CONTROL-005 assigns BITS-01 and WS-02 below; other rows await explicit assignment. No activation PRs.
 
 ## Authority and communication
 
