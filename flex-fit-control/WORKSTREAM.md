@@ -150,3 +150,12 @@ The temporary numeric probe was restored and the executor tree is clean. Keep th
 ## Electron local handoff — CONTROL-014
 
 WS-07 reports signed local candidate 4191626a9894199b0768311fb991b912a4fc2ba1 stacked on WS-01 47f8760c5c7ca870a13029bb711cd74d3a506bae. It adds Electron scenario/corpus CI integration; 914 unit passes, 45 focused checks and static 18 applicable / 47 excluded of 65. All three numeric cases remain selected; no exclusions added and zero Electron runtime cases executed. The source audit identified a shared zero-quiet-period observation gap for Electron renderer flush. Bounded repair and regression ownership granted; updated private handoff/macOS runtime needed. This is a harness prerequisite, not an SDK defect. Matrix refreshed with all outcomes.
+
+
+## Browser excluded coverage and Flutter dependency proposal — CONTROL-015
+
+WS-05's source audit of 45 excluded Browser corpus cases found material stale filtering: provider 2.4.0 uses core 3.6.0 with the corpus's obfuscation encoding support. Grouping: two native exact-integer exclusions, one unsupported-consumer case where Browser is capable, 17 encoded positive/hash/salt activation candidates, six mixed numeric-boundary cases with nested Web-applicable evaluations, three encoded decimal numeric-gap candidates, and 16 malformed-encoding whole-response rejection cases. These are source classifications, not newly executed passes or failures. BITS-01 is assigned corpus activation preparation starting with the 17 cases and bounded Web error-contract coordination; WS-05 remains executor. The shared WS-03 rejection implementation exists locally for native transports and must be integrated rather than duplicated; Web transport support remains incomplete. The original 17-case baseline is insufficient for whole-cell acceptance while eligible coverage is still excluded.
+
+WS-05 also confirmed all-types traffic: one HTTP200 configuration request, five evaluations, five exposures and five evaluation events. Full private evidence remains access-controlled.
+
+WS-08 reports the pinned Flutter package lacks the recovered OpenFeature API; a clean newer pure-Dart flag package may be separable from the current native RUM/plugin pin. Coordinator granted bounded Flutter scenario/init/flush hunks and requires real package-resolution/compatibility evidence before adopting that proposal. Optional historical conformance overlays remain separate. No Flutter runtime result or pin-change acceptance is claimed. Matrix updated alongside these instructions.

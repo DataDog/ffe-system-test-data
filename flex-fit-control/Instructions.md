@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-014, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-015, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -105,3 +105,14 @@ WS-08 coordinator-local Flutter online-precomputed implementation is assigned un
 ## Electron emission observation — CONTROL-014
 
 WS-07 may own the bounded shared harness condition and focused regressions that give Electron the existing Web renderer emission quiet period. It uses the same asynchronous renderer flush. Preserve native driver behaviour and the shared rejection path, and prove delayed unexpected emissions fail using a positive control. This is an integration/harness prerequisite, never an SDK exclusion. Return an updated exact private candidate for macOS execution and independent review.
+
+
+## Browser exclusion audit follow-through — CONTROL-015
+
+WS-05 found that the current Browser flagging core supports the corpus's obfuscation encoding, so blanket Browser exclusion is not justified by lack of obfuscation. BITS-01 must reconcile the 45 excluded corpus cases, starting with the 17 source-eligible encoded positive/hash/salt cases. Prepare applicable corpus activation through its authorised generation path and provide a safe exact fixture patch/test request for delegated execution. Source eligibility is not a pass. Preserve justified exact-integer/unsupported-consumer filters, retain the reproduced numeric quarantines, and diagnose mixed numeric boundaries with narrow applicability rather than hiding their valid evaluations.
+
+Sixteen malformed-encoding rejection cases require actual Web init-error classification and runner integration. The shared WS-03 candidate now handles explicit complete-response rejection for gRPC/HTTP but is not yet integrated into the Web execution tree; do not duplicate that shared work or claim Web error transport is already supported. BITS-01 owns a bounded Web adapter contract proposal; coordinator owns shared runner coordination. Only positively identified malformed configuration may emit the agreed rejection marker; ordinary transport/readiness failures remain failures. Request required source changes through the access-controlled handoff. BitsCode continues to delegate all FIT runs.
+
+## Flutter integration hunk ownership — CONTROL-015
+
+WS-08 may own Flutter-only scenario inclusion and conftest provider-init/flush/readiness hunks, preserving WS-01 marker/CI, iOS, Android and other owners' behaviour. Its proposed separate clean Dart flag-package pin is provisional: prove actual dependency resolution and compatibility with the existing RUM/plugin pin before adopting it. Use genuine batching and bounded intake where no public flush API exists; no fake acknowledgement. Native SDK prerequisite ownership remains unchanged.
