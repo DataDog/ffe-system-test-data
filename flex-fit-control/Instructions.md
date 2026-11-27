@@ -1,10 +1,14 @@
 # Instructions
 
-Revision: CONTROL-043, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-044, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Aggregate validation preparation — CONTROL-044
+
+Browser rebuild evidence closes the bundle-provenance question without changing candidate files. The complete unchanged lint wrapper requires all platform prerequisites: local Browser candidate lacks most SDK checkouts, local virtual environment and MAUI/native workloads;8.5GiBfree does not yet establish provisioning capacity. The WS-01/WS-10 workspace owner is assigned read-only capacity/prerequisite feasibility assessment before downloads/builds/cleanup. Preserve WIP and paired dependencies; do not replace aggregate checks with narrower passing checks. No new BitsCode implementation assignment and no activation PRs.
 
 ## Browser delivery clarification — CONTROL-043
 
-Browser online-precomputed support already exists. Its outstanding lane is expanded corpus coverage and final delivery validation, not a new mode implementation. The repaired full selection is34passed/31skipped with160audited actualRPCs. The private audit correction preserves the original stale manifest and explicitly records unrecovered historical argv/environment and reused-bundle provenance limits. Complete source-derived build verification, aggregate lint/integration and paired activation-branch publication before accepting the expanded candidate. Do not use this bookkeeping state to imply the existing Browser mode is unavailable. Other row sequencing remains unchanged; no activation PRs and no new BitsCode implementation assignment.
+Browser online-precomputed support already exists. Its outstanding lane is expanded corpus coverage and final delivery validation, not a new mode implementation. The repaired full selection is34passed/31skipped with160audited actualRPCs. The private audit correction preserves the original stale manifest and explicitly records unrecovered historical argv/environment and reused-bundle provenance limits. Source-derived build verification is now complete: exact clean Browser SDK rebuilt successfully and bundle/map hashes match the validated candidate. Existing installed dependencies were reused. Complete aggregate lint/integration and paired activation-branch publication before accepting the expanded candidate. Do not use this bookkeeping state to imply the existing Browser mode is unavailable. Other row sequencing remains unchanged; no activation PRs and no new BitsCode implementation assignment.
 
 ## Current verification state — CONTROL-042
 
