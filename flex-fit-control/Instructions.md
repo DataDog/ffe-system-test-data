@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-021, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-022, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -155,3 +155,10 @@ Assign WS-10 React Native online precomputed to the existing workspace activatio
 ## Flutter complete Android inventory and iOS review — CONTROL-021
 
 WS-08 may re-reserve its task AVD for the complete64-applicable Android corpus sweep using the verified APK and source topology, retaining exact handles and ownership. WS-02 has not reserved the device. Preserve APK/hash/evidence before measured cleanup of solely task-owned reproducible intermediates; maintain12GiB free-space floor. No broad SDK exclusion without case diagnosis. Flutter iOS runtime remains a separate pending obligation. WS-04 signed paired candidate is now in coordinator independent local Crucible; signing is recovered and aggregate lint gates remain distinct.
+
+
+## Android rejection integration repair — CONTROL-022
+
+WS-02 owns repair of the local Crucible P1: genuine Android SDK whole-response parsing rejection currently never reaches the shared strict invalid-response marker. Translate only positively identified native parse rejection during awaited initialisation/readiness. Preserve network/HTTP errors, timeout, cancellation and freshHTTP200/no-emission harness guards. The pinned SDK exposes the native error publicly but no stable public parse-specific code; document any narrowly pinned compatibility classification rather than claiming a public typed error API. Do not classify all provider errors as rejection or exclude the cases as unsupported SDK behaviour. Add direct/OpenFeature malformed-response positive tests and network/timeout/cancellation negative controls, then return signed private child and exact evidence for independent re-review. No SDK conformance overlay, activation push or PR.
+
+Also document OpenFeature Kotlin0.6.2 metadata enumeration limitation separately: typed public getters cannot enumerate arbitrary keys. Avoid reflection, fixture-derived reconstruction or duplicate evaluation that changes telemetry. Required preservation beyond the public API remains an explicit capability gap until a proper public API is available. Coordinate shared schema generators with native owners.

@@ -19,3 +19,6 @@ CONTROL-019 queue additions: WS-04 full actual-source candidate now reports10pas
 
 
 CONTROL-021: coordinator independently verified signed/clean paired iOS FIT4bc3a62838895147466fb72d75e7e1683927aa2a (basee07ae57) and corpus261df0f204655f05b3ea680485d53e4509c901cf (basefe24ed2). Local correctness specialist started, other lenses/verifier pending. Android correctness specialist is also live; no verdict yet. No clean council or acceptance inferred.
+
+
+CONTROL-022 Android correctness result: oneP1 pending repair, noP0 found in this lens. Android InitProvider lacks strict malformed-response translation; exact pinned SDK public error state retained, no public parse-specific code. Owner must add bounded mapping and positive/negative controls, followed by independent re-review. Root73affected tests pass; they do not prove device mapping. Other specialist lenses/coverage/verifier remain incomplete. Metadata enumeration is a separate SDK/API capability gap.
