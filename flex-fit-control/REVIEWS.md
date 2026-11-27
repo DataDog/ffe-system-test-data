@@ -34,3 +34,6 @@ CONTROL-026 Android P1 source delta confirmed fixed at signedacbeb6b2de9f9b6ddee
 
 
 CONTROL-027: iOS signed child215fb35b2b3283ec39fb5d39c3bcd1e32b638865 signature verified; original senior reviewer confirms P1 fixed/no remaining actionable delta. Correctness, QA, SRE, senior and native coverage lenses complete; external launcher absent, native fallback disclosed. Performance P2 actor-blockingflush/client-retention candidates remain in private ledger. Root full-unit exact child run live; final targeted stateful verifier pending. WS-11 transport branch will require its own independent local review and runtime controls once ready.
+
+
+CONTROL-028: iOS exact-child coordinator full unit suite973pass; all five native lenses/native coverage fallback/stateful verifier complete without remainingP0/P1. P2 synchronous actor-blocking flush retained; no untested remedy applied. External RPC cancellation unverified. Exact-child full simulator corpus live; lint/publication gates open. WS-11 serializer-only review superseded by Tyler's explicit binary control-RPC requirement; preserve existing candidate/evidence, independently review replacement rather than accepting narrower repair. Android performanceP2 repeated feature enablement candidate pending coordinator adjudication; remaining council/runtime gates open.
