@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-042, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-043, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Browser delivery clarification — CONTROL-043
+
+Browser online-precomputed support already exists. Its outstanding lane is expanded corpus coverage and final delivery validation, not a new mode implementation. The repaired full selection is34passed/31skipped with160audited actualRPCs. The private audit correction preserves the original stale manifest and explicitly records unrecovered historical argv/environment and reused-bundle provenance limits. Complete source-derived build verification, aggregate lint/integration and paired activation-branch publication before accepting the expanded candidate. Do not use this bookkeeping state to imply the existing Browser mode is unavailable. Other row sequencing remains unchanged; no activation PRs and no new BitsCode implementation assignment.
 
 ## Current verification state — CONTROL-042
 
