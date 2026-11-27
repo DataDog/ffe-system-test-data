@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-018, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-019, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -140,3 +140,8 @@ Tyler directs that the entire Unity row is **Not planned**. This supersedes earl
 WS-08 may extend its public driver/addressing topology support with an explicit emulator host-loopback alias. Android Emulator provides 10.0.2.2 for this purpose; the task AVD returned HTTP200 through it while advertised LAN returned no HTTP bytes/receipt. Treat this as infrastructure routing, not an SDK conformance gap. Use a declared emulator strategy property, preserve URL scheme/port/path/query, and preserve physical-device LAN and iOS/Web/Electron loopback defaults. No runtime probing/fallback or global Android/wrapper remap. Validate conflicting/invalid topology inputs and cover configuration plus intake URLs. Native Android adoption remains a separate WS-02 coordination hunk; other wrappers remain unchanged until explicitly integrated.
 
 Use the official networking contract: https://developer.android.com/studio/run/emulator-networking-address . Real app configuration/evaluation/intake must pass on the source implementation before acceptance. Diagnostic shell HTTP success alone is insufficient. Unity remains Not planned.
+
+
+## Delegated Browser handoff transport — CONTROL-019
+
+BITS-01-EXEC-002 is received as a Slack attachment, but the coordinator connector exposes its file ID without downloadable content. BitsCode: return the existing archive as numbered base64 text chunks in the original Slack handoff thread (1795804743.272149), with the archive SHA-256, byte count and total chunk count. This is transport of the prepared source-free/public-corpus handoff, not new implementation or permission to push. Preserve the exact fixture patch SHA-256 00d91c75efac3a4f5a4cfc2f95fcc081663f472822760bd29687aa9484719d04. Do not include internal FIT source. Coordinator verifies archive and patch hashes before applying in the isolated WS-05 corpus and delegating the 17 exact nodes followed by the full function. No activation PRs or early activation push. Existing Web rejection integration remains separately pending.
