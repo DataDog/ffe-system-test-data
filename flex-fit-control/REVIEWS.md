@@ -46,3 +46,14 @@ CONTROL-033 Android stateful verifier completed on clean repaired headacbeb6b2de
 
 
 CONTROL-037 RN exact signed local importb31433e3d7bf2121cb74bead81a68d85d5ecfa9b/basef00e34003d4f35026653c16a945389aa24dd5844/tree4ad01494f28936830d1a876271515a6eb16b6c8c: five native specialist jobs completed, plus native coverage fallback/targeted verifier (external launcher absent). Empty-key/default request defect repaired in private candidate tree4c379e205e0c5d69260453bd60b083a2d4caf66c; root16tests pass and6baseline failures verified separately. Follow-up non-finite float response encoding and repeat-init retained client/worker lifecycle remainP2; response repair assigned. Actual native SDK/runtime, resolved iOS build and full corpus evidence pending; no acceptance.
+
+
+CONTROL-038 Flutter correctness/performance/QA/SRE lenses completed on frozen full03source. QA P1: reserved targetingKey attribute is promoted to subject/dropped; reject unsupported context explicitly before provider mutation. CorrectnessP2 shutdown-before-invalidcontext overlaps this remedy. PerformanceP2 queued action can execute after caller deadline; current single-init corpus bounds it. Senior/coverage/stateful verifier remain incomplete. Full03passing-with-exclusions is pre-repair and is not acceptance.
+
+### CONTROL-038 continuation — local evidence only, signing blocked
+
+Flutter reserved-context P1 independently source-reviewed closed; coordinator19existing plus54new controls pass in separate exact-source runs. Runtime full03 predates repair. Flush documentation corrected for29-second capped best-effort wait; final doc recheck pending. Android topology delta independently reviewed with noP0/P1 and coordinator96mocked tests pass; repaired device smoke running. Browser completed-run independent evidence audit finds no newP0/P1; retrospective manifest correction preserves original and records unrecoverable historical argv/source-build limits. No activation PRs.
+
+Flutter final stateful/coverage verification confirms no remainingP0/P1 in reserved-context repair at unchanged adapterSHA; corrected flush threshold text reviewed as accurate. Independent19+54test runs and pre-repair runtime remain separate evidence. Android released parser/corpus disagreement under isolated runtime confirmation; no exclusion or SDK code change.
+
+Electron activation local review: exact paired FIT tree87d4eafc and corpus treee746ef4e against recorded preactivation/base. Correctness, Performance, QA, SRE, Senior SWE, native coverage fallback and final targeted verifier: no actionableP0/P1/P2. Configured external peer unavailable; nativefallback disclosed. Coordinator37FIT and29corpus controls pass; focused4actualElectron cases pass. Full catalogue, full lint, clean-checkout/build provenance and publication remain independent pending gates. Detailed source reports retained privately.

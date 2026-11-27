@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-037, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-038, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -252,3 +252,17 @@ Coordinator populated the unchanged pinned Flutter/MAUI SDK sources missing from
 Coordinator independently verified the owner repair tree4c379e205e0c5d69260453bd60b083a2d4caf66c in a separate validation checkout:16tests pass; restoring the baseline adapter with the new controls yields6failures/10passes. Native coverage/stateful verifier confirms the empty-key/default request repair. No native device result is implied.
 
 WS-10 owner additionally owns bounded float-response repair: valid ProtoJSON non-finite defaults now decode to numbers, but ordinary response JSON serialization converts NaN/infinities into null. Preserve protobuf special-string representation for the FeatureFlagService float response across the actual native-JS response boundary. Do not rewrite generic RPC transport or unrelated metadata. Add dispatcher-output/native-parser round-trip controls, including finite/zero values and unchanged other service responses. Return a private exact delta/tree/red-green evidence, no push/PR/FIT run. Repeated-initialization client/worker retention remains documentedP2, bounded by current fresh-process corpus; no reusable-init safety claim.
+
+
+## Flutter terminal run and required context repair — CONTROL-038
+
+Full03Android completed24passed/41skipped/0failed in963.64seconds. Independent audit confirms24matching configurationPOSTs/HTTP200,70exposures and84evaluation records.25freshAIreports represent24passes plus1existing call-time skip;40old failure reports were copied by the archiver and are explicitly stale, not new run evidence. The24passing IDs match full02 and40new skips exactly match investigated failures.86typed evaluations derive from executed fixture assertions, not RPC observation; diagnostics were not recorded.
+
+WS-08 owner must repair confirmedP1 context rewriting before acceptance. A custom attribute named targetingKey must never become the dedicated subject or be silently dropped. The pinned OpenFeature API cannot represent that attribute, so reject it explicitly as unsupported, preserving dedicated targeting-key absence/blank semantics. Validate/convert initialization input before shutting down or replacing an active provider, changing queued/submitted state or requesting configuration. Test string/null/nonstring attribute-only cases and explicit-key collisions, including active-provider preservation/no extra fetch. Full03is terminal, so this bounded repair may proceed in owned adapter/tests/docs. Preserve all other owners and full03evidence; do not run FIT/claim ready/push/PR. Document SDK context limitation separately.
+
+PerformanceP2 queued lifecycle expiry remains documented: caller timeout does not prevent a still-queued action later mutating SDK state. Record it; do not mix an unvalidated lifecycle redesign into the context repair. Native full03proof is pre-repair, not repaired-head evidence.
+
+RN owner response repair has been imported privately, checksum-verified and independently re-reviewed. Coordinator23dispatcher tests pass; native parser controls are separate owner evidence. Android first smoke collection did not execute device cases due to a missing isolated corpus checkout; exact pinned corpus is now populated and a separate fresh two-route smoke is live.
+
+
+CONTROL-038 follow-up: Android smoke03executed initialization but failed before any configPOST; SDK network warning and direct host control isolate advertised LAN connection reset while loopback servesHTTP200. Source audit confirms AndroidDriver current manager accepts local Android Emulator targets only, not physical devices. Coordinator is preparing an explicit emulator-gateway topology repair in an isolated private checkout, preserving physical/undeclared driver routing; no SDK exclusion. Control publication is temporarily held by configured SSH signing-agent communication failure; no unsigned bypass.
