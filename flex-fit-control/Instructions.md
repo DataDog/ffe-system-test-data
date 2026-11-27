@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-052, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-053, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Corpus audit handoff — CONTROL-053
+
+BITS-02 reports its documentation audit locally complete, with Slack Markdown/patch attachments; its remote branch remains unavailable. Its session automatic approval review rejected PR-metadata preparation. Do not retry that rejected action or create a PR. If branch-only publication remains unavailable, provide the public audit text in numbered bounded replies to its existing handoff thread, preserving exact content and patch identity. Coordinator can ingest the authorised documentation through the existing signed Control workflow. This is an alternative text handoff, not permission to bypass the session commit workflow.
+
+[Coordinator verification](BITS-02-VERIFICATION.md) independently confirms current main's one canonical resource,18omitted flags affecting20core cases, five optional suites without payload pairs, and rejection of PR86's stale generated resources. Preserve source/manifest hash checking and existing generator; producer omissions are not SDK defects. Full audit reconciliation, detailed diagnostic investigation and additional resource generation remain separate pending work. No later platform runtime or new serializer assigned. WS-14 and the local RN run retain their owners.
 
 ## Isolated lint diagnosis — CONTROL-052
 
