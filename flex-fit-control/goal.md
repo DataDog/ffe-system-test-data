@@ -1,3 +1,5 @@
+> CONTROL-004 sequencing: verify an existing core RUM FIT IPC server before assigning a platform row. If absent, defer the entire row. Unknown eligibility is unverified; Unity needs explicit verification. For eligible rows, complete online precomputed through independent acceptance first; then the other three modes may proceed in parallel. Existing cell descriptions below are inventory, not evidence that this gate passed. Rules payloads come from corpus-generated UFC artifacts; audit shared FIT serving/loading infrastructure before mode implementation.
+
 # Control policy — authoritative update, November 27, 2026
 
 The coordinator oversees all nine platform rows × four deployment modes below, plus tracked API/telemetry sub-features. Repository support and SDK conformance are separate facts. The inventory below is a November 27 audit snapshot, not a new runtime validation or an assignment to begin implementation.

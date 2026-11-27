@@ -51,3 +51,11 @@ Keep authored reasons/source shapes intact and report disagreements. Investigate
 ## Existing local WIP inventory
 
 Read [WIP-INVENTORY.md](WIP-INVENTORY.md) before implementing or replacing native/shared code. It distinguishes dirty candidates, unpushed commits, already published work and historical/deleted temporary checkouts. Request portable diffs through REQUESTS.md when local evidence is inaccessible.
+
+## Sequencing clarification — November 27, CONTROL-004
+
+An existing core FIT IPC server gates row eligibility; no server means the whole row is deferred. Verify source and startup/transport wiring before assigning. Unity remains unverified. Complete and independently accept online precomputed before parallelising the remaining three modes within an eligible row.
+
+At the inspected FIT origin/main, src/rum_sdk_test/flagging/server.py exposes POST /flag-config returning precomputed JSON and OPTIONS; it does not implement a binary rules endpoint. Reconcile WIP/PR extensions before adding one. This is a source inspection, not runtime proof or a complete audit of every branch.
+
+Corpus tools/ufc/README.md documents generation through the production Go converter and pinned flagging-core serializer. rules-resources/catalog.json currently names canonical-evaluator from ufc-config.json. The generated resource contains ufc.pb and configuration-wire.json with manifest provenance. The latter contains the portable wire string without extra JSON quoting. Use these generated resources and their paired cases; inspect open and merged corpus changes for additional UFCs/encodings. Do not assume every opt-in suite is already represented in the catalogue or that conversion includes every source flag.

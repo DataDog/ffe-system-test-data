@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-003, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-004, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -11,6 +11,16 @@ Tyler resumed the matrix goal and explicitly requested workspace chats in the x-
 - **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Other platform assignments follow after workspace creation/execution is verified.
 
 No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
+
+## Platform eligibility and delivery order — CONTROL-004
+
+Tyler requires an existing core RUM FIT IPC server before a platform row enters implementation. Verify the server, app startup/registration and harness transport against actual source, including relevant WIP; distinguish the core IPC server from FeatureFlagService. If no core IPC server exists, mark the entire platform row deferred. Do not expand this matrix assignment into building a new core IPC server. Unknown eligibility remains unverified and is not permission to dispatch a row. Unity is specifically unverified; an unpublished feature-flag candidate alone does not establish eligibility.
+
+For every eligible row, complete online precomputed first, with applicable fixture activation, local runtime evidence, documented SDK gaps/exclusions and independent coordinator local Crucible acceptance. Only after that cell is accepted may offline precomputed, online rules and offline rules proceed in parallel. This sequence applies even where a later mode could technically be implemented independently. Shared mode infrastructure may be investigated and prepared in parallel without activating later cells prematurely. Retain one integration owner per platform row and bounded ownership of shared files.
+
+Before implementing a deployment-mode path, inventory existing FIT infrastructure and open/merged changes. In particular, inspect FlagServer for actual rules payload delivery rather than assuming the endpoint exists. Rules-based protobuf and portable wire payloads must come from the corpus generation/catalogue tooling and the selected corpus revision, including applicable existing PRs. Do not invent a second converter, hand-edit generated payloads or treat generation success as SDK conformance. Record source/artifact provenance, conversion omissions and the corresponding evaluation cases. Online rules additionally requires the appropriate HTTP endpoint/headers and actual SDK consumption; offline rules requires the corresponding local-loading path.
+
+WS-01 ownership is unchanged. BitsCode remains unassigned; this sequencing update does not dispatch implementation. No activation PRs.
 
 ## Authority and communication
 

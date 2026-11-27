@@ -50,3 +50,7 @@ For every newly diagnosed gap add:
 - Re-enable conditions, removal owner and verification receipt; track unexpected passes where supported.
 
 Do not put raw credentials, customer data or private logs in this repository. Summarise evidence and use appropriate access-controlled references.
+
+## Delivery sequencing update — CONTROL-004
+
+Tyler clarified row eligibility and order: existing core IPC server, then completed/independently accepted online precomputed, then parallel remaining modes. Rows lacking a core server are deferred; unverified rows cannot yet be dispatched. Unity core-server eligibility is unverified. Inventory existing shared FIT mode infrastructure and corpus-generated protobuf/wire artifacts before introducing new infrastructure. Source inspection confirms the inspected main FlagServer has precomputed JSON serving but no binary rules endpoint; corpus generation tooling and canonical protobuf/wire resources already exist. No new platform assignment or runtime acceptance is claimed by this update. WS-01 remains the only assigned implementation workstream.
