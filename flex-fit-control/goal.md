@@ -1,4 +1,4 @@
-> CONTROL-049 matrix refresh, November 27, 2026. Signed Control publication resumed successfully with CONTROL-038. Current runtime, SDK gaps and review limits are recorded below. No online-precomputed row is independently accepted yet. No activation PRs.
+> CONTROL-049 matrix refresh, November 27, 2026. Signed Control publication resumed successfully with CONTROL-038. Current runtime, SDK gaps and review limits are recorded below. No new activation candidate is independently accepted yet; existing Browser online-precomputed support remains enabled. No activation PRs.
 
 > Source eligibility and Unity Not planned disposition: [IPC-ELIGIBILITY.md](IPC-ELIGIBILITY.md). CONTROL-006 assigns shared native foundations and iOS online precomputed alongside Browser/Android.
 
@@ -45,7 +45,7 @@ This document tracks test delivery and its supporting work. It does not assert t
 
 Coverage and evidence:
 
-- PR metadata/check states were refreshed today; native candidate receipts are historical, principally November 17, and were not rerun for this inventory. Android/iOS host results must be tracked separately for RN, Flutter, KMP and MAUI. A framework-wide tick is insufficient.
+- Current runtime results in the matrix are November 27 coordinator checks. Earlier PR check-state inventory and November 17 receipts are historical unless explicitly refreshed; they do not replace current runtime evidence. Android/iOS host results must be tracked separately for RN, Flutter, KMP and MAUI. A framework-wide tick is insufficient.
 - Browser offline rules #221 is merged. Its full rules corpus remains intentionally skipped; the lifecycle proof is not a required CI gate. Browser online rules still needs the public fetch-helper/binary endpoint path.
 - Android #136 and the overlapping #240 conflict with main; #241 targets #136's branch. No duplicate or superseded PR was closed during this scan. Reconcile ownership and exact deltas before choosing a delivery branch.
 - Direct access is an additional slice: Android [#139](https://github.com/DataDog/rum-sdk-integration-test-framework/pull/139) / [FFLSDK-213](https://linear.app/datadoghq-pilot/issue/FFLSDK-213) is draft; iOS [FFLSDK-214](https://linear.app/datadoghq-pilot/issue/FFLSDK-214) is backlog.
