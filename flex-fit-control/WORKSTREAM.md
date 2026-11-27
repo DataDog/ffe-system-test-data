@@ -8,7 +8,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | --- | --- | --- | --- |
 | Control setup and matrix coordination | Codex coordinator | Initial control files pushed; signed commit verified | CONTROL-001 acknowledgement requested; implementation remains unassigned |
 | BitsCode | No implementation assignment yet | CONTROL-001 acknowledged at c481ab2; all six reads succeeded | Read CONTROL-002; avoid overlapping WS-01 |
-| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Assignment committed; workspace launch pending | Verify execution/access, implement ACT-01/02 and report local checks |
+| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Chat created and execution verified on ffe-xplatform; waiting on approval | Complete Control Branch read/access receipt, implement ACT-01/02 and report local checks |
 | Platform rows | Await coordinator assignment | Preserve existing WIP and owners | Reconcile dependencies before fanout |
 
 ## Control publication receipt
@@ -16,6 +16,12 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 The coordinator pushed the six initial documents on typo/flex-fit-control and verified the signed commit and matching remote revision. Local Markdown links resolve and no machine-local paths were published. Documentation only; fixture content and implementation code are unchanged. No PR was opened.
 
 BitsCode notification and acknowledgement request: https://dd.slack.com/archives/C0CKGQ8T483/p1795797929001209 . BitsCode subsequently acknowledged all six Control Branch reads at c481ab2. Actual bot push remains untested. Current instructions are CONTROL-002; the earlier setup-only pause is superseded for the named assignment.
+
+## WS-01 workspace launch receipt
+
+Chat: FLEX workspace activation foundations; thread ID 01a21df1-4c96-7152-b4f1-2a5be423c216; host workspace-ffe-xplatform; project x-platform testing. Initial commands returned hostname ffe-xplatform and resolved workspace /home/bits/go/src/github.com/DataDog. This verifies remote chat creation and command execution. The repository-collection root is not a Git checkout; the coordinator directed the implementor to scope commands to the FIT and fixture repositories.
+
+Assignment: [WS-01](assignments/WS-01.md), CONTROL-002. Latest app status is active/waitingOnApproval; the exact pending approval and Control Branch read receipt have not yet been returned. Do not claim source access or implementation validation from workspace launch alone. No implementation branch or PR is reported. Coordinator requested the concrete approval/access blocker and will validate the eventual result independently.
 
 ## Recording implementation progress
 
