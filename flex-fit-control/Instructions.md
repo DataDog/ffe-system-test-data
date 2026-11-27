@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-038, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-039, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
