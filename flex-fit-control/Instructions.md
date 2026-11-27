@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-009, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-010, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -12,6 +12,7 @@ Tyler resumed the matrix goal and explicitly requested workspace chats in the x-
 - **WS-03 — shared native online-precomputed foundation:** coordinator-local implementation agent owns [assignments/WS-03.md](assignments/WS-03.md), excluding WS-01 CI/markers/conftest ownership.
 - **WS-04 — iOS online precomputed:** coordinator-local implementation agent owns [assignments/WS-04.md](assignments/WS-04.md) and the shared native iOS prerequisite lane used by RN.
 - **WS-05 — Browser execution:** coordinator-local execution agent owns [assignments/WS-05.md](assignments/WS-05.md); executes BITS-01 candidates and returns exact-head receipts.
+- **WS-06 — remaining-row capability audit:** WS-01 workspace chat additionally performs the read-only assignment in [assignments/WS-06.md](assignments/WS-06.md); no new implementation ownership is implied.
 - **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Coordinate the active lanes below and independently review handed-off heads.
 
 No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
@@ -37,6 +38,10 @@ Tyler requires the matrix view in goal.md to be updated with every material impl
 ## Source handoff visibility — CONTROL-009
 
 Verify the visibility of every source repository before placing patches or source excerpts in this public Control Branch. A public SDK does not establish visibility of FIT or other repositories. Keep internal-source payloads in access-controlled coordinator/implementor handoffs; public control documents may record safe status and bounded requests without embedding internal code. Never use a public evidence path as a workaround for an access or transfer restriction. Recheck all payloads and linked sources before publication.
+
+## Simulator transport investigation — CONTROL-010
+
+The iOS runner reached actual IPC, but this host's advertised LAN self-connect path failed before HTTP request parsing. An independent standard-library server reproduced the same failure; loopback worked. Treat this as a topology/environment investigation, not an SDK defect or a reason to weaken expectations. WS-03 owns a separate bounded topology-based address-selection candidate, preserving its signed original head and Android/physical-device LAN routing. The existing iOS driver is simulator-only; verify actual source selection and real RPC/configuration/intake after integration. Plugin-based diagnostic runs remain separate evidence. No network-probing fallback or global mobile-loopback replacement.
 
 ## Authority and communication
 
