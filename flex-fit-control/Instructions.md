@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-012, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-013, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -95,3 +95,8 @@ WS-06 prerequisite audit is complete as a source audit. Assign WS-07 Electron on
 ## Bounded iOS gap handling — CONTROL-012
 
 WS-04 may own iOS-only compatibility policy and its focused regression coverage in the shared compatibility module/tests. Preserve Browser/Electron owners' policies and all other platform behaviour. Complete source-based diagnosis and record exact gaps, scope and removal conditions in WORKSTREAM.md before relying on exclusions. Generated corpus content must be regenerated through its authorised generator, never manually edited; where a generated feature family is affected, use the appropriate narrow iOS consumer-layer policy. Applicable authored plain-case filters may be edited directly in the imported corpus, following its instructions. Do not classify an adapter, IPC, transport or harness defect as an SDK conformance exclusion. All canonical expected values remain intact.
+
+
+## Flutter row launch — CONTROL-013
+
+WS-08 coordinator-local Flutter online-precomputed implementation is assigned under [assignments/WS-08.md](assignments/WS-08.md). Reconcile preserved Flutter app/SDK/launcher candidates and reuse shared native foundations. Native Android/iOS SDK lanes remain WS-02/WS-04; request prerequisite changes through those owners. Both native Flutter hosts require separate verification. No later modes or activation PRs.

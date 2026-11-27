@@ -15,6 +15,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | WS-05 Browser FIT execution | Coordinator-local agent | Baseline underway; numeric diagnostic queued | Return actual runtime/configuration/intake evidence to BitsCode |
 | WS-06 KMP/MAUI/Electron prerequisites | Existing WS-01 workspace chat | Read-only audit complete | Preserve source evidence; integration prerequisites recorded |
 | WS-07 Electron online precomputed | Existing WS-01 workspace chat | Implementation assigned under CONTROL-011 | Separate candidate, renderer IPC/configuration/intake and delegated runtime proof |
+| WS-08 Flutter online precomputed | Coordinator-local agent | Implementation assigned under CONTROL-013 | Reconcile WIP and verify both native hosts |
 | Other platform rows | Queued; Unity deferred | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
 
 ## Control publication receipt
@@ -127,3 +128,8 @@ WS-05 completed the unchanged Browser baseline: exit 0, 17 passed / 48 skipped, 
 WS-03 independent local council has five completed native specialist jobs, native coverage fallback and a targeted verifier, all retaining no actionable defect. External peer unavailable. Coordinator reproduced 83 focused passes and three isolated positive controls: marker bypass, fresh-receipt bypass and Android loopback each caused test failures; source restored and mutation tree clean. Full coordinator unit suite remains live; no final pass count claimed yet. Platform malformed-response classification and intake remain platform gates.
 
 WS-04 source-based full corpus run has passed real positive cases and exposed further numeric/obfuscation failures; complete AI-report diagnosis is pending. Bounded iOS-only compatibility policy/test ownership is granted under Instructions.md. No new SDK exclusion has yet been authored or approved as a diagnosis. Respect corpus generated-content rules and record gaps/removal conditions before exclusions. Matrix and review evidence updated in this publication.
+
+
+## Flutter implementation launch — CONTROL-013
+
+WS-08 coordinator-local Flutter online-precomputed assignment is published. It reconciles preserved app/SDK/launcher candidates and actual APIs, preserving shared Android/iOS ownership and unrelated WIP. Both native hosts need separate actual verification. Flutter tooling is absent; preparation is bounded by existing assets, actual project constraints and disk budget. No implementation result, conformance outcome or ready branch is claimed. goal.md updated in the same publication.
