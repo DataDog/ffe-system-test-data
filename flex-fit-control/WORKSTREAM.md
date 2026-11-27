@@ -6,9 +6,15 @@ Updated November 27, 2026. Initial control setup only. No implementor has been d
 
 | Work | Owner | State | Next action |
 | --- | --- | --- | --- |
-| Control setup and matrix coordination | Codex coordinator | Control location established; preparing initial publication | BitsCode read verified; publish documentation branch and request CONTROL-001 acknowledgement |
-| BitsCode | Unassigned implementation scope | Access/acknowledgement only | Read CONTROL-001 and report access |
+| Control setup and matrix coordination | Codex coordinator | Initial control files pushed; signed commit verified | CONTROL-001 acknowledgement requested; implementation remains unassigned |
+| BitsCode | Unassigned implementation scope | Main-repo read verified; control acknowledgement pending | Read CONTROL-001 and report fetched revision/access |
 | Platform rows | Await coordinator assignment | Preserve existing WIP and owners | Reconcile dependencies before fanout |
+
+## Control publication receipt
+
+The coordinator pushed the six initial documents on typo/flex-fit-control and verified the signed commit and matching remote revision. Local Markdown links resolve and no machine-local paths were published. Documentation only; fixture content and implementation code are unchanged. No PR was opened.
+
+BitsCode notification and acknowledgement request: https://dd.slack.com/archives/C0CKGQ8T483/p1795797929001209 . Instructions remain CONTROL-001 (setup only). BitsCode's main-repository read is verified; its actual Control Branch read/push path awaits acknowledgement.
 
 ## Recording implementation progress
 
