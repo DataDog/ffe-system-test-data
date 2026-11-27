@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-054, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-055, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Clean-main lint terminal; controlled RN comparison — CONTROL-055
+
+WS-14 clean-main unchanged wrapper is terminal with aggregate exit1. Python/Android/KMP/Web passed; other stages have explicit unavailable tool/SDK/setup failures. No Python configuration change was prepared because the reported42diagnostics did not reproduce. Dedicated environment resolved different grpc/protobuf versions and two generated files differ from the committed RN base. WS-14 now owns the [isolated RN-base/same-version comparison](assignments/WS-14-PYTHON-LINT-BASELINE.md#control-055--terminal-clean-main-result-and-isolated-rn-base-comparison), preserving all WIP and earlier logs. This comparison does not include root's uncommitted expected-failure policy and cannot prove its aggregate checks. No source/config speculation, skipped gates or native success claims.
+
+A read-only local capacity audit identified approximately3.70GiB of older task-owned generated iOS caches/intermediates excluding app products/logs/build-provenance data, plus approximately1.1GiB of SwiftPM repository caches. No archive, transfer or deletion occurred; safe restorability/inactivity and actual native installation headroom remain unverified. This is preparation only. The current local .NET installation lacks native MAUI workload packs, and eventual workload/Xcode compatibility must be checked. Preserve all app products, source, dependency checkouts, reports and live RN resources.
 
 ## Exact audit text preserved; lint baseline update — CONTROL-054
 
