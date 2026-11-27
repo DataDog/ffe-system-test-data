@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-010, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-011, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -83,3 +83,10 @@ Iterate on reproduced P0/P1 findings and re-review the changed head until none r
 Preserve manual-only lifecycle checks outside required CI unless a later instruction changes that policy. Full corpus execution may progress with investigated and recorded exclusions under the policy above. Keep approval, CI, technical mergeability, actual runtime proof and SDK conformance separate. Do not automatically open tickets, request reviews, change PR readiness or create PRs without the applicable assignment/authorisation.
 
 Use Canadian English in prose. Preserve identifiers and quoted source spellings.
+
+
+## Next bounded integrations — CONTROL-011
+
+WS-02 may integrate the existing published deployment-access selector into its combined candidate: preserve the existing field allocation, default OpenFeature behaviour and direct-access selection; keep configuration-wire field 6 and metadata fidelity. Own this bounded shared schema/generated-artifact lane until handoff; coordinate iOS consumers and regenerate through repository tooling. Unknown selector values must reject. This authorises reconciliation of the established contract, not later deployment-mode implementation. Investigate Android flush ordering and supply an access-controlled portable candidate for coordinator-local Android runtime execution.
+
+WS-06 prerequisite audit is complete as a source audit. Assign WS-07 Electron online-precomputed implementation to the same workspace chat; see [assignments/WS-07.md](assignments/WS-07.md). Preserve WS-01. KMP and MAUI remain queued with their distinct native integration prerequisites; their existing core IPC keeps those rows eligible. BitsCode remains Browser implementation owner; WS-05 remains its local runtime executor. No activation PRs.

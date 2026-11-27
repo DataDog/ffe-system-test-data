@@ -13,7 +13,8 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | WS-03 shared native foundation and simulator topology | Coordinator-local agent | Local signed candidates; focused checks pass, topology full suite pending | Independent review and source-based iOS execution |
 | WS-04 iOS online precomputed | Coordinator-local agent | Simulator built on unchanged pins; full source-based FIT run underway | Diagnose every failure and record gaps before exclusions |
 | WS-05 Browser FIT execution | Coordinator-local agent | Baseline underway; numeric diagnostic queued | Return actual runtime/configuration/intake evidence to BitsCode |
-| WS-06 KMP/MAUI/Electron prerequisites | Existing WS-01 workspace chat | Read-only audit assigned | Establish actual API/pin/host prerequisites before implementation |
+| WS-06 KMP/MAUI/Electron prerequisites | Existing WS-01 workspace chat | Read-only audit complete | Preserve source evidence; integration prerequisites recorded |
+| WS-07 Electron online precomputed | Existing WS-01 workspace chat | Implementation assigned under CONTROL-011 | Separate candidate, renderer IPC/configuration/intake and delegated runtime proof |
 | Other platform rows | Queued; Unity deferred | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
 
 ## Control publication receipt
@@ -106,3 +107,14 @@ Owner: WS-04; observed November 27, 2026. iOS simulator, online precomputed, Ope
 Diagnostic real-RPC/configuration/intake executions found two failures: defaults-and-emission-gates expects TYPE_MISMATCH for flutter.fixture.string; empty-flags-response expects FLAG_NOT_FOUND for fixture.bool.missing. Actual errorCode is absent in both results. Implementor source inspection attributes this to provider conversions omitting the native error code. The diagnostic transport override was required for those runs; confirmation in the current source-based full run is pending. This is separate from the host LAN transport failure and absent-key SDK capability investigation.
 
 Evidence: WS-04 coordinator-local probe-reports contains the two case AI reports. Full private paths and logs remain access-controlled. No new ticket or exclusion has been created. Preserve authored expectations. Before using an exclusion, confirm affected cases/access paths in the source-based run and record its exact scope, removal owner and re-enable check. Re-enable condition: corresponding typed provider evaluations return the expected OpenFeature error code and both cases pass with configuration/intake evidence.
+
+
+## Review evidence, prerequisite audit and next assignment — CONTROL-011
+
+WS-01 independent local Crucible completed with no actionable finding: five native specialists, native coverage fallback and targeted verifier. External peer was unavailable. Coordinator reproduced 49 focused passes and two failing mutation controls. Full unit run had 882 passes and 30 missing-browser-runtime failures; all 30 passed in the environment rerun against the same candidate. These separate runs cover all 912 cases; no single uninterrupted green full run is claimed. Full lint and authenticated Dynamic Build/native evidence remain delivery limitations.
+
+WS-03 simulator child reports 960 unit passes, 14 focused passes and clean signed handoff; independent Crucible started against the combined base-to-child delta. WS-04 confirms real-source simulator cases pass without diagnostic overrides; full corpus outcome remains pending.
+
+WS-02 integrated the private shared dependency and reports 69 focused plus 135 broader checks. Kotlin compilation exposed the missing established deployment-access selector; a disposable probe with the published selector compiled and passed ktlint. Coordinator approved bounded schema/generated-artifact reconciliation with defaults and field allocations preserved. No Android runtime executed; workspace has no device/emulator. Coordinator-local Android runtime handoff is next.
+
+WS-06 source audit completed: Electron can reuse its renderer flagging transport; KMP requires native integration and aligned iOS provider dependencies; MAUI requires flag bindings/wrappers and resolved package-identity evidence. Those are integration prerequisites, not fixture conformance failures and not reasons to defer rows that already have core IPC. Source inspection is not runtime proof. WS-07 Electron implementation is assigned to the existing workspace chat, preserving WS-01. Matrix and review queue refreshed in this publication.
