@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-032, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-033, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -221,3 +221,8 @@ The coordinator completed independent WS-11 review: five specialist lenses, nati
 Flutter Android full02 completed24passed/40failed/1skipped. All65fresh reports, receipts and pinned SDK source were independently audited; six investigated gap groups are in [FLUTTER-GAPS.md](FLUTTER-GAPS.md). WS-08 may prepare narrowly scoped Android-host online-precomputed exclusions for those exact cases, preserving canonical expectations and all iOS applicability. Never classify every generic provider initialization error as INVALID_RESPONSE. Exclusions need independent review and actual rerun; this is not acceptance.
 
 RN ARM64 build is complete as compile-only evidence; actual native execution remains pending. iOS exact-child receipts have been independently audited, with10passed/55skipped and973unit passes; full lint/publication gates remain. No cell is independently accepted and no later-mode gate is open.
+
+
+## Browser empty-key regression proof — CONTROL-033
+
+The two real Browser encoded empty-key vectors now pass with the reviewed WS-11 repair:2passed/0failed in90.99seconds,18evaluation RPCs,16exposures and18evaluation events; both configuration POSTs returned200. Empty-key string result is exactly value-7 with TARGETING_MATCH and variant. Previous shorthand minus7 was inaccurate; preserve authored expected values. Exact integrated local head87442cf, unchanged SDK/assets and corpus. Full65selection is now running with separate receipts; no full success or cell acceptance claimed.

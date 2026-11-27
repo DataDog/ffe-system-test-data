@@ -40,3 +40,6 @@ CONTROL-028: iOS exact-child coordinator full unit suite973pass; all five native
 
 
 CONTROL-032 WS-11: exact basee07ae57ef3108b18b10d2f67690bc36caf8303af, reviewed headd56d3659e29cf2ad7b9480f880e4ef3ff16dbef6. Five native specialist lenses plus native coverage fallback and stateful verifier found no actionable defect; external peer unavailable. Coordinator19focused/110neighbouring tests passed. Default scalars now cross the existing JSON boundary while optional/message presence and response/error paths remain intact. Browser validation integration87442cf; two real failed-baseline vectors running, full repaired corpus/aggregate lint pending. This review does not establish all-mode initialization or cell acceptance.
+
+
+CONTROL-033 Android stateful verifier completed on clean repaired headacbeb6b2de9f9b6ddee1653697ac4768ce7c2f48. Exact released SDK objectdad2312223110e2e7ed84cf46cefe3a45bc759c6 confirms fresh malformed-response classification and cancellation identity. No remainingP0/P1 found across council/coverage/verifier. ConfirmedP2 repeated-init registration/worker retention within one process; current driver clears app data and launches fresh per case with one init, so no cross-case carryover demonstrated. Device RPC/HTTP/intake proof still absent; no acceptance.
