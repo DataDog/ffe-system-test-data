@@ -25,3 +25,6 @@ CONTROL-022 Android correctness result: oneP1 pending repair, noP0 found in this
 
 
 CONTROL-023 iOS correctness lens: NONE,5independent compatibility passes and all24changed corpus files verified non-filter-equivalent. Performance lens live; other council jobs/coverage/verifier incomplete. Root independently verified signed heads as recorded above. No platform accepted.
+
+
+CONTROL-024 iOS council partial: correctness/QA/SRE NONE; senior P1 confirmed by coordinator source trace through MauiDriver -> IosDriver -> unconditionalgrpc readiness. Owner repair assigned; P1 remains open until tested/re-reviewed. Performance twoP2 observations retained in private candidate ledger for adjudication. Other required coverage/verifier work pending. Android repair handed off, independent delta verification pending. No full clean council or cell acceptance claimed.

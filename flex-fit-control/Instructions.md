@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-023, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-024, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -162,3 +162,10 @@ WS-08 may re-reserve its task AVD for the complete64-applicable Android corpus s
 WS-02 owns repair of the local Crucible P1: genuine Android SDK whole-response parsing rejection currently never reaches the shared strict invalid-response marker. Translate only positively identified native parse rejection during awaited initialisation/readiness. Preserve network/HTTP errors, timeout, cancellation and freshHTTP200/no-emission harness guards. The pinned SDK exposes the native error publicly but no stable public parse-specific code; document any narrowly pinned compatibility classification rather than claiming a public typed error API. Do not classify all provider errors as rejection or exclude the cases as unsupported SDK behaviour. Add direct/OpenFeature malformed-response positive tests and network/timeout/cancellation negative controls, then return signed private child and exact evidence for independent re-review. No SDK conformance overlay, activation push or PR.
 
 Also document OpenFeature Kotlin0.6.2 metadata enumeration limitation separately: typed public getters cannot enumerate arbitrary keys. Avoid reflection, fixture-derived reconstruction or duplicate evaluation that changes telemetry. Required preservation beyond the public API remains an explicit capability gap until a proper public API is available. Coordinate shared schema generators with native owners.
+
+
+## iOS composed HTTP readiness repair — CONTROL-024
+
+WS-04 owns the coordinator-confirmed P1 in the iOS candidate: unconditional gRPC startup readiness is also reached through MauiDriver's iOS composition, whose app serves HTTP/JSON. Add explicit transport-aware readiness to IosDriver consistent with Android's existing grpc/http distinction, and pass HTTP from MAUI/iOS. Preserve native gRPC defaults, startup gating, simulator addressing and existing wrapper behaviour. Add positive native-gRPC and composed-MAUI-HTTP controls plus invalid transport/negative readiness checks; demonstrate pre-change failure. No MAUI native build or new flags implementation is needed for this bounded shared-driver repair. Return signed child and exact checks for independent delta review. No simulator/AVD use while root Flutter run owns the device.
+
+Two iOS performance observations (actor-blocking SDK flush and retained native client registry entries) remain under coordinator adjudication; do not impose an arbitrary client budget or weaken fresh-client rejection fidelity. Keep them distinct from the confirmed P1 and from SDK capability gaps.
