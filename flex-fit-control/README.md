@@ -6,7 +6,7 @@ This branch is the team's authoritative coordination home for the FLEX platform 
 
 ## Read in this order
 
-1. [Instructions.md](Instructions.md) — current assignments, authority, activation/exclusion workflow and communications. Current revision: CONTROL-001; setup/acknowledgement only.
+1. [Instructions.md](Instructions.md) — current assignments, authority, activation/exclusion workflow and communications. Current revision: CONTROL-002; workspace foundation implementation assigned.
 2. [goal.md](goal.md) — full matrix, existing tickets/PRs and activation audit. November 27 status snapshot; refresh mutable state before implementation.
 3. [REFERENCE.md](REFERENCE.md) — source contract, baseline revisions and known integration pitfalls.
 4. [WORKSTREAM.md](WORKSTREAM.md) — ownership, implementation receipts and SDK defect/exclusion ledger.
@@ -26,6 +26,6 @@ Access probe and response: https://dd.slack.com/archives/C0CKGQ8T483/p1795797629
 
 ## Current user decisions
 
-Activate the imported corpus directly during development. Investigate and record every SDK defect/gap before appropriately scoped skips or xfails. SDKs do not have to pass every fixture. Once locally green with declared exclusions, implementors may push activation branches. **No activation PRs yet**; consolidate platform rows later where practical. Existing PRs/WIP stay intact until their assigned owner reconciles them. Current setup does not dispatch implementation.
+Activate the imported corpus directly during development. Investigate and record every SDK defect/gap before appropriately scoped skips or xfails. SDKs do not have to pass every fixture. Once locally green with declared exclusions, implementors may push activation branches. **No activation PRs yet**; consolidate platform rows later where practical. Existing PRs/WIP stay intact until their assigned owner reconciles them. Implementation has resumed under CONTROL-002; only committed assignments are dispatched.
 
 Keep this branch current as goals, instructions, references and results change. Fetch/rebase or serialise documentation writes and never force-push over another contributor. The coordinator independently validates implementation and exclusion rationale.

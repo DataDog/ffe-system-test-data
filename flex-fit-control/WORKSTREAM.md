@@ -1,20 +1,21 @@
 # Workstream, implementation receipts and SDK gaps
 
-Updated November 27, 2026. Initial control setup only. No implementor has been dispatched by CONTROL-001. The November 27 inventory in goal.md is the baseline; its historical checks are not new validation.
+Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace chat execution/access is the first verification gate. The November 27 inventory in goal.md is the baseline; its historical checks are not new validation.
 
 ## Ownership and assignments
 
 | Work | Owner | State | Next action |
 | --- | --- | --- | --- |
 | Control setup and matrix coordination | Codex coordinator | Initial control files pushed; signed commit verified | CONTROL-001 acknowledgement requested; implementation remains unassigned |
-| BitsCode | Unassigned implementation scope | Main-repo read verified; control acknowledgement pending | Read CONTROL-001 and report fetched revision/access |
+| BitsCode | No implementation assignment yet | CONTROL-001 acknowledged at c481ab2; all six reads succeeded | Read CONTROL-002; avoid overlapping WS-01 |
+| WS-01 shared activation foundations | Dedicated x-platform testing workspace chat | Assignment committed; workspace launch pending | Verify execution/access, implement ACT-01/02 and report local checks |
 | Platform rows | Await coordinator assignment | Preserve existing WIP and owners | Reconcile dependencies before fanout |
 
 ## Control publication receipt
 
 The coordinator pushed the six initial documents on typo/flex-fit-control and verified the signed commit and matching remote revision. Local Markdown links resolve and no machine-local paths were published. Documentation only; fixture content and implementation code are unchanged. No PR was opened.
 
-BitsCode notification and acknowledgement request: https://dd.slack.com/archives/C0CKGQ8T483/p1795797929001209 . Instructions remain CONTROL-001 (setup only). BitsCode's main-repository read is verified; its actual Control Branch read/push path awaits acknowledgement.
+BitsCode notification and acknowledgement request: https://dd.slack.com/archives/C0CKGQ8T483/p1795797929001209 . BitsCode subsequently acknowledged all six Control Branch reads at c481ab2. Actual bot push remains untested. Current instructions are CONTROL-002; the earlier setup-only pause is superseded for the named assignment.
 
 ## Recording implementation progress
 

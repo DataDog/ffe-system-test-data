@@ -1,10 +1,16 @@
 # Instructions
 
-Revision: CONTROL-001, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-002, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
-## Current assignment: establish control only
+## Current assignments — implementation resumed
 
-BitsCode: read README.md, goal.md, this document, REFERENCE.md, WORKSTREAM.md and REQUESTS.md from the named remote Control Branch. Acknowledge CONTROL-001 in the designated Slack channel and report whether you can read the branch and push a documentation update. Report the exact fetched revision. Do not begin matrix implementation, create activation branches or open PRs during this setup assignment. Wait for a committed assignment and its Slack notification.
+Tyler resumed the matrix goal and explicitly requested workspace chats in the x-platform testing project. CONTROL-002 supersedes CONTROL-001's setup-only pause for the assignment below. Other rows are not implicitly assigned.
+
+- **WS-01 — workspace activation foundations:** the newly created workspace chat owns the bounded assignment in [assignments/WS-01.md](assignments/WS-01.md). First verify workspace execution and Control Branch/repository access, then implement shared CI activation and inherited platform-marker fixes within that scope.
+- **BitsCode:** continue to use this branch as the specification source and report in the designated Slack channel. No overlapping implementation assignment yet. WS-01's shared activation changes are owned by the workspace chat; do not duplicate them.
+- **Coordinator:** verify WS-01 started in the requested remote project, independently validate its deliverable and maintain documents. Other platform assignments follow after workspace creation/execution is verified.
+
+No activation PRs or Control Branch PR. Implementors may push activation branches only after appropriate local checks pass with declared, investigated exclusions. The goal is active; SDK conformance is tracked separately.
 
 ## Authority and communication
 
@@ -12,7 +18,7 @@ Tyler's direct instructions take precedence. This document carries current assig
 
 The coordinator commits and pushes new instructions before notifying @Datadog in the channel. On each notification, fetch the Control Branch and read the new revision before acting. Report progress, blockers, branch links and results in the channel. Read specifications here rather than relying on Slack paraphrases. Never publish secrets, tokens, raw private logs or customer data into control documents.
 
-## Implementation workflow for future assignments
+## Implementation workflow
 
 1. Claim only the assigned platform/cell/sub-feature; record owner, base revisions, dependencies and overlap before editing. Preserve colleagues' commits and dirty work. Reconcile existing implementations/PRs before creating a competing implementation.
 2. Edit the imported ffe-system-test-data corpus directly during testing and development to activate the cases applicable to the cell. Track corpus changes separately from the enclosing FIT gitlink; do not discard edits with a submodule refresh. Follow fixture-, evaluation- and matcher-level filters, not only top-level includes. Edit plain authored fixtures directly; regenerate obfuscated companions with the repository tooling rather than hand-editing generated files. Run the documented schema and companion checks when fixture data changes.
