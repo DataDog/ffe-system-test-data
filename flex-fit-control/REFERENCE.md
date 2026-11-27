@@ -20,7 +20,7 @@ Typed responses carry value, optional variant/reason/error_code and flag_metadat
 
 ## Matrix axes
 
-Platforms: Browser, Android, iOS, React Native, Flutter, Kotlin Multiplatform, MAUI, Electron, Unity. Cells: online precomputed, offline precomputed, online rules, offline rules. OpenFeature/direct access, exposure tracking, evaluation-event tracking, RUM enrichment and cache/restoration are additional dimensions. Cross-platform wrappers need distinct Android/iOS receipts where applicable.
+Platforms: Browser, Android, iOS, React Native, Flutter, Kotlin Multiplatform, MAUI, Electron; Unity is Not planned. Cells: online precomputed, offline precomputed, online rules, offline rules. OpenFeature/direct access, exposure tracking, evaluation-event tracking, RUM enrichment and cache/restoration are additional dimensions. Cross-platform wrappers need distinct Android/iOS receipts where applicable.
 
 ## Activation pitfalls found in the audit
 
@@ -54,7 +54,7 @@ Read [WIP-INVENTORY.md](WIP-INVENTORY.md) before implementing or replacing nativ
 
 ## Sequencing clarification — November 27, CONTROL-004
 
-An existing core FIT IPC server gates row eligibility; no server means the whole row is deferred. Verify source and startup/transport wiring before assigning. Unity remains unverified. Complete and independently accept online precomputed before parallelising the remaining three modes within an eligible row.
+An existing core FIT IPC server gates row eligibility; no server means the whole row is deferred. Verify source and startup/transport wiring before assigning. Unity is Not planned and has no verification/implementation assignment. Complete and independently accept online precomputed before parallelising the remaining three modes within an eligible row.
 
 At the inspected FIT origin/main, src/rum_sdk_test/flagging/server.py exposes POST /flag-config returning precomputed JSON and OPTIONS; it does not implement a binary rules endpoint. Reconcile WIP/PR extensions before adding one. This is a source inspection, not runtime proof or a complete audit of every branch.
 

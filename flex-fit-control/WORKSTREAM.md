@@ -17,7 +17,7 @@ Updated November 27, 2026. Implementation resumed under CONTROL-002; workspace c
 | WS-07 Electron online precomputed | Existing WS-01 workspace chat | Implementation assigned under CONTROL-011 | Separate candidate, renderer IPC/configuration/intake and delegated runtime proof |
 | WS-09 Electron FIT execution | Coordinator-local executor | Assigned under CONTROL-016 | Exact private candidate build and actual runtime receipts |
 | WS-08 Flutter online precomputed | Coordinator-local agent | Implementation assigned under CONTROL-013 | Reconcile WIP and verify both native hosts |
-| Other platform rows | Queued; Unity deferred | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
+| Other platform rows | Queued; Unity Not planned | Preserve existing WIP and shared lane ownership | Online-precomputed acceptance before later modes |
 
 ## Control publication receipt
 
@@ -219,3 +219,10 @@ Owner/removal owner WS-07; executor WS-09. Existing related ticket FFLSDK-292. E
 WS-04 prepared the recorded authored-case filters and iOS encoded-feature compatibility after diagnosis, respecting include-versus-skip schema rules; generator companions regenerated and all65schema checks pass reported, four compatibility checks pass. Its complete actual-source rerun is starting; no green result claimed. Three additional no-init/no-IPC SDK model controls pass reported, supplementing the earlier limited direct control.
 
 WS-08 reports94 focused topology/forwarding checks and Android build pass. Initial smoke was blocked before launch by mobilecli missing from PATH; it reused WS-04's existing1.0.24 installation and the smoke retry is live. This is an environment recovery, not an SDK failure. Dynamic forwarding avoids wrong-app connections. No new download and no native pass yet. Root matrix refreshed; remote publication still awaits the configured signing agent.
+
+
+## Unity Not planned and signed publication recovery — CONTROL-017
+
+Tyler explicitly changed the entire Unity row to **Not planned**. All four matrix cells, current instructions/reference/eligibility disposition and ACT-13 now agree. Earlier deferred/unverified Unity entries are historical and superseded. Preserve candidate inventory; no Unity eligibility, core IPC, implementation or delivery-ticket work is assigned. The other eight delivery rows retain their gates.
+
+Following Tyler's requested retry, signed CONTROL-016 publication succeeded at 1383fff31f7e4bd9f8f722396dfd2d385255be87; signature verified good and remote head matched. This update preserves signed publication and the configured identity.

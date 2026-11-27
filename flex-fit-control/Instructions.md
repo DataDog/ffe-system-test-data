@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-016, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-017, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -19,7 +19,7 @@ No activation PRs or Control Branch PR. Implementors may push activation branche
 
 ## Platform eligibility and delivery order — CONTROL-004
 
-Tyler requires an existing core RUM FIT IPC server before a platform row enters implementation. Verify the server, app startup/registration and harness transport against actual source, including relevant WIP; distinguish the core IPC server from FeatureFlagService. If no core IPC server exists, mark the entire platform row deferred. Do not expand this matrix assignment into building a new core IPC server. Unknown eligibility remains unverified and is not permission to dispatch a row. Unity is specifically unverified; an unpublished feature-flag candidate alone does not establish eligibility.
+Tyler requires an existing core RUM FIT IPC server before a platform row enters implementation. Verify the server, app startup/registration and harness transport against actual source, including relevant WIP; distinguish the core IPC server from FeatureFlagService. If no core IPC server exists, mark the entire platform row deferred. Do not expand this matrix assignment into building a new core IPC server. Unknown eligibility remains unverified and is not permission to dispatch a row. Unity is **Not planned**, per Tyler’s latest direction; do not dispatch Unity eligibility work, a new core IPC server, implementation or delivery-ticket creation. Preserve historical WIP as inventory.
 
 For every eligible row, complete online precomputed first, with applicable fixture activation, local runtime evidence, documented SDK gaps/exclusions and independent coordinator local Crucible acceptance. Only after that cell is accepted may offline precomputed, online rules and offline rules proceed in parallel. This sequence applies even where a later mode could technically be implemented independently. Shared mode infrastructure may be investigated and prepared in parallel without activating later cells prematurely. Retain one integration owner per platform row and bounded ownership of shared files.
 
@@ -128,3 +128,8 @@ WS-09 coordinator-local Electron executor is assigned [assignments/WS-09.md](ass
 WS-08 owns two bounded prerequisites in its candidate: explicit Flutter native-host topology through a public driver property and shared address-selector factory, and Android host-port allocation via adb's dynamic port forwarding. Keep Android device IPC port unchanged, connect to the exact returned host port and remove only the owned forward. No global wrapper loopback, private-field inspection, host-port guessing or remove-all cleanup. Root coordinates shared harness/conftest construction-site hunks and retains other owners' changes. These changes need focused regression controls and actual Flutter runtime identity checks.
 
 Configured SSH signing-agent failures delayed this revision. Preserve signed-commit requirements and verify the signed remote head before claiming publication. Runtime work and exact private patch testing may proceed during a signing interruption; no unsigned commits/pushes or ready-publication claims.
+
+
+## Unity disposition — CONTROL-017
+
+Tyler directs that the entire Unity row is **Not planned**. This supersedes earlier deferred/unverified Unity wording. All four deployment-mode cells reflect Not planned. Unity is outside current execution scope; preserve historical candidates without assigning new work or creating delivery tracking. Other rows retain their existing eligibility and online-precomputed-first gates.
