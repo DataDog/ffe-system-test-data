@@ -76,3 +76,7 @@ Tyler confirmed BitsCode cannot run FIT; all its FIT execution now belongs to lo
 ## Matrix freshness — CONTROL-008
 
 goal.md now reflects every active lane and the whole deferred Unity row. Each subsequent material update must refresh affected matrix cells in the same publication. WS-05 browser_execution local agent launched; BitsCode remains implementation owner. WS-01 local Crucible has independently reproduced49focused passes plus killed inherited-filter and corpus-route mutants; council/full-suite work continues. WS-03 broader failures were reported as missing Chromium; bounded local runtime preparation underway, with no SDK exclusions or acceptance claimed. WS-04 helper15passes remains separate from pending simulator proof.
+
+## Current execution and source handoffs — CONTROL-009
+
+WS-04 reports simulator app compilation and15helper passes using unchanged pinned iOS SDK/provider; real IPC/intake is pending, with absent-key SDK capability gap to record separately. WS-03 reports899initial unit passes plus all57environment-blocked cases passing after Chromium setup, separate runs against the same signed head; full lint/tool gaps and independent review remain. WS-05 local Browser build is ready with flag provider2.4.0 and65cases collected; actual baseline is starting. FIT source handoffs require access-controlled transfer; the app patch has been withdrawn from current public evidence. The public Android SDK candidate remains available. No native cell acceptance or activation push is claimed.

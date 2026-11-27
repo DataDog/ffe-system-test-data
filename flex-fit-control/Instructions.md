@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-008, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-009, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -33,6 +33,10 @@ Tyler confirmed BitsCode cannot run the FIT suite. BitsCode owns preparation, co
 ## Matrix freshness — CONTROL-008
 
 Tyler requires the matrix view in goal.md to be updated with every material implementation, assignment, blocker, test, publication or review update. Update the affected cells in the same control publication as detailed workstream/assignment changes, preserving ticket/PR links. Show owner, current stage and decisive evidence/blocker; distinguish implementor reports from independent verification. Reflect row-wide deferrals in every cell. Routine unchanged monitoring does not create a new matrix state.
+
+## Source handoff visibility — CONTROL-009
+
+Verify the visibility of every source repository before placing patches or source excerpts in this public Control Branch. A public SDK does not establish visibility of FIT or other repositories. Keep internal-source payloads in access-controlled coordinator/implementor handoffs; public control documents may record safe status and bounded requests without embedding internal code. Never use a public evidence path as a workaround for an access or transfer restriction. Recheck all payloads and linked sources before publication.
 
 ## Authority and communication
 
