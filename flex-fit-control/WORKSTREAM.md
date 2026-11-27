@@ -446,3 +446,7 @@ BITS-02 text handoff reconstructed from eight individually hash-verified chunks;
 ### CONTROL-055 — clean-main lint conclusion
 
 WS-14 completed unchanged aggregatewrapper: Python/Android/KMP/Web pass; aggregateexit1 on explicit other tool/SDK/setup prerequisites. No sourcepatch. Committed RNbase differs in generateddeclarations and donorpackageversions; isolated same-version RNbase comparison assigned before any configfix. Rootpolicyuncommitted remains outside that comparison. Read-only macOScapacityaudit identified3.70GiBpossiblearchivableolderiOSintermediates plus1.1GiBcaches, preservingProducts/logs/XCBuildData; nocleanup/transfer or sufficient-headroom claim. RNfull02 remains live.
+
+### CONTROL-056 — scoped RN canonical runtime audited
+
+Complete RNAndroid scoped-policy run:35XFAIL/30skip,0unexpected/XPASS,1044.68s;35singlefreshHTTP200/exactcontexts,3actualtypeddefault/errorresults,0exp/eval/observeddiagnostics,65freshreports,sourcehashesunchanged;ownedreverse/proxycleanupverified. SDKgaps17parser/17classification/1trackingremainexplicit; noordinarycanonicalpass/iOSproof. Exact18-filefullcandidate privatelytransferred/hashverified for WS-14phase3afterbasewrapperterminal. ControlledRNbasePythonstagealsozeroerrorswithsamepackages; no speculative configfix. Rootretrieved/hashverifiedcleanmainterminalwrapper/provenanceartifacts. No activationaccepted/published.

@@ -1,6 +1,14 @@
 # Instructions
 
-Revision: CONTROL-055, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-056, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN scoped runtime terminal; exact candidate lint handoff — CONTROL-056
+
+Coordinator audited the complete RNAndroid scoped-policy canonical rerun:35XFAIL/30skip,0unexpected failures/strictXPASS,1044.68seconds. All35executed cases have one freshHTTP200 and exact fixture contexts. Three typed missing-flag default/error results match;0exposures/evaluationrecords/observed diagnostics;65fresh reports and unchanged candidate source hashes verified. Owned emulator reverse table is empty and proxy cleanup succeeded. Gap groups remain17parser/17malformedclassification/1missingtracking. These are documented SDK gaps, not ordinary passing conformance. RN iOS remains untested; aggregate/publication remains open. The prior35failed/30skipped canonical run stays preserved.
+
+WS-14 privately received and verified the exact signed committed RNbase. Its controlled same-package-version Python stage also reports zero diagnostics; full wrapper still running. Coordinator independently retrieved/hash-checked the terminal clean-main wrapper and provenance logs. The earlier42diagnostics remain unreproduced on either controlled base, so no speculative config fix is assigned.
+
+After the RN-base wrapper is terminal, WS-14 may proceed with the [separate exact full-candidate pass](assignments/WS-14-PYTHON-LINT-BASELINE.md#control-056--exact-runtime-candidate-lint-pass). The frozen18-file source delta/identity was transferred privately and remote SHA256 verified. Do not apply it over the baseline, change SDK/corpus pins/expectations or publish internal source in public Control/Slack. Use unchanged wrapper fix/check, preserve drift/evidence, and return minimal real corrections for coordinator review. No source edits to the local runtime tree or activation publication from workspace checks.
 
 ## Clean-main lint terminal; controlled RN comparison — CONTROL-055
 
