@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-011, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-012, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -90,3 +90,8 @@ Use Canadian English in prose. Preserve identifiers and quoted source spellings.
 WS-02 may integrate the existing published deployment-access selector into its combined candidate: preserve the existing field allocation, default OpenFeature behaviour and direct-access selection; keep configuration-wire field 6 and metadata fidelity. Own this bounded shared schema/generated-artifact lane until handoff; coordinate iOS consumers and regenerate through repository tooling. Unknown selector values must reject. This authorises reconciliation of the established contract, not later deployment-mode implementation. Investigate Android flush ordering and supply an access-controlled portable candidate for coordinator-local Android runtime execution.
 
 WS-06 prerequisite audit is complete as a source audit. Assign WS-07 Electron online-precomputed implementation to the same workspace chat; see [assignments/WS-07.md](assignments/WS-07.md). Preserve WS-01. KMP and MAUI remain queued with their distinct native integration prerequisites; their existing core IPC keeps those rows eligible. BitsCode remains Browser implementation owner; WS-05 remains its local runtime executor. No activation PRs.
+
+
+## Bounded iOS gap handling — CONTROL-012
+
+WS-04 may own iOS-only compatibility policy and its focused regression coverage in the shared compatibility module/tests. Preserve Browser/Electron owners' policies and all other platform behaviour. Complete source-based diagnosis and record exact gaps, scope and removal conditions in WORKSTREAM.md before relying on exclusions. Generated corpus content must be regenerated through its authorised generator, never manually edited; where a generated feature family is affected, use the appropriate narrow iOS consumer-layer policy. Applicable authored plain-case filters may be edited directly in the imported corpus, following its instructions. Do not classify an adapter, IPC, transport or harness defect as an SDK conformance exclusion. All canonical expected values remain intact.
