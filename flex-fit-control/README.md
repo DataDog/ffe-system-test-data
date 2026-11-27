@@ -13,6 +13,8 @@ This branch is the team's authoritative coordination home for the FLEX platform 
 5. [REVIEWS.md](REVIEWS.md) — exact-head local Crucible review queue and acceptance receipts.
 6. [REQUESTS.md](REQUESTS.md) — requested diffs/implementation changes for repositories a contributor cannot access.
 
+[Existing chat and local WIP inventory](WIP-INVENTORY.md) — consult before duplicating or replacing prior implementations.
+
 ## Location and communication
 
 - Branch: https://github.com/DataDog/ffe-system-test-data/tree/typo/flex-fit-control/flex-fit-control

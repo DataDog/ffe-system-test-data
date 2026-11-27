@@ -47,3 +47,7 @@ Corpus #88 Android dependent activation; #84 preview-pin fidelity; #85 restoredR
 The coordinator retains a November 17 package of shared native foundations, Android/iOS/RN/Flutter/Unity FIT candidates and SDK/provider companions. It contains overlapping shared/activation changes and historical runtime receipts. These are not all published or current. Request a portable handoff through REQUESTS.md before depending on inaccessible local material. Do not report those historical checks as fresh execution.
 
 Keep authored reasons/source shapes intact and report disagreements. Investigated SDK gaps may be excluded as explicitly authorised; exclusions are not evidence of SDK correctness. Preserve source-to-artifact provenance and list conversion omissions.
+
+## Existing local WIP inventory
+
+Read [WIP-INVENTORY.md](WIP-INVENTORY.md) before implementing or replacing native/shared code. It distinguishes dirty candidates, unpushed commits, already published work and historical/deleted temporary checkouts. Request portable diffs through REQUESTS.md when local evidence is inaccessible.

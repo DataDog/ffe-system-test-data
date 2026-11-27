@@ -27,6 +27,10 @@ Assignment: [WS-01](assignments/WS-01.md), CONTROL-002. Latest workspace progres
 
 Tyler requires local Crucible reviews on branches reported ready. Coordinator reviews exact heads and paired dependencies, validates exclusions and iterates on P0/P1 findings before acceptance. [Review queue](REVIEWS.md) established; no current assignment has reported a ready branch. No activation PRs or external review publication.
 
+## Existing chat and WIP preservation scan
+
+[WIP-INVENTORY.md](WIP-INVENTORY.md) records four other FLEX-related chats and current local evidence. The 13 native FIT/SDK/provider candidates still have uncommitted overlays; one additional shared IPC commit is unpushed. Flutter launcher, RN iOS registration, MAUI lint, portable filtering and checkout-helper candidates also survive. Some old copies overlap merged/published work; the old pin refresh is already pushed. No candidate in this inventory is implicitly ready or accepted. Reconcile this work before new implementations; local-only origins on three SDK candidates require care before publication.
+
 ## Recording implementation progress
 
 For each cell record: stable ID, platform/native host, delivery/evaluation mode, API/sub-features, owner, linked tickets/PRs, real base/FIT/corpus/SDK revisions, branch links, changes, executed checks/counts, exclusions, remaining blockers and independent coordinator validation. Distinguish active coverage from SDK conformance. Add timestamps and links to durable evidence. No activation PRs yet.
