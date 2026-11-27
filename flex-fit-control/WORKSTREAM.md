@@ -426,3 +426,7 @@ CONTROL-049: RN canonical run terminal35failed/30skipped972.33s. Coordinator aud
 ### CONTROL-050 — RN expected-failure implementation under review
 
 The initial exact-path Android RN policy passes135coordinator focused tests and138implementor tests including compatibility controls. Correctness review found a P2 asynchronous receipt-inventory boundary: revalidate after awaited observation before classifying the known gap. Correction and delayed-request controls assigned; final council/device rerun pending. This does not replace the canonical35failed/30skipped SDK result. No activation accepted or published. FIT #171 inspection found no Python lint-config/generated-stub overlap; aggregate validation remains open.
+
+### CONTROL-051 — RN policy review complete; runtime rerun live
+
+WS-13 receipt race corrected and independently checked:142coordinator tests pass, four delayed-request red controls fail with weakened in-memory guards. Local Crucible five native lenses/nativecoverage/finalverifier no remaining P0/P1/P2; externalpeer unavailable disclosed. Complete65-selection canonical RNAndroid rerun is live with unchanged corpus/SDK/service/APK and exact source capture. No terminal result or activation acceptance yet. Aggregate lint/publication remain outstanding.

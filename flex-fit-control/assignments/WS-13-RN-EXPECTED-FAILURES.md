@@ -15,3 +15,7 @@ Own a small test-policy helper, the common runner/scenario integration and focus
 ## CONTROL-050 review checkpoint
 
 Initial implementation is local. Coordinator focused policy/rejection tests:135passed; implementor policy/rejection/compatibility selection:138passed. Independent correctness review found a P2 asynchronous receipt-inventory defect. Re-read the complete fresh receipt inventory immediately before each known-gap exception, after flush/observation; delayed extra HTTP200 or non200 receipts must remain ordinary failures. Correction and red/fix regression controls assigned. Final review and canonical device rerun remain pending. Aggregate lint/publication are not complete.
+
+## CONTROL-051 final policy review
+
+The asynchronous receipt boundary correction is independently verified. Coordinator final tests142passed; four delayed200/403 receipt controls fail under restored weak guards. Five native lenses, native Coverage fallback and final stateful verifier report no remaining P0/P1/P2. Exact-path host/error policy is frozen during a new canonical Android runtime run. No terminal rerun result yet. Full aggregate lint and publication remain outstanding; expected failures remain SDK gaps, not conformance.

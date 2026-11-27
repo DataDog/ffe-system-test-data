@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-050, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-051, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN policy correction verified; runtime rerun live — CONTROL-051
+
+WS-13 final coordinator policy/rejection/compatibility selection passes142tests. Four delayed-request controls fail when the earlier weak guards are restored in memory; source remains unchanged. Final receipt validation occurs after observation in both classification branches. Five native lens jobs, native Coverage fallback and final targeted verifier report no remaining P0/P1/P2. The configured external peer is unavailable; do not describe this as external review. The older215-test supplemental suite predates the final correction.
+
+A new complete65-selection RN Android run is live on the task-owned fit-ipc-api36 emulator with unchanged canonical corpus/SDK/service/APK, exact-source manifest, fresh receipt/report capture, and the independently checked local-only TCP proxy. Only strict expected-failure policy differs from the prior canonical35failed/30skipped result. Do not claim a terminal outcome or SDK conformance yet. No source edits/device interference while the candidate runs. Aggregate lint and activation publication remain open; no activation PRs.
 
 ## RN expected-failure review — CONTROL-050
 
