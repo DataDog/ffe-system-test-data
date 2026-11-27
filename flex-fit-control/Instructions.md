@@ -1,6 +1,10 @@
 # Instructions
 
-Revision: CONTROL-051, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-052, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Isolated lint diagnosis — CONTROL-052
+
+The existing x-platform workspace chat owns [WS-14](assignments/WS-14-PYTHON-LINT-BASELINE.md), an isolated clean-main wrapper/Python import diagnosis. It may install dependencies in its isolated lane, reproduce baseline failures and prepare a minimal evidence-led correction. It must preserve all native/source WIP, keep the wrapper and strict diagnostics intact, avoid populated MAUI build cleanup and report unavailable Linux native prerequisites separately. No aggregate pass, publication or activation acceptance is implied. Local RN source/device ownership remains frozen during its live runtime; no edits or interference there.
 
 ## RN policy correction verified; runtime rerun live — CONTROL-051
 

@@ -430,3 +430,7 @@ The initial exact-path Android RN policy passes135coordinator focused tests and1
 ### CONTROL-051 — RN policy review complete; runtime rerun live
 
 WS-13 receipt race corrected and independently checked:142coordinator tests pass, four delayed-request red controls fail with weakened in-memory guards. Local Crucible five native lenses/nativecoverage/finalverifier no remaining P0/P1/P2; externalpeer unavailable disclosed. Complete65-selection canonical RNAndroid rerun is live with unchanged corpus/SDK/service/APK and exact source capture. No terminal result or activation acceptance yet. Aggregate lint/publication remain outstanding.
+
+### CONTROL-052 — isolate aggregate-wrapper diagnosis
+
+WS-14 assigned to the existing workspace owner: reproduce suspected generated Python import errors on clean current main through the unchanged aggregate wrapper and prepare a minimal correction only if reproduced. Native Linux prerequisites remain unresolved; partial stages cannot establish full aggregate green. No SDK submodule initialization, shared MAUI cleanup, platform-candidate changes or publication. Local RN full02 remains live and source-frozen.
