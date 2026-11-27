@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-013, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-014, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -100,3 +100,8 @@ WS-04 may own iOS-only compatibility policy and its focused regression coverage 
 ## Flutter row launch — CONTROL-013
 
 WS-08 coordinator-local Flutter online-precomputed implementation is assigned under [assignments/WS-08.md](assignments/WS-08.md). Reconcile preserved Flutter app/SDK/launcher candidates and reuse shared native foundations. Native Android/iOS SDK lanes remain WS-02/WS-04; request prerequisite changes through those owners. Both native Flutter hosts require separate verification. No later modes or activation PRs.
+
+
+## Electron emission observation — CONTROL-014
+
+WS-07 may own the bounded shared harness condition and focused regressions that give Electron the existing Web renderer emission quiet period. It uses the same asynchronous renderer flush. Preserve native driver behaviour and the shared rejection path, and prove delayed unexpected emissions fail using a positive control. This is an integration/harness prerequisite, never an SDK exclusion. Return an updated exact private candidate for macOS execution and independent review.

@@ -133,3 +133,20 @@ WS-04 source-based full corpus run has passed real positive cases and exposed fu
 ## Flutter implementation launch — CONTROL-013
 
 WS-08 coordinator-local Flutter online-precomputed assignment is published. It reconciles preserved app/SDK/launcher candidates and actual APIs, preserving shared Android/iOS ownership and unrelated WIP. Both native hosts need separate actual verification. Flutter tooling is absent; preparation is bounded by existing assets, actual project constraints and disk budget. No implementation result, conformance outcome or ready branch is claimed. goal.md updated in the same publication.
+
+
+## Shared candidate verification and Browser numeric diagnosis — CONTROL-014
+
+Coordinator independently completed all 960 framework unit tests on exact WS-03 child 286af174684cca80eeec627b3c530a2b4a6d010f in 258.71 seconds, plus 83 focused checks and three restored/killed mutation controls. The six independent review lenses and targeted verifier retain no actionable defect. Full platform lint/tooling and native platform conformance remain separate gates; no activation push or acceptance claimed.
+
+### GAP-browser-001 — existing FFLSDK-292 numeric quarantine reproduced
+
+Owner: BITS-01, local execution WS-05; observed November 27, 2026. Existing ticket [FFLSDK-292](https://linear.app/datadoghq/issue/FFLSDK-292). Exact FIT e07ae57ef3108b18b10d2f67690bc36caf8303af, corpus a4966e2ee78f15b0b36f204417ceac9895079262, loaded local RUM bundle built from Browser b3bd0bc59b35467f84f4f8203c9ac1a1f418a992; provider 2.4.0/core 3.6.0; Chromium 153.0.8010.12. Runtime RUM version reports dev; original source/build provenance is retained in private evidence.
+
+Numeric-decimal-float, numeric-decimal-integer and numeric-decimal-number: exactly three cases executed, all failed, no skips/xfails. Each fails at inexact-whole-double: actual 9007199254740992 with TARGETING_MATCH, variant present and no error; expected default -99.5 with ERROR/TYPE_MISMATCH and absent variant. Fifteen of 21 applicable evaluations were attempted: 12 matched, three failed, six remained unexecuted after assertions. Each case fetched configuration once with HTTP 200; executor recorded five exposures and five evaluation events per case plus separate RUM events. Private AI/JUnit, per-evaluation and traffic receipts were preserved and immediately read. An earlier overbroad selection attempt was interrupted/preserved; these counts are the final exact-node run.
+
+The temporary numeric probe was restored and the executor tree is clean. Keep the existing three Web quarantines; no permanent policy or canonical expectation change. Re-enable when the same three authored cases pass typed value/reason/error/variant and emission assertions on the intended runtime. Browser's remaining 45 top-level corpus exclusions are being audited for stale filters versus unsupported wire/features before cell acceptance.
+
+## Electron local handoff — CONTROL-014
+
+WS-07 reports signed local candidate 4191626a9894199b0768311fb991b912a4fc2ba1 stacked on WS-01 47f8760c5c7ca870a13029bb711cd74d3a506bae. It adds Electron scenario/corpus CI integration; 914 unit passes, 45 focused checks and static 18 applicable / 47 excluded of 65. All three numeric cases remain selected; no exclusions added and zero Electron runtime cases executed. The source audit identified a shared zero-quiet-period observation gap for Electron renderer flush. Bounded repair and regression ownership granted; updated private handoff/macOS runtime needed. This is a harness prerequisite, not an SDK defect. Matrix refreshed with all outcomes.
