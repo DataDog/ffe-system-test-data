@@ -1,0 +1,3145 @@
+diff --git a/detekt_custom_safe_calls_third_party.yml b/detekt_custom_safe_calls_third_party.yml
+index 24c461f0fc..b1a91e949d 100644
+--- a/detekt_custom_safe_calls_third_party.yml
++++ b/detekt_custom_safe_calls_third_party.yml
+@@ -366,6 +366,9 @@ datadog:
+       - "java.lang.StringBuilder.append(kotlin.String?)"
+       - "java.lang.StringBuilder.clear()"
+       - "java.lang.StringBuilder.constructor()"
++      - "java.math.BigDecimal.compareTo(java.math.BigDecimal?)"
++      - "java.math.BigDecimal.scale()"
++      - "java.math.BigDecimal.signum()"
+       - "java.math.BigInteger.toHexString()"
+       - "java.math.BigInteger.toLong()"
+       - "java.nio.ByteBuffer.duplicate()"
+@@ -420,6 +423,7 @@ datadog:
+       - "java.util.zip.Deflater.setInput(kotlin.ByteArray?)"
+       # endregion
+       # region Kotlin Stdlib
++      - "kotlin.Double.isFinite()"
+       - "kotlin.Float.isNaN()"
+       - "kotlin.lazy(kotlin.Function0)"
+       - "kotlin.lazy(kotlin.LazyThreadSafetyMode, kotlin.Function0)"
+@@ -433,6 +437,8 @@ datadog:
+       - "kotlin.Result.getOrElse(kotlin.Function1)"
+       - "kotlin.Result.map(kotlin.Function1)"
+       - "kotlin.Result.onFailure(kotlin.Function1)"
++      - "kotlin.Result.success(kotlin.Double)"
++      - "kotlin.Result.success(kotlin.Int)"
+       # endregion
+       # region Kotlin Collections
+       - "kotlin.Array.all(kotlin.Function1)"
+@@ -943,7 +949,6 @@ datadog:
+       - "kotlin.String.removePrefix(kotlin.CharSequence)"
+       - "kotlin.String.removeSuffix(kotlin.CharSequence)"
+       - "kotlin.String.takeIf(kotlin.Function1)"
+-      - "kotlin.String.toBigIntegerOrNull()"
+       - "kotlin.String.toBoolean()"
+       - "kotlin.String.toBooleanStrictOrNull()"
+       - "kotlin.String.toRegex()"
+@@ -1185,8 +1190,12 @@ datadog:
+       - "dev.openfeature.kotlin.sdk.Builder.putString(kotlin.String, kotlin.String)"
+       - "dev.openfeature.kotlin.sdk.EvaluationContext.asMap()"
+       - "dev.openfeature.kotlin.sdk.EvaluationContext.getTargetingKey()"
++      - "dev.openfeature.kotlin.sdk.ImmutableContext.asMap()"
++      - "dev.openfeature.kotlin.sdk.ImmutableContext.constructor(kotlin.String, kotlin.collections.Map)"
++      - "dev.openfeature.kotlin.sdk.ImmutableContext.hashCode()"
+       - "dev.openfeature.kotlin.sdk.events.OpenFeatureProviderEvents.ProviderError.constructor(dev.openfeature.kotlin.sdk.exceptions.OpenFeatureError)"
+       - "dev.openfeature.kotlin.sdk.exceptions.OpenFeatureError.GeneralError.constructor(kotlin.String)"
++      - "dev.openfeature.kotlin.sdk.exceptions.OpenFeatureError.ParseError.constructor(kotlin.String)"
+       - "dev.openfeature.kotlin.sdk.exceptions.OpenFeatureError.ProviderFatalError.constructor()"
+       - "dev.openfeature.kotlin.sdk.exceptions.OpenFeatureError.ProviderFatalError.constructor(kotlin.String)"
+       - "dev.openfeature.kotlin.sdk.ProviderEvaluation.constructor(kotlin.Any, kotlin.String?, kotlin.String?, dev.openfeature.kotlin.sdk.exceptions.ErrorCode?, kotlin.String?)"
+@@ -1198,8 +1207,11 @@ datadog:
+       - "dev.openfeature.kotlin.sdk.Value.String.constructor(kotlin.String)"
+       - "dev.openfeature.kotlin.sdk.Value.asBoolean()"
+       - "dev.openfeature.kotlin.sdk.Value.asDouble()"
++      - "dev.openfeature.kotlin.sdk.Value.asInstant()"
+       - "dev.openfeature.kotlin.sdk.Value.asInteger()"
++      - "dev.openfeature.kotlin.sdk.Value.asList()"
+       - "dev.openfeature.kotlin.sdk.Value.asString()"
++      - "dev.openfeature.kotlin.sdk.Value.asStructure()"
+       # endregion
+       # region Opentelemetry
+       - "io.opentelemetry.api.trace.Span.getInvalid()"
+diff --git a/detekt_custom_unsafe_calls.yml b/detekt_custom_unsafe_calls.yml
+index 682ebbe645..fdda24bb10 100644
+--- a/detekt_custom_unsafe_calls.yml
++++ b/detekt_custom_unsafe_calls.yml
+@@ -166,6 +166,10 @@ datadog:
+       - "java.lang.System.loadLibrary(kotlin.String?):java.lang.SecurityException,java.lang.UnsatisfiedLinkError,java.lang.NullPointerException"
+       - "java.lang.reflect.Field.get(kotlin.Any):java.lang.IllegalAccessException,java.lang.IllegalArgumentException,java.lang.NullPointerException,java.lang.ExceptionInInitializerError"
+       - "java.lang.reflect.Field.get(kotlin.Any?):java.lang.IllegalAccessException,java.lang.IllegalArgumentException,java.lang.NullPointerException,java.lang.ExceptionInInitializerError"
++      - "java.math.BigDecimal.constructor(kotlin.Double):java.lang.NumberFormatException"
++      - "java.math.BigDecimal.constructor(kotlin.String?):java.lang.NumberFormatException"
++      - "java.math.BigDecimal.intValueExact():java.lang.ArithmeticException"
++      - "java.math.BigDecimal.stripTrailingZeros():java.lang.ArithmeticException"
+       - "java.math.BigInteger.and(java.math.BigInteger?):java.lang.NumberFormatException,java.lang.ArithmeticException"
+       - "java.math.BigInteger.constructor(kotlin.String?, kotlin.Int):java.lang.NumberFormatException,java.lang.ArithmeticException"
+       - "java.math.BigInteger.shiftRight(kotlin.Int):java.lang.NumberFormatException,java.lang.ArithmeticException"
+diff --git a/features/dd-sdk-android-flags-openfeature/README.md b/features/dd-sdk-android-flags-openfeature/README.md
+index b3ec9c7ead..88749f56bc 100644
+--- a/features/dd-sdk-android-flags-openfeature/README.md
++++ b/features/dd-sdk-android-flags-openfeature/README.md
+@@ -28,6 +28,32 @@ dependencies {
+ }
+ ```
+ 
++### Context values and optional targeting keys
++
++Use OpenFeature `Value` primitives, lists and structures for evaluation attributes.
++The provider preserves their JSON types in the native SDK context.
++
++OpenFeature Kotlin requires a non-null string targeting key. To distinguish an
++omitted key from a blank key with this provider, pass `DatadogEvaluationContext`
++through the normal OpenFeature context API:
++
++```kotlin
++import com.datadog.android.flags.openfeature.DatadogEvaluationContext
++import dev.openfeature.kotlin.sdk.OpenFeatureAPI
++import dev.openfeature.kotlin.sdk.Value
++
++val context = DatadogEvaluationContext(
++    targetingKeyOrNull = null,
++    attributes = mapOf("premium" to Value.Boolean(false))
++)
++OpenFeatureAPI.setEvaluationContextAndWait(context)
++```
++
++Null omits the key; an empty string sends a blank key. Existing
++`ImmutableContext` callers keep their existing blank-key behaviour. Other
++providers see a blank key through the required OpenFeature getter, so this
++presence distinction applies to the Datadog provider.
++
+ ### Initial setup
+ 
+ 1. Initialize the Datadog SDK and enable the Feature Flags feature:
+@@ -77,6 +103,8 @@ val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
+ OpenFeatureAPI.setProviderAndWait(provider)
+ ```
+ 
++Initialisation and context updates classify a rejected downloaded response as `OpenFeatureError.ParseError`. Network failures and initialisation timeouts retain their existing classifications. Matching cached assignments remain stale after a failed refresh; later successful responses can restore readiness.
++
+ ### Configuration options
+ 
+ You can configure the underlying `FlagsClient` before converting it to an OpenFeature provider:
+@@ -110,7 +138,7 @@ val enabled = OpenFeatureAPI.getClient().getBooleanValue("new-feature", false)
+ 
+ Only boolean `true` suppresses new evaluation events, counts, and automatic RUM flag annotations. Missing, false, null, strings, numbers, and other types preserve telemetry. Activation defaults to disabled.
+ 
+-Update the decision through `OpenFeatureAPI.setEvaluationContext`. The attribute remains available for targeting and exposure reporting. The provider converts it to a string for targeting, like other attributes. Attribute changes use the normal assignment refresh path.
++Update the decision through `OpenFeatureAPI.setEvaluationContext`. The attribute remains available for targeting and exposure reporting. The provider preserves its boolean type for targeting. Attribute changes use the normal assignment refresh path.
+ 
+ Opting out suppresses new evaluation reporting immediately. Opting the same subject back in also applies immediately. Switching to another subject does not re-enable reporting for an opted-out subject whose assignments remain active during a pending or failed refresh. Suppression does not change flag values or exposure logging. Targeting rules can still change assignments, and normal exposure deduplication applies.
+ 
+@@ -191,7 +219,7 @@ If RUM is not enabled, the OpenFeature provider will continue to work normally,
+ - **Consistent targeting keys**: Use consistent targeting keys (user ID) to ensure users see consistent feature flag values across sessions.
+ - **Provide meaningful defaults**: Always provide sensible default values that maintain core functionality if flag evaluation fails.
+ - **Set context early**: Set the evaluation context as early as possible in your application lifecycle, typically after user authentication.
+-- **Attribute types**: The provider converts targeting attributes to strings. Supply `dd_evaluation_telemetry_opt_out` as `Value.Boolean` to control telemetry. The provider reads its type before conversion and retains the attribute for targeting and exposures.
++- **Attribute types**: The provider preserves JSON primitives, nulls, lists and nested structures. Supply `dd_evaluation_telemetry_opt_out` as `Value.Boolean` to control telemetry. The provider retains the attribute for targeting and exposures.
+ 
+ ## Differences from direct FlagsClient usage
+ 
+diff --git a/features/dd-sdk-android-flags-openfeature/api/apiSurface b/features/dd-sdk-android-flags-openfeature/api/apiSurface
+index 963b1ac446..fd2eb54fc4 100644
+--- a/features/dd-sdk-android-flags-openfeature/api/apiSurface
++++ b/features/dd-sdk-android-flags-openfeature/api/apiSurface
+@@ -1,3 +1,8 @@
++class com.datadog.android.flags.openfeature.DatadogEvaluationContext : dev.openfeature.kotlin.sdk.EvaluationContext
++  constructor(String? = null, Map<String, dev.openfeature.kotlin.sdk.Value> = emptyMap())
++  override fun withTargetingKey(String): DatadogEvaluationContext
++  override fun equals(Any?): Boolean
++  override fun hashCode(): Int
+ class com.datadog.android.flags.openfeature.DatadogFlagsProvider : dev.openfeature.kotlin.sdk.FeatureProvider
+   override val metadata: dev.openfeature.kotlin.sdk.ProviderMetadata
+   override val hooks: List<dev.openfeature.kotlin.sdk.Hook<*>>
+diff --git a/features/dd-sdk-android-flags-openfeature/api/dd-sdk-android-flags-openfeature.api b/features/dd-sdk-android-flags-openfeature/api/dd-sdk-android-flags-openfeature.api
+index 9efb6cec0f..8ef3d948d9 100644
+--- a/features/dd-sdk-android-flags-openfeature/api/dd-sdk-android-flags-openfeature.api
++++ b/features/dd-sdk-android-flags-openfeature/api/dd-sdk-android-flags-openfeature.api
+@@ -1,3 +1,19 @@
++public final class com/datadog/android/flags/openfeature/DatadogEvaluationContext : dev/openfeature/kotlin/sdk/EvaluationContext {
++	public fun <init> ()V
++	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
++	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
++	public fun asMap ()Ljava/util/Map;
++	public fun asObjectMap ()Ljava/util/Map;
++	public fun equals (Ljava/lang/Object;)Z
++	public fun getTargetingKey ()Ljava/lang/String;
++	public final fun getTargetingKeyOrNull ()Ljava/lang/String;
++	public fun getValue (Ljava/lang/String;)Ldev/openfeature/kotlin/sdk/Value;
++	public fun hashCode ()I
++	public fun keySet ()Ljava/util/Set;
++	public fun withTargetingKey (Ljava/lang/String;)Lcom/datadog/android/flags/openfeature/DatadogEvaluationContext;
++	public synthetic fun withTargetingKey (Ljava/lang/String;)Ldev/openfeature/kotlin/sdk/EvaluationContext;
++}
++
+ public final class com/datadog/android/flags/openfeature/DatadogFlagsProvider : dev/openfeature/kotlin/sdk/FeatureProvider {
+ 	public static final field Companion Lcom/datadog/android/flags/openfeature/DatadogFlagsProvider$Companion;
+ 	public synthetic fun <init> (Lcom/datadog/android/flags/FlagsClient;Lcom/datadog/android/api/feature/FeatureSdkCore;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+diff --git a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogEvaluationContext.kt b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogEvaluationContext.kt
+new file mode 100644
+index 0000000000..76c62f5a0f
+--- /dev/null
++++ b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogEvaluationContext.kt
+@@ -0,0 +1,36 @@
++/*
++ * Unless explicitly stated otherwise all files in this repository are licensed under the Apache License Version 2.0.
++ * This product includes software developed at Datadog (https://www.datadoghq.com/).
++ * Copyright 2016-Present Datadog, Inc.
++ */
++
++package com.datadog.android.flags.openfeature
++
++import dev.openfeature.kotlin.sdk.EvaluationContext
++import dev.openfeature.kotlin.sdk.ImmutableContext
++import dev.openfeature.kotlin.sdk.Value
++
++/**
++ * An OpenFeature context that distinguishes an absent targeting key from an explicitly blank key.
++ *
++ * Pass this context through the OpenFeature API when using [DatadogFlagsProvider]. The provider
++ * preserves [targetingKeyOrNull] on requests. Other providers using [getTargetingKey] see an empty
++ * string when the key is absent because OpenFeature's Kotlin API requires a non-null string.
++ *
++ * @param targetingKeyOrNull The targeting key, or null to omit it. An empty string stays blank.
++ * @param attributes JSON-valued evaluation attributes.
++ */
++class DatadogEvaluationContext(
++    val targetingKeyOrNull: String? = null,
++    attributes: Map<String, Value> = emptyMap()
++) : EvaluationContext by ImmutableContext(targetingKeyOrNull ?: "", attributes) {
++    private val context = ImmutableContext(targetingKeyOrNull ?: "", attributes)
++
++    override fun withTargetingKey(targetingKey: String): DatadogEvaluationContext =
++        DatadogEvaluationContext(targetingKey, context.asMap())
++
++    override fun equals(other: Any?): Boolean = other is DatadogEvaluationContext &&
++        targetingKeyOrNull == other.targetingKeyOrNull && context.asMap() == other.asMap()
++
++    override fun hashCode(): Int = 31 * (targetingKeyOrNull?.hashCode() ?: 0) + context.hashCode()
++}
+diff --git a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProvider.kt b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProvider.kt
+index 74a93fa7a8..77146109fe 100644
+--- a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProvider.kt
++++ b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProvider.kt
+@@ -11,11 +11,13 @@ import com.datadog.android.api.InternalLogger
+ import com.datadog.android.api.feature.FeatureSdkCore
+ import com.datadog.android.flags.FlagsClient
+ import com.datadog.android.flags.FlagsInitializationTimeoutException
++import com.datadog.android.flags.FlagsInvalidResponseException
+ import com.datadog.android.flags.FlagsStateListener
+ import com.datadog.android.flags._FlagsInternalProxy
+ import com.datadog.android.flags.model.FlagsClientState
+ import com.datadog.android.flags.openfeature.internal.adapters.convertToValue
+ import com.datadog.android.flags.openfeature.internal.adapters.toDatadogEvaluationContext
++import com.datadog.android.flags.openfeature.internal.adapters.toEvaluationMetadata
+ import com.datadog.android.flags.openfeature.internal.adapters.toOpenFeatureErrorCode
+ import com.datadog.android.flags.openfeature.internal.adapters.toProviderEvaluation
+ import com.datadog.android.flags.openfeature.internal.setEvaluationContextSuspend
+@@ -169,7 +171,8 @@ class DatadogFlagsProvider private constructor(private val flagsClient: FlagsCli
+                 variant = resolutionDetails.variant,
+                 reason = resolutionDetails.reason?.name,
+                 errorCode = resolutionDetails.errorCode?.toOpenFeatureErrorCode(),
+-                errorMessage = resolutionDetails.errorMessage
++                errorMessage = resolutionDetails.errorMessage,
++                metadata = resolutionDetails.flagMetadata.toEvaluationMetadata()
+             )
+         }
+ 
+@@ -182,7 +185,8 @@ class DatadogFlagsProvider private constructor(private val flagsClient: FlagsCli
+             variant = resolutionDetails.variant,
+             reason = resolutionDetails.reason?.name,
+             errorCode = null,
+-            errorMessage = null
++            errorMessage = null,
++            metadata = resolutionDetails.flagMetadata.toEvaluationMetadata()
+         )
+     }
+ 
+@@ -225,10 +229,12 @@ class DatadogFlagsProvider private constructor(private val flagsClient: FlagsCli
+                     FlagsClientState.Stale -> OpenFeatureProviderEvents.ProviderStale
+                     is FlagsClientState.Error -> newState.error.let { cause ->
+                         OpenFeatureProviderEvents.ProviderError(
+-                            error = if (cause is FlagsInitializationTimeoutException) {
+-                                OpenFeatureError.GeneralError(cause.message ?: "Flags initialization timed out")
+-                            } else {
+-                                OpenFeatureError.ProviderFatalError()
++                            error = when (cause) {
++                                is FlagsInvalidResponseException ->
++                                    OpenFeatureError.ParseError(cause.message ?: "Invalid feature flags response")
++                                is FlagsInitializationTimeoutException ->
++                                    OpenFeatureError.GeneralError(cause.message ?: "Flags initialization timed out")
++                                else -> OpenFeatureError.ProviderFatalError()
+                             }
+                         )
+                     }
+diff --git a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/FlagsClientExt.kt b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/FlagsClientExt.kt
+index 37a4dcfc5c..f2db467958 100644
+--- a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/FlagsClientExt.kt
++++ b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/FlagsClientExt.kt
+@@ -9,6 +9,7 @@ package com.datadog.android.flags.openfeature.internal
+ import com.datadog.android.flags.EvaluationContextCallback
+ import com.datadog.android.flags.FlagsClient
+ import com.datadog.android.flags.FlagsInitializationTimeoutException
++import com.datadog.android.flags.FlagsInvalidResponseException
+ import com.datadog.android.flags._FlagsInternalProxy
+ import com.datadog.android.flags.model.EvaluationContext
+ import com.datadog.android.flags.model.FlagsClientState
+@@ -27,6 +28,7 @@ import kotlin.coroutines.suspendCoroutine
+  *
+  * @param context The evaluation context to set
+  * @param telemetryOptedOut The typed subject decision, or null to preserve native telemetry configuration.
++ * @throws [OpenFeatureError.ParseError] if the downloaded response is invalid or uses an unsupported encoding.
+  * @throws [OpenFeatureError.GeneralError] if setting the context fails. The first context operation also
+  * fails when the configured Flags initialization timeout elapses without matching cached assignments.
+  */
+@@ -52,11 +54,13 @@ internal suspend fun FlagsClient.setEvaluationContextSuspend(
+                 if (isUsableTimeout) {
+                     continuation.resume(Unit)
+                 } else {
+-                    continuation.resumeWithException(
+-                        OpenFeatureError.GeneralError(
+-                            error.message ?: "Unknown error: ${error::class.simpleName}"
+-                        )
+-                    )
++                    val message = error.message ?: "Unknown error: ${error::class.simpleName}"
++                    val providerError = if (error is FlagsInvalidResponseException) {
++                        OpenFeatureError.ParseError(message)
++                    } else {
++                        OpenFeatureError.GeneralError(message)
++                    }
++                    continuation.resumeWithException(providerError)
+                 }
+             }
+         }
+diff --git a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/adapters/Converters.kt b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/adapters/Converters.kt
+index 5e0b6f22bd..ace5776537 100644
+--- a/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/adapters/Converters.kt
++++ b/features/dd-sdk-android-flags-openfeature/src/main/kotlin/com/datadog/android/flags/openfeature/internal/adapters/Converters.kt
+@@ -9,6 +9,7 @@ package com.datadog.android.flags.openfeature.internal.adapters
+ import com.datadog.android.flags.model.ErrorCode
+ import com.datadog.android.flags.model.EvaluationContext
+ import com.datadog.android.flags.model.ResolutionDetails
++import com.datadog.android.flags.openfeature.DatadogEvaluationContext
+ import dev.openfeature.kotlin.sdk.Builder
+ import dev.openfeature.kotlin.sdk.EvaluationMetadata
+ import dev.openfeature.kotlin.sdk.ProviderEvaluation
+@@ -20,25 +21,29 @@ import dev.openfeature.kotlin.sdk.exceptions.ErrorCode as OpenFeatureErrorCode
+  * Converts an OpenFeature [EvaluationContext] to a Datadog [EvaluationContext].
+  */
+ internal fun OpenFeatureEvaluationContext.toDatadogEvaluationContext(): EvaluationContext {
+-    val targetingKey = this.getTargetingKey()
+-
+-    val stringAttributes = this.asMap()
+-        .mapValues { (_, value) ->
+-            when (value) {
+-                is Value.String -> value.asString() ?: value.toString()
+-                is Value.Boolean -> value.asBoolean()?.toString() ?: value.toString()
+-                is Value.Integer -> value.asInteger()?.toString() ?: value.toString()
+-                is Value.Double -> value.asDouble()?.toString() ?: value.toString()
+-                else -> value.toString()
+-            }
+-        }
+-
++    val targetingKey = if (this is DatadogEvaluationContext) {
++        targetingKeyOrNull
++    } else {
++        getTargetingKey()
++    }
+     return EvaluationContext(
+         targetingKey = targetingKey,
+-        attributes = stringAttributes
++        attributes = asMap().mapValues { (_, value) -> value.toDatadogValue() }
+     )
+ }
+ 
++@OptIn(kotlin.time.ExperimentalTime::class)
++private fun Value.toDatadogValue(): Any? = when (this) {
++    is Value.String -> asString()
++    is Value.Boolean -> asBoolean()
++    is Value.Integer -> asInteger()
++    is Value.Double -> asDouble()
++    is Value.Structure -> asStructure()?.mapValues { (_, value) -> value.toDatadogValue() }
++    is Value.List -> asList()?.map { it.toDatadogValue() }
++    is Value.Null -> null
++    is Value.Instant -> asInstant()?.toString()
++}
++
+ /**
+  * Converts a Datadog [ResolutionDetails] to an OpenFeature [ProviderEvaluation].
+  */
+@@ -51,7 +56,7 @@ internal fun <T : Any> ResolutionDetails<T>.toProviderEvaluation(): ProviderEval
+     metadata = this.flagMetadata.toEvaluationMetadata()
+ )
+ 
+-private fun Map<String, Any>.toEvaluationMetadata(): EvaluationMetadata {
++internal fun Map<String, Any>.toEvaluationMetadata(): EvaluationMetadata {
+     val builder = Builder()
+     forEach { (key, value) ->
+         when (value) {
+diff --git a/features/dd-sdk-android-flags-openfeature/src/test/java/com/datadog/android/flags/openfeature/NativeFlagsErrors.java b/features/dd-sdk-android-flags-openfeature/src/test/java/com/datadog/android/flags/openfeature/NativeFlagsErrors.java
+new file mode 100644
+index 0000000000..43537434ec
+--- /dev/null
++++ b/features/dd-sdk-android-flags-openfeature/src/test/java/com/datadog/android/flags/openfeature/NativeFlagsErrors.java
+@@ -0,0 +1,26 @@
++/*
++ * Unless explicitly stated otherwise all files in this repository are licensed under the Apache License Version 2.0.
++ * This product includes software developed at Datadog (https://www.datadoghq.com/).
++ * Copyright 2016-Present Datadog, Inc.
++ */
++
++package com.datadog.android.flags.openfeature;
++
++import com.datadog.android.flags.FlagsInitializationTimeoutException;
++import com.datadog.android.flags.FlagsInvalidResponseException;
++import com.datadog.android.flags.internal.net.NetworkRequestFailedException;
++
++final class NativeFlagsErrors {
++    private NativeFlagsErrors() {}
++
++    static Throwable create(String kind) {
++        switch (kind) {
++            case "invalid":
++                return new FlagsInvalidResponseException();
++            case "network":
++                return new NetworkRequestFailedException("Unable to fetch feature flags.");
++            default:
++                return new FlagsInitializationTimeoutException(25L);
++        }
++    }
++}
+diff --git a/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProviderTest.kt b/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProviderTest.kt
+index a0cfe9b84b..560fb21f52 100644
+--- a/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProviderTest.kt
++++ b/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/DatadogFlagsProviderTest.kt
+@@ -4,9 +4,6 @@
+  * Copyright 2016-Present Datadog, Inc.
+  */
+ 
+-// doNothing() (used inside lenient().apply { ... } below) confuses detekt's UnusedImports usage tracking
+-@file:Suppress("UnusedImports")
+-
+ package com.datadog.android.flags.openfeature
+ 
+ import com.datadog.android.api.InternalLogger
+@@ -14,6 +11,7 @@ import com.datadog.android.api.feature.FeatureSdkCore
+ import com.datadog.android.flags.EvaluationContextCallback
+ import com.datadog.android.flags.FlagsClient
+ import com.datadog.android.flags.FlagsInitializationTimeoutException
++import com.datadog.android.flags.FlagsInvalidResponseException
+ import com.datadog.android.flags.FlagsStateListener
+ import com.datadog.android.flags.StateObservable
+ import com.datadog.android.flags.model.ErrorCode
+@@ -34,15 +32,19 @@ import fr.xgouchet.elmyr.annotation.StringForgery
+ import fr.xgouchet.elmyr.junit5.ForgeConfiguration
+ import fr.xgouchet.elmyr.junit5.ForgeExtension
+ import kotlinx.coroutines.ExperimentalCoroutinesApi
++import kotlinx.coroutines.async
+ import kotlinx.coroutines.launch
+ import kotlinx.coroutines.test.UnconfinedTestDispatcher
+ import kotlinx.coroutines.test.runTest
+ import org.assertj.core.api.Assertions.assertThat
++import org.junit.jupiter.api.AfterEach
+ import org.junit.jupiter.api.BeforeEach
+ import org.junit.jupiter.api.Test
+ import org.junit.jupiter.api.assertDoesNotThrow
+ import org.junit.jupiter.api.extension.ExtendWith
+ import org.junit.jupiter.api.extension.Extensions
++import org.junit.jupiter.params.ParameterizedTest
++import org.junit.jupiter.params.provider.ValueSource
+ import org.mockito.Mock
+ import org.mockito.Mockito.lenient
+ import org.mockito.junit.jupiter.MockitoExtension
+@@ -80,7 +82,6 @@ internal class DatadogFlagsProviderTest {
+     private var capturedStateListener: FlagsStateListener? = null
+ 
+     @BeforeEach
+-    @Suppress("UnnecessaryApply") // lenient()'s pending-stub marker must consume the same mock invocation it wraps
+     fun setUp() {
+         whenever(mockSdkCore.internalLogger).thenReturn(mockInternalLogger)
+ 
+@@ -91,8 +92,6 @@ internal class DatadogFlagsProviderTest {
+             capturedStateListener = it.getArgument(0)
+         }
+ 
+-        lenient().apply { doNothing().whenever(mockStateObservable).removeListener(any()) }
+-
+         lenient().whenever(mockStateObservable.getCurrentState()).thenReturn(FlagsClientState.NotReady)
+ 
+         lenient().whenever(mockFlagsClient.setEvaluationContext(any(), any())).doAnswer { invocation ->
+@@ -104,6 +103,9 @@ internal class DatadogFlagsProviderTest {
+         provider = DatadogFlagsProvider.wrap(mockFlagsClient, mockSdkCore)
+     }
+ 
++    @AfterEach
++    fun `tear down OpenFeature state`() = runTest { OpenFeatureAPI.clearProvider() }
++
+     @Test
+     fun `M return provider metadata W metadata()`() {
+         // When
+@@ -122,6 +124,31 @@ internal class DatadogFlagsProviderTest {
+         assertThat(hooks).isEmpty()
+     }
+ 
++    @OptIn(ExperimentalCoroutinesApi::class)
++    @Test
++    fun `M preserve missing flag error and false default W getBooleanDetails()`() = runTest {
++        // Given
++        whenever(mockFlagsClient.resolve("unknown", false)).thenReturn(
++            ResolutionDetails(value = false, reason = ResolutionReason.ERROR, errorCode = ErrorCode.FLAG_NOT_FOUND)
++        )
++        try {
++            OpenFeatureAPI.setProviderAndWait(
++                provider,
++                ImmutableContext("user"),
++                dispatcher = UnconfinedTestDispatcher(testScheduler)
++            )
++            // When
++            val result = OpenFeatureAPI.getClient().getBooleanDetails("unknown", false)
++            // Then
++            assertThat(result.value).isFalse()
++            assertThat(result.errorCode).isEqualTo(dev.openfeature.kotlin.sdk.exceptions.ErrorCode.FLAG_NOT_FOUND)
++            assertThat(result.reason).isEqualTo("ERROR")
++            assertThat(result.variant).isNull()
++        } finally {
++            OpenFeatureAPI.clearProvider()
++        }
++    }
++
+     // region Primitive Type Evaluations
+ 
+     @Test
+@@ -276,7 +303,8 @@ internal class DatadogFlagsProviderTest {
+         val resolution = ResolutionDetails(
+             value = expectedMapValue,
+             variant = variant,
+-            reason = forge.aValueFrom(ResolutionReason::class.java)
++            reason = forge.aValueFrom(ResolutionReason::class.java),
++            flagMetadata = mapOf("allocationKey" to "allocation", "doLog" to false)
+         )
+         whenever(mockFlagsClient.resolve(eq(flagKey), any<Map<String, Any?>>())).thenReturn(resolution)
+ 
+@@ -286,6 +314,8 @@ internal class DatadogFlagsProviderTest {
+         // Then - verify Map is converted to Value.Structure
+         assertThat(result.value).isInstanceOf(Value.Structure::class.java)
+         assertThat(result.variant).isEqualTo(variant)
++        assertThat(result.metadata.getString("allocationKey")).isEqualTo("allocation")
++        assertThat(result.metadata.getBoolean("doLog")).isFalse()
+         assertThat(result.reason).isEqualTo(resolution.reason?.name)
+         assertThat(result.errorCode).isNull()
+         assertThat(result.errorMessage).isNull()
+@@ -318,7 +348,8 @@ internal class DatadogFlagsProviderTest {
+             value = emptyMap<String, Any?>(), // Sentinel: empty map returned by FlagsClient
+             errorCode = fakeErrorCode,
+             errorMessage = errorMessage,
+-            reason = ResolutionReason.ERROR
++            reason = ResolutionReason.ERROR,
++            flagMetadata = mapOf("allocationKey" to "allocation", "doLog" to false)
+         )
+         whenever(mockFlagsClient.resolve(eq(flagKey), any<Map<String, Any?>>()))
+             .thenReturn(resolution)
+@@ -331,6 +362,8 @@ internal class DatadogFlagsProviderTest {
+         assertThat(result.variant).isNull()
+         assertThat(result.errorCode).isNotNull()
+         assertThat(result.errorMessage).isEqualTo(errorMessage)
++        assertThat(result.metadata.getString("allocationKey")).isEqualTo("allocation")
++        assertThat(result.metadata.getBoolean("doLog")).isFalse()
+         assertThat(result.reason).isEqualTo("ERROR")
+ 
+         // Verify types are preserved (not converted to strings)
+@@ -363,6 +396,111 @@ internal class DatadogFlagsProviderTest {
+         assertThat(contextCaptor.firstValue.targetingKey).isEqualTo("user-123")
+     }
+ 
++    @OptIn(ExperimentalCoroutinesApi::class)
++    @Test
++    fun `M preserve explicit key presence W setProviderAndWait() + setEvaluationContextAndWait()`() = runTest {
++        // Given
++        val attributes = mapOf(
++            "false" to Value.Boolean(false),
++            "null" to Value.Null,
++            "nested" to Value.Structure(mapOf("list" to Value.List(listOf(Value.Integer(0), Value.Null))))
++        )
++        try {
++            OpenFeatureAPI.setProviderAndWait(
++                provider,
++                DatadogEvaluationContext(attributes = attributes),
++                dispatcher = UnconfinedTestDispatcher(testScheduler)
++            )
++            OpenFeatureAPI.setEvaluationContextAndWait(DatadogEvaluationContext("", attributes))
++            OpenFeatureAPI.setEvaluationContextAndWait(DatadogEvaluationContext(attributes = attributes))
++            OpenFeatureAPI.setEvaluationContextAndWait(ImmutableContext("", attributes))
++            // Then
++            val contexts = argumentCaptor<EvaluationContext>()
++            verify(mockFlagsClient, org.mockito.kotlin.times(4)).setEvaluationContext(contexts.capture(), any())
++            assertThat(contexts.allValues.map { it.targetingKey }).containsExactly(null, "", null, "")
++            contexts.allValues.forEach {
++                assertThat(it.attributes).isEqualTo(
++                    mapOf("false" to false, "null" to null, "nested" to mapOf("list" to listOf(0, null)))
++                )
++            }
++        } finally {
++            OpenFeatureAPI.clearProvider()
++        }
++    }
++
++    @OptIn(ExperimentalCoroutinesApi::class)
++    @ParameterizedTest
++    @ValueSource(strings = ["invalid", "network", "timeout"])
++    fun `M retain cached refresh classification W setProviderAndWait() {same context twice}`(kind: String) = runTest {
++        // Given
++        val failure = NativeFlagsErrors.create(kind)
++        val context = ImmutableContext("cached-subject")
++        var state: FlagsClientState = FlagsClientState.NotReady
++        var fetches = 0
++        var pendingCallback: EvaluationContextCallback? = null
++        if (kind == "timeout") {
++            whenever(mockStateObservable.getCurrentState()).doAnswer { state }
++        }
++        whenever(mockStateObservable.addListener(any())).doAnswer {
++            capturedStateListener = it.getArgument(0)
++            checkNotNull(capturedStateListener).onStateChanged(state)
++        }
++        whenever(mockFlagsClient.setEvaluationContext(any(), any())).doAnswer { invocation ->
++            fetches++
++            val callback = invocation.getArgument<EvaluationContextCallback>(1)
++            state = FlagsClientState.Reconciling
++            capturedStateListener?.onStateChanged(state)
++            if (fetches == 1) {
++                state = FlagsClientState.Ready
++                capturedStateListener?.onStateChanged(state)
++                callback.onSuccess()
++            } else {
++                pendingCallback = callback
++            }
++        }
++
++        // When
++        OpenFeatureAPI.setProviderAndWait(provider, context, dispatcher = UnconfinedTestDispatcher(testScheduler))
++        assertThat(OpenFeatureAPI.getStatus()).isEqualTo(OpenFeatureStatus.Ready)
++        val secondProvider = DatadogFlagsProvider.wrap(mockFlagsClient, mockSdkCore)
++        val registering = async {
++            OpenFeatureAPI.setProviderAndWait(
++                secondProvider,
++                context,
++                dispatcher = UnconfinedTestDispatcher(testScheduler)
++            )
++        }
++        testScheduler.runCurrent()
++        assertThat(registering.isCompleted).isFalse()
++        state = FlagsClientState.Stale
++        capturedStateListener?.onStateChanged(state)
++        testScheduler.runCurrent()
++        assertThat(registering.isCompleted).isFalse()
++        checkNotNull(pendingCallback).onFailure(failure)
++        registering.await()
++        testScheduler.runCurrent()
++
++        // Then
++        assertThat(fetches).isEqualTo(2)
++        assertThat(state).isEqualTo(FlagsClientState.Stale)
++        val status = OpenFeatureAPI.getStatus()
++        when (kind) {
++            "invalid" -> {
++                assertThat(status).isInstanceOf(OpenFeatureStatus.Error::class.java)
++                assertThat(
++                    (status as OpenFeatureStatus.Error).error
++                ).isInstanceOf(OpenFeatureError.ParseError::class.java)
++            }
++            "network" -> {
++                assertThat(status).isInstanceOf(OpenFeatureStatus.Error::class.java)
++                assertThat(
++                    (status as OpenFeatureStatus.Error).error
++                ).isInstanceOf(OpenFeatureError.GeneralError::class.java)
++            }
++            else -> assertThat(status).isIn(OpenFeatureStatus.Ready, OpenFeatureStatus.Stale)
++        }
++    }
++
+     @Test
+     fun `M use empty context W initialize() {null context}`() = runTest {
+         // When
+@@ -405,6 +543,49 @@ internal class DatadogFlagsProviderTest {
+         }
+     }
+ 
++    @Test
++    fun `M classify native invalid response W initialize()`() = runTest {
++        // Given
++        val stubError = mock<FlagsInvalidResponseException>()
++        whenever(stubError.message).thenReturn("invalid response")
++        whenever(mockFlagsClient.setEvaluationContext(any(), any())).doAnswer { invocation ->
++            invocation.getArgument<EvaluationContextCallback>(1).onFailure(stubError)
++        }
++
++        // When
++        val error = try {
++            provider.initialize(null)
++            null
++        } catch (error: OpenFeatureError) {
++            error
++        }
++
++        // Then
++        assertThat(error).isInstanceOf(OpenFeatureError.ParseError::class.java)
++        assertThat(error).hasMessage("invalid response")
++    }
++
++    @Test
++    fun `M retain generic classification W initialize() {message resembles invalid response}`() = runTest {
++        // Given
++        val failure = IllegalStateException("FLEX_INIT_ERROR:INVALID_RESPONSE invalid response")
++        whenever(mockFlagsClient.setEvaluationContext(any(), any())).doAnswer { invocation ->
++            invocation.getArgument<EvaluationContextCallback>(1).onFailure(failure)
++        }
++
++        // When
++        val error = try {
++            provider.initialize(null)
++            null
++        } catch (error: OpenFeatureError) {
++            error
++        }
++
++        // Then
++        assertThat(error).isInstanceOf(OpenFeatureError.GeneralError::class.java)
++        assertThat(error).isNotInstanceOf(OpenFeatureError.ParseError::class.java)
++    }
++
+     @Test
+     fun `M complete initialization W initialize() {timeout with matching cached assignments}`() = runTest {
+         // Given
+@@ -528,6 +709,29 @@ internal class DatadogFlagsProviderTest {
+         assertThat(events[1]).isInstanceOf(OpenFeatureProviderEvents.ProviderReady::class.java)
+     }
+ 
++    @Test
++    fun `M preserve parse classification then recover W observe()`() = runTest {
++        // Given
++        val events = mutableListOf<OpenFeatureProviderEvents>()
++        val stubError = mock<FlagsInvalidResponseException>()
++        whenever(stubError.message).thenReturn("invalid encoding")
++
++        // When
++        val job = launch { provider.observe().collect { events.add(it) } }
++        testScheduler.runCurrent()
++        checkNotNull(capturedStateListener).onStateChanged(FlagsClientState.Error(stubError))
++        checkNotNull(capturedStateListener).onStateChanged(FlagsClientState.Ready)
++        testScheduler.runCurrent()
++        job.cancel()
++
++        // Then
++        assertThat(events).hasSize(2)
++        val error = (events.first() as OpenFeatureProviderEvents.ProviderError).error
++        assertThat(error).isInstanceOf(OpenFeatureError.ParseError::class.java)
++        assertThat(error).hasMessage("invalid encoding")
++        assertThat(events.last()).isInstanceOf(OpenFeatureProviderEvents.ProviderReady::class.java)
++    }
++
+     @Test
+     fun `M filter NotReady state W observe() {state changes to NotReady}`() = runTest {
+         // Given
+diff --git a/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/internal/adapters/ConvertersTest.kt b/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/internal/adapters/ConvertersTest.kt
+index 8c59ccd371..4c5bc153b7 100644
+--- a/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/internal/adapters/ConvertersTest.kt
++++ b/features/dd-sdk-android-flags-openfeature/src/test/kotlin/com/datadog/android/flags/openfeature/internal/adapters/ConvertersTest.kt
+@@ -9,6 +9,7 @@ package com.datadog.android.flags.openfeature.internal.adapters
+ import com.datadog.android.flags.model.ErrorCode
+ import com.datadog.android.flags.model.ResolutionDetails
+ import com.datadog.android.flags.model.ResolutionReason
++import com.datadog.android.flags.openfeature.DatadogEvaluationContext
+ import com.datadog.tools.unit.forge.BaseConfigurator
+ import dev.openfeature.kotlin.sdk.ImmutableContext
+ import dev.openfeature.kotlin.sdk.Value
+@@ -47,7 +48,7 @@ internal class ConvertersTest {
+ 
+         // Then
+         assertThat(result.attributes).containsOnlyKeys(fakeKey, fakeControl)
+-            .containsEntry(fakeKey, fakeValue).containsEntry(fakeControl, "true")
++            .containsEntry(fakeKey, fakeValue).containsEntry(fakeControl, true)
+     }
+ 
+     // region toProviderEvaluation
+@@ -280,8 +281,8 @@ internal class ConvertersTest {
+         // When
+         val result = context.toDatadogEvaluationContext()
+ 
+-        // Then - must be "true"/"false", not "Boolean(boolean=<value>)"
+-        assertThat(result.attributes[fakeKey]).isEqualTo(fakeBool.toString())
++        // Then
++        assertThat(result.attributes[fakeKey]).isEqualTo(fakeBool)
+     }
+ 
+     @Test
+@@ -298,8 +299,8 @@ internal class ConvertersTest {
+         // When
+         val result = context.toDatadogEvaluationContext()
+ 
+-        // Then - must be raw integer string, not "Integer(integer=<value>)"
+-        assertThat(result.attributes[fakeKey]).isEqualTo(fakeInt.toString())
++        // Then
++        assertThat(result.attributes[fakeKey]).isEqualTo(fakeInt)
+     }
+ 
+     @Test
+@@ -316,8 +317,8 @@ internal class ConvertersTest {
+         // When
+         val result = context.toDatadogEvaluationContext()
+ 
+-        // Then - must be raw double string, not "Double(double=<value>)"
+-        assertThat(result.attributes[fakeKey]).isEqualTo(fakeDouble.toString())
++        // Then
++        assertThat(result.attributes[fakeKey]).isEqualTo(fakeDouble)
+     }
+ 
+     @Test
+@@ -366,6 +367,43 @@ internal class ConvertersTest {
+         assertThat(result.targetingKey).isEqualTo(fakeTargetingKey)
+     }
+ 
++    @Test
++    fun `M preserve recursive values W toDatadogEvaluationContext()`() {
++        // Given
++        val context = ImmutableContext(
++            attributes = mapOf(
++                "false" to Value.Boolean(false),
++                "zero" to Value.Integer(0),
++                "fraction" to Value.Double(2.5),
++                "null" to Value.Null,
++                "nested" to Value.Structure(mapOf("list" to Value.List(listOf(Value.Null, Value.String("")))))
++            )
++        )
++        // When
++        val result = context.toDatadogEvaluationContext()
++        // Then
++        assertThat(result.attributes).isEqualTo(
++            mapOf(
++                "false" to false,
++                "zero" to 0,
++                "fraction" to 2.5,
++                "null" to null,
++                "nested" to mapOf("list" to listOf(null, ""))
++            )
++        )
++    }
++
++    @Test
++    fun `M distinguish absent and blank key W toDatadogEvaluationContext()`() {
++        // When / Then
++        assertThat(DatadogEvaluationContext().toDatadogEvaluationContext().targetingKey).isNull()
++        assertThat(DatadogEvaluationContext("").toDatadogEvaluationContext().targetingKey).isEmpty()
++        assertThat(ImmutableContext("").toDatadogEvaluationContext().targetingKey).isEmpty()
++        assertThat(DatadogEvaluationContext()).isNotEqualTo(DatadogEvaluationContext(""))
++        assertThat(DatadogEvaluationContext().withTargetingKey("key").toDatadogEvaluationContext().targetingKey)
++            .isEqualTo("key")
++    }
++
+     // endregion
+ 
+     // region toOpenFeatureErrorCode
+diff --git a/features/dd-sdk-android-flags/README.md b/features/dd-sdk-android-flags/README.md
+index 47e6a7fca5..e32200d02f 100644
+--- a/features/dd-sdk-android-flags/README.md
++++ b/features/dd-sdk-android-flags/README.md
+@@ -159,6 +159,8 @@ client.setEvaluationContext(context)
+   - Transition to a user ID when the user authenticates.
+ - All attribute values must be strings. Convert numbers, booleans, and other types to strings before passing them.
+ 
++A downloaded response that cannot be parsed or uses an unsupported encoding fails the context callback with `FlagsInvalidResponseException`. When no matching assignments are available, `FlagsClientState.Error.error` exposes the same exception. Network and HTTP failures retain their separate error type. A failed refresh preserves matching cached assignments and leaves the client stale.
++
+ ### Evaluate feature flags
+ 
+ The `FlagsClient` provides two ways to resolve flag values:
+diff --git a/features/dd-sdk-android-flags/api/apiSurface b/features/dd-sdk-android-flags/api/apiSurface
+index 77dc984de9..3a865104c0 100644
+--- a/features/dd-sdk-android-flags/api/apiSurface
++++ b/features/dd-sdk-android-flags/api/apiSurface
+@@ -37,6 +37,7 @@ data class com.datadog.android.flags.FlagsConfiguration
+     fun gracefulModeEnabled(Boolean): Builder
+     fun build(): FlagsConfiguration
+ class com.datadog.android.flags.FlagsInitializationTimeoutException : RuntimeException
++class com.datadog.android.flags.FlagsInvalidResponseException : RuntimeException
+ interface com.datadog.android.flags.FlagsStateListener
+   fun onStateChanged(com.datadog.android.flags.model.FlagsClientState)
+ interface com.datadog.android.flags.FlagsSubscription
+@@ -60,7 +61,7 @@ enum com.datadog.android.flags.model.ErrorCode
+   - PARSE_ERROR
+   - TYPE_MISMATCH
+ data class com.datadog.android.flags.model.EvaluationContext
+-  constructor(String, Map<String, String> = emptyMap())
++  constructor(String?, Map<String, Any?> = emptyMap())
+   companion object 
+     val EMPTY: EvaluationContext
+ class com.datadog.android.flags.model.FlagsClientEvent
+diff --git a/features/dd-sdk-android-flags/api/dd-sdk-android-flags.api b/features/dd-sdk-android-flags/api/dd-sdk-android-flags.api
+index 3fdb143343..e9461cba63 100644
+--- a/features/dd-sdk-android-flags/api/dd-sdk-android-flags.api
++++ b/features/dd-sdk-android-flags/api/dd-sdk-android-flags.api
+@@ -79,6 +79,9 @@ public final class com/datadog/android/flags/FlagsConfiguration$Builder {
+ public final class com/datadog/android/flags/FlagsInitializationTimeoutException : java/lang/RuntimeException {
+ }
+ 
++public final class com/datadog/android/flags/FlagsInvalidResponseException : java/lang/RuntimeException {
++}
++
+ public abstract interface class com/datadog/android/flags/FlagsStateListener {
+ 	public abstract fun onStateChanged (Lcom/datadog/android/flags/model/FlagsClientState;)V
+ }
+diff --git a/features/dd-sdk-android-flags/src/main/json/flags/exposure-event-schema.json b/features/dd-sdk-android-flags/src/main/json/flags/exposure-event-schema.json
+index d7cb29239e..fcdbb4c6b4 100644
+--- a/features/dd-sdk-android-flags/src/main/json/flags/exposure-event-schema.json
++++ b/features/dd-sdk-android-flags/src/main/json/flags/exposure-event-schema.json
+@@ -45,12 +45,10 @@
+         "attributes": {
+           "type": "object",
+           "description": "Additional attributes for the subject",
+-          "additionalProperties": {
+-            "type": "string"
+-          }
++          "additionalProperties": true
+         }
+       },
+-      "required": ["id", "attributes"]
++      "required": ["attributes"]
+     },
+     "serial_id": {
+       "type": "integer",
+diff --git a/features/dd-sdk-android-flags/src/main/json/flags/flags-state.json b/features/dd-sdk-android-flags/src/main/json/flags/flags-state.json
+index 66fbd93752..2fc3be9b06 100644
+--- a/features/dd-sdk-android-flags/src/main/json/flags/flags-state.json
++++ b/features/dd-sdk-android-flags/src/main/json/flags/flags-state.json
+@@ -8,8 +8,7 @@
+       "properties": {
+         "targetingKey": { "type": "string" },
+         "attributes": { "type": "object", "additionalProperties": true }
+-      },
+-      "required": ["targetingKey"]
++      }
+     },
+     "flags": { "type": "object", "additionalProperties": true },
+     "encodedFlags": { "type": "object", "additionalProperties": true },
+diff --git a/features/dd-sdk-android-flags/src/main/json/flags/precomputed-assignments-request.json b/features/dd-sdk-android-flags/src/main/json/flags/precomputed-assignments-request.json
+index 3b2f0c094b..e5e7592f2b 100644
+--- a/features/dd-sdk-android-flags/src/main/json/flags/precomputed-assignments-request.json
++++ b/features/dd-sdk-android-flags/src/main/json/flags/precomputed-assignments-request.json
+@@ -48,13 +48,10 @@
+                 },
+                 "targeting_attributes": {
+                   "type": "object",
+-                  "additionalProperties": {
+-                    "type": "string"
+-                  }
++                  "additionalProperties": true
+                 }
+               },
+               "required": [
+-                "targeting_key",
+                 "targeting_attributes"
+               ]
+             }
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsInvalidResponseException.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsInvalidResponseException.kt
+new file mode 100644
+index 0000000000..54133e72c7
+--- /dev/null
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/FlagsInvalidResponseException.kt
+@@ -0,0 +1,15 @@
++/*
++ * Unless explicitly stated otherwise all files in this repository are licensed under the Apache License Version 2.0.
++ * This product includes software developed at Datadog (https://www.datadoghq.com/).
++ * Copyright 2016-Present Datadog, Inc.
++ */
++
++package com.datadog.android.flags
++
++/**
++ * Indicates that a downloaded feature flags response cannot be read or uses an unsupported encoding.
++ *
++ * Network and HTTP failures are reported separately. Existing assignments remain available when applicable.
++ */
++class FlagsInvalidResponseException internal constructor() :
++    RuntimeException("Unable to read the feature flags response.")
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt
+index 0b94f89b4b..0b8edcfc5b 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/DatadogFlagsClient.kt
+@@ -62,8 +62,8 @@ internal class DatadogFlagsClient(
+     @Volatile
+     private var evaluationTelemetryOptOut: Boolean = false
+     private val telemetryLock = Any()
+-    private val subjectOptOut = mutableMapOf<String, Boolean>()
+-    private val pendingSubjects = mutableMapOf<String, Int>()
++    private val subjectOptOut = mutableMapOf<String?, Boolean>()
++    private val pendingSubjects = mutableMapOf<String?, Int>()
+     private var requestedSubject: String? = null
+ 
+     override val state: StateObservable = flagStateManager
+@@ -131,11 +131,12 @@ internal class DatadogFlagsClient(
+             synchronized(telemetryLock) {
+                 val remaining = (pendingSubjects[context.targetingKey] ?: 1) - 1
+                 if (remaining == 0) {
++                    @Suppress("UnsafeThirdPartyFunctionCall") // This map accepts nullable subject keys.
+                     pendingSubjects.remove(context.targetingKey)
+                 } else {
+                     pendingSubjects[context.targetingKey] = remaining
+                 }
+-                subjectOptOut.keys.retainAll(pendingSubjects.keys + listOfNotNull(installedSubject, requestedSubject))
++                subjectOptOut.keys.retainAll(pendingSubjects.keys + listOf(installedSubject, requestedSubject))
+             }
+         }
+     }
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/ExposureEventsProcessor.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/ExposureEventsProcessor.kt
+index 089089cd1c..6b5a5e9f5d 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/ExposureEventsProcessor.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/ExposureEventsProcessor.kt
+@@ -17,7 +17,7 @@ internal class ExposureEventsProcessor(private val writer: RecordWriter, private
+     EventsProcessor {
+ 
+     private data class CacheKey(
+-        val targetingKey: String,
++        val targetingKey: String?,
+         val flagKey: String
+     )
+ 
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagValueConverter.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagValueConverter.kt
+index a3c7e5b22a..e0865d5d4c 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagValueConverter.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/FlagValueConverter.kt
+@@ -8,6 +8,7 @@ package com.datadog.android.flags.internal
+ 
+ import com.datadog.android.flags.internal.model.VariationType
+ import org.json.JSONObject
++import java.math.BigDecimal
+ import java.util.Locale
+ import kotlin.reflect.KClass
+ 
+@@ -48,33 +49,65 @@ internal object FlagValueConverter {
+             )
+         }
+ 
+-        return runCatching {
+-            @Suppress("UNCHECKED_CAST")
+-            val result: T? = when (targetType) {
+-                Boolean::class -> variationValue.lowercase(Locale.US).toBooleanStrictOrNull() as? T
+-                String::class -> variationValue as T
+-                Int::class -> variationValue.toIntOrNull() as? T
+-                Double::class -> variationValue.toDoubleOrNull() as? T
+-                Map::class -> variationValue.toMap() as? T
+-                JSONObject::class -> {
+-                    @Suppress("UnsafeThirdPartyFunctionCall") // Safe: wrapped in runCatching
+-                    val json = JSONObject(variationValue)
+-                    @Suppress("UNCHECKED_CAST")
+-                    json as? T
+-                }
+-                else -> {
+-                    // Check if targetType is a Map implementation
+-                    // Safe: isAssignableFrom is a standard Java reflection call
+-                    @Suppress("UnsafeThirdPartyFunctionCall")
+-                    if (Map::class.java.isAssignableFrom(targetType.java)) {
+-                        variationValue.toMap() as? T
+-                    } else {
+-                        null
++        return when (targetType) {
++            Int::class -> parseInteger(variationValue) as Result<T>
++            Double::class -> parseDouble(variationValue) as Result<T>
++            else -> runCatching {
++                @Suppress("UNCHECKED_CAST")
++                val result: T? = when (targetType) {
++                    Boolean::class -> variationValue.lowercase(Locale.US).toBooleanStrictOrNull() as? T
++                    String::class -> variationValue as T
++                    Map::class -> variationValue.toMap() as? T
++                    JSONObject::class -> {
++                        @Suppress("UnsafeThirdPartyFunctionCall") // Safe: wrapped in runCatching
++                        val json = JSONObject(variationValue)
++                        @Suppress("UNCHECKED_CAST")
++                        json as? T
++                    }
++                    else -> {
++                        // Check if targetType is a Map implementation
++                        // Safe: isAssignableFrom is a standard Java reflection call
++                        @Suppress("UnsafeThirdPartyFunctionCall")
++                        if (Map::class.java.isAssignableFrom(targetType.java)) {
++                            variationValue.toMap() as? T
++                        } else {
++                            null
++                        }
+                     }
+                 }
++
++                result ?: throw IllegalArgumentException("Failed to parse value '$variationValue'")
+             }
++        }
++    }
+ 
+-            result ?: throw IllegalArgumentException("Failed to parse value '$variationValue'")
++    private fun parseInteger(value: String): Result<Int> = try {
++        Result.success(BigDecimal(value).intValueExact())
++    } catch (_: NumberFormatException) {
++        Result.failure(TypeMismatchException("Value '$value' is not an integer"))
++    } catch (_: ArithmeticException) {
++        Result.failure(TypeMismatchException("Value '$value' is outside the Int range or fractional"))
++    }
++
++    private fun parseDouble(value: String): Result<Double> {
++        val parsed = value.toDoubleOrNull()
++        if (parsed == null || !parsed.isFinite()) {
++            return Result.failure(TypeMismatchException("Value '$value' is not a finite number"))
++        }
++        return try {
++            val original = BigDecimal(value)
++            val underflows = original.signum() != 0 && parsed == 0.0
++            val whole = original.stripTrailingZeros().scale() <= 0
++            val losesIntegerPrecision = whole && BigDecimal(parsed).compareTo(original) != 0
++            if (underflows || losesIntegerPrecision) {
++                Result.failure(TypeMismatchException("Value '$value' cannot be represented exactly as Double"))
++            } else {
++                Result.success(parsed)
++            }
++        } catch (_: NumberFormatException) {
++            Result.failure(TypeMismatchException("Value '$value' is not a finite number"))
++        } catch (_: ArithmeticException) {
++            Result.failure(TypeMismatchException("Value '$value' cannot be represented exactly as Double"))
+         }
+     }
+ 
+@@ -88,7 +121,9 @@ internal object FlagValueConverter {
+     fun isTypeCompatible(variationType: String, targetType: KClass<*>): Boolean = when (targetType) {
+         Boolean::class -> variationType == VariationType.BOOLEAN.value
+         String::class -> variationType == VariationType.STRING.value
+-        Int::class -> variationType == VariationType.INTEGER.value || variationType == VariationType.NUMBER.value
++        Int::class ->
++            variationType == VariationType.INTEGER.value || variationType == VariationType.NUMBER.value ||
++                variationType == VariationType.FLOAT.value
+         Double::class ->
+             variationType == VariationType.NUMBER.value || variationType == VariationType.FLOAT.value ||
+                 variationType == VariationType.INTEGER.value
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt
+index 6473baec3d..8485755706 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManager.kt
+@@ -13,6 +13,7 @@ import com.datadog.android.core.InternalSdkCore
+ import com.datadog.android.core.internal.utils.executeSafe
+ import com.datadog.android.flags.EvaluationContextCallback
+ import com.datadog.android.flags.FlagsInitializationTimeoutException
++import com.datadog.android.flags.FlagsInvalidResponseException
+ import com.datadog.android.flags.internal.FlagsStateManager
+ import com.datadog.android.flags.internal.diagnostics.UUIDv7Generator
+ import com.datadog.android.flags.internal.model.PrecomputedAssignments
+@@ -181,7 +182,11 @@ internal class EvaluationsManager(
+                         { message }
+                     )
+ 
+-                    val throwable = NetworkRequestFailedException(message)
++                    val throwable = if (response == null) {
++                        NetworkRequestFailedException(message)
++                    } else {
++                        FlagsInvalidResponseException()
++                    }
+                     // Lifecycle is Stale only when retained flags match the requested context.
+                     // Failed fetches do not replace the installed flags or their context.
+                     val completionCallback = synchronized(initializationTerminalLock) {
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactory.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactory.kt
+index c97f9f7286..b09ea1ae52 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactory.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactory.kt
+@@ -101,13 +101,11 @@ internal class PrecomputedAssignmentsRequestFactory(
+         datadogContext: DatadogContext,
+         diagnostics: PrecomputedAssignmentsRequest.Diagnostics
+     ): RequestBody {
+-        // Java callers can supply null entries despite the Kotlin map type.
+-        val inputAttributes: Map<out String?, String?> = context.attributes
+-        val targetingAttributes = mutableMapOf<String, String>()
++        // Java callers may provide null keys; preserve JSON null values but omit invalid keys.
++        val inputAttributes: Map<out String?, Any?> = context.attributes
++        val targetingAttributes = mutableMapOf<String, Any?>()
+         for ((key, value) in inputAttributes) {
+-            if (key != null && value != null) {
+-                targetingAttributes[key] = value
+-            }
++            if (key != null) targetingAttributes[key] = value
+         }
+         val body = PrecomputedAssignmentsRequest(
+             diagnostics = diagnostics,
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateDeserializer.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateDeserializer.kt
+index 1cfcc63235..1d3ccc5b3d 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateDeserializer.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateDeserializer.kt
+@@ -43,7 +43,7 @@ internal class FlagsStateDeserializer(private val internalLogger: InternalLogger
+                 evaluationContext = EvaluationContext(
+                     state.evaluationContext.targetingKey,
+                     state.evaluationContext.attributes?.additionalProperties.orEmpty().mapValues {
+-                        FlagsJson.stringValue(it.value as JsonElement)
++                        FlagsJson.jsonValue(it.value as JsonElement)
+                     }
+                 ),
+                 flags = flags,
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt
+index 4e09cdc03a..e6f5b5b59f 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapper.kt
+@@ -30,7 +30,15 @@ internal class PrecomputeMapper(private val internalLogger: InternalLogger) {
+         val flags = attributes.flags.additionalProperties
+         if (obfuscation != null) FlagsJson.validateKeys(flags.keys.iterator())
+         PrecomputedAssignments(
+-            flags.mapValues { FlagsJson.readAssignment(FlagsJson.objectValue(it.value)) },
++            flags.mapNotNull { (key, value) ->
++                val assignment = FlagsJson.objectValue(value)
++                val type = assignment.get("variationType")?.takeIf { it.isJsonPrimitive }?.asString
++                if (type == null || type in setOf("boolean", "string", "integer", "float", "number", "object")) {
++                    key to FlagsJson.readAssignment(assignment)
++                } else {
++                    null
++                }
++            }.toMap(),
+             obfuscation
+         )
+     } catch (e: JsonParseException) {
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/serialization/FlagsJson.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/serialization/FlagsJson.kt
+index 1d5653f7db..1345680500 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/serialization/FlagsJson.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/internal/serialization/FlagsJson.kt
+@@ -34,6 +34,7 @@ internal object FlagsJson {
+         val serialId = json.get("serialId")
+         if (serialId?.isJsonPrimitive != true || !serialId.asJsonPrimitive.isNumber) json.remove("serialId")
+ 
++        if (!json.has("extraLogging")) json.add("extraLogging", JsonObject())
+         val assignment = Assignment.fromJsonObject(json)
+ 
+         @Suppress("UnsafeThirdPartyFunctionCall") // Generated JSON is a valid object.
+@@ -115,6 +116,17 @@ internal object FlagsJson {
+         }
+     }
+ 
++    /** Decode generated cache JSON without losing nested types or explicit null. */
++    @Suppress("UnsafeThirdPartyFunctionCall") // Parsed JSON trees are traversed without concurrent mutation.
++    fun jsonValue(value: JsonElement): Any? = when {
++        value.isJsonNull -> null
++        value.isJsonObject -> value.asJsonObject.entrySet().associate { (key, entry) -> key to jsonValue(entry) }
++        value.isJsonArray -> value.asJsonArray.map { jsonValue(it) }
++        value.asJsonPrimitive.isBoolean -> value.asBoolean
++        value.asJsonPrimitive.isString -> value.asString
++        else -> value.asDouble
++    }
++
+     fun stringValue(value: JsonElement): String =
+         if (value.isJsonPrimitive && value.asJsonPrimitive.isString) value.asString else value.toString()
+ 
+diff --git a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/model/EvaluationContext.kt b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/model/EvaluationContext.kt
+index 4917468d28..dc6ec656a2 100644
+--- a/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/model/EvaluationContext.kt
++++ b/features/dd-sdk-android-flags/src/main/kotlin/com/datadog/android/flags/model/EvaluationContext.kt
+@@ -18,10 +18,9 @@ package com.datadog.android.flags.model
+  *   bucketing for that user. Common examples include user ID (consistent treatment per user),
+  *   company ID (consistent treatment for entire company), or device ID (consistent treatment
+  *   per device). The targeting key may also be used in targeting rules for flag evaluation.
+- * @param attributes Additional attributes used for targeting flag evaluation. All values must be
+- *   strings - you are responsible for converting numbers, booleans, and other types to their
+- *   string representation before passing them to the context. Examples:
+- *   `mapOf("email" to "user@example.com", "age" to "25", "premium" to "true")`.
++ * @param attributes Additional attributes used for targeting flag evaluation. Values may be JSON strings, numbers, booleans, null,
++ *   lists, or nested maps with string keys. Examples:
++ *   `mapOf("email" to "user@example.com", "age" to 25, "premium" to true)`.
+  *   These attributes provide additional context for flag evaluation rules and can include
+  *   user properties, device information, or any other relevant contextual data.
+  */
+@@ -29,24 +28,24 @@ data class EvaluationContext(
+     /**
+      * The unique identifier used for targeting and bucketing flag evaluation.
+      *
+-     * Must be consistent for the same entity to ensure consistent flag behavior across requests.
+-     * Examples: user ID, company ID, device ID.
++     * Must be consistent for the same entity to ensure consistent flag behaviour across requests.
++     * Examples: user ID, company ID, device ID. Null omits the targeting key;
++     * an empty string sends an explicitly blank key.
+      */
+-    val targetingKey: String,
++    val targetingKey: String?,
+     /**
+      * Additional attributes used for targeting flag evaluation.
+      *
+-     * All values must be strings. You are responsible for converting numbers, booleans,
+-     * and other types to strings before passing them to the context.
++     * Values may be JSON primitives, null, lists, or nested maps with string keys.
+      *
+-     * Example: `mapOf("email" to "user@example.com", "age" to "25", "premium" to "true")`
++     * Example: `mapOf("email" to "user@example.com", "age" to 25, "premium" to true)`
+      */
+-    val attributes: Map<String, String> = emptyMap()
++    val attributes: Map<String, Any?> = emptyMap()
+ ) {
+ 
+     companion object {
+         /**
+-         * An evaluation context with no targeting key and no attributes.
++         * An evaluation context with an empty targeting key and no attributes.
+          *
+          * Use this when you want to evaluate flags without any targeting or user attributes.
+          * This constant provides a standard empty context for such evaluations.
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt
+index 47b15a9521..d70a8b5f1f 100644
+--- a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/DatadogFlagsClientTest.kt
+@@ -52,6 +52,7 @@ import org.mockito.kotlin.verifyNoInteractions
+ import org.mockito.kotlin.verifyNoMoreInteractions
+ import org.mockito.kotlin.whenever
+ import org.mockito.quality.Strictness
++import java.math.BigDecimal
+ import java.util.concurrent.CountDownLatch
+ import java.util.concurrent.ExecutorService
+ import java.util.concurrent.Executors
+@@ -1404,11 +1405,11 @@ internal class DatadogFlagsClientTest {
+ 
+         val numberFlag = forge.getForgery<PrecomputedFlag>().copy(
+             variationType = VariationType.NUMBER.value,
+-            variationValue = fakeFlagValue.toString()
++            variationValue = BigDecimal(fakeFlagValue).toPlainString()
+         )
+         val floatFlag = forge.getForgery<PrecomputedFlag>().copy(
+             variationType = VariationType.FLOAT.value,
+-            variationValue = fakeFlagValue.toString()
++            variationValue = BigDecimal(fakeFlagValue).toPlainString()
+         )
+         val intFlag = forge.getForgery<PrecomputedFlag>().copy(
+             variationType = VariationType.INTEGER.value,
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagValueConverterTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagValueConverterTest.kt
+new file mode 100644
+index 0000000000..c1973a9d43
+--- /dev/null
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/FlagValueConverterTest.kt
+@@ -0,0 +1,109 @@
++/*
++ * Unless explicitly stated otherwise all files in this repository are licensed under the Apache License Version 2.0.
++ * This product includes software developed at Datadog (https://www.datadoghq.com/).
++ * Copyright 2016-Present Datadog, Inc.
++ */
++
++package com.datadog.android.flags.internal
++
++import com.datadog.android.api.InternalLogger
++import com.datadog.android.flags.internal.repository.net.PrecomputeMapper
++import com.google.gson.JsonParser
++import org.assertj.core.api.Assertions.assertThat
++import org.junit.jupiter.api.Test
++import org.junit.jupiter.params.ParameterizedTest
++import org.junit.jupiter.params.provider.ValueSource
++import org.mockito.kotlin.mock
++import java.math.BigDecimal
++
++internal class FlagValueConverterTest {
++    @Test
++    fun `M retain native integer boundaries W convert() {numeric variation types}`() {
++        // When / Then
++        listOf("integer", "float", "number").forEach { type ->
++            listOf(Int.MIN_VALUE, 0, Int.MAX_VALUE).forEach { value ->
++                assertThat(FlagValueConverter.convert(value.toString(), type, Int::class).getOrThrow())
++                    .isEqualTo(value)
++            }
++            assertThat(FlagValueConverter.convert("2.0", type, Int::class).getOrThrow()).isEqualTo(2)
++        }
++    }
++
++    @Test
++    fun `M reject integer overflow and fractions W convert()`() {
++        // When / Then
++        listOf("-2147483649", "2147483648", "2.5", "NaN", "Infinity").forEach { value ->
++            listOf("integer", "float", "number").forEach { type ->
++                assertThat(FlagValueConverter.convert(value, type, Int::class).exceptionOrNull())
++                    .isInstanceOf(TypeMismatchException::class.java)
++            }
++        }
++    }
++
++    @Test
++    fun `M preserve exactly representable double values W convert()`() {
++        // When / Then
++        listOf(
++            "-2147483649",
++            "2147483648",
++            "9007199254740992",
++            "-9223372036854775808",
++            "2.5",
++            "9007199254740993.5",
++            "0.0",
++            "-0.0",
++            "4.9e-324",
++            BigDecimal(Double.MAX_VALUE).toPlainString()
++        ).forEach { value ->
++            listOf("integer", "float", "number").forEach { type ->
++                assertThat(FlagValueConverter.convert(value, type, Double::class).getOrThrow())
++                    .isEqualTo(value.toDouble())
++            }
++        }
++    }
++
++    @ParameterizedTest
++    @ValueSource(
++        strings = [
++            "9007199254740993", "-9007199254740993", "9223372036854775807", "NaN", "Infinity",
++            "1e309", "1e-400", "-1e-400", "9007199254740993.0", "9007199254740993e0",
++            "1.7976931348623157e308"
++        ]
++    )
++    fun `M reject rounded or nonfinite double values W convert()`(value: String) {
++        // When / Then
++        listOf("integer", "float", "number").forEach { type ->
++            assertThat(FlagValueConverter.convert(value, type, Double::class).exceptionOrNull())
++                .isInstanceOf(TypeMismatchException::class.java)
++        }
++    }
++
++    @ParameterizedTest
++    @ValueSource(strings = ["integer", "float", "number"])
++    fun `M preserve original numeric tokens W convert() {parsed canonical decimal responses}`(declaration: String) {
++        // Given
++        val testedMapper = PrecomputeMapper(mock<InternalLogger>())
++        val resource = checkNotNull(javaClass.getResource("/numeric-decimal-$declaration.json"))
++        val fixture = JsonParser.parseString(resource.readText()).asJsonObject
++        val assignments = checkNotNull(testedMapper.map(fixture.get("response").toString()))
++
++        // When / Then
++        fixture.getAsJsonArray("evaluations").forEach { element ->
++            val evaluation = element.asJsonObject
++            val flag = checkNotNull(assignments.flags[evaluation.get("flag").asString])
++            val expected = evaluation.getAsJsonObject("expectedResult")
++            val integerRead = evaluation.get("variationType").asString == "integer"
++            val result = if (integerRead) {
++                FlagValueConverter.convert(flag.variationValue, flag.variationType, Int::class)
++            } else {
++                FlagValueConverter.convert(flag.variationValue, flag.variationType, Double::class)
++            }
++            if (!expected.get("errorCode").isJsonNull) {
++                assertThat(result.exceptionOrNull()).isInstanceOf(TypeMismatchException::class.java)
++            } else {
++                assertThat((result.getOrThrow() as Number).toDouble())
++                    .isEqualTo(expected.get("value").asDouble)
++            }
++        }
++    }
++}
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManagerTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManagerTest.kt
+index 107d30337b..8a368213b2 100644
+--- a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManagerTest.kt
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/evaluation/EvaluationsManagerTest.kt
+@@ -16,6 +16,7 @@ import com.datadog.android.core.InternalSdkCore
+ import com.datadog.android.core.persistence.datastore.DataStoreContent
+ import com.datadog.android.flags.EvaluationContextCallback
+ import com.datadog.android.flags.FlagsInitializationTimeoutException
++import com.datadog.android.flags.FlagsInvalidResponseException
+ import com.datadog.android.flags.FlagsStateListener
+ import com.datadog.android.flags.internal.FlagsStateManager
+ import com.datadog.android.flags.internal.model.FlagsStateEntry
+@@ -614,6 +615,8 @@ internal class EvaluationsManagerTest {
+         // Then
+         argumentCaptor<Throwable>().apply {
+             verify(mockCallback).onFailure(capture())
++            assertThat(firstValue).isInstanceOf(NetworkRequestFailedException::class.java)
++            assertThat(firstValue).isNotInstanceOf(FlagsInvalidResponseException::class.java)
+             assertThat(firstValue.message).contains("Unable to fetch feature flags")
+         }
+     }
+@@ -632,6 +635,8 @@ internal class EvaluationsManagerTest {
+         // Then
+         argumentCaptor<Throwable>().apply {
+             verify(mockCallback).onFailure(capture())
++            assertThat(firstValue).isInstanceOf(NetworkRequestFailedException::class.java)
++            assertThat(firstValue).isNotInstanceOf(FlagsInvalidResponseException::class.java)
+             assertThat(firstValue.message).contains("Unable to fetch feature flags")
+         }
+     }
+@@ -1513,7 +1518,7 @@ internal class EvaluationsManagerTest {
+ 
+         // Then
+         verify(mockFlagsStateManager).updateState(FlagsClientState.Stale)
+-        val failure = argumentCaptor<NetworkRequestFailedException>()
++        val failure = argumentCaptor<FlagsInvalidResponseException>()
+         verify(mockCallback).onFailure(failure.capture())
+         assertThat(failure.firstValue.message).isEqualTo("Unable to read the feature flags response.")
+         assertThat(checkNotNull(testedRepository.getPrecomputedFlag("flag")).variationValue).isEqualTo("true")
+@@ -1561,7 +1566,7 @@ internal class EvaluationsManagerTest {
+         testedManager.updateEvaluationsForContext(context, mockCallback)
+ 
+         // Then
+-        val failure = argumentCaptor<NetworkRequestFailedException>()
++        val failure = argumentCaptor<FlagsInvalidResponseException>()
+         verify(mockCallback).onFailure(failure.capture())
+         assertThat(failure.firstValue.message).isEqualTo("Unable to read the feature flags response.")
+         assertThat(testedRepository.hasFlags()).isFalse()
+@@ -1648,6 +1653,32 @@ internal class EvaluationsManagerTest {
+         return DefaultFlagsRepository(mockSdkCore, fakeTargetingKey, mockDataStore)
+     }
+ 
++    @ParameterizedTest
++    @ValueSource(strings = ["not JSON", "{}", "{\"data\":{\"attributes\":{}}}"])
++    fun `M report typed invalid response W updateEvaluationsForContext() {actual parser}`(response: String) {
++        // Given
++        val context = EvaluationContext(fakeTargetingKey, emptyMap())
++        val testedRepository = createRepository()
++        val testedManager = createManagerWithRepository(testedRepository)
++        val mockCallback = mock<EvaluationContextCallback>()
++        whenever(
++            mockAssignmentsDownloader.readPrecomputedFlags(eq(context), eq(fakeDatadogContext), isA<Diagnostics>())
++        ).thenReturn(response)
++
++        // When
++        testedManager.updateEvaluationsForContext(context, mockCallback)
++
++        // Then
++        val failure = argumentCaptor<Throwable>()
++        verify(mockCallback).onFailure(failure.capture())
++        assertThat(failure.firstValue).isInstanceOf(FlagsInvalidResponseException::class.java)
++        val state = argumentCaptor<FlagsClientState>()
++        verify(mockFlagsStateManager, times(2)).updateState(state.capture())
++        assertThat((state.lastValue as FlagsClientState.Error).error).isSameAs(failure.firstValue)
++        assertThat(testedRepository.hasFlags()).isFalse()
++        verify(mockCallback, never()).onSuccess()
++    }
++
+     private fun createManagerWithRepository(repository: FlagsRepository): EvaluationsManager = EvaluationsManager(
+         sdkCore = mockSdkCore,
+         executorService = mockExecutorService,
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactoryTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactoryTest.kt
+index c1179e28b0..3e5d3064a4 100644
+--- a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactoryTest.kt
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/net/PrecomputedAssignmentsRequestFactoryTest.kt
+@@ -13,10 +13,12 @@ import com.datadog.android.api.feature.Feature
+ import com.datadog.android.flags.internal.model.PrecomputedAssignmentsRequest
+ import com.datadog.android.flags.internal.model.PrecomputedAssignmentsRequest.Diagnostics
+ import com.datadog.android.flags.internal.model.PrecomputedAssignmentsRequest.Trigger
++import com.datadog.android.flags.internal.serialization.FlagsJson
+ import com.datadog.android.flags.model.EvaluationContext
+ import com.datadog.android.flags.utils.forge.ForgeConfigurator
+ import com.datadog.android.internal.rum.RumContext
+ import com.datadog.android.utils.withRumContext
++import com.google.gson.JsonElement
+ import com.google.gson.JsonParser
+ import fr.xgouchet.elmyr.Forge
+ import fr.xgouchet.elmyr.annotation.Forgery
+@@ -96,6 +98,26 @@ internal class PrecomputedAssignmentsRequestFactoryTest {
+         assertThat(body.remove("diagnostics")).isEqualTo(expectedDiagnostics)
+     }
+ 
++    @Test
++    fun `M preserve subject presence and recursive JSON W create()`() {
++        val attrs = mapOf("nested" to mapOf("array" to listOf(true, 2.5, null)), "null" to null)
++        for (key in listOf(null, "", "user")) {
++            val request =
++                checkNotNull(testedFactory.create(EvaluationContext(key, attrs), fakeDatadogContext, fakeDiagnostics))
++            val subject = JSONObject(extractRequestBodyAsString(request)).getJSONObject("data")
++                .getJSONObject("attributes").getJSONObject("subject")
++            assertThat(subject.has("targeting_key")).isEqualTo(key != null)
++            if (key != null) assertThat(subject.getString("targeting_key")).isEqualTo(key)
++            val attributes = subject.getJSONObject("targeting_attributes")
++            assertThat(attributes.has("null")).isTrue()
++            assertThat(attributes.isNull("null")).isTrue()
++            val array = attributes.getJSONObject("nested").getJSONArray("array")
++            assertThat(array.getBoolean(0)).isTrue()
++            assertThat(array.getDouble(1)).isEqualTo(2.5)
++            assertThat(array.isNull(2)).isTrue()
++        }
++    }
++
+     // region create() - Success cases
+ 
+     @Test
+@@ -236,7 +258,11 @@ internal class PrecomputedAssignmentsRequestFactoryTest {
+             .isEqualTo("precompute-assignments-request")
+         val attributes = PrecomputedAssignmentsRequest.fromJsonObject(bodyJson).data.attributes
+         assertThat(attributes.subject.targetingKey).isEqualTo(fakeContext.targetingKey)
+-        assertThat(attributes.subject.targetingAttributes.additionalProperties).isEqualTo(fakeAttributes)
++        assertThat(
++            attributes.subject.targetingAttributes.additionalProperties.mapValues {
++                FlagsJson.jsonValue(it.value as JsonElement)
++            }
++        ).isEqualTo(fakeAttributes)
+         assertThat(attributes.env.ddEnv).isEqualTo(fakeDatadogContext.env)
+         assertThat(attributes.source.sdkName).isEqualTo(fakeDatadogContext.source)
+         assertThat(attributes.source.sdkVersion).isEqualTo(fakeDatadogContext.sdkVersion)
+@@ -295,7 +321,7 @@ internal class PrecomputedAssignmentsRequestFactoryTest {
+     }
+ 
+     @Test
+-    fun `M omit null attribute values W create() { null attribute value from Java }`(
++    fun `M preserve null attribute values W create() { null attribute value from Java }`(
+         @StringForgery fakeTargetingKey: String,
+         @StringForgery fakeKey: String,
+         @StringForgery fakeValue: String
+@@ -312,7 +338,8 @@ internal class PrecomputedAssignmentsRequestFactoryTest {
+         val json = JSONObject(extractRequestBodyAsString(checkNotNull(request)))
+             .getJSONObject("data").getJSONObject("attributes")
+             .getJSONObject("subject").getJSONObject("targeting_attributes")
+-        assertThat(json.has(fakeKey)).isFalse()
++        assertThat(json.has(fakeKey)).isTrue()
++        assertThat(json.isNull(fakeKey)).isTrue()
+         assertThat(json.getString("$fakeKey-valid")).isEqualTo(fakeValue)
+     }
+ 
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateSerializerTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateSerializerTest.kt
+index f774526dd0..0801cb6cf8 100644
+--- a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateSerializerTest.kt
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/persistence/FlagsStateSerializerTest.kt
+@@ -38,6 +38,19 @@ internal class FlagsStateSerializerTest {
+         testedSerializer = FlagsStateSerializer(mockInternalLogger)
+     }
+ 
++    @Test
++    fun `M round trip recursive JSON and subject presence W serialize()`() {
++        val attrs = mapOf("nested" to mapOf("array" to listOf(true, 2.5, null)), "null" to null)
++        for (key in listOf(null, "", "user")) {
++            val state = FlagsStateEntry(EvaluationContext(key, attrs), emptyMap(), fakeTimestamp)
++            val serialized = testedSerializer.serialize(state)
++            val json = JSONObject(serialized).getJSONObject("evaluationContext")
++            assertThat(json.has("targetingKey")).isEqualTo(key != null)
++            val restored = checkNotNull(FlagsStateDeserializer(mockInternalLogger).deserialize(serialized))
++            assertThat(restored.evaluationContext).isEqualTo(state.evaluationContext)
++        }
++    }
++
+     @Test
+     fun `M separate encoded flags from legacy cache W serialize() {obfuscated state}`(forge: Forge) {
+         // Given
+diff --git a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapperTest.kt b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapperTest.kt
+index 82000ab113..3f77727569 100644
+--- a/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapperTest.kt
++++ b/features/dd-sdk-android-flags/src/test/kotlin/com/datadog/android/flags/internal/repository/net/PrecomputeMapperTest.kt
+@@ -151,6 +151,51 @@ internal class PrecomputeMapperTest {
+         assertThat(result.variationValue).isEqualTo("true")
+     }
+ 
++    @Test
++    fun `M isolate unsupported variation types W map()`() {
++        val supported = buildFlagJson(VariationType.BOOLEAN.value, true)
++        val unsupported = JSONObject().put("variationType", "unsupported")
++        val result = checkNotNull(
++            testedMapper.map(
++                buildValidJson(
++                    mapOf(
++                        "supported" to supported,
++                        "unknown" to unsupported
++                    )
++                )
++            )
++        ).flags
++        assertThat(result.keys).containsExactly("supported")
++        assertThat(result.getValue("supported").variationValue).isEqualTo("true")
++        verifyNoInteractions(mockInternalLogger)
++    }
++
++    @Test
++    fun `M preserve flag W map() {extra logging omitted}`() {
++        val fakeFlag = buildFlagJson(VariationType.STRING.value, "value").apply {
++            remove("extraLogging")
++        }
++
++        val result = checkNotNull(testedMapper.map(buildValidJson(mapOf(fakeFlagKey to fakeFlag)))).flags
++
++        assertThat(result).containsKey(fakeFlagKey)
++        assertThat(checkNotNull(result[fakeFlagKey]).extraLogging.length()).isZero()
++        verifyNoInteractions(mockInternalLogger)
++    }
++
++    @Test
++    fun `M reject malformed response W map() {extra logging has invalid type}`() {
++        listOf(JSONObject.NULL, "invalid", 42, true).forEach { fakeExtraLogging ->
++            val fakeFlag = buildFlagJson(VariationType.STRING.value, "value").apply {
++                put("extraLogging", fakeExtraLogging)
++            }
++
++            val result = testedMapper.map(buildValidJson(mapOf(fakeFlagKey to fakeFlag)))
++
++            assertThat(result).isNull()
++        }
++    }
++
+     @Test
+     fun `M parse single flag with string variation W map() { valid JSON }`() {
+         // Given
+@@ -586,7 +631,7 @@ internal class PrecomputeMapperTest {
+             attributes {
+                 flags {
+                     flag(fakeFlagKey) {
+-                        put("variationType", VariationType.STRING)
++                        put("variationType", VariationType.STRING.value)
+                         // Missing other required fields
+                     }
+                 }
+diff --git a/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-float.json b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-float.json
+new file mode 100644
+index 0000000000..a32ef2e084
+--- /dev/null
++++ b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-float.json
+@@ -0,0 +1,487 @@
++{
++  "name": "numeric-decimal-float",
++  "description": "Exact original-value Integer reads, rounded fractional Double reads, and range rejection survive caching.",
++  "context": {
++    "targetingKey": "fixture-subject",
++    "attributes": {}
++  },
++  "response": {
++    "data": {
++      "attributes": {
++        "createdAt": "2026-01-01T00:00:00Z",
++        "flags": {
++          "decimal-rounding": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1.20000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "inexact-whole-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 9007199254740993,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "overflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "float",
++            "variationValue": 1e400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          }
++        }
++      }
++    }
++  },
++  "evaluations": [
++    {
++      "flag": "decimal-rounding",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.2,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "near-one-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "near-one-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "large-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "large-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 4503599627370498.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "larger-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "larger-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 9007199254740994.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "inexact-whole-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "underflow-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "underflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "overflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    }
++  ],
++  "expectations": {
++    "noUnmatchedEvents": true,
++    "exposures": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        }
++      }
++    ],
++    "evaluationEvents": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "inexact-whole-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "overflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      }
++    ]
++  }
++}
+diff --git a/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-integer.json b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-integer.json
+new file mode 100644
+index 0000000000..b7710857dc
+--- /dev/null
++++ b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-integer.json
+@@ -0,0 +1,487 @@
++{
++  "name": "numeric-decimal-integer",
++  "description": "Exact original-value Integer reads, rounded fractional Double reads, and range rejection survive caching.",
++  "context": {
++    "targetingKey": "fixture-subject",
++    "attributes": {}
++  },
++  "response": {
++    "data": {
++      "attributes": {
++        "createdAt": "2026-01-01T00:00:00Z",
++        "flags": {
++          "decimal-rounding": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1.20000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "inexact-whole-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 9007199254740993,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "overflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "integer",
++            "variationValue": 1e400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          }
++        }
++      }
++    }
++  },
++  "evaluations": [
++    {
++      "flag": "decimal-rounding",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.2,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "near-one-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "near-one-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "large-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "large-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 4503599627370498.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "larger-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "larger-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 9007199254740994.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "inexact-whole-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "underflow-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "underflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "overflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    }
++  ],
++  "expectations": {
++    "noUnmatchedEvents": true,
++    "exposures": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        }
++      }
++    ],
++    "evaluationEvents": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "inexact-whole-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "overflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      }
++    ]
++  }
++}
+diff --git a/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-number.json b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-number.json
+new file mode 100644
+index 0000000000..a0a3b234cc
+--- /dev/null
++++ b/features/dd-sdk-android-flags/src/test/resources/numeric-decimal-number.json
+@@ -0,0 +1,487 @@
++{
++  "name": "numeric-decimal-number",
++  "description": "Exact original-value Integer reads, rounded fractional Double reads, and range rejection survive caching.",
++  "context": {
++    "targetingKey": "fixture-subject",
++    "attributes": {}
++  },
++  "response": {
++    "data": {
++      "attributes": {
++        "createdAt": "2026-01-01T00:00:00Z",
++        "flags": {
++          "decimal-rounding": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1.20000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "near-one-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1.00000000000000001,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "large-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 4503599627370497.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "larger-fraction-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 9007199254740993.5,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "inexact-whole-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 9007199254740993,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-integer": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "underflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1e-400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          },
++          "overflow-double": {
++            "allocationKey": "allocation",
++            "variationKey": "variant",
++            "variationType": "number",
++            "variationValue": 1e400,
++            "reason": "TARGETING_MATCH",
++            "doLog": true
++          }
++        }
++      }
++    }
++  },
++  "evaluations": [
++    {
++      "flag": "decimal-rounding",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.2,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "near-one-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "near-one-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 1.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "large-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "large-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 4503599627370498.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "larger-fraction-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "larger-fraction-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": 9007199254740994.0,
++        "reason": "TARGETING_MATCH",
++        "errorCode": null,
++        "variantKey": "variant"
++      }
++    },
++    {
++      "flag": "inexact-whole-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "underflow-integer",
++      "variationType": "integer",
++      "defaultValue": -99,
++      "expectedResult": {
++        "value": -99,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      },
++      "_include": [
++        {
++          "platform": "ios",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "android",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "flutter",
++          "reason": "Requires a separate Integer getter."
++        },
++        {
++          "platform": "unity",
++          "reason": "Requires a separate Integer getter."
++        }
++      ]
++    },
++    {
++      "flag": "underflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    },
++    {
++      "flag": "overflow-double",
++      "variationType": "float",
++      "defaultValue": -99.5,
++      "expectedResult": {
++        "value": -99.5,
++        "reason": "ERROR",
++        "errorCode": "TYPE_MISMATCH",
++        "variantKey": null
++      }
++    }
++  ],
++  "expectations": {
++    "noUnmatchedEvents": true,
++    "exposures": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        }
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        }
++      }
++    ],
++    "evaluationEvents": [
++      {
++        "_count": 1,
++        "flag": {
++          "key": "decimal-rounding"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "near-one-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "large-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "larger-fraction-double"
++        },
++        "evaluation_count": 1
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "inexact-whole-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-integer"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true,
++        "_include": [
++          {
++            "platform": "ios",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "android",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "flutter",
++            "reason": "Requires a separate Integer getter."
++          },
++          {
++            "platform": "unity",
++            "reason": "Requires a separate Integer getter."
++          }
++        ]
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "underflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      },
++      {
++        "_count": 1,
++        "flag": {
++          "key": "overflow-double"
++        },
++        "evaluation_count": 1,
++        "runtime_default_used": true
++      }
++    ]
++  }
++}

@@ -1,0 +1,24 @@
+[
+  {
+    "file": "android-app-candidate.patch",
+    "repository": "DataDog/rum-sdk-integration-test-framework",
+    "base": "e613bea09f5b53e4a72c8ea435e137e25ee69bf4",
+    "sha256": "251f4abefbb0f3b9a5bdaafdf4f6715d754dae335cae51d64faeb56d4d8439d9",
+    "bytes": 37720,
+    "scope": [
+      "apps/android"
+    ],
+    "status": "Historical uncommitted candidate; not reviewed or accepted; reconcile against current selected APIs before use"
+  },
+  {
+    "file": "android-sdk-candidate.patch",
+    "repository": "DataDog/dd-sdk-android",
+    "base": "dad2312223110e2e7ed84cf46cefe3a45bc759c6",
+    "sha256": "568fb87addeac26d9c56942137d2ae81add59abe2e9fb039d35b82ae4fa21cf3",
+    "bytes": 130851,
+    "scope": [
+      "full tracked/staged candidate overlay"
+    ],
+    "status": "Historical uncommitted candidate; not reviewed or accepted; reconcile against current selected APIs before use"
+  }
+]

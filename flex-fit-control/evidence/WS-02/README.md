@@ -1,0 +1,3 @@
+# WS-02 portable salvage sources
+
+November 27, 2026. These patches export preserved uncommitted Android app and SDK candidate overlays for the remote workspace. Original checkouts/indexes are untouched. They are historical salvage material, not new implementation or passing branches. The app export intentionally excludes shared Python/proto/CI and gitlink changes; WS-03 owns shared reconciliation. See manifest.json for exact bases/checksums. Apply only in an isolated checkout at the specified base to inspect; reconcile appropriate changes onto the actual selected implementation base rather than blindly applying over current work. SDK conformance changes may be unnecessary under the diagnosed-exclusion policy. No generated dependencies/caches or PR actions are included.
