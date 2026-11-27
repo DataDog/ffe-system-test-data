@@ -352,3 +352,6 @@ RN workspace produced an ARM64 compile-only APK and private source handoff; repo
 
 
 CONTROL-033 Browser: repaired two-vector run terminal2passed/0failed in90.99seconds; actual empty-key string value-7/TARGETING_MATCH/variant,18RPC evaluations,16exposures,18evaluation events, two configHTTP200. Full65repaired selection live separately; do not sum partial earlier runs. iOS private candidate manifest and coordinator review now correctly reference independently audited exact-child runtime, replacing stale pending language.
+
+
+CONTROL-034 Flutter exclusions independently verified against all65JUnit nodes:40exact failed IDs, no overbroad matching or iOS/Web suppression, unchanged canonical expectations. Root-owned full03Android rerun started separately; result pending. Prior24pass40fail1skip remains unmodified diagnostic evidence. No cell or row accepted.

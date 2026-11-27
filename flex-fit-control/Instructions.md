@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-033, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-034, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -226,3 +226,8 @@ RN ARM64 build is complete as compile-only evidence; actual native execution rem
 ## Browser empty-key regression proof — CONTROL-033
 
 The two real Browser encoded empty-key vectors now pass with the reviewed WS-11 repair:2passed/0failed in90.99seconds,18evaluation RPCs,16exposures and18evaluation events; both configuration POSTs returned200. Empty-key string result is exactly value-7 with TARGETING_MATCH and variant. Previous shorthand minus7 was inaccurate; preserve authored expected values. Exact integrated local head87442cf, unchanged SDK/assets and corpus. Full65selection is now running with separate receipts; no full success or cell acceptance claimed.
+
+
+## Flutter exclusion review and rerun — CONTROL-034
+
+Independent verifier matched all40exclusions to full02failed IDs with zero missing or extra entries. Android-host-only selection, full-stem matching, unchanged canonical expectations and preserved iOS/Web/future fixtures confirmed; noP0/P1 or inappropriate exclusion found. Seven marker controls pass reported. Coordinator full03Android rerun is now live with separate fresh reports/receipts. Predicted24executed/41skipped is not yet a result. Full implementation review, aggregate gates and FlutteriOS remain outstanding; no activation acceptance.
