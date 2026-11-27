@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-028, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-029, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -193,3 +193,8 @@ WS-11 owns the bounded internal FIT transport repair in assignments/WS-11-protob
 Tyler explicitly requires FIT control RPC to carry protobuf raw bytes. WS-11's serializer-defaults-only candidate is superseded and must not be integrated as the final repair. Preserve it and its evidence for comparison. Implement protobuf binary encoding and generated decoding for both request and response across the existing Playwright bridge, retaining service/method dispatch and explicit transport errors. A byte-array carrier required by Playwright is acceptable; do not convert protobuf messages into JSON field objects or repair missing fields by hand. Cover every shared-stub consumer: Browser, Electron and Flutter Web. Preserve actual SDK configuration payloads and canonical fixture expectations.
 
 WS-11 owns an isolated replacement candidate and directly affected transport adapters, tests and documentation. Audit byte carrier behaviour, all generated request/response codecs, integer range behaviour and optional/message presence. Do not edit the live WS-05 runner; finish its unchanged baseline, then integrate only the independently reviewed binary candidate and rerun the two failing online-precomputed fixed vectors followed by the full65case function. Record any additional caller/runtime and aggregate-lint gaps explicitly. No later deployment modes, SDK changes, activation PRs, downloads or large builds.
+
+
+## Transport implementation hold — CONTROL-029
+
+Tyler said to hold while confirming the relationship between offline initialization and the control transport. Do not start or integrate the WS-11 replacement, or the superseded serializer-only candidate, until the coordinator records a resolution. Existing unchanged baseline execution and unrelated platform implementation/review continue. ConfigurationWire is the SDK initialization payload inside the control request; preserve that payload and its SDK-defined serialization independently of the outer RPC representation. CONTROL-028 records the requested binary direction, not permission to bypass this later hold.

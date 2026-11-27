@@ -1,5 +1,7 @@
 # WS-11 — Raw protobuf bytes across the Playwright control RPC
 
+**HOLD — CONTROL-029:** do not start or integrate this replacement while Tyler clarifies the ConfigurationWire/control transport distinction. Preserve candidates and evidence. Existing unchanged baseline runs continue.
+
 CONTROL-028 supersedes the serializer-only remedy in CONTROL-027. Tyler explicitly requires FIT control RPC to send protobuf in raw bytes. Coordinator-assigned local shared transport owner; work in a separate isolated checkout and never change the live WS-05 runner. Preserve the original signed scalar-default patch and its evidence; do not integrate it as the final solution.
 
 Encode Python request messages using protobuf binary serialization. Pass a byte carrier through Playwright and decode using generated message codecs at the receiving app before dispatch. Encode responses with generated codecs and parse protobuf bytes in Python. Service/method names and explicit transport errors remain bridge metadata. Do not serialize protobuf field objects to JSON, manually fill defaults, or change SDK configuration delivery. Audit Browser/Electron/shared Flutter Web consumers and implement each affected receiving adapter. Avoid generated-code hand edits; use existing codecs where available and repository generation when necessary.

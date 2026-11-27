@@ -323,3 +323,8 @@ Tyler rejected the proto-JSON control-RPC design and explicitly requires raw pro
 iOS coordinator exact-child framework suite973passed in279.58seconds. All five native lenses, native coverage fallback and stateful verifier complete with no remainingP0/P1. Synchronous flush actor blocking remains a source-confirmedP2 without an observed hang; client registry retention is bounded operationally by fresh process per corpus case, not an OOM finding. External RPC cancellation remains unverified. Coordinator exact-child full65simulator corpus started and is live; no final corpus result yet. Aggregate lint gaps remain.
 
 RN workspace reports65canonical cases collected,35applicable including17response-rejection cases; actual Android build remains live, no native execution claim. Flutter root-owned full02 remains live. Android independent performance source review raisesP2 repeat-initialization lifecycle allocation; adjudication/device evidence pending, no automatic SDK lifecycle workaround. Disk growth traced to per-case Flutter proxy-port dart-defines producing distinct retained compiler snapshots; only task-owned completed/reproducible artefacts reclaimed, source/apps/evidence preserved.
+
+
+## Transport clarification hold — CONTROL-029
+
+Tyler asked to hold while discussing serialized ConfigurationWire for offline rules initialization. Coordinator clarified SDK configuration payload and outer control RPC are distinct layers; serialized configuration remains unchanged inside the request. Binary replacement has not been dispatched or integrated. Both proposed transport remedies remain on hold; WS-05 confirmed it will finish the existing unchanged baseline only. Other platform reviews and existing iOS/Flutter executions continue.
