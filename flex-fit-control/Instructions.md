@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-035, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-036, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -240,3 +240,8 @@ Fresh source audit supersedes the earlier shorthand that native API availability
 WS-10 owner: repair native ProtoJSON ordinary-default loss for all five evaluation requests. The native serializers omit empty keys; decode using generated request semantics before JS getters, preserving int64 precision checks and optional/message presence. Add omission/empty-key and falsy-default controls and show failed-baseline/passing-repair results. Keep changes isolated on the current private candidate, return exact tree/patch/checksums, no push/PR. Coordinator owns independent review and device execution. Other lifecycle questions await exact SDK source audit; do not infer acceptance from the first lens.
 
 Android exact repaired APK has been privately transferred and checksum verified. Device execution waits for Flutter to release the reserved AVD. RN compile-only artifacts remain distinct from runtime evidence.
+
+
+## iOS lint prerequisite progress — CONTROL-036
+
+Coordinator populated the unchanged pinned Flutter/MAUI SDK sources missing from the exact signed iOS candidate. Flutter lint stage now passes:32files formatted with0changes, analyzer no issues. The invocation refreshed its dependency lock; that generated diff is privately archived and reverted so the signed source remains clean. This clears one prior lint stage, not aggregate lint or activation acceptance. MAUI build/format and other remaining gates still require separate evidence. RN local review is pinned to exact signed importb31433e with tree identical to owner handoff; review/repair and native runtime remain pending.

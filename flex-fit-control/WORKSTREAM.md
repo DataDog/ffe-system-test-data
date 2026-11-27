@@ -358,3 +358,6 @@ CONTROL-034 Flutter exclusions independently verified against all65JUnit nodes:4
 
 
 CONTROL-035: fresh KMP upstream source confirms no flagging API/module; pinned MAUI source confirms no flagging wrapper/native bindings and a package-version mismatch. Both retain core-IPC eligibility, but require SDK integration before a meaningful SDK conformance adapter. See prerequisite brief. RN private handoff imported at exact stagedtree4ad01494f28936830d1a876271515a6eb16b6c8c; first correctness lens found empty-key ProtoJSON loss across five getters, bounded repair assigned. Actual Android repaired APK/source manifest privately acquired, hash verified; no device run yet. Browser/Flutter runs remain live separately.
+
+
+CONTROL-036 iOS environment repair: exact pinned Flutter/MAUI SDK submodules populated without changing gitlinks. Flutter lint stage passes32files/0format changes/no analyzer issues; generated lock diff archived then reverted, candidate clean. Aggregate lint remains incomplete. RN exact private import signedb31433e has matching owner tree; correctness/performance reviews completed withoutP0/P1, raw-getter default defect repair is assigned, other council lenses pending.
