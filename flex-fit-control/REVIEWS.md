@@ -16,3 +16,6 @@ Review entries above concern handed-off local candidates; historical open PRs an
 
 
 CONTROL-019 queue additions: WS-04 full actual-source candidate now reports10pass/55scopedskip/0fail, exact signed paired handoff pending; independent local council required. WS-07 signed child8598538616ec739ecc928cd2c421eea69bbee24a (parent4191626a9894199b0768311fb991b912a4fc2ba1, treee08134afdee24a807a03956b0ea61b6e55f90417) verified and queued after live WS-09 inventory. WS-08 real SDK smoke passes but is not a ready/full-row handoff. No review acceptance is inferred from runtime counts.
+
+
+CONTROL-021: coordinator independently verified signed/clean paired iOS FIT4bc3a62838895147466fb72d75e7e1683927aa2a (basee07ae57) and corpus261df0f204655f05b3ea680485d53e4509c901cf (basefe24ed2). Local correctness specialist started, other lenses/verifier pending. Android correctness specialist is also live; no verdict yet. No clean council or acceptance inferred.

@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-020, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-021, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -150,3 +150,8 @@ BITS-01-EXEC-002 is received as a Slack attachment, but the coordinator connecto
 ## React Native workspace lane — CONTROL-020
 
 Assign WS-10 React Native online precomputed to the existing workspace activation-foundations chat now that WS-07 handed off its signed candidate. Follow assignments/WS-10-react-native-online-precomputed.md. Begin with current PR230/WIP reconciliation, preserving Sameeran's work, then implement within the bounded RN ownership. Native SDK/shared schema owner coordination is required before overlapping changes. This assignment does not open later modes or change BitsCode's Browser lane.
+
+
+## Flutter complete Android inventory and iOS review — CONTROL-021
+
+WS-08 may re-reserve its task AVD for the complete64-applicable Android corpus sweep using the verified APK and source topology, retaining exact handles and ownership. WS-02 has not reserved the device. Preserve APK/hash/evidence before measured cleanup of solely task-owned reproducible intermediates; maintain12GiB free-space floor. No broad SDK exclusion without case diagnosis. Flutter iOS runtime remains a separate pending obligation. WS-04 signed paired candidate is now in coordinator independent local Crucible; signing is recovered and aggregate lint gates remain distinct.
