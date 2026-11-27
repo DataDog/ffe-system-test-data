@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-053, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-054, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Exact audit text preserved; lint baseline update — CONTROL-054
+
+BITS-02 completed its alternate text handoff without retrying the rejected metadata action. Coordinator reconstructed eight chunks, verified every chunk hash and the complete16,796-byte/239-line document hash, and preserved the unchanged [full public audit](../docs/audits/BITS-02-rules-resource-provenance.md). Its requested documentation handoff is complete; branch publication remains unavailable but no longer blocks reading the audit. [Independent verification](BITS-02-VERIFICATION.md) distinguishes coordinator-checked findings from reported tooling/diagnostic results. No new BitsCode implementation, regeneration, serializer, PR or ticket assignment.
+
+WS-14 reports the unchanged wrapper's Python stage passes on clean current FIT main with Ruff0.17.6/Pyright1.1.414 in a dedicated venv. The full wrapper remains live. The earlier42-error local hypothesis is not reproduced on clean main; compare tool/generated-stub/import identities before proposing any configuration fix. Native Linux failures still cannot establish aggregate green. A read-only local capacity audit preserves app products/source/evidence; no cache deletion, transfer or native installation is authorised by that audit. Local RN canonical full02 remains live/source-frozen.
 
 ## Corpus audit handoff — CONTROL-053
 

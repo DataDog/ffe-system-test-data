@@ -438,3 +438,7 @@ WS-14 assigned to the existing workspace owner: reproduce suspected generated Py
 ### CONTROL-053 — corpus audit independently checked
 
 BITS-02 audit is locally complete but branch publication remains unavailable after its metadata approval rejection. Public Markdown/patch attachments exist; a bounded text handoff is requested if branch-only publishing remains unavailable. Coordinator independently verified main68flags/50converted/18omitted affecting20of398corecases; five optional suites269cases lack catalogued pairs; exact20436byteprotobuf/27285bytewire pass loader verification. PR86 changes source to72flags/410cases without regeneration; source digest mismatches and loader rejects it. No producer omissions reclassified as SDK defects, source edits or rules-mode SDK execution. Detailed audit reconciliation remains open.
+
+### CONTROL-054 — exact BitsCode handoff preserved
+
+BITS-02 text handoff reconstructed from eight individually hash-verified chunks; complete16,796-byte/239-line audit hash matches and unchanged document is preserved under docs/audits. No metadata retry or PR. Coordinator previously checked canonical coverage/hash counts and stalePR86 rejection; detailed tooling/diagnostic runs remain attributed to BitsCode. WS-14 clean-main Python stage reports zero diagnostics in dedicatedvenv; fullwrapper remains live and localenvironmentcomparison pending. No speculative config fix. LocalRNfull02 remains live; no aggregate pass/activation acceptance.

@@ -11,3 +11,7 @@ The coordinator’s local agent separately owns FIT serving/SDK-fetch contract a
 ## CONTROL-053 handoff checkpoint
 
 Audit reported locally complete; remote branch unavailable and its automatic approval review rejected a required metadata step. Do not retry the rejected action. If branch-only publication remains unavailable, paste the public audit document in numbered bounded replies to the existing handoff thread so coordinator can preserve it in the authorised Control Branch. Preserve exact content and patch identity. Coordinator has independently verified the key canonical resource/omission/optional-suite/PR86-staleness findings in [BITS-02-VERIFICATION.md](../BITS-02-VERIFICATION.md). No new implementation or PR assignment.
+
+## CONTROL-054 text handoff complete
+
+The coordinator reconstructed all eight numbered replies, verified all chunk hashes and complete document SHA256 `e587c293acdeeb4b6b9dfaf96fc01a9b2d012c8e24616dbcf46a22a4ab500447`, and preserved the unchanged239-line audit at [docs/audits/BITS-02-rules-resource-provenance.md](../../docs/audits/BITS-02-rules-resource-provenance.md). No rejected action was retried. Full text is now available to the team; no new implementation or publication assignment.
