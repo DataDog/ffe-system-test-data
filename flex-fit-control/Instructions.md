@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-049, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-050, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## RN expected-failure review — CONTROL-050
+
+WS-13 implemented the exact 35-path RN Android expected-failure policy. Coordinator focused unit execution passed 135 tests, including real pytest strict-XPASS and exception-filter controls. This is policy verification, not a new canonical SDK run. Independent correctness review identified a P2 boundary defect: eligibility was checked before awaited flush/observation, so an additional configuration receipt arriving during that interval could still be classified as a known gap. The coordinator assigned final receipt revalidation in both branches and delayed-request regression controls. Final council, device rerun, aggregate lint and publication remain open. Preserve canonical fixture expectations and fail unexpected errors/emissions. No activation PRs.
+
+Existing FIT PR #171 changes CI placement/native setup; its inspected file inventory contains no Python lint configuration or generated-stub changes. It does not establish a fix for the suspected generated-import issue; a clean reproduction remains outstanding.
 
 ## Current runtime and shared component evidence — CONTROL-049
 
