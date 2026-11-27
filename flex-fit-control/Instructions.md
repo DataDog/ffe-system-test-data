@@ -1,6 +1,12 @@
 # Instructions
 
-Revision: CONTROL-056, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-057, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Framework SDK prerequisite briefings — CONTROL-057
+
+BITS-02 handoff is complete. BitsCode now owns the bounded read-only [BITS-03 KMP/MAUI SDK prerequisite briefings](assignments/BITS-03-FRAMEWORK-FLAGS-PREREQUISITES.md). Refresh actual public API/interop visibility and prepare concrete file-level implementation/test/dependency plans. Existing core IPC is eligible; no native bypass may stand for framework conformance. No SDK/FIT implementation, builds, later modes, tickets, PRs or source/publication changes are assigned. Return checksum-identified Markdown/text for coordinator ingestion without invoking the previously blocked metadata workflow. Read full SDK guidance and identify real API approval requirements before proposing execution.
+
+Coordinator refreshed FFLSDK-143, FFLSDK-147 and parent FFLSDK-109, current SDK develop heads and complete source-tree inventories, and current open PR lists. No open flagging prerequisite PR was found in those inventories. Current MAUI upstream differs from the older FIT-pinned source; keep those identities separate. WS-14 is now executing the exact 18-file RN candidate in a separate checkout after terminal base comparison. It retains exclusive lint ownership; no new BitsCode FIT work or activation PRs.
 
 ## RN scoped runtime terminal; exact candidate lint handoff — CONTROL-056
 

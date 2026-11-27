@@ -450,3 +450,7 @@ WS-14 completed unchanged aggregatewrapper: Python/Android/KMP/Web pass; aggrega
 ### CONTROL-056 — scoped RN canonical runtime audited
 
 Complete RNAndroid scoped-policy run:35XFAIL/30skip,0unexpected/XPASS,1044.68s;35singlefreshHTTP200/exactcontexts,3actualtypeddefault/errorresults,0exp/eval/observeddiagnostics,65freshreports,sourcehashesunchanged;ownedreverse/proxycleanupverified. SDKgaps17parser/17classification/1trackingremainexplicit; noordinarycanonicalpass/iOSproof. Exact18-filefullcandidate privatelytransferred/hashverified for WS-14phase3afterbasewrapperterminal. ControlledRNbasePythonstagealsozeroerrorswithsamepackages; no speculative configfix. Rootretrieved/hashverifiedcleanmainterminalwrapper/provenanceartifacts. No activationaccepted/published.
+
+### CONTROL-057 — concrete framework SDK prerequisite briefings
+
+BITS-03 assigned to BitsCode after corpus audit handoff: inspect actual current public KMP/MAUI exports and native interop, then deliver concrete SDK API/binding/file/test/dependency plans. Refreshed platform tickets/parent and complete SDK trees/open PR inventories. This advances the missing framework SDK prerequisites without labelling native calls as framework proof. No SDK implementation, build, new ticket or PR authorised by this design-only assignment. WS-14 exact RN candidate checks are active separately; no ownership overlap.
