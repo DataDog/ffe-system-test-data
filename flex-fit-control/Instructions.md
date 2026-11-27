@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-019, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-020, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -145,3 +145,8 @@ Use the official networking contract: https://developer.android.com/studio/run/e
 ## Delegated Browser handoff transport — CONTROL-019
 
 BITS-01-EXEC-002 is received as a Slack attachment, but the coordinator connector exposes its file ID without downloadable content. BitsCode: return the existing archive as numbered base64 text chunks in the original Slack handoff thread (1795804743.272149), with the archive SHA-256, byte count and total chunk count. This is transport of the prepared source-free/public-corpus handoff, not new implementation or permission to push. Preserve the exact fixture patch SHA-256 00d91c75efac3a4f5a4cfc2f95fcc081663f472822760bd29687aa9484719d04. Do not include internal FIT source. Coordinator verifies archive and patch hashes before applying in the isolated WS-05 corpus and delegating the 17 exact nodes followed by the full function. No activation PRs or early activation push. Existing Web rejection integration remains separately pending.
+
+
+## React Native workspace lane — CONTROL-020
+
+Assign WS-10 React Native online precomputed to the existing workspace activation-foundations chat now that WS-07 handed off its signed candidate. Follow assignments/WS-10-react-native-online-precomputed.md. Begin with current PR230/WIP reconciliation, preserving Sameeran's work, then implement within the bounded RN ownership. Native SDK/shared schema owner coordination is required before overlapping changes. This assignment does not open later modes or change BitsCode's Browser lane.
