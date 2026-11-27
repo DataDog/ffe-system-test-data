@@ -355,3 +355,6 @@ CONTROL-033 Browser: repaired two-vector run terminal2passed/0failed in90.99seco
 
 
 CONTROL-034 Flutter exclusions independently verified against all65JUnit nodes:40exact failed IDs, no overbroad matching or iOS/Web suppression, unchanged canonical expectations. Root-owned full03Android rerun started separately; result pending. Prior24pass40fail1skip remains unmodified diagnostic evidence. No cell or row accepted.
+
+
+CONTROL-035: fresh KMP upstream source confirms no flagging API/module; pinned MAUI source confirms no flagging wrapper/native bindings and a package-version mismatch. Both retain core-IPC eligibility, but require SDK integration before a meaningful SDK conformance adapter. See prerequisite brief. RN private handoff imported at exact stagedtree4ad01494f28936830d1a876271515a6eb16b6c8c; first correctness lens found empty-key ProtoJSON loss across five getters, bounded repair assigned. Actual Android repaired APK/source manifest privately acquired, hash verified; no device run yet. Browser/Flutter runs remain live separately.

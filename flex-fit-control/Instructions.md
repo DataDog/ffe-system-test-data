@@ -1,6 +1,6 @@
 # Instructions
 
-Revision: CONTROL-034, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-035, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
 
 ## Current assignments — implementation resumed
 
@@ -231,3 +231,12 @@ The two real Browser encoded empty-key vectors now pass with the reviewed WS-11 
 ## Flutter exclusion review and rerun — CONTROL-034
 
 Independent verifier matched all40exclusions to full02failed IDs with zero missing or extra entries. Android-host-only selection, full-stem matching, unchanged canonical expectations and preserved iOS/Web/future fixtures confirmed; noP0/P1 or inappropriate exclusion found. Seven marker controls pass reported. Coordinator full03Android rerun is now live with separate fresh reports/receipts. Predicted24executed/41skipped is not yet a result. Full implementation review, aggregate gates and FlutteriOS remain outstanding; no activation acceptance.
+
+
+## SDK prerequisites and RN correctness repair — CONTROL-035
+
+Fresh source audit supersedes the earlier shorthand that native API availability meant KMP adapter readiness. KMP developc5608b842e1135c928280cc5eb3a20a25a6d8b2d has no flagging module/API; pinned MAUIa44ba752694d09c29d1d542d26b392833f03a1a9 has no flagging bindings/wrapper. Both existing core IPC servers remain eligible. Record missing SDK integration as prerequisites, not missing-core deferral or conformance failure. Native-host adapters alone must not close their SDK API slices. See [prerequisite brief](assignments/KMP-MAUI-PREREQUISITES.md). No SDK wrapper implementation is newly dispatched by this update.
+
+WS-10 owner: repair native ProtoJSON ordinary-default loss for all five evaluation requests. The native serializers omit empty keys; decode using generated request semantics before JS getters, preserving int64 precision checks and optional/message presence. Add omission/empty-key and falsy-default controls and show failed-baseline/passing-repair results. Keep changes isolated on the current private candidate, return exact tree/patch/checksums, no push/PR. Coordinator owns independent review and device execution. Other lifecycle questions await exact SDK source audit; do not infer acceptance from the first lens.
+
+Android exact repaired APK has been privately transferred and checksum verified. Device execution waits for Flutter to release the reserved AVD. RN compile-only artifacts remain distinct from runtime evidence.
