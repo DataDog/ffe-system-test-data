@@ -1,6 +1,14 @@
 # Instructions
 
-Revision: CONTROL-058, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+Revision: CONTROL-059, November 27, 2026. Issuer: coordinator, following Tyler's direct instructions.
+
+## Framework proposal handoff received — staged CONTROL-059
+
+BITS-03 completed two source-based implementation proposals: [KMP](../docs/briefings/BITS-03-KMP-FLAGS-PREREQUISITES.md) and [MAUI](../docs/briefings/BITS-03-MAUI-FLAGS-PREREQUISITES.md). Coordinator reconstructed all22 Slack chunks and verified every part and both complete document checksums; exact originals are preserved. Independent bounded source reviews of both proposals found no actionable P0/P1/P2. This is design review, not branch Crucible acceptance or generated binary/runtime verification. Proposed APIs, bridge ownership and full-fidelity native enhancements are not approved or dispatched implementation. Existing core IPC eligibility remains unchanged. No build, binary compatibility or runtime proof is claimed. Public Control contains only public SDK source references and proposed designs, no internal FIT source.
+
+## Isolated aggregate tooling repair — CONTROL-059
+
+WS-14 terminal logs establish missing Yarn for RN and global-link permissions for Electron Corepack. [WS-15](assignments/WS-15-AGGREGATE-TOOLING.md) assigns the existing workspace executor a bounded tooling-only repair: task-owned user prefix, exact clean pinned RN/Electron SDK checkouts and unchanged wrapper fix/check. Preserve all prior evidence and strict diagnostics; no source/pin/config changes, populated MAUI cleanup, devices or publication. Native macOS prerequisites remain a separate unresolved aggregate gate. Local read-only capacity audit is continuing; no deletion or installation authorised by that audit. BITS-03 retains the SDK design-only briefings.
 
 ## RN exact-candidate lint correction verified — CONTROL-058
 
